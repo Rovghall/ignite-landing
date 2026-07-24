@@ -26,7 +26,6 @@ export const metadata: Metadata = {
   title: 'IGNITE AI: Built to make progress look easy.',
   description:
     'Snap a photo of your meal, get calories and macros instantly, track workouts, and share progress with friends. Free to start on iOS and Android.',
-  generator: 'v0.app',
   metadataBase: new URL('https://ignitehub.app'),
   openGraph: {
     title: 'IGNITE AI: Built to make progress look easy.',
@@ -36,21 +35,9 @@ export const metadata: Metadata = {
     siteName: 'IGNITE AI',
   },
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: [{ url: '/favicon.png', type: 'image/png' }],
+    apple: '/favicon.png',
+    shortcut: '/favicon.png',
   },
 }
 
