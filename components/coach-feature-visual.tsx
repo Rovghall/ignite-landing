@@ -15,7 +15,7 @@ export function CoachFeatureVisual({
   const reduce = useReducedMotion()
 
   return (
-    <div className="relative w-[min(100%,26rem)] shrink-0 overflow-visible sm:w-[28rem]">
+    <div className="relative mx-auto w-[min(100%,26rem)] shrink-0 overflow-x-clip sm:w-[28rem] md:overflow-visible">
       <FeatureMockup src="/chat1.png" alt="AI Coach Chat" tilt={tilt} width={width}>
         {/* User bubble — further in & lower; moves with the phone */}
         <motion.div

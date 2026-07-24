@@ -106,7 +106,7 @@ export function SiteFooter() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="text-foreground transition-opacity hover:opacity-60"
+                  className="inline-flex size-10 items-center justify-center text-foreground transition-opacity hover:opacity-60 md:size-auto"
                 >
                   <Icon className="size-5" />
                 </a>

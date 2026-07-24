@@ -17,7 +17,7 @@ export function FriendsFeatureVisual() {
 
   return (
     <div
-      className="relative -mx-2 flex w-[min(100vw,52rem)] max-w-none items-end justify-center overflow-visible sm:-mx-4 sm:w-[min(100vw,56rem)]"
+      className="relative mx-auto flex w-full max-w-[34rem] items-end justify-center overflow-x-clip sm:max-w-[40rem] md:max-w-[52rem] md:overflow-visible lg:max-w-[56rem]"
       aria-label="Friends group: chat, feed, and leaderboard"
     >
       {screens.map((screen, i) => {

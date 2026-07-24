@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useAnimationControls, useReducedMotion } from 'motion/react'
 import { FeatureMockup } from '@/components/feature-mockup'
 
@@ -81,11 +81,22 @@ function sleep(ms: number) {
 function BadgeOrbit({ badge }: { badge: FloatBadge }) {
   const controls = useAnimationControls()
   const reduce = useReducedMotion()
+  const [compact, setCompact] = useState(false)
 
-  // Anchored over the phone face; slide further out past the bezel.
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const sync = () => setCompact(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
+
+  // Anchored over the phone face; shorter travel on mobile to avoid overflow.
   const underX = 0
-  const outX = badge.side === 'left' ? -150 : 150
-  const outXPeek = badge.side === 'left' ? -168 : 168
+  const travel = compact ? 72 : 150
+  const peek = compact ? 84 : 168
+  const outX = badge.side === 'left' ? -travel : travel
+  const outXPeek = badge.side === 'left' ? -peek : peek
 
   useEffect(() => {
     if (reduce) return
@@ -112,7 +123,7 @@ function BadgeOrbit({ badge }: { badge: FloatBadge }) {
         // Pop out from behind the bezel
         await controls.start({
           opacity: 1,
-          scale: 1.14,
+          scale: compact ? 1.08 : 1.14,
           x: outX,
           y: 0,
           rotate: badge.popRotate,
@@ -177,7 +188,7 @@ function BadgeOrbit({ badge }: { badge: FloatBadge }) {
       alive = false
       controls.stop()
     }
-  }, [badge, controls, outX, outXPeek, reduce, underX])
+  }, [badge, compact, controls, outX, outXPeek, reduce, underX])
 
   if (reduce) {
     return (
@@ -238,7 +249,7 @@ export function StreaksFeatureVisual({
   width?: number
 }) {
   return (
-    <div className="relative w-full max-w-[28rem] shrink-0 overflow-visible sm:max-w-[30rem]">
+    <div className="relative mx-auto w-full max-w-[28rem] shrink-0 overflow-x-clip sm:max-w-[30rem] md:overflow-visible">
       <FeatureMockup src="/badge.png" alt="Streaks & Badges" tilt={tilt} width={width}>
         {floatBadges.map((badge) => (
           <BadgeOrbit key={badge.src} badge={badge} />

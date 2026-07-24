@@ -110,7 +110,7 @@ export function SocialProof() {
                 active={statsInView}
               />
             </p>
-            <p className="mt-1 whitespace-nowrap text-[0.65rem] font-medium uppercase tracking-wider text-muted-foreground sm:text-xs md:text-sm">
+            <p className="mt-1 text-[0.65rem] font-medium uppercase leading-snug tracking-wider text-muted-foreground text-pretty sm:whitespace-nowrap sm:text-xs md:text-sm">
               {stat.label}
             </p>
           </motion.div>

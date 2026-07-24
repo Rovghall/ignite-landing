@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { FeatureMockup } from '@/components/feature-mockup'
 import { easeOutExpo } from '@/lib/motion'
@@ -56,10 +56,10 @@ export function WorkoutFeatureVisual({
   const [hovered, setHovered] = useState<string | null>(null)
 
   return (
-    <div className="relative flex w-full max-w-[52rem] shrink-0 items-center justify-end gap-2 overflow-visible sm:gap-3">
-      {/* Chips column — left of phone, slight stagger toward the device */}
+    <div className="relative flex w-full max-w-[52rem] shrink-0 flex-col items-center gap-4 overflow-x-clip md:flex-row md:items-center md:justify-end md:gap-2 md:overflow-visible lg:gap-3">
+      {/* Chips: 2×2 on mobile, column beside phone from md up */}
       <div
-        className="relative z-20 flex w-[14.5rem] shrink-0 flex-col gap-2.5 sm:w-[16.5rem] sm:gap-3"
+        className="relative z-20 grid w-full max-w-[20rem] grid-cols-2 gap-2 md:flex md:w-[14.5rem] md:max-w-none md:shrink-0 md:flex-col md:gap-2.5 lg:w-[16.5rem] lg:gap-3"
         aria-label="Example workout types"
       >
         {floatChips.map((chip, i) => {
@@ -68,12 +68,14 @@ export function WorkoutFeatureVisual({
           return (
             <motion.div
               key={chip.src}
-              className="relative w-full"
-              style={{
-                zIndex: isHovered ? 40 : 10 + i,
-                marginLeft: chip.x,
-                maxWidth: `calc(100% - ${chip.x}px)`,
-              }}
+              className="relative w-full max-md:!ml-0 max-md:!max-w-full md:max-w-[calc(100%-var(--chip-x))]"
+              style={
+                {
+                  zIndex: isHovered ? 40 : 10 + i,
+                  '--chip-x': `${chip.x}px`,
+                  marginLeft: chip.x,
+                } as CSSProperties
+              }
               initial={reduce ? false : { opacity: 0, x: -18, scale: 0.9 }}
               whileInView={{ opacity: 1, x: 0, scale: 1 }}
               viewport={{ once: true, amount: 0.35 }}
@@ -117,7 +119,7 @@ export function WorkoutFeatureVisual({
                     width={420}
                     height={140}
                     className="pointer-events-none h-auto w-full select-none drop-shadow-[0_12px_28px_rgba(0,0,0,0.14)]"
-                    sizes="280px"
+                    sizes="(min-width: 768px) 280px, 45vw"
                     draggable={false}
                   />
                 </motion.button>
@@ -127,12 +129,13 @@ export function WorkoutFeatureVisual({
         })}
       </div>
 
-      <div className="relative z-10 shrink-0">
+      <div className="relative z-10 w-full max-w-[380px] md:w-auto md:shrink-0">
         <FeatureMockup
           src="/workout.png"
           alt="Workout Log"
           tilt={tilt}
           width={width}
+          className="mx-auto"
         />
       </div>
     </div>

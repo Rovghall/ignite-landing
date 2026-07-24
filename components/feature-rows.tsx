@@ -148,7 +148,7 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
           feature.visual === 'coach' ||
           feature.visual === 'friends' ||
           feature.visual === 'streaks') &&
-          'overflow-visible',
+          'overflow-x-clip md:overflow-visible',
       )}
     >
       <Reveal

@@ -47,8 +47,8 @@ export function FeatureMockup({
 
   return (
     <div
-      className={cn('relative z-10 max-w-none shrink-0 py-2', className)}
-      style={{ width: `min(100vw, ${width}px)` }}
+      className={cn('relative z-10 w-full max-w-none shrink-0 py-2', className)}
+      style={{ width: `min(100%, ${width}px)` }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
