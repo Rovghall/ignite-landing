@@ -63,6 +63,7 @@ const features: Feature[] = [
     visual: 'image',
     imageSrc: '/applehealth.png',
     tilt: -6,
+    width: 560,
   },
   {
     eyebrow: 'Workout logging',
@@ -141,6 +142,8 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
         'grid items-center gap-10 md:grid-cols-2 md:gap-16',
         feature.visual === 'friends' &&
           'mt-8 md:mt-12 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.35fr)] md:gap-10',
+        feature.imageSrc === '/applehealth.png' &&
+          'md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] md:gap-10',
         feature.eyebrow.includes('Streak') && '-mt-4 md:-mt-10',
         (feature.visual === 'image' ||
           feature.visual === 'video' ||
@@ -181,6 +184,11 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
               alt={feature.screenshotLabel}
               tilt={feature.tilt}
               width={feature.width}
+              className={
+                feature.imageSrc === '/applehealth.png'
+                  ? 'origin-center scale-[1.12] sm:scale-[1.18] md:scale-125'
+                  : undefined
+              }
             />
           ) : feature.visual === 'video' && feature.videoSrc ? (
             <FeatureMockup
