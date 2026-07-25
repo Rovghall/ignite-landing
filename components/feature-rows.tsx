@@ -148,19 +148,19 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
           feature.visual === 'coach' ||
           feature.visual === 'friends' ||
           feature.visual === 'streaks') &&
-          'overflow-x-clip md:overflow-visible',
+          'overflow-visible',
       )}
     >
       <Reveal
         className={cn(
-          'flex justify-center overflow-visible',
+          'flex w-full min-w-0 justify-center overflow-visible',
           index % 2 === 1 && 'md:order-2',
         )}
         x={reduce ? 0 : fromLeft ? -40 : 40}
         delay={0.05}
       >
         <motion.div
-          className="flex w-full justify-center overflow-visible"
+          className="flex w-full min-w-0 justify-center overflow-visible"
           whileInView={reduce ? undefined : { opacity: [0.5, 1], scale: [0.96, 1] }}
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.7, ease: easeOutExpo }}
@@ -238,7 +238,7 @@ export function FeatureRows() {
 
   return (
     <section className="border-t border-border bg-secondary/40" aria-labelledby="features-heading">
-      <div className="mx-auto max-w-6xl px-4 pb-5 pt-20 sm:px-6 md:pb-6 md:pt-28">
+      <div className="mx-auto max-w-6xl px-3 pb-5 pt-20 sm:px-6 md:pb-6 md:pt-28">
         <h2 id="features-heading" className="sr-only">
           Features
         </h2>

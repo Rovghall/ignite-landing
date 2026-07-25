@@ -1,10 +1,11 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { Moon, Sun, Sunrise, type LucideIcon } from 'lucide-react'
 import { easeOutExpo } from '@/lib/motion'
+import { cn } from '@/lib/utils'
 
 type ThemeId = 'light' | 'glow' | 'dark'
 
@@ -43,15 +44,24 @@ const themes: ThemePreview[] = [
 export function ThemeShowcase() {
   const reduce = useReducedMotion()
   const [hovered, setHovered] = useState<ThemeId | null>(null)
+  const [desktopHover, setDesktopHover] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px) and (hover: hover)')
+    const sync = () => setDesktopHover(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
 
   return (
     <section
       className="relative border-t border-border bg-background"
       aria-labelledby="themes-heading"
     >
-      <div className="relative mx-auto max-w-[120rem] px-2 pb-12 pt-20 sm:px-3 md:pb-14 md:pt-28 lg:px-4">
+      <div className="relative mx-auto max-w-[120rem] px-3 pb-12 pt-20 sm:px-4 md:px-3 md:pb-14 md:pt-28 lg:px-4">
         <motion.div
-          className="mx-auto max-w-2xl px-2 text-center"
+          className="mx-auto max-w-2xl text-center"
           initial={reduce ? false : { opacity: 0, y: 20, filter: 'blur(6px)' }}
           whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
           viewport={{ once: true, amount: 0.5 }}
@@ -68,16 +78,23 @@ export function ThemeShowcase() {
           </p>
         </motion.div>
 
-        <div className="mt-14 overflow-x-auto overflow-y-visible pb-10 pt-8">
-          <div className="mx-auto flex w-max items-end justify-center">
+        <div className="mt-10 w-full overflow-visible pb-6 pt-4 md:mt-14 md:overflow-x-auto md:overflow-y-visible md:pb-10 md:pt-8">
+          <div className="mx-auto flex w-full items-end justify-center gap-1.5 md:w-max md:gap-0">
             {themes.map((theme, i) => {
               const Icon = theme.icon
               const isHovered = hovered === theme.id
+              const hoverScale = desktopHover && isHovered ? 1.4 : 1
 
               return (
                 <motion.div
                   key={theme.id}
-                  className="relative flex w-[min(91vw,28.6rem)] flex-col items-center gap-5 not-first:-ml-24 sm:w-[min(36.4vw,33.8rem)] sm:not-first:-ml-28 lg:not-first:-ml-32"
+                  className={cn(
+                    'relative flex flex-col items-center gap-3 md:gap-5',
+                    // Mobile: equal thirds, all visible, no drag
+                    'w-[32.5%] min-w-0 shrink',
+                    // Desktop: fan overlap (unchanged feel)
+                    'md:w-[min(36.4vw,33.8rem)] md:shrink-0 md:not-first:-ml-28 lg:not-first:-ml-32',
+                  )}
                   style={{ zIndex: isHovered ? 10 : 1 }}
                   initial={reduce ? false : { opacity: 0, y: 28 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -86,19 +103,18 @@ export function ThemeShowcase() {
                   onMouseEnter={() => setHovered(theme.id)}
                   onMouseLeave={() => setHovered(null)}
                 >
-                  {/* Stable hit area — float on outer, scale on inner */}
                   <div className="relative w-full">
                     <motion.div
                       className="will-change-transform"
                       animate={
                         reduce
                           ? { y: 0 }
-                          : { y: isHovered ? -6 : [0, -10, 0] }
+                          : { y: isHovered && desktopHover ? -6 : [0, -10, 0] }
                       }
                       transition={
                         reduce
                           ? { duration: 0.2 }
-                          : isHovered
+                          : isHovered && desktopHover
                             ? { type: 'spring', stiffness: 300, damping: 24 }
                             : {
                                 duration: 4.6 + i * 0.45,
@@ -110,7 +126,7 @@ export function ThemeShowcase() {
                     >
                       <motion.div
                         className="origin-center will-change-transform"
-                        animate={reduce ? { scale: 1 } : { scale: isHovered ? 1.4 : 1 }}
+                        animate={{ scale: reduce ? 1 : hoverScale }}
                         transition={{
                           type: 'spring',
                           stiffness: 320,
@@ -123,8 +139,8 @@ export function ThemeShowcase() {
                           alt={`IGNITE AI ${theme.name} theme`}
                           width={1200}
                           height={2400}
-                          className="pointer-events-none h-auto w-full select-none drop-shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]"
-                          sizes="(min-width: 640px) 34rem, 91vw"
+                          className="pointer-events-none mx-auto h-auto w-full select-none object-contain drop-shadow-[0_20px_40px_-16px_rgba(0,0,0,0.3)] md:drop-shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]"
+                          sizes="(min-width: 768px) 34rem, 33vw"
                           priority={theme.id === 'dark'}
                           draggable={false}
                         />
@@ -132,16 +148,16 @@ export function ThemeShowcase() {
                     </motion.div>
                   </div>
 
-                  <div className="flex flex-col items-center gap-2 text-center">
-                    <div className="flex items-center gap-2">
-                      <span className="flex size-8 items-center justify-center rounded-full bg-secondary">
-                        <Icon className="size-4 text-foreground" strokeWidth={2} aria-hidden="true" />
+                  <div className="flex flex-col items-center gap-1.5 text-center md:gap-2">
+                    <div className="flex items-center gap-1.5 md:gap-2">
+                      <span className="flex size-7 items-center justify-center rounded-full bg-secondary md:size-8">
+                        <Icon className="size-3.5 text-foreground md:size-4" strokeWidth={2} aria-hidden="true" />
                       </span>
-                      <p className="font-brand text-sm font-semibold uppercase tracking-[0.14em] text-foreground">
+                      <p className="font-brand text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground md:text-sm">
                         {theme.name}
                       </p>
                     </div>
-                    <p className="max-w-[12rem] text-sm text-muted-foreground text-pretty">
+                    <p className="max-w-[7.5rem] text-[11px] leading-snug text-muted-foreground text-pretty md:max-w-[12rem] md:text-sm">
                       {theme.description}
                     </p>
                   </div>

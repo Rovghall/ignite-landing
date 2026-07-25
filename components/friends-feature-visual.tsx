@@ -1,9 +1,10 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { easeOutExpo } from '@/lib/motion'
+import { cn } from '@/lib/utils'
 
 const screens = [
   { src: '/g1.png', alt: 'Friends group chat', tilt: -4 },
@@ -14,10 +15,19 @@ const screens = [
 export function FriendsFeatureVisual() {
   const reduce = useReducedMotion()
   const [hovered, setHovered] = useState<string | null>(null)
+  const [desktopHover, setDesktopHover] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px) and (hover: hover)')
+    const sync = () => setDesktopHover(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
 
   return (
     <div
-      className="relative mx-auto flex w-full max-w-[34rem] items-end justify-center overflow-x-clip sm:max-w-[40rem] md:max-w-[52rem] md:overflow-visible lg:max-w-[56rem]"
+      className="relative mx-auto flex w-full max-w-full items-end justify-center gap-1 overflow-visible px-0 sm:gap-1.5 md:max-w-[52rem] md:gap-0 lg:max-w-[56rem]"
       aria-label="Friends group: chat, feed, and leaderboard"
     >
       {screens.map((screen, i) => {
@@ -26,7 +36,13 @@ export function FriendsFeatureVisual() {
         return (
           <motion.div
             key={screen.src}
-            className="relative w-[48%] shrink-0 not-first:-ml-[14%] sm:w-[46%] sm:not-first:-ml-[12%]"
+            className={cn(
+              'relative min-w-0 shrink',
+              // Equal width on mobile — all fully visible
+              'w-[32.5%]',
+              // Desktop fan
+              'md:w-[46%] md:shrink-0 md:not-first:-ml-[12%]',
+            )}
             style={{ zIndex: isHovered ? 20 : 10 - Math.abs(i - 1) }}
             initial={reduce ? false : { opacity: 0, y: 22, scale: 0.94 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -41,15 +57,19 @@ export function FriendsFeatureVisual() {
                 reduce
                   ? { y: 0, rotate: 0 }
                   : {
-                      y: isHovered ? -10 : [0, -9, 0],
-                      rotate: isHovered ? screen.tilt * 0.35 : screen.tilt,
+                      y: isHovered && desktopHover ? -10 : [0, -9, 0],
+                      rotate: desktopHover
+                        ? isHovered
+                          ? screen.tilt * 0.35
+                          : screen.tilt
+                        : 0,
                     }
               }
               transition={
                 reduce
                   ? { duration: 0.15 }
                   : {
-                      y: isHovered
+                      y: isHovered && desktopHover
                         ? { type: 'spring', stiffness: 380, damping: 26 }
                         : {
                             duration: 5 + i * 0.35,
@@ -63,7 +83,9 @@ export function FriendsFeatureVisual() {
             >
               <motion.div
                 className="origin-center will-change-transform"
-                animate={{ scale: reduce ? 1 : isHovered ? 1.12 : 1 }}
+                animate={{
+                  scale: reduce ? 1 : isHovered && desktopHover ? 1.12 : 1,
+                }}
                 transition={{
                   type: 'spring',
                   stiffness: 400,
@@ -76,8 +98,8 @@ export function FriendsFeatureVisual() {
                   alt={screen.alt}
                   width={880}
                   height={1760}
-                  className="pointer-events-none h-auto w-full select-none drop-shadow-[0_28px_60px_rgba(0,0,0,0.25)]"
-                  sizes="(min-width: 640px) 420px, 55vw"
+                  className="pointer-events-none mx-auto h-auto w-full select-none object-contain drop-shadow-[0_16px_36px_rgba(0,0,0,0.2)] md:drop-shadow-[0_28px_60px_rgba(0,0,0,0.25)]"
+                  sizes="(min-width: 768px) 420px, 33vw"
                   priority={i === 1}
                   draggable={false}
                 />

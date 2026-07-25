@@ -91,10 +91,10 @@ function BadgeOrbit({ badge }: { badge: FloatBadge }) {
     return () => mq.removeEventListener('change', sync)
   }, [])
 
-  // Anchored over the phone face; shorter travel on mobile to avoid overflow.
+  // Anchored over the phone face; shorter travel on mobile so badges stay on-screen.
   const underX = 0
-  const travel = compact ? 72 : 150
-  const peek = compact ? 84 : 168
+  const travel = compact ? 44 : 150
+  const peek = compact ? 52 : 168
   const outX = badge.side === 'left' ? -travel : travel
   const outXPeek = badge.side === 'left' ? -peek : peek
 
@@ -249,8 +249,8 @@ export function StreaksFeatureVisual({
   width?: number
 }) {
   return (
-    <div className="relative mx-auto w-full max-w-[28rem] shrink-0 overflow-x-clip sm:max-w-[30rem] md:overflow-visible">
-      <FeatureMockup src="/badge.png" alt="Streaks & Badges" tilt={tilt} width={width}>
+    <div className="relative mx-auto w-[min(100%,20.5rem)] shrink-0 origin-center overflow-visible sm:w-[min(100%,28rem)] md:w-[min(100%,30rem)]">
+      <FeatureMockup src="/badge.png" alt="Streaks & Badges" tilt={tilt} width={width} className="mx-auto">
         {floatBadges.map((badge) => (
           <BadgeOrbit key={badge.src} badge={badge} />
         ))}

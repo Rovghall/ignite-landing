@@ -15,11 +15,11 @@ export function CoachFeatureVisual({
   const reduce = useReducedMotion()
 
   return (
-    <div className="relative mx-auto w-[min(100%,26rem)] shrink-0 overflow-x-clip sm:w-[28rem] md:overflow-visible">
-      <FeatureMockup src="/chat1.png" alt="AI Coach Chat" tilt={tilt} width={width}>
+    <div className="relative mx-auto w-[min(100%,22rem)] shrink-0 overflow-visible sm:w-[26rem] md:w-[28rem]">
+      <FeatureMockup src="/chat1.png" alt="AI Coach Chat" tilt={tilt} width={width} className="mx-auto">
         {/* User bubble — further in & lower; moves with the phone */}
         <motion.div
-          className="pointer-events-none absolute bottom-[30%] right-[-4%] z-20 w-[68%] max-w-[14.5rem] sm:bottom-[28%] sm:right-[-6%] sm:w-[70%]"
+          className="pointer-events-none absolute bottom-[30%] right-[2%] z-20 w-[68%] max-w-[14.5rem] sm:bottom-[28%] sm:right-[-4%] sm:w-[70%] md:right-[-6%]"
           initial={reduce ? false : { opacity: 0, y: 18, scale: 0.94 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.4 }}

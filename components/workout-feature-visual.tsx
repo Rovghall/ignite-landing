@@ -56,7 +56,7 @@ export function WorkoutFeatureVisual({
   const [hovered, setHovered] = useState<string | null>(null)
 
   return (
-    <div className="relative flex w-full max-w-[52rem] shrink-0 flex-col items-center gap-4 overflow-x-clip md:flex-row md:items-center md:justify-end md:gap-2 md:overflow-visible lg:gap-3">
+    <div className="relative flex w-full max-w-[52rem] shrink-0 flex-col items-center gap-4 overflow-visible md:flex-row md:items-center md:justify-end md:gap-2 lg:gap-3">
       {/* Chips: 2×2 on mobile, column beside phone from md up */}
       <div
         className="relative z-20 grid w-full max-w-[20rem] grid-cols-2 gap-2 md:flex md:w-[14.5rem] md:max-w-none md:shrink-0 md:flex-col md:gap-2.5 lg:w-[16.5rem] lg:gap-3"
