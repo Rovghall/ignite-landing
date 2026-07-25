@@ -48,6 +48,7 @@ const features: Feature[] = [
     screenshotLabel: 'Daily Goals',
     visual: 'image',
     imageSrc: '/calories_ring.png',
+    width: 560,
   },
   {
     eyebrow: 'Apple Health & Health Connect',
@@ -144,6 +145,8 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
           'mt-8 md:mt-12 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.35fr)] md:gap-10',
         feature.imageSrc === '/applehealth.png' &&
           'md:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] md:gap-10',
+        feature.imageSrc === '/calories_ring.png' &&
+          'md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:gap-10',
         feature.eyebrow.includes('Streak') && '-mt-4 md:-mt-10',
         (feature.visual === 'image' ||
           feature.visual === 'video' ||
@@ -185,7 +188,8 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
               tilt={feature.tilt}
               width={feature.width}
               className={
-                feature.imageSrc === '/applehealth.png'
+                feature.imageSrc === '/applehealth.png' ||
+                feature.imageSrc === '/calories_ring.png'
                   ? 'origin-center scale-[1.12] sm:scale-[1.18] md:scale-125'
                   : undefined
               }
