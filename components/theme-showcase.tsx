@@ -41,6 +41,8 @@ const themes: ThemePreview[] = [
   },
 ]
 
+const lightTheme = themes[0]
+
 export function ThemeShowcase() {
   const reduce = useReducedMotion()
   const [hovered, setHovered] = useState<ThemeId | null>(null)
@@ -78,8 +80,52 @@ export function ThemeShowcase() {
           </p>
         </motion.div>
 
-        <div className="mt-10 w-full overflow-visible pb-6 pt-4 md:mt-14 md:overflow-x-auto md:overflow-y-visible md:pb-10 md:pt-8">
-          <div className="mx-auto flex w-full items-end justify-center gap-1.5 md:w-max md:gap-0">
+        {/* Mobile: Light only */}
+        <motion.div
+          className="mx-auto mt-10 flex w-full max-w-[16.5rem] flex-col items-center gap-4 md:hidden"
+          initial={reduce ? false : { opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.55, ease: easeOutExpo }}
+        >
+          <motion.div
+            className="w-full will-change-transform"
+            animate={reduce ? { y: 0 } : { y: [0, -10, 0] }}
+            transition={
+              reduce
+                ? { duration: 0.2 }
+                : { duration: 4.8, repeat: Infinity, ease: 'easeInOut' }
+            }
+          >
+            <Image
+              src={lightTheme.src}
+              alt="IGNITE AI Light theme"
+              width={1200}
+              height={2400}
+              className="pointer-events-none h-auto w-full select-none drop-shadow-[0_24px_48px_-16px_rgba(0,0,0,0.3)]"
+              sizes="280px"
+              priority
+              draggable={false}
+            />
+          </motion.div>
+          <div className="flex flex-col items-center gap-2 text-center">
+            <div className="flex items-center gap-2">
+              <span className="flex size-8 items-center justify-center rounded-full bg-secondary">
+                <Sun className="size-4 text-foreground" strokeWidth={2} aria-hidden="true" />
+              </span>
+              <p className="font-brand text-sm font-semibold uppercase tracking-[0.14em] text-foreground">
+                {lightTheme.name}
+              </p>
+            </div>
+            <p className="max-w-[14rem] text-sm text-muted-foreground text-pretty">
+              {lightTheme.description}
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Desktop: all three themes */}
+        <div className="mt-14 hidden w-full overflow-x-auto overflow-y-visible pb-10 pt-8 md:block">
+          <div className="mx-auto flex w-max items-end justify-center">
             {themes.map((theme, i) => {
               const Icon = theme.icon
               const isHovered = hovered === theme.id
@@ -89,11 +135,7 @@ export function ThemeShowcase() {
                 <motion.div
                   key={theme.id}
                   className={cn(
-                    'relative flex flex-col items-center gap-3 md:gap-5',
-                    // Mobile: equal thirds, all visible, no drag
-                    'w-[32.5%] min-w-0 shrink',
-                    // Desktop: fan overlap (unchanged feel)
-                    'md:w-[min(36.4vw,33.8rem)] md:shrink-0 md:not-first:-ml-28 lg:not-first:-ml-32',
+                    'relative flex w-[min(36.4vw,33.8rem)] shrink-0 flex-col items-center gap-5 not-first:-ml-28 lg:not-first:-ml-32',
                   )}
                   style={{ zIndex: isHovered ? 10 : 1 }}
                   initial={reduce ? false : { opacity: 0, y: 28 }}
@@ -139,8 +181,8 @@ export function ThemeShowcase() {
                           alt={`IGNITE AI ${theme.name} theme`}
                           width={1200}
                           height={2400}
-                          className="pointer-events-none mx-auto h-auto w-full select-none object-contain drop-shadow-[0_20px_40px_-16px_rgba(0,0,0,0.3)] md:drop-shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]"
-                          sizes="(min-width: 768px) 34rem, 33vw"
+                          className="pointer-events-none h-auto w-full select-none drop-shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]"
+                          sizes="34rem"
                           priority={theme.id === 'dark'}
                           draggable={false}
                         />
@@ -148,16 +190,16 @@ export function ThemeShowcase() {
                     </motion.div>
                   </div>
 
-                  <div className="flex flex-col items-center gap-1.5 text-center md:gap-2">
-                    <div className="flex items-center gap-1.5 md:gap-2">
-                      <span className="flex size-7 items-center justify-center rounded-full bg-secondary md:size-8">
-                        <Icon className="size-3.5 text-foreground md:size-4" strokeWidth={2} aria-hidden="true" />
+                  <div className="flex flex-col items-center gap-2 text-center">
+                    <div className="flex items-center gap-2">
+                      <span className="flex size-8 items-center justify-center rounded-full bg-secondary">
+                        <Icon className="size-4 text-foreground" strokeWidth={2} aria-hidden="true" />
                       </span>
-                      <p className="font-brand text-[11px] font-semibold uppercase tracking-[0.14em] text-foreground md:text-sm">
+                      <p className="font-brand text-sm font-semibold uppercase tracking-[0.14em] text-foreground">
                         {theme.name}
                       </p>
                     </div>
-                    <p className="max-w-[7.5rem] text-[11px] leading-snug text-muted-foreground text-pretty md:max-w-[12rem] md:text-sm">
+                    <p className="max-w-[12rem] text-sm text-muted-foreground text-pretty">
                       {theme.description}
                     </p>
                   </div>
