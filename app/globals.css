@@ -93,11 +93,24 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
     scroll-behavior: smooth;
+    color-scheme: light only;
+    background-color: var(--background);
+  }
+  body {
+    @apply bg-background text-foreground;
+    color-scheme: light only;
+    background-color: var(--background);
+  }
+  /* Keep page light even when the phone OS is in dark mode */
+  @media (prefers-color-scheme: dark) {
+    html,
+    body {
+      color-scheme: light only;
+      background-color: var(--background);
+      color: var(--foreground);
+    }
   }
 }
 

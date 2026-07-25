@@ -45,7 +45,10 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   colorScheme: 'light',
-  themeColor: '#FFFFFF',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
+    { media: '(prefers-color-scheme: dark)', color: '#FFFFFF' },
+  ],
 }
 
 export default function RootLayout({
@@ -54,8 +57,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`light bg-background ${geist.variable} ${inter.variable} ${syne.variable}`}>
-      <body className="font-sans antialiased">
+    <html
+      lang="en"
+      className={`light bg-background ${geist.variable} ${inter.variable} ${syne.variable}`}
+      style={{ colorScheme: 'light only' }}
+      suppressHydrationWarning
+    >
+      <body className="bg-background font-sans text-foreground antialiased" style={{ colorScheme: 'light only' }}>
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
