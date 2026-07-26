@@ -53,7 +53,7 @@ const features: Feature[] = [
     bullets: ['Snap or describe any meal', 'Instant calorie & macro estimates', 'Edit and confirm in one tap'],
     screenshotLabel: 'Snap Track',
     visual: 'video',
-    videoSrc: '/video_page.mp4',
+    videoSrc: '/video_page.webm',
     tilt: -6,
   },
   {
