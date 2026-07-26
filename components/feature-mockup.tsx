@@ -97,20 +97,26 @@ export function FeatureMockup({
           }}
         >
           {kind === 'video' ? (
-            <video
-              ref={videoRef}
-              className="pointer-events-none h-auto w-full select-none bg-transparent drop-shadow-[0_28px_60px_rgba(0,0,0,0.22)]"
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label={alt}
-            >
-              <source
-                src={src}
-                type={src.endsWith('.mp4') ? 'video/mp4' : 'video/webm'}
-              />
-            </video>
+            // Clip baked-in floor shadow from the asset, then apply the same
+            // drop-shadow used on PNG mockups so the silhouette matches.
+            <div className="relative drop-shadow-[0_28px_60px_rgba(0,0,0,0.22)]">
+              <div className="overflow-hidden [clip-path:inset(0_1.5%_9%_1.5%)]">
+                <video
+                  ref={videoRef}
+                  className="pointer-events-none h-auto w-full select-none bg-transparent"
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  aria-label={alt}
+                >
+                  <source
+                    src={src}
+                    type={src.endsWith('.mp4') ? 'video/mp4' : 'video/webm'}
+                  />
+                </video>
+              </div>
+            </div>
           ) : (
             <Image
               src={src}
