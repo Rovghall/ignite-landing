@@ -5,6 +5,9 @@ import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { motion, useInView, useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/utils'
 
+/** Shared with PNG mockups so video/image phones cast the same shadow. */
+const MOCKUP_SHADOW = 'drop-shadow-[0_28px_60px_rgba(0,0,0,0.22)]'
+
 /** Phone mockup (image or video) with float, tilt, and quick hover scale. */
 export function FeatureMockup({
   src,
@@ -97,13 +100,13 @@ export function FeatureMockup({
           }}
         >
           {kind === 'video' ? (
-            // Clip baked-in floor shadow from the asset, then apply the same
-            // drop-shadow used on PNG mockups so the silhouette matches.
-            <div className="relative drop-shadow-[0_28px_60px_rgba(0,0,0,0.22)]">
-              <div className="overflow-hidden [clip-path:inset(0_1.5%_9%_1.5%)]">
+            // video_meal includes a baked floor contact shadow; crop it out and
+            // re-apply the same CSS drop-shadow used by Daily Nutrition PNGs.
+            <div className={cn('relative', MOCKUP_SHADOW)}>
+              <div className="overflow-hidden [clip-path:inset(0_2%_16%_2%)]">
                 <video
                   ref={videoRef}
-                  className="pointer-events-none h-auto w-full select-none bg-transparent"
+                  className="pointer-events-none h-auto w-full origin-top scale-[1.12] select-none bg-transparent"
                   muted
                   loop
                   playsInline
@@ -123,7 +126,10 @@ export function FeatureMockup({
               alt={alt}
               width={880}
               height={1760}
-              className="pointer-events-none relative z-10 h-auto w-full select-none drop-shadow-[0_28px_60px_rgba(0,0,0,0.22)]"
+              className={cn(
+                'pointer-events-none relative z-10 h-auto w-full select-none',
+                MOCKUP_SHADOW,
+              )}
               sizes={`(max-width: 768px) 95vw, ${Math.min(Math.round(width * 1.4), 900)}px`}
               priority={priority}
               quality={90}
