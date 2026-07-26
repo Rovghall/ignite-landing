@@ -33,7 +33,7 @@ function IntroVideoScreen({ reduce }: { reduce: boolean | null }) {
       muted
       loop
       playsInline
-      preload="auto"
+      preload="metadata"
       aria-label="IGNITE AI intro"
     >
       <source src="/video_intro.webm" type="video/webm" />
@@ -56,7 +56,7 @@ function EmberField({ reduce }: { reduce: boolean | null }) {
     )
   }
 
-  const sparks = Array.from({ length: 10 }, (_, i) => i)
+  const sparks = Array.from({ length: 5 }, (_, i) => i)
 
   return (
     <div

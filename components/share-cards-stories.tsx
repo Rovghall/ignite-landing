@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useReducedMotion } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
+import { AnimatePresence, motion, useInView, useReducedMotion } from 'motion/react'
 import { easeOutExpo } from '@/lib/motion'
 
 const STORY_MS = 3400
@@ -16,28 +16,33 @@ const stories = [
 
 export function ShareCardsStories() {
   const reduce = useReducedMotion()
+  const rootRef = useRef<HTMLDivElement>(null)
+  const inView = useInView(rootRef, { amount: 0.25, margin: '80px 0px' })
   const [index, setIndex] = useState(0)
   const [hovered, setHovered] = useState(false)
 
   useEffect(() => {
-    if (reduce) return
+    if (reduce || !inView) return
     const id = window.setInterval(() => {
       setIndex((i) => (i + 1) % stories.length)
     }, STORY_MS)
     return () => window.clearInterval(id)
-  }, [reduce, index])
+  }, [reduce, index, inView])
 
   return (
     <div
+      ref={rootRef}
       className="relative z-10 w-[min(100%,280px)] shrink-0"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
       <motion.div
-        className="will-change-transform"
-        animate={reduce ? { y: 0 } : { y: hovered ? -6 : [0, -8, 0] }}
+        className={inView && !reduce ? 'will-change-transform' : undefined}
+        animate={
+          reduce || !inView ? { y: 0 } : { y: hovered ? -6 : [0, -8, 0] }
+        }
         transition={
-          reduce
+          reduce || !inView
             ? { duration: 0.15 }
             : hovered
               ? { type: 'spring', stiffness: 400, damping: 28 }
@@ -71,7 +76,7 @@ export function ShareCardsStories() {
                   height={1760}
                   className="pointer-events-none h-full w-full scale-[1.12] object-cover object-center"
                   sizes="280px"
-                  priority
+                  quality={70}
                 />
               </motion.div>
             </AnimatePresence>

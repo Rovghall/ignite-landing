@@ -100,7 +100,8 @@ export function FriendsFeatureVisual() {
                   height={1760}
                   className="pointer-events-none mx-auto h-auto w-full select-none object-contain drop-shadow-[0_16px_36px_rgba(0,0,0,0.2)] md:drop-shadow-[0_28px_60px_rgba(0,0,0,0.25)]"
                   sizes="(min-width: 768px) 420px, 33vw"
-                  priority={i === 1}
+                  quality={70}
+                  loading="lazy"
                   draggable={false}
                 />
               </motion.div>

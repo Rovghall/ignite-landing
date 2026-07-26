@@ -1,8 +1,8 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { motion, useAnimationControls, useReducedMotion } from 'motion/react'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useAnimationControls, useInView, useReducedMotion } from 'motion/react'
 import { FeatureMockup } from '@/components/feature-mockup'
 
 type FloatBadge = {
@@ -78,7 +78,7 @@ function sleep(ms: number) {
   })
 }
 
-function BadgeOrbit({ badge }: { badge: FloatBadge }) {
+function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
   const controls = useAnimationControls()
   const reduce = useReducedMotion()
   const [compact, setCompact] = useState(false)
@@ -99,7 +99,10 @@ function BadgeOrbit({ badge }: { badge: FloatBadge }) {
   const outXPeek = badge.side === 'left' ? -peek : peek
 
   useEffect(() => {
-    if (reduce) return
+    if (reduce || !active) {
+      void controls.set({ opacity: 0, scale: 0.5, x: underX, y: 8, zIndex: 0 })
+      return
+    }
 
     let alive = true
 
@@ -188,7 +191,7 @@ function BadgeOrbit({ badge }: { badge: FloatBadge }) {
       alive = false
       controls.stop()
     }
-  }, [badge, compact, controls, outX, outXPeek, reduce, underX])
+  }, [active, badge, compact, controls, outX, outXPeek, reduce, underX])
 
   if (reduce) {
     return (
@@ -248,11 +251,17 @@ export function StreaksFeatureVisual({
   tilt?: number
   width?: number
 }) {
+  const rootRef = useRef<HTMLDivElement>(null)
+  const inView = useInView(rootRef, { amount: 0.2, margin: '100px 0px' })
+
   return (
-    <div className="relative mx-auto w-[min(100%,20.5rem)] shrink-0 origin-center overflow-visible sm:w-[min(100%,28rem)] md:w-[min(100%,30rem)]">
+    <div
+      ref={rootRef}
+      className="relative mx-auto w-[min(100%,20.5rem)] shrink-0 origin-center overflow-visible sm:w-[min(100%,28rem)] md:w-[min(100%,30rem)]"
+    >
       <FeatureMockup src="/badge.png" alt="Streaks & Badges" tilt={tilt} width={width} className="mx-auto">
         {floatBadges.map((badge) => (
-          <BadgeOrbit key={badge.src} badge={badge} />
+          <BadgeOrbit key={badge.src} badge={badge} active={inView} />
         ))}
       </FeatureMockup>
     </div>

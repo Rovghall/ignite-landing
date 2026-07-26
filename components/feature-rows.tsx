@@ -1,17 +1,34 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { PhoneFrame } from '@/components/phone-frame'
-import { CoachFeatureVisual } from '@/components/coach-feature-visual'
 import { FeatureMockup } from '@/components/feature-mockup'
-import { FriendsFeatureVisual } from '@/components/friends-feature-visual'
-import { ShareCardsStories } from '@/components/share-cards-stories'
-import { StreaksFeatureVisual } from '@/components/streaks-feature-visual'
-import { WorkoutFeatureVisual } from '@/components/workout-feature-visual'
 import { Reveal } from '@/components/reveal'
 import { Check } from 'lucide-react'
 import { motion, useReducedMotion } from 'motion/react'
 import { cn } from '@/lib/utils'
 import { easeOutExpo } from '@/lib/motion'
+
+const ShareCardsStories = dynamic(
+  () => import('@/components/share-cards-stories').then((m) => m.ShareCardsStories),
+  { ssr: false },
+)
+const WorkoutFeatureVisual = dynamic(
+  () => import('@/components/workout-feature-visual').then((m) => m.WorkoutFeatureVisual),
+  { ssr: false },
+)
+const CoachFeatureVisual = dynamic(
+  () => import('@/components/coach-feature-visual').then((m) => m.CoachFeatureVisual),
+  { ssr: false },
+)
+const FriendsFeatureVisual = dynamic(
+  () => import('@/components/friends-feature-visual').then((m) => m.FriendsFeatureVisual),
+  { ssr: false },
+)
+const StreaksFeatureVisual = dynamic(
+  () => import('@/components/streaks-feature-visual').then((m) => m.StreaksFeatureVisual),
+  { ssr: false },
+)
 
 type Feature = {
   eyebrow: string
