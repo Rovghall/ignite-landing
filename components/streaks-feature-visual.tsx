@@ -208,7 +208,8 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
           height={320}
           className="h-auto w-full select-none drop-shadow-[0_14px_32px_rgba(0,0,0,0.2)]"
           style={{ mixBlendMode: 'lighten' }}
-          sizes="160px"
+          sizes="220px"
+          quality={90}
           draggable={false}
         />
       </div>
@@ -237,7 +238,8 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
         height={320}
         className="h-auto w-full select-none drop-shadow-[0_18px_40px_rgba(0,0,0,0.28)]"
         style={{ mixBlendMode: 'lighten' }}
-        sizes="180px"
+        sizes="240px"
+        quality={90}
         draggable={false}
       />
     </motion.div>

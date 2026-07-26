@@ -115,9 +115,9 @@ export function FeatureMockup({
               width={880}
               height={1760}
               className="pointer-events-none relative z-10 h-auto w-full select-none drop-shadow-[0_28px_60px_rgba(0,0,0,0.22)]"
-              sizes={`(max-width: 768px) 90vw, ${Math.min(width, 560)}px`}
+              sizes={`(max-width: 768px) 95vw, ${Math.min(Math.round(width * 1.4), 900)}px`}
               priority={priority}
-              quality={75}
+              quality={90}
               draggable={false}
             />
           )}

@@ -33,7 +33,8 @@ export function CoachFeatureVisual({
             height={220}
             className="h-auto w-full select-none drop-shadow-[0_16px_36px_rgba(0,0,0,0.2)]"
             style={{ mixBlendMode: 'lighten' }}
-            sizes="240px"
+            sizes="320px"
+            quality={90}
             draggable={false}
           />
         </motion.div>

@@ -138,8 +138,8 @@ export function ThemeShowcase() {
                           width={1200}
                           height={2400}
                           className="pointer-events-none mx-auto h-auto w-full select-none object-contain drop-shadow-[0_20px_40px_-16px_rgba(0,0,0,0.3)] md:drop-shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]"
-                          sizes="(min-width: 768px) 34rem, 33vw"
-                          quality={70}
+                          sizes="(min-width: 768px) 40rem, 40vw"
+                          quality={90}
                           loading="lazy"
                           draggable={false}
                         />

@@ -75,8 +75,8 @@ export function ShareCardsStories() {
                   width={880}
                   height={1760}
                   className="pointer-events-none h-full w-full scale-[1.12] object-cover object-center"
-                  sizes="280px"
-                  quality={70}
+                  sizes="400px"
+                  quality={90}
                 />
               </motion.div>
             </AnimatePresence>

@@ -119,7 +119,8 @@ export function WorkoutFeatureVisual({
                     width={420}
                     height={140}
                     className="pointer-events-none h-auto w-full select-none drop-shadow-[0_12px_28px_rgba(0,0,0,0.14)]"
-                    sizes="(min-width: 768px) 280px, 45vw"
+                    sizes="(min-width: 768px) 360px, 50vw"
+                    quality={90}
                     draggable={false}
                   />
                 </motion.button>
