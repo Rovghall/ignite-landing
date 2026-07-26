@@ -106,7 +106,10 @@ export function FeatureMockup({
               preload="metadata"
               aria-label={alt}
             >
-              <source src={src} type="video/webm" />
+              <source
+                src={src}
+                type={src.endsWith('.mp4') ? 'video/mp4' : 'video/webm'}
+              />
             </video>
           ) : (
             <Image
