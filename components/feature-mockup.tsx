@@ -100,23 +100,24 @@ export function FeatureMockup({
           }}
         >
           {kind === 'video' ? (
-            <video
-              ref={videoRef}
-              className={cn(
-                'pointer-events-none h-auto w-full select-none bg-transparent',
-                MOCKUP_SHADOW,
-              )}
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label={alt}
-            >
-              <source
-                src={src}
-                type={src.endsWith('.mp4') ? 'video/mp4' : 'video/webm'}
-              />
-            </video>
+            // drop-shadow on <video> follows the rectangular frame, not alpha.
+            // Put the filter on a wrapper so it uses the transparent silhouette.
+            <div className={MOCKUP_SHADOW}>
+              <video
+                ref={videoRef}
+                className="pointer-events-none h-auto w-full select-none bg-transparent"
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label={alt}
+              >
+                <source
+                  src={src}
+                  type={src.endsWith('.mp4') ? 'video/mp4' : 'video/webm'}
+                />
+              </video>
+            </div>
           ) : (
             <Image
               src={src}
