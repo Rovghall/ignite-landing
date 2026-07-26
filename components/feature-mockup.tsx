@@ -100,26 +100,23 @@ export function FeatureMockup({
           }}
         >
           {kind === 'video' ? (
-            // video_meal includes a baked floor contact shadow; crop it out and
-            // re-apply the same CSS drop-shadow used by Daily Nutrition PNGs.
-            <div className={cn('relative', MOCKUP_SHADOW)}>
-              <div className="overflow-hidden [clip-path:inset(0_2%_16%_2%)]">
-                <video
-                  ref={videoRef}
-                  className="pointer-events-none h-auto w-full origin-top scale-[1.12] select-none bg-transparent"
-                  muted
-                  loop
-                  playsInline
-                  preload="metadata"
-                  aria-label={alt}
-                >
-                  <source
-                    src={src}
-                    type={src.endsWith('.mp4') ? 'video/mp4' : 'video/webm'}
-                  />
-                </video>
-              </div>
-            </div>
+            <video
+              ref={videoRef}
+              className={cn(
+                'pointer-events-none h-auto w-full select-none bg-transparent',
+                MOCKUP_SHADOW,
+              )}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label={alt}
+            >
+              <source
+                src={src}
+                type={src.endsWith('.mp4') ? 'video/mp4' : 'video/webm'}
+              />
+            </video>
           ) : (
             <Image
               src={src}
