@@ -55,6 +55,7 @@ const features: Feature[] = [
     visual: 'video',
     videoSrc: '/video_meal.webm',
     tilt: -6,
+    width: 560,
   },
   {
     eyebrow: 'Daily nutrition goals',
@@ -217,8 +218,8 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
               src={feature.videoSrc}
               alt={feature.screenshotLabel}
               tilt={feature.tilt ?? 0}
-              width={360}
-              className="-mt-6 sm:-mt-8"
+              width={feature.width ?? 560}
+              className="origin-center scale-[1.12] sm:scale-[1.18] md:scale-125"
             />
           ) : (
             <PhoneFrame label={feature.screenshotLabel} className="max-w-[260px]" />
