@@ -1,0 +1,702 @@
+{
+  "privacyPolicy": {
+    "title": "Privacybeleid",
+    "lastUpdated": "Laatst bijgewerkt: 9 juli 2026",
+    "intro": "Dit Privacybeleid legt uit hoe IGNITE AI (\"IGNITE\", \"wij\", \"ons\" of \"onze\") persoonsgegevens verzamelt, gebruikt, opslaat en deelt wanneer u de mobiele applicatie IGNITE AI en gerelateerde diensten (de \"Dienst\") gebruikt. Wij opereren vanuit het Verenigd Koninkrijk. Dit Beleid geldt samen met onze Gebruiksvoorwaarden.",
+    "sections": [
+      {
+        "title": "1. Wie verantwoordelijk is voor uw gegevens",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE AI is de verwerkingsverantwoordelijke voor de persoonsgegevens die in dit Beleid worden beschreven, behalve wanneer wij gegevens uitsluitend namens een andere partij verwerken."
+          },
+          {
+            "type": "p",
+            "text": "Privacyvragen en verzoeken: privacy@ignitehub.app."
+          }
+        ]
+      },
+      {
+        "title": "2. Gegevens die wij verzamelen",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Afhankelijk van hoe u de Dienst gebruikt, kunnen wij het volgende verzamelen:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Accountgegevens: e-mailadres en authenticatie-identificatoren van aanmeldproviders (Google, Apple of e-mail).",
+              "Profiel- en plangegevens: naam, geboortedatum, geslacht, lengte, gewicht, doelen, activiteitsniveau, dieetvoorkeuren, stap- en waterdoelen, en gerelateerde keuzes tijdens onboarding.",
+              "Voedings- en activiteitsgegevens: maaltijd- en dranklogs, calorieën, macro's, ingrediënten, trainingsinvoer, vasten- en watertracking, voedingsscores en micronutriëntadvies.",
+              "Foto's en media die u kiest te uploaden: maaltijdfoto's, foto's van verpakkingslabels, voortgangsfoto's, profielavatar, foto's en bijschriften in de profielgalerij, en afbeeldingen die in de IGNITE AI Assistant-chat worden gestuurd.",
+              "Spraakinvoer: audio die u opneemt voor een maaltijdbeschrijving wordt verzonden voor transcriptie. Wij gebruiken het transcript om uw verzoek te verwerken. Wij zijn niet van plan ruwe spraakopnamen in uw account te bewaren nadat de transcriptie is voltooid.",
+              "Tekst die u verstrekt: getypte maaltijdbeschrijvingen, chatberichten, groeps-chat- en feedposts, feedback en zoekopdrachten.",
+              "Gezondheidsmetingen (wanneer u verbindt en toestemming geeft): op ondersteunde apparaten gegevens van Apple Health of Health Connect zoals stappen, actieve calorieën, hartslag, slaap of bloedzuurstof. Beschikbaarheid hangt af van platform en machtigingen.",
+              "Apparaat- en app-informatie: appversie, taal, tijdzone, pushmeldingtokens en technische logs die nodig zijn om de Dienst te laten werken en te beveiligen.",
+              "Abonnements- en aankoopinformatie (wanneer optionele betaalde plannen beschikbaar zijn): plantype, abonnementsstatus en transactie-identificatoren van Apple of Google. Wij ontvangen of bewaren niet uw volledige betaalkaartgegevens.",
+              "Friends- en sociale gegevens: weergavenaam, handle, bio, vriendverbindingen en -verzoeken, lidmaatschap van privégroepen, groeps-chat- en feedposts, media in de profielgalerij, likes en reacties, uitnodigingen en deelnameverzoeken, en wellnessstatistieken die u kiest te tonen op uw Friends-profiel.",
+              "Door AI gegenereerde dieetplannen en opgeslagen recepten op basis van uw profiel, doelen en voorkeuren.",
+              "Productgebruikvoorkeuren: favoriete thema's voor share cards en exportgebeurtenissen wanneer u functies voor het delen van maaltijden of trainingen gebruikt. Dit wordt gebruikt om deel-functies te verbeteren, niet voor advertenties.",
+              "Feeddeel-instellingen per groep: voor elke privégroep of u ervoor heeft gekozen nieuwe maaltijd- of trainingslogs automatisch te delen naar de feed van die groep."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3. Hoe wij uw gegevens gebruiken",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Wij gebruiken persoonsgegevens om:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "De Dienst te leveren, inclusief voedselregistratie, doelen, plannen en voortgangsregistratie.",
+              "AI-ondersteunde functies uit te voeren zoals Snap Track, Snap Cook, label- en barcodeanalyse, Describe, Voice, door AI gegenereerde dieetplannen en IGNITE AI Assistant.",
+              "Calorie- en macrodoelen en in-app coaching te personaliseren op basis van uw profiel en logs.",
+              "Gezondheidsgerelateerde metingen te synchroniseren wanneer u ondersteunde integraties verbindt.",
+              "Service- en sociale meldingen te sturen die u inschakelt, beveiliging te handhaven, misbruik te voorkomen en fouten te verhelpen.",
+              "Abonnementen te verwerken wanneer die worden aangeboden, te reageren op ondersteuningsverzoeken en te voldoen aan de wet.",
+              "Friends en privégroepen te laten werken, inclusief chat, feeds, profielgalerijen, leaderboards en inhoud die u deelt met vrienden of groepsleden."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Wij verkopen uw gezondheids- of maaltijdgegevens niet voor advertenties."
+          },
+          {
+            "type": "p",
+            "text": "Zichtbaarheid voor Friends: Geaccepteerde vrienden en groepsleden kunnen informatie zien die u deelt via Friends-functies, zoals uw profiel, galerijmedia, berichten en statistieken die u inschakelt. Maaltijd- en trainingslogs worden niet op een groepsfeed geplaatst tenzij u ze handmatig deelt of automatisch delen voor die groep inschakelt. U kunt de zichtbaarheid van uw profiel en de feeddeel-instellingen per groep in de app aanpassen."
+          }
+        ]
+      },
+      {
+        "title": "4. AI-verwerking",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Wanneer u AI-functies gebruikt, wordt inhoud die u indient (zoals foto's, tekst, spraak voor transcriptie of chatberichten) verwerkt op beveiligde servers, inclusief infrastructuur van derden en AI-providers die wij gebruiken om de Dienst te leveren."
+          },
+          {
+            "type": "p",
+            "text": "AI-verwerking wordt alleen gebruikt om suggesties en schattingen te genereren. Suggesties voor maaltijden, trainingen, recepten en dieetplannen worden niet in uw dagboek opgeslagen totdat u ze in de app controleert en bevestigt, behalve wanneer een functie duidelijk automatisch logt na analyse (zoals beschreven in onze Gebruiksvoorwaarden)."
+          },
+          {
+            "type": "p",
+            "text": "Dien geen gevoelige informatie in die u niet voor dit doel wilt laten verwerken. Functies die onder een betaald plan als onbeperkt worden beschreven, zijn onderworpen aan de regels voor redelijk persoonlijk gebruik in onze Gebruiksvoorwaarden."
+          }
+        ]
+      },
+      {
+        "title": "5. Friends en privégroepen",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Wanneer u Friends- en Groups Room-functies gebruikt, verwerken wij sociale en profielgegevens om u met vrienden te verbinden, privégroepen te laten werken en gedeelde inhoud weer te geven."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Vriendverbindingen: het sturen en accepteren van vriendschapsverzoeken, het bekijken van Friends-profielen, en uitnodigingslinks of QR-codes die u gebruikt.",
+              "Privégroepen: groepsnaam, lidmaatschap, chatberichten, feedposts, leaderboards, en maaltijd- of trainingskaarten die u met een groep deelt.",
+              "Profielgalerij: foto's, bijschriften, likes, reacties en interacties op media die u naar uw profiel uploadt.",
+              "Meldingen: push- of in-app-meldingen voor vriendschapsverzoeken, groepsactiviteit, reacties, likes en uitnodigingen wanneer u die inschakelt."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Deel via Friends-functies geen inhoud die u niet wilt dat vrienden of groepsleden zien. Wij kunnen sociale inhoud verwijderen die onze Voorwaarden of toepasselijk recht schendt."
+          },
+          {
+            "type": "p",
+            "text": "Delen naar groepsfeeds: Voor elke privégroep kunt u kiezen of nieuwe maaltijd- of trainingslogs automatisch op de feed van die groep worden geplaatst. Deze opties staan standaard uit. U kunt ze wijzigen bij het toetreden tot een groep of op elk moment via het pictogram voor Feed-tabbladinstellingen in de groep."
+          }
+        ]
+      },
+      {
+        "title": "6. Rechtsgrondslagen en regionale informatie",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Verenigd Koninkrijk en Europese Economische Ruimte: Waar de UK GDPR of EU GDPR van toepassing is, steunen wij op een of meer van de volgende rechtsgrondslagen:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Overeenkomst: om de Dienst te leveren die u aanvraagt, inclusief account, logging, plannen, sociale functies en betaalde functies wanneer die worden aangeboden.",
+              "Toestemming: waar vereist, bijvoorbeeld voor optionele pushmeldingen, toegang tot Apple Health of Health Connect, of machtigingen voor microfoon en camera.",
+              "Gerechtvaardigde belangen: om de Dienst te beveiligen, misbruik te voorkomen, betrouwbaarheid te verbeteren en gebruikers te ondersteunen, afgewogen tegen uw rechten.",
+              "Wettelijke verplichting: waar wij informatie moeten bewaren of openbaar maken om aan de wet te voldoen."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Verenigde Staten: Wij verwerken persoonsgegevens zoals beschreven in dit Beleid om de Dienst te leveren en te verbeteren. Wij verkopen uw persoonsgegevens niet voor geld. Wij delen geen persoonsgegevens voor cross-context gedragsgerichte advertenties. Afhankelijk van uw woonstaat kunt u aanvullende rechten hebben onder staatsprivacywetten (bijvoorbeeld in Californië, Virginia of Colorado)."
+          },
+          {
+            "type": "p",
+            "text": "Australië: Waar de Privacy Act 1988 (Cth) van toepassing is, gaan wij met persoonsgegevens om in overeenstemming met de Australian Privacy Principles (APPs). Consumentengaranties onder de Australian Consumer Law kunnen ook van toepassing zijn en kunnen waar van toepassing niet worden uitgesloten (zie onze Gebruiksvoorwaarden)."
+          }
+        ]
+      },
+      {
+        "title": "7. Hoe wij gegevens delen",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Wij kunnen persoonsgegevens delen met:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Dienstverleners die ons helpen hosten, opslaan, gebruikers authenticeren, AI-verzoeken verwerken, meldingen bezorgen en de app laten werken (bijvoorbeeld cloudhosting en authenticatiediensten).",
+              "Apple en Google wanneer u zich aanmeldt of abonnementen koopt via hun platforms.",
+              "Autoriteiten, toezichthouders of anderen wanneer dit wettelijk vereist is of om rechten, veiligheid en beveiliging te beschermen."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Wij kunnen openbare voedingsdatabases gebruiken om voedingsinformatie op te zoeken. Wij verkopen uw persoonsgegevens niet aan gegevensproviders van derden."
+          },
+          {
+            "type": "p",
+            "text": "Als ons bedrijf wordt gereorganiseerd, kunnen wij gegevens als onderdeel van dat proces overdragen met passende waarborgen."
+          }
+        ]
+      },
+      {
+        "title": "8. Internationale doorgifte",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Wij kunnen gegevens verwerken en opslaan in het Verenigd Koninkrijk en andere landen waar onze dienstverleners actief zijn, inclusief landen waar u woont (zoals de Verenigde Staten of Australië). Waar vereist gebruiken wij passende waarborgen voor doorgifte buiten het VK of de EER, zoals standaardcontractbepalingen."
+          }
+        ]
+      },
+      {
+        "title": "9. Hoe lang wij gegevens bewaren",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Wij bewaren persoonsgegevens zolang uw account actief is en zolang nodig om de Dienst te leveren."
+          },
+          {
+            "type": "p",
+            "text": "Wanneer u uw account verwijdert via Profiel → Account, verwijderen of anonimiseren wij accountgerelateerde gegevens zoals uw profiel, voedingslogs, dieetplannen, opgeslagen recepten, gewichtsgeschiedenis, chatgeschiedenis van AI Assistant, Friends-verbindingen, privégroepen die u bezit, groepsposts en berichten, media in de profielgalerij, sociale meldingen, deelvoorkeuren en gerelateerde accountgegevens, onder voorbehoud van wettelijke bewaarplichten en redelijke back-upcycli."
+          },
+          {
+            "type": "p",
+            "text": "Sommige gegevens kunnen gedurende een beperkte periode in versleutelde back-ups blijven staan voordat ze worden overschreven. Feedback die u stuurt kan na accountverwijdering in geanonimiseerde vorm worden bewaard waar de wet dat toestaat."
+          },
+          {
+            "type": "p",
+            "text": "Opslagbestanden zoals foto's worden mogelijk niet in elke omgeving altijd onmiddellijk verwijderd. Wij werken eraan om verwijdering in de loop van de tijd af te stemmen op accountverwijdering."
+          }
+        ]
+      },
+      {
+        "title": "10. Beveiliging",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Wij gebruiken technische en organisatorische maatregelen die zijn bedoeld om persoonsgegevens te beschermen, inclusief toegangscontroles en versleuteling tijdens verzending. Geen enkele onlinedienst kan absolute beveiliging garanderen. Gebruik een sterke aanmeldmethode en laat het ons weten als u vermoedt dat er ongeautoriseerde toegang is."
+          }
+        ]
+      },
+      {
+        "title": "11. Uw keuzes en rechten",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Afhankelijk van waar u woont, kunt u het recht hebben om:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Persoonsgegevens in te zien, te corrigeren of te laten verwijderen.",
+              "Toestemming in te trekken wanneer verwerking op toestemming is gebaseerd.",
+              "Bezwaar te maken tegen of bepaalde verwerking te beperken.",
+              "Overdraagbaarheid te verzoeken van gegevens die u heeft verstrekt.",
+              "Een klacht in te dienen bij een toezichthoudende autoriteit."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "U kunt een groot deel van uw profiel in de app bijwerken. Voor andere verzoeken kunt u contact opnemen via privacy@ignitehub.app. Wij kunnen uw identiteit moeten verifiëren."
+          },
+          {
+            "type": "p",
+            "text": "Gebruikers in het Verenigd Koninkrijk kunnen contact opnemen met het Information Commissioner's Office (ICO). Gebruikers in de Europese Economische Ruimte kunnen contact opnemen met hun lokale gegevensbeschermingsautoriteit."
+          },
+          {
+            "type": "p",
+            "text": "Inwoners van de Verenigde Staten: U kunt het recht hebben om te weten welke persoonsgegevens wij verzamelen, deze in te zien, te corrigeren of te laten verwijderen, en u af te melden voor bepaalde verwerking waar toepasselijke staatswet die rechten biedt. Stuur voor een verzoek een e-mail naar privacy@ignitehub.app. Wij zullen u niet discrimineren omdat u privacyrechten uitoefent die door de wet zijn toegestaan."
+          },
+          {
+            "type": "p",
+            "text": "Inwoners van Australië: U kunt toegang tot of correctie van persoonsgegevens die wij over u bewaren verzoeken door contact op te nemen via privacy@ignitehub.app. U kunt ook een klacht indienen bij het Office of the Australian Information Commissioner (OAIC) via oaic.gov.au."
+          }
+        ]
+      },
+      {
+        "title": "12. Machtigingen en apparaatinstellingen",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "De Dienst kan om camera-, microfoon-, fotobibliotheek-, meldings- en gezondheidsmachtigingen vragen. U kunt veel hiervan wijzigen in de instellingen van uw apparaat. Sommige functies werken niet zonder de relevante machtiging."
+          }
+        ]
+      },
+      {
+        "title": "13. Kinderen",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "De Dienst is niet gericht op kinderen onder de 13 jaar, en wij verzamelen niet bewust persoonsgegevens van hen. Als u denkt dat een kind onder de 13 jaar gegevens heeft verstrekt, neem dan contact met ons op zodat wij passende stappen kunnen zetten."
+          }
+        ]
+      },
+      {
+        "title": "14. Wijzigingen in dit Beleid",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Wij kunnen dit Privacybeleid van tijd tot tijd bijwerken. Wij plaatsen de bijgewerkte versie in de app en op deze website en wijzigen de datum \"Laatst bijgewerkt\". Materiële wijzigingen kunnen ook in de app worden gecommuniceerd waar dat passend is."
+          }
+        ]
+      },
+      {
+        "title": "15. Contact",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vragen over dit Privacybeleid: privacy@ignitehub.app."
+          }
+        ]
+      }
+    ]
+  },
+  "termsOfUse": {
+    "title": "Gebruiksvoorwaarden",
+    "lastUpdated": "Laatst bijgewerkt: 9 juli 2026",
+    "intro": "Deze Gebruiksvoorwaarden (\"Voorwaarden\") regelen uw gebruik van de mobiele applicatie IGNITE AI en gerelateerde diensten (gezamenlijk de \"Dienst\"), beheerd door IGNITE AI (\"IGNITE\", \"wij\", \"ons\" of \"onze\") vanuit het Verenigd Koninkrijk. De Dienst kan worden gebruikt in het Verenigd Koninkrijk, Portugal, de Verenigde Staten, Australië en andere landen. Door een account aan te maken, toegang te krijgen tot of de Dienst te gebruiken, gaat u akkoord met deze Voorwaarden en met ons Privacybeleid. Als u niet akkoord gaat, gebruik de Dienst dan niet.",
+    "sections": [
+      {
+        "title": "1. Geschiktheid",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "U moet voldoen aan de minimale leeftijd die in uw land vereist is om digitale diensten te gebruiken. U moet minstens 13 jaar oud zijn. Kinderen onder de 13 jaar mogen de Dienst niet gebruiken."
+          },
+          {
+            "type": "p",
+            "text": "Als u jonger bent dan 18, of jonger dan de leeftijd van meerderjarigheid in uw land, mag u de Dienst alleen gebruiken met toestemming en onder toezicht van een ouder of wettelijke voogd die deze Voorwaarden namens u accepteert. In sommige landen (inclusief delen van de Europese Economische Ruimte) moet u minstens 16 jaar zijn om de Dienst zonder ouderlijke betrokkenheid te gebruiken."
+          },
+          {
+            "type": "p",
+            "text": "De Dienst is niet bedoeld voor personen die volgens toepasselijk recht geen voedings-, fitness- of wellnesstrackingtools mogen gebruiken. Door de Dienst te gebruiken, verklaart u dat u aan deze eisen voldoet."
+          }
+        ]
+      },
+      {
+        "title": "2. Wat IGNITE biedt",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE AI is een app voor wellness- en voedingstracking. Hij helpt u maaltijden en dranken te loggen, calorieën en macro's bij te houden, voedingsdoelen in te stellen, gewicht en activiteitsgerelateerde metingen te monitoren, en AI-ondersteunde tools te gebruiken om voedselfoto's, verpakkingslabels, barcodes, tekstbeschrijvingen en spraakinvoer te interpreteren."
+          },
+          {
+            "type": "p",
+            "text": "De Dienst omvat momenteel functies zoals een dagelijks voedingsdagboek, gepersonaliseerde calorie- en macrodoelen, Snap Track-logging, Snap Cook AI-receptgeneratie op basis van foto's, door AI gegenereerde dieetmaaltijdplannen, zelfstandige trainingslogging, chatassistentie via IGNITE AI Assistant, Friends en privégroepen (Groups Room), optionele integratie met Apple Health en Health Connect waar beschikbaar, water- en stapdoelen, vastentools, voortgangsfoto's, voedings- en share cards, opgeslagen recepten en gerelateerde tools waar beschikbaar."
+          },
+          {
+            "type": "p",
+            "text": "IGNITE wordt aangeboden als een wellness-ondersteunings- en trackingtool. Het is geen medisch hulpmiddel en biedt geen medische zorg, diagnose, behandeling of ziektepreventie."
+          }
+        ]
+      },
+      {
+        "title": "3. Snap Track",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Snap Track laat u voedsel loggen met foto's, barcodes, verpakkingslabels, getypte beschrijvingen, spraakopnamen, handmatige ingrediënteninvoer, directe macro-invoer en voedselzoekopdrachten. Afhankelijk van de invoer die u geeft, kunnen verschillende herkennings- en schattingsmethoden van toepassing zijn."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Maaltijd- en drankfoto's: voedingsmiddelen, dranken en porties worden geïdentificeerd. Bij geslaagde analyse kan een invoer automatisch in uw dagboek worden opgeslagen; u kunt deze daarna openen om te controleren, ingrediënten te bewerken, problemen te corrigeren of te verwijderen.",
+              "Barcodescans: producten kunnen worden gekoppeld aan voedingsdatabases wanneer beschikbaar en kunnen bij een geslaagde match automatisch worden gelogd.",
+              "Verpakkingslabels: product- en voedingsinformatie kan uit uw foto worden gelezen en, wanneer analyse slaagt, automatisch worden gelogd voor latere controle.",
+              "Describe en Voice: tekst of getranscribeerde spraak wordt omgezet in voorgestelde ingrediënten en porties die u controleert en bevestigt voordat u logt.",
+              "Macro's invoegen: u kunt calorieën en macro's rechtstreeks invoeren zonder AI-analyse."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Afhankelijk van de invoer kan Snap Track na analyse automatisch een invoer opslaan (bijvoorbeeld maaltijd- of verpakte-voedselfoto's en geslaagde barcode-matches), of u eerst vragen te controleren en te bevestigen (bijvoorbeeld Describe, Voice en IGNITE AI Assistant). U moet gelogde invoeren altijd controleren en alles bewerken of verwijderen wat onjuist lijkt."
+          }
+        ]
+      },
+      {
+        "title": "4. IGNITE AI Assistant",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE AI Assistant biedt conversationele ondersteuning bij voeding en wellness. Hij kan schattingen voor maaltijden of trainingen voorstellen, vragen over uw doelen of gelogde gegevens beantwoorden, en u helpen voedsel- en activiteitsinformatie te verkennen."
+          },
+          {
+            "type": "p",
+            "text": "Suggesties voor maaltijden en trainingen in de chat zijn alleen voorbeelden. Niets wordt in uw voedingsdagboek of activiteitstotalen opgeslagen totdat u de suggestie controleert en deze expliciet in de app bevestigt. Chatantwoorden kunnen onnauwkeurig, onvolledig of ongeschikt zijn voor uw persoonlijke situatie."
+          }
+        ]
+      },
+      {
+        "title": "5. Snap Cook, dieetplannen, training en delen",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Snap Cook gebruikt AI om recepten voor te stellen op basis van foto's van ingrediënten of maaltijden die u verstrekt. Suggesties zijn startpunten. Controleer ingrediënten, porties en voedingswaarden voordat u opslaat of logt."
+          },
+          {
+            "type": "p",
+            "text": "Door AI gegenereerde dieetplannen maken voorgestelde maaltijden voor dagen of weken op basis van uw profiel, doelen en voorkeuren. Plannen zijn alleen suggesties. U kunt elke voorgestelde maaltijd bewerken, vervangen of negeren."
+          },
+          {
+            "type": "p",
+            "text": "Trainingslogging laat u workouts en geschatte verbranding registreren. Schattingen zijn niet klinisch precies. Trainingssuggesties van IGNITE AI Assistant volgen dezelfde controle-en-bevestigingsregels als maaltijden."
+          },
+          {
+            "type": "p",
+            "text": "Share cards laten u samenvattingen van maaltijden of trainingen exporteren of delen met thema's die u selecteert. Gedeelde afbeeldingen kunnen de app verlaten via het deelblad van uw apparaat. U bepaalt wat u deelt en met wie."
+          }
+        ]
+      },
+      {
+        "title": "6. Friends en privégroepen",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Friends-functies laten u verbinden met andere gebruikers, toetreden tot privé-accountabilitygroepen, chatten, maaltijd- of trainingsupdates delen, profielgalerijen bekijken en sociale meldingen ontvangen wanneer die zijn ingeschakeld."
+          },
+          {
+            "type": "p",
+            "text": "Inhoud die u in een groep plaatst of met vrienden deelt, kan zichtbaar zijn voor leden van die groep of uw geaccepteerde vrienden. Respecteer de privacy van anderen en deel alleen inhoud die u mag delen."
+          },
+          {
+            "type": "p",
+            "text": "Groepseigenaren kunnen leden uitnodigen, lidmaatschap beheren en groepen die zij hebben aangemaakt verwijderen. Wij kunnen groepen of sociale inhoud verwijderen die deze Voorwaarden schenden of risico voor gebruikers creëren."
+          },
+          {
+            "type": "p",
+            "text": "Maaltijd- en trainingslogs worden niet op een groepsfeed geplaatst tenzij u ze handmatig deelt of automatisch delen voor die groep inschakelt. Automatisch delen is optioneel, staat standaard uit en kan per groep in het Feed-tabblad afzonderlijk worden ingesteld voor maaltijden en training."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Pest, intimideer of plaats geen schadelijke inhoud in groepen of op profielen.",
+              "Deel geen foto's of gezondheidsinformatie van een andere persoon zonder toestemming waar dat wettelijk vereist is."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "7. Gezondheid, activiteit en lichaamsmetingen",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "U kunt gezondheidsgerelateerde informatie invoeren of synchroniseren zoals gewicht, lengte, stappen en, op ondersteunde apparaten met uw toestemming, gegevens van Apple Health of Health Connect (bijvoorbeeld stappen, actieve calorieën, hartslag, slaap of bloedzuurstof). Beschikbaarheid hangt af van uw apparaat, besturingssysteem en de machtigingen die u verleent."
+          },
+          {
+            "type": "p",
+            "text": "Gesynchroniseerde of weergegeven gezondheidsgegevens zijn alleen bedoeld voor algemene wellnesstracking en vormen geen medische monitoring, klinische meting of nooddetectie."
+          }
+        ]
+      },
+      {
+        "title": "8. Medische en wellness-disclaimers",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Informatie in de Dienst, inclusief calorieaantallen, macro's, voedingsscores, maaltijdsuggesties, vastenadvies, schattingen van trainingsverbranding en door AI gegenereerde inhoud, is uitsluitend bedoeld voor algemene informatie- en wellnessdoeleinden. Het is geen persoonlijk medisch advies en geen vervanging voor advies van een gekwalificeerde arts, geregistreerde diëtist of andere bevoegde gezondheidsprofessional."
+          },
+          {
+            "type": "p",
+            "text": "Gebruik de Dienst niet voor medische noodgevallen. Als u denkt dat u een medische noodsituatie heeft, neem dan onmiddellijk contact op met de hulpdiensten."
+          },
+          {
+            "type": "p",
+            "text": "Raadpleeg een gekwalificeerde gezondheidsprofessional voordat u significante wijzigingen aanbrengt in uw dieet, training, vastenroutine of gewichtsbeheersingsplan, vooral als u zwanger bent, borstvoeding geeft, diabetes of een andere chronische aandoening beheert, medicatie gebruikt, herstelt van ziekte, of een voorgeschiedenis van eetstoornissen heeft."
+          },
+          {
+            "type": "p",
+            "text": "De Dienst is niet ontworpen voor gebruikers die actief een eetstoornis beheren zonder professioneel toezicht. Als u een eetstoornis heeft of vermoedt, zoek dan gekwalificeerde zorg voordat u calorie-trackingfuncties gebruikt."
+          },
+          {
+            "type": "p",
+            "text": "Tijdens zwangerschap en borstvoeding zijn voedingsbehoeften anders; volg geen caloriedoelen, vastenadvies of afvalplannen in de app zonder begeleiding van een gekwalificeerde gezondheidsprofessional. Als u een fysieke of gezondheidstoestand heeft, neem dezelfde voorzorg: raadpleeg een gekwalificeerde professional voordat u doelen of advies van de Dienst volgt."
+          }
+        ]
+      },
+      {
+        "title": "9. Voedingsgegevens en nauwkeurigheid",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Voedingswaarden in IGNITE kunnen afkomstig zijn van openbare voedseldatabases, erkende productinformatie, ingrediëntenanalyse en AI-ondersteunde schatting. Productherkenning kan zichtbare productnamen, verpakkingen, barcodes, voedingslabels en databasekoppeling gebruiken."
+          },
+          {
+            "type": "p",
+            "text": "Database-invoer kan onvolledig, verouderd of onjuist zijn. AI-ondersteunde resultaten zijn schattingen en kunnen voedingsmiddelen, porties, ingrediënten of allergenen verkeerd identificeren. Zelfgemaakte maaltijden, restaurantgerechten, gemengde borden en regionale producten zijn bijzonder onzeker."
+          },
+          {
+            "type": "p",
+            "text": "Behandel alle resultaten als schattingen tenzij u ze onafhankelijk heeft geverifieerd. Aan databases gekoppelde verpakte producten zijn meestal betrouwbaarder dan alleen-AI-suggesties."
+          }
+        ]
+      },
+      {
+        "title": "10. AI-ondersteunde analyse",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE gebruikt geavanceerde AI-modellen die op beveiligde servers worden gehost om foto's, labels, beschrijvingen en chatberichten te helpen interpreteren. AI-uitvoer is een startpunt, geen garantie. Deze kan onjuist, verouderd of ongeschikt zijn voor uw behoeften."
+          },
+          {
+            "type": "p",
+            "text": "U blijft verantwoordelijk voor wat u logt. Vertrouw niet op AI-resultaten voor allergieveiligheid, medische voedingstherapie of andere beslissingen met een hoog risico zonder professionele verificatie."
+          },
+          {
+            "type": "p",
+            "text": "Sommige functies kunnen als \"onbeperkt\" worden beschreven of zijn inbegrepen in een betaald plan wanneer dat wordt aangeboden. Dit betekent redelijk persoonlijk, niet-commercieel gebruik voor het loggen van uw eigen maaltijden, dranken en wellnessgegevens via Snap Track, IGNITE AI Assistant en gerelateerde tools. Het staat geen geautomatiseerde verzoeken, bulkverwerking, doorverkoop van toegang, delen van één abonnement met meerdere niet-gerelateerde gebruikers, of enig gebruik toe dat een onevenredige belasting op de Dienst legt. Wij kunnen technische limieten toepassen of toegang opschorten als wij misbruik of afwijkend gebruik detecteren."
+          }
+        ]
+      },
+      {
+        "title": "11. Uw verantwoordelijkheden",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "Controleer en bewerk voorgestelde of automatisch gelogde maaltijden, dranken, ingrediënten, porties en macro's. Corrigeer of verwijder invoeren die er verkeerd uitzien.",
+              "Verstrek waar gevraagd accurate account- en profielgegevens.",
+              "Gebruik de Dienst rechtmatig en alleen voor persoonlijke, niet-commerciële doeleinden, tenzij wij schriftelijk anders overeenkomen.",
+              "Houd uw aanmeldgegevens veilig en laat het ons weten als u vermoedt dat er ongeautoriseerde toegang tot uw account is.",
+              "Upload geen inhoud die u niet mag delen, inclusief foto's van andere personen zonder toestemming waar dat wettelijk vereist is."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "12. Gebruikersinhoud",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "U kunt inhoud bij de Dienst indienen, inclusief maaltijdlogs, foto's, spraakinvoer voor transcriptie, chatberichten, profielinformatie, media in de profielgalerij, groepsposts en berichten, voortgangsfoto's en feedback (\"Gebruikersinhoud\"). U behoudt het eigendom van uw Gebruikersinhoud."
+          },
+          {
+            "type": "p",
+            "text": "Door Gebruikersinhoud in te dienen, verleent u IGNITE een wereldwijde, niet-exclusieve, royaltyvrije licentie om die inhoud te hosten, op te slaan, te reproduceren, te verwerken, weer te geven en te gebruiken, alleen voor zover nodig om de Dienst te laten werken, te beveiligen, te verbeteren en te leveren, inclusief AI-ondersteunde analyse en ondersteuning. Deze licentie eindigt wanneer uw inhoud wordt verwijderd, behalve wanneer bewaring wettelijk vereist is of volgens legitieme back-uppraktijken."
+          },
+          {
+            "type": "p",
+            "text": "Wij kunnen inhoud verwijderen of toegang opschorten als wij redelijkerwijs van mening zijn dat deze deze Voorwaarden, toepasselijk recht of de rechten van anderen schendt."
+          }
+        ]
+      },
+      {
+        "title": "13. Aanvaardbaar gebruik",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "U stemt ermee in om niet:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "De Dienst te gebruiken voor onwettige, schadelijke, frauduleuze of misbruikdoeleinden.",
+              "Te proberen de Dienst of systemen daarvan te reverse-engineeren, scrapen, overbelasten of te verstoren.",
+              "Malware, spam of inhoud te uploaden die intimiderend, hatelijk of seksueel uitbuitend is, of die onveilige afvalpraktijken of eetstoornissen promoot.",
+              "Uw identiteit verkeerd voor te stellen of zich als een andere persoon voor te doen.",
+              "De Dienst te gebruiken om medisch advies aan derden te geven of als vervanging voor professionele gezondheidszorg.",
+              "Scripts, bots of andere automatisering te gebruiken om AI-analyseverzoeken, barcode-opzoekingen of chatberichten te sturen.",
+              "Een betaald abonnement of account met anderen te delen op een manier die aparte abonnementen vervangt of commercieel gebruik mogelijk maakt.",
+              "Uitvoer van AI-functies door te verkopen, opnieuw te publiceren of commercieel te exploiteren zonder onze schriftelijke toestemming.",
+              "Andere gebruikers te intimideren, te bedreigen of te misbruiken in Friends-functies, groepen, reacties of profielgalerijen."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "14. Abonnementen en betaalde functies",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE biedt gratis toegang tot kernwellnessfuncties. Wij kunnen in sommige regio's ook optionele betaalde abonnementsplannen aanbieden. Wanneer beschikbaar, worden prijzen, factureringsperioden (bijvoorbeeld wekelijks, maandelijks of jaarlijks), proefperioden en inbegrepen functies in de app getoond op het moment van aankoop."
+          },
+          {
+            "type": "p",
+            "text": "Betaalde abonnementen worden verwerkt door Apple, Google of andere geautoriseerde betalingsproviders. Hun voorwaarden en privacybeleiden zijn van toepassing op facturering en restituties."
+          },
+          {
+            "type": "p",
+            "text": "Abonnementen worden automatisch verlengd tenzij u annuleert vóór het einde van de huidige factureringsperiode via de accountinstellingen van uw App Store of Google Play. Het verwijderen van de IGNITE-app annuleert uw abonnement niet."
+          },
+          {
+            "type": "p",
+            "text": "Als een gratis proefperiode wordt aangeboden, wordt u in rekening gebracht wanneer de proefperiode eindigt, tenzij u vóór die datum annuleert. Proefduur en geschiktheid worden bij aankoop getoond."
+          },
+          {
+            "type": "p",
+            "text": "Functies die onder een betaald plan als onbeperkt worden beschreven, zijn onderworpen aan de regels voor redelijk persoonlijk gebruik in Sectie 10. Normaal dagelijks maaltijdloggen wordt niet als misbruik beschouwd."
+          }
+        ]
+      },
+      {
+        "title": "15. Account en beveiliging",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "U kunt zich aanmelden met ondersteunde methoden zoals Google, Apple of e-mail. U bent verantwoordelijk voor alle activiteit onder uw account, tenzij veroorzaakt door onze fout. Wij kunnen accounts opschorten of beëindigen die deze Voorwaarden schenden of een beveiligings-, juridisch of operationeel risico creëren."
+          }
+        ]
+      },
+      {
+        "title": "16. Diensten van derden",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "De Dienst kan steunen op of linken naar diensten van derden, inclusief aanmeldproviders, cloudhosting, voedingsdatabases en gezondheidsplatforms op apparaten. Die diensten vallen onder hun eigen voorwaarden en beleiden. Wij controleren diensten van derden niet en zijn daar niet verantwoordelijk voor."
+          },
+          {
+            "type": "p",
+            "text": "IGNITE kan voedingsdatabases en gegevensproviders van derden gebruiken onder hun respectieve licenties en voorwaarden. Waar vereist voldoen wij aan toeschrijvings- en gebruiksverplichtingen voor die bronnen."
+          }
+        ]
+      },
+      {
+        "title": "17. Intellectuele eigendom",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "De Dienst, inclusief software, ontwerp, branding en documentatie, is eigendom van IGNITE of haar licentiegevers en wordt beschermd door intellectuele-eigendomswetten. Wij verlenen u een beperkte, persoonlijke, niet-overdraagbare, herroepbare licentie om de app te gebruiken volgens deze Voorwaarden."
+          },
+          {
+            "type": "p",
+            "text": "U mag de Dienst niet kopiëren, wijzigen, verspreiden, verkopen of afgeleide werken daarvan maken, behalve zoals toegestaan door de wet of met onze schriftelijke toestemming."
+          }
+        ]
+      },
+      {
+        "title": "18. Disclaimers",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "VOOR ZOVER MAXIMAAL TOEGESTAAN DOOR DE WET WORDT DE DIENST GELEVERD \"ZOALS DEZE IS\" EN \"ZOALS BESCHIKBAAR.\" WIJ WIJZEN ALLE GARANTIES AF, UITDRUKKELIJK OF IMPLICIET, INCLUSIEF VERKOOPBAARHEID, GESCHIKTHEID VOOR EEN BEPAALD DOEL EN NIET-INBREUK."
+          },
+          {
+            "type": "p",
+            "text": "Wij garanderen niet dat de Dienst ononderbroken, foutloos of veilig zal zijn, of dat voedings-, gezondheids- of AI-uitvoer nauwkeurig, volledig of geschikt voor uw doeleinden zal zijn."
+          }
+        ]
+      },
+      {
+        "title": "19. Beperking van aansprakelijkheid",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "VOOR ZOVER MAXIMAAL TOEGESTAAN DOOR DE WET ZIJN IGNITE EN HAAR FUNCTIONARISSEN, BESTUURDERS, WERKNEMERS, AGENTEN EN LEVERANCIERS NIET AANSPRAKELIJK VOOR ENIGE INDIRECTE, INCIDENTELE, BIJZONDERE, GEVOLG- OF PUNITIEVE SCHADE, OF VOOR VERLIES VAN WINST, GEGEVENS, GOODWILL OF GEZONDHEIDSGERELATEERDE UITKOMSTEN, VOORTVLOEIEND UIT OF VERBAND HOUDEND MET UW GEBRUIK VAN DE DIENST."
+          },
+          {
+            "type": "p",
+            "text": "VOOR ZOVER MAXIMAAL TOEGESTAAN DOOR DE WET ZAL ONZE TOTALE AANSPRAKELIJKHEID VOOR ENIGE VORDERING VOORTVLOEIEND UIT OF VERBAND HOUDEND MET DE DIENST OF DEZE VOORWAARDEN NIET HOGER ZIJN DAN HET HOOGSTE VAN (A) HET BEDRAG DAT U ONS VOOR DE DIENST HEEFT BETAALD IN DE TWAALF MAANDEN VOOR DE VORDERING, OF (B) VIJFTIG POND STERLING (£50) OF HET BIJBENADERDE EQUIVALENT IN LOKALE VALUTA."
+          },
+          {
+            "type": "p",
+            "text": "Sommige rechtsgebieden staan bepaalde beperkingen niet toe. In die gevallen is onze aansprakelijkheid beperkt tot het maximale wat door toepasselijk recht is toegestaan. Niets in deze Voorwaarden beperkt aansprakelijkheid die onder dwingend consumentenbeschermingsrecht niet mag worden beperkt."
+          }
+        ]
+      },
+      {
+        "title": "20. Vrijwaring",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Voor zover maximaal toegestaan door de wet stemt u ermee in IGNITE te vrijwaren en schadeloos te stellen voor claims, schade, verliezen en kosten (inclusief redelijke juridische kosten) die voortvloeien uit uw Gebruikersinhoud, uw misbruik van de Dienst, of uw schending van deze Voorwaarden of toepasselijk recht."
+          }
+        ]
+      },
+      {
+        "title": "21. Beëindiging en accountverwijdering",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "U kunt op elk moment stoppen met het gebruik van de Dienst. U kunt uw account verwijderen via Profiel → Account. Wanneer verwijdering is voltooid, verwijderen of anonimiseren wij accountgerelateerde gegevens zoals beschreven in ons Privacybeleid, onder voorbehoud van wettelijke bewaarplichten en redelijke back-upcycli."
+          },
+          {
+            "type": "p",
+            "text": "Wij kunnen uw toegang opschorten of beëindigen als u deze Voorwaarden materieel schendt of als dat nodig is om gebruikers, de Dienst of onze wettelijke verplichtingen te beschermen."
+          }
+        ]
+      },
+      {
+        "title": "22. Wijzigingen in de Dienst en Voorwaarden",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Wij kunnen elk deel van de Dienst op elk moment wijzigen, opschorten of stopzetten. Wij kunnen deze Voorwaarden bijwerken door een herziene versie in de app en op deze website te plaatsen en de datum \"Laatst bijgewerkt\" bij te werken. Materiële wijzigingen kunnen ook in de app worden gecommuniceerd waar dat passend is."
+          },
+          {
+            "type": "p",
+            "text": "Als u de Dienst blijft gebruiken nadat bijgewerkte Voorwaarden van kracht worden, accepteert u de herziene Voorwaarden. Als u niet akkoord gaat, moet u stoppen met het gebruik van de Dienst en kunt u uw account verwijderen."
+          }
+        ]
+      },
+      {
+        "title": "23. Toepasselijk recht en internationale gebruikers",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE beheert de Dienst vanuit het Verenigd Koninkrijk. Deze Voorwaarden worden beheerst door het recht van Engeland en Wales, behalve waar dwingende consumentenbeschermingswetten in uw woonland anders vereisen."
+          },
+          {
+            "type": "p",
+            "text": "Als u een consument in het Verenigd Koninkrijk bent, sluit of beperkt niets in deze Voorwaarden uw wettelijke rechten onder de Consumer Rights Act 2015 en andere toepasselijke UK-wetgeving."
+          },
+          {
+            "type": "p",
+            "text": "Als u een consument in de Europese Economische Ruimte, Portugal of Zwitserland bent, behoudt u alle dwingende rechten onder de wetten van uw woonland, inclusief rechten die niet contractueel kunnen worden afstand gedaan."
+          },
+          {
+            "type": "p",
+            "text": "Als u een consument in de Verenigde Staten bent, behoudt u alle rechten onder toepasselijke federale of staatsconsumentenbeschermingswetten die niet bij overeenkomst kunnen worden afstand gedaan."
+          },
+          {
+            "type": "p",
+            "text": "Als u een consument in Australië bent, gaan onze goederen en diensten gepaard met garanties die onder de Australian Consumer Law waar van toepassing niet kunnen worden uitgesloten. Niets in deze Voorwaarden is bedoeld om die niet-uitsluitbare rechten uit te sluiten, te beperken of te wijzigen."
+          },
+          {
+            "type": "p",
+            "text": "Onder voorbehoud van dwingend lokaal recht hebben rechtbanken in Engeland en Wales exclusieve bevoegdheid over geschillen die uit deze Voorwaarden voortvloeien. Waar uw lokale wet u als consument het recht geeft claims in uw woonland in te dienen, blijft dat recht onaangetast."
+          }
+        ]
+      },
+      {
+        "title": "24. Contact",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vragen over deze Voorwaarden kunnen worden gestuurd naar support@ignitehub.app."
+          },
+          {
+            "type": "p",
+            "text": "Voor privacygerelateerde verzoeken, zie ons Privacybeleid."
+          }
+        ]
+      }
+    ]
+  }
+}

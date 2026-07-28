@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from 'motion/react'
 import { StoreButtons } from '@/components/store-buttons'
+import { useT } from '@/lib/i18n/provider'
 import { easeOutExpo } from '@/lib/motion'
 
 function GoldStar({ className, style }: { className?: string; style?: React.CSSProperties }) {
@@ -31,6 +32,7 @@ function GoldStar({ className, style }: { className?: string; style?: React.CSSP
 }
 
 export function FinalCta() {
+  const t = useT()
   const reduce = useReducedMotion()
   const sparks = Array.from({ length: 10 }, (_, i) => i)
   const starLifts = [6, 3, 0, 3, 6]
@@ -71,7 +73,7 @@ export function FinalCta() {
         transition={{ duration: 0.75, ease: easeOutExpo }}
       >
         <div className="flex flex-col items-center gap-4 sm:gap-5">
-          <div className="flex items-end gap-1.5 sm:gap-2" aria-label="5 star rating">
+          <div className="flex items-end gap-1.5 sm:gap-2" aria-label={t.finalCta.ratingAria}>
             {starLifts.map((lift, i) => (
               <GoldStar
                 key={i}
@@ -84,10 +86,10 @@ export function FinalCta() {
             className="max-w-2xl overflow-visible font-display text-3xl font-bold tracking-tight text-foreground text-balance sm:text-4xl lg:text-5xl"
             style={{ lineHeight: 1.2, paddingBottom: '0.22em' }}
           >
-            Start making progress look easy.
+            {t.finalCta.title}
           </h2>
         </div>
-        <p className="text-lg text-muted-foreground text-pretty">Snap it. Log it. Crush it.</p>
+        <p className="text-lg text-muted-foreground text-pretty">{t.finalCta.tagline}</p>
         <StoreButtons />
       </motion.div>
     </section>

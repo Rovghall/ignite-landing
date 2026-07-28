@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { animate, motion, useInView, useReducedMotion } from 'motion/react'
+import { useT } from '@/lib/i18n/provider'
 import { easeOutExpo } from '@/lib/motion'
 
 /** Flip to true after launch with real testimonials. */
@@ -25,16 +26,11 @@ const quotes = [
   },
 ]
 
-const stats = [
-  {
-    value: 90,
-    prefix: '',
-    suffix: '%',
-    label: 'ID accuracy on clear plates',
-  },
-  { value: 55, prefix: '', suffix: '+', label: 'Share Card themes' },
-  { value: 4, prefix: '', suffix: '', label: 'health signals synced' },
-  { value: 5, prefix: '', suffix: '+', label: 'exercise types to log' },
+const statValues = [
+  { value: 90, prefix: '', suffix: '%' },
+  { value: 55, prefix: '', suffix: '+' },
+  { value: 4, prefix: '', suffix: '' },
+  { value: 5, prefix: '', suffix: '+' },
 ]
 
 function CountUp({
@@ -75,9 +71,15 @@ function CountUp({
 }
 
 export function SocialProof() {
+  const t = useT()
   const reduce = useReducedMotion()
   const statsRef = useRef<HTMLDivElement>(null)
   const statsInView = useInView(statsRef, { once: true, amount: 0.5 })
+
+  const stats = statValues.map((stat, i) => ({
+    ...stat,
+    label: t.socialProof.stats[i] ?? '',
+  }))
 
   return (
     <section className="mx-auto max-w-6xl px-4 pb-20 pt-10 sm:px-6 md:pb-28 md:pt-12" aria-labelledby="social-proof-heading">
@@ -89,13 +91,13 @@ export function SocialProof() {
         viewport={{ once: true, amount: 0.6 }}
         transition={{ duration: 0.65, ease: easeOutExpo }}
       >
-        Built for people who want results, not spreadsheets.
+        {t.socialProof.title}
       </motion.h2>
 
       <div ref={statsRef} className="mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-6 border-y border-border py-8 sm:grid-cols-4 sm:gap-4">
         {stats.map((stat, i) => (
           <motion.div
-            key={stat.label}
+            key={`${stat.label}-${i}`}
             className="text-center"
             initial={reduce ? false : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}

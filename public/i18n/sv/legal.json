@@ -1,0 +1,702 @@
+{
+  "privacyPolicy": {
+    "title": "Integritetspolicy",
+    "lastUpdated": "Senast uppdaterad: 9 juli 2026",
+    "intro": "Denna integritetspolicy förklarar hur IGNITE AI (\"IGNITE\", \"vi\", \"oss\" eller \"vår\") samlar in, använder, lagrar och delar personuppgifter när du använder mobilapplikationen IGNITE AI och relaterade tjänster (\"Tjänsten\"). Vi bedriver verksamhet från Storbritannien. Denna policy gäller tillsammans med våra användarvillkor.",
+    "sections": [
+      {
+        "title": "1. Vem som är ansvarig för dina uppgifter",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE AI är personuppgiftsansvarig för de personuppgifter som beskrivs i denna policy, utom när vi behandlar uppgifter enbart för någon annans räkning."
+          },
+          {
+            "type": "p",
+            "text": "Integritetsfrågor och begäranden: privacy@ignitehub.app."
+          }
+        ]
+      },
+      {
+        "title": "2. Uppgifter vi samlar in",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Beroende på hur du använder Tjänsten kan vi samla in:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Kontoinformation: e-postadress och autentiseringsidentifikatorer från inloggningsleverantörer (Google, Apple eller e-post).",
+              "Profil- och plandata: namn, födelsedatum, kön, längd, vikt, mål, aktivitetsnivå, kostpreferenser, steg- och vattenmål samt relaterade val vid onboarding.",
+              "Närings- och aktivitetsdata: måltids- och dryckesloggar, kalorier, makron, ingredienser, träningsposter, fasta- och vattenspårning, näringspoäng och vägledning om mikronäringsämnen.",
+              "Foton och media som du väljer att ladda upp: måltidsfoton, foton av förpackningsetiketter, framstegsfoton, profilavatar, profilgallerifoton och bildtexter samt bilder som skickas i IGNITE AI Assistant-chatt.",
+              "Voice-indata: ljud som du spelar in för måltidsbeskrivning skickas för transkription. Vi använder transkriptionen för att behandla din begäran. Vi avser inte att behålla råa röstinspelningar i ditt konto efter att transkriptionen är klar.",
+              "Text som du lämnar: skrivna måltidsbeskrivningar, chattmeddelanden, gruppchatt och inlägg i flödet, feedback och sökfrågor.",
+              "Hälsomått (när du ansluter och ger tillstånd): på stödda enheter, data från Apple Health eller Health Connect såsom steg, aktiva kalorier, hjärtfrekvens, sömn eller blodsyre. Tillgänglighet beror på plattform och behörigheter.",
+              "Enhets- och appinformation: appversion, språk, tidszon, tokens för push-aviseringar och tekniska loggar som behövs för att driva och skydda Tjänsten.",
+              "Prenumerations- och köpinformation (när valfria betalde planer finns): plantyp, prenumerationsstatus och transaktionsidentifikatorer från Apple eller Google. Vi tar inte emot eller lagrar dina fullständiga betalkortsuppgifter.",
+              "Friends och sociala data: visningsnamn, användarnamn, bio, vänkopplingar och -förfrågningar, medlemskap i privata grupper, gruppchatt och inlägg i flödet, profilgallerimedia, likes och kommentarer, inbjudningar och anslutningsförfrågningar samt välmåendestatistik som du väljer att visa på din Friends-profil.",
+              "AI-genererade kostplaner och sparade recept baserade på din profil, dina mål och preferenser.",
+              "Produktanvändningspreferenser: favoritteman för Share Cards och exporthändelser när du använder funktioner för delning av måltid eller träning. Detta används för att förbättra delningsfunktioner, inte för reklam.",
+              "Delningsinställningar per grupps flöde: för varje privat grupp, om du har valt att automatiskt dela nya måltids- eller träningsloggar till den gruppens flöde."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3. Hur vi använder dina uppgifter",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vi använder personuppgifter för att:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Tillhandahålla Tjänsten, inklusive matloggning, mål, planer och framstegsspårning.",
+              "Köra AI-assisterade funktioner som Snap Track, Snap Cook, etikett- och streckkodsanalys, Describe, Voice, AI-genererade kostplaner och IGNITE AI Assistant.",
+              "Anpassa kalori- och makromål samt coachning i appen baserat på din profil och dina loggar.",
+              "Synkronisera hälsorelaterade mått när du ansluter stödda integrationer.",
+              "Skicka tjänste- och sociala aviseringar som du aktiverar, upprätthålla säkerhet, förhindra missbruk och åtgärda fel.",
+              "Hantera prenumerationer när de erbjuds, svara på supportförfrågningar och följa lag.",
+              "Driva Friends och privata grupper, inklusive chatt, flöden, profilgallerier, topplistor och innehåll som du delar med vänner eller gruppdeltagare."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Vi säljer inte dina hälso- eller måltidsdata för reklam."
+          },
+          {
+            "type": "p",
+            "text": "Synlighet i Friends: Godkända vänner och gruppdeltagare kan se information som du delar via Friends-funktioner, såsom din profil, gallerimedia, inlägg och statistik som du aktiverar. Måltids- och träningsloggar publiceras inte i ett gruppflöde om du inte delar dem manuellt eller aktiverar automatisk delning för den gruppen. Du kan justera profilsynlighet och delningsinställningar per grupps flöde i appen."
+          }
+        ]
+      },
+      {
+        "title": "4. AI-behandling",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "När du använder AI-funktioner behandlas innehåll som du skickar in (såsom foton, text, röst för transkription eller chattmeddelanden) på säkra servrar, inklusive tredjepartsinfrastruktur och AI-leverantörer som vi använder för att tillhandahålla Tjänsten."
+          },
+          {
+            "type": "p",
+            "text": "AI-behandling används endast för att generera förslag och uppskattningar. Förslag på måltider, träning, recept och kostplaner sparas inte i din dagbok förrän du har granskat och bekräftat dem i appen, utom när en funktion tydligt loggar automatiskt efter analys (enligt beskrivning i våra användarvillkor)."
+          },
+          {
+            "type": "p",
+            "text": "Skicka inte in känslig information som du inte vill ska behandlas för detta ändamål. Funktioner som beskrivs som obegränsade under en betald plan omfattas av reglerna om rimlig personlig användning i våra användarvillkor."
+          }
+        ]
+      },
+      {
+        "title": "5. Friends och privata grupper",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "När du använder Friends- och Groups Room-funktioner behandlar vi sociala och profiluppgifter för att koppla dig till vänner, driva privata grupper och visa delat innehåll."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Vänkopplingar: skicka och acceptera vänförfrågningar, visa vänprofiler samt inbjudningslänkar eller QR-koder som du använder.",
+              "Privata grupper: gruppnamn, medlemskap, chattmeddelanden, inlägg i flödet, topplistor samt måltids- eller träningskort som du delar till en grupp.",
+              "Profilgalleri: foton, bildtexter, likes, kommentarer och reaktioner på media som du laddar upp till din profil.",
+              "Aviseringar: push- eller appaviseringar för vänförfrågningar, gruppaktivitet, kommentarer, likes och inbjudningar när du aktiverar dem."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Dela inte innehåll via Friends-funktioner som du inte vill att vänner eller gruppdeltagare ska se. Vi kan ta bort socialt innehåll som bryter mot våra villkor eller tillämplig lag."
+          },
+          {
+            "type": "p",
+            "text": "Delning till gruppflöde: För varje privat grupp kan du välja om nya måltids- eller träningsloggar ska publiceras automatiskt i den gruppens flöde. Dessa alternativ är avstängda som standard. Du kan ändra dem när du går med i en grupp eller när som helst via inställningsikonen i Feed-fliken i gruppen."
+          }
+        ]
+      },
+      {
+        "title": "6. Rättsliga grunder och regional information",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Storbritannien och Europeiska ekonomiska samarbetsområdet: Där UK GDPR eller EU GDPR gäller förlitar vi oss på en eller flera av följande rättsliga grunder:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Avtal: för att tillhandahålla Tjänsten som du begär, inklusive konto, loggning, planer, sociala funktioner och betalfunktioner när de erbjuds.",
+              "Samtycke: där det krävs, till exempel valfria push-aviseringar, åtkomst till Apple Health eller Health Connect, eller mikrofon- och kamerabehörigheter.",
+              "Berättigade intressen: för att säkra Tjänsten, förhindra missbruk, förbättra tillförlitlighet och stödja användare, vägt mot dina rättigheter.",
+              "Rättslig förpliktelse: där vi måste behålla eller lämna ut information för att följa lag."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "USA: Vi behandlar personuppgifter enligt denna policy för att tillhandahålla och förbättra Tjänsten. Vi säljer inte dina personuppgifter mot betalning. Vi delar inte personuppgifter för beteendebaserad reklam över kontexter. Beroende på vilken delstat du bor i kan du ha ytterligare rättigheter enligt delstatliga integritetslagar (till exempel i Kalifornien, Virginia eller Colorado)."
+          },
+          {
+            "type": "p",
+            "text": "Australien: Där Privacy Act 1988 (Cth) gäller hanterar vi personuppgifter i enlighet med Australian Privacy Principles (APPs). Konsumentskyddsgarantier enligt Australian Consumer Law kan också gälla och kan inte uteslutas där de är tillämpliga (se våra användarvillkor)."
+          }
+        ]
+      },
+      {
+        "title": "7. Hur vi delar uppgifter",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vi kan dela personuppgifter med:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Tjänsteleverantörer som hjälper oss att hosta, lagra, autentisera användare, behandla AI-förfrågningar, leverera aviseringar och driva appen (till exempel molnhosting och autentiseringstjänster).",
+              "Apple och Google när du loggar in eller köper prenumerationer via deras plattformar.",
+              "Myndigheter, tillsynsorgan eller andra när det krävs enligt lag eller för att skydda rättigheter, säkerhet och trygghet."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Vi kan använda offentliga näringsdatabaser för att slå upp matinformation. Vi säljer inte dina personuppgifter till tredjeparts dataleverantörer."
+          },
+          {
+            "type": "p",
+            "text": "Om vår verksamhet omorganiseras kan vi överföra uppgifter som en del av den processen med lämpliga skyddsåtgärder."
+          }
+        ]
+      },
+      {
+        "title": "8. Internationella överföringar",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vi kan behandla och lagra uppgifter i Storbritannien och andra länder där våra tjänsteleverantörer bedriver verksamhet, inklusive länder där du kan bo (till exempel USA eller Australien). Där det krävs använder vi lämpliga skyddsåtgärder för överföringar utanför Storbritannien eller EES, såsom standardavtalsklausuler."
+          }
+        ]
+      },
+      {
+        "title": "9. Hur länge vi behåller uppgifter",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vi behåller personuppgifter så länge ditt konto är aktivt och så länge det behövs för att tillhandahålla Tjänsten."
+          },
+          {
+            "type": "p",
+            "text": "När du raderar ditt konto från Profil → Konto raderar eller avidentifierar vi kontorelaterade data såsom din profil, näringsloggar, kostplaner, sparade recept, vikthistorik, IGNITE AI Assistant-chatthistorik, Friends-kopplingar, privata grupper som du äger, gruppinlägg och -meddelanden, profilgallerimedia, sociala aviseringar, delningspreferenser och relaterade kontouppgifter, med förbehåll för lagstadgade lagringsskyldigheter och rimliga säkerhetskopieringscykler."
+          },
+          {
+            "type": "p",
+            "text": "Vissa uppgifter kan finnas kvar i krypterade säkerhetskopior under en begränsad tid innan de skrivs över. Feedback som du skickar kan behållas i avidentifierad form efter kontoradering där lagen tillåter det."
+          },
+          {
+            "type": "p",
+            "text": "Lagringsfiler såsom foton tas inte alltid bort omedelbart i varje miljö. Vi arbetar för att anpassa radering till kontoradering över tid."
+          }
+        ]
+      },
+      {
+        "title": "10. Säkerhet",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vi använder tekniska och organisatoriska åtgärder som är utformade för att skydda personuppgifter, inklusive åtkomstkontroller och kryptering under överföring. Ingen onlinetjänst kan garantera absolut säkerhet. Använd en stark inloggningsmetod och meddela oss om du misstänker obehörig åtkomst."
+          }
+        ]
+      },
+      {
+        "title": "11. Dina val och rättigheter",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Beroende på var du bor kan du ha rätt att:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Få tillgång till, korrigera eller radera personuppgifter.",
+              "Återkalla samtycke där behandlingen grundas på samtycke.",
+              "Invända mot eller begränsa viss behandling.",
+              "Begära portabilitet av uppgifter som du har lämnat.",
+              "Lämna in ett klagomål till en tillsynsmyndighet."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Du kan uppdatera mycket av din profil i appen. För andra begäranden, kontakta privacy@ignitehub.app. Vi kan behöva verifiera din identitet."
+          },
+          {
+            "type": "p",
+            "text": "Användare i Storbritannien kan kontakta Information Commissioner's Office (ICO). Användare i Europeiska ekonomiska samarbetsområdet kan kontakta sin lokala dataskyddsmyndighet."
+          },
+          {
+            "type": "p",
+            "text": "Bosatta i USA: Du kan ha rätt att få veta vilka personuppgifter vi samlar in, att få tillgång till, korrigera eller radera dem och att välja bort viss behandling där tillämplig delstatlig lag ger sådana rättigheter. För att göra en begäran, e-posta privacy@ignitehub.app. Vi diskriminerar dig inte för att utöva integritetsrättigheter som lagen tillåter."
+          },
+          {
+            "type": "p",
+            "text": "Bosatta i Australien: Du kan begära tillgång till eller korrigering av personuppgifter som vi har om dig genom att kontakta privacy@ignitehub.app. Du kan också lämna in ett klagomål till Office of the Australian Information Commissioner (OAIC) på oaic.gov.au."
+          }
+        ]
+      },
+      {
+        "title": "12. Behörigheter och enhetsinställningar",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Tjänsten kan begära behörigheter för kamera, mikrofon, fotobibliotek, aviseringar och hälsa. Du kan ändra många av dessa i dina enhetsinställningar. Vissa funktioner fungerar inte utan relevant behörighet."
+          }
+        ]
+      },
+      {
+        "title": "13. Barn",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Tjänsten riktar sig inte till barn under 13 år, och vi samlar inte medvetet in personuppgifter från dem. Om du tror att ett barn under 13 år har lämnat uppgifter, kontakta oss så att vi kan vidta lämpliga åtgärder."
+          }
+        ]
+      },
+      {
+        "title": "14. Ändringar av denna policy",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vi kan uppdatera denna integritetspolicy då och då. Vi publicerar den uppdaterade versionen i appen och på denna webbplats och ändrar datumet för \"Senast uppdaterad\". Väsentliga ändringar kan också kommuniceras i appen där det är lämpligt."
+          }
+        ]
+      },
+      {
+        "title": "15. Kontakt",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Frågor om denna integritetspolicy: privacy@ignitehub.app."
+          }
+        ]
+      }
+    ]
+  },
+  "termsOfUse": {
+    "title": "Användarvillkor",
+    "lastUpdated": "Senast uppdaterad: 9 juli 2026",
+    "intro": "Dessa användarvillkor (\"Villkoren\") reglerar din användning av mobilapplikationen IGNITE AI och relaterade tjänster (gemensamt \"Tjänsten\"), som drivs av IGNITE AI (\"IGNITE\", \"vi\", \"oss\" eller \"vår\") från Storbritannien. Tjänsten kan nås i Storbritannien, Portugal, USA, Australien och andra länder. Genom att skapa ett konto, få åtkomst till eller använda Tjänsten godkänner du dessa Villkor och vår integritetspolicy. Om du inte godkänner dem ska du inte använda Tjänsten.",
+    "sections": [
+      {
+        "title": "1. Behörighet",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Du måste uppfylla den lägsta ålder som krävs för att använda digitala tjänster i ditt land. Du måste vara minst 13 år. Barn under 13 år får inte använda Tjänsten."
+          },
+          {
+            "type": "p",
+            "text": "Om du är under 18 år, eller under myndighetsåldern i ditt land, får du använda Tjänsten endast med samtycke och under uppsikt av en förälder eller vårdnadshavare som godkänner dessa Villkor å dina vägnar. I vissa länder (inklusive delar av Europeiska ekonomiska samarbetsområdet) måste du vara minst 16 år för att använda Tjänsten utan föräldramedverkan."
+          },
+          {
+            "type": "p",
+            "text": "Tjänsten är inte avsedd för personer som enligt tillämplig lag är förbjudna att använda verktyg för närings-, tränings- eller välmåendespårning. Genom att använda Tjänsten intygar du att du uppfyller dessa krav."
+          }
+        ]
+      },
+      {
+        "title": "2. Vad IGNITE tillhandahåller",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE AI är en app för välmående- och näringsspårning. Den hjälper dig att logga måltider och drycker, spåra kalorier och makron, sätta näringsmål, övervaka vikt och aktivitetsrelaterade mått samt använda AI-assisterade verktyg för att tolka matfoton, förpackningsetiketter, streckkoder, textbeskrivningar och röstindata."
+          },
+          {
+            "type": "p",
+            "text": "Tjänsten inkluderar för närvarande funktioner som en daglig matdagbok, personliga kalori- och makromål, Snap Track-loggning, Snap Cook AI-receptgenerering från foton, AI-genererade kostmåltidsplaner, fristående träningsloggning, IGNITE AI Assistant-chattassistans, Friends och privata grupper (Groups Room), valfri integration med Apple Health och Health Connect där det finns, vatten- och stegmål, fastaverktyg, framstegsfoton, närings- och Share Cards, sparade recept och relaterade verktyg där de finns tillgängliga."
+          },
+          {
+            "type": "p",
+            "text": "IGNITE tillhandahålls som ett verktyg för välmåndestöd och spårning. Det är inte en medicinteknisk produkt och tillhandahåller inte medicinsk vård, diagnos, behandling eller förebyggande av sjukdom."
+          }
+        ]
+      },
+      {
+        "title": "3. Snap Track",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Snap Track låter dig logga mat med hjälp av foton, streckkoder, förpackningsetiketter, skrivna beskrivningar, röstinspelningar, manuell ingrediensinmatning, direkt makroinmatning och matsökning. Beroende på den indata du lämnar kan olika igenkännings- och uppskattningsmetoder gälla."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Måltids- och dryckesfoton: livsmedel, drycker och portioner identifieras. Lyckad analys kan spara en post i din dagbok automatiskt; du kan öppna den efteråt för att granska, redigera ingredienser, åtgärda fel eller radera den.",
+              "Streckkodsskanning: produkter kan matchas mot näringsdatabaser när de finns och kan loggas automatiskt vid lyckad matchning.",
+              "Förpackningsetiketter: produkt- och näringsinformation kan läsas från ditt foto och, när analysen lyckas, loggas automatiskt för din senare granskning.",
+              "Describe och Voice: text eller transkriberat tal tolkas till föreslagna ingredienser och portioner som du granskar och bekräftar innan loggning.",
+              "Infoga makron: du kan ange kalorier och makron direkt utan AI-analys."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Beroende på indata kan Snap Track spara en post automatiskt efter analys (till exempel måltids- eller färdigmatsfoton och lyckade streckkodsmatchningar), eller be dig granska och bekräfta först (till exempel Describe, Voice och IGNITE AI Assistant). Du bör alltid granska loggade poster och redigera eller radera allt som ser felaktigt ut."
+          }
+        ]
+      },
+      {
+        "title": "4. IGNITE AI Assistant",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE AI Assistant ger konversationsbaserad närings- och välmåndeassistans. Den kan föreslå uppskattningar för måltider eller träning, svara på frågor om dina mål eller loggade data och hjälpa dig att utforska mat- och aktivitetsinformation."
+          },
+          {
+            "type": "p",
+            "text": "Förslag på måltider och träning i chatten är endast förhandsvisningar. Ingenting sparas i din matdagbok eller dina aktivitetstotaler förrän du har granskat förslaget och uttryckligen bekräftat det i appen. Chattsvar kan vara felaktiga, ofullständiga eller olämpliga för dina individuella omständigheter."
+          }
+        ]
+      },
+      {
+        "title": "5. Snap Cook, kostplaner, träning och delning",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Snap Cook använder AI för att föreslå recept från foton av ingredienser eller måltider som du tillhandahåller. Förslag är startpunkter. Granska ingredienser, portioner och näring innan du sparar eller loggar."
+          },
+          {
+            "type": "p",
+            "text": "AI-genererade kostplaner skapar föreslagna måltider för dagar eller veckor baserat på din profil, dina mål och preferenser. Planer är endast förslag. Du kan redigera, ersätta eller ignorera vilken föreslagen måltid som helst."
+          },
+          {
+            "type": "p",
+            "text": "Träningsloggning låter dig registrera träningspass och uppskattad förbränning. Uppskattningar är inte kliniskt precisa. Träningsförslag från IGNITE AI Assistant följer samma gransknings- och bekräftelseregler som måltider."
+          },
+          {
+            "type": "p",
+            "text": "Share Cards låter dig exportera eller dela måltids- eller träningssammanfattningar med teman som du väljer. Delade bilder kan lämna appen via enhetens delningsmeny. Du styr vad du delar och med vem."
+          }
+        ]
+      },
+      {
+        "title": "6. Friends och privata grupper",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Friends-funktioner låter dig ansluta till andra användare, gå med i privata ansvarighetsgrupper, chatta, dela måltids- eller träningsuppdateringar, visa profilgallerier och ta emot sociala aviseringar när de är aktiverade."
+          },
+          {
+            "type": "p",
+            "text": "Innehåll som du publicerar i en grupp eller delar med vänner kan vara synligt för medlemmar i den gruppen eller dina godkända vänner. Respektera andras integritet och dela endast innehåll som du har rätt att dela."
+          },
+          {
+            "type": "p",
+            "text": "Gruppägare kan bjuda in medlemmar, hantera medlemskap och radera grupper som de har skapat. Vi kan ta bort grupper eller socialt innehåll som bryter mot dessa Villkor eller skapar risk för användare."
+          },
+          {
+            "type": "p",
+            "text": "Måltids- och träningsloggar publiceras inte i ett gruppflöde om du inte delar dem manuellt eller aktiverar automatisk delning för den gruppen. Automatisk delning är valfri, avstängd som standard och kan styras separat för måltider och träning i varje grupps Feed-flik."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Trakassera, mobba eller publicera inte skadligt innehåll i grupper eller på profiler.",
+              "Dela inte en annan persons foton eller hälsoinformation utan tillstånd där lagen kräver det."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "7. Hälsa, aktivitet och kroppsmått",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Du kan ange eller synkronisera hälsorelaterad information såsom vikt, längd, steg och, på stödda enheter med ditt tillstånd, data från Apple Health eller Health Connect (till exempel steg, aktiva kalorier, hjärtfrekvens, sömn eller blodsyre). Tillgänglighet beror på din enhet, ditt operativsystem och de behörigheter du ger."
+          },
+          {
+            "type": "p",
+            "text": "Synkroniserade eller visade hälsodata är endast för allmän välmåndespårning och utgör inte medicinsk övervakning, klinisk mätning eller nöddetektering."
+          }
+        ]
+      },
+      {
+        "title": "8. Medicinska och välmånderelaterade ansvarsfriskrivningar",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Information i Tjänsten, inklusive kalorivärden, makron, näringspoäng, måltidsförslag, vägledning om fasta, uppskattningar av träningsförbränning och AI-genererat innehåll, är endast för allmän information och välmående. Det är inte personlig medicinsk rådgivning och ersätter inte råd från en kvalificerad läkare, legitimerad dietist eller annan licensierad hälso- och sjukvårdspersonal."
+          },
+          {
+            "type": "p",
+            "text": "Använd inte Tjänsten vid medicinska nödsituationer. Om du tror att du kan ha en medicinsk nödsituation, kontakta räddningstjänsten omedelbart."
+          },
+          {
+            "type": "p",
+            "text": "Rådfråga kvalificerad hälso- och sjukvårdspersonal innan du gör betydande förändringar i kost, träning, fasta eller viktplan, särskilt om du är gravid, ammar, hanterar diabetes eller annan kronisk sjukdom, tar medicin, återhämtar dig efter sjukdom eller har en historia av ätstörningar."
+          },
+          {
+            "type": "p",
+            "text": "Tjänsten är inte utformad för användare som aktivt hanterar en ätstörning utan professionell tillsyn. Om du har eller misstänker en ätstörning, sök kvalificerad vård innan du använder kalorispårningsfunktioner."
+          },
+          {
+            "type": "p",
+            "text": "Under graviditet och amning är näringsbehoven annorlunda; följ inte kalorimål, vägledning om fasta eller viktnedgångsplaner i appen utan vägledning från kvalificerad hälso- och sjukvårdspersonal. Om du har något fysiskt eller hälsomässigt tillstånd, vidta samma försiktighet: rådfråga en kvalificerad yrkesperson innan du följer mål eller vägledning från Tjänsten."
+          }
+        ]
+      },
+      {
+        "title": "9. Näringsdata och noggrannhet",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Näringsvärden i IGNITE kan komma från offentliga matdatabaser, erkänd produktinformation, ingrediensanalys och AI-assisterad uppskattning. Produktigenkänning kan använda synliga produktnamn, förpackning, streckkoder, näringsetiketter och databasmatchning."
+          },
+          {
+            "type": "p",
+            "text": "Databasposter kan vara ofullständiga, föråldrade eller felaktiga. AI-assisterade resultat är uppskattningar och kan felidentifiera livsmedel, portioner, ingredienser eller allergener. Hemlagade måltider, restaurangmat, blandade tallrikar och regionala produkter är särskilt osäkra."
+          },
+          {
+            "type": "p",
+            "text": "Behandla alla resultat som uppskattningar om du inte har verifierat dem självständigt. Databasmatchade färdigförpackade produkter är vanligtvis mer tillförlitliga än förslag enbart från AI."
+          }
+        ]
+      },
+      {
+        "title": "10. AI-assisterad analys",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE använder avancerade AI-modeller som hostas på säkra servrar för att hjälpa till att tolka foton, etiketter, beskrivningar och chattmeddelanden. AI-resultat är startpunkter, inte garantier. De kan vara felaktiga, föråldrade eller olämpliga för dina behov."
+          },
+          {
+            "type": "p",
+            "text": "Du förblir ansvarig för det du loggar. Förlita dig inte på AI-resultat för allergensäkerhet, medicinsk nutritionsterapi eller andra högriskbeslut utan professionell verifiering."
+          },
+          {
+            "type": "p",
+            "text": "Vissa funktioner kan beskrivas som \"obegränsade\" eller ingå i en betald plan när den erbjuds. Detta innebär rimlig personlig, icke-kommersiell användning för att logga dina egna måltider, drycker och välmåndedata via Snap Track, IGNITE AI Assistant och relaterade verktyg. Det tillåter inte automatiserade förfrågningar, bulkbehandling, vidareförsäljning av åtkomst, delning av en prenumeration mellan flera orelaterade användare eller användning som belastar Tjänsten oproportionerligt. Vi kan tillämpa tekniska begränsningar eller stänga av åtkomst om vi upptäcker missbruk eller avvikande användning."
+          }
+        ]
+      },
+      {
+        "title": "11. Dina skyldigheter",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "Granska och redigera föreslagna eller automatiskt loggade måltider, drycker, ingredienser, portioner och makron. Korrigera eller radera poster som ser felaktiga ut.",
+              "Lämna korrekt konto- och profilinformation där det efterfrågas.",
+              "Använd Tjänsten lagligt och endast för personliga, icke-kommersiella ändamål om vi inte skriftligen överenskommer något annat.",
+              "Håll dina inloggningsuppgifter säkra och meddela oss om du misstänker obehörig åtkomst till ditt konto.",
+              "Ladda inte upp innehåll som du inte har rätt att dela, inklusive foton av andra personer utan tillstånd där lagen kräver det."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "12. Användarinnehåll",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Du kan skicka in innehåll till Tjänsten, inklusive måltidsloggar, foton, röstindata för transkription, chattmeddelanden, profilinformation, profilgallerimedia, gruppinlägg och -meddelanden, framstegsfoton och feedback (\"Användarinnehåll\"). Du behåller äganderätten till ditt Användarinnehåll."
+          },
+          {
+            "type": "p",
+            "text": "Genom att skicka in Användarinnehåll ger du IGNITE en världsomspännande, icke-exklusiv, royaltyfri licens att hosta, lagra, reproducera, behandla, visa och använda det innehållet endast i den mån det behövs för att driva, säkra, förbättra och tillhandahålla Tjänsten, inklusive AI-assisterad analys och support. Denna licens upphör när ditt innehåll raderas, utom när lagring krävs enligt lag eller legitima säkerhetskopieringsrutiner."
+          },
+          {
+            "type": "p",
+            "text": "Vi kan ta bort innehåll eller stänga av åtkomst om vi rimligen anser att det bryter mot dessa Villkor, tillämplig lag eller andras rättigheter."
+          }
+        ]
+      },
+      {
+        "title": "13. Acceptabel användning",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Du samtycker till att inte:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Använda Tjänsten för olagliga, skadliga, bedrägliga eller missbrukande ändamål.",
+              "Försöka reverse engineera, skrapa, överbelasta eller störa Tjänsten eller dess system.",
+              "Ladda upp skadlig programvara, spam eller innehåll som är trakasserande, hatiskt, sexuellt exploaterande eller som främjar osäkra viktminskningsmetoder eller ätstörningar.",
+              "Felaktigt ange din identitet eller utge dig för att vara en annan person.",
+              "Använda Tjänsten för att ge medicinsk rådgivning till tredje part eller som ersättning för professionella vårdtjänster.",
+              "Använda skript, bottar eller annan automatisering för att skicka AI-analysförfrågningar, streckkodsuppslag eller chattmeddelanden.",
+              "Dela en betald prenumeration eller ett konto med andra på ett sätt som ersätter separata prenumerationer eller möjliggör kommersiell användning.",
+              "Vidareförsälja, återpublicera eller kommersiellt utnyttja resultat från AI-funktioner utan vårt skriftliga tillstånd.",
+              "Trakassera, hota eller missbruka andra användare i Friends-funktioner, grupper, kommentarer eller profilgallerier."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "14. Prenumerationer och betalfunktioner",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE erbjuder gratis åtkomst till kärnfunktioner för välmående. Vi kan också erbjuda valfria betalda prenumerationsplaner i vissa regioner. När de finns visas priser, faktureringsperioder (till exempel veckovis, månadsvis eller årsvis), provperioder och inkluderade funktioner i appen vid köptillfället."
+          },
+          {
+            "type": "p",
+            "text": "Betalda prenumerationer hanteras av Apple, Google eller andra auktoriserade betalningsleverantörer. Deras villkor och integritetspolicyer gäller för fakturering och återbetalningar."
+          },
+          {
+            "type": "p",
+            "text": "Prenumerationer förnyas automatiskt om du inte avbryter före slutet av den aktuella faktureringsperioden via dina App Store- eller Google Play-kontoinställningar. Att radera IGNITE-appen avbryter inte din prenumeration."
+          },
+          {
+            "type": "p",
+            "text": "Om en gratis provperiod erbjuds debiteras du när provperioden upphör om du inte avbryter före det datumet. Provperiodens längd och behörighet visas vid köp."
+          },
+          {
+            "type": "p",
+            "text": "Funktioner som beskrivs som obegränsade under en betald plan omfattas av reglerna om rimlig personlig användning i avsnitt 10. Normal daglig måltidsloggning anses inte vara missbruk."
+          }
+        ]
+      },
+      {
+        "title": "15. Konto och säkerhet",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Du kan logga in med stödda metoder såsom Google, Apple eller e-post. Du är ansvarig för all aktivitet under ditt konto om den inte orsakas av vårt fel. Vi kan stänga av eller avsluta konton som bryter mot dessa Villkor eller skapar säkerhetsmässig, rättslig eller operativ risk."
+          }
+        ]
+      },
+      {
+        "title": "16. Tredjepartstjänster",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Tjänsten kan förlita sig på eller länka till tredjepartstjänster, inklusive inloggningsleverantörer, molnhosting, näringsdatabaser och enhetshälsoplattformar. Dessa tjänster regleras av sina egna villkor och policyer. Vi kontrollerar inte och ansvarar inte för tredjepartstjänster."
+          },
+          {
+            "type": "p",
+            "text": "IGNITE kan använda tredjeparts näringsdatabaser och dataleverantörer under deras respektive licenser och villkor. Där det krävs följer vi attribuerings- och användningsskyldigheter för dessa källor."
+          }
+        ]
+      },
+      {
+        "title": "17. Immateriella rättigheter",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Tjänsten, inklusive dess programvara, design, varumärke och dokumentation, ägs av IGNITE eller dess licensgivare och skyddas av immaterialrättsliga lagar. Vi ger dig en begränsad, personlig, icke-överlåtbar, återkallelig licens att använda appen enligt dessa Villkor."
+          },
+          {
+            "type": "p",
+            "text": "Du får inte kopiera, ändra, distribuera, sälja eller skapa bearbetningar av Tjänsten utom i den mån lagen tillåter eller med vårt skriftliga tillstånd."
+          }
+        ]
+      },
+      {
+        "title": "18. Ansvarsfriskrivningar",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "I DEN UTSTRÄCKNING LAGEN TILLÅTER DET TILLHANDAHÅLLS TJÄNSTEN \"I BEFINTLIGT SKICK\" OCH \"SÅ SOM DEN ÄR TILLGÄNGLIG\". VI FRISKRIVER OSS FRÅN ALLA GARANTIER, UTTRYCKLIGA ELLER UNDERFÖRSTÅDDA, INKLUSIVE SÄLJBARHET, LÄMPLIGHET FÖR ETT SÄRSKILT ÄNDAMÅL OCH ICKE-INTRÅNG."
+          },
+          {
+            "type": "p",
+            "text": "Vi garanterar inte att Tjänsten kommer att vara oavbruten, felfri eller säker, eller att närings-, hälso- eller AI-resultat kommer att vara korrekta, fullständiga eller lämpliga för dina ändamål."
+          }
+        ]
+      },
+      {
+        "title": "19. Ansvarsbegränsning",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "I DEN UTSTRÄCKNING LAGEN TILLÅTER DET ÄR IGNITE OCH DESS STYRELSELEDAMÖTER, DIREKTÖRER, ANSTÄLLDA, OMBUD OCH LEVERANTÖRER INTE ANSVARIGA FÖR NÅGRA INDIREKTA, TILLFÄLLIGA, SÄRSKILDA, FÖLJDSKADOR ELLER STRAFFSKADESTÅND, ELLER FÖR FÖRLUST AV VINST, DATA, GOODWILL ELLER HÄLSORELATERADE UTFALL, SOM UPPSTÅR FRÅN ELLER ÄR RELATERADE TILL DIN ANVÄNDNING AV TJÄNSTEN."
+          },
+          {
+            "type": "p",
+            "text": "I DEN UTSTRÄCKNING LAGEN TILLÅTER DET SKA VÅRT TOTALA ANSVAR FÖR NÅGOT KRAV SOM UPPSTÅR UR ELLER AVSER TJÄNSTEN ELLER DESSA VILLKOR INTE ÖVERSTIGA DET HÖGSTA AV (A) DET BELOPP DU HAR BETALAT OSS FÖR TJÄNSTEN UNDER DE TOLV MÅNADERNA FÖRE KRAVET, ELLER (B) FEMTIO BRITTISKA PUND (£50) ELLER UNGEFÄR MOTSVARANDE LOKAL VALUTA."
+          },
+          {
+            "type": "p",
+            "text": "Vissa jurisdiktioner tillåter inte vissa begränsningar. I sådana fall är vårt ansvar begränsat i den utsträckning tillämplig lag medger. Ingenting i dessa Villkor begränsar ansvar som inte kan begränsas enligt tvingande konsumentskyddslagstiftning."
+          }
+        ]
+      },
+      {
+        "title": "20. Skadeslöshet",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "I den utsträckning lagen tillåter det samtycker du till att hålla IGNITE skadeslöst från krav, skador, förluster och kostnader (inklusive skäliga advokatkostnader) som uppstår från ditt Användarinnehåll, ditt missbruk av Tjänsten eller din överträdelse av dessa Villkor eller tillämplig lag."
+          }
+        ]
+      },
+      {
+        "title": "21. Uppsägning och kontoradering",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Du kan sluta använda Tjänsten när som helst. Du kan radera ditt konto från Profil → Konto. När radereringen är klar raderar eller avidentifierar vi kontorelaterade data enligt beskrivning i vår integritetspolicy, med förbehåll för lagstadgade lagringsskyldigheter och rimliga säkerhetskopieringscykler."
+          },
+          {
+            "type": "p",
+            "text": "Vi kan stänga av eller avsluta din åtkomst om du väsentligt bryter mot dessa Villkor eller om det är nödvändigt för att skydda användare, Tjänsten eller våra rättsliga förpliktelser."
+          }
+        ]
+      },
+      {
+        "title": "22. Ändringar av Tjänsten och Villkoren",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vi kan ändra, avbryta eller upphöra med vilken del som helst av Tjänsten när som helst. Vi kan uppdatera dessa Villkor genom att publicera en reviderad version i appen och på denna webbplats och uppdatera datumet för \"Senast uppdaterad\". Väsentliga ändringar kan också kommuniceras i appen där det är lämpligt."
+          },
+          {
+            "type": "p",
+            "text": "Om du fortsätter att använda Tjänsten efter att uppdaterade Villkor träder i kraft godkänner du de reviderade Villkoren. Om du inte godkänner dem måste du sluta använda Tjänsten och kan radera ditt konto."
+          }
+        ]
+      },
+      {
+        "title": "23. Tillämplig lag och internationella användare",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE driver Tjänsten från Storbritannien. Dessa Villkor regleras av lagarna i England och Wales, utom där tvingande konsumentskyddslagstiftning i ditt bosättningsland kräver något annat."
+          },
+          {
+            "type": "p",
+            "text": "Om du är konsument i Storbritannien utesluter eller begränsar ingenting i dessa Villkor dina lagstadgade rättigheter enligt Consumer Rights Act 2015 och annan tillämplig brittisk lag."
+          },
+          {
+            "type": "p",
+            "text": "Om du är konsument i Europeiska ekonomiska samarbetsområdet, Portugal eller Schweiz behåller du eventuella tvingande rättigheter enligt lagarna i ditt bosättningsland, inklusive rättigheter som inte kan avstås genom avtal."
+          },
+          {
+            "type": "p",
+            "text": "Om du är konsument i USA behåller du eventuella rättigheter enligt tillämpliga federala eller delstatliga konsumentskyddslagar som inte kan avstås genom avtal."
+          },
+          {
+            "type": "p",
+            "text": "Om du är konsument i Australien följer våra varor och tjänster med garantier som inte kan uteslutas enligt Australian Consumer Law där den är tillämplig. Ingenting i dessa Villkor är avsett att utesluta, begränsa eller ändra dessa icke-uteslutbara rättigheter."
+          },
+          {
+            "type": "p",
+            "text": "Med förbehåll för tvingande lokal lag har domstolar i England och Wales exklusiv behörighet över tvister som uppstår från dessa Villkor. Där din lokala lag ger dig rätt att väcka talan i ditt bosättningsland som konsument påverkas inte den rätten."
+          }
+        ]
+      },
+      {
+        "title": "24. Kontakt",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Frågor om dessa Villkor kan skickas till support@ignitehub.app."
+          },
+          {
+            "type": "p",
+            "text": "För integritetsrelaterade begäranden, se vår integritetspolicy."
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -8,9 +8,10 @@ import {
   useReducedMotion,
 } from 'motion/react'
 import { StoreButtons } from '@/components/store-buttons'
+import { useT } from '@/lib/i18n/provider'
 import { easeOutExpo } from '@/lib/motion'
 
-function IntroVideoScreen({ reduce }: { reduce: boolean | null }) {
+function IntroVideoScreen({ reduce, ariaLabel }: { reduce: boolean | null; ariaLabel: string }) {
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
@@ -34,7 +35,7 @@ function IntroVideoScreen({ reduce }: { reduce: boolean | null }) {
       loop
       playsInline
       preload="metadata"
-      aria-label="IGNITE AI intro"
+      aria-label={ariaLabel}
     >
       <source src="/video_intro.webm" type="video/webm" />
       <source src="/video_intro.mp4" type="video/mp4" />
@@ -93,7 +94,7 @@ function EmberField({ reduce }: { reduce: boolean | null }) {
   )
 }
 
-function ParallaxPhone({ reduce }: { reduce: boolean | null }) {
+function ParallaxPhone({ reduce, introAria }: { reduce: boolean | null; introAria: string }) {
   const ref = useRef<HTMLDivElement>(null)
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
@@ -143,7 +144,7 @@ function ParallaxPhone({ reduce }: { reduce: boolean | null }) {
               : { y: { duration: 5.5, repeat: Infinity, ease: 'easeInOut' }, rotate: { duration: 0 } }
           }
         >
-          <IntroVideoScreen reduce={reduce} />
+          <IntroVideoScreen reduce={reduce} ariaLabel={introAria} />
         </motion.div>
       </motion.div>
     </div>
@@ -151,10 +152,11 @@ function ParallaxPhone({ reduce }: { reduce: boolean | null }) {
 }
 
 export function Hero() {
+  const t = useT()
   const reduce = useReducedMotion()
 
   return (
-    <section className="relative overflow-visible">
+    <section className="relative overflow-x-clip">
       <div
         className="pointer-events-none absolute inset-0 -z-10 overflow-x-clip"
         style={{
@@ -192,7 +194,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.12, ease: easeOutExpo }}
           >
-            Built to make progress look easy.
+            {t.hero.headline}
           </motion.h1>
 
           <motion.p
@@ -201,7 +203,7 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.24, ease: easeOutExpo }}
           >
-            IGNITE AI is an AI-powered app built to snap meals for instant calories and macros, log workouts, and share progress with friends. One app to fuel, train, and stay consistent.
+            {t.hero.description}
           </motion.p>
 
           <motion.p
@@ -210,19 +212,25 @@ export function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.36, ease: easeOutExpo }}
           >
-            Snap it. Log it. Crush it.
+            {t.hero.tagline}
           </motion.p>
 
           <motion.div
+            className="w-full max-w-full"
             initial={reduce ? false : { opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.48, ease: easeOutExpo }}
           >
-            <StoreButtons />
+            <div className="sm:hidden">
+              <StoreButtons size="compact" />
+            </div>
+            <div className="hidden sm:block">
+              <StoreButtons />
+            </div>
           </motion.div>
         </div>
 
-        <ParallaxPhone reduce={reduce} />
+        <ParallaxPhone reduce={reduce} introAria={t.hero.introAria} />
       </div>
     </section>
   )

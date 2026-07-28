@@ -59,18 +59,18 @@ export function StoreButtons({
   size = 'default',
   className,
 }: {
-  size?: 'default' | 'compact'
+  size?: 'default' | 'compact' | 'mini'
   className?: string
   variant?: 'dark' | 'light'
 }) {
-  const compact = size === 'compact'
   // Official assets: Apple SVG is tight; Google PNG includes clear-space padding, so taller box optically matches.
-  const appleH = compact ? 32 : 40
+  const appleH = size === 'mini' ? 26 : size === 'compact' ? 32 : 40
   const appleW = Math.round(appleH * (119.66407 / 40))
-  const playH = compact ? 48 : 60
+  const playH = size === 'mini' ? 38 : size === 'compact' ? 48 : 60
+  const gap = size === 'mini' ? 'gap-0.5' : 'gap-1 sm:gap-2'
 
   return (
-    <div className={cn('flex flex-wrap items-center gap-1 sm:gap-2', className)}>
+    <div className={cn('flex flex-nowrap items-center', gap, className)}>
       <MagneticLink
         href="#download"
         ariaLabel="Download IGNITE AI on the App Store"

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'motion/react'
 import { Moon, Sun, Sunrise, type LucideIcon } from 'lucide-react'
+import { useT } from '@/lib/i18n/provider'
 import { easeOutExpo } from '@/lib/motion'
 import { cn } from '@/lib/utils'
 
@@ -17,34 +18,23 @@ type ThemePreview = {
   src: string
 }
 
-const themes: ThemePreview[] = [
-  {
-    id: 'light',
-    name: 'Light',
-    description: 'Clean mesh canvas for everyday logging.',
-    icon: Sun,
-    src: '/light.png',
-  },
-  {
-    id: 'dark',
-    name: 'Dark',
-    description: 'Charcoal night mode for low light.',
-    icon: Moon,
-    src: '/dark.png',
-  },
-  {
-    id: 'glow',
-    name: 'Glow',
-    description: 'Soft sunset wash with warm depth.',
-    icon: Sunrise,
-    src: '/glow.png',
-  },
+const themeMeta: { id: ThemeId; icon: LucideIcon; src: string }[] = [
+  { id: 'light', icon: Sun, src: '/light.png' },
+  { id: 'dark', icon: Moon, src: '/dark.png' },
+  { id: 'glow', icon: Sunrise, src: '/glow.png' },
 ]
 
 export function ThemeShowcase() {
+  const t = useT()
   const reduce = useReducedMotion()
   const [hovered, setHovered] = useState<ThemeId | null>(null)
   const [desktopHover, setDesktopHover] = useState(false)
+
+  const themes: ThemePreview[] = themeMeta.map((meta) => ({
+    ...meta,
+    name: t.themes.items[meta.id].name,
+    description: t.themes.items[meta.id].description,
+  }))
 
   useEffect(() => {
     const mq = window.matchMedia('(min-width: 768px) and (hover: hover)')
@@ -56,7 +46,7 @@ export function ThemeShowcase() {
 
   return (
     <section
-      className="relative border-t border-border bg-background"
+      className="relative overflow-x-clip border-t border-border bg-background"
       aria-labelledby="themes-heading"
     >
       <div className="relative mx-auto max-w-[120rem] px-3 pb-12 pt-20 sm:px-4 md:px-3 md:pb-14 md:pt-28 lg:px-4">
@@ -71,10 +61,10 @@ export function ThemeShowcase() {
             id="themes-heading"
             className="font-display text-3xl font-bold tracking-tight text-foreground text-balance sm:text-4xl"
           >
-            Three looks. Same IGNITE.
+            {t.themes.title}
           </h2>
           <p className="mt-4 text-lg text-muted-foreground text-pretty">
-            Switch between Light, Glow, and Dark anytime in Appearance.
+            {t.themes.subtitle}
           </p>
         </motion.div>
 
@@ -134,7 +124,7 @@ export function ThemeShowcase() {
                       >
                         <Image
                           src={theme.src}
-                          alt={`IGNITE AI ${theme.name} theme`}
+                          alt={t.themes.alt.replace('{name}', theme.name)}
                           width={1200}
                           height={2400}
                           className="pointer-events-none mx-auto h-auto w-full select-none object-contain drop-shadow-[0_20px_40px_-16px_rgba(0,0,0,0.3)] md:drop-shadow-[0_30px_80px_-20px_rgba(0,0,0,0.35)]"

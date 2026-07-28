@@ -1,12 +1,8 @@
+'use client'
+
 import Link from 'next/link'
 import { Wordmark } from '@/components/site-nav'
-
-const legalLinks = [
-  { label: 'Privacy Policy', href: '/privacy' },
-  { label: 'Terms of use', href: '/terms' },
-]
-
-const companyLinks = [{ label: 'Contact', href: 'mailto:support@ignitehub.app' }]
+import { useLanguage, useT } from '@/lib/i18n/provider'
 
 const socialLinks = [
   {
@@ -53,19 +49,30 @@ function TikTokIcon({ className }: { className?: string }) {
 }
 
 export function SiteFooter() {
+  const t = useT()
+  const { href } = useLanguage()
+  const year = new Date().getFullYear()
+  const legalLinks = [
+    { label: t.footer.privacy, path: '/privacy' },
+    { label: t.footer.terms, path: '/terms' },
+  ]
+  const companyLinks = [{ label: t.footer.contact, path: '/contact' }]
+
   return (
     <footer className="border-t border-border bg-background">
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12 sm:px-6">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
-          <Wordmark className="text-lg" />
+          <Link href={href('/')} className="text-lg" aria-label="IGNITE AI">
+            <Wordmark className="text-lg" />
+          </Link>
 
           <div className="flex flex-wrap gap-12 sm:gap-16">
-            <nav aria-label="Legal" className="flex min-w-[9rem] flex-col gap-3">
-              <p className="font-brand text-sm font-semibold text-foreground">Legal</p>
+            <nav aria-label={t.footer.legal} className="flex min-w-[9rem] flex-col gap-3">
+              <p className="font-brand text-sm font-semibold text-foreground">{t.footer.legal}</p>
               <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
                 {legalLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className="link-ink link-ember transition-colors hover:text-foreground">
+                  <li key={link.path}>
+                    <Link href={href(link.path)} className="link-ink link-ember transition-colors hover:text-foreground">
                       {link.label}
                     </Link>
                   </li>
@@ -73,17 +80,17 @@ export function SiteFooter() {
               </ul>
             </nav>
 
-            <nav aria-label="Company" className="flex min-w-[9rem] flex-col gap-3">
-              <p className="font-brand text-sm font-semibold text-foreground">Company</p>
+            <nav aria-label={t.footer.company} className="flex min-w-[9rem] flex-col gap-3">
+              <p className="font-brand text-sm font-semibold text-foreground">{t.footer.company}</p>
               <ul className="flex flex-col gap-2 text-sm text-muted-foreground">
                 {companyLinks.map((link) => (
-                  <li key={link.href}>
-                    <a
-                      href={link.href}
+                  <li key={link.path}>
+                    <Link
+                      href={href(link.path)}
                       className="link-ink link-ember transition-colors hover:text-foreground"
                     >
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -94,9 +101,7 @@ export function SiteFooter() {
         <div className="flex flex-col gap-4 border-t border-border pt-6">
           <div className="flex items-center justify-between gap-4">
             <p className="text-xs text-muted-foreground">
-              {'© Copyright '}
-              {new Date().getFullYear()}
-              {', All rights reserved'}
+              {t.footer.copyright.replace('{year}', String(year))}
             </p>
             <nav aria-label="Social" className="flex items-center gap-4">
               {socialLinks.map(({ label, href, icon: Icon }) => (
@@ -114,8 +119,7 @@ export function SiteFooter() {
             </nav>
           </div>
           <p className="max-w-2xl text-xs leading-relaxed text-pretty text-muted-foreground">
-            IGNITE AI provides general wellness and fitness information only. It is not medical advice. Consult a
-            healthcare professional before making changes to your diet or exercise routine.
+            {t.footer.disclaimer}
           </p>
         </div>
       </div>

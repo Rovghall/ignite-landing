@@ -1,4 +1,4 @@
-import type { LegalDoc } from '@/lib/legal-content'
+import type { LegalDoc } from '@/lib/content/types'
 
 export function LegalDocument({ doc }: { doc: LegalDoc }) {
   return (

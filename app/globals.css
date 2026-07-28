@@ -98,10 +98,15 @@
     color-scheme: light only;
     background-color: var(--background);
   }
+  html {
+    overflow-x: clip;
+  }
   body {
     @apply bg-background text-foreground;
     color-scheme: light only;
     background-color: var(--background);
+    overflow-x: clip;
+    max-width: 100%;
   }
   /* Keep page light even when the phone OS is in dark mode */
   @media (prefers-color-scheme: dark) {

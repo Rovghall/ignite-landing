@@ -1,17 +1,14 @@
 'use client'
 
 import Image from 'next/image'
-import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useEffect, useMemo, useState } from 'react'
 import { motion, useMotionValueEvent, useScroll, useReducedMotion, AnimatePresence } from 'motion/react'
 import { Menu, X } from 'lucide-react'
+import { LanguagePicker } from '@/components/language-picker'
 import { StoreButtons } from '@/components/store-buttons'
+import { useLanguage, useT } from '@/lib/i18n/provider'
 import { cn } from '@/lib/utils'
-
-const navLinks = [
-  { label: 'Home', href: '/' },
-  { label: 'Press', href: '/press' },
-  { label: 'Blogs', href: '/blog' },
-]
 
 export function Wordmark({ className }: { className?: string }) {
   return (
@@ -33,10 +30,21 @@ export function Wordmark({ className }: { className?: string }) {
 }
 
 export function SiteNav() {
+  const t = useT()
+  const { href } = useLanguage()
   const { scrollY } = useScroll()
   const reduce = useReducedMotion()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+
+  const navLinks = useMemo(
+    () => [
+      { label: t.nav.home, path: '/' },
+      { label: t.nav.press, path: '/press' },
+      { label: t.nav.blogs, path: '/blog' },
+    ],
+    [t],
+  )
 
   useMotionValueEvent(scrollY, 'change', (y) => {
     setScrolled(y > 12)
@@ -62,48 +70,50 @@ export function SiteNav() {
   return (
     <motion.header
       className={cn(
-        'sticky top-0 z-50 border-b transition-[border-color,background-color,backdrop-filter] duration-300',
+        'sticky top-0 z-50 overflow-x-clip border-b transition-[border-color,background-color,backdrop-filter] duration-300',
         scrolled || open
           ? 'border-border/60 bg-background/75 backdrop-blur-xl'
           : 'border-transparent bg-background/50 backdrop-blur-md',
       )}
     >
       <nav
-        aria-label="Main"
+        aria-label={t.nav.main}
         className="relative mx-auto flex h-16 max-w-6xl items-center justify-between gap-2 px-4 sm:px-6"
       >
-        <motion.a
-          href="/"
-          className="relative z-10 shrink-0 text-[17px]"
-          aria-label="IGNITE AI home"
+        <motion.div
+          className="relative z-10 min-w-0 shrink text-[15px] sm:text-[17px]"
           animate={reduce ? undefined : { scale: scrolled ? 0.96 : 1 }}
           transition={{ type: 'spring', stiffness: 320, damping: 28 }}
         >
-          <Wordmark />
-        </motion.a>
+          <Link href={href('/')} aria-label={t.nav.homeAria}>
+            <Wordmark />
+          </Link>
+        </motion.div>
 
         <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-7 md:flex lg:gap-9">
           {navLinks.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
+            <Link
+              key={link.path}
+              href={href(link.path)}
               className="font-brand text-[15px] font-medium text-foreground/85 transition-colors duration-200 hover:text-foreground"
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
-        <div className="relative z-10 flex shrink-0 items-center gap-1.5">
-          <div className="hidden min-[400px]:block">
+        <div className="relative z-10 flex min-w-0 shrink-0 items-center gap-1.5 sm:gap-2">
+          {/* Mobile: language pill only. Store badges stay desktop-only to avoid horizontal overflow. */}
+          <LanguagePicker />
+          <div className="max-md:hidden">
             <StoreButtons size="compact" />
           </div>
           <button
             type="button"
-            className="inline-flex size-10 items-center justify-center rounded-lg text-foreground md:hidden"
+            className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg text-foreground md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
-            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
             onClick={() => setOpen((v) => !v)}
           >
             {open ? <X className="size-5" /> : <Menu className="size-5" />}
@@ -123,18 +133,15 @@ export function SiteNav() {
           >
             <div className="mx-auto flex max-w-6xl flex-col gap-1 px-4 py-3 sm:px-6">
               {navLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
+                <Link
+                  key={link.path}
+                  href={href(link.path)}
                   className="rounded-lg px-3 py-3 font-brand text-base font-medium text-foreground/90 transition-colors hover:bg-secondary"
                   onClick={() => setOpen(false)}
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
-              <div className="mt-2 border-t border-border pt-3 min-[400px]:hidden">
-                <StoreButtons size="compact" />
-              </div>
             </div>
           </motion.div>
         ) : null}

@@ -1,0 +1,702 @@
+{
+  "privacyPolicy": {
+    "title": "Politique de confidentialité",
+    "lastUpdated": "Dernière mise à jour : 9 juillet 2026",
+    "intro": "La présente Politique de confidentialité explique comment IGNITE AI (« IGNITE », « nous », « notre » ou « nos ») collecte, utilise, stocke et partage des informations personnelles lorsque vous utilisez l'application mobile IGNITE AI et les services associés (le « Service »). Nous opérons depuis le Royaume-Uni. Cette Politique s'applique conjointement à nos Conditions d'utilisation.",
+    "sections": [
+      {
+        "title": "1. Qui est responsable de vos données",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE AI est le responsable du traitement des informations personnelles décrites dans la présente Politique, sauf lorsque nous traitons des données uniquement pour le compte d'une autre partie."
+          },
+          {
+            "type": "p",
+            "text": "Questions et demandes relatives à la confidentialité : privacy@ignitehub.app."
+          }
+        ]
+      },
+      {
+        "title": "2. Informations que nous collectons",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Selon la façon dont vous utilisez le Service, nous pouvons collecter :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Informations de compte : adresse e-mail et identifiants d'authentification provenant des fournisseurs de connexion (Google, Apple ou e-mail).",
+              "Données de profil et de plan : nom, date de naissance, genre, taille, poids, objectifs, niveau d'activité, préférences alimentaires, objectifs de pas et d'eau, et choix liés à l'intégration initiale.",
+              "Données de nutrition et d'activité : journaux de repas et de boissons, calories, macros, ingrédients, entrées d'exercice, jeûne et suivi de l'eau, scores nutritionnels et conseils sur les micronutriments.",
+              "Photos et médias que vous choisissez de téléverser : photos de repas, photos d'étiquettes d'emballage, photos de progression, avatar de profil, photos de la galerie de profil et légendes, et images envoyées dans le chat IGNITE AI Assistant.",
+              "Saisie vocale : l'audio que vous enregistrez pour décrire un repas est envoyé pour transcription. Nous utilisons la transcription pour traiter votre demande. Nous n'avons pas l'intention de conserver les enregistrements vocaux bruts dans votre compte une fois la transcription terminée.",
+              "Texte que vous fournissez : descriptions de repas saisies, messages de chat, publications dans le chat et le fil des groupes, commentaires et requêtes de recherche.",
+              "Mesures de santé (lorsque vous vous connectez et accordez l'autorisation) : sur les appareils compatibles, données d'Apple Health ou de Health Connect telles que les pas, les calories actives, la fréquence cardiaque, le sommeil ou l'oxygène sanguin. La disponibilité dépend de la plateforme et des autorisations.",
+              "Informations sur l'appareil et l'application : version de l'application, langue, fuseau horaire, jetons de notifications push et journaux techniques nécessaires pour exploiter et sécuriser le Service.",
+              "Informations d'abonnement et d'achat (lorsque des formules payantes optionnelles sont disponibles) : type de formule, statut d'abonnement et identifiants de transaction d'Apple ou de Google. Nous ne recevons ni ne stockons les détails complets de votre carte de paiement.",
+              "Données Friends et sociales : nom d'affichage, identifiant, biographie, connexions et demandes d'amis, appartenance à des groupes privés, publications de chat et de fil de groupe, médias de la galerie de profil, likes et commentaires, invitations et demandes d'adhésion, et statistiques de bien-être que vous choisissez d'afficher sur votre profil d'amis.",
+              "Plans alimentaires générés par IA et recettes enregistrées basés sur votre profil, vos objectifs et vos préférences.",
+              "Préférences d'utilisation du produit : thèmes favoris de share card et événements d'exportation lorsque vous utilisez les fonctions de partage de repas ou d'exercice. Elles servent à améliorer les fonctions de partage, et non à la publicité.",
+              "Paramètres de partage du fil par groupe : pour chaque groupe privé, si vous avez choisi de partager automatiquement les nouveaux journaux de repas ou d'entraînement sur le fil de ce groupe."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "3. Comment nous utilisons vos informations",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Nous utilisons les informations personnelles pour :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Fournir le Service, y compris le journal alimentaire, les objectifs, les plans et le suivi des progrès.",
+              "Faire fonctionner les fonctionnalités assistées par IA telles que Snap Track, Snap Cook, l'analyse d'étiquettes et de codes-barres, Describe, Voice, les plans alimentaires générés par IA et IGNITE AI Assistant.",
+              "Personnaliser les objectifs de calories et de macros et le coaching dans l'application en fonction de votre profil et de vos journaux.",
+              "Synchroniser les mesures liées à la santé lorsque vous connectez des intégrations prises en charge.",
+              "Envoyer les notifications de service et sociales que vous activez, assurer la sécurité, prévenir les abus et corriger les erreurs.",
+              "Traiter les abonnements lorsqu'ils sont proposés, répondre aux demandes d'assistance et respecter la loi.",
+              "Faire fonctionner Friends et les groupes privés, y compris le chat, les fils, les galeries de profil, les classements et les contenus que vous partagez avec des amis ou des membres du groupe."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Nous ne vendons pas vos données de santé ou de repas à des fins publicitaires."
+          },
+          {
+            "type": "p",
+            "text": "Visibilité Friends : Les amis acceptés et les membres du groupe peuvent voir les informations que vous partagez via les fonctionnalités Friends, telles que votre profil, les médias de la galerie, les publications et les statistiques que vous activez. Les journaux de repas et d'entraînement ne sont pas publiés sur le fil d'un groupe sauf si vous les partagez manuellement ou activez le partage automatique pour ce groupe. Vous pouvez ajuster la visibilité du profil et les paramètres de partage du fil par groupe dans l'application."
+          }
+        ]
+      },
+      {
+        "title": "4. Traitement par IA",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Lorsque vous utilisez des fonctionnalités d'IA, le contenu que vous soumettez (tels que des photos, du texte, de la voix pour transcription ou des messages de chat) est traité sur des serveurs sécurisés, y compris une infrastructure tierce et des fournisseurs d'IA que nous utilisons pour fournir le Service."
+          },
+          {
+            "type": "p",
+            "text": "Le traitement par IA sert uniquement à générer des suggestions et des estimations. Les suggestions de repas, d'exercice, de recettes et de plans alimentaires ne sont enregistrées dans votre journal qu'après votre examen et confirmation dans l'application, sauf lorsqu'une fonctionnalité enregistre clairement automatiquement après analyse (comme décrit dans nos Conditions d'utilisation)."
+          },
+          {
+            "type": "p",
+            "text": "Ne soumettez pas d'informations sensibles que vous ne souhaitez pas voir traitées à cette fin. Les fonctionnalités décrites comme illimitées dans une formule payante sont soumises aux règles d'utilisation personnelle raisonnable de nos Conditions d'utilisation."
+          }
+        ]
+      },
+      {
+        "title": "5. Friends et groupes privés",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Lorsque vous utilisez les fonctionnalités Friends et Groups Room, nous traitons des informations sociales et de profil pour vous connecter à des amis, faire fonctionner des groupes privés et afficher le contenu partagé."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Connexions d'amis : envoi et acceptation de demandes d'amis, consultation des profils d'amis, et liens d'invitation ou codes QR que vous utilisez.",
+              "Groupes privés : noms de groupes, appartenance, messages de chat, publications sur le fil, classements, et cartes de repas ou d'entraînement que vous partagez dans un groupe.",
+              "Galerie de profil : photos, légendes, likes, commentaires et réactions sur les médias que vous téléversez sur votre profil.",
+              "Notifications : alertes push ou dans l'application pour les demandes d'amis, l'activité du groupe, les commentaires, les likes et les invitations lorsque vous les activez."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Ne partagez pas via les fonctionnalités Friends de contenu que vous ne souhaitez pas que des amis ou des membres du groupe voient. Nous pouvons supprimer du contenu social qui viole nos Conditions ou la législation applicable."
+          },
+          {
+            "type": "p",
+            "text": "Partage sur le fil du groupe : Pour chaque groupe privé, vous pouvez choisir si les nouveaux journaux de repas ou d'entraînement sont publiés automatiquement sur le fil de ce groupe. Ces options sont désactivées par défaut. Vous pouvez les modifier lors de l'adhésion à un groupe ou à tout moment via l'icône des paramètres de l'onglet Feed du groupe."
+          }
+        ]
+      },
+      {
+        "title": "6. Bases légales et informations régionales",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Royaume-Uni et Espace économique européen : Lorsque le RGPD du Royaume-Uni ou le RGPD de l'UE s'applique, nous nous fondons sur une ou plusieurs des bases légales suivantes :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Contrat : pour fournir le Service que vous demandez, y compris le compte, les journaux, les plans, les fonctionnalités sociales et les fonctionnalités payantes lorsqu'elles sont proposées.",
+              "Consentement : lorsque cela est requis, par exemple pour les notifications push optionnelles, l'accès à Apple Health ou Health Connect, ou les autorisations de microphone et de caméra.",
+              "Intérêts légitimes : pour sécuriser le Service, prévenir les abus, améliorer la fiabilité et assister les utilisateurs, en équilibre avec vos droits.",
+              "Obligation légale : lorsque nous devons conserver ou divulguer des informations pour respecter la loi."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "États-Unis : Nous traitons les informations personnelles comme décrit dans la présente Politique pour fournir et améliorer le Service. Nous ne vendons pas vos informations personnelles contre de l'argent. Nous ne partageons pas d'informations personnelles à des fins de publicité comportementale inter-contextes. Selon votre État de résidence, vous pouvez disposer de droits supplémentaires en vertu des lois sur la confidentialité des États (par exemple en Californie, en Virginie ou au Colorado)."
+          },
+          {
+            "type": "p",
+            "text": "Australie : Lorsque la Privacy Act 1988 (Cth) s'applique, nous traitons les informations personnelles conformément aux Australian Privacy Principles (APPs). Les garanties des consommateurs en vertu de l'Australian Consumer Law peuvent également s'appliquer et ne peuvent être exclues le cas échéant (voir nos Conditions d'utilisation)."
+          }
+        ]
+      },
+      {
+        "title": "7. Comment nous partageons les informations",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Nous pouvons partager des informations personnelles avec :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Des prestataires de services qui nous aident à héberger, stocker, authentifier les utilisateurs, traiter les demandes d'IA, délivrer des notifications et faire fonctionner l'application (par exemple services d'hébergement cloud et d'authentification).",
+              "Apple et Google lorsque vous vous connectez ou achetez des abonnements via leurs plateformes.",
+              "Des autorités, régulateurs ou autres lorsque la loi l'exige ou pour protéger les droits, la sécurité et la sûreté."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Nous pouvons utiliser des bases de données nutritionnelles publiques pour rechercher des informations sur les aliments. Nous ne vendons pas vos données personnelles à des fournisseurs de données tiers."
+          },
+          {
+            "type": "p",
+            "text": "Si notre entreprise est réorganisée, nous pouvons transférer des informations dans le cadre de ce processus avec des garanties appropriées."
+          }
+        ]
+      },
+      {
+        "title": "8. Transferts internationaux",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Nous pouvons traiter et stocker des informations au Royaume-Uni et dans d'autres pays où nos prestataires de services opèrent, y compris des pays où vous pouvez résider (tels que les États-Unis ou l'Australie). Lorsque cela est requis, nous utilisons des garanties appropriées pour les transferts hors du Royaume-Uni ou de l'EEE, telles que les clauses contractuelles types."
+          }
+        ]
+      },
+      {
+        "title": "9. Durée de conservation des informations",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Nous conservons les informations personnelles aussi longtemps que votre compte est actif et selon les besoins pour fournir le Service."
+          },
+          {
+            "type": "p",
+            "text": "Lorsque vous supprimez votre compte depuis Profile → Account, nous supprimons ou anonymisons les données liées au compte telles que votre profil, vos journaux nutritionnels, vos plans alimentaires, vos recettes enregistrées, votre historique de poids, l'historique de chat de l'AI Assistant, vos connexions Friends, les groupes privés dont vous êtes propriétaire, les publications et messages de groupe, les médias de la galerie de profil, les notifications sociales, les préférences de partage et les enregistrements de compte associés, sous réserve des exigences légales de conservation et des cycles de sauvegarde raisonnables."
+          },
+          {
+            "type": "p",
+            "text": "Certaines informations peuvent rester dans des sauvegardes chiffrées pendant une période limitée avant d'être écrasées. Les commentaires que vous envoyez peuvent être conservés sous forme anonymisée après la suppression du compte lorsque la loi le permet."
+          },
+          {
+            "type": "p",
+            "text": "Les fichiers de stockage tels que les photos peuvent ne pas toujours être supprimés immédiatement dans tous les environnements. Nous œuvrons pour aligner la suppression sur la suppression du compte au fil du temps."
+          }
+        ]
+      },
+      {
+        "title": "10. Sécurité",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Nous utilisons des mesures techniques et organisationnelles conçues pour protéger les informations personnelles, y compris des contrôles d'accès et le chiffrement en transit. Aucun service en ligne ne peut garantir une sécurité absolue. Veuillez utiliser une méthode de connexion solide et nous avertir si vous soupçonnez un accès non autorisé."
+          }
+        ]
+      },
+      {
+        "title": "11. Vos choix et vos droits",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Selon votre lieu de résidence, vous pouvez avoir le droit de :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Accéder à, corriger ou supprimer des informations personnelles.",
+              "Retirer votre consentement lorsque le traitement est fondé sur le consentement.",
+              "Vous opposer à certains traitements ou les restreindre.",
+              "Demander la portabilité des informations que vous avez fournies.",
+              "Déposer une plainte auprès d'une autorité de contrôle."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Vous pouvez mettre à jour une grande partie de votre profil dans l'application. Pour les autres demandes, contactez privacy@ignitehub.app. Nous pourrons avoir besoin de vérifier votre identité."
+          },
+          {
+            "type": "p",
+            "text": "Les utilisateurs du Royaume-Uni peuvent contacter l'Information Commissioner's Office (ICO). Les utilisateurs de l'Espace économique européen peuvent contacter leur autorité locale de protection des données."
+          },
+          {
+            "type": "p",
+            "text": "Résidents des États-Unis : Vous pouvez avoir le droit de savoir quelles informations personnelles nous collectons, d'y accéder, de les corriger ou de les supprimer, et de vous opposer à certains traitements lorsque la loi de l'État applicable confère ces droits. Pour faire une demande, écrivez à privacy@ignitehub.app. Nous ne vous discriminerons pas pour avoir exercé des droits de confidentialité autorisés par la loi."
+          },
+          {
+            "type": "p",
+            "text": "Résidents d'Australie : Vous pouvez demander l'accès ou la correction des informations personnelles que nous détenons à votre sujet en contactant privacy@ignitehub.app. Vous pouvez également déposer une plainte auprès de l'Office of the Australian Information Commissioner (OAIC) sur oaic.gov.au."
+          }
+        ]
+      },
+      {
+        "title": "12. Autorisations et paramètres de l'appareil",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Le Service peut demander des autorisations de caméra, de microphone, de photothèque, de notifications et de santé. Vous pouvez en modifier un grand nombre dans les paramètres de votre appareil. Certaines fonctionnalités ne fonctionneront pas sans l'autorisation concernée."
+          }
+        ]
+      },
+      {
+        "title": "13. Enfants",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Le Service ne s'adresse pas aux enfants de moins de 13 ans et nous ne collectons pas sciemment d'informations personnelles les concernant. Si vous pensez qu'un enfant de moins de 13 ans a fourni des informations, contactez-nous afin que nous puissions prendre les mesures appropriées."
+          }
+        ]
+      },
+      {
+        "title": "14. Modifications de la présente Politique",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Nous pouvons mettre à jour la présente Politique de confidentialité de temps à autre. Nous publierons la version mise à jour dans l'application et sur ce site web et modifierons la date de « Dernière mise à jour ». Les modifications importantes peuvent également être communiquées dans l'application le cas échéant."
+          }
+        ]
+      },
+      {
+        "title": "15. Contact",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Questions concernant la présente Politique de confidentialité : privacy@ignitehub.app."
+          }
+        ]
+      }
+    ]
+  },
+  "termsOfUse": {
+    "title": "Conditions d'utilisation",
+    "lastUpdated": "Dernière mise à jour : 9 juillet 2026",
+    "intro": "Les présentes Conditions d'utilisation (« Conditions ») régissent votre utilisation de l'application mobile IGNITE AI et des services associés (collectivement, le « Service »), exploités par IGNITE AI (« IGNITE », « nous », « notre » ou « nos ») depuis le Royaume-Uni. Le Service peut être accessible au Royaume-Uni, au Portugal, aux États-Unis, en Australie et dans d'autres pays. En créant un compte, en accédant au Service ou en l'utilisant, vous acceptez les présentes Conditions et notre Politique de confidentialité. Si vous n'acceptez pas, n'utilisez pas le Service.",
+    "sections": [
+      {
+        "title": "1. Éligibilité",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vous devez remplir l'âge minimum requis pour utiliser des services numériques dans votre pays. Vous devez avoir au moins 13 ans. Les enfants de moins de 13 ans ne peuvent pas utiliser le Service."
+          },
+          {
+            "type": "p",
+            "text": "Si vous avez moins de 18 ans, ou si vous n'avez pas l'âge de la majorité légale dans votre pays, vous ne pouvez utiliser le Service qu'avec le consentement et la supervision d'un parent ou tuteur légal qui accepte les présentes Conditions en votre nom. Dans certains pays (y compris certaines parties de l'Espace économique européen), vous devez avoir au moins 16 ans pour utiliser le Service sans intervention parentale."
+          },
+          {
+            "type": "p",
+            "text": "Le Service n'est pas destiné aux personnes auxquelles la loi applicable interdit d'utiliser des outils de suivi de nutrition, de fitness ou de bien-être. En utilisant le Service, vous déclarez remplir ces exigences."
+          }
+        ]
+      },
+      {
+        "title": "2. Ce que propose IGNITE",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE AI est une application de suivi du bien-être et de la nutrition. Elle vous aide à enregistrer repas et boissons, suivre calories et macros, définir des objectifs nutritionnels, surveiller le poids et les mesures liées à l'activité, et utiliser des outils assistés par IA pour interpréter des photos d'aliments, des étiquettes d'emballage, des codes-barres, des descriptions textuelles et une saisie vocale."
+          },
+          {
+            "type": "p",
+            "text": "Le Service comprend actuellement des fonctionnalités telles qu'un journal alimentaire quotidien, des objectifs personnalisés de calories et de macros, l'enregistrement Snap Track, la génération de recettes par IA avec Snap Cook à partir de photos, des plans de repas générés par IA, l'enregistrement autonome d'exercice, l'assistance par chat IGNITE AI Assistant, Friends et les groupes privés (Groups Room), l'intégration optionnelle avec Apple Health et Health Connect lorsqu'elle est disponible, les objectifs d'eau et de pas, les outils de jeûne, les photos de progression, les cartes de nutrition et de partage, les recettes enregistrées et les outils associés lorsqu'ils sont disponibles."
+          },
+          {
+            "type": "p",
+            "text": "IGNITE est fourni comme outil d'accompagnement et de suivi du bien-être. Ce n'est pas un dispositif médical et il ne fournit pas de soins médicaux, de diagnostic, de traitement ou de prévention des maladies."
+          }
+        ]
+      },
+      {
+        "title": "3. Snap Track",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Snap Track vous permet d'enregistrer des aliments à l'aide de photos, de codes-barres, d'étiquettes d'emballage, de descriptions saisies, d'enregistrements vocaux, de saisie manuelle d'ingrédients, de saisie directe de macros et de recherche d'aliments. Selon l'entrée que vous fournissez, différentes approches de reconnaissance et d'estimation peuvent s'appliquer."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Photos de repas et de boissons : les aliments, boissons et portions sont identifiés. Une analyse réussie peut enregistrer automatiquement une entrée dans votre journal ; vous pouvez l'ouvrir ensuite pour la revoir, modifier les ingrédients, corriger des problèmes ou la supprimer.",
+              "Scans de codes-barres : les produits peuvent être associés à des bases de données nutritionnelles lorsqu'elles sont disponibles et peuvent être enregistrés automatiquement en cas de correspondance réussie.",
+              "Étiquettes d'emballage : les informations produit et nutritionnelles peuvent être lues à partir de votre photo et, lorsque l'analyse réussit, peuvent être enregistrées automatiquement pour votre examen ultérieur.",
+              "Describe et Voice : le texte ou la parole transcrite est interprété en ingrédients et portions suggérés que vous examinez et confirmez avant l'enregistrement.",
+              "Insérer des macros : vous pouvez saisir directement les calories et macros sans analyse par IA."
+            ]
+          },
+          {
+            "type": "p",
+            "text": "Selon l'entrée, Snap Track peut enregistrer une entrée automatiquement après analyse (par exemple photos de repas ou d'aliments emballés et correspondances réussies de codes-barres), ou vous demander de revoir et confirmer d'abord (par exemple Describe, Voice et IGNITE AI Assistant). Vous devez toujours revoir les entrées enregistrées et modifier ou supprimer tout ce qui semble inexact."
+          }
+        ]
+      },
+      {
+        "title": "4. IGNITE AI Assistant",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE AI Assistant fournit une assistance conversationnelle en nutrition et bien-être. Il peut suggérer des estimations de repas ou d'exercice, répondre à des questions sur vos objectifs ou données enregistrées, et vous aider à explorer des informations sur l'alimentation et l'activité."
+          },
+          {
+            "type": "p",
+            "text": "Les suggestions de repas et d'exercice dans le chat ne sont que des aperçus. Rien n'est enregistré dans votre journal alimentaire ou vos totaux d'activité tant que vous n'avez pas examiné la suggestion et ne l'avez pas confirmée explicitement dans l'application. Les réponses du chat peuvent être inexactes, incomplètes ou inadaptées à votre situation individuelle."
+          }
+        ]
+      },
+      {
+        "title": "5. Snap Cook, plans alimentaires, exercice et partage",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Snap Cook utilise l'IA pour suggérer des recettes à partir de photos d'ingrédients ou de repas que vous fournissez. Les suggestions sont des points de départ. Examinez les ingrédients, les portions et la nutrition avant d'enregistrer ou de journaliser."
+          },
+          {
+            "type": "p",
+            "text": "Les plans alimentaires générés par IA créent des repas suggérés pour des jours ou des semaines selon votre profil, vos objectifs et vos préférences. Les plans ne sont que des suggestions. Vous pouvez modifier, remplacer ou ignorer tout repas suggéré."
+          },
+          {
+            "type": "p",
+            "text": "L'enregistrement d'exercice vous permet de noter des entraînements et une dépense estimée. Les estimations ne sont pas cliniquement précises. Les suggestions d'exercice d'IGNITE AI Assistant suivent les mêmes règles d'examen et de confirmation que les repas."
+          },
+          {
+            "type": "p",
+            "text": "Les Share Cards vous permettent d'exporterer ou de partager des résumés de repas ou d'exercice à l'aide de thèmes que vous sélectionnez. Les images partagées peuvent quitter l'application via la feuille de partage de votre appareil. Vous contrôlez ce que vous partagez et avec qui."
+          }
+        ]
+      },
+      {
+        "title": "6. Friends et groupes privés",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Les fonctionnalités Friends vous permettent de vous connecter à d'autres utilisateurs, de rejoindre des groupes privés de responsabilisation, de discuter, de partager des mises à jour de repas ou d'entraînement, de consulter des galeries de profil et de recevoir des notifications sociales lorsqu'elles sont activées."
+          },
+          {
+            "type": "p",
+            "text": "Le contenu que vous publiez dans un groupe ou partagez avec des amis peut être visible par les membres de ce groupe ou vos amis acceptés. Respectez la vie privée des autres et ne partagez que du contenu que vous avez le droit de partager."
+          },
+          {
+            "type": "p",
+            "text": "Les propriétaires de groupes peuvent inviter des membres, gérer l'appartenance et supprimer les groupes qu'ils ont créés. Nous pouvons supprimer des groupes ou du contenu social qui violent les présentes Conditions ou créent un risque pour les utilisateurs."
+          },
+          {
+            "type": "p",
+            "text": "Les journaux de repas et d'entraînement ne sont pas publiés sur le fil d'un groupe sauf si vous les partagez manuellement ou activez le partage automatique pour ce groupe. Le partage automatique est optionnel, désactivé par défaut, et peut être contrôlé séparément pour les repas et l'exercice dans l'onglet Feed de chaque groupe."
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Ne harcelez pas, n'intimidez pas et ne publiez pas de contenu nuisible dans les groupes ou sur les profils.",
+              "Ne partagez pas les photos ou les informations de santé d'une autre personne sans autorisation lorsque la loi l'exige."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "7. Santé, activité et mesures corporelles",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vous pouvez saisir ou synchroniser des informations liées à la santé telles que le poids, la taille, les pas et, sur les appareils compatibles avec votre autorisation, des données d'Apple Health ou de Health Connect (par exemple pas, calories actives, fréquence cardiaque, sommeil ou oxygène sanguin). La disponibilité dépend de votre appareil, de votre système d'exploitation et des autorisations que vous accordez."
+          },
+          {
+            "type": "p",
+            "text": "Toute donnée de santé synchronisée ou affichée sert uniquement au suivi général du bien-être et ne constitue pas une surveillance médicale, une mesure clinique ou une détection d'urgence."
+          }
+        ]
+      },
+      {
+        "title": "8. Avertissements médicaux et de bien-être",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Les informations du Service, y compris les calories, macros, scores nutritionnels, suggestions de repas, conseils de jeûne, estimations de dépense d'exercice et contenus générés par IA, sont destinées uniquement à des fins d'information générale et de bien-être. Elles ne constituent pas un avis médical personnalisé et ne remplacent pas les conseils d'un médecin qualifié, d'un diététicien diplômé ou d'un autre professionnel de santé agréé."
+          },
+          {
+            "type": "p",
+            "text": "N'utilisez pas le Service pour des urgences médicales. Si vous pensez être en situation d'urgence médicale, contactez immédiatement les services d'urgence."
+          },
+          {
+            "type": "p",
+            "text": "Consultez un professionnel de santé qualifié avant d'apporter des changements importants à votre alimentation, à votre exercice, à votre routine de jeûne ou à votre plan de gestion du poids, surtout si vous êtes enceinte, allaitez, gérez un diabète ou une autre affection chronique, prenez des médicaments, vous remettez d'une maladie ou avez entretenu des troubles du comportement alimentaire."
+          },
+          {
+            "type": "p",
+            "text": "Le Service n'est pas conçu pour les utilisateurs qui gèrent activement un trouble alimentaire sans supervision professionnelle. Si vous avez ou soupçonnez un trouble alimentaire, sollicitez des soins qualifiés avant d'utiliser les fonctionnalités de suivi des calories."
+          },
+          {
+            "type": "p",
+            "text": "Pendant la grossesse et l'allaitement, les besoins nutritionnels sont différents ; ne suivez pas les objectifs caloriques, les conseils de jeûne ou les plans de perte de poids de l'application sans l'accompagnement d'un professionnel de santé qualifié. Si vous avez une condition physique ou de santé, prenez la même précaution : consultez un professionnel qualifié avant de suivre les objectifs ou conseils du Service."
+          }
+        ]
+      },
+      {
+        "title": "9. Données nutritionnelles et précision",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Les valeurs nutritionnelles dans IGNITE peuvent provenir de bases de données alimentaires publiques, d'informations produits reconnues, d'analyse d'ingrédients et d'estimation assistée par IA. La reconnaissance des produits peut utiliser des noms de produits visibles, des emballages, des codes-barres, des étiquettes nutritionnelles et une correspondance avec des bases de données."
+          },
+          {
+            "type": "p",
+            "text": "Les entrées des bases de données peuvent être incomplètes, obsolètes ou incorrectes. Les résultats assistés par IA sont des estimations et peuvent mal identifier les aliments, portions, ingrédients ou allergènes. Les repas faits maison, plats de restaurant, assiettes mixtes et produits régionaux sont particulièrement incertains."
+          },
+          {
+            "type": "p",
+            "text": "Traitez tous les résultats comme des estimations, sauf si vous les avez vérifiés de manière indépendante. Les produits emballés associés à une base de données sont généralement plus fiables que les suggestions uniquement par IA."
+          }
+        ]
+      },
+      {
+        "title": "10. Analyse assistée par IA",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE utilise des modèles d'IA avancés hébergés sur des serveurs sécurisés pour aider à interpréter photos, étiquettes, descriptions et messages de chat. Les sorties de l'IA sont des points de départ, pas des garanties. Elles peuvent être erronées, obsolètes ou inadaptées à vos besoins."
+          },
+          {
+            "type": "p",
+            "text": "Vous restez responsable de ce que vous enregistrez. Ne vous fiez pas aux résultats de l'IA pour la sécurité allergique, la thérapie nutritionnelle médicale ou d'autres décisions à haut risque sans vérification professionnelle."
+          },
+          {
+            "type": "p",
+            "text": "Certaines fonctionnalités peuvent être décrites comme « illimitées » ou incluses dans une formule payante lorsqu'elle est proposée. Cela signifie une utilisation personnelle raisonnable et non commerciale pour enregistrer vos propres repas, boissons et données de bien-être via Snap Track, IGNITE AI Assistant et les outils associés. Cela n'autorise pas les demandes automatisées, le traitement en masse, la revente d'accès, le partage d'un abonnement entre plusieurs utilisateurs sans lien, ni toute utilisation imposant une charge disproportionnée au Service. Nous pouvons appliquer des limites techniques ou suspendre l'accès si nous détectons une utilisation abusive ou anormale."
+          }
+        ]
+      },
+      {
+        "title": "11. Vos responsabilités",
+        "blocks": [
+          {
+            "type": "ul",
+            "items": [
+              "Examinez et modifiez les repas, boissons, ingrédients, portions et macros suggérés ou enregistrés automatiquement. Corrigez ou supprimez les entrées qui semblent incorrectes.",
+              "Fournissez des informations de compte et de profil exactes lorsque cela est demandé.",
+              "Utilisez le Service de manière licite et uniquement à des fins personnelles et non commerciales, sauf accord écrit contraire.",
+              "Protégez vos identifiants de connexion et avertissez-nous si vous soupçonnez un accès non autorisé à votre compte.",
+              "Ne téléversez pas de contenu que vous n'avez pas le droit de partager, y compris des photos d'autres personnes sans autorisation lorsque la loi l'exige."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "12. Contenu utilisateur",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vous pouvez soumettre du contenu au Service, y compris des journaux de repas, des photos, une saisie vocale pour transcription, des messages de chat, des informations de profil, des médias de la galerie de profil, des publications et messages de groupe, des photos de progression et des commentaires (« Contenu Utilisateur »). Vous conservez la propriété de votre Contenu Utilisateur."
+          },
+          {
+            "type": "p",
+            "text": "En soumettant du Contenu Utilisateur, vous accordez à IGNITE une licence mondiale, non exclusive et libre de redevances pour héberger, stocker, reproduire, traiter, afficher et utiliser ce contenu uniquement dans la mesure nécessaire pour exploiter, sécuriser, améliorer et fournir le Service, y compris l'analyse assistée par IA et l'assistance. Cette licence prend fin lorsque votre contenu est supprimé, sauf lorsque la conservation est exigée par la loi ou par des pratiques légitimes de sauvegarde."
+          },
+          {
+            "type": "p",
+            "text": "Nous pouvons supprimer du contenu ou suspendre l'accès si nous estimons raisonnablement qu'il viole les présentes Conditions, la législation applicable ou les droits d'autrui."
+          }
+        ]
+      },
+      {
+        "title": "13. Utilisation acceptable",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vous acceptez de ne pas :"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Utiliser le Service à des fins illicites, nuisibles, frauduleuses ou abusives.",
+              "Tenter de procéder à de l'ingénierie inverse, d'extraire des données, de surcharger ou de perturber le Service ou ses systèmes.",
+              "Téléverser des logiciels malveillants, du spam ou du contenu harcelant, haineux, sexuellement exploiteur, ou qui promeut des pratiques dangereuses de perte de poids ou des troubles alimentaires.",
+              "Usurper votre identité ou vous faire passer pour une autre personne.",
+              "Utiliser le Service pour fournir des conseils médicaux à des tiers ou comme substitut à des services de santé professionnels.",
+              "Utiliser des scripts, bots ou autre automatisation pour envoyer des demandes d'analyse par IA, des recherches de codes-barres ou des messages de chat.",
+              "Partager un abonnement ou un compte payant avec d'autres d'une manière qui remplace des abonnements distincts ou permet une utilisation commerciale.",
+              "Revendre, republier ou exploiter commercialement les sorties des fonctionnalités d'IA sans notre autorisation écrite.",
+              "Harceler, menacer ou maltraiter d'autres utilisateurs dans les fonctionnalités Friends, les groupes, les commentaires ou les galeries de profil."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "14. Abonnements et fonctionnalités payantes",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE offre un accès gratuit aux fonctionnalités essentielles de bien-être. Nous pouvons également proposer des formules d'abonnement payantes optionnelles dans certaines régions. Lorsqu'elles sont disponibles, les prix, périodes de facturation (par exemple hebdomadaire, mensuelle ou annuelle), essais et fonctionnalités incluses sont indiqués dans l'application au moment de l'achat."
+          },
+          {
+            "type": "p",
+            "text": "Les abonnements payants sont traités par Apple, Google ou d'autres prestataires de paiement autorisés. Leurs conditions et politiques de confidentialité s'appliquent à la facturation et aux remboursements."
+          },
+          {
+            "type": "p",
+            "text": "Les abonnements se renouvellent automatiquement sauf si vous annulez avant la fin de la période de facturation en cours via les paramètres de votre compte App Store ou Google Play. Supprimer l'application IGNITE n'annule pas votre abonnement."
+          },
+          {
+            "type": "p",
+            "text": "Si un essai gratuit est proposé, vous serez facturé à la fin de l'essai sauf si vous annulez avant cette date. La durée et l'éligibilité de l'essai sont indiquées lors de l'achat."
+          },
+          {
+            "type": "p",
+            "text": "Les fonctionnalités décrites comme illimitées dans une formule payante sont soumises aux règles d'utilisation personnelle raisonnable de la Section 10. L'enregistrement quotidien normal des repas n'est pas considéré comme un abus."
+          }
+        ]
+      },
+      {
+        "title": "15. Compte et sécurité",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vous pouvez vous connecter à l'aide de méthodes prises en charge telles que Google, Apple ou l'e-mail. Vous êtes responsable de toute activité sous votre compte, sauf si elle est causée par notre faute. Nous pouvons suspendre ou résilier les comptes qui violent les présentes Conditions ou créent un risque de sécurité, juridique ou opérationnel."
+          }
+        ]
+      },
+      {
+        "title": "16. Services tiers",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Le Service peut s'appuyer sur ou renvoyer vers des services tiers, y compris des fournisseurs de connexion, l'hébergement cloud, des bases de données nutritionnelles et des plateformes de santé de l'appareil. Ces services sont régis par leurs propres conditions et politiques. Nous ne contrôlons pas et ne sommes pas responsables des services tiers."
+          },
+          {
+            "type": "p",
+            "text": "IGNITE peut utiliser des bases de données nutritionnelles et des fournisseurs de données tiers conformément à leurs licences et conditions respectives. Lorsque cela est requis, nous respectons les obligations d'attribution et d'utilisation de ces sources."
+          }
+        ]
+      },
+      {
+        "title": "17. Propriété intellectuelle",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Le Service, y compris son logiciel, sa conception, sa marque et sa documentation, est la propriété d'IGNITE ou de ses concédants et est protégé par les lois sur la propriété intellectuelle. Nous vous accordons une licence limitée, personnelle, non transférable et révocable pour utiliser l'application conformément aux présentes Conditions."
+          },
+          {
+            "type": "p",
+            "text": "Vous ne pouvez pas copier, modifier, distribuer, vendre ou créer d'œuvres dérivées du Service, sauf dans la mesure autorisée par la loi ou avec notre autorisation écrite."
+          }
+        ]
+      },
+      {
+        "title": "18. Exclusions de garantie",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "DANS TOUTE LA MESURE PERMISE PAR LA LOI, LE SERVICE EST FOURNI « EN L'ÉTAT » ET « SELON DISPONIBILITÉ ». NOUS DÉCLINONS TOUTES GARANTIES, EXPRESSES OU IMPLICITES, Y COMPRIS DE QUALITÉ MARCHANDE, D'ADÉQUATION À UN USAGE PARTICULIER ET DE NON-CONTREFAÇON."
+          },
+          {
+            "type": "p",
+            "text": "Nous ne garantissons pas que le Service sera ininterrompu, exempt d'erreurs, sécurisé, ni que les résultats de nutrition, de santé ou d'IA seront exacts, complets ou adaptés à vos fins."
+          }
+        ]
+      },
+      {
+        "title": "19. Limitation de responsabilité",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "DANS TOUTE LA MESURE PERMISE PAR LA LOI, IGNITE ET SES DIRIGEANTS, ADMINISTRATEURS, EMPLOYÉS, AGENTS ET FOURNISSEURS NE SERONT PAS RESPONSABLES DE TOUT DOMMAGE INDIRECT, ACCESSOIRE, SPÉCIAL, CONSÉCUTIF OU PUNITIF, NI DE TOUTE PERTE DE BÉNÉFICES, DE DONNÉES, DE CLIENTÈLE OU DE RÉSULTATS LIÉS À LA SANTÉ, DÉCOULANT DE OU LIÉS À VOTRE UTILISATION DU SERVICE."
+          },
+          {
+            "type": "p",
+            "text": "DANS TOUTE LA MESURE PERMISE PAR LA LOI, NOTRE RESPONSABILITÉ TOTALE POUR TOUTE RÉCLAMATION DÉCOULANT DU SERVICE OU DES PRÉSENTES CONDITIONS OU Y ÉTANT LIÉE NE DÉPASSERA PAS LE PLUS ÉLEVÉ ENTRE (A) LE MONTANT QUE VOUS NOUS AVEZ PAYÉ POUR LE SERVICE AU COURS DES DOUZE MOIS PRÉCÉDANT LA RÉCLAMATION, OU (B) CINQUANTE LIVRES STERLING (£50) OU L'ÉQUIVALENT APPROXIMATIF EN DEVISE LOCALE."
+          },
+          {
+            "type": "p",
+            "text": "Certaines juridictions n'autorisent pas certaines limitations. Dans ces cas, notre responsabilité est limitée dans toute la mesure permise par la législation applicable. Rien dans les présentes Conditions ne limite une responsabilité qui ne peut être limitée en vertu du droit impératif de la consommation."
+          }
+        ]
+      },
+      {
+        "title": "20. Indemnisation",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Dans toute la mesure permise par la loi, vous acceptez d'indemniser et de dégager IGNITE de toute responsabilité au titre des réclamations, dommages, pertes et dépenses (y compris les honoraires juridiques raisonnables) découlant de votre Contenu Utilisateur, de votre mauvaise utilisation du Service, ou de votre violation des présentes Conditions ou de la législation applicable."
+          }
+        ]
+      },
+      {
+        "title": "21. Résiliation et suppression du compte",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Vous pouvez cesser d'utiliser le Service à tout moment. Vous pouvez supprimer votre compte depuis Profile → Account. Lorsque la suppression est terminée, nous supprimerons ou anonymiserons les données liées au compte comme décrit dans notre Politique de confidentialité, sous réserve des exigences légales de conservation et des cycles de sauvegarde raisonnables."
+          },
+          {
+            "type": "p",
+            "text": "Nous pouvons suspendre ou résilier votre accès si vous violez de manière substantielle les présentes Conditions ou si cela est nécessaire pour protéger les utilisateurs, le Service ou nos obligations légales."
+          }
+        ]
+      },
+      {
+        "title": "22. Modifications du Service et des Conditions",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Nous pouvons modifier, suspendre ou interrompre toute partie du Service à tout moment. Nous pouvons mettre à jour les présentes Conditions en publiant une version révisée dans l'application et sur ce site web et en mettant à jour la date de « Dernière mise à jour ». Les modifications importantes peuvent également être communiquées dans l'application le cas échéant."
+          },
+          {
+            "type": "p",
+            "text": "Si vous continuez à utiliser le Service après l'entrée en vigueur des Conditions mises à jour, vous acceptez les Conditions révisées. Si vous n'acceptez pas, vous devez cesser d'utiliser le Service et pouvez supprimer votre compte."
+          }
+        ]
+      },
+      {
+        "title": "23. Droit applicable et utilisateurs internationaux",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "IGNITE exploite le Service depuis le Royaume-Uni. Les présentes Conditions sont régies par les lois d'Angleterre et du Pays de Galles, sauf lorsque les lois impératives de protection des consommateurs de votre pays de résidence exigent autrement."
+          },
+          {
+            "type": "p",
+            "text": "Si vous êtes un consommateur au Royaume-Uni, rien dans les présentes Conditions n'exclut ni ne limite vos droits légaux en vertu du Consumer Rights Act 2015 et des autres lois applicables du Royaume-Uni."
+          },
+          {
+            "type": "p",
+            "text": "Si vous êtes un consommateur dans l'Espace économique européen, au Portugal ou en Suisse, vous conservez tous les droits impératifs en vertu des lois de votre pays de résidence, y compris les droits auxquels il ne peut être renoncé par contrat."
+          },
+          {
+            "type": "p",
+            "text": "Si vous êtes un consommateur aux États-Unis, vous conservez tous les droits en vertu des lois fédérales ou étatiques applicables de protection des consommateurs auxquels il ne peut être renoncé par accord."
+          },
+          {
+            "type": "p",
+            "text": "Si vous êtes un consommateur en Australie, nos biens et services comportent des garanties qui ne peuvent être exclues en vertu de l'Australian Consumer Law le cas échéant. Rien dans les présentes Conditions n'est destiné à exclure, restreindre ou modifier ces droits non exclusibles."
+          },
+          {
+            "type": "p",
+            "text": "Sous réserve du droit local impératif, les tribunaux d'Angleterre et du Pays de Galles ont compétence exclusive sur les litiges découlant des présentes Conditions. Lorsque votre droit local vous donne le droit d'introduire des réclamations dans votre pays de résidence en tant que consommateur, ce droit n'est pas affecté."
+          }
+        ]
+      },
+      {
+        "title": "24. Contact",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Les questions concernant les présentes Conditions peuvent être envoyées à support@ignitehub.app."
+          },
+          {
+            "type": "p",
+            "text": "Pour les demandes relatives à la confidentialité, consultez notre Politique de confidentialité."
+          }
+        ]
+      }
+    ]
+  }
+}

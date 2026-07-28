@@ -3,10 +3,11 @@
 import { FormEvent, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, useReducedMotion } from 'motion/react'
-import { Wordmark } from '@/components/site-nav'
+import { useT } from '@/lib/i18n/provider'
 import { easeOutExpo } from '@/lib/motion'
 
 export function ComingSoonGate() {
+  const t = useT()
   const router = useRouter()
   const reduce = useReducedMotion()
   const [password, setPassword] = useState('')
@@ -24,14 +25,14 @@ export function ComingSoonGate() {
         body: JSON.stringify({ password }),
       })
       if (!res.ok) {
-        setError('Wrong password. Try again.')
+        setError(t.comingSoon.wrongPassword)
         setLoading(false)
         return
       }
       router.replace('/')
       router.refresh()
     } catch {
-      setError('Something went wrong. Try again.')
+      setError(t.comingSoon.genericError)
       setLoading(false)
     }
   }
@@ -45,7 +46,7 @@ export function ComingSoonGate() {
       transition={{ duration: 0.55, delay: 0.15, ease: easeOutExpo }}
     >
       <label htmlFor="site-password" className="sr-only">
-        Password
+        {t.comingSoon.password}
       </label>
       <div className="flex gap-2">
         <input
@@ -53,7 +54,7 @@ export function ComingSoonGate() {
           type="password"
           name="password"
           autoComplete="current-password"
-          placeholder="Password"
+          placeholder={t.comingSoon.password}
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="min-w-0 flex-1 rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground outline-none ring-foreground/15 placeholder:text-muted-foreground focus:ring-2"
@@ -63,7 +64,7 @@ export function ComingSoonGate() {
           disabled={loading || !password}
           className="shrink-0 rounded-xl bg-foreground px-5 py-3 text-sm font-semibold text-background transition hover:opacity-90 disabled:opacity-40"
         >
-          {loading ? '…' : 'Enter'}
+          {loading ? '…' : t.comingSoon.enter}
         </button>
       </div>
       {error ? <p className="mt-3 text-center text-sm text-ember">{error}</p> : null}

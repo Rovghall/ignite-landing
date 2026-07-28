@@ -13,3 +13,15 @@ __v0_jsx-dev-runtime.ts
 node_modules
 .next/
 .DS_Store
+
+# i18n translation scratch
+content/**/*.progress.json
+content/**/*-translate.log
+content/**/*-translate.err.log
+content/**/blog-part-*.json
+content/**/_frag-*.json
+content/**/posts/
+.vercel
+
+content/_dict/
+*.tsbuildinfo

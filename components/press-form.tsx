@@ -1,10 +1,12 @@
 'use client'
 
 import { FormEvent, useState } from 'react'
+import { useT } from '@/lib/i18n/provider'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
 export function PressForm() {
+  const t = useT()
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState('')
 
@@ -29,13 +31,13 @@ export function PressForm() {
       })
       const json = (await res.json().catch(() => ({}))) as { error?: string }
       if (!res.ok) {
-        throw new Error(json.error || 'Something went wrong. Please try again.')
+        throw new Error(json.error || t.press.error)
       }
       setStatus('success')
       form.reset()
     } catch (err) {
       setStatus('error')
-      setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+      setError(err instanceof Error ? err.message : t.press.error)
     }
   }
 
@@ -48,42 +50,42 @@ export function PressForm() {
       <div className="flex flex-col gap-5">
         <label className="flex flex-col gap-2">
           <span className="font-brand text-sm font-medium text-foreground">
-            Email Address <span className="text-foreground">*</span>
+            {t.press.email} <span className="text-foreground">*</span>
           </span>
           <input
             type="email"
             name="email"
             required
             autoComplete="email"
-            placeholder="your.email@example.com"
+            placeholder={t.press.emailPlaceholder}
             className="h-11 rounded-lg border border-black/15 bg-white px-3 text-[15px] text-foreground outline-none transition-[border-color,box-shadow] placeholder:text-muted-foreground/70 focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10"
           />
         </label>
 
         <label className="flex flex-col gap-2">
           <span className="font-brand text-sm font-medium text-foreground">
-            Subject <span className="text-foreground">*</span>
+            {t.press.subject} <span className="text-foreground">*</span>
           </span>
           <input
             type="text"
             name="subject"
             required
             maxLength={200}
-            placeholder="Media inquiry subject"
+            placeholder={t.press.subjectPlaceholder}
             className="h-11 rounded-lg border border-black/15 bg-white px-3 text-[15px] text-foreground outline-none transition-[border-color,box-shadow] placeholder:text-muted-foreground/70 focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10"
           />
         </label>
 
         <label className="flex flex-col gap-2">
           <span className="font-brand text-sm font-medium text-foreground">
-            Message <span className="text-foreground">*</span>
+            {t.press.message} <span className="text-foreground">*</span>
           </span>
           <textarea
             name="message"
             required
             rows={6}
             maxLength={5000}
-            placeholder="Please provide details about your media inquiry, including deadline, outlet information, and specific questions you'd like answered..."
+            placeholder={t.press.messagePlaceholder}
             className="min-h-[150px] resize-y rounded-lg border border-black/15 bg-white px-3 py-2.5 text-[15px] text-foreground outline-none transition-[border-color,box-shadow] placeholder:text-muted-foreground/70 focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10"
           />
         </label>
@@ -93,12 +95,12 @@ export function PressForm() {
           disabled={status === 'loading'}
           className="mt-1 flex h-12 w-full items-center justify-center rounded-lg bg-foreground font-brand text-[15px] font-semibold text-background transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {status === 'loading' ? 'Sending…' : 'Send Press Inquiry'}
+          {status === 'loading' ? t.press.sending : t.press.submit}
         </button>
 
         {status === 'success' ? (
           <p className="text-center text-sm text-foreground/80" role="status">
-            Thanks. Your press inquiry was sent. We will get back to you soon.
+            {t.press.success}
           </p>
         ) : null}
         {status === 'error' ? (
