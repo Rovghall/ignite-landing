@@ -25,3 +25,8 @@ content/**/posts/
 
 content/_dict/
 *.tsbuildinfo
+
+# translation run logs
+content/**/*-translate-run*.log
+content/**/*-translate-run.log
+content/**/*.log
