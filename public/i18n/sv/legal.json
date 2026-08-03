@@ -1,19 +1,23 @@
 {
   "privacyPolicy": {
     "title": "Integritetspolicy",
-    "lastUpdated": "Senast uppdaterad: 9 juli 2026",
-    "intro": "Denna integritetspolicy förklarar hur IGNITE AI (\"IGNITE\", \"vi\", \"oss\" eller \"vår\") samlar in, använder, lagrar och delar personuppgifter när du använder mobilapplikationen IGNITE AI och relaterade tjänster (\"Tjänsten\"). Vi bedriver verksamhet från Storbritannien. Denna policy gäller tillsammans med våra användarvillkor.",
+    "lastUpdated": "Senast uppdaterad: 3 augusti 2026",
+    "intro": "Denna integritetspolicy förklarar hur 9NINE SOFTWARE LTD, som bedriver verksamhet under namnet IGNITE AI (\"IGNITE\", \"vi\", \"oss\" eller \"vår\"), samlar in, använder, lagrar och delar personuppgifter när du använder mobilapplikationen IGNITE AI och tillhörande tjänster (\"Tjänsten\"). Verksamheten bedrivs från Förenade kungariket. Denna policy gäller tillsammans med våra Användarvillkor.",
     "sections": [
       {
         "title": "1. Vem som är ansvarig för dina uppgifter",
         "blocks": [
           {
             "type": "p",
-            "text": "IGNITE AI är personuppgiftsansvarig för de personuppgifter som beskrivs i denna policy, utom när vi behandlar uppgifter enbart för någon annans räkning."
+            "text": "Personuppgiftsansvarig för de personuppgifter som beskrivs i denna policy är 9NINE SOFTWARE LTD, som bedriver verksamhet under namnet IGNITE AI, registrerat i Förenade kungariket, utom i de fall vi behandlar uppgifter uteslutande på uppdrag av en annan part."
           },
           {
             "type": "p",
-            "text": "Integritetsfrågor och begäranden: privacy@ignitehub.app."
+            "text": "Registrerad adress: 71-75 Shelton Street, London, Greater London, WC2H 9JQ, United Kingdom."
+          },
+          {
+            "type": "p",
+            "text": "Frågor och begäranden rörande integritet: privacy@ignitehub.app."
           }
         ]
       },
@@ -60,7 +64,8 @@
               "Synkronisera hälsorelaterade mått när du ansluter stödda integrationer.",
               "Skicka tjänste- och sociala aviseringar som du aktiverar, upprätthålla säkerhet, förhindra missbruk och åtgärda fel.",
               "Hantera prenumerationer när de erbjuds, svara på supportförfrågningar och följa lag.",
-              "Driva Friends och privata grupper, inklusive chatt, flöden, profilgallerier, topplistor och innehåll som du delar med vänner eller gruppdeltagare."
+              "Driva Friends och privata grupper, inklusive chatt, flöden, profilgallerier, topplistor och innehåll som du delar med vänner eller gruppdeltagare.",
+              "förbättra tillförlitlighet och produktfunktioner med aggregerade eller tekniska användningssignaler där det är lämpligt."
             ]
           },
           {
@@ -143,27 +148,29 @@
         ]
       },
       {
-        "title": "7. Hur vi delar uppgifter",
+        "title": "7. Hur information delas",
         "blocks": [
           {
             "type": "p",
-            "text": "Vi kan dela personuppgifter med:"
+            "text": "Personuppgifter kan delas med följande kategorier av mottagare (vi listar inte varje enskild leverantör med namn):"
           },
           {
             "type": "ul",
             "items": [
-              "Tjänsteleverantörer som hjälper oss att hosta, lagra, autentisera användare, behandla AI-förfrågningar, leverera aviseringar och driva appen (till exempel molnhosting och autentiseringstjänster).",
-              "Apple och Google när du loggar in eller köper prenumerationer via deras plattformar.",
-              "Myndigheter, tillsynsorgan eller andra när det krävs enligt lag eller för att skydda rättigheter, säkerhet och trygghet."
+              "Tjänsteleverantörer som bistår med hosting och lagring av data, autentisering av användare, behandling av AI-förfrågningar, leverans av notiser, kundsupport samt drift eller förbättring av Tjänsten (till exempel molnhosting, autentisering, lagring, AI-infrastruktur och produktanalys som behövs för att driva appen).",
+              "Appplattformar: Apple och Google vid inloggning eller köp av prenumerationer via deras butiker. Betalkortsuppgifter hanteras av dessa plattformar; vi tar inte emot dina fullständiga betalkortsuppgifter.",
+              "Hälsoplattformar: Apple Health och/eller Health Connect, endast när du väljer att ansluta dem och ger tillstånd. Hälsodata du synkar används inte av oss för marknadsföring eller reklam.",
+              "Andra användare som du väljer att interagera med: vänner och medlemmar i privata grupper, för innehåll och profilinformation som delas via Vänner-funktioner.",
+              "Myndigheter, tillsynsorgan eller andra parter när det krävs enligt lag eller för att skydda rättigheter, säkerhet och trygghet."
             ]
           },
           {
             "type": "p",
-            "text": "Vi kan använda offentliga näringsdatabaser för att slå upp matinformation. Vi säljer inte dina personuppgifter till tredjeparts dataleverantörer."
+            "text": "Offentliga näringsdatabaser kan användas för att slå upp livsmedelsinformation. Personuppgifter säljs inte till tredjepartsdatamäklare."
           },
           {
             "type": "p",
-            "text": "Om vår verksamhet omorganiseras kan vi överföra uppgifter som en del av den processen med lämpliga skyddsåtgärder."
+            "text": "Om vår verksamhet omorganiseras kan vi överföra information som en del av den processen med lämpliga skyddsåtgärder."
           }
         ]
       },

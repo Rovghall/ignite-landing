@@ -1,15 +1,19 @@
 {
   "privacyPolicy": {
     "title": "Datenschutzerklärung",
-    "lastUpdated": "Zuletzt aktualisiert: 9. Juli 2026",
-    "intro": "Diese Datenschutzerklärung erläutert, wie IGNITE AI („IGNITE“, „wir“, „uns“ oder „unser“) personenbezogene Daten erhebt, verwendet, speichert und weitergibt, wenn Sie die mobile Anwendung IGNITE AI und zugehörige Dienste (der „Dienst“) nutzen. Wir betreiben unser Angebot aus dem Vereinigten Königreich. Diese Erklärung gilt zusammen mit unseren Nutzungsbedingungen.",
+    "lastUpdated": "Zuletzt aktualisiert: 3. August 2026",
+    "intro": "Diese Datenschutzerklärung erläutert, wie 9NINE SOFTWARE LTD, handelnd als IGNITE AI („IGNITE“, „wir“, „uns“ oder „unser“), personenbezogene Daten erhebt, verwendet, speichert und weitergibt, wenn Sie die mobile Anwendung IGNITE AI und die zugehörigen Dienste (der „Dienst“) nutzen. Wir haben unseren Sitz im Vereinigten Königreich. Diese Erklärung ergänzt unsere Nutzungsbedingungen.",
     "sections": [
       {
         "title": "1. Wer für Ihre Daten verantwortlich ist",
         "blocks": [
           {
             "type": "p",
-            "text": "IGNITE AI ist der Verantwortliche für die in dieser Erklärung beschriebenen personenbezogenen Daten, außer soweit wir Daten ausschließlich im Auftrag einer anderen Partei verarbeiten."
+            "text": "Der Verantwortliche für die in dieser Erklärung beschriebenen personenbezogenen Daten ist 9NINE SOFTWARE LTD, handelnd als IGNITE AI, registriert im Vereinigten Königreich, sofern wir Daten nicht ausschließlich im Auftrag einer anderen Partei verarbeiten."
+          },
+          {
+            "type": "p",
+            "text": "Eingetragene Anschrift: 71-75 Shelton Street, London, Greater London, WC2H 9JQ, United Kingdom."
           },
           {
             "type": "p",
@@ -60,12 +64,13 @@
               "gesundheitsbezogene Metriken zu synchronisieren, wenn Sie unterstützte Integrationen verbinden.",
               "von Ihnen aktivierte Dienst- und Sozialbenachrichtigungen zu senden, Sicherheit zu gewährleisten, Missbrauch zu verhindern und Fehler zu beheben.",
               "Abonnements zu verarbeiten, wenn angeboten, Supportanfragen zu beantworten und gesetzliche Pflichten zu erfüllen.",
-              "Friends und private Gruppen zu betreiben, einschließlich Chat, Feeds, Profilgalerien, Ranglisten und Inhalten, die Sie mit Freunden oder Gruppenmitgliedern teilen."
+              "Friends und private Gruppen zu betreiben, einschließlich Chat, Feeds, Profilgalerien, Ranglisten und Inhalten, die Sie mit Freunden oder Gruppenmitgliedern teilen.",
+              "Zuverlässigkeit und Produktfunktionen mithilfe aggregierter oder technischer Nutzungssignale zu verbessern, wo angemessen."
             ]
           },
           {
             "type": "p",
-            "text": "Wir verkaufen Ihre Gesundheits- oder Mahlzeitendaten nicht für Werbezwecke."
+            "text": "Wir verkaufen Ihre personenbezogenen Daten nicht. Wir verwenden Ihre Gesundheits-, Ernährungs-, Mahlzeiten- oder Trainingsdaten nicht für gezielte Werbung. Wir geben personenbezogene Daten nicht für kontextübergreifende Verhaltenswerbung weiter."
           },
           {
             "type": "p",
@@ -143,27 +148,29 @@
         ]
       },
       {
-        "title": "7. Wie wir Informationen weitergeben",
+        "title": "7. Wie wir Informationen teilen",
         "blocks": [
           {
             "type": "p",
-            "text": "Wir können personenbezogene Daten weitergeben an:"
+            "text": "Wir können personenbezogene Daten mit folgenden Kategorien von Empfängern teilen (wir listen nicht jeden einzelnen Anbieter namentlich auf):"
           },
           {
             "type": "ul",
             "items": [
-              "Dienstleister, die uns beim Hosting, Speichern, Authentifizieren von Nutzern, Verarbeiten von KI-Anfragen, Zustellen von Benachrichtigungen und Betreiben der App unterstützen (z. B. Cloud-Hosting und Authentifizierungsdienste).",
-              "Apple und Google, wenn Sie sich anmelden oder Abonnements über deren Plattformen erwerben.",
-              "Behörden, Aufsichtsstellen oder andere, wenn gesetzlich erforderlich oder zum Schutz von Rechten, Sicherheit und Integrität."
+              "Dienstleister, die uns beim Hosting und Speichern von Daten, bei der Authentifizierung von Nutzern, der Verarbeitung von KI-Anfragen, der Zustellung von Benachrichtigungen, dem Kundensupport sowie dem Betrieb oder der Verbesserung des Dienstes unterstützen (z. B. Cloud-Hosting, Authentifizierung, Speicher, KI-Infrastruktur und Produktanalytik, die zum Betrieb der App erforderlich ist).",
+              "App-Plattformen: Apple und Google, wenn Sie sich anmelden oder Abonnements über deren Stores erwerben. Zahlungskartendaten werden von diesen Plattformen verarbeitet; wir erhalten Ihre vollständigen Zahlungskartendaten nicht.",
+              "Gesundheitsplattformen: Apple Health und/oder Health Connect, nur wenn Sie diese verbinden und die Berechtigung erteilen. Von Ihnen synchronisierte Gesundheitsdaten werden von uns nicht für Marketing oder Werbung verwendet.",
+              "Andere Nutzer, mit denen Sie interagieren: Freunde und Mitglieder privater Gruppen, für Inhalte und Profilinformationen, die Sie über Freunde-Funktionen teilen.",
+              "Behörden, Aufsichtsstellen oder andere, wenn gesetzlich vorgeschrieben oder zum Schutz von Rechten, Sicherheit und Integrität."
             ]
           },
           {
             "type": "p",
-            "text": "Wir können öffentliche Ernährungsdatenbanken nutzen, um Lebensmittelinformationen abzurufen. Wir verkaufen Ihre personenbezogenen Daten nicht an Drittanbieter von Daten."
+            "text": "Wir können öffentliche Ernährungsdatenbanken zur Lebensmittelinformationssuche nutzen. Wir verkaufen Ihre personenbezogenen Daten nicht an Drittanbieter-Datenbroker."
           },
           {
             "type": "p",
-            "text": "Wenn unser Unternehmen umstrukturiert wird, können wir Informationen im Rahmen dieses Prozesses mit angemessenen Schutzmaßnahmen übertragen."
+            "text": "Bei einer Unternehmensumstrukturierung können wir Informationen im Rahmen dieses Prozesses mit angemessenen Schutzmaßnahmen übertragen."
           }
         ]
       },

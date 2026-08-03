@@ -1,19 +1,23 @@
 {
   "privacyPolicy": {
     "title": "Privacybeleid",
-    "lastUpdated": "Laatst bijgewerkt: 9 juli 2026",
-    "intro": "Dit Privacybeleid legt uit hoe IGNITE AI (\"IGNITE\", \"wij\", \"ons\" of \"onze\") persoonsgegevens verzamelt, gebruikt, opslaat en deelt wanneer u de mobiele applicatie IGNITE AI en gerelateerde diensten (de \"Dienst\") gebruikt. Wij opereren vanuit het Verenigd Koninkrijk. Dit Beleid geldt samen met onze Gebruiksvoorwaarden.",
+    "lastUpdated": "Laatst bijgewerkt: 3 augustus 2026",
+    "intro": "Deze privacyverklaring legt uit hoe 9NINE SOFTWARE LTD, handelend als IGNITE AI (\"IGNITE\", \"wij\", \"ons\" of \"onze\"), persoonsgegevens verzamelt, gebruikt, opslaat en deelt wanneer u de mobiele applicatie IGNITE AI en bijbehorende diensten (de \"Dienst\") gebruikt. Wij zijn gevestigd in het Verenigd Koninkrijk. Dit beleid werkt samen met onze Gebruiksvoorwaarden.",
     "sections": [
       {
         "title": "1. Wie verantwoordelijk is voor uw gegevens",
         "blocks": [
           {
             "type": "p",
-            "text": "IGNITE AI is de verwerkingsverantwoordelijke voor de persoonsgegevens die in dit Beleid worden beschreven, behalve wanneer wij gegevens uitsluitend namens een andere partij verwerken."
+            "text": "De verwerkingsverantwoordelijke voor de persoonsgegevens die in dit beleid worden beschreven is 9NINE SOFTWARE LTD, handelend als IGNITE AI, geregistreerd in het Verenigd Koninkrijk, behalve wanneer wij gegevens uitsluitend verwerken namens een andere partij."
           },
           {
             "type": "p",
-            "text": "Privacyvragen en verzoeken: privacy@ignitehub.app."
+            "text": "Geregistreerd adres: 71-75 Shelton Street, London, Greater London, WC2H 9JQ, United Kingdom."
+          },
+          {
+            "type": "p",
+            "text": "Vragen en verzoeken over privacy: privacy@ignitehub.app."
           }
         ]
       },
@@ -60,12 +64,13 @@
               "Gezondheidsgerelateerde metingen te synchroniseren wanneer u ondersteunde integraties verbindt.",
               "Service- en sociale meldingen te sturen die u inschakelt, beveiliging te handhaven, misbruik te voorkomen en fouten te verhelpen.",
               "Abonnementen te verwerken wanneer die worden aangeboden, te reageren op ondersteuningsverzoeken en te voldoen aan de wet.",
-              "Friends en privégroepen te laten werken, inclusief chat, feeds, profielgalerijen, leaderboards en inhoud die u deelt met vrienden of groepsleden."
+              "Friends en privégroepen te laten werken, inclusief chat, feeds, profielgalerijen, leaderboards en inhoud die u deelt met vrienden of groepsleden.",
+              "De betrouwbaarheid en productfuncties te verbeteren met geaggregeerde of technische gebruikssignalen waar dat passend is."
             ]
           },
           {
             "type": "p",
-            "text": "Wij verkopen uw gezondheids- of maaltijdgegevens niet voor advertenties."
+            "text": "Wij verkopen uw persoonsgegevens niet. Wij gebruiken uw gezondheids-, voedings-, maaltijd- of trainingsgegevens niet voor gerichte advertenties. Wij delen geen persoonsgegevens voor cross-context gedragsreclame."
           },
           {
             "type": "p",
@@ -143,27 +148,29 @@
         ]
       },
       {
-        "title": "7. Hoe wij gegevens delen",
+        "title": "7. Hoe wij informatie delen",
         "blocks": [
           {
             "type": "p",
-            "text": "Wij kunnen persoonsgegevens delen met:"
+            "text": "Wij kunnen persoonsgegevens delen met de volgende categorieën ontvangers (wij vermelden niet elke individuele leverancier bij naam):"
           },
           {
             "type": "ul",
             "items": [
-              "Dienstverleners die ons helpen hosten, opslaan, gebruikers authenticeren, AI-verzoeken verwerken, meldingen bezorgen en de app laten werken (bijvoorbeeld cloudhosting en authenticatiediensten).",
-              "Apple en Google wanneer u zich aanmeldt of abonnementen koopt via hun platforms.",
-              "Autoriteiten, toezichthouders of anderen wanneer dit wettelijk vereist is of om rechten, veiligheid en beveiliging te beschermen."
+              "Dienstverleners die ons helpen bij het hosten en opslaan van gegevens, authenticatie van gebruikers, verwerking van AI-verzoeken, levering van meldingen, klantenondersteuning en het bedrijven of verbeteren van de Dienst (bijvoorbeeld cloudhosting, authenticatie, opslag, AI-infrastructuur en productanalyse die nodig is om de app te laten werken).",
+              "App-platformen: Apple en Google wanneer u zich aanmeldt of abonnementen koopt via hun stores. Betaalkaartgegevens worden door die platformen verwerkt; wij ontvangen niet uw volledige betaalkaartgegevens.",
+              "Gezondheidsplatformen: Apple Health en/of Health Connect, alleen wanneer u deze kiest te verbinden en toestemming geeft. Door u gesynchroniseerde gezondheidsgegevens gebruiken wij niet voor marketing of advertenties.",
+              "Andere gebruikers met wie u kiest te interageren: vrienden en leden van privégroepen, voor inhoud en profielinformatie die u deelt via Vrienden-functies.",
+              "Autoriteiten, toezichthouders of anderen wanneer wettelijk vereist of om rechten, veiligheid en beveiliging te beschermen."
             ]
           },
           {
             "type": "p",
-            "text": "Wij kunnen openbare voedingsdatabases gebruiken om voedingsinformatie op te zoeken. Wij verkopen uw persoonsgegevens niet aan gegevensproviders van derden."
+            "text": "Wij kunnen openbare voedingsdatabases gebruiken om voedingsinformatie op te zoeken. Wij verkopen uw persoonsgegevens niet aan externe datamakelaars."
           },
           {
             "type": "p",
-            "text": "Als ons bedrijf wordt gereorganiseerd, kunnen wij gegevens als onderdeel van dat proces overdragen met passende waarborgen."
+            "text": "Als ons bedrijf wordt gereorganiseerd, kunnen wij informatie als onderdeel van dat proces overdragen met passende waarborgen."
           }
         ]
       },

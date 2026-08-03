@@ -1,15 +1,19 @@
 {
   "privacyPolicy": {
     "title": "Privacy Policy",
-    "lastUpdated": "Last updated: July 9, 2026",
-    "intro": "This Privacy Policy explains how IGNITE AI (\"IGNITE,\" \"we,\" \"us,\" or \"our\") collects, uses, stores, and shares personal information when you use the IGNITE AI mobile application and related services (the \"Service\"). We operate from the United Kingdom. This Policy works together with our Terms of use.",
+    "lastUpdated": "Last updated: August 3, 2026",
+    "intro": "This Privacy Policy explains how 9NINE SOFTWARE LTD, trading as IGNITE AI (\"IGNITE,\" \"we,\" \"us,\" or \"our\") collects, uses, stores, and shares personal information when you use the IGNITE AI mobile application and related services (the \"Service\"). We operate from the United Kingdom. This Policy works together with our Terms of use.",
     "sections": [
       {
         "title": "1. Who is responsible for your data",
         "blocks": [
           {
             "type": "p",
-            "text": "IGNITE AI is the controller of personal information described in this Policy, except where we process data solely on behalf of another party."
+            "text": "The controller of personal information described in this Policy is 9NINE SOFTWARE LTD, trading as IGNITE AI, registered in the United Kingdom, except where we process data solely on behalf of another party."
+          },
+          {
+            "type": "p",
+            "text": "Registered address: 71-75 Shelton Street, London, Greater London, WC2H 9JQ, United Kingdom."
           },
           {
             "type": "p",
@@ -60,12 +64,13 @@
               "Sync health-related metrics when you connect supported integrations.",
               "Send service and social notifications you enable, maintain security, prevent abuse, and fix errors.",
               "Process subscriptions when offered, respond to support requests, and comply with law.",
-              "Operate Friends and private groups, including chat, feeds, profile galleries, leaderboards, and content you share with friends or group members."
+              "Operate Friends and private groups, including chat, feeds, profile galleries, leaderboards, and content you share with friends or group members.",
+              "Improve reliability and product features using aggregated or technical usage signals where appropriate."
             ]
           },
           {
             "type": "p",
-            "text": "We do not sell your health or meal data for advertising."
+            "text": "We do not sell your personal information. We do not use your health, nutrition, meal, or workout data for targeted advertising. We do not share personal information for cross-context behavioral advertising."
           },
           {
             "type": "p",
@@ -147,19 +152,21 @@
         "blocks": [
           {
             "type": "p",
-            "text": "We may share personal information with:"
+            "text": "We may share personal information with the following categories of recipients (we do not list every individual vendor by name):"
           },
           {
             "type": "ul",
             "items": [
-              "Service providers that help us host, store, authenticate users, process AI requests, deliver notifications, and operate the app (for example cloud hosting and authentication services).",
-              "Apple and Google when you sign in or purchase subscriptions through their platforms.",
+              "Service providers that help us host and store data, authenticate users, process AI requests, deliver notifications, provide customer support, and operate or improve the Service (for example cloud hosting, authentication, storage, AI infrastructure, and product analytics needed to run the app).",
+              "App platforms: Apple and Google when you sign in or purchase subscriptions through their stores. Payment card details are handled by those platforms; we do not receive your full payment card details.",
+              "Health platforms: Apple Health and/or Health Connect, only when you choose to connect them and grant permission. Health data you sync is not used by us for marketing or advertising.",
+              "Other users you choose to interact with: friends and private group members, for content and profile information you share through Friends features.",
               "Authorities, regulators, or others when required by law or to protect rights, safety, and security."
             ]
           },
           {
             "type": "p",
-            "text": "We may use public nutrition databases to look up food information. We do not sell your personal data to third-party data providers."
+            "text": "We may use public nutrition databases to look up food information. We do not sell your personal data to third-party data brokers."
           },
           {
             "type": "p",

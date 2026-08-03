@@ -1,15 +1,19 @@
 {
   "privacyPolicy": {
     "title": "Politique de confidentialité",
-    "lastUpdated": "Dernière mise à jour : 9 juillet 2026",
-    "intro": "La présente Politique de confidentialité explique comment IGNITE AI (« IGNITE », « nous », « notre » ou « nos ») collecte, utilise, stocke et partage des informations personnelles lorsque vous utilisez l'application mobile IGNITE AI et les services associés (le « Service »). Nous opérons depuis le Royaume-Uni. Cette Politique s'applique conjointement à nos Conditions d'utilisation.",
+    "lastUpdated": "Dernière mise à jour : 3 août 2026",
+    "intro": "La présente Politique de confidentialité explique comment 9NINE SOFTWARE LTD, opérant sous le nom IGNITE AI (« IGNITE », « nous », « notre » ou « nos »), collecte, utilise, stocke et partage des informations personnelles lorsque vous utilisez l'application mobile IGNITE AI et les services associés (le « Service »). Nous opérons depuis le Royaume-Uni. Cette Politique complète nos Conditions d'utilisation.",
     "sections": [
       {
         "title": "1. Qui est responsable de vos données",
         "blocks": [
           {
             "type": "p",
-            "text": "IGNITE AI est le responsable du traitement des informations personnelles décrites dans la présente Politique, sauf lorsque nous traitons des données uniquement pour le compte d'une autre partie."
+            "text": "Le responsable du traitement des informations personnelles décrites dans la présente Politique est 9NINE SOFTWARE LTD, opérant sous le nom IGNITE AI, enregistrée au Royaume-Uni, sauf lorsque nous traitons des données uniquement pour le compte d'une autre partie."
+          },
+          {
+            "type": "p",
+            "text": "Adresse enregistrée : 71-75 Shelton Street, London, Greater London, WC2H 9JQ, United Kingdom."
           },
           {
             "type": "p",
@@ -60,7 +64,8 @@
               "Synchroniser les mesures liées à la santé lorsque vous connectez des intégrations prises en charge.",
               "Envoyer les notifications de service et sociales que vous activez, assurer la sécurité, prévenir les abus et corriger les erreurs.",
               "Traiter les abonnements lorsqu'ils sont proposés, répondre aux demandes d'assistance et respecter la loi.",
-              "Faire fonctionner Friends et les groupes privés, y compris le chat, les fils, les galeries de profil, les classements et les contenus que vous partagez avec des amis ou des membres du groupe."
+              "Faire fonctionner Friends et les groupes privés, y compris le chat, les fils, les galeries de profil, les classements et les contenus que vous partagez avec des amis ou des membres du groupe.",
+              "améliorer la fiabilité et les fonctionnalités du produit à l'aide de signaux d'utilisation agrégés ou techniques, le cas échéant."
             ]
           },
           {
@@ -147,19 +152,21 @@
         "blocks": [
           {
             "type": "p",
-            "text": "Nous pouvons partager des informations personnelles avec :"
+            "text": "Nous pouvons partager des informations personnelles avec les catégories de destinataires suivantes (nous ne listons pas chaque prestataire individuellement par nom) :"
           },
           {
             "type": "ul",
             "items": [
-              "Des prestataires de services qui nous aident à héberger, stocker, authentifier les utilisateurs, traiter les demandes d'IA, délivrer des notifications et faire fonctionner l'application (par exemple services d'hébergement cloud et d'authentification).",
-              "Apple et Google lorsque vous vous connectez ou achetez des abonnements via leurs plateformes.",
-              "Des autorités, régulateurs ou autres lorsque la loi l'exige ou pour protéger les droits, la sécurité et la sûreté."
+              "Des prestataires de services qui nous aident à héberger et stocker des données, authentifier les utilisateurs, traiter les demandes d'IA, envoyer des notifications, fournir un support client et exploiter ou améliorer le Service (par exemple hébergement cloud, authentification, stockage, infrastructure d'IA et analytique produit nécessaire au fonctionnement de l'application).",
+              "Plateformes d'applications : Apple et Google lorsque vous vous connectez ou achetez des abonnements via leurs boutiques. Les données de carte de paiement sont gérées par ces plateformes ; nous ne recevons pas les données complètes de votre carte de paiement.",
+              "Plateformes de santé : Apple Health et/ou Health Connect, uniquement lorsque vous choisissez de les connecter et d'accorder l'autorisation. Les données de santé que vous synchronisez ne sont pas utilisées par nous à des fins de marketing ou de publicité.",
+              "Autres utilisateurs avec lesquels vous choisissez d'interagir : amis et membres de groupes privés, pour le contenu et les informations de profil que vous partagez via les fonctionnalités Friends.",
+              "Autorités, régulateurs ou autres lorsque la loi l'exige ou pour protéger les droits, la sécurité et l'intégrité."
             ]
           },
           {
             "type": "p",
-            "text": "Nous pouvons utiliser des bases de données nutritionnelles publiques pour rechercher des informations sur les aliments. Nous ne vendons pas vos données personnelles à des fournisseurs de données tiers."
+            "text": "Nous pouvons utiliser des bases de données nutritionnelles publiques pour rechercher des informations alimentaires. Nous ne vendons pas vos données personnelles à des courtiers en données tiers."
           },
           {
             "type": "p",

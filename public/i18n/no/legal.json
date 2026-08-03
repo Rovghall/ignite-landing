@@ -1,15 +1,19 @@
 {
   "privacyPolicy": {
     "title": "Personvernerklæring",
-    "lastUpdated": "Sist oppdatert: 9. juli 2026",
-    "intro": "Denne personvernerklæringen forklarer hvordan IGNITE AI (\"IGNITE\", \"vi\", \"oss\" eller \"vår\") samler inn, bruker, lagrer og deler personopplysninger når du bruker mobilapplikasjonen IGNITE AI og tilknyttede tjenester (\"Tjenesten\"). Vi opererer fra Storbritannia. Denne erklæringen gjelder sammen med våre vilkår for bruk.",
+    "lastUpdated": "Sist oppdatert: 3. august 2026",
+    "intro": "Denne personvernerklæringen forklarer hvordan 9NINE SOFTWARE LTD, som driver under navnet IGNITE AI («IGNITE», «vi», «oss» eller «vår»), samler inn, bruker, lagrer og deler personopplysninger når du bruker mobilapplikasjonen IGNITE AI og tilhørende tjenester («Tjenesten»). Vi er basert i Storbritannia. Denne erklæringen fungerer sammen med våre vilkår for bruk.",
     "sections": [
       {
         "title": "1. Hvem som er ansvarlig for dine data",
         "blocks": [
           {
             "type": "p",
-            "text": "IGNITE AI er behandlingsansvarlig for personopplysningene som er beskrevet i denne erklæringen, med mindre vi behandler data utelukkende på vegne av en annen part."
+            "text": "Behandlingsansvarlig for personopplysningene som beskrives i denne erklæringen er 9NINE SOFTWARE LTD, som driver under navnet IGNITE AI, registrert i Storbritannia, unntatt når vi utelukkende behandler data på vegne av en annen part."
+          },
+          {
+            "type": "p",
+            "text": "Registrert adresse: 71-75 Shelton Street, London, Greater London, WC2H 9JQ, United Kingdom."
           },
           {
             "type": "p",
@@ -60,7 +64,8 @@
               "Synkronisere helserelaterte parametere når du kobler til støttede integrasjoner.",
               "Sende tjeneste- og sosiale varsler du aktiverer, opprettholde sikkerhet, forebygge misbruk og rette feil.",
               "Behandle abonnementer når de tilbys, svare på supportforespørsler og overholde lov.",
-              "Drive Friends og private grupper, inkludert chat, feeder, profilgallerier, rangeringslister og innhold du deler med venner eller gruppemedlemmer."
+              "Drive Friends og private grupper, inkludert chat, feeder, profilgallerier, rangeringslister og innhold du deler med venner eller gruppemedlemmer.",
+              "forbedre pålitelighet og produktfunksjoner ved hjelp av aggregerte eller tekniske brukssignaler der det er hensiktsmessig."
             ]
           },
           {
@@ -143,27 +148,29 @@
         ]
       },
       {
-        "title": "7. Hvordan vi deler opplysninger",
+        "title": "7. Hvordan vi deler informasjon",
         "blocks": [
           {
             "type": "p",
-            "text": "Vi kan dele personopplysninger med:"
+            "text": "Vi kan dele personopplysninger med følgende kategorier av mottakere (vi lister ikke opp hver enkelt leverandør med navn):"
           },
           {
             "type": "ul",
             "items": [
-              "Tjenesteleverandører som hjelper oss med hosting, lagring, autentisering av brukere, behandling av AI-forespørsler, levering av varsler og drift av appen (for eksempel skytjenester for hosting og autentisering).",
-              "Apple og Google når du logger inn eller kjøper abonnementer via plattformene deres.",
-              "Myndigheter, tilsynsorganer eller andre når det kreves ved lov eller for å beskytte rettigheter, sikkerhet og trygghet."
+              "Tjenesteleverandører som hjelper oss med hosting og lagring av data, brukerautentisering, behandling av AI-forespørsler, levering av varsler, kundestøtte og drift eller forbedring av Tjenesten (for eksempel skyhosting, autentisering, lagring, AI-infrastruktur og produktanalyse som trengs for å drifte appen).",
+              "App-plattformer: Apple og Google når du logger inn eller kjøper abonnementer via butikkene deres. Betalingskortdetaljer håndteres av disse plattformene; vi mottar ikke dine fulle betalingskortdetaljer.",
+              "Helseplattformer: Apple Health og/eller Health Connect, bare når du velger å koble dem til og gir tillatelse. Helsedata du synkroniserer brukes ikke av oss til markedsføring eller reklame.",
+              "Andre brukere du velger å interagere med: venner og medlemmer av private grupper, for innhold og profilinformasjon du deler via Venner-funksjoner.",
+              "Myndigheter, tilsynsorganer eller andre når loven krever det eller for å beskytte rettigheter, sikkerhet og trygghet."
             ]
           },
           {
             "type": "p",
-            "text": "Vi kan bruke offentlige ernæringsdatabaser til å slå opp matinformasjon. Vi selger ikke personopplysningene dine til tredjeparts dataleverandører."
+            "text": "Vi kan bruke offentlige ernæringsdatabaser for å slå opp ernæringsinformasjon. Vi selger ikke personopplysningene dine til eksterne datameglere."
           },
           {
             "type": "p",
-            "text": "Hvis virksomheten vår omorganiseres, kan vi overføre opplysninger som del av den prosessen med passende sikkerhetstiltak."
+            "text": "Hvis virksomheten vår omorganiseres, kan vi overføre informasjon som en del av den prosessen med passende garantier."
           }
         ]
       },
