@@ -20,6 +20,10 @@ const FinalCta = dynamic(
   () => import('@/components/final-cta').then((m) => m.FinalCta),
   { ssr: true },
 )
+const FaqTeaser = dynamic(
+  () => import('@/components/faq-teaser').then((m) => m.FaqTeaser),
+  { ssr: true },
+)
 
 export default function Page() {
   return (
@@ -31,6 +35,7 @@ export default function Page() {
         <FeatureRows />
         <ThemeShowcase />
         <SocialProof />
+        <FaqTeaser />
         <FinalCta />
       </main>
       <SiteFooter />

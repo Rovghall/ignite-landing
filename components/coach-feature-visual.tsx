@@ -31,8 +31,8 @@ export function CoachFeatureVisual({
             alt=""
             width={640}
             height={220}
-            className="h-auto w-full select-none drop-shadow-[0_16px_36px_rgba(0,0,0,0.2)]"
-            style={{ mixBlendMode: 'lighten' }}
+            className="h-auto w-full select-none bg-transparent md:drop-shadow-[0_16px_36px_rgba(0,0,0,0.2)]"
+            style={{ mixBlendMode: 'lighten', background: 'transparent' }}
             sizes="320px"
             quality={90}
             draggable={false}

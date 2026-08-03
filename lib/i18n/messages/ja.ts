@@ -1,4 +1,5 @@
 import type { Messages } from './en'
+import { faqJa } from './faq-ja'
 
 export const ja = {
   lang: {
@@ -191,6 +192,7 @@ export const ja = {
     terms: '利用規約',
     company: '会社情報',
     contact: 'お問い合わせ',
+    faq: 'FAQ',
     copyright: '© Copyright {year}, All rights reserved',
     disclaimer:
       'IGNITE AI は一般的なウェルネスとフィットネス情報のみを提供します。医療アドバイスではありません。食事や運動習慣を変える前に、医療従事者にご相談ください。',
@@ -238,6 +240,7 @@ export const ja = {
     privacy: 'プライバシーポリシー',
     terms: '利用規約',
   },
+  faq: faqJa,
   comingSoon: {
     title: "近日公開",
     subtitle:

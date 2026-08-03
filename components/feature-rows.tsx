@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { PhoneFrame } from '@/components/phone-frame'
 import { FeatureMockup } from '@/components/feature-mockup'
 import { Reveal } from '@/components/reveal'
@@ -101,8 +101,19 @@ type Feature = FeatureVisual & {
 
 function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
   const reduce = useReducedMotion()
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false,
+  )
   const fromLeft = index % 2 === 0
   const isStreaks = feature.id === 'streaks'
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    const sync = () => setMobile(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
 
   return (
     <div
@@ -126,15 +137,17 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
     >
       <Reveal
         className={cn(
-          'flex w-full min-w-0 justify-center overflow-visible',
+          'flex w-full min-w-0 justify-center overflow-visible bg-transparent',
           index % 2 === 1 && 'md:order-2',
         )}
-        x={reduce ? 0 : fromLeft ? -40 : 40}
+        x={reduce || mobile ? 0 : fromLeft ? -40 : 40}
         delay={0.05}
       >
         <motion.div
-          className="flex w-full min-w-0 justify-center overflow-visible"
-          whileInView={reduce ? undefined : { opacity: [0.5, 1], scale: [0.96, 1] }}
+          className="flex w-full min-w-0 justify-center overflow-visible bg-transparent"
+          whileInView={
+            reduce || mobile ? undefined : { opacity: [0.5, 1], scale: [0.96, 1] }
+          }
           viewport={{ once: true, amount: 0.25 }}
           transition={{ duration: 0.7, ease: easeOutExpo }}
         >
@@ -157,7 +170,7 @@ function FeatureRow({ feature, index }: { feature: Feature; index: number }) {
               className={
                 feature.imageSrc === '/applehealth.png' ||
                 feature.imageSrc === '/calories_ring.png'
-                  ? 'origin-center scale-[1.12] sm:scale-[1.18] md:scale-125'
+                  ? 'origin-center scale-[1.38] sm:scale-[1.32] md:scale-125'
                   : undefined
               }
             />

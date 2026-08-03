@@ -27,23 +27,49 @@ export function FriendsFeatureVisual() {
 
   return (
     <div
-      className="relative mx-auto flex w-full max-w-full items-end justify-center gap-1 overflow-visible px-0 sm:gap-1.5 md:max-w-[52rem] md:gap-0 lg:max-w-[56rem]"
+      className="relative mx-auto flex w-full max-w-full items-end justify-center gap-1 overflow-visible bg-transparent px-0 sm:gap-1.5 md:max-w-[52rem] md:gap-0 lg:max-w-[56rem]"
+      style={{ background: 'transparent' }}
       aria-label="Friends group: chat, feed, and leaderboard"
     >
       {screens.map((screen, i) => {
         const isHovered = hovered === screen.src
 
+        // Mobile / iOS: static phones — Motion float + drop-shadow paint gray plates.
+        if (!desktopHover || reduce) {
+          return (
+            <div
+              key={screen.src}
+              className={cn(
+                'relative min-w-0 shrink bg-transparent',
+                'w-[32.5%]',
+                'md:w-[46%] md:shrink-0 md:not-first:-ml-[12%]',
+              )}
+              style={{ zIndex: 10 - Math.abs(i - 1), background: 'transparent' }}
+            >
+              <Image
+                src={screen.src}
+                alt={screen.alt}
+                width={880}
+                height={1760}
+                className="pointer-events-none mx-auto h-auto w-full select-none bg-transparent object-contain md:drop-shadow-[0_28px_60px_rgba(0,0,0,0.25)]"
+                sizes="(min-width: 768px) 520px, 40vw"
+                quality={90}
+                loading="lazy"
+                draggable={false}
+              />
+            </div>
+          )
+        }
+
         return (
           <motion.div
             key={screen.src}
             className={cn(
-              'relative min-w-0 shrink',
-              // Equal width on mobile — all fully visible
+              'relative min-w-0 shrink bg-transparent',
               'w-[32.5%]',
-              // Desktop fan
               'md:w-[46%] md:shrink-0 md:not-first:-ml-[12%]',
             )}
-            style={{ zIndex: isHovered ? 20 : 10 - Math.abs(i - 1) }}
+            style={{ zIndex: isHovered ? 20 : 10 - Math.abs(i - 1), background: 'transparent' }}
             initial={reduce ? false : { opacity: 0, y: 22, scale: 0.94 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.25 }}
@@ -52,39 +78,27 @@ export function FriendsFeatureVisual() {
             onMouseLeave={() => setHovered(null)}
           >
             <motion.div
-              className="will-change-transform"
-              animate={
-                reduce
-                  ? { y: 0, rotate: 0 }
+              className="bg-transparent will-change-transform"
+              animate={{
+                y: isHovered ? -10 : [0, -9, 0],
+                rotate: isHovered ? screen.tilt * 0.35 : screen.tilt,
+              }}
+              transition={{
+                y: isHovered
+                  ? { type: 'spring', stiffness: 380, damping: 26 }
                   : {
-                      y: isHovered && desktopHover ? -10 : [0, -9, 0],
-                      rotate: desktopHover
-                        ? isHovered
-                          ? screen.tilt * 0.35
-                          : screen.tilt
-                        : 0,
-                    }
-              }
-              transition={
-                reduce
-                  ? { duration: 0.15 }
-                  : {
-                      y: isHovered && desktopHover
-                        ? { type: 'spring', stiffness: 380, damping: 26 }
-                        : {
-                            duration: 5 + i * 0.35,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                            delay: i * 0.25,
-                          },
-                      rotate: { type: 'spring', stiffness: 260, damping: 22 },
-                    }
-              }
+                      duration: 5 + i * 0.35,
+                      repeat: Infinity,
+                      ease: 'easeInOut',
+                      delay: i * 0.25,
+                    },
+                rotate: { type: 'spring', stiffness: 260, damping: 22 },
+              }}
             >
               <motion.div
-                className="origin-center will-change-transform"
+                className="origin-center bg-transparent will-change-transform"
                 animate={{
-                  scale: reduce ? 1 : isHovered && desktopHover ? 1.12 : 1,
+                  scale: isHovered ? 1.12 : 1,
                 }}
                 transition={{
                   type: 'spring',
@@ -98,7 +112,7 @@ export function FriendsFeatureVisual() {
                   alt={screen.alt}
                   width={880}
                   height={1760}
-                  className="pointer-events-none mx-auto h-auto w-full select-none object-contain drop-shadow-[0_16px_36px_rgba(0,0,0,0.2)] md:drop-shadow-[0_28px_60px_rgba(0,0,0,0.25)]"
+                  className="pointer-events-none mx-auto h-auto w-full select-none bg-transparent object-contain drop-shadow-[0_28px_60px_rgba(0,0,0,0.25)]"
                   sizes="(min-width: 768px) 520px, 40vw"
                   quality={90}
                   loading="lazy"

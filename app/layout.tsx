@@ -29,16 +29,17 @@ export const metadata: Metadata = {
     apple: '/favicon.png',
     shortcut: '/favicon.png',
   },
+  other: {
+    'color-scheme': 'light only',
+    'supported-color-schemes': 'light',
+  },
 }
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   colorScheme: 'light',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
-    { media: '(prefers-color-scheme: dark)', color: '#FFFFFF' },
-  ],
+  themeColor: '#FFFFFF',
 }
 
 export default function RootLayout({
@@ -50,10 +51,13 @@ export default function RootLayout({
     <html
       lang="en"
       className={`light bg-background ${geist.variable} ${inter.variable} ${syne.variable}`}
-      style={{ colorScheme: 'light only' }}
+      style={{ colorScheme: 'only light', backgroundColor: '#ffffff' }}
       suppressHydrationWarning
     >
-      <body className="bg-background font-sans text-foreground antialiased" style={{ colorScheme: 'light only' }}>
+      <body
+        className="bg-background font-sans text-foreground antialiased"
+        style={{ colorScheme: 'only light', backgroundColor: '#ffffff' }}
+      >
         {children}
         <GoogleAnalytics />
         {process.env.NODE_ENV === 'production' && <Analytics />}

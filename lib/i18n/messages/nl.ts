@@ -1,4 +1,5 @@
 import type { Messages } from './en'
+import { faqNl } from './faq-nl'
 
 export const nl = {
   lang: {
@@ -191,6 +192,7 @@ export const nl = {
     terms: 'Gebruiksvoorwaarden',
     company: 'Bedrijf',
     contact: 'Contact',
+    faq: 'FAQ',
     copyright: '© Copyright {year}, Alle rechten voorbehouden',
     disclaimer:
       'IGNITE AI biedt alleen algemene wellness- en fitnessinformatie. Het is geen medisch advies. Raadpleeg een zorgprofessional voordat je je dieet of trainingsroutine wijzigt.',
@@ -238,6 +240,7 @@ export const nl = {
     privacy: 'Privacybeleid',
     terms: 'Gebruiksvoorwaarden',
   },
+  faq: faqNl,
   comingSoon: {
     title: "Binnenkort",
     subtitle:

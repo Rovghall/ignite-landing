@@ -1,4 +1,5 @@
 import type { Messages } from './en'
+import { faqPt } from './faq-content'
 
 export const pt = {
   lang: {
@@ -191,6 +192,7 @@ export const pt = {
     terms: 'Termos de utilização',
     company: 'Empresa',
     contact: 'Contacto',
+    faq: 'FAQ',
     copyright: '© Copyright {year}, Todos os direitos reservados',
     disclaimer:
       'O IGNITE AI fornece apenas informação geral de bem-estar e fitness. Não constitui aconselhamento médico. Consulta um profissional de saúde antes de alterar a tua dieta ou rotina de exercício.',
@@ -238,6 +240,7 @@ export const pt = {
     privacy: 'Política de Privacidade',
     terms: 'Termos de utilização',
   },
+  faq: faqPt,
   comingSoon: {
     title: "Em breve",
     subtitle:

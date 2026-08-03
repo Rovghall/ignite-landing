@@ -44,8 +44,12 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  // Coming soon stays unprefixed
-  if (pathname === '/coming-soon' || pathname.startsWith('/coming-soon/')) {
+  // Unprefixed routes that must match mobile share URLs / gates
+  const isComingSoon = pathname === '/coming-soon' || pathname.startsWith('/coming-soon/')
+  const isCommunityInvite =
+    pathname === '/community' || pathname.startsWith('/community/')
+
+  if (isComingSoon || isCommunityInvite) {
     const preferred = resolvePreferredLocale(request)
     return withGeoCookie(request, NextResponse.next(), preferred)
   }

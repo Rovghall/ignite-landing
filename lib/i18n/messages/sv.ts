@@ -1,4 +1,5 @@
 import type { Messages } from './en'
+import { faqSv } from './faq-sv'
 
 export const sv = {
   lang: {
@@ -191,6 +192,7 @@ export const sv = {
     terms: 'Användarvillkor',
     company: 'Företag',
     contact: 'Kontakt',
+    faq: 'FAQ',
     copyright: '© Copyright {year}, Alla rättigheter förbehållna',
     disclaimer:
       'IGNITE AI ger endast allmän information om välmående och träning. Det är inte medicinsk rådgivning. Rådfråga vårdpersonal innan du ändrar kost eller träningsrutin.',
@@ -238,6 +240,7 @@ export const sv = {
     privacy: 'Integritetspolicy',
     terms: 'Användarvillkor',
   },
+  faq: faqSv,
   comingSoon: {
     title: "Kommer snart",
     subtitle:

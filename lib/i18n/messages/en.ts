@@ -1,3 +1,5 @@
+import { faqEn } from './faq-content'
+
 export const en = {
   lang: {
     chooseLanguage: 'Choose Language',
@@ -189,6 +191,7 @@ export const en = {
     terms: 'Terms of use',
     company: 'Company',
     contact: 'Contact',
+    faq: 'FAQ',
     copyright: '© Copyright {year}, All rights reserved',
     disclaimer:
       'IGNITE AI provides general wellness and fitness information only. It is not medical advice. Consult a healthcare professional before making changes to your diet or exercise routine.',
@@ -236,6 +239,7 @@ export const en = {
     privacy: 'Privacy Policy',
     terms: 'Terms of use',
   },
+  faq: faqEn,
   comingSoon: {
     title: 'Coming soon',
     subtitle:

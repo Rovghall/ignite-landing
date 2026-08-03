@@ -1,6 +1,7 @@
 export const locales = [
   'en',
   'pt',
+  'pt-br',
   'es',
   'fr',
   'de',
@@ -29,7 +30,14 @@ export type LocaleMeta = {
 
 export const localeMeta: Record<Locale, LocaleMeta> = {
   en: { code: 'en', pill: 'EN', nativeName: 'English', flag: '🇺🇸', htmlLang: 'en' },
-  pt: { code: 'pt', pill: 'PT', nativeName: 'Português', flag: '🇵🇹', htmlLang: 'pt-PT' },
+  pt: { code: 'pt', pill: 'PT', nativeName: 'Português (Portugal)', flag: '🇵🇹', htmlLang: 'pt-PT' },
+  'pt-br': {
+    code: 'pt-br',
+    pill: 'BR',
+    nativeName: 'Português (Brasil)',
+    flag: '🇧🇷',
+    htmlLang: 'pt-BR',
+  },
   es: { code: 'es', pill: 'ES', nativeName: 'Español', flag: '🇪🇸', htmlLang: 'es' },
   fr: { code: 'fr', pill: 'FR', nativeName: 'Français', flag: '🇫🇷', htmlLang: 'fr' },
   de: { code: 'de', pill: 'DE', nativeName: 'Deutsch', flag: '🇩🇪', htmlLang: 'de' },

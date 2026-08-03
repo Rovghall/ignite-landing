@@ -47,7 +47,8 @@ export function SiteNav() {
   )
 
   useMotionValueEvent(scrollY, 'change', (y) => {
-    setScrolled(y > 12)
+    const next = y > 12
+    setScrolled((prev) => (prev === next ? prev : next))
   })
 
   useEffect(() => {
@@ -70,10 +71,10 @@ export function SiteNav() {
   return (
     <motion.header
       className={cn(
-        'sticky top-0 z-50 overflow-x-clip border-b transition-[border-color,background-color,backdrop-filter] duration-300',
+        'sticky top-0 z-50 overflow-x-clip border-b transition-[border-color,background-color] duration-300 max-md:bg-background md:transition-[border-color,background-color,backdrop-filter]',
         scrolled || open
-          ? 'border-border/60 bg-background/75 backdrop-blur-xl'
-          : 'border-transparent bg-background/50 backdrop-blur-md',
+          ? 'border-border/60 max-md:bg-background md:bg-background/75 md:backdrop-blur-xl'
+          : 'border-transparent max-md:bg-background/95 md:bg-background/50 md:backdrop-blur-md',
       )}
     >
       <nav

@@ -277,6 +277,157 @@
     ]
   },
   {
+    "slug": "ignite-ai-vs-cal-ai",
+    "title": "IGNITE AI vs Cal AI: vilken fotokalorispårare ska du använda?",
+    "date": "2026-07-15",
+    "description": "Ärlig IGNITE AI vs Cal AI-jämförelse: fotomåltidsloggning, makroredigering, träningspass, Saved måltider, Health-synk, och vem som bör välja vilken AI-kalorispårare.",
+    "sections": [
+      {
+        "body": [
+          "Cal AI gjorde fotokalorilogging normalt. Rikta en kamera mot middagen, få siffror, gå vidare. Det skiftet spelar roll. Frågan är inte längre om AI-mattigenkänning kan fungera. Det är vilken app du fortfarande öppnar en trött torsdag när resterna ser ut som ett vetenskapligt experiment.",
+          "IGNITE AI och Cal AI börjar båda med ett foto. De skiljer sig efter snap: hur enkelt det är att redigera makron, om träningspass finns på samma ställe, hur du loggar grundmat på nytt, och om framsteg är något du kan dela utan att exportera skärmdumpar till Instagram.",
+          "Det här är en en-mot-en produktguide, inte ytterligare ett alternativsammandrag. Vill du ha ett bredare fält av kamera-först-appar, läs vår Cal AI-alternativguide efter det här. Har du redan shortlistat båda, stanna här och kör tre-dagars-testet i slutet innan du betalar för ännu ett år av ett verktyg du kommer att överge."
+        ]
+      },
+      {
+        "heading": "Snabb dom",
+        "body": [
+          "Välj Cal AI om du vill ha den enklaste kamera-först-uppskattningen av kalorier och makron, och du är okej med att hålla träning, steg och social ansvarighet någon annanstans.",
+          "Välj IGNITE AI om fotologgning bara är halva vanan. Du vill också ha träningspass i samma app, Saved måltider för upprepningar, Health-synksignaler och delbar framsteg utan att leva i ett livsmedelsdatabassökfält.",
+          "Ingen av apparna ersätter omdöme. Oljor, dressingar, staplade skålar och restaurangportioner behöver fortfarande redigering. Vinnaren är verktyget som gör dessa redigeringar snabba nog så att du håller dig ärlig när du är hungrig och otålig."
+        ]
+      },
+      {
+        "heading": "Vad båda apparna får rätt",
+        "body": [
+          "Båda apparna angriper samma fel läge: att skriva in varje ingrediens medan maten svalnar. Hemlagade tallrikar, takeaway och blandade skålar är där klassiska streckkodsdagböcker tappar folk. Det är också där underrapportering vanligtvis gömmer sig.",
+          "Båda returnerar kalori- och makrouppskattningar från ett foto. Båda förväntar sig att du granskar resultatet. Den delade designen är korrekt. Visuell portionsuppskattning har felmarginaler för människor och modeller. Dietforskning om visuell portionsuppskattning har visat att folk felbedömer volymer, särskilt amorfa livsmedel som ris, pasta och hackade blandningar. Redigering är produkten, inte en bugg.",
+          "Om dina måltider mestadels är förpackade livsmedel med tydliga etiketter kan en databas-först-spårare fortfarande kännas snabbare. Foto-först-verktyg lyser när tallriken saknar streckkod och ingen användbar förpackning. Det är de flesta riktiga middagar utanför en meal-prep-fabrik."
+        ]
+      },
+      {
+        "heading": "Loggningshastighet på riktiga måltider",
+        "body": [
+          "På en ren tallrik med bra ljus känns båda snabba: snap, vänta på igenkänning, bekräfta. Gapet syns på röriga måltider, delade tallrikar och allt som drunknar i sås.",
+          "Med Cal AI ligger tyngdpunkten på kamerauppskattningen. Det är en styrka när du vill ha minimal UI och en kort väg från slutare till siffra. Det kan kännas tunt om du också behöver streckkod, röst eller en andra loggningsväg när fotot är tvetydigt eller ljuset är hemskt.",
+          "IGNITE AI behandlar fotologgning som standardvägen i ett bredare Quick log-flöde. I praktiken betyder det att du kan fotografera en måltid, beskriva den eller skanna förpackning när tallriken inte är hela historien. På hektiska veckor betyder mer än en ärlig inmatningsväg mer än en snyggare slutarknapp.",
+          "Hastighet är inte bara tid-till-första-uppskattning. Det är tid-till-pålitlig-logg. Litar du mindre på första siffran redigerar du eller underrapporterar. Underrapportering är hur \"jag är i underskott\" blir en stillastående våg. Appen som håller redigering billig vinner efterlevnad.",
+          "Ett användbart personligt riktmärke: om det tar längre tid att logga middagen än att äta första halvan slutar du till slut. Testa båda apparna på veckans värsta måltid, inte din snyggaste havregrynsbowl."
+        ]
+      },
+      {
+        "heading": "Mattigenkänning, makron och redigering",
+        "body": [
+          "Igenkänningskvalitet beror på inramning, belysning och hur separerbara livsmedlen är. En burritoskål under restaurangljus utmanar vilken modell som helst. Ett ljust overhead-foto av tydliga delar brukar gå bättre. Ta bilden innan du förstör tallrikens uppbyggnad.",
+          "IGNITE AI är byggt kring att identifiera ingredienser visuellt och koppla makron till uppskattad vikt per del. Den vikten är en uppskattning. Om du väger mat ibland, justera vikten till den faktiska mängden efter analysen. Den vanan stänger det mesta av noggrannhetsgapet folk skyller på AI.",
+          "Cal AI populariserade konsument-fotokalorilogging med en enkel återkopplingsloop. Behandla siffrorna på samma sätt: ett utkast, inte en laboratorieanalys. Rätta protein när modellen hittar på kyckling som inte fanns där. Höj fett när tallriken glänser av olja. Lägg till drycken om den har kalorier.",
+          "Där IGNITE AI trycker hårdare är arbetsflödet efter skanning: öppna analysen från Recently uploaded, justera med tillgängliga alternativ och spara. För upprepningar sparar du måltiden under Diet → Saved och Log igen senare utan nytt foto. Så slutar kamera-först-spårning vara en gimmick och blir ett system.",
+          "Om du aldrig redigerar driver båda apparna. Redigerar du varje olja och sås i en vecka kan båda vara noggranna nog för fettförlusttrender. Veckogenomsnitt betyder mer än en enda heroisk perfekt dag.",
+          "Sekundära sökord folk faktiskt söker på när de jämför dessa appar: AI calorie counter, AI macro tracker, AI meal scanner och AI food recognition. Rankningssidan som vinner lär vanligtvis redigering, inte lovar magi."
+        ]
+      },
+      {
+        "heading": "Träningspass, steg och resten av dagen",
+        "body": [
+          "Kalorimål utan aktivitetskontext blir gissning. Många loggar mat i en app och träningspass i en annan, och undrar sedan varför underskottet känns falskt eller varför \"äta tillbaka träningskalorier\" blev ett andra jobb.",
+          "IGNITE AI loggar träningspass i appen och kan synka Health-signaler du godkänner, som steg, genomsnittlig puls, blodsyre och sömnstadier via Apple Health eller Health Connect. Du bestämmer fortfarande vad du ger tillgång till. Synk är inte omedelbar magi, och telefon- versus klockkällor kan vara oeniga.",
+          "Cal AIs produktberättelse kretsar kring fotologgning av mat. Om träning och wearable-data betyder något för din plan, kolla om du är villig att hålla det någon annanstans. Delade system fungerar tills de inte gör det, oftast på reseveckor eller när du glömmer vilken app som äger sanningen.",
+          "Ska du äta tillbaka träningskalorier? Det är en separat coachingsfråga utan universellt svar. Det som spelar roll i den här jämförelsen är om aktivitet och måltider delar en tidslinje så att du kan se veckan ärligt.",
+          "Om målet är fettförlust slår steg och protein oftast obsessiv träningskalori-matematik. Om målet är prestation behöver du fortfarande en matlogg du litar på på hårda träningsdagar. Hur som helst är fragmentering en tyst slut-risk."
+        ]
+      },
+      {
+        "heading": "Saved måltider, streckkoder och upprepad mat",
+        "body": [
+          "De flesta äter samma frukost och gymskålar om och om igen. Att fotografera dem för evigt är bortkastad friktion och ett bra sätt att introducera slumpmässiga fel varje morgon.",
+          "IGNITE AI låter dig spara en loggad måltid och logga den igen från Saved. Det är det praktiska svaret på \"jag äter samma sak fyra gånger i veckan.\" Kombinera med streckkods- eller etikettskanning för förpackade grundvaror när ett foto är fel verktyg.",
+          "Cal AI-användare bygger ofta mentala genvägar eller låter grundvaror vara underloggade. Varje foto-app utan ett starkt upprepingsbibliotek trycker dig tillbaka mot att hoppa över. Att hoppa över är hur underskott dör tyst medan du fortfarande \"spårar de flesta dagar.\"",
+          "Om din kost är 70% upprepningar och 30% kaos är Saved plus foto kombinationen. Om din kost är 90% unika restaurangmåltider betyder rå kamerahastighet mer än bibliotek. Var ärlig om vilken typ av ätare du är innan du köper historien från något av märkena."
+        ]
+      },
+      {
+        "heading": "Framstegsdelning och ansvarighet",
+        "body": [
+          "Spårning fastnar när någon annan kan se streaken, eller när du kan posta ett kort utan att bygga om det manuellt i Stories varje söndagskväll.",
+          "IGNITE AI inkluderar Share Cards och vän-liknande delning så att måltider, träningspass och streaks kan lämna den privata dagboken. Det spelar ingen roll om du hatar sociala funktioner. Det spelar roll om ansvarighet var den enda anledningen till att du höll ut förbi dag tolv förra gången.",
+          "Cal AIs varumärke är kamera-loggen. Om community är det saknade pusslet, jämför nuvarande in-app-alternativ i stället för att anta att varje kalori-app är social. Funktioner ändras. Testa builden på din telefon i stället för att lita på en blogg skriven förra året.",
+          "Ansvarighet utan en användbar logger misslyckas. En vacker social graf ovanpå en smärtsam matdagbok misslyckas också. Välj loggningsloopen först, och avgör sedan om delning är en bonus eller ett krav."
+        ]
+      },
+      {
+        "heading": "Priser, plattformar och supportrealiteter",
+        "body": [
+          "Båda apparna sitter i abonnemangsvärlden för App Store och Google Play. Planer, provperioder och regionala priser ändras. Verifiera alltid det aktuella erbjudandet på din enhet innan du bestämmer dig. Lita inte på en skärmdump från en slumpmässig TikTok.",
+          "Abonnemang faktureras av Apple eller Google vid typiska mobilinstallationer. Återställ köp på samma butikskonto om en betalvägg fastnar efter att du betalat. Återbetalningar går via Apple eller Google enligt deras policyer.",
+          "Supportkvalitet är svår att bedöma från marknadsföringssidor. Använd en kort provvecka: logga tre tunga måltider, en träningsdag och en upprepad frukost. Supportärenden slår sällan ett riktigt arbetsflödestest.",
+          "Byter du telefon eller butikskonto mitt i ett abonnemang, förvänta dig friktion. Det är plattformsrealitet, inte en unik förolämpning från något av märkena."
+        ]
+      },
+      {
+        "heading": "Vem bör välja Cal AI",
+        "body": [
+          "Du vill ha den kortaste vägen från foto till kalori- och makrouppskattning.",
+          "Du är okej med att använda en annan app för träning, steg eller coaching.",
+          "Dina måltider är varierade nog att ett upprepingsbibliotek betyder mindre än slutarhastighet.",
+          "Du gillar redan Cal AIs gränssnitt och behöver bara bekräftelse på att byte är valfritt, inte obligatoriskt.",
+          "Du jämför AI calorie counter-appar och din huvudsmärta är databassökning, inte saknad träningskontext."
+        ]
+      },
+      {
+        "heading": "Vem bör välja IGNITE AI",
+        "body": [
+          "Du vill ha fotomakron plus träningspass i en vaneslinga.",
+          "Du äter samma måltider igen och behöver Saved → Log utan att fotografera på nytt.",
+          "Du bryr dig om Health-synksignaler och redigering av ingrediensvikter efter analys.",
+          "Du vill ha delbara framstegskort eller vän-ansvarighet utan att exportera dagboken.",
+          "Du lämnade MyFitnessPal-liknande sökfält och behöver fortfarande mer än ett kamera-wrapper.",
+          "Du vill ha en AI macro tracker som fortfarande beter sig som en fullständig närings- och träningsdagbok på tuffa veckor."
+        ]
+      },
+      {
+        "heading": "Så testar du båda på tre dagar (rättvis protokoll)",
+        "body": [
+          "Dag 1: logga frukost, lunch och middag i båda apparna. Föredra blandade tallrikar, inte proteinbars. Notera hur lång tid redigering tar.",
+          "Dag 2: logga en restaurangmåltid och ett förpackat mellanmål. Lägg märke till redigeringstid och om du hoppar över oljor, drycker eller delade bett.",
+          "Dag 3: logga en träningsdag och en upprepad frukost. Se vilken app som fortfarande känns användbar när du är upptagen och lite irriterad.",
+          "Behåll appen där du underrapporterade minst. Det är det riktiga noggrannhetsmåttet. Modelldemoer ljuger. Dina hoppade-över såser gör det inte.",
+          "Valfri tie-breaker: fråga vilken app du fortfarande skulle öppna efter en sen middag. Emotionell friktion förutsäger churn bättre än funktionslistor."
+        ]
+      },
+      {
+        "heading": "Interna länkar värda att läsa vidare",
+        "body": [
+          "Fototeknik: How to Snap a Meal Photo for Instant Calories and Macros.",
+          "Produktarbetsflöde: The Complete Guide to Photo Meal Logging With IGNITE AI.",
+          "Upprepningar: How to Use Saved Meals in IGNITE AI for Faster Logging.",
+          "Noggrannhetsmindset: How Accurate Is AI Food Logging, And How to Make It Accurate Enough.",
+          "Bredare shortlist: 12 Best Cal AI Alternatives for Photo Food Logging and Macros.",
+          "Databas-alternativkontext: IGNITE AI vs MyFitnessPal."
+        ]
+      },
+      {
+        "heading": "FAQ",
+        "body": [
+          "Är IGNITE AI mer noggrann än Cal AI? Noggrannhet beror mer på fotokvalitet och dina redigeringar än på varumärkesslogans. Båda behöver mänsklig korrigering på oljor, såser och staplade livsmedel.",
+          "Kan jag byta från Cal AI till IGNITE AI utan att förlora framsteg? Du importerar inte magiskt varje historisk dag mellan ekosystem. Exportera eller ta skärmdumpar av det du behöver, och bygg grundvaror i Saved under vecka ett.",
+          "Behöver jag fortfarande en köksvåg? Ibland, ja, för kaloritäta grundvaror du äter dagligen. Använd vågen för att kalibrera ögat och appens viktfält, inte för att väga varje druva för evigt.",
+          "Vad om AI felmärker min måltid? Öppna analysen, redigera delar eller vikter och spara. I IGNITE AI börjar du från Recently uploaded efter skanningen.",
+          "Räcker fotologgning för kroppssammansättning? Det kan göra det, om protein och veckogenomsnitt är ärliga. Recomp misslyckas på grund av underloggade fetter och för mycket tillit till träningskalorier, inte för att du valde fel kameramärke.",
+          "Vad är bäst för nybörjare? Cal AI kan kännas enklare dag ett. IGNITE AI kan vinna vecka två om du också tränar och upprepar måltider. Nybörjare slutar på grund av friktion, inte för att en mikronäringspanel saknas.",
+          "Vart ska jag gå härnäst? Läs den kompletta fotomåltidsguiden, Saved måltider-arbetsflödet och Cal AI-alternativsammandraget om du vill ha mer än en shortlist med två appar."
+        ]
+      },
+      {
+        "heading": "Slutord",
+        "body": [
+          "Cal AI bevisade kategorin. IGNITE AI konkurrerar på hela dagen runt fotot: redigering, upprepningar, träning, Health-kontext och framsteg du kan dela.",
+          "Om allt du vill ha är en snabb snap-uppskattning är Cal AI fortfarande ett legitimt val. Om du vill att snap ska bli en hållbar närings- och träningsvana är IGNITE AI det starkare standardvalet.",
+          "Installera en primärapp. Redigera som en vuxen. Spara dina grundvaror. Det slår att ladda ner åtta AI calorie trackers och överge dem alla före nästa måndag."
+        ]
+      }
+    ]
+  },
+  {
     "slug": "macros-for-fat-loss-ratios",
     "title": "Vilka är de bästa makron för fettminskning? Enkla förhållanden som fortfarande låter dig träna hårt",
     "date": "2026-07-14",

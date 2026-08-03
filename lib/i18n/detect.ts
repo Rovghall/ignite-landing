@@ -7,7 +7,7 @@ export const LOCALE_GEO_COOKIE = 'ignite-locale-geo'
 const COUNTRY_TO_LOCALE: Record<string, Locale> = {
   // Portuguese
   PT: 'pt',
-  BR: 'pt',
+  BR: 'pt-br',
   AO: 'pt',
   MZ: 'pt',
   CV: 'pt',
@@ -86,10 +86,17 @@ function localeFromLanguageTag(tag: string): Locale | null {
   const normalized = tag.trim().toLowerCase().replace('_', '-')
   if (!normalized) return null
 
+  // Exact match first so pt-BR → pt-br (not European pt)
+  if (isLocale(normalized)) return normalized
+
   const primary = normalized.split('-')[0]
 
   if (primary === 'nb' || primary === 'nn' || primary === 'no') return 'no'
   if (primary === 'zh') return 'zh'
+  if (primary === 'pt') {
+    if (normalized.includes('br')) return 'pt-br'
+    return 'pt'
+  }
   if (isLocale(primary)) return primary
 
   return null

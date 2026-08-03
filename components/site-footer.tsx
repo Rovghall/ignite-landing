@@ -56,7 +56,10 @@ export function SiteFooter() {
     { label: t.footer.privacy, path: '/privacy' },
     { label: t.footer.terms, path: '/terms' },
   ]
-  const companyLinks = [{ label: t.footer.contact, path: '/contact' }]
+  const companyLinks = [
+    { label: t.footer.faq, path: '/faq' },
+    { label: t.footer.contact, path: '/contact' },
+  ]
 
   return (
     <footer className="border-t border-border bg-background">

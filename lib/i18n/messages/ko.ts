@@ -1,4 +1,5 @@
 import type { Messages } from './en'
+import { faqKo } from './faq-ko'
 
 export const ko = {
   lang: {
@@ -191,6 +192,7 @@ export const ko = {
     terms: '이용약관',
     company: '회사',
     contact: '문의',
+    faq: 'FAQ',
     copyright: '© Copyright {year}, All rights reserved',
     disclaimer:
       'IGNITE AI는 일반적인 웰니스·피트니스 정보만 제공합니다. 의학적 조언이 아닙니다. 식단이나 운동 루틴을 바꾸기 전에 의료 전문가와 상담하세요.',
@@ -238,6 +240,7 @@ export const ko = {
     privacy: '개인정보 처리방침',
     terms: '이용약관',
   },
+  faq: faqKo,
   comingSoon: {
     title: "곧 공개",
     subtitle:

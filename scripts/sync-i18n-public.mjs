@@ -2,7 +2,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 
-const locales = ['en', 'pt', 'es', 'fr', 'de', 'it', 'nl', 'no', 'sv', 'ja', 'ko', 'zh']
+const locales = ['en', 'pt', 'pt-br', 'es', 'fr', 'de', 'it', 'nl', 'no', 'sv', 'ja', 'ko', 'zh']
 for (const loc of locales) {
   const dest = path.join('public', 'i18n', loc)
   fs.mkdirSync(dest, { recursive: true })

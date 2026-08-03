@@ -1,45 +1,50 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import {
   motion,
+  useInView,
   useMotionValue,
   useSpring,
   useReducedMotion,
 } from 'motion/react'
+import { AlphaVideo } from '@/components/alpha-video'
 import { StoreButtons } from '@/components/store-buttons'
 import { useT } from '@/lib/i18n/provider'
 import { easeOutExpo } from '@/lib/motion'
 
-function IntroVideoScreen({ reduce, ariaLabel }: { reduce: boolean | null; ariaLabel: string }) {
-  const videoRef = useRef<HTMLVideoElement>(null)
-
-  useEffect(() => {
-    const el = videoRef.current
-    if (!el || reduce) return
-    el.muted = true
-    const play = () => {
-      void el.play().catch(() => {})
-    }
-    play()
-    el.addEventListener('loadeddata', play)
-    return () => el.removeEventListener('loadeddata', play)
-  }, [reduce])
+function IntroVideoScreen({
+  ariaLabel,
+  active,
+}: {
+  ariaLabel: string
+  active: boolean
+}) {
+  // Soft CSS shadow + fade the baked contact line at the phone base
+  // (WebM alpha keeps a hard dark edge where the floor shadow starts).
+  const bottomFade =
+    'linear-gradient(to bottom, #000 0%, #000 86%, rgba(0,0,0,0.7) 90%, rgba(0,0,0,0.25) 94%, transparent 100%)'
 
   return (
-    <video
-      ref={videoRef}
-      className="block h-auto w-full max-w-[360px] bg-transparent sm:max-w-[380px] lg:max-w-[400px]"
-      autoPlay
-      muted
-      loop
-      playsInline
-      preload="metadata"
-      aria-label={ariaLabel}
+    <div
+      className="w-full max-w-[360px] sm:max-w-[380px] lg:max-w-[400px]"
+      style={{ filter: 'drop-shadow(0 32px 48px rgba(0,0,0,0.16))' }}
     >
-      <source src="/video_intro.webm" type="video/webm" />
-      <source src="/video_intro.mp4" type="video/mp4" />
-    </video>
+      <div
+        style={{
+          maskImage: bottomFade,
+          WebkitMaskImage: bottomFade,
+        }}
+      >
+        <AlphaVideo
+          className="w-full"
+          ariaLabel={ariaLabel}
+          stackedSrc="/video_intro_stacked.mp4"
+          nativeSources={[{ src: '/video_intro.webm', type: 'video/webm' }]}
+          active={active}
+        />
+      </div>
+    </div>
   )
 }
 
@@ -94,8 +99,15 @@ function EmberField({ reduce }: { reduce: boolean | null }) {
   )
 }
 
-function ParallaxPhone({ reduce, introAria }: { reduce: boolean | null; introAria: string }) {
+function ParallaxPhone({
+  reduce,
+  introAria,
+}: {
+  reduce: boolean | null
+  introAria: string
+}) {
   const ref = useRef<HTMLDivElement>(null)
+  const inView = useInView(ref, { amount: 0.15, margin: '80px 0px' })
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
   const springX = useSpring(mx, { stiffness: 120, damping: 18, mass: 0.4 })
@@ -134,17 +146,17 @@ function ParallaxPhone({ reduce, introAria }: { reduce: boolean | null; introAri
           className="md:ml-4 md:translate-y-2 lg:ml-8"
           style={{ transformOrigin: 'center bottom' }}
           animate={
-            reduce
-              ? { rotate: 3.5 }
+            reduce || !inView
+              ? { rotate: 3.5, y: 0 }
               : { y: [0, -8, 0], rotate: 3.5 }
           }
           transition={
-            reduce
+            reduce || !inView
               ? undefined
               : { y: { duration: 5.5, repeat: Infinity, ease: 'easeInOut' }, rotate: { duration: 0 } }
           }
         >
-          <IntroVideoScreen reduce={reduce} ariaLabel={introAria} />
+          <IntroVideoScreen ariaLabel={introAria} active={Boolean(inView && !reduce)} />
         </motion.div>
       </motion.div>
     </div>

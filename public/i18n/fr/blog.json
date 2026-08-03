@@ -277,6 +277,157 @@
     ]
   },
   {
+    "slug": "ignite-ai-vs-cal-ai",
+    "title": "IGNITE AI vs Cal AI : quel tracker de calories par photo choisir ?",
+    "date": "2026-07-15",
+    "description": "Comparaison honnête IGNITE AI vs Cal AI : journal photo des repas, édition des macros, entraînements, repas Saved, sync Health, et qui devrait choisir quel tracker de calories IA.",
+    "sections": [
+      {
+        "body": [
+          "Cal AI a rendu le journal de calories par photo banal. Vous visez le dîner avec l'appareil, vous obtenez des chiffres, vous passez à autre chose. Ce basculement compte. La question n'est plus de savoir si la reconnaissance alimentaire par IA peut fonctionner. C'est de savoir quelle app vous ouvrirez encore un jeudi fatigué, quand les restes ressemblent à une expérience de labo.",
+          "IGNITE AI et Cal AI commencent tous deux par une photo. Ils divergent après la prise : facilité d'édition des macros, entraînements au même endroit ou non, re-saisie des plats habituels, et possibilité de partager vos progrès sans exporter des captures vers Instagram.",
+          "Ceci est un guide de décision produit en tête-à-tête, pas un autre roundup d'alternatives. Si vous voulez un champ plus large d'apps centrées caméra, lisez notre guide des alternatives à Cal AI ensuite. Si vous avez déjà présélectionné les deux, restez ici et faites le test de trois jours à la fin avant de payer une année de plus pour un outil que vous abandonnerez."
+        ]
+      },
+      {
+        "heading": "Verdict rapide",
+        "body": [
+          "Choisissez Cal AI si vous voulez l'estimation calories et macros la plus simple en mode caméra, et que vous acceptez de garder entraînement, pas et responsabilité sociale ailleurs.",
+          "Choisissez IGNITE AI si le journal photo n'est que la moitié de l'habitude. Vous voulez aussi les entraînements dans la même app, les repas Saved pour les répétitions, les signaux de sync Health, et un progrès partageable sans vivre dans une barre de recherche de base alimentaire.",
+          "Aucune app ne remplace le jugement. Huiles, sauces, bowls empilés et portions restaurant demandent encore des edits. Gagne l'outil qui rend ces edits assez rapides pour que vous restiez honnête quand vous avez faim et peu de patience."
+        ]
+      },
+      {
+        "heading": "Ce que les deux apps font bien",
+        "body": [
+          "Les deux attaquent le même échec : taper chaque ingrédient pendant que la nourriture refroidit. Plats maison, plats à emporter et bowls mixtes sont là où les journaux codes-barres classiques perdent du monde. C'est aussi là que se cache généralement la sous-déclaration.",
+          "Les deux renvoient des estimations calories et macros à partir d'une photo. Les deux attendent que vous relisiez le résultat. Ce design partagé est correct. L'estimation visuelle des portions comporte des erreurs pour humains et modèles. La recherche en diététique sur l'estimation visuelle montre que les volumes sont mal jugés, surtout pour des aliments amorphes comme riz, pâtes et mélanges hachés. L'édition est le produit, pas un bug.",
+          "Si vos repas sont surtout des produits emballés avec étiquettes claires, un tracker base de données peut rester plus rapide. Les outils photo-first brillent quand l'assiette n'a ni code-barres ni emballage utile. C'est la plupart des vrais dîners hors usine de meal prep."
+        ]
+      },
+      {
+        "heading": "Vitesse de saisie sur de vrais repas",
+        "body": [
+          "Sur une assiette propre avec une bonne lumière, les deux semblent rapides : photo, attente de reconnaissance, confirmation. L'écart apparaît sur repas désordonnés, assiettes partagées et tout ce qui noie dans la sauce.",
+          "Avec Cal AI, le centre de gravité est l'estimation caméra. C'est une force si vous voulez une UI minimale et un chemin court entre déclencheur et chiffre. Ça peut sembler léger si vous avez aussi besoin de code-barres, voix ou d'une seconde voie de saisie quand la photo est ambiguë ou la lumière affreuse.",
+          "IGNITE AI traite le journal photo comme le chemin par défaut dans un flux Quick log plus large. En pratique vous pouvez photographier un repas, le décrire ou scanner l'emballage quand l'assiette ne raconte pas toute l'histoire. Les semaines chargées, avoir plus d'une voie honnête de saisie compte plus qu'un joli bouton déclencheur.",
+          "La vitesse n'est pas seulement le temps jusqu'à la première estimation. C'est le temps jusqu'à un log de confiance. Si vous faites moins confiance au premier chiffre, vous éditez ou sous-déclarez. La sous-déclaration, c'est comment \"je suis en déficit\" devient une balance qui stagne. Gagne l'app qui garde l'édition bon marché.",
+          "Un repère perso utile : si journaliser le dîner prend plus longtemps que manger la première moitié, vous finirez par arrêter. Testez les deux apps sur votre pire repas de la semaine, pas sur votre plus joli bol d'avoine."
+        ]
+      },
+      {
+        "heading": "Reconnaissance alimentaire, macros et édition",
+        "body": [
+          "La qualité de reconnaissance dépend du cadrage, de la lumière et de la séparabilité des aliments. Un burrito bowl sous lumière de restaurant défiera n'importe quel modèle. Une photo plongeante nette d'éléments distincts fait généralement mieux. Photographiez avant de détruire l'architecture de l'assiette.",
+          "IGNITE AI est construit autour de l'identification visuelle des ingrédients et du lien macros / poids estimé par item. Ce poids est une estimation. Si vous pesez parfois, ajustez le poids au montant réel après l'analyse. Cette habitude comble la majeure partie de l'écart de précision que l'on impute à l'IA.",
+          "Cal AI a popularisé le journal calories photo grand public avec une boucle de feedback simple. Traitez ses chiffres pareil : un brouillon, pas un dosage labo. Corrigez les protéines quand le modèle invente du poulet absent. Montez les lipides quand l'assiette brille d'huile. Ajoutez la boisson si elle a des calories.",
+          "Là où IGNITE AI pousse plus fort, c'est le workflow post-scan : ouvrez l'analyse depuis Recently uploaded, ajustez avec les options disponibles, puis enregistrez. Pour les répétitions, sauvegardez le repas sous Diet → Saved et Log à nouveau plus tard sans nouvelle photo. C'est ainsi que le tracking caméra-first cesse d'être une nouveauté et devient un système.",
+          "Si vous n'éditez jamais, les deux apps dérivent. Si vous éditez chaque huile et sauce pendant une semaine, l'une ou l'autre peut être assez précise pour les tendances perte de gras. Les moyennes hebdo comptent plus qu'une seule journée héroïque parfaite.",
+          "Mots-clés secondaires que les gens cherchent en comparant ces apps : compteur calories IA, tracker macros IA, scanner repas IA, reconnaissance alimentaire IA. La page qui gagne enseigne généralement l'édition, pas la magie."
+        ]
+      },
+      {
+        "heading": "Entraînements, pas et reste de la journée",
+        "body": [
+          "Des objectifs caloriques sans contexte d'activité deviennent du tâtonnement. Beaucoup journalisent la nourriture dans une app et l'entraînement dans une autre, puis se demandent pourquoi le déficit semble faux ou pourquoi \"manger les calories d'exercice\" est devenu un second job.",
+          "IGNITE AI journalise les entraînements in-app et peut synchroniser les signaux Health que vous approuvez, comme pas, fréquence cardiaque moyenne, oxygène sanguin et phases de sommeil via Apple Health ou Health Connect. Vous décidez toujours quoi autoriser. La sync n'est pas magie instantanée, et téléphone vs montre peuvent diverger.",
+          "Le récit produit de Cal AI est centré sur le journal photo alimentaire. Si entraînement et données wearable comptent pour votre plan, vérifiez si vous acceptez de les garder ailleurs. Les systèmes éclatés marchent jusqu'à ce qu'ils ne marchent plus, souvent en voyage ou quand vous oubliez quelle app détient la vérité.",
+          "Faut-il manger les calories d'entraînement ? Question de coaching à part, sans réponse universelle. Ce qui compte ici, c'est si activité et repas partagent une timeline pour voir la semaine honnêtement.",
+          "Si votre objectif est perte de gras, pas et protéines battent généralement la math obsessionnelle des calories d'exercice. Si votre objectif est performance, il vous faut quand même un journal alimentaire fiable les jours d'entraînement dur. Dans tous les cas, la fragmentation est un risque silencieux d'abandon."
+        ]
+      },
+      {
+        "heading": "Repas Saved, codes-barres et aliments répétés",
+        "body": [
+          "La plupart mangent les mêmes petits-déjeuners et bowls de gym en boucle. Les photographier indéfiniment, c'est de la friction gaspillée et un bon moyen d'introduire de l'erreur aléatoire chaque matin.",
+          "IGNITE AI permet de sauvegarder un repas journalisé et de le re-Log depuis Saved. C'est la réponse pratique à \"je mange la même chose quatre fois par semaine\". Combinez avec scans code-barres ou étiquette pour les bases emballées quand la photo est le mauvais outil.",
+          "Les utilisateurs Cal AI créent souvent des raccourcis mentaux ou laissent des bases sous-déclarées. Toute app photo sans solide bibliothèque de répétitions vous pousse à sauter. Sauter, c'est comment les déficits meurent en silence pendant que vous \"trackez presque tous les jours\".",
+          "Si votre alimentation est 70 % répétitions et 30 % chaos, Saved plus photo est le combo. Si c'est 90 % repas uniques au restaurant, la vitesse caméra brute compte plus que les bibliothèques. Soyez honnête sur le mangeur que vous êtes avant d'acheter le discours de l'une ou l'autre marque."
+        ]
+      },
+      {
+        "heading": "Partage de progrès et responsabilité",
+        "body": [
+          "Le suivi tient quand quelqu'un d'autre voit la série, ou quand vous pouvez poster une carte sans la reconstruire dans Stories manuellement chaque dimanche soir.",
+          "IGNITE AI inclut Share Cards et un partage style amis pour que repas, entraînements et séries sortent du journal privé. Ça ne comptera pas si vous détestez le social. Ça comptera si la responsabilité était la seule raison pour laquelle vous avez tenu au-delà du jour douze la dernière fois.",
+          "La marque Cal AI, c'est le journal caméra. Si la communauté vous manque, comparez les options actuelles dans l'app plutôt que d'assumer que toute app calories est sociale. Les fonctionnalités changent. Testez la version sur votre téléphone plutôt qu'un blog écrit l'an dernier.",
+          "La responsabilité sans outil de saisie utilisable échoue. Un beau graphe social sur un journal alimentaire pénible échoue aussi. Choisissez d'abord la boucle de saisie, puis décidez si le partage est un bonus ou une exigence."
+        ]
+      },
+      {
+        "heading": "Tarifs, plateformes et réalités du support",
+        "body": [
+          "Les deux apps vivent dans l'univers abonnements App Store et Google Play. Plans, essais et prix régionaux changent. Vérifiez toujours l'offre actuelle sur votre appareil avant de décider. Ne faites pas confiance à une capture TikTok au hasard.",
+          "Les abonnements sont facturés par Apple ou Google sur les installs mobiles classiques. Restaurez les achats sur le même compte store si un paywall persiste après paiement. Les remboursements passent par Apple ou Google selon leurs politiques.",
+          "La qualité du support est difficile à juger depuis des pages marketing. Faites une semaine d'essai courte : trois repas difficiles, un jour d'entraînement, un petit-déjeuner répété. Les tickets support battent rarement un vrai test de workflow.",
+          "Si vous changez de téléphone ou de compte store en cours d'abonnement, attendez-vous à de la friction. C'est une réalité plateforme, pas un insulte propre à l'une ou l'autre marque."
+        ]
+      },
+      {
+        "heading": "Qui devrait choisir Cal AI",
+        "body": [
+          "Vous voulez le chemin le plus court de la photo à l'estimation calories et macros.",
+          "Vous acceptez une autre app pour entraînement, pas ou coaching.",
+          "Vos repas varient assez pour qu'une bibliothèque de répétitions compte moins que la vitesse du déclencheur.",
+          "Vous aimez déjà l'interface Cal AI et voulez seulement confirmer que changer est optionnel, pas obligatoire.",
+          "Vous comparez des apps compteur calories IA et votre douleur principale est la recherche base de données, pas le contexte entraînement manquant."
+        ]
+      },
+      {
+        "heading": "Qui devrait choisir IGNITE AI",
+        "body": [
+          "Vous voulez macros photo plus entraînements dans une même boucle d'habitude.",
+          "Vous re-mangez les mêmes repas et avez besoin de Saved → Log sans re-photographier.",
+          "Les signaux sync Health et l'édition des poids d'ingrédients après analyse comptent pour vous.",
+          "Vous voulez des cartes de progrès partageables ou une responsabilité amis sans exporter le journal.",
+          "Vous avez quitté les barres de recherche style MyFitnessPal et avez besoin de plus qu'un wrapper caméra.",
+          "Vous voulez un tracker macros IA qui se comporte encore comme un journal nutrition et entraînement complet les semaines difficiles."
+        ]
+      },
+      {
+        "heading": "Comment tester les deux en trois jours (protocole équitable)",
+        "body": [
+          "Jour 1 : journalisez petit-déjeuner, déjeuner et dîner dans les deux apps. Préférez assiettes mixtes, pas barres protéinées. Notez le temps d'édition.",
+          "Jour 2 : journalisez un repas restaurant et un snack emballé. Observez temps d'édition et si vous sautez huiles, boissons ou bouchées partagées.",
+          "Jour 3 : journalisez un jour d'entraînement et un petit-déjeuner répété. Voyez quelle app reste utilisable quand vous êtes occupé et un peu agacé.",
+          "Gardez l'app où vous avez le moins sous-déclaré. C'est la vraie métrique de précision. Les démos de modèles mentent. Vos sauces omises, non.",
+          "Départage optionnel : demandez-vous quelle app vous ouvririez encore après un dîner tardif. La friction émotionnelle prédit l'abandon mieux qu'une checklist de features."
+        ]
+      },
+      {
+        "heading": "Liens internes à lire ensuite",
+        "body": [
+          "Technique photo : Comment prendre une photo de repas pour des calories et des macros instantanées (sans tout peser).",
+          "Workflow produit : Le guide complet de l'enregistrement des repas photo avec IGNITE AI.",
+          "Répétitions : Comment utiliser les repas Saved dans IGNITE AI pour une journalisation plus rapide.",
+          "Mentalité précision : Quelle est la précision de l'enregistrement des aliments par l'IA et comment le rendre suffisamment précis.",
+          "Shortlist élargie : 12 meilleures alternatives Cal AI pour l'enregistrement des photos et des macros.",
+          "Contexte alternative base de données : IGNITE AI vs MyFitnessPal : quel macro tracker correspond à votre façon de manger réellement ?"
+        ]
+      },
+      {
+        "heading": "FAQ",
+        "body": [
+          "IGNITE AI est-il plus précis que Cal AI ? La précision dépend surtout de la qualité photo et de vos edits, pas des slogans de marque. Les deux demandent une correction humaine sur huiles, sauces et aliments empilés.",
+          "Puis-je passer de Cal AI à IGNITE AI sans perdre mes progrès ? Vous n'importerez pas magiquement chaque jour historique entre écosystèmes. Exportez ou capturez ce qu'il faut, puis reconstruisez les bases dans Saved la première semaine.",
+          "Ai-je encore besoin d'une balance alimentaire ? Parfois oui, pour les bases caloriques que vous mangez chaque jour. Utilisez-la pour calibrer l'œil et les champs poids de l'app, pas pour peser chaque raisin pour toujours.",
+          "Et si l'IA étiquette mal mon repas ? Ouvrez l'analyse, éditez items ou poids, puis enregistrez. Dans IGNITE AI, partez de Recently uploaded après le scan.",
+          "Le journal photo suffit-il pour la recomposition corporelle ? Oui si protéines et moyennes hebdo sont honnêtes. La recomposition échoue sur lipides sous-enregistrés et calories d'entraînement trop optimistes, pas sur le mauvais choix de marque caméra.",
+          "Lequel est mieux pour débutants ? Cal AI peut sembler plus simple le jour un. IGNITE AI peut gagner la semaine deux si vous vous entraînez aussi et répétez des repas. Les débutants abandonnent à cause de la friction, pas d'un panneau micronutriments manquant.",
+          "Où aller ensuite ? Lisez le guide complet journal repas photo, le flux repas Saved, et le comparatif alternatives Cal AI si vous voulez plus qu'une liste restreinte à deux apps."
+        ]
+      },
+      {
+        "heading": "Conclusion",
+        "body": [
+          "Cal AI a prouvé la catégorie. IGNITE AI rivalise sur la journée entière autour de la photo : édition, répétitions, entraînement, contexte Health, progrès partageable.",
+          "Si vous voulez seulement une estimation rapide au déclencheur, Cal AI reste un choix légitime. Si vous voulez que la photo devienne une habitude durable nutrition et entraînement, IGNITE AI est le défaut le plus solide.",
+          "Installez une app principale. Éditez comme un adulte. Sauvegardez vos bases. Ça bat télécharger huit trackers calories IA et tous les quitter avant lundi prochain."
+        ]
+      }
+    ]
+  },
+  {
     "slug": "macros-for-fat-loss-ratios",
     "title": "Quelles sont les meilleures macros pour perdre de la graisse ? Des ratios simples qui vous permettent quand même de vous entraîner dur",
     "date": "2026-07-14",

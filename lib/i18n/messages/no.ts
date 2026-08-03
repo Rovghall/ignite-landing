@@ -1,4 +1,5 @@
 import type { Messages } from './en'
+import { faqNo } from './faq-no'
 
 export const no = {
   lang: {
@@ -191,6 +192,7 @@ export const no = {
     terms: 'Vilkår for bruk',
     company: 'Selskap',
     contact: 'Kontakt',
+    faq: 'FAQ',
     copyright: '© Copyright {year}, Alle rettigheter forbeholdt',
     disclaimer:
       'IGNITE AI gir kun generell informasjon om velvære og trening. Det er ikke medisinsk råd. Rådfør deg med helsepersonell før du endrer kosthold eller treningsrutine.',
@@ -238,6 +240,7 @@ export const no = {
     privacy: 'Personvernerklæring',
     terms: 'Vilkår for bruk',
   },
+  faq: faqNo,
   comingSoon: {
     title: "Kommer snart",
     subtitle:

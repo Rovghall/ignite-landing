@@ -1,4 +1,5 @@
 import type { Messages } from './en'
+import { faqZh } from './faq-zh'
 
 export const zh = {
   lang: {
@@ -191,6 +192,7 @@ export const zh = {
     terms: '使用条款',
     company: '公司',
     contact: '联系',
+    faq: 'FAQ',
     copyright: '© Copyright {year}, 保留所有权利',
     disclaimer:
       'IGNITE AI 仅提供一般性的健康与健身信息，不构成医疗建议。更改饮食或运动习惯前，请咨询医疗专业人士。',
@@ -237,6 +239,7 @@ export const zh = {
     privacy: '隐私政策',
     terms: '使用条款',
   },
+  faq: faqZh,
   comingSoon: {
     title: "即将推出",
     subtitle:

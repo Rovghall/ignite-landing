@@ -5,6 +5,8 @@ async function importLegal(locale: Locale): Promise<LegalBundle> {
   switch (locale) {
     case 'pt':
       return (await import('@/content/pt/legal.json')).default as LegalBundle
+    case 'pt-br':
+      return (await import('@/content/pt-br/legal.json')).default as LegalBundle
     case 'es':
       return (await import('@/content/es/legal.json')).default as LegalBundle
     case 'fr':
@@ -34,6 +36,8 @@ async function importBlog(locale: Locale): Promise<BlogPost[]> {
   switch (locale) {
     case 'pt':
       return (await import('@/content/pt/blog.json')).default as BlogPost[]
+    case 'pt-br':
+      return (await import('@/content/pt-br/blog.json')).default as BlogPost[]
     case 'es':
       return (await import('@/content/es/blog.json')).default as BlogPost[]
     case 'fr':

@@ -109,21 +109,21 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
     async function run() {
       await sleep(badge.delay * 1000)
       while (alive) {
-        // Fully covered by the phone image (z below phone)
+        // Fully covered by the phone image (z below phone).
+        // No CSS filter on mobile — Safari paints opaque gray plates behind filtered layers.
         await controls.set({
-          opacity: 0.35,
+          opacity: compact ? 0 : 0.35,
           scale: 0.55,
           x: underX,
           y: 8,
           rotate: badge.restRotate * 0.2,
           zIndex: 0,
-          filter: 'blur(4px) brightness(0.7)',
+          ...(compact ? {} : { filter: 'blur(4px) brightness(0.7)' }),
         })
 
         await sleep(120)
         if (!alive) break
 
-        // Pop out from behind the bezel
         await controls.start({
           opacity: 1,
           scale: compact ? 1.08 : 1.14,
@@ -131,10 +131,10 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
           y: 0,
           rotate: badge.popRotate,
           zIndex: 20,
-          filter: 'blur(0px) brightness(1.05)',
+          ...(compact ? {} : { filter: 'blur(0px) brightness(1.05)' }),
           transition: {
             opacity: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
-            filter: { duration: 0.35, ease: 'easeOut' },
+            ...(compact ? {} : { filter: { duration: 0.35, ease: 'easeOut' } }),
             zIndex: { delay: 0.15, duration: 0 },
             default: { type: 'spring', stiffness: 250, damping: 16, mass: 0.8 },
           },
@@ -146,7 +146,7 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
           x: outXPeek,
           y: -8,
           rotate: badge.restRotate,
-          filter: 'blur(0px) brightness(1)',
+          ...(compact ? {} : { filter: 'blur(0px) brightness(1)' }),
           transition: { type: 'spring', stiffness: 190, damping: 14, mass: 0.9 },
         })
         if (!alive) break
@@ -158,19 +158,18 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
         })
         if (!alive) break
 
-        // Slide back under the phone
         await controls.start({
-          opacity: 0.2,
+          opacity: compact ? 0 : 0.2,
           scale: 0.5,
           x: underX,
           y: 10,
           rotate: badge.restRotate * 0.15,
           zIndex: 0,
-          filter: 'blur(4px) brightness(0.65)',
+          ...(compact ? {} : { filter: 'blur(4px) brightness(0.65)' }),
           transition: {
             zIndex: { duration: 0 },
             opacity: { duration: 0.35, ease: [0.4, 0, 1, 1], delay: 0.1 },
-            filter: { duration: 0.35, ease: 'easeIn' },
+            ...(compact ? {} : { filter: { duration: 0.35, ease: 'easeIn' } }),
             default: { type: 'spring', stiffness: 230, damping: 20, mass: 0.85 },
           },
         })
@@ -196,9 +195,10 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
   if (reduce) {
     return (
       <div
-        className={`pointer-events-none absolute z-20 ${badge.className}`}
+        className={`pointer-events-none absolute z-20 bg-transparent ${badge.className}`}
         style={{
           transform: `translateX(${outX}px) rotate(${badge.restRotate}deg)`,
+          background: 'transparent',
         }}
       >
         <Image
@@ -206,8 +206,8 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
           alt={badge.alt}
           width={320}
           height={320}
-          className="h-auto w-full select-none drop-shadow-[0_14px_32px_rgba(0,0,0,0.2)]"
-          style={{ mixBlendMode: 'lighten' }}
+          className="h-auto w-full select-none bg-transparent md:drop-shadow-[0_14px_32px_rgba(0,0,0,0.2)]"
+          style={{ mixBlendMode: 'lighten', background: 'transparent' }}
           sizes="220px"
           quality={90}
           draggable={false}
@@ -218,7 +218,7 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
 
   return (
     <motion.div
-      className={`pointer-events-none absolute ${badge.className}`}
+      className={`pointer-events-none absolute bg-transparent ${badge.className}`}
       initial={{
         opacity: 0,
         scale: 0.5,
@@ -226,18 +226,20 @@ function BadgeOrbit({ badge, active }: { badge: FloatBadge; active: boolean }) {
         y: 8,
         rotate: badge.restRotate * 0.2,
         zIndex: 0,
-        filter: 'blur(4px) brightness(0.7)',
       }}
       animate={controls}
-      style={{ willChange: 'transform, opacity, filter' }}
+      style={{
+        background: 'transparent',
+        willChange: compact ? 'transform, opacity' : 'transform, opacity, filter',
+      }}
     >
       <Image
         src={badge.src}
         alt={badge.alt}
         width={320}
         height={320}
-        className="h-auto w-full select-none drop-shadow-[0_18px_40px_rgba(0,0,0,0.28)]"
-        style={{ mixBlendMode: 'lighten' }}
+        className="h-auto w-full select-none bg-transparent md:drop-shadow-[0_18px_40px_rgba(0,0,0,0.28)]"
+        style={{ mixBlendMode: 'lighten', background: 'transparent' }}
         sizes="240px"
         quality={90}
         draggable={false}
@@ -259,7 +261,8 @@ export function StreaksFeatureVisual({
   return (
     <div
       ref={rootRef}
-      className="relative mx-auto w-[min(100%,20.5rem)] shrink-0 origin-center overflow-visible sm:w-[min(100%,28rem)] md:w-[min(100%,30rem)]"
+      className="relative mx-auto w-[min(100%,20.5rem)] shrink-0 origin-center overflow-visible bg-transparent sm:w-[min(100%,28rem)] md:w-[min(100%,30rem)]"
+      style={{ background: 'transparent' }}
     >
       <FeatureMockup src="/badge.png" alt="Streaks & Badges" tilt={tilt} width={width} className="mx-auto">
         {floatBadges.map((badge) => (
