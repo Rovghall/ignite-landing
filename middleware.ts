@@ -48,8 +48,10 @@ export async function middleware(request: NextRequest) {
   const isComingSoon = pathname === '/coming-soon' || pathname.startsWith('/coming-soon/')
   const isCommunityInvite =
     pathname === '/community' || pathname.startsWith('/community/')
+  const isInternalOps =
+    pathname === '/internal' || pathname.startsWith('/internal/')
 
-  if (isComingSoon || isCommunityInvite) {
+  if (isComingSoon || isCommunityInvite || isInternalOps) {
     const preferred = resolvePreferredLocale(request)
     return withGeoCookie(request, NextResponse.next(), preferred)
   }
