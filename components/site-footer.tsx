@@ -58,6 +58,7 @@ export function SiteFooter() {
   ]
   const companyLinks = [
     { label: t.footer.faq, path: '/faq' },
+    { label: t.footer.creatorProgram, path: '/creator-program' },
     { label: t.footer.contact, path: '/contact' },
   ]
 

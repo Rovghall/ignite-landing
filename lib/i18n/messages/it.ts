@@ -10,6 +10,7 @@ export const it = {
     home: 'Home',
     press: 'Stampa',
     blogs: 'Blog',
+    creatorProgram: 'Creator Program',
     main: 'Principale',
     homeAria: 'Home IGNITE AI',
     closeMenu: 'Chiudi menu',
@@ -193,6 +194,7 @@ export const it = {
     company: 'Azienda',
     contact: 'Contatti',
     faq: 'FAQ',
+    creatorProgram: 'Creator Program',
     copyright: '© Copyright {year}, Tutti i diritti riservati',
     disclaimer:
       'IGNITE AI fornisce solo informazioni generali su benessere e fitness. Non è un consiglio medico. Consulta un professionista sanitario prima di modificare dieta o routine di esercizio.',
@@ -226,6 +228,57 @@ export const it = {
     sending: 'Invio…',
     success: 'Grazie. La tua richiesta stampa è stata inviata. Ti risponderemo presto.',
     error: 'Qualcosa è andato storto. Riprova.',
+  },
+  creatorProgram: {
+    title: 'Creator Program',
+    subtitle:
+      'Collabora con IGNITE AI. Condividi il tuo codice personalizzato per il prezzo annuale esclusivo e guadagna quando il tuo pubblico passa a Premium.',
+    howTitle: 'Come funziona',
+    steps: [
+      {
+        title: 'Candidati',
+        description: 'Raccontaci dei tuoi contenuti, piattaforme e audience.',
+      },
+      {
+        title: 'Esaminiamo',
+        description: 'Il nostro team guarda il tuo profilo e ti risponde.',
+      },
+      {
+        title: 'Ricevi il codice',
+        description:
+          'Se sei approvato, ricevi un codice creator personalizzato con il prezzo annuale Premium più basso.',
+      },
+      {
+        title: 'Condividi e guadagna',
+        description:
+          'Condividi il codice con il tuo pubblico. Guadagna una ricompensa per ogni follower che sottoscrive il piano Premium annuale.',
+      },
+    ],
+    applyTitle: 'Candidati',
+    applyHint: "Raccontaci un po' dei tuoi contenuti così possiamo esaminare la candidatura.",
+    fieldName: 'Nome visualizzato',
+    fieldNamePlaceholder: 'Il tuo nome o brand',
+    fieldEmail: 'Email di contatto',
+    fieldEmailPlaceholder: 'tu@email.com',
+    fieldPlatforms: 'Piattaforme',
+    fieldHandle: 'Handle / link principale',
+    fieldHandlePlaceholder: '@tuohandle o URL del profilo',
+    fieldAudience: 'Dimensione audience',
+    fieldAudiencePlaceholder: 'es. 25k',
+    fieldNotes: 'Altro?',
+    fieldNotesPlaceholder: 'Nichia, idee di collab, ecc.',
+    submit: 'Invia candidatura',
+    sending: 'Invio…',
+    success: 'Grazie. La tua candidatura è stata inviata. La esamineremo e ti risponderemo presto.',
+    error: 'Qualcosa è andato storto. Riprova.',
+    errorPlatforms: 'Seleziona almeno una piattaforma.',
+    appNote: "Puoi candidarti anche da Profilo → Creator program nell'app IGNITE AI.",
+    platform: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      youtube: 'YouTube',
+      other: 'Altro',
+    },
   },
   blog: {
     title: 'Il nostro blog',

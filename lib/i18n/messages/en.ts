@@ -9,6 +9,7 @@ export const en = {
     home: 'Home',
     press: 'Press',
     blogs: 'Blogs',
+    creatorProgram: 'Creator Program',
     main: 'Main',
     homeAria: 'IGNITE AI home',
     closeMenu: 'Close menu',
@@ -192,6 +193,7 @@ export const en = {
     company: 'Company',
     contact: 'Contact',
     faq: 'FAQ',
+    creatorProgram: 'Creator Program',
     copyright: '© Copyright {year}, All rights reserved',
     disclaimer:
       'IGNITE AI provides general wellness and fitness information only. It is not medical advice. Consult a healthcare professional before making changes to your diet or exercise routine.',
@@ -225,6 +227,57 @@ export const en = {
     sending: 'Sending…',
     success: 'Thanks. Your press inquiry was sent. We will get back to you soon.',
     error: 'Something went wrong. Please try again.',
+  },
+  creatorProgram: {
+    title: 'Creator Program',
+    subtitle:
+      'Partner with IGNITE AI. Share your personalized code for exclusive annual pricing and earn when your audience goes Premium.',
+    howTitle: 'How it works',
+    steps: [
+      {
+        title: 'Apply',
+        description: 'Tell us about your content, platforms, and audience.',
+      },
+      {
+        title: 'We review',
+        description: 'Our team looks at your profile and gets back to you.',
+      },
+      {
+        title: 'Get your code',
+        description:
+          'If approved, you receive a personalized creator code for the lowest annual Premium price.',
+      },
+      {
+        title: 'Share and earn',
+        description:
+          'Share your code with your audience. Earn a reward for each follower who subscribes to the annual Premium plan.',
+      },
+    ],
+    applyTitle: 'Apply',
+    applyHint: 'Tell us a bit about your content so we can review your application.',
+    fieldName: 'Display name',
+    fieldNamePlaceholder: 'Your name or brand',
+    fieldEmail: 'Contact email',
+    fieldEmailPlaceholder: 'you@email.com',
+    fieldPlatforms: 'Platforms',
+    fieldHandle: 'Main handle / link',
+    fieldHandlePlaceholder: '@yourhandle or profile URL',
+    fieldAudience: 'Audience size',
+    fieldAudiencePlaceholder: 'e.g. 25k',
+    fieldNotes: 'Anything else?',
+    fieldNotesPlaceholder: 'Audience niche, collab ideas, etc.',
+    submit: 'Submit application',
+    sending: 'Sending…',
+    success: 'Thanks. Your application was sent. We will review it and get back to you soon.',
+    error: 'Something went wrong. Please try again.',
+    errorPlatforms: 'Select at least one platform.',
+    appNote: 'You can also apply from Profile → Creator program inside the IGNITE AI app.',
+    platform: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      youtube: 'YouTube',
+      other: 'Other',
+    },
   },
   blog: {
     title: 'Our Blog',

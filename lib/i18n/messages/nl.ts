@@ -10,6 +10,7 @@ export const nl = {
     home: 'Home',
     press: 'Pers',
     blogs: 'Blog',
+    creatorProgram: 'Creator Program',
     main: 'Hoofd',
     homeAria: 'IGNITE AI home',
     closeMenu: 'Menu sluiten',
@@ -193,6 +194,7 @@ export const nl = {
     company: 'Bedrijf',
     contact: 'Contact',
     faq: 'FAQ',
+    creatorProgram: 'Creator Program',
     copyright: '© Copyright {year}, Alle rechten voorbehouden',
     disclaimer:
       'IGNITE AI biedt alleen algemene wellness- en fitnessinformatie. Het is geen medisch advies. Raadpleeg een zorgprofessional voordat je je dieet of trainingsroutine wijzigt.',
@@ -226,6 +228,57 @@ export const nl = {
     sending: 'Versturen…',
     success: 'Bedankt. Je persvraag is verstuurd. We nemen snel contact op.',
     error: 'Er ging iets mis. Probeer het opnieuw.',
+  },
+  creatorProgram: {
+    title: 'Creator Program',
+    subtitle:
+      'Word partner van IGNITE AI. Deel je persoonlijke code voor de exclusieve jaarprijs en verdien wanneer je publiek Premium neemt.',
+    howTitle: 'Hoe het werkt',
+    steps: [
+      {
+        title: 'Solliciteer',
+        description: 'Vertel ons over je content, platforms en publiek.',
+      },
+      {
+        title: 'Wij beoordelen',
+        description: 'Ons team bekijkt je profiel en neemt contact op.',
+      },
+      {
+        title: 'Ontvang je code',
+        description:
+          'Bij goedkeuring krijg je een persoonlijke creatorcode met de laagste jaarlijkse Premium-prijs.',
+      },
+      {
+        title: 'Deel en verdien',
+        description:
+          'Deel je code met je publiek. Verdien een beloning voor elke volger die het jaarlijkse Premium-abonnement neemt.',
+      },
+    ],
+    applyTitle: 'Solliciteren',
+    applyHint: 'Vertel iets over je content zodat we je aanvraag kunnen beoordelen.',
+    fieldName: 'Weergavenaam',
+    fieldNamePlaceholder: 'Je naam of merk',
+    fieldEmail: 'Contact-e-mail',
+    fieldEmailPlaceholder: 'jij@email.com',
+    fieldPlatforms: 'Platforms',
+    fieldHandle: 'Hoofd-handle / link',
+    fieldHandlePlaceholder: '@jouwhandle of profiel-URL',
+    fieldAudience: 'Publieksgrootte',
+    fieldAudiencePlaceholder: 'bijv. 25k',
+    fieldNotes: 'Nog iets?',
+    fieldNotesPlaceholder: 'Niche, collab-ideeën, enz.',
+    submit: 'Aanvraag versturen',
+    sending: 'Versturen…',
+    success: 'Bedankt. Je aanvraag is verstuurd. We bekijken hem en reageren snel.',
+    error: 'Er ging iets mis. Probeer opnieuw.',
+    errorPlatforms: 'Selecteer minstens één platform.',
+    appNote: 'Je kunt ook solliciteren via Profiel → Creator program in de IGNITE AI-app.',
+    platform: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      youtube: 'YouTube',
+      other: 'Overig',
+    },
   },
   blog: {
     title: 'Onze blog',

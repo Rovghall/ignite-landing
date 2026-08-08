@@ -10,6 +10,7 @@ export const zh = {
     home: '首页',
     press: '媒体',
     blogs: '博客',
+    creatorProgram: 'Creator Program',
     main: '主页',
     homeAria: 'IGNITE AI 首页',
     closeMenu: '关闭菜单',
@@ -193,6 +194,7 @@ export const zh = {
     company: '公司',
     contact: '联系',
     faq: 'FAQ',
+    creatorProgram: 'Creator Program',
     copyright: '© Copyright {year}, 保留所有权利',
     disclaimer:
       'IGNITE AI 仅提供一般性的健康与健身信息，不构成医疗建议。更改饮食或运动习惯前，请咨询医疗专业人士。',
@@ -225,6 +227,57 @@ export const zh = {
     sending: '发送中…',
     success: '谢谢。您的媒体垂询已发送。我们会尽快回复。',
     error: '出了点问题。请重试。',
+  },
+  creatorProgram: {
+    title: 'Creator Program',
+    subtitle:
+      '与 IGNITE AI 合作。分享你的专属年费优惠码，当观众开通 Premium 时可获得奖励。',
+    howTitle: '如何运作',
+    steps: [
+      {
+        title: '申请',
+        description: '告诉我们你的内容、平台和受众情况。',
+      },
+      {
+        title: '我们审核',
+        description: '团队会查看你的资料并回复你。',
+      },
+      {
+        title: '获得代码',
+        description:
+          '通过后，你会获得专属创作者代码，对应最低年费 Premium 价格。',
+      },
+      {
+        title: '分享并赚取',
+        description:
+          '把代码分享给受众。每位订阅年度 Premium 计划的粉丝都能为你带来奖励。',
+      },
+    ],
+    applyTitle: '申请',
+    applyHint: '简单介绍你的内容，方便我们审核申请。',
+    fieldName: '显示名称',
+    fieldNamePlaceholder: '你的名字或品牌',
+    fieldEmail: '联系邮箱',
+    fieldEmailPlaceholder: 'you@email.com',
+    fieldPlatforms: '平台',
+    fieldHandle: '主要账号 / 链接',
+    fieldHandlePlaceholder: '@yourhandle 或主页链接',
+    fieldAudience: '受众规模',
+    fieldAudiencePlaceholder: '例如 25k',
+    fieldNotes: '其他说明',
+    fieldNotesPlaceholder: '内容方向、合作想法等',
+    submit: '提交申请',
+    sending: '发送中…',
+    success: '谢谢。你的申请已发送。我们会审核并尽快回复。',
+    error: '出了点问题，请再试一次。',
+    errorPlatforms: '请至少选择一个平台。',
+    appNote: '你也可以在 IGNITE AI 应用内「个人资料 → Creator program」申请。',
+    platform: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      youtube: 'YouTube',
+      other: '其他',
+    },
   },
   blog: {
     title: '我们的博客',

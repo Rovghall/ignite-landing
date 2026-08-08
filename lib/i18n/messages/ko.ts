@@ -10,6 +10,7 @@ export const ko = {
     home: '홈',
     press: '프레스',
     blogs: '블로그',
+    creatorProgram: 'Creator Program',
     main: '메인',
     homeAria: 'IGNITE AI 홈',
     closeMenu: '메뉴 닫기',
@@ -193,6 +194,7 @@ export const ko = {
     company: '회사',
     contact: '문의',
     faq: 'FAQ',
+    creatorProgram: 'Creator Program',
     copyright: '© Copyright {year}, All rights reserved',
     disclaimer:
       'IGNITE AI는 일반적인 웰니스·피트니스 정보만 제공합니다. 의학적 조언이 아닙니다. 식단이나 운동 루틴을 바꾸기 전에 의료 전문가와 상담하세요.',
@@ -226,6 +228,57 @@ export const ko = {
     sending: '보내는 중…',
     success: '감사합니다. 프레스 문의가 전송되었습니다. 곧 연락드리겠습니다.',
     error: '문제가 발생했습니다. 다시 시도해 주세요.',
+  },
+  creatorProgram: {
+    title: 'Creator Program',
+    subtitle:
+      'IGNITE AI와 함께하세요. 전용 연간 요금 코드를 공유하고, 오디언스가 Premium에 가입하면 보상을 받으세요.',
+    howTitle: '이용 방법',
+    steps: [
+      {
+        title: '지원하기',
+        description: '콘텐츠, 플랫폼, 오디언스에 대해 알려 주세요.',
+      },
+      {
+        title: '검토하기',
+        description: '팀이 프로필을 검토한 뒤 연락드립니다.',
+      },
+      {
+        title: '코드 받기',
+        description:
+          '승인되면 최저 연간 Premium 가격을 위한 개인 크리에이터 코드를 받습니다.',
+      },
+      {
+        title: '공유하고 보상받기',
+        description:
+          '코드를 오디언스와 공유하세요. 연간 Premium에 가입한 팔로워마다 보상을 받습니다.',
+      },
+    ],
+    applyTitle: '지원',
+    applyHint: '지원서 검토를 위해 콘텐츠에 대해 간단히 알려 주세요.',
+    fieldName: '표시 이름',
+    fieldNamePlaceholder: '이름 또는 브랜드',
+    fieldEmail: '연락 이메일',
+    fieldEmailPlaceholder: 'you@email.com',
+    fieldPlatforms: '플랫폼',
+    fieldHandle: '메인 핸들 / 링크',
+    fieldHandlePlaceholder: '@yourhandle 또는 프로필 URL',
+    fieldAudience: '오디언스 규모',
+    fieldAudiencePlaceholder: '예: 25k',
+    fieldNotes: '추가로 하실 말씀',
+    fieldNotesPlaceholder: '니치, 콜라보 아이디어 등',
+    submit: '지원서 제출',
+    sending: '전송 중…',
+    success: '감사합니다. 지원서가 전송되었습니다. 검토 후 곧 연락드리겠습니다.',
+    error: '문제가 발생했습니다. 다시 시도해 주세요.',
+    errorPlatforms: '플랫폼을 하나 이상 선택하세요.',
+    appNote: 'IGNITE AI 앱의 프로필 → Creator program에서도 지원할 수 있습니다.',
+    platform: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      youtube: 'YouTube',
+      other: '기타',
+    },
   },
   blog: {
     title: '블로그',

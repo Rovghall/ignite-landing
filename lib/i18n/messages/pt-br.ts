@@ -10,6 +10,7 @@ export const ptBr = {
     home: 'Início',
     press: 'Imprensa',
     blogs: 'Blog',
+    creatorProgram: 'Creator Program',
     main: 'Principal',
     homeAria: 'Início IGNITE AI',
     closeMenu: 'Fechar menu',
@@ -193,6 +194,7 @@ export const ptBr = {
     company: 'Empresa',
     contact: 'Contato',
     faq: 'FAQ',
+    creatorProgram: 'Creator Program',
     copyright: '© Copyright {year}, Todos os direitos reservados',
     disclaimer:
       'O IGNITE AI fornece apenas informação geral de bem-estar e fitness. Não constitui aconselhamento médico. Consulte um profissional de saúde antes de alterar sua dieta ou rotina de exercício.',
@@ -226,6 +228,57 @@ export const ptBr = {
     sending: 'Enviando…',
     success: 'Obrigado. Seu pedido de imprensa foi enviado. Entraremos em contato em breve.',
     error: 'Algo deu errado. Tente novamente.',
+  },
+  creatorProgram: {
+    title: 'Creator Program',
+    subtitle:
+      'Faça parceria com o IGNITE AI. Compartilhe seu código personalizado para o preço anual exclusivo e ganhe quando sua audiência assinar o Premium.',
+    howTitle: 'Como funciona',
+    steps: [
+      {
+        title: 'Candidate-se',
+        description: 'Conte-nos sobre seu conteúdo, plataformas e audiência.',
+      },
+      {
+        title: 'Nós analisamos',
+        description: 'Nossa equipe analisa seu perfil e responde.',
+      },
+      {
+        title: 'Receba seu código',
+        description:
+          'Se aprovado, você recebe um código de criador personalizado com o menor preço anual Premium.',
+      },
+      {
+        title: 'Compartilhe e ganhe',
+        description:
+          'Compartilhe seu código com sua audiência. Ganhe uma recompensa por cada seguidor que assinar o plano anual Premium.',
+      },
+    ],
+    applyTitle: 'Candidatar-se',
+    applyHint: 'Conte um pouco sobre seu conteúdo para analisarmos a candidatura.',
+    fieldName: 'Nome de exibição',
+    fieldNamePlaceholder: 'Seu nome ou marca',
+    fieldEmail: 'Email de contato',
+    fieldEmailPlaceholder: 'voce@email.com',
+    fieldPlatforms: 'Plataformas',
+    fieldHandle: 'Handle / link principal',
+    fieldHandlePlaceholder: '@seuhandle ou URL do perfil',
+    fieldAudience: 'Tamanho da audiência',
+    fieldAudiencePlaceholder: 'ex. 25k',
+    fieldNotes: 'Mais alguma coisa?',
+    fieldNotesPlaceholder: 'Nicho, ideias de collab, etc.',
+    submit: 'Enviar candidatura',
+    sending: 'Enviando…',
+    success: 'Obrigado. Sua candidatura foi enviada. Vamos analisar e responder em breve.',
+    error: 'Algo deu errado. Tente novamente.',
+    errorPlatforms: 'Selecione pelo menos uma plataforma.',
+    appNote: 'Você também pode se candidatar em Perfil → Creator program no app IGNITE AI.',
+    platform: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      youtube: 'YouTube',
+      other: 'Outro',
+    },
   },
   blog: {
     title: 'Nosso blog',

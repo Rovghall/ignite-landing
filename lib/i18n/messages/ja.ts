@@ -10,6 +10,7 @@ export const ja = {
     home: 'ホーム',
     press: 'プレス',
     blogs: 'ブログ',
+    creatorProgram: 'Creator Program',
     main: 'メイン',
     homeAria: 'IGNITE AI ホーム',
     closeMenu: 'メニューを閉じる',
@@ -193,6 +194,7 @@ export const ja = {
     company: '会社情報',
     contact: 'お問い合わせ',
     faq: 'FAQ',
+    creatorProgram: 'Creator Program',
     copyright: '© Copyright {year}, All rights reserved',
     disclaimer:
       'IGNITE AI は一般的なウェルネスとフィットネス情報のみを提供します。医療アドバイスではありません。食事や運動習慣を変える前に、医療従事者にご相談ください。',
@@ -226,6 +228,57 @@ export const ja = {
     sending: '送信中…',
     success: 'ありがとうございます。プレスお問い合わせを送信しました。近日中にご連絡します。',
     error: '問題が発生しました。もう一度お試しください。',
+  },
+  creatorProgram: {
+    title: 'Creator Program',
+    subtitle:
+      'IGNITE AIと提携しましょう。専用の年間料金コードを共有し、オーディエンスがPremiumに加入すると報酬を得られます。',
+    howTitle: '仕組み',
+    steps: [
+      {
+        title: '応募する',
+        description: 'コンテンツ、プラットフォーム、オーディエンスについて教えてください。',
+      },
+      {
+        title: '審査する',
+        description: 'チームがプロフィールを確認し、ご連絡します。',
+      },
+      {
+        title: 'コードを受け取る',
+        description:
+          '承認されると、最安の年間Premium価格向けのパーソナルクリエイターコードが届きます。',
+      },
+      {
+        title: '共有して稼ぐ',
+        description:
+          'コードをオーディエンスと共有。年間Premiumプランに加入したフォロワーごとに報酬を獲得。',
+      },
+    ],
+    applyTitle: '応募',
+    applyHint: '審査のため、コンテンツについて少し教えてください。',
+    fieldName: '表示名',
+    fieldNamePlaceholder: '名前またはブランド',
+    fieldEmail: '連絡用メール',
+    fieldEmailPlaceholder: 'you@email.com',
+    fieldPlatforms: 'プラットフォーム',
+    fieldHandle: 'メインのハンドル / リンク',
+    fieldHandlePlaceholder: '@yourhandle またはプロフィールURL',
+    fieldAudience: 'オーディエンス規模',
+    fieldAudiencePlaceholder: '例: 25k',
+    fieldNotes: 'その他',
+    fieldNotesPlaceholder: 'ニッチ、コラボ案など',
+    submit: '応募を送信',
+    sending: '送信中…',
+    success: 'ありがとうございます。応募を受け付けました。審査後、ご連絡します。',
+    error: '問題が発生しました。もう一度お試しください。',
+    errorPlatforms: 'プラットフォームを1つ以上選択してください。',
+    appNote: 'IGNITE AIアプリの「プロフィール → Creator program」からも応募できます。',
+    platform: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      youtube: 'YouTube',
+      other: 'その他',
+    },
   },
   blog: {
     title: 'ブログ',

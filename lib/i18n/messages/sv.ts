@@ -10,6 +10,7 @@ export const sv = {
     home: 'Hem',
     press: 'Press',
     blogs: 'Blogg',
+    creatorProgram: 'Creator Program',
     main: 'Huvud',
     homeAria: 'IGNITE AI hem',
     closeMenu: 'Stäng meny',
@@ -193,6 +194,7 @@ export const sv = {
     company: 'Företag',
     contact: 'Kontakt',
     faq: 'FAQ',
+    creatorProgram: 'Creator Program',
     copyright: '© Copyright {year}, Alla rättigheter förbehållna',
     disclaimer:
       'IGNITE AI ger endast allmän information om välmående och träning. Det är inte medicinsk rådgivning. Rådfråga vårdpersonal innan du ändrar kost eller träningsrutin.',
@@ -226,6 +228,57 @@ export const sv = {
     sending: 'Skickar…',
     success: 'Tack. Din pressförfrågan har skickats. Vi återkommer snart.',
     error: 'Något gick fel. Försök igen.',
+  },
+  creatorProgram: {
+    title: 'Creator Program',
+    subtitle:
+      'Samarbeta med IGNITE AI. Dela din personliga kod för det exklusiva årspriset och tjäna när din publik går Premium.',
+    howTitle: 'Så fungerar det',
+    steps: [
+      {
+        title: 'Ansök',
+        description: 'Berätta om ditt innehåll, dina plattformar och din publik.',
+      },
+      {
+        title: 'Vi granskar',
+        description: 'Vårt team tittar på din profil och återkommer.',
+      },
+      {
+        title: 'Få din kod',
+        description:
+          'Om du godkänns får du en personlig creator-kod med det lägsta årliga Premium-priset.',
+      },
+      {
+        title: 'Dela och tjäna',
+        description:
+          'Dela koden med din publik. Tjäna en belöning för varje följare som tecknar den årliga Premium-planen.',
+      },
+    ],
+    applyTitle: 'Ansök',
+    applyHint: 'Berätta lite om ditt innehåll så att vi kan granska din ansökan.',
+    fieldName: 'Visningsnamn',
+    fieldNamePlaceholder: 'Ditt namn eller varumärke',
+    fieldEmail: 'Kontakt-e-post',
+    fieldEmailPlaceholder: 'du@email.com',
+    fieldPlatforms: 'Plattformar',
+    fieldHandle: 'Huvud-handle / länk',
+    fieldHandlePlaceholder: '@dithandle eller profil-URL',
+    fieldAudience: 'Publikstorlek',
+    fieldAudiencePlaceholder: 't.ex. 25k',
+    fieldNotes: 'Något mer?',
+    fieldNotesPlaceholder: 'Nisch, collab-idéer, etc.',
+    submit: 'Skicka ansökan',
+    sending: 'Skickar…',
+    success: 'Tack. Din ansökan har skickats. Vi granskar den och återkommer snart.',
+    error: 'Något gick fel. Försök igen.',
+    errorPlatforms: 'Välj minst en plattform.',
+    appNote: 'Du kan också ansöka via Profil → Creator program i IGNITE AI-appen.',
+    platform: {
+      instagram: 'Instagram',
+      tiktok: 'TikTok',
+      youtube: 'YouTube',
+      other: 'Annat',
+    },
   },
   blog: {
     title: 'Vår blogg',
