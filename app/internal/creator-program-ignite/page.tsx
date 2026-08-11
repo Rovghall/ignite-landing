@@ -244,6 +244,80 @@ function platformsLabel(raw: unknown): string {
   return list.length ? list.join(', ') : '—'
 }
 
+type CreatorRewardStats = {
+  followers: number
+  pendingCentsByCurrency: Record<string, number>
+  paidCentsByCurrency: Record<string, number>
+  lastAnnualAt: string | null
+  lastPaidAt: string | null
+  lastRequestedAt: string | null
+}
+
+function emptyCreatorStats(): CreatorRewardStats {
+  return {
+    followers: 0,
+    pendingCentsByCurrency: {},
+    paidCentsByCurrency: {},
+    lastAnnualAt: null,
+    lastPaidAt: null,
+    lastRequestedAt: null,
+  }
+}
+
+function addCents(map: Record<string, number>, currency: string, cents: number) {
+  const key = currency || 'USD'
+  map[key] = (map[key] ?? 0) + cents
+}
+
+function formatMoneyMap(map: Record<string, number>): string {
+  const entries = Object.entries(map).filter(([, v]) => v > 0)
+  if (!entries.length) return '—'
+  return entries.map(([cur, cents]) => money(cents, cur)).join(' · ')
+}
+
+function laterIso(a: string | null, b: string | null): string | null {
+  if (!a) return b
+  if (!b) return a
+  return new Date(a).getTime() >= new Date(b).getTime() ? a : b
+}
+
+function summarizeCreatorRewards(rewards: RewardRow[], referrerId: string): CreatorRewardStats {
+  const stats = emptyCreatorStats()
+  for (const row of rewards) {
+    if (row.referrer_id !== referrerId) continue
+    stats.followers += 1
+    if (row.refunded_at) {
+      // still counts as a follower who used the code
+    } else if (row.reward_status === 'paid') {
+      addCents(stats.paidCentsByCurrency, row.currency, row.amount_cents)
+    } else if (row.reward_status === 'pending') {
+      addCents(stats.pendingCentsByCurrency, row.currency, row.amount_cents)
+    }
+    stats.lastAnnualAt = laterIso(stats.lastAnnualAt, row.annual_purchased_at)
+    stats.lastPaidAt = laterIso(stats.lastPaidAt, row.paid_at)
+    stats.lastRequestedAt = laterIso(stats.lastRequestedAt, row.payout_requested_at)
+  }
+  return stats
+}
+
+function matchesAppSearch(app: ApplicationRow, q: string): boolean {
+  if (!q) return true
+  const hay = [app.display_name, app.contact_email, app.assigned_code, app.primary_handle]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+  return hay.includes(q)
+}
+
+function matchesRewardSearch(row: RewardRow, q: string): boolean {
+  if (!q) return true
+  const hay = [row.referrer_name, row.paypal_email, row.friend_name, row.code_used]
+    .filter(Boolean)
+    .join(' ')
+    .toLowerCase()
+  return hay.includes(q)
+}
+
 const DEMO_APPS: ApplicationRow[] = [
   {
     id: 'demo-app-1',
@@ -370,16 +444,36 @@ const DEMO_PAYOUTS: RewardRow[] = [
     payout_requested_at: daysAgo(40),
     paid_at: daysAgo(35),
     created_at: daysAgo(80),
-    referrer_id: 'demo-user-1',
-    referrer_name: 'Ana Fitness',
-    paypal_email: 'ana@creators.demo',
+    referrer_id: 'demo-user-2',
+    referrer_name: 'Chef Marco',
+    paypal_email: 'marco@creators.demo',
     friend_name: 'Follower C',
     referral_status: 'rewarded',
     annual_purchased_at: daysAgo(70),
     refunded_at: null,
     payout_eligible: false,
     days_until_eligible: 0,
-    code_used: 'ANA10',
+    code_used: 'MARCO20',
+  },
+  {
+    reward_id: 'demo-creator-paid-2',
+    referral_id: 'demo-cref-4',
+    amount_cents: 1000,
+    currency: 'USD',
+    reward_status: 'paid',
+    payout_requested_at: daysAgo(55),
+    paid_at: daysAgo(50),
+    created_at: daysAgo(95),
+    referrer_id: 'demo-user-2',
+    referrer_name: 'Chef Marco',
+    paypal_email: 'marco@creators.demo',
+    friend_name: 'Follower D',
+    referral_status: 'rewarded',
+    annual_purchased_at: daysAgo(85),
+    refunded_at: null,
+    payout_eligible: false,
+    days_until_eligible: 0,
+    code_used: 'MARCO20',
   },
 ]
 
@@ -448,6 +542,9 @@ export default function CreatorProgramAdminPage() {
   const [demoApps, setDemoApps] = useState<ApplicationRow[]>(DEMO_APPS)
   const [demoCodes, setDemoCodes] = useState<CodeRow[]>(DEMO_CODES)
   const [demoRewards, setDemoRewards] = useState<RewardRow[]>(DEMO_PAYOUTS)
+  const [attributionRewards, setAttributionRewards] = useState<RewardRow[]>([])
+  const [appSearch, setAppSearch] = useState('')
+  const [payoutSearch, setPayoutSearch] = useState('')
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [busyId, setBusyId] = useState<string | null>(null)
@@ -579,12 +676,32 @@ export default function CreatorProgramAdminPage() {
     setRewards(Array.isArray(payload.rewards) ? payload.rewards : [])
   }, [supabase, payoutFilter])
 
+  const loadAttributionRewards = useCallback(async () => {
+    if (!supabase) return
+    const { data, error } = await supabase.rpc('admin_list_referral_rewards', {
+      p_filter: 'all',
+      p_source: 'creator',
+    })
+    if (error) {
+      setAttributionRewards([])
+      return
+    }
+    const payload = data as { ok?: boolean; rewards?: RewardRow[] } | null
+    if (!payload?.ok) {
+      setAttributionRewards([])
+      return
+    }
+    setAttributionRewards(Array.isArray(payload.rewards) ? payload.rewards : [])
+  }, [supabase])
+
   const load = useCallback(async () => {
     if (demoMode) return
-    if (tab === 'applications') await loadApplications()
-    else if (tab === 'codes') await loadCodes()
+    if (tab === 'applications') {
+      await loadApplications()
+      await loadAttributionRewards()
+    } else if (tab === 'codes') await loadCodes()
     else await loadRewards()
-  }, [tab, loadApplications, loadCodes, loadRewards, demoMode])
+  }, [tab, loadApplications, loadCodes, loadRewards, loadAttributionRewards, demoMode])
 
   useEffect(() => {
     if (!session || demoMode) return
@@ -593,9 +710,12 @@ export default function CreatorProgramAdminPage() {
 
   const visibleApps = useMemo(() => {
     const source = demoMode ? demoApps : apps
-    const filtered = filter === 'all' ? [...source] : source.filter((a) => a.status === filter)
+    const q = appSearch.trim().toLowerCase()
+    const filtered =
+      filter === 'all' ? [...source] : source.filter((a) => a.status === filter)
+    const searched = q ? filtered.filter((a) => matchesAppSearch(a, q)) : filtered
     if (filter === 'approved' && appSort === 'ending_soon') {
-      filtered.sort((a, b) => {
+      searched.sort((a, b) => {
         const aEnd = a.creator_premium_ends_at ? new Date(a.creator_premium_ends_at).getTime() : Infinity
         const bEnd = b.creator_premium_ends_at ? new Date(b.creator_premium_ends_at).getTime() : Infinity
         const aValid = Number.isFinite(aEnd) ? aEnd : Infinity
@@ -604,13 +724,20 @@ export default function CreatorProgramAdminPage() {
         return a.display_name.localeCompare(b.display_name)
       })
     }
-    return filtered
-  }, [demoMode, demoApps, apps, filter, appSort])
+    return searched
+  }, [demoMode, demoApps, apps, filter, appSort, appSearch])
 
   const visibleCodes = demoMode ? demoCodes : codes
-  const visibleRewards = demoMode
-    ? filterDemoPayouts(demoRewards, payoutFilter)
-    : rewards
+  const visibleRewards = useMemo(() => {
+    const source = demoMode
+      ? filterDemoPayouts(demoRewards, payoutFilter)
+      : rewards
+    const q = payoutSearch.trim().toLowerCase()
+    if (!q) return source
+    return source.filter((row) => matchesRewardSearch(row, q))
+  }, [demoMode, demoRewards, rewards, payoutFilter, payoutSearch])
+
+  const attributionSource = demoMode ? demoRewards : attributionRewards
 
   async function onSignIn(e: FormEvent) {
     e.preventDefault()
@@ -626,6 +753,7 @@ export default function CreatorProgramAdminPage() {
     setApps([])
     setCodes([])
     setRewards([])
+    setAttributionRewards([])
     setDemoMode(false)
   }
 
@@ -1374,6 +1502,28 @@ export default function CreatorProgramAdminPage() {
 
           <div style={styles.toolbarSpacer} />
 
+          {tab === 'applications' ? (
+            <input
+              style={styles.searchInput}
+              type="search"
+              placeholder="Search name, email, code…"
+              value={appSearch}
+              onChange={(e) => setAppSearch(e.target.value)}
+              aria-label="Search applications"
+            />
+          ) : null}
+
+          {tab === 'payouts' ? (
+            <input
+              style={styles.searchInput}
+              type="search"
+              placeholder="Search creator, PayPal, follower, code…"
+              value={payoutSearch}
+              onChange={(e) => setPayoutSearch(e.target.value)}
+              aria-label="Search payouts"
+            />
+          ) : null}
+
           {tab === 'applications' && filter === 'approved' ? (
             <label style={styles.sortLabel}>
               Sort
@@ -1678,6 +1828,44 @@ export default function CreatorProgramAdminPage() {
                             />
                           </div>
                         </>
+                      )
+                    })()}
+                    {(() => {
+                      const stats = summarizeCreatorRewards(attributionSource, app.user_id)
+                      return (
+                        <div style={styles.creatorStatsBox}>
+                          <p style={styles.creatorStatsLabel}>Referral performance</p>
+                          <div style={styles.creatorStatsGrid}>
+                            <div>
+                              <p style={styles.statKey}>Followers (code used)</p>
+                              <p style={styles.statVal}>{stats.followers}</p>
+                            </div>
+                            <div>
+                              <p style={styles.statKey}>Pending</p>
+                              <p style={styles.statVal}>
+                                {formatMoneyMap(stats.pendingCentsByCurrency)}
+                              </p>
+                            </div>
+                            <div>
+                              <p style={styles.statKey}>Paid</p>
+                              <p style={styles.statVal}>
+                                {formatMoneyMap(stats.paidCentsByCurrency)}
+                              </p>
+                            </div>
+                            <div>
+                              <p style={styles.statKey}>Last annual buy</p>
+                              <p style={styles.statVal}>{shortDate(stats.lastAnnualAt)}</p>
+                            </div>
+                            <div>
+                              <p style={styles.statKey}>Last paid</p>
+                              <p style={styles.statVal}>{shortDate(stats.lastPaidAt)}</p>
+                            </div>
+                            <div>
+                              <p style={styles.statKey}>Last requested</p>
+                              <p style={styles.statVal}>{shortDate(stats.lastRequestedAt)}</p>
+                            </div>
+                          </div>
+                        </div>
                       )
                     })()}
                     <div style={styles.actions}>
@@ -2164,6 +2352,55 @@ const styles: Record<string, CSSProperties> = {
     letterSpacing: 0.4,
     textTransform: 'uppercase',
     color: '#065F46',
+  },
+  creatorStatsBox: {
+    marginTop: 4,
+    padding: 12,
+    borderRadius: 12,
+    background: '#FFFFFF',
+    border: '1px solid #A7F3D0',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 10,
+  },
+  creatorStatsLabel: {
+    margin: 0,
+    fontSize: 11,
+    fontWeight: 700,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase',
+    color: '#047857',
+  },
+  creatorStatsGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
+    gap: 10,
+  },
+  statKey: {
+    margin: 0,
+    fontSize: 11,
+    fontWeight: 600,
+    color: '#71717A',
+    textTransform: 'uppercase',
+    letterSpacing: 0.3,
+  },
+  statVal: {
+    margin: '4px 0 0',
+    fontSize: 14,
+    fontWeight: 700,
+    color: '#18181B',
+  },
+  searchInput: {
+    borderRadius: 999,
+    border: '1px solid #E4E4E7',
+    background: '#FFFFFF',
+    color: '#111827',
+    padding: '8px 14px',
+    fontSize: 14,
+    minWidth: 220,
+    maxWidth: 320,
+    flex: '1 1 220px',
+    outline: 'none',
   },
   premiumBarTrack: {
     height: 8,
