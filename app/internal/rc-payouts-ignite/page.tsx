@@ -164,34 +164,36 @@ const DEMO_ROWS: RewardRow[] = [
 ]
 
 function filterDemoRows(all: RewardRow[], filter: Filter): RewardRow[] {
-  return all.filter((row) => {
-    switch (filter) {
-      case 'holding':
-        return (
-          row.reward_status === 'pending' &&
-          !row.payout_requested_at &&
-          !row.refunded_at &&
-          !row.payout_eligible
-        )
-      case 'pending':
-        return (
-          row.reward_status === 'pending' &&
-          !row.payout_requested_at &&
-          !row.refunded_at &&
-          row.payout_eligible
-        )
-      case 'requested':
-        return row.reward_status === 'pending' && !!row.payout_requested_at && !row.refunded_at
-      case 'paid':
-        return row.reward_status === 'paid'
-      case 'cancelled':
-        return row.reward_status === 'cancelled' && !row.refunded_at
-      case 'refunded':
-        return !!row.refunded_at
-      default:
-        return true
-    }
-  })
+  return all.filter((row) => rowMatchesFilter(row, filter))
+}
+
+function rowMatchesFilter(row: RewardRow, filter: Filter): boolean {
+  switch (filter) {
+    case 'holding':
+      return (
+        row.reward_status === 'pending' &&
+        !row.payout_requested_at &&
+        !row.refunded_at &&
+        !row.payout_eligible
+      )
+    case 'pending':
+      return (
+        row.reward_status === 'pending' &&
+        !row.payout_requested_at &&
+        !row.refunded_at &&
+        row.payout_eligible
+      )
+    case 'requested':
+      return row.reward_status === 'pending' && !!row.payout_requested_at && !row.refunded_at
+    case 'paid':
+      return row.reward_status === 'paid'
+    case 'cancelled':
+      return row.reward_status === 'cancelled' && !row.refunded_at
+    case 'refunded':
+      return !!row.refunded_at
+    default:
+      return true
+  }
 }
 
 export default function ReferralPayoutsAdminPage() {
@@ -242,8 +244,9 @@ export default function ReferralPayoutsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
+    // Always load all so tab counts stay accurate; filter client-side.
     const { data, error } = await supabase.rpc('admin_list_referral_rewards', {
-      p_filter: filter,
+      p_filter: 'all',
       p_source: 'friend',
     })
     setLoading(false)
@@ -263,15 +266,34 @@ export default function ReferralPayoutsAdminPage() {
       return
     }
     setRows(Array.isArray(payload.rewards) ? payload.rewards : [])
-  }, [supabase, filter, demoMode])
+  }, [supabase, demoMode])
 
   useEffect(() => {
     if (!session || !supabase || demoMode) return
     void load()
   }, [session, load, supabase, demoMode])
 
+  const rowSource = demoMode ? demoRows : rows
+
+  const filterCounts = useMemo(() => {
+    const keys: Filter[] = [
+      'requested',
+      'holding',
+      'pending',
+      'paid',
+      'refunded',
+      'cancelled',
+      'all',
+    ]
+    const counts = {} as Record<Filter, number>
+    for (const key of keys) {
+      counts[key] = key === 'all' ? rowSource.length : rowSource.filter((r) => rowMatchesFilter(r, key)).length
+    }
+    return counts
+  }, [rowSource])
+
   const visibleRows = useMemo(() => {
-    const source = demoMode ? filterDemoRows(demoRows, filter) : [...rows]
+    const source = filterDemoRows(rowSource, filter)
     const q = search.trim().toLowerCase()
     const searched = q ? source.filter((row) => matchesPayoutSearch(row, q)) : source
     if (filter === 'holding' && countdownSort !== 'default') {
@@ -285,7 +307,7 @@ export default function ReferralPayoutsAdminPage() {
       })
     }
     return searched
-  }, [demoMode, demoRows, rows, filter, countdownSort, search])
+  }, [rowSource, filter, countdownSort, search])
 
   const payoutStats = useMemo(() => {
     const pending: Record<string, number> = {}
@@ -471,7 +493,7 @@ export default function ReferralPayoutsAdminPage() {
                     ...(filter === f ? styles.chipActive : null),
                   }}
                 >
-                  {f}
+                  {f} ({filterCounts[f]})
                 </button>
               ),
             )}

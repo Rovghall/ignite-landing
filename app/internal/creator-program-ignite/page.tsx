@@ -4,7 +4,7 @@ import { FormEvent, useCallback, useEffect, useMemo, useState, type CSSPropertie
 import type { Session, User } from '@supabase/supabase-js'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
 
-type AppFilter = 'all' | 'pending' | 'approved' | 'rejected'
+type AppFilter = 'all' | 'pending' | 'approved' | 'rejected' | 'trial'
 type AppSort = 'default' | 'ending_soon'
 type PayoutFilter = 'all' | 'holding' | 'pending' | 'requested' | 'paid' | 'cancelled' | 'refunded'
 type Tab = 'applications' | 'codes' | 'payouts'
@@ -85,38 +85,40 @@ function money(cents: number, currency: string): string {
 }
 
 function filterDemoPayouts(all: RewardRow[], filter: PayoutFilter): RewardRow[] {
-  return all.filter((row) => {
-    switch (filter) {
-      case 'holding':
-        return (
-          row.reward_status === 'pending' &&
-          !row.payout_requested_at &&
-          !row.refunded_at &&
-          !row.payout_eligible
-        )
-      case 'pending':
-        return (
-          row.reward_status === 'pending' &&
-          !row.payout_requested_at &&
-          !row.refunded_at &&
-          row.payout_eligible
-        )
-      case 'requested':
-        return (
-          row.reward_status === 'pending' &&
-          !!row.payout_requested_at &&
-          !row.refunded_at
-        )
-      case 'paid':
-        return row.reward_status === 'paid'
-      case 'cancelled':
-        return row.reward_status === 'cancelled' && !row.refunded_at
-      case 'refunded':
-        return !!row.refunded_at
-      default:
-        return true
-    }
-  })
+  return all.filter((row) => rowMatchesPayoutFilter(row, filter))
+}
+
+function rowMatchesPayoutFilter(row: RewardRow, filter: PayoutFilter): boolean {
+  switch (filter) {
+    case 'holding':
+      return (
+        row.reward_status === 'pending' &&
+        !row.payout_requested_at &&
+        !row.refunded_at &&
+        !row.payout_eligible
+      )
+    case 'pending':
+      return (
+        row.reward_status === 'pending' &&
+        !row.payout_requested_at &&
+        !row.refunded_at &&
+        row.payout_eligible
+      )
+    case 'requested':
+      return (
+        row.reward_status === 'pending' &&
+        !!row.payout_requested_at &&
+        !row.refunded_at
+      )
+    case 'paid':
+      return row.reward_status === 'paid'
+    case 'cancelled':
+      return row.reward_status === 'cancelled' && !row.refunded_at
+    case 'refunded':
+      return !!row.refunded_at
+    default:
+      return true
+  }
 }
 
 function daysAgo(days: number): string {
@@ -316,6 +318,20 @@ function matchesRewardSearch(row: RewardRow, q: string): boolean {
     .join(' ')
     .toLowerCase()
   return hay.includes(q)
+}
+
+/** Matches the Trial badge shown on cards (active trial, not already premium). */
+function isOnTrial(app: ApplicationRow): boolean {
+  if (app.rc_premium_active) return false
+  if (app.creator_premium_paused) return false
+  if (app.creator_premium_active) return false
+  return Boolean(app.referral_trial_active)
+}
+
+function matchesAppFilter(app: ApplicationRow, filter: AppFilter): boolean {
+  if (filter === 'all') return true
+  if (filter === 'trial') return isOnTrial(app)
+  return app.status === filter
 }
 
 const DEMO_APPS: ApplicationRow[] = [
@@ -582,8 +598,9 @@ export default function CreatorProgramAdminPage() {
     if (!supabase) return
     setLoading(true)
     setListError(null)
+    // Always load all so tab counts stay accurate; filter client-side.
     const { data, error } = await supabase.rpc('admin_list_creator_applications', {
-      p_filter: filter,
+      p_filter: 'all',
     })
     setLoading(false)
     if (error) {
@@ -621,7 +638,7 @@ export default function CreatorProgramAdminPage() {
       }
       return next
     })
-  }, [supabase, filter])
+  }, [supabase])
 
   const loadCodes = useCallback(async () => {
     if (!supabase) return
@@ -651,8 +668,9 @@ export default function CreatorProgramAdminPage() {
     if (!supabase) return
     setLoading(true)
     setListError(null)
+    // Always load all so tab counts stay accurate; filter client-side.
     const { data, error } = await supabase.rpc('admin_list_referral_rewards', {
-      p_filter: payoutFilter,
+      p_filter: 'all',
       p_source: 'creator',
     })
     setLoading(false)
@@ -674,7 +692,7 @@ export default function CreatorProgramAdminPage() {
       return
     }
     setRewards(Array.isArray(payload.rewards) ? payload.rewards : [])
-  }, [supabase, payoutFilter])
+  }, [supabase])
 
   const loadAttributionRewards = useCallback(async () => {
     if (!supabase) return
@@ -708,11 +726,28 @@ export default function CreatorProgramAdminPage() {
     void load()
   }, [session, load, demoMode])
 
+  const appSource = demoMode ? demoApps : apps
+
+  const appCounts = useMemo(() => {
+    const counts: Record<AppFilter, number> = {
+      pending: 0,
+      approved: 0,
+      rejected: 0,
+      trial: 0,
+      all: appSource.length,
+    }
+    for (const app of appSource) {
+      if (app.status === 'pending') counts.pending += 1
+      else if (app.status === 'approved') counts.approved += 1
+      else if (app.status === 'rejected') counts.rejected += 1
+      if (isOnTrial(app)) counts.trial += 1
+    }
+    return counts
+  }, [appSource])
+
   const visibleApps = useMemo(() => {
-    const source = demoMode ? demoApps : apps
     const q = appSearch.trim().toLowerCase()
-    const filtered =
-      filter === 'all' ? [...source] : source.filter((a) => a.status === filter)
+    const filtered = appSource.filter((a) => matchesAppFilter(a, filter))
     const searched = q ? filtered.filter((a) => matchesAppSearch(a, q)) : filtered
     if (filter === 'approved' && appSort === 'ending_soon') {
       searched.sort((a, b) => {
@@ -725,17 +760,37 @@ export default function CreatorProgramAdminPage() {
       })
     }
     return searched
-  }, [demoMode, demoApps, apps, filter, appSort, appSearch])
+  }, [appSource, filter, appSort, appSearch])
 
   const visibleCodes = demoMode ? demoCodes : codes
+  const rewardSource = demoMode ? demoRewards : rewards
+
+  const payoutCounts = useMemo(() => {
+    const keys: PayoutFilter[] = [
+      'requested',
+      'holding',
+      'pending',
+      'paid',
+      'refunded',
+      'cancelled',
+      'all',
+    ]
+    const counts = {} as Record<PayoutFilter, number>
+    for (const key of keys) {
+      counts[key] =
+        key === 'all'
+          ? rewardSource.length
+          : rewardSource.filter((r) => rowMatchesPayoutFilter(r, key)).length
+    }
+    return counts
+  }, [rewardSource])
+
   const visibleRewards = useMemo(() => {
-    const source = demoMode
-      ? filterDemoPayouts(demoRewards, payoutFilter)
-      : rewards
+    const source = filterDemoPayouts(rewardSource, payoutFilter)
     const q = payoutSearch.trim().toLowerCase()
     if (!q) return source
     return source.filter((row) => matchesRewardSearch(row, q))
-  }, [demoMode, demoRewards, rewards, payoutFilter, payoutSearch])
+  }, [rewardSource, payoutFilter, payoutSearch])
 
   const attributionSource = demoMode ? demoRewards : attributionRewards
 
@@ -1464,7 +1519,7 @@ export default function CreatorProgramAdminPage() {
         <div style={styles.toolbar}>
           {tab === 'applications' ? (
             <div style={styles.toolbarGroup}>
-              {(['pending', 'approved', 'rejected', 'all'] as AppFilter[]).map((f) => (
+              {(['pending', 'trial', 'approved', 'rejected', 'all'] as AppFilter[]).map((f) => (
                 <button
                   key={f}
                   type="button"
@@ -1474,7 +1529,7 @@ export default function CreatorProgramAdminPage() {
                     ...(filter === f ? styles.chipActive : null),
                   }}
                 >
-                  {f}
+                  {f} ({appCounts[f]})
                 </button>
               ))}
             </div>
@@ -1494,7 +1549,7 @@ export default function CreatorProgramAdminPage() {
                     ...(payoutFilter === f ? styles.chipActive : null),
                   }}
                 >
-                  {f}
+                  {f} ({payoutCounts[f]})
                 </button>
               ))}
             </div>
