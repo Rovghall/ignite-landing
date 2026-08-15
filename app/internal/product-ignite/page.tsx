@@ -2934,7 +2934,7 @@ export default function ProductInsightsAdminPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
                 Alertas (Fase L)
               </p>
-              <SectionHelpInline text={SECTION_HELP.alerts} label="Alertas" />
+              <HelpTipInline text={SECTION_HELP.alerts} label="Alertas" />
             </div>
             {alerts.alerts.map((a) => (
               <div
