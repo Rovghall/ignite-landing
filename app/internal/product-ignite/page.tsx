@@ -512,6 +512,32 @@ type FastingPayload = {
   daily: FastingDaily[]
 }
 
+type AiFunnelDaily = { day: string; opens: number; messages: number }
+
+type AiFunnelPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    opens: number
+    open_users: number
+    messages: number
+    message_users: number
+    open_to_message_rate: number | null
+    messages_per_open: number | null
+    median_messages: number | null
+    avg_messages: number | null
+  }
+  message_buckets: {
+    one: number
+    light: number
+    medium: number
+    heavy: number
+  }
+  daily: AiFunnelDaily[]
+}
+
 type DaypartPayload = {
   ok: boolean
   error?: string
@@ -1144,6 +1170,41 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoAiFunnel(days: WindowDays): AiFunnelPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.3
+  const openUsers = Math.round(95 * scale)
+  const messageUsers = Math.round(openUsers * 0.62)
+  const daily = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const opens = Math.max(2, Math.round(8 + Math.sin(i / 2.3) * 3))
+    const messages = Math.max(1, Math.round(opens * 1.8))
+    return { day: d.toISOString().slice(0, 10), opens, messages }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      opens: Math.round(210 * scale),
+      open_users: openUsers,
+      messages: Math.round(380 * scale),
+      message_users: messageUsers,
+      open_to_message_rate: 0.62,
+      messages_per_open: 1.81,
+      median_messages: 3,
+      avg_messages: 4.8,
+    },
+    message_buckets: {
+      one: Math.round(messageUsers * 0.28),
+      light: Math.round(messageUsers * 0.36),
+      medium: Math.round(messageUsers * 0.24),
+      heavy: Math.round(messageUsers * 0.12),
+    },
+    daily,
+  }
+}
+
 function buildDemoFasting(days: WindowDays): FastingPayload {
   const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
   const daily = Array.from({ length: days }, (_, i) => {
@@ -1763,6 +1824,7 @@ export default function ProductInsightsAdminPage() {
   const [shareFunnel, setShareFunnel] = useState<ShareFunnelPayload | null>(null)
   const [newReturning, setNewReturning] = useState<NewReturningPayload | null>(null)
   const [fasting, setFasting] = useState<FastingPayload | null>(null)
+  const [aiFunnel, setAiFunnel] = useState<AiFunnelPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -1785,7 +1847,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp, sh, nr, fa] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp, sh, nr, fa, ai] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1807,6 +1869,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_share_funnel', { p_days: windowDays }),
       supabase.rpc('admin_product_new_returning', { p_days: windowDays }),
       supabase.rpc('admin_product_fasting', { p_days: windowDays }),
+      supabase.rpc('admin_product_ai_funnel', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1833,6 +1896,7 @@ export default function ProductInsightsAdminPage() {
       setShareFunnel(null)
       setNewReturning(null)
       setFasting(null)
+      setAiFunnel(null)
       return
     }
     if (fu.error) {
@@ -1858,6 +1922,7 @@ export default function ProductInsightsAdminPage() {
       setShareFunnel(null)
       setNewReturning(null)
       setFasting(null)
+      setAiFunnel(null)
       return
     }
 
@@ -1890,6 +1955,7 @@ export default function ProductInsightsAdminPage() {
       setShareFunnel(null)
       setNewReturning(null)
       setFasting(null)
+      setAiFunnel(null)
       return
     }
     if (!fuData?.ok) {
@@ -1919,6 +1985,7 @@ export default function ProductInsightsAdminPage() {
       setShareFunnel(null)
       setNewReturning(null)
       setFasting(null)
+      setAiFunnel(null)
       return
     }
     setOverview(ovData)
@@ -2057,6 +2124,13 @@ export default function ProductInsightsAdminPage() {
       setFasting(faData?.ok ? faData : null)
     }
 
+    if (ai.error) {
+      setAiFunnel(null)
+    } else {
+      const aiData = ai.data as AiFunnelPayload | null
+      setAiFunnel(aiData?.ok ? aiData : null)
+    }
+
     setLastUpdatedAt(new Date().toISOString())
   }, [supabase, demoMode, windowDays])
 
@@ -2096,6 +2170,7 @@ export default function ProductInsightsAdminPage() {
     setShareFunnel(buildDemoShareFunnel(windowDays))
     setNewReturning(buildDemoNewReturning(windowDays))
     setFasting(buildDemoFasting(windowDays))
+    setAiFunnel(buildDemoAiFunnel(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -2132,6 +2207,7 @@ export default function ProductInsightsAdminPage() {
       setShareFunnel(null)
       setNewReturning(null)
       setFasting(null)
+      setAiFunnel(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -2161,6 +2237,7 @@ export default function ProductInsightsAdminPage() {
     setShareFunnel(buildDemoShareFunnel(windowDays))
     setNewReturning(buildDemoNewReturning(windowDays))
     setFasting(buildDemoFasting(windowDays))
+    setAiFunnel(buildDemoAiFunnel(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -2306,6 +2383,7 @@ export default function ProductInsightsAdminPage() {
     setShareFunnel(buildDemoShareFunnel(windowDays))
     setNewReturning(buildDemoNewReturning(windowDays))
     setFasting(buildDemoFasting(windowDays))
+    setAiFunnel(buildDemoAiFunnel(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -2465,6 +2543,7 @@ export default function ProductInsightsAdminPage() {
                 ['share', 'Partilha'],
                 ['newret', 'New/Ret'],
                 ['fasting', 'Jejum'],
+                ['ai', 'AI chat'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -3939,6 +4018,113 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {aiFunnel ? (
+              <Section
+                id="ai"
+                title="AI chat (Fase Z)"
+                subtitle="ai_open → ai_message_sent: conversão e profundidade de mensagens por user."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Opens"
+                    value={fmt(aiFunnel.summary.opens)}
+                    hint={`${fmt(aiFunnel.summary.open_users)} users`}
+                  />
+                  <StatCard
+                    label="Messages"
+                    value={fmt(aiFunnel.summary.messages)}
+                    hint={`${fmt(aiFunnel.summary.message_users)} users`}
+                    tone="up"
+                  />
+                  <StatCard
+                    label="Open → msg"
+                    value={pct(aiFunnel.summary.open_to_message_rate)}
+                    hint="users"
+                  />
+                  <StatCard
+                    label="Msg / open"
+                    value={
+                      aiFunnel.summary.messages_per_open != null
+                        ? String(aiFunnel.summary.messages_per_open)
+                        : '—'
+                    }
+                  />
+                  <StatCard
+                    label="Mediana msgs"
+                    value={
+                      aiFunnel.summary.median_messages != null
+                        ? String(aiFunnel.summary.median_messages)
+                        : '—'
+                    }
+                    hint="por user com msgs"
+                  />
+                  <StatCard
+                    label="Média msgs"
+                    value={
+                      aiFunnel.summary.avg_messages != null
+                        ? String(aiFunnel.summary.avg_messages)
+                        : '—'
+                    }
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Opens / dia
+                  </p>
+                  <SparkBars
+                    label="AI opens por dia"
+                    values={aiFunnel.daily.map((d) => d.opens)}
+                  />
+                  <p className="mb-3 mt-4 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Messages / dia
+                  </p>
+                  <SparkBars
+                    label="AI messages por dia"
+                    values={aiFunnel.daily.map((d) => d.messages)}
+                  />
+                </div>
+                {aiFunnel.summary.message_users > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="border-b border-border bg-muted/40 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                      Mensagens / user
+                    </div>
+                    <table className="w-full border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">Bucket</th>
+                          <th className="px-4 py-3">Users</th>
+                          <th className="px-4 py-3">%</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(
+                          [
+                            ['one', '1'],
+                            ['light', '2–4'],
+                            ['medium', '5–14'],
+                            ['heavy', '15+'],
+                          ] as const
+                        ).map(([key, label]) => {
+                          const users = aiFunnel.message_buckets[key]
+                          const share =
+                            aiFunnel.summary.message_users > 0
+                              ? users / aiFunnel.summary.message_users
+                              : 0
+                          return (
+                            <tr key={key} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">{label}</td>
+                              <td className="px-4 py-3">{fmt(users)}</td>
+                              <td className="px-4 py-3">{pct(share)}</td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -4678,7 +4864,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase Y · jejum. A–X continuam ativos.
+          Fase Z · AI chat funnel. A–Y continuam ativos.
         </p>
       </div>
     </main>
