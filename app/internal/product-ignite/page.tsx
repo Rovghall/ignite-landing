@@ -567,6 +567,60 @@ type DemographicsPayload = {
   by_age: DemographicsBucket[]
 }
 
+type FinancePayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  assumptions: {
+    currency: string
+    monthly_arpu_cents: number
+    annual_mrr_cents: number
+    ai_message_cents: number
+    snap_meal_cents: number
+    note: string
+  }
+  revenue_est: {
+    premium_active: number
+    premium_annualish: number
+    premium_other: number
+    mrr_cents: number
+    converted_users_window: number
+    converted_events_window: number
+    gross_new_cents_window: number
+    creator_comp_active: number
+    creator_comp_opp_cents: number
+  }
+  payouts: {
+    window: {
+      pending_n: number
+      paid_n: number
+      pending_cents: number
+      paid_cents: number
+      pending_creator_cents: number
+      pending_friend_cents: number
+      paid_creator_cents: number
+      paid_friend_cents: number
+    }
+    lifetime: {
+      pending_cents: number
+      paid_cents: number
+    }
+  }
+  cogs_est: {
+    ai_messages: number
+    ai_cents: number
+    snap_meals: number
+    snap_cents: number
+    snap_opens: number
+    total_cents: number
+  }
+  net_est: {
+    mrr_minus_lifetime_pending_cents: number
+    window_gross_minus_paid_payouts_minus_cogs_cents: number
+  }
+}
+
 type BundlePayload = {
   ok: boolean
   error?: string
@@ -582,6 +636,7 @@ type BundlePayload = {
   fasting: FastingPayload | null
   ai_funnel: AiFunnelPayload | null
   demographics: DemographicsPayload | null
+  finance: FinancePayload | null
 }
 
 type DaypartPayload = {
@@ -1234,6 +1289,80 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
       { reason: 'early', events: Math.round(24 * scale), users: Math.round(20 * scale) },
     ],
     daily_quick_log,
+  }
+}
+
+function moneyCents(cents: number | null | undefined, currency = 'USD'): string {
+  if (cents == null || !Number.isFinite(cents)) return '—'
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency,
+    maximumFractionDigits: 0,
+  }).format(cents / 100)
+}
+
+function buildDemoFinance(days: WindowDays): FinancePayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
+  const premium = Math.round(214 * (days === 90 ? 1.1 : 1))
+  const annualish = Math.round(premium * 0.55)
+  const other = premium - annualish
+  const mrr = annualish * 417 + other * 999
+  const aiMsg = Math.round(380 * scale)
+  const snapMeals = Math.round(260 * scale)
+  const pendingW = Math.round(45000 * scale)
+  const paidW = Math.round(28000 * scale)
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    assumptions: {
+      currency: 'USD',
+      monthly_arpu_cents: 999,
+      annual_mrr_cents: 417,
+      ai_message_cents: 2,
+      snap_meal_cents: 5,
+      note: 'Demo — receita/API estimados; payouts reais no live.',
+    },
+    revenue_est: {
+      premium_active: premium,
+      premium_annualish: annualish,
+      premium_other: other,
+      mrr_cents: mrr,
+      converted_users_window: Math.round(18 * scale),
+      converted_events_window: Math.round(20 * scale),
+      gross_new_cents_window: Math.round(18 * scale) * 999,
+      creator_comp_active: 12,
+      creator_comp_opp_cents: 12 * 999,
+    },
+    payouts: {
+      window: {
+        pending_n: Math.round(12 * scale),
+        paid_n: Math.round(8 * scale),
+        pending_cents: pendingW,
+        paid_cents: paidW,
+        pending_creator_cents: Math.round(pendingW * 0.6),
+        pending_friend_cents: Math.round(pendingW * 0.4),
+        paid_creator_cents: Math.round(paidW * 0.55),
+        paid_friend_cents: Math.round(paidW * 0.45),
+      },
+      lifetime: {
+        pending_cents: 120000,
+        paid_cents: 340000,
+      },
+    },
+    cogs_est: {
+      ai_messages: aiMsg,
+      ai_cents: aiMsg * 2,
+      snap_meals: snapMeals,
+      snap_cents: snapMeals * 5,
+      snap_opens: Math.round(420 * scale),
+      total_cents: aiMsg * 2 + snapMeals * 5,
+    },
+    net_est: {
+      mrr_minus_lifetime_pending_cents: mrr - 120000,
+      window_gross_minus_paid_payouts_minus_cogs_cents:
+        Math.round(18 * scale) * 999 - paidW - (aiMsg * 2 + snapMeals * 5),
+    },
   }
 }
 
@@ -1945,6 +2074,7 @@ export default function ProductInsightsAdminPage() {
   const [fasting, setFasting] = useState<FastingPayload | null>(null)
   const [aiFunnel, setAiFunnel] = useState<AiFunnelPayload | null>(null)
   const [demographics, setDemographics] = useState<DemographicsPayload | null>(null)
+  const [finance, setFinance] = useState<FinancePayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -2010,6 +2140,7 @@ export default function ProductInsightsAdminPage() {
       setFasting(null)
       setAiFunnel(null)
       setDemographics(null)
+      setFinance(null)
       return
     }
     if (fu.error) {
@@ -2037,6 +2168,7 @@ export default function ProductInsightsAdminPage() {
       setFasting(null)
       setAiFunnel(null)
       setDemographics(null)
+      setFinance(null)
       return
     }
 
@@ -2071,6 +2203,7 @@ export default function ProductInsightsAdminPage() {
       setFasting(null)
       setAiFunnel(null)
       setDemographics(null)
+      setFinance(null)
       return
     }
     if (!fuData?.ok) {
@@ -2102,6 +2235,7 @@ export default function ProductInsightsAdminPage() {
       setFasting(null)
       setAiFunnel(null)
       setDemographics(null)
+      setFinance(null)
       return
     }
     setOverview(ovData)
@@ -2195,6 +2329,7 @@ export default function ProductInsightsAdminPage() {
       setFasting(null)
       setAiFunnel(null)
       setDemographics(null)
+      setFinance(null)
     } else {
       const bunData = bun.data as BundlePayload | null
       if (!bunData?.ok) {
@@ -2208,6 +2343,7 @@ export default function ProductInsightsAdminPage() {
         setFasting(null)
         setAiFunnel(null)
         setDemographics(null)
+        setFinance(null)
       } else {
         const pick = <T extends { ok?: boolean }>(v: T | null | undefined): T | null =>
           v && v.ok !== false ? v : null
@@ -2221,6 +2357,7 @@ export default function ProductInsightsAdminPage() {
         setFasting(pick(bunData.fasting))
         setAiFunnel(pick(bunData.ai_funnel))
         setDemographics(pick(bunData.demographics))
+        setFinance(pick(bunData.finance))
       }
     }
 
@@ -2265,6 +2402,7 @@ export default function ProductInsightsAdminPage() {
     setFasting(buildDemoFasting(windowDays))
     setAiFunnel(buildDemoAiFunnel(windowDays))
     setDemographics(buildDemoDemographics(windowDays))
+    setFinance(buildDemoFinance(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -2303,6 +2441,7 @@ export default function ProductInsightsAdminPage() {
       setFasting(null)
       setAiFunnel(null)
       setDemographics(null)
+      setFinance(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -2334,6 +2473,7 @@ export default function ProductInsightsAdminPage() {
     setFasting(buildDemoFasting(windowDays))
     setAiFunnel(buildDemoAiFunnel(windowDays))
     setDemographics(buildDemoDemographics(windowDays))
+    setFinance(buildDemoFinance(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -2481,6 +2621,7 @@ export default function ProductInsightsAdminPage() {
     setFasting(buildDemoFasting(windowDays))
     setAiFunnel(buildDemoAiFunnel(windowDays))
     setDemographics(buildDemoDemographics(windowDays))
+    setFinance(buildDemoFinance(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -2642,6 +2783,7 @@ export default function ProductInsightsAdminPage() {
                 ['fasting', 'Jejum'],
                 ['ai', 'AI chat'],
                 ['demographics', 'Demografia'],
+                ['finance', 'Finance'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -4321,6 +4463,214 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {finance ? (
+              <Section
+                id="finance"
+                title="Finance (Fase AC)"
+                subtitle={finance.assumptions.note}
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="MRR est."
+                    value={moneyCents(finance.revenue_est.mrr_cents, finance.assumptions.currency)}
+                    hint={`${fmt(finance.revenue_est.premium_active)} premium`}
+                    tone="up"
+                  />
+                  <StatCard
+                    label="Gross new est."
+                    value={moneyCents(
+                      finance.revenue_est.gross_new_cents_window,
+                      finance.assumptions.currency,
+                    )}
+                    hint={`${fmt(finance.revenue_est.converted_users_window)} converts`}
+                  />
+                  <StatCard
+                    label="Payouts pending"
+                    value={moneyCents(
+                      finance.payouts.window.pending_cents,
+                      finance.assumptions.currency,
+                    )}
+                    hint={`${fmt(finance.payouts.window.pending_n)} rewards · janela`}
+                    tone="down"
+                  />
+                  <StatCard
+                    label="Payouts paid"
+                    value={moneyCents(
+                      finance.payouts.window.paid_cents,
+                      finance.assumptions.currency,
+                    )}
+                    hint="janela · real"
+                  />
+                  <StatCard
+                    label="AI+Snap COGS est."
+                    value={moneyCents(
+                      finance.cogs_est.total_cents,
+                      finance.assumptions.currency,
+                    )}
+                    hint="janela"
+                    tone="down"
+                  />
+                  <StatCard
+                    label="Liability life"
+                    value={moneyCents(
+                      finance.payouts.lifetime.pending_cents,
+                      finance.assumptions.currency,
+                    )}
+                    hint="pending all-time"
+                  />
+                </div>
+                <div className="mt-3 grid gap-3 lg:grid-cols-2">
+                  <div className="overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                      Receita estimada
+                    </p>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">Premium annualish</span>
+                        <span className="font-semibold">
+                          {fmt(finance.revenue_est.premium_annualish)}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">Premium other/monthly</span>
+                        <span className="font-semibold">
+                          {fmt(finance.revenue_est.premium_other)}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">Creator comp (opp.)</span>
+                        <span className="font-semibold">
+                          {moneyCents(
+                            finance.revenue_est.creator_comp_opp_cents,
+                            finance.assumptions.currency,
+                          )}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3 border-t border-border/70 pt-2">
+                        <span className="text-muted-foreground">ARPU mensal assumido</span>
+                        <span className="font-semibold">
+                          {moneyCents(
+                            finance.assumptions.monthly_arpu_cents,
+                            finance.assumptions.currency,
+                          )}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                      Payouts (reais)
+                    </p>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">Pending creator</span>
+                        <span className="font-semibold">
+                          {moneyCents(
+                            finance.payouts.window.pending_creator_cents,
+                            finance.assumptions.currency,
+                          )}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">Pending friend</span>
+                        <span className="font-semibold">
+                          {moneyCents(
+                            finance.payouts.window.pending_friend_cents,
+                            finance.assumptions.currency,
+                          )}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">Paid creator</span>
+                        <span className="font-semibold">
+                          {moneyCents(
+                            finance.payouts.window.paid_creator_cents,
+                            finance.assumptions.currency,
+                          )}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">Paid friend</span>
+                        <span className="font-semibold">
+                          {moneyCents(
+                            finance.payouts.window.paid_friend_cents,
+                            finance.assumptions.currency,
+                          )}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3 border-t border-border/70 pt-2">
+                        <span className="text-muted-foreground">Paid lifetime</span>
+                        <span className="font-semibold">
+                          {moneyCents(
+                            finance.payouts.lifetime.paid_cents,
+                            finance.assumptions.currency,
+                          )}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="mt-3 grid gap-3 lg:grid-cols-2">
+                  <div className="overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                      COGS API estimado
+                    </p>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">
+                          AI msgs ({fmt(finance.cogs_est.ai_messages)})
+                        </span>
+                        <span className="font-semibold">
+                          {moneyCents(finance.cogs_est.ai_cents, finance.assumptions.currency)}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">
+                          Snap meals ({fmt(finance.cogs_est.snap_meals)})
+                        </span>
+                        <span className="font-semibold">
+                          {moneyCents(finance.cogs_est.snap_cents, finance.assumptions.currency)}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3 border-t border-border/70 pt-2">
+                        <span className="text-muted-foreground">Total est.</span>
+                        <span className="font-semibold">
+                          {moneyCents(finance.cogs_est.total_cents, finance.assumptions.currency)}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                      Net aproximado
+                    </p>
+                    <ul className="space-y-2 text-sm">
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">MRR − liability pending</span>
+                        <span className="font-semibold">
+                          {moneyCents(
+                            finance.net_est.mrr_minus_lifetime_pending_cents,
+                            finance.assumptions.currency,
+                          )}
+                        </span>
+                      </li>
+                      <li className="flex justify-between gap-3">
+                        <span className="text-muted-foreground">
+                          Janela: gross − paid − COGS
+                        </span>
+                        <span className="font-semibold">
+                          {moneyCents(
+                            finance.net_est.window_gross_minus_paid_payouts_minus_cogs_cents,
+                            finance.assumptions.currency,
+                          )}
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -5060,7 +5410,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase AB · demografia (sexo/idade × premium). A–AA continuam ativos.
+          Fase AC · finance (MRR est. + payouts reais + COGS est.). A–AB continuam ativos.
         </p>
       </div>
     </main>
