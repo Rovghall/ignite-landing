@@ -538,6 +538,22 @@ type AiFunnelPayload = {
   daily: AiFunnelDaily[]
 }
 
+type BundlePayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  adoption: AdoptionPayload | null
+  time_to_convert: TimeToConvertPayload | null
+  intensity: IntensityPayload | null
+  snap_funnel: SnapFunnelPayload | null
+  daypart: DaypartPayload | null
+  share_funnel: ShareFunnelPayload | null
+  new_returning: NewReturningPayload | null
+  fasting: FastingPayload | null
+  ai_funnel: AiFunnelPayload | null
+}
+
 type DaypartPayload = {
   ok: boolean
   error?: string
@@ -1847,7 +1863,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp, sh, nr, fa, ai] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, bun] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1861,15 +1877,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_compare', { p_days: windowDays }),
       supabase.rpc('admin_product_retention_matrix', { p_weeks: 8 }),
       supabase.rpc('admin_product_top_referrers', { p_days: windowDays, p_limit: 15 }),
-      supabase.rpc('admin_product_adoption', { p_days: windowDays }),
-      supabase.rpc('admin_product_time_to_convert', { p_days: windowDays }),
-      supabase.rpc('admin_product_intensity', { p_days: windowDays }),
-      supabase.rpc('admin_product_snap_funnel', { p_days: windowDays }),
-      supabase.rpc('admin_product_daypart', { p_days: windowDays }),
-      supabase.rpc('admin_product_share_funnel', { p_days: windowDays }),
-      supabase.rpc('admin_product_new_returning', { p_days: windowDays }),
-      supabase.rpc('admin_product_fasting', { p_days: windowDays }),
-      supabase.rpc('admin_product_ai_funnel', { p_days: windowDays }),
+      supabase.rpc('admin_product_bundle', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -2068,67 +2076,41 @@ export default function ProductInsightsAdminPage() {
       setTopReferrers(trData?.ok ? trData : null)
     }
 
-    if (ad.error) {
+    if (bun.error) {
       setAdoption(null)
-    } else {
-      const adData = ad.data as AdoptionPayload | null
-      setAdoption(adData?.ok ? adData : null)
-    }
-
-    if (ttc.error) {
       setTimeToConvert(null)
-    } else {
-      const ttcData = ttc.data as TimeToConvertPayload | null
-      setTimeToConvert(ttcData?.ok ? ttcData : null)
-    }
-
-    if (it.error) {
       setIntensity(null)
-    } else {
-      const itData = it.data as IntensityPayload | null
-      setIntensity(itData?.ok ? itData : null)
-    }
-
-    if (sf.error) {
       setSnapFunnel(null)
-    } else {
-      const sfData = sf.data as SnapFunnelPayload | null
-      setSnapFunnel(sfData?.ok ? sfData : null)
-    }
-
-    if (dp.error) {
       setDaypart(null)
-    } else {
-      const dpData = dp.data as DaypartPayload | null
-      setDaypart(dpData?.ok ? dpData : null)
-    }
-
-    if (sh.error) {
       setShareFunnel(null)
-    } else {
-      const shData = sh.data as ShareFunnelPayload | null
-      setShareFunnel(shData?.ok ? shData : null)
-    }
-
-    if (nr.error) {
       setNewReturning(null)
-    } else {
-      const nrData = nr.data as NewReturningPayload | null
-      setNewReturning(nrData?.ok ? nrData : null)
-    }
-
-    if (fa.error) {
       setFasting(null)
-    } else {
-      const faData = fa.data as FastingPayload | null
-      setFasting(faData?.ok ? faData : null)
-    }
-
-    if (ai.error) {
       setAiFunnel(null)
     } else {
-      const aiData = ai.data as AiFunnelPayload | null
-      setAiFunnel(aiData?.ok ? aiData : null)
+      const bunData = bun.data as BundlePayload | null
+      if (!bunData?.ok) {
+        setAdoption(null)
+        setTimeToConvert(null)
+        setIntensity(null)
+        setSnapFunnel(null)
+        setDaypart(null)
+        setShareFunnel(null)
+        setNewReturning(null)
+        setFasting(null)
+        setAiFunnel(null)
+      } else {
+        const pick = <T extends { ok?: boolean }>(v: T | null | undefined): T | null =>
+          v && v.ok !== false ? v : null
+        setAdoption(pick(bunData.adoption))
+        setTimeToConvert(pick(bunData.time_to_convert))
+        setIntensity(pick(bunData.intensity))
+        setSnapFunnel(pick(bunData.snap_funnel))
+        setDaypart(pick(bunData.daypart))
+        setShareFunnel(pick(bunData.share_funnel))
+        setNewReturning(pick(bunData.new_returning))
+        setFasting(pick(bunData.fasting))
+        setAiFunnel(pick(bunData.ai_funnel))
+      }
     }
 
     setLastUpdatedAt(new Date().toISOString())
@@ -4864,7 +4846,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase Z · AI chat funnel. A–Y continuam ativos.
+          Fase AA · bundle R–Z (1 RPC). A–Z continuam ativos.
         </p>
       </div>
     </main>
