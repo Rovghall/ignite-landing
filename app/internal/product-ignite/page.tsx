@@ -460,6 +460,34 @@ type ShareFunnelPayload = {
   daily: ShareFunnelDaily[]
 }
 
+type NewReturningDaily = {
+  day: string
+  new_openers: number
+  returning_openers: number
+}
+
+type NewReturningPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  opens: {
+    openers: number
+    new_openers: number
+    returning_openers: number
+    new_share: number | null
+    returning_share: number | null
+  }
+  meals: {
+    loggers: number
+    new_loggers: number
+    returning_loggers: number
+    new_share: number | null
+    returning_share: number | null
+  }
+  daily: NewReturningDaily[]
+}
+
 type DaypartPayload = {
   ok: boolean
   error?: string
@@ -1092,6 +1120,47 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoNewReturning(days: WindowDays): NewReturningPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
+  const openers = Math.round(520 * scale)
+  const newOpeners = Math.round(openers * 0.22)
+  const returningOpeners = openers - newOpeners
+  const loggers = Math.round(380 * scale)
+  const newLoggers = Math.round(loggers * 0.18)
+  const returningLoggers = loggers - newLoggers
+  const daily = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const ret = Math.max(8, Math.round(22 + Math.sin(i / 2.5) * 6))
+    const neu = Math.max(2, Math.round(ret * 0.28))
+    return {
+      day: d.toISOString().slice(0, 10),
+      new_openers: neu,
+      returning_openers: ret,
+    }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    opens: {
+      openers,
+      new_openers: newOpeners,
+      returning_openers: returningOpeners,
+      new_share: Number((newOpeners / openers).toFixed(3)),
+      returning_share: Number((returningOpeners / openers).toFixed(3)),
+    },
+    meals: {
+      loggers,
+      new_loggers: newLoggers,
+      returning_loggers: returningLoggers,
+      new_share: Number((newLoggers / loggers).toFixed(3)),
+      returning_share: Number((returningLoggers / loggers).toFixed(3)),
+    },
+    daily,
+  }
+}
+
 function buildDemoShareFunnel(days: WindowDays): ShareFunnelPayload {
   const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.3
   const daily = Array.from({ length: days }, (_, i) => {
@@ -1633,6 +1702,7 @@ export default function ProductInsightsAdminPage() {
   const [snapFunnel, setSnapFunnel] = useState<SnapFunnelPayload | null>(null)
   const [daypart, setDaypart] = useState<DaypartPayload | null>(null)
   const [shareFunnel, setShareFunnel] = useState<ShareFunnelPayload | null>(null)
+  const [newReturning, setNewReturning] = useState<NewReturningPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -1655,7 +1725,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp, sh] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp, sh, nr] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1675,6 +1745,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_snap_funnel', { p_days: windowDays }),
       supabase.rpc('admin_product_daypart', { p_days: windowDays }),
       supabase.rpc('admin_product_share_funnel', { p_days: windowDays }),
+      supabase.rpc('admin_product_new_returning', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1699,6 +1770,7 @@ export default function ProductInsightsAdminPage() {
       setSnapFunnel(null)
       setDaypart(null)
       setShareFunnel(null)
+      setNewReturning(null)
       return
     }
     if (fu.error) {
@@ -1722,6 +1794,7 @@ export default function ProductInsightsAdminPage() {
       setSnapFunnel(null)
       setDaypart(null)
       setShareFunnel(null)
+      setNewReturning(null)
       return
     }
 
@@ -1752,6 +1825,7 @@ export default function ProductInsightsAdminPage() {
       setSnapFunnel(null)
       setDaypart(null)
       setShareFunnel(null)
+      setNewReturning(null)
       return
     }
     if (!fuData?.ok) {
@@ -1779,6 +1853,7 @@ export default function ProductInsightsAdminPage() {
       setSnapFunnel(null)
       setDaypart(null)
       setShareFunnel(null)
+      setNewReturning(null)
       return
     }
     setOverview(ovData)
@@ -1903,6 +1978,13 @@ export default function ProductInsightsAdminPage() {
       setShareFunnel(shData?.ok ? shData : null)
     }
 
+    if (nr.error) {
+      setNewReturning(null)
+    } else {
+      const nrData = nr.data as NewReturningPayload | null
+      setNewReturning(nrData?.ok ? nrData : null)
+    }
+
     setLastUpdatedAt(new Date().toISOString())
   }, [supabase, demoMode, windowDays])
 
@@ -1940,6 +2022,7 @@ export default function ProductInsightsAdminPage() {
     setSnapFunnel(buildDemoSnapFunnel(windowDays))
     setDaypart(buildDemoDaypart(windowDays))
     setShareFunnel(buildDemoShareFunnel(windowDays))
+    setNewReturning(buildDemoNewReturning(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -1974,6 +2057,7 @@ export default function ProductInsightsAdminPage() {
       setSnapFunnel(null)
       setDaypart(null)
       setShareFunnel(null)
+      setNewReturning(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -2001,6 +2085,7 @@ export default function ProductInsightsAdminPage() {
     setSnapFunnel(buildDemoSnapFunnel(windowDays))
     setDaypart(buildDemoDaypart(windowDays))
     setShareFunnel(buildDemoShareFunnel(windowDays))
+    setNewReturning(buildDemoNewReturning(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -2144,6 +2229,7 @@ export default function ProductInsightsAdminPage() {
     setSnapFunnel(buildDemoSnapFunnel(windowDays))
     setDaypart(buildDemoDaypart(windowDays))
     setShareFunnel(buildDemoShareFunnel(windowDays))
+    setNewReturning(buildDemoNewReturning(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -2301,6 +2387,7 @@ export default function ProductInsightsAdminPage() {
                 ['snap', 'Snap Track'],
                 ['daypart', 'Horários'],
                 ['share', 'Partilha'],
+                ['newret', 'New/Ret'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -3635,6 +3722,57 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {newReturning ? (
+              <Section
+                id="newret"
+                title="New vs returning (Fase X)"
+                subtitle="Openers/loggers no período: novos (1ª vez ever) vs returning (já tinham open/meal antes da janela)."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard label="Openers" value={fmt(newReturning.opens.openers)} />
+                  <StatCard
+                    label="New opens"
+                    value={fmt(newReturning.opens.new_openers)}
+                    hint={pct(newReturning.opens.new_share)}
+                  />
+                  <StatCard
+                    label="Returning opens"
+                    value={fmt(newReturning.opens.returning_openers)}
+                    hint={pct(newReturning.opens.returning_share)}
+                    tone="up"
+                  />
+                  <StatCard label="Loggers" value={fmt(newReturning.meals.loggers)} />
+                  <StatCard
+                    label="New loggers"
+                    value={fmt(newReturning.meals.new_loggers)}
+                    hint={pct(newReturning.meals.new_share)}
+                  />
+                  <StatCard
+                    label="Returning meals"
+                    value={fmt(newReturning.meals.returning_loggers)}
+                    hint={pct(newReturning.meals.returning_share)}
+                    tone="up"
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    New openers / dia
+                  </p>
+                  <SparkBars
+                    label="New openers por dia"
+                    values={newReturning.daily.map((d) => d.new_openers)}
+                  />
+                  <p className="mb-3 mt-4 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Returning openers / dia
+                  </p>
+                  <SparkBars
+                    label="Returning openers por dia"
+                    values={newReturning.daily.map((d) => d.returning_openers)}
+                  />
+                </div>
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -4374,7 +4512,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase W · funil de partilha. A–V continuam ativos.
+          Fase X · new vs returning. A–W continuam ativos.
         </p>
       </div>
     </main>
