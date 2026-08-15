@@ -422,6 +422,31 @@ type AdoptionPayload = {
   features: AdoptionFeature[]
 }
 
+type SnapFunnelDaily = { day: string; opens: number; fails: number; meals: number }
+type SnapFunnelSource = { source: string; meals: number; users: number }
+type SnapFunnelFail = { source: string; events: number; users: number }
+
+type SnapFunnelPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    snap_opens: number
+    snap_open_users: number
+    analysis_fails: number
+    analysis_fail_users: number
+    snap_meals: number
+    snap_meal_users: number
+    open_to_meal_rate: number | null
+    fail_per_open: number | null
+    meal_per_open: number | null
+  }
+  by_source: SnapFunnelSource[]
+  fail_by_source: SnapFunnelFail[]
+  daily: SnapFunnelDaily[]
+}
+
 type IntensityPayload = {
   ok: boolean
   error?: string
@@ -1003,6 +1028,46 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoSnapFunnel(days: WindowDays): SnapFunnelPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.4
+  const daily = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const opens = Math.max(4, Math.round(18 + Math.sin(i / 2.4) * 6 + (i % 4)))
+    const fails = Math.max(0, Math.round(opens * 0.12))
+    const meals = Math.max(2, Math.round(opens * 0.55))
+    return { day: d.toISOString().slice(0, 10), opens, fails, meals }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      snap_opens: Math.round(420 * scale),
+      snap_open_users: Math.round(210 * scale),
+      analysis_fails: Math.round(48 * scale),
+      analysis_fail_users: Math.round(36 * scale),
+      snap_meals: Math.round(260 * scale),
+      snap_meal_users: Math.round(150 * scale),
+      open_to_meal_rate: 0.71,
+      fail_per_open: 0.114,
+      meal_per_open: 0.62,
+    },
+    by_source: [
+      { source: 'snap_track_reviewed_ai', meals: Math.round(140 * scale), users: Math.round(90 * scale) },
+      { source: 'snap_track_reviewed_db', meals: Math.round(70 * scale), users: Math.round(48 * scale) },
+      { source: 'snap_cook', meals: Math.round(35 * scale), users: Math.round(22 * scale) },
+      { source: 'snap_track_packaged_reviewed_ai', meals: Math.round(15 * scale), users: Math.round(12 * scale) },
+    ],
+    fail_by_source: [
+      { source: 'snap', events: Math.round(28 * scale), users: Math.round(22 * scale) },
+      { source: 'describe', events: Math.round(12 * scale), users: Math.round(10 * scale) },
+      { source: '(unknown)', events: Math.round(8 * scale), users: Math.round(6 * scale) },
+    ],
+    daily,
+  }
+}
+
 function buildDemoIntensity(days: WindowDays): IntensityPayload {
   const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
   const openers = Math.round(520 * scale)
@@ -1415,6 +1480,7 @@ export default function ProductInsightsAdminPage() {
   const [adoption, setAdoption] = useState<AdoptionPayload | null>(null)
   const [timeToConvert, setTimeToConvert] = useState<TimeToConvertPayload | null>(null)
   const [intensity, setIntensity] = useState<IntensityPayload | null>(null)
+  const [snapFunnel, setSnapFunnel] = useState<SnapFunnelPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -1437,7 +1503,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1454,6 +1520,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_adoption', { p_days: windowDays }),
       supabase.rpc('admin_product_time_to_convert', { p_days: windowDays }),
       supabase.rpc('admin_product_intensity', { p_days: windowDays }),
+      supabase.rpc('admin_product_snap_funnel', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1475,6 +1542,7 @@ export default function ProductInsightsAdminPage() {
       setAdoption(null)
       setTimeToConvert(null)
       setIntensity(null)
+      setSnapFunnel(null)
       return
     }
     if (fu.error) {
@@ -1495,6 +1563,7 @@ export default function ProductInsightsAdminPage() {
       setAdoption(null)
       setTimeToConvert(null)
       setIntensity(null)
+      setSnapFunnel(null)
       return
     }
 
@@ -1522,6 +1591,7 @@ export default function ProductInsightsAdminPage() {
       setAdoption(null)
       setTimeToConvert(null)
       setIntensity(null)
+      setSnapFunnel(null)
       return
     }
     if (!fuData?.ok) {
@@ -1546,6 +1616,7 @@ export default function ProductInsightsAdminPage() {
       setAdoption(null)
       setTimeToConvert(null)
       setIntensity(null)
+      setSnapFunnel(null)
       return
     }
     setOverview(ovData)
@@ -1649,6 +1720,13 @@ export default function ProductInsightsAdminPage() {
       setIntensity(itData?.ok ? itData : null)
     }
 
+    if (sf.error) {
+      setSnapFunnel(null)
+    } else {
+      const sfData = sf.data as SnapFunnelPayload | null
+      setSnapFunnel(sfData?.ok ? sfData : null)
+    }
+
     setLastUpdatedAt(new Date().toISOString())
   }, [supabase, demoMode, windowDays])
 
@@ -1683,6 +1761,7 @@ export default function ProductInsightsAdminPage() {
     setAdoption(buildDemoAdoption(windowDays))
     setTimeToConvert(buildDemoTimeToConvert(windowDays))
     setIntensity(buildDemoIntensity(windowDays))
+    setSnapFunnel(buildDemoSnapFunnel(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -1714,6 +1793,7 @@ export default function ProductInsightsAdminPage() {
     setAdoption(null)
     setTimeToConvert(null)
       setIntensity(null)
+      setSnapFunnel(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -1738,6 +1818,7 @@ export default function ProductInsightsAdminPage() {
         setAdoption(buildDemoAdoption(windowDays))
         setTimeToConvert(buildDemoTimeToConvert(windowDays))
     setIntensity(buildDemoIntensity(windowDays))
+    setSnapFunnel(buildDemoSnapFunnel(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -1878,6 +1959,7 @@ export default function ProductInsightsAdminPage() {
                   setAdoption(buildDemoAdoption(windowDays))
                   setTimeToConvert(buildDemoTimeToConvert(windowDays))
     setIntensity(buildDemoIntensity(windowDays))
+    setSnapFunnel(buildDemoSnapFunnel(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -2032,6 +2114,7 @@ export default function ProductInsightsAdminPage() {
                 ['adoption', 'Adoção'],
                 ['ttc', 'Time-to-pay'],
                 ['intensity', 'Intensidade'],
+                ['snap', 'Snap Track'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -3029,6 +3112,129 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {snapFunnel ? (
+              <Section
+                id="snap"
+                title="Snap Track (Fase U)"
+                subtitle="Open → analysis fail → refeições Snap (nutrition_logs). Fail rate = fails / opens."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Opens"
+                    value={fmt(snapFunnel.summary.snap_opens)}
+                    hint={`${fmt(snapFunnel.summary.snap_open_users)} users`}
+                  />
+                  <StatCard
+                    label="Meals Snap"
+                    value={fmt(snapFunnel.summary.snap_meals)}
+                    hint={`${fmt(snapFunnel.summary.snap_meal_users)} users`}
+                    tone="up"
+                  />
+                  <StatCard
+                    label="Open → meal"
+                    value={pct(snapFunnel.summary.open_to_meal_rate)}
+                    hint="users"
+                  />
+                  <StatCard
+                    label="Meal / open"
+                    value={
+                      snapFunnel.summary.meal_per_open != null
+                        ? String(snapFunnel.summary.meal_per_open)
+                        : '—'
+                    }
+                    hint="eventos"
+                  />
+                  <StatCard
+                    label="Fails"
+                    value={fmt(snapFunnel.summary.analysis_fails)}
+                    hint={`${fmt(snapFunnel.summary.analysis_fail_users)} users`}
+                    tone="down"
+                  />
+                  <StatCard
+                    label="Fail / open"
+                    value={pct(snapFunnel.summary.fail_per_open)}
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Opens / dia
+                  </p>
+                  <SparkBars
+                    label="Snap opens por dia"
+                    values={snapFunnel.daily.map((d) => d.opens)}
+                  />
+                  <p className="mb-3 mt-4 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Meals Snap / dia
+                  </p>
+                  <SparkBars
+                    label="Snap meals por dia"
+                    values={snapFunnel.daily.map((d) => d.meals)}
+                  />
+                  <p className="mb-3 mt-4 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Fails / dia
+                  </p>
+                  <SparkBars
+                    label="Analysis fails por dia"
+                    values={snapFunnel.daily.map((d) => d.fails)}
+                  />
+                </div>
+                <div className="mt-3 grid gap-3 lg:grid-cols-2">
+                  {snapFunnel.by_source.length > 0 ? (
+                    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                      <div className="border-b border-border bg-muted/40 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                        Meals por source
+                      </div>
+                      <table className="w-full border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Source</th>
+                            <th className="px-4 py-3">Meals</th>
+                            <th className="px-4 py-3">Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {snapFunnel.by_source.map((row) => (
+                            <tr key={row.source} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {labelSource(row.source, row.source)}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.meals)}</td>
+                              <td className="px-4 py-3">{fmt(row.users)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : null}
+                  {snapFunnel.fail_by_source.length > 0 ? (
+                    <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                      <div className="border-b border-border bg-muted/40 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                        Fails por origem
+                      </div>
+                      <table className="w-full border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Source</th>
+                            <th className="px-4 py-3">Events</th>
+                            <th className="px-4 py-3">Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {snapFunnel.fail_by_source.map((row) => (
+                            <tr key={row.source} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">{row.source}</td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3">{fmt(row.users)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  ) : null}
+                </div>
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -3768,7 +3974,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase T · intensidade (power users). A–S continuam ativos.
+          Fase U · funil Snap Track. A–T continuam ativos.
         </p>
       </div>
     </main>
