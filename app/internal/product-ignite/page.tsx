@@ -231,6 +231,38 @@ type ActivationPayload = {
   daily: Array<{ day: string; signups: number; activated_24h: number }>
 }
 
+type GrowthPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    referrals: number
+    referrers: number
+    friend: number
+    creator: number
+    signups: number
+    referred_signups: number
+    referral_share: number | null
+    activated_7d: number
+    activation_rate_7d: number | null
+    premium_active: number
+    rewards_pending: number
+    rewards_paid: number
+    rewards_cancelled: number
+    pending_cents: number
+    paid_cents: number
+  }
+  by_status: Array<{ status: string; events: number; users: number }>
+  by_source: Array<{
+    source: string
+    events: number
+    referrers: number
+    referred: number
+  }>
+  daily: Array<{ day: string; referrals: number; friend: number; creator: number }>
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -653,6 +685,55 @@ function buildDemoActivation(days: WindowDays): ActivationPayload {
   }
 }
 
+function buildDemoGrowth(days: WindowDays): GrowthPayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  const daily = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const friend = Math.max(0, Math.round((2 + (i % 3)) * scale))
+    const creator = Math.max(0, Math.round((1 + (i % 2)) * scale))
+    return {
+      day: d.toISOString().slice(0, 10),
+      referrals: friend + creator,
+      friend,
+      creator,
+    }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      referrals: Math.round(42 * scale),
+      referrers: Math.round(28 * scale),
+      friend: Math.round(26 * scale),
+      creator: Math.round(16 * scale),
+      signups: Math.round(180 * scale),
+      referred_signups: Math.round(38 * scale),
+      referral_share: 0.211,
+      activated_7d: Math.round(24 * scale),
+      activation_rate_7d: 0.571,
+      premium_active: Math.round(9 * scale),
+      rewards_pending: Math.round(6 * scale),
+      rewards_paid: Math.round(4 * scale),
+      rewards_cancelled: Math.round(1 * scale),
+      pending_cents: Math.round(6000 * scale),
+      paid_cents: Math.round(4000 * scale),
+    },
+    by_status: [
+      { status: 'trial_active', events: Math.round(18 * scale), users: Math.round(18 * scale) },
+      { status: 'qualified', events: Math.round(10 * scale), users: Math.round(10 * scale) },
+      { status: 'rewarded', events: Math.round(8 * scale), users: Math.round(8 * scale) },
+      { status: 'pending', events: Math.round(4 * scale), users: Math.round(4 * scale) },
+    ],
+    by_source: [
+      { source: 'friend', events: Math.round(26 * scale), referrers: Math.round(20 * scale), referred: Math.round(26 * scale) },
+      { source: 'creator', events: Math.round(16 * scale), referrers: Math.round(8 * scale), referred: Math.round(16 * scale) },
+    ],
+    daily,
+  }
+}
+
 const ERROR_SOURCE_LABELS_PT: Record<string, string> = {
   react_boundary: 'React boundary',
   global_handler: 'Handler global',
@@ -778,6 +859,7 @@ export default function ProductInsightsAdminPage() {
   const [engagement, setEngagement] = useState<EngagementPayload | null>(null)
   const [monetization, setMonetization] = useState<MonetizationPayload | null>(null)
   const [activation, setActivation] = useState<ActivationPayload | null>(null)
+  const [growth, setGrowth] = useState<GrowthPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -799,13 +881,14 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
       supabase.rpc('admin_product_engagement', { p_days: windowDays }),
       supabase.rpc('admin_product_monetization', { p_days: windowDays }),
       supabase.rpc('admin_product_activation', { p_days: windowDays }),
+      supabase.rpc('admin_product_growth', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -817,6 +900,7 @@ export default function ProductInsightsAdminPage() {
       setEngagement(null)
       setMonetization(null)
       setActivation(null)
+      setGrowth(null)
       return
     }
     if (fu.error) {
@@ -827,6 +911,7 @@ export default function ProductInsightsAdminPage() {
       setEngagement(null)
       setMonetization(null)
       setActivation(null)
+      setGrowth(null)
       return
     }
 
@@ -844,6 +929,7 @@ export default function ProductInsightsAdminPage() {
       setEngagement(null)
       setMonetization(null)
       setActivation(null)
+      setGrowth(null)
       return
     }
     if (!fuData?.ok) {
@@ -858,6 +944,7 @@ export default function ProductInsightsAdminPage() {
       setEngagement(null)
       setMonetization(null)
       setActivation(null)
+      setGrowth(null)
       return
     }
     setOverview(ovData)
@@ -890,6 +977,13 @@ export default function ProductInsightsAdminPage() {
       const acData = ac.data as ActivationPayload | null
       setActivation(acData?.ok ? acData : null)
     }
+
+    if (gr.error) {
+      setGrowth(null)
+    } else {
+      const grData = gr.data as GrowthPayload | null
+      setGrowth(grData?.ok ? grData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -905,6 +999,7 @@ export default function ProductInsightsAdminPage() {
     setEngagement(buildDemoEngagement(windowDays))
     setMonetization(buildDemoMonetization(windowDays))
     setActivation(buildDemoActivation(windowDays))
+    setGrowth(buildDemoGrowth(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -925,6 +1020,7 @@ export default function ProductInsightsAdminPage() {
     setEngagement(null)
     setMonetization(null)
     setActivation(null)
+    setGrowth(null)
     setDemoMode(false)
   }
 
@@ -938,6 +1034,7 @@ export default function ProductInsightsAdminPage() {
         setEngagement(buildDemoEngagement(windowDays))
         setMonetization(buildDemoMonetization(windowDays))
         setActivation(buildDemoActivation(windowDays))
+        setGrowth(buildDemoGrowth(windowDays))
         setListError(null)
       }
       return next
@@ -1067,6 +1164,7 @@ export default function ProductInsightsAdminPage() {
                   setEngagement(buildDemoEngagement(windowDays))
                   setMonetization(buildDemoMonetization(windowDays))
                   setActivation(buildDemoActivation(windowDays))
+                  setGrowth(buildDemoGrowth(windowDays))
                   return
                 }
                 void load()
@@ -1918,6 +2016,133 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {growth ? (
+              <Section
+                title="Crescimento / referrals (Fase J)"
+                subtitle="Atribuições friend vs creator, estados, rewards e % dos signups referidos."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Referrals"
+                    value={fmt(growth.summary.referrals)}
+                    hint={`${fmt(growth.summary.referrers)} referrers`}
+                  />
+                  <StatCard
+                    label="Friend"
+                    value={fmt(growth.summary.friend)}
+                    hint="source=friend"
+                  />
+                  <StatCard
+                    label="Creator"
+                    value={fmt(growth.summary.creator)}
+                    hint="source=creator"
+                  />
+                  <StatCard
+                    label="% referidos"
+                    value={pct(growth.summary.referral_share)}
+                    hint={`${fmt(growth.summary.referred_signups)} / ${fmt(growth.summary.signups)}`}
+                  />
+                  <StatCard
+                    label="Meal 7d"
+                    value={pct(growth.summary.activation_rate_7d)}
+                    hint={`${fmt(growth.summary.activated_7d)} ativados`}
+                    tone="up"
+                  />
+                  <StatCard
+                    label="Premium"
+                    value={fmt(growth.summary.premium_active)}
+                    hint="referred · rc_premium"
+                  />
+                </div>
+                <div className="mt-3 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+                  <StatCard
+                    label="Rewards pending"
+                    value={fmt(growth.summary.rewards_pending)}
+                    hint={`$${(growth.summary.pending_cents / 100).toFixed(0)}`}
+                  />
+                  <StatCard
+                    label="Rewards paid"
+                    value={fmt(growth.summary.rewards_paid)}
+                    hint={`$${(growth.summary.paid_cents / 100).toFixed(0)}`}
+                  />
+                  <StatCard
+                    label="Cancelled"
+                    value={fmt(growth.summary.rewards_cancelled)}
+                  />
+                  <StatCard
+                    label="Estados"
+                    value={fmt(growth.by_status.length)}
+                    hint="pipeline"
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Referrals / dia
+                  </p>
+                  <SparkBars
+                    label="Referrals por dia"
+                    values={growth.daily.map((d) => d.referrals)}
+                  />
+                </div>
+                {growth.by_source.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[420px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Fonte</th>
+                            <th className="px-4 py-3">Referrals</th>
+                            <th className="px-4 py-3">Referrers</th>
+                            <th className="px-4 py-3">Referred</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {growth.by_source.map((row) => (
+                            <tr key={row.source} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {row.source === 'friend'
+                                  ? 'Friend'
+                                  : row.source === 'creator'
+                                    ? 'Creator'
+                                    : row.source}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3">{fmt(row.referrers)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.referred)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+                {growth.by_status.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[420px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Estado</th>
+                            <th className="px-4 py-3">Count</th>
+                            <th className="px-4 py-3">Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {growth.by_status.map((row) => (
+                            <tr key={row.status} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">{row.status}</td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
             {events.retention_opens ? (
               <Section
                 title="Retenção (app_open)"
@@ -2099,7 +2324,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase I · ativação signup → 1ª refeição. A–H continuam ativos.
+          Fase J · crescimento referrals. A–I continuam ativos.
         </p>
       </div>
     </main>
