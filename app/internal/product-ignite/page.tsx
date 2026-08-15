@@ -405,6 +405,23 @@ type TopReferrersPayload = {
   rows: TopReferrerRow[]
 }
 
+type AdoptionFeature = {
+  event: string
+  label: string
+  users: number
+  events: number
+  adoption_rate: number | null
+}
+
+type AdoptionPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  openers: number
+  features: AdoptionFeature[]
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -937,6 +954,41 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoAdoption(days: WindowDays): AdoptionPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
+  const openers = Math.round(520 * scale)
+  const mk = (event: string, label: string, rate: number, evMul = 2.2) => {
+    const users = Math.round(openers * rate)
+    return {
+      event,
+      label,
+      users,
+      events: Math.round(users * evMul),
+      adoption_rate: rate,
+    }
+  }
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    openers,
+    features: [
+      mk('meal_logged', 'Refeição registada', 0.72, 8),
+      mk('quick_log_open', 'Quick Log', 0.58),
+      mk('snap_track_open', 'Snap Track', 0.41),
+      mk('share_prompt_shown', 'Prompt de partilha', 0.33),
+      mk('ai_open', 'AI chat', 0.28),
+      mk('group_open', 'Grupo aberto', 0.19),
+      mk('paywall_shown', 'Paywall', 0.17),
+      mk('diet_open', 'Diet', 0.15),
+      mk('fasting_started', 'Jejum', 0.12),
+      mk('ai_message_sent', 'AI mensagem', 0.11),
+      mk('premium_converted', 'Premium', 0.035, 1),
+      mk('group_created', 'Grupo criado', 0.04, 1.1),
+    ].sort((a, b) => b.users - a.users),
+  }
+}
+
 function buildDemoTopReferrers(days: WindowDays): TopReferrersPayload {
   const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2
   return {
@@ -1258,6 +1310,7 @@ export default function ProductInsightsAdminPage() {
   const [compare, setCompare] = useState<ComparePayload | null>(null)
   const [retentionMatrix, setRetentionMatrix] = useState<RetentionMatrixPayload | null>(null)
   const [topReferrers, setTopReferrers] = useState<TopReferrersPayload | null>(null)
+  const [adoption, setAdoption] = useState<AdoptionPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -1279,7 +1332,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1293,6 +1346,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_compare', { p_days: windowDays }),
       supabase.rpc('admin_product_retention_matrix', { p_weeks: 8 }),
       supabase.rpc('admin_product_top_referrers', { p_days: windowDays, p_limit: 15 }),
+      supabase.rpc('admin_product_adoption', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1311,6 +1365,7 @@ export default function ProductInsightsAdminPage() {
       setCompare(null)
       setRetentionMatrix(null)
       setTopReferrers(null)
+      setAdoption(null)
       return
     }
     if (fu.error) {
@@ -1328,6 +1383,7 @@ export default function ProductInsightsAdminPage() {
       setCompare(null)
       setRetentionMatrix(null)
       setTopReferrers(null)
+      setAdoption(null)
       return
     }
 
@@ -1352,6 +1408,7 @@ export default function ProductInsightsAdminPage() {
       setCompare(null)
       setRetentionMatrix(null)
       setTopReferrers(null)
+      setAdoption(null)
       return
     }
     if (!fuData?.ok) {
@@ -1373,6 +1430,7 @@ export default function ProductInsightsAdminPage() {
       setCompare(null)
       setRetentionMatrix(null)
       setTopReferrers(null)
+      setAdoption(null)
       return
     }
     setOverview(ovData)
@@ -1454,6 +1512,13 @@ export default function ProductInsightsAdminPage() {
       const trData = tr.data as TopReferrersPayload | null
       setTopReferrers(trData?.ok ? trData : null)
     }
+
+    if (ad.error) {
+      setAdoption(null)
+    } else {
+      const adData = ad.data as AdoptionPayload | null
+      setAdoption(adData?.ok ? adData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -1476,6 +1541,7 @@ export default function ProductInsightsAdminPage() {
     setCompare(buildDemoCompare(windowDays))
     setRetentionMatrix(buildDemoRetentionMatrix())
     setTopReferrers(buildDemoTopReferrers(windowDays))
+    setAdoption(buildDemoAdoption(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -1503,6 +1569,7 @@ export default function ProductInsightsAdminPage() {
     setCompare(null)
     setRetentionMatrix(null)
     setTopReferrers(null)
+    setAdoption(null)
     setDemoMode(false)
   }
 
@@ -1523,6 +1590,7 @@ export default function ProductInsightsAdminPage() {
         setCompare(buildDemoCompare(windowDays))
         setRetentionMatrix(buildDemoRetentionMatrix())
         setTopReferrers(buildDemoTopReferrers(windowDays))
+        setAdoption(buildDemoAdoption(windowDays))
         setListError(null)
       }
       return next
@@ -1659,6 +1727,7 @@ export default function ProductInsightsAdminPage() {
                   setCompare(buildDemoCompare(windowDays))
                   setRetentionMatrix(buildDemoRetentionMatrix())
                   setTopReferrers(buildDemoTopReferrers(windowDays))
+                  setAdoption(buildDemoAdoption(windowDays))
                   return
                 }
                 void load()
@@ -1799,6 +1868,7 @@ export default function ProductInsightsAdminPage() {
                 ['compare', 'Δ período'],
                 ['retention-matrix', 'Retenção'],
                 ['top-referrers', 'Referrers'],
+                ['adoption', 'Adoção'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -3277,7 +3347,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase P · matriz de retenção semanal. A–O continuam ativos.
+          Fase Q · top referrers. A–P continuam ativos.
         </p>
       </div>
     </main>
