@@ -136,6 +136,22 @@ type EventsPayload = {
   }
 }
 
+type EngagementPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  opens: {
+    dau: number
+    wau: number
+    mau: number
+    opens_window: number
+    openers_window: number
+  }
+  platforms: Array<{ platform: string; events: number; users: number; pct: number }>
+  daily_opens: Array<{ day: string; opens: number; users: number }>
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -394,6 +410,37 @@ function buildDemoEvents(days: WindowDays): EventsPayload {
   }
 }
 
+function buildDemoEngagement(days: WindowDays): EngagementPayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  const daily_opens = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const wave = Math.sin(i / 3) * 10 + 45 + (i % 5)
+    return {
+      day: d.toISOString().slice(0, 10),
+      opens: Math.max(10, Math.round(wave * scale)),
+      users: Math.max(8, Math.round(wave * 0.7 * scale)),
+    }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    opens: {
+      dau: Math.round(52 * (days === 7 ? 0.9 : 1)),
+      wau: Math.round(210 * scale),
+      mau: Math.round(680 * scale),
+      opens_window: Math.round(1400 * scale),
+      openers_window: Math.round(420 * scale),
+    },
+    platforms: [
+      { platform: 'ios', events: Math.round(2600 * scale), users: Math.round(240 * scale), pct: 62 },
+      { platform: 'android', events: Math.round(1600 * scale), users: Math.round(160 * scale), pct: 38 },
+    ],
+    daily_opens,
+  }
+}
+
 function SparkBars({
   values,
   label,
@@ -509,6 +556,7 @@ export default function ProductInsightsAdminPage() {
   const [overview, setOverview] = useState<OverviewPayload | null>(null)
   const [features, setFeatures] = useState<FeatureUsagePayload | null>(null)
   const [events, setEvents] = useState<EventsPayload | null>(null)
+  const [engagement, setEngagement] = useState<EngagementPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -530,10 +578,11 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev] = await Promise.all([
+    const [ov, fu, ev, eg] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
+      supabase.rpc('admin_product_engagement', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -542,6 +591,7 @@ export default function ProductInsightsAdminPage() {
       setOverview(null)
       setFeatures(null)
       setEvents(null)
+      setEngagement(null)
       return
     }
     if (fu.error) {
@@ -549,6 +599,7 @@ export default function ProductInsightsAdminPage() {
       setOverview(null)
       setFeatures(null)
       setEvents(null)
+      setEngagement(null)
       return
     }
 
@@ -563,6 +614,7 @@ export default function ProductInsightsAdminPage() {
       setOverview(null)
       setFeatures(null)
       setEvents(null)
+      setEngagement(null)
       return
     }
     if (!fuData?.ok) {
@@ -574,6 +626,7 @@ export default function ProductInsightsAdminPage() {
       setOverview(null)
       setFeatures(null)
       setEvents(null)
+      setEngagement(null)
       return
     }
     setOverview(ovData)
@@ -584,6 +637,13 @@ export default function ProductInsightsAdminPage() {
     } else {
       const evData = ev.data as EventsPayload | null
       setEvents(evData?.ok ? evData : null)
+    }
+
+    if (eg.error) {
+      setEngagement(null)
+    } else {
+      const egData = eg.data as EngagementPayload | null
+      setEngagement(egData?.ok ? egData : null)
     }
   }, [supabase, demoMode, windowDays])
 
@@ -597,6 +657,7 @@ export default function ProductInsightsAdminPage() {
     setOverview(buildDemoOverview(windowDays))
     setFeatures(buildDemoFeatures(windowDays))
     setEvents(buildDemoEvents(windowDays))
+    setEngagement(buildDemoEngagement(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -614,6 +675,7 @@ export default function ProductInsightsAdminPage() {
     setOverview(null)
     setFeatures(null)
     setEvents(null)
+    setEngagement(null)
     setDemoMode(false)
   }
 
@@ -624,6 +686,7 @@ export default function ProductInsightsAdminPage() {
         setOverview(buildDemoOverview(windowDays))
         setFeatures(buildDemoFeatures(windowDays))
         setEvents(buildDemoEvents(windowDays))
+        setEngagement(buildDemoEngagement(windowDays))
         setListError(null)
       }
       return next
@@ -750,6 +813,7 @@ export default function ProductInsightsAdminPage() {
                   setOverview(buildDemoOverview(windowDays))
                   setFeatures(buildDemoFeatures(windowDays))
                   setEvents(buildDemoEvents(windowDays))
+                  setEngagement(buildDemoEngagement(windowDays))
                   return
                 }
                 void load()
@@ -837,6 +901,94 @@ export default function ProductInsightsAdminPage() {
                 hint="rc_premium_active"
               />
             </div>
+
+            {engagement ? (
+              <Section
+                title="Engagement (Fase E)"
+                subtitle="DAU por app_open (abre a app) + split iOS/Android."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="DAU opens"
+                    value={fmt(engagement.opens.dau)}
+                    hint="app_open · 24h"
+                  />
+                  <StatCard
+                    label="WAU opens"
+                    value={fmt(engagement.opens.wau)}
+                    hint="app_open · 7d"
+                  />
+                  <StatCard
+                    label="MAU opens"
+                    value={fmt(engagement.opens.mau)}
+                    hint="app_open · 30d"
+                  />
+                  <StatCard
+                    label="Opens"
+                    value={fmt(engagement.opens.opens_window)}
+                    hint={`${fmt(engagement.opens.openers_window)} users`}
+                  />
+                  {engagement.platforms.slice(0, 2).map((p) => (
+                    <StatCard
+                      key={p.platform}
+                      label={p.platform === 'ios' ? 'iOS' : p.platform === 'android' ? 'Android' : p.platform}
+                      value={fmt(p.users)}
+                      hint={`${p.pct.toFixed(0)}% eventos`}
+                    />
+                  ))}
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    App opens / dia
+                  </p>
+                  <SparkBars
+                    label="App opens por dia"
+                    values={engagement.daily_opens.map((d) => d.opens)}
+                  />
+                </div>
+                {engagement.platforms.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[420px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Plataforma</th>
+                            <th className="px-4 py-3">Eventos</th>
+                            <th className="px-4 py-3">Utilizadores</th>
+                            <th className="px-4 py-3">%</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {engagement.platforms.map((row) => (
+                            <tr key={row.platform} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {row.platform === 'ios'
+                                  ? 'iOS'
+                                  : row.platform === 'android'
+                                    ? 'Android'
+                                    : row.platform}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                              <td className="px-4 py-3">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-28">
+                                    <UsageBar pctValue={row.pct} />
+                                  </div>
+                                  <span className="tabular-nums text-muted-foreground">
+                                    {row.pct.toFixed(1)}%
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
 
             <Section
               title="Atividade"
@@ -1309,7 +1461,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase D · Social/AI/Diet + falhas de análise. A–C continuam ativos.
+          Fase E · DAU por app_open + plataformas. A–D continuam ativos.
         </p>
       </div>
     </main>
