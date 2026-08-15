@@ -2,6 +2,7 @@
 
 import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
+import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
 import { cn } from '@/lib/utils'
 
@@ -1670,6 +1671,7 @@ export default function CreatorProgramAdminPage() {
           <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
             Programa de creators
           </h1>
+          <InternalAdminNav active="creators" className="mt-4" />
           <p className="mt-3 text-sm font-semibold text-red-600">{configError}</p>
         </div>
       </main>
@@ -1686,6 +1688,7 @@ export default function CreatorProgramAdminPage() {
           <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
             Programa de creators
           </h1>
+          <InternalAdminNav active="creators" className="mt-4" />
           <p className="mt-2 text-sm text-muted-foreground">
             Entra com a tua conta de admin Ignite.
           </p>
@@ -1742,6 +1745,7 @@ export default function CreatorProgramAdminPage() {
             <p className="mt-1 text-sm text-muted-foreground">
               {user?.email ?? 'Pré-visualização demo'}
             </p>
+            <InternalAdminNav active="creators" className="mt-3" />
           </div>
           <div className="flex flex-wrap items-center gap-2">
             <button
