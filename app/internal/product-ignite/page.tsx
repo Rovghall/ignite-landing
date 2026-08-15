@@ -82,6 +82,30 @@ type FeatureUsagePayload = {
   }>
 }
 
+type EventsPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  totals: { events: number; users: number }
+  by_name: Array<{ name: string; events: number; users: number; pct: number }>
+  daily: Array<{ day: string; events: number; users: number }>
+  tabs: Array<{ tab: string; events: number; users: number }>
+  funnel: {
+    app_opens: number
+    app_open_users: number
+    quick_log_opens: number
+    quick_log_actions: number
+    share_prompt_shown: number
+    share_prompt_share: number
+    share_prompt_dismissed: number
+    share_prompt_users: number
+    share_convert_rate: number | null
+    fasting_started: number
+    fasting_stopped: number
+  }
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -115,6 +139,26 @@ const FEATURE_LABELS_PT: Record<string, string> = {
   group_chat: 'Mensagens de chat em grupo',
   friendships: 'Amizades criadas',
   share_export: 'Exportações do cartão de partilha',
+}
+
+const EVENT_LABELS_PT: Record<string, string> = {
+  app_open: 'Abertura da app',
+  tab_view: 'Vista de tab',
+  quick_log_open: 'Abrir Quick Log',
+  quick_log_action: 'Ação Quick Log',
+  share_prompt_shown: 'Prompt de partilha mostrado',
+  share_prompt_dismissed: 'Prompt de partilha dispensado',
+  share_prompt_share: 'Prompt de partilha → partilhar',
+  fasting_started: 'Jejum iniciado',
+  fasting_stopped: 'Jejum terminado',
+}
+
+const TAB_LABELS_PT: Record<string, string> = {
+  index: 'Home',
+  progress: 'Health',
+  ai: 'AI',
+  diet: 'Diet',
+  profile: 'Profile',
 }
 
 function labelSource(source: string, fallback: string): string {
@@ -223,6 +267,57 @@ function buildDemoFeatures(days: WindowDays): FeatureUsagePayload {
       { key: 'friendships', label: 'Amizades criadas', events: Math.round(110 * scale), users: Math.round(180 * scale) },
       { key: 'groups', label: 'Grupos de amigos criados', events: Math.round(34 * scale), users: Math.round(30 * scale) },
     ],
+  }
+}
+
+function buildDemoEvents(days: WindowDays): EventsPayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  const daily = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const wave = Math.sin(i / 3) * 20 + 80 + (i % 7)
+    return {
+      day: d.toISOString().slice(0, 10),
+      events: Math.max(20, Math.round(wave * scale)),
+      users: Math.max(8, Math.round(wave * 0.35 * scale)),
+    }
+  })
+  const shown = Math.round(210 * scale)
+  const tapped = Math.round(78 * scale)
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    totals: { events: Math.round(4200 * scale), users: Math.round(380 * scale) },
+    by_name: [
+      { name: 'tab_view', events: Math.round(1800 * scale), users: Math.round(320 * scale), pct: 42.9 },
+      { name: 'app_open', events: Math.round(900 * scale), users: Math.round(280 * scale), pct: 21.4 },
+      { name: 'quick_log_open', events: Math.round(420 * scale), users: Math.round(160 * scale), pct: 10.0 },
+      { name: 'share_prompt_shown', events: shown, users: Math.round(140 * scale), pct: 5.0 },
+      { name: 'share_prompt_share', events: tapped, users: Math.round(70 * scale), pct: 1.9 },
+      { name: 'fasting_started', events: Math.round(55 * scale), users: Math.round(40 * scale), pct: 1.3 },
+    ],
+    daily,
+    tabs: [
+      { tab: 'index', events: Math.round(720 * scale), users: Math.round(300 * scale) },
+      { tab: 'progress', events: Math.round(380 * scale), users: Math.round(180 * scale) },
+      { tab: 'diet', events: Math.round(290 * scale), users: Math.round(140 * scale) },
+      { tab: 'ai', events: Math.round(240 * scale), users: Math.round(110 * scale) },
+      { tab: 'profile', events: Math.round(170 * scale), users: Math.round(150 * scale) },
+    ],
+    funnel: {
+      app_opens: Math.round(900 * scale),
+      app_open_users: Math.round(280 * scale),
+      quick_log_opens: Math.round(420 * scale),
+      quick_log_actions: Math.round(310 * scale),
+      share_prompt_shown: shown,
+      share_prompt_share: tapped,
+      share_prompt_dismissed: Math.round(95 * scale),
+      share_prompt_users: Math.round(140 * scale),
+      share_convert_rate: shown > 0 ? Number((tapped / shown).toFixed(3)) : null,
+      fasting_started: Math.round(55 * scale),
+      fasting_stopped: Math.round(48 * scale),
+    },
   }
 }
 
@@ -340,6 +435,7 @@ export default function ProductInsightsAdminPage() {
   const [windowDays, setWindowDays] = useState<WindowDays>(30)
   const [overview, setOverview] = useState<OverviewPayload | null>(null)
   const [features, setFeatures] = useState<FeatureUsagePayload | null>(null)
+  const [events, setEvents] = useState<EventsPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -361,9 +457,10 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu] = await Promise.all([
+    const [ov, fu, ev] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
+      supabase.rpc('admin_product_events', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -371,12 +468,14 @@ export default function ProductInsightsAdminPage() {
       setListError(ov.error.message)
       setOverview(null)
       setFeatures(null)
+      setEvents(null)
       return
     }
     if (fu.error) {
       setListError(fu.error.message)
       setOverview(null)
       setFeatures(null)
+      setEvents(null)
       return
     }
 
@@ -390,6 +489,7 @@ export default function ProductInsightsAdminPage() {
       )
       setOverview(null)
       setFeatures(null)
+      setEvents(null)
       return
     }
     if (!fuData?.ok) {
@@ -400,10 +500,18 @@ export default function ProductInsightsAdminPage() {
       )
       setOverview(null)
       setFeatures(null)
+      setEvents(null)
       return
     }
     setOverview(ovData)
     setFeatures(fuData)
+
+    if (ev.error) {
+      setEvents(null)
+    } else {
+      const evData = ev.data as EventsPayload | null
+      setEvents(evData?.ok ? evData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -415,6 +523,7 @@ export default function ProductInsightsAdminPage() {
     if (!demoMode) return
     setOverview(buildDemoOverview(windowDays))
     setFeatures(buildDemoFeatures(windowDays))
+    setEvents(buildDemoEvents(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -431,6 +540,7 @@ export default function ProductInsightsAdminPage() {
     await supabase.auth.signOut()
     setOverview(null)
     setFeatures(null)
+    setEvents(null)
     setDemoMode(false)
   }
 
@@ -440,6 +550,7 @@ export default function ProductInsightsAdminPage() {
       if (next) {
         setOverview(buildDemoOverview(windowDays))
         setFeatures(buildDemoFeatures(windowDays))
+        setEvents(buildDemoEvents(windowDays))
         setListError(null)
       }
       return next
@@ -565,6 +676,7 @@ export default function ProductInsightsAdminPage() {
                 if (demoMode) {
                   setOverview(buildDemoOverview(windowDays))
                   setFeatures(buildDemoFeatures(windowDays))
+                  setEvents(buildDemoEvents(windowDays))
                   return
                 }
                 void load()
@@ -587,7 +699,8 @@ export default function ProductInsightsAdminPage() {
 
         {demoMode ? (
           <p className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900">
-            Modo demo — dados fictícios. Aplica a migration `admin_product_insights` para RPCs reais.
+            Modo demo — dados fictícios. Aplica as migrations `admin_product_insights` +
+            `product_events` para RPCs reais.
           </p>
         ) : null}
 
@@ -871,6 +984,143 @@ export default function ProductInsightsAdminPage() {
           </>
         ) : null}
 
+        {events ? (
+          <>
+            <Section
+              title="Eventos de produto (Fase B)"
+              subtitle="Instrumentação na app — aberturas, tabs, Quick Log, partilha e jejum."
+            >
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                <StatCard label="Eventos" value={fmt(events.totals.events)} />
+                <StatCard label="Utilizadores" value={fmt(events.totals.users)} />
+                <StatCard label="App opens" value={fmt(events.funnel.app_opens)} />
+                <StatCard label="Quick Log" value={fmt(events.funnel.quick_log_opens)} />
+                <StatCard
+                  label="Share convert"
+                  value={pct(events.funnel.share_convert_rate)}
+                  hint={`${fmt(events.funnel.share_prompt_share)} / ${fmt(events.funnel.share_prompt_shown)}`}
+                />
+                <StatCard
+                  label="Jejuns"
+                  value={fmt(events.funnel.fasting_started)}
+                  hint={`${fmt(events.funnel.fasting_stopped)} terminados`}
+                />
+              </div>
+              <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                  Eventos / dia
+                </p>
+                <SparkBars
+                  label="Eventos por dia"
+                  values={events.daily.map((d) => d.events)}
+                />
+              </div>
+            </Section>
+
+            <Section title="Funil de partilha" subtitle="Prompt pós-refeição / exercício.">
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+                <StatCard label="Mostrado" value={fmt(events.funnel.share_prompt_shown)} />
+                <StatCard label="Partilhar" value={fmt(events.funnel.share_prompt_share)} />
+                <StatCard label="Dispensado" value={fmt(events.funnel.share_prompt_dismissed)} />
+                <StatCard label="Utilizadores" value={fmt(events.funnel.share_prompt_users)} />
+              </div>
+            </Section>
+
+            <Section title="Tabs" subtitle="tab_view por área da app.">
+              <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[420px] border-collapse text-sm">
+                    <thead>
+                      <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                        <th className="px-4 py-3">Tab</th>
+                        <th className="px-4 py-3">Vistas</th>
+                        <th className="px-4 py-3">Utilizadores</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {events.tabs.map((row) => (
+                        <tr key={row.tab} className="border-t border-border/70">
+                          <td className="px-4 py-3 font-semibold">
+                            {TAB_LABELS_PT[row.tab] ?? row.tab}
+                          </td>
+                          <td className="px-4 py-3">{fmt(row.events)}</td>
+                          <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                        </tr>
+                      ))}
+                      {events.tabs.length === 0 ? (
+                        <tr>
+                          <td colSpan={3} className="px-4 py-10 text-center text-muted-foreground">
+                            Ainda sem tab_view — usa a app com a migration aplicada.
+                          </td>
+                        </tr>
+                      ) : null}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </Section>
+
+            <Section title="Ranking de eventos" subtitle="Todos os nomes em product_events.">
+              <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                <div className="overflow-x-auto">
+                  <table className="w-full min-w-[560px] border-collapse text-sm">
+                    <thead>
+                      <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                        <th className="px-4 py-3">Evento</th>
+                        <th className="px-4 py-3">Count</th>
+                        <th className="px-4 py-3">Utilizadores</th>
+                        <th className="px-4 py-3">%</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {events.by_name.map((row) => (
+                        <tr key={row.name} className="border-t border-border/70">
+                          <td className="px-4 py-3">
+                            <div className="font-semibold">
+                              {EVENT_LABELS_PT[row.name] ?? row.name}
+                            </div>
+                            <div className="font-mono text-[11px] text-muted-foreground">
+                              {row.name}
+                            </div>
+                          </td>
+                          <td className="px-4 py-3">{fmt(row.events)}</td>
+                          <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                          <td className="px-4 py-3">
+                            <div className="flex items-center gap-3">
+                              <div className="w-28">
+                                <UsageBar pctValue={row.pct} />
+                              </div>
+                              <span className="tabular-nums text-muted-foreground">
+                                {row.pct.toFixed(1)}%
+                              </span>
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                      {events.by_name.length === 0 ? (
+                        <tr>
+                          <td colSpan={4} className="px-4 py-10 text-center text-muted-foreground">
+                            Sem eventos neste período.
+                          </td>
+                        </tr>
+                      ) : null}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </Section>
+          </>
+        ) : overview && !demoMode ? (
+          <Section
+            title="Eventos de produto (Fase B)"
+            subtitle="Aplica a migration `product_events` e usa a app para começar a ver dados aqui."
+          >
+            <p className="text-sm text-muted-foreground">
+              RPC `admin_product_events` ainda não disponível ou sem dados.
+            </p>
+          </Section>
+        ) : null}
+
         {!overview && !loading && !listError ? (
           <p className="mt-8 text-sm text-muted-foreground">
             Ainda sem dados — clica em Atualizar depois de entrar.
@@ -878,8 +1128,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase A · Só tabelas de domínio. Jejum e funis de ecrã precisam de eventos de produto (Fase
-          B).
+          Fase B · Eventos na app (`product_events`). Fase A continua a alimentar KPIs de domínio.
         </p>
       </div>
     </main>
