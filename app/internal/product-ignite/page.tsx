@@ -488,6 +488,30 @@ type NewReturningPayload = {
   daily: NewReturningDaily[]
 }
 
+type FastingDaily = { day: string; started: number; completed: number; early: number }
+type FastingReason = { reason: string; events: number; users: number }
+
+type FastingPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    started: number
+    started_users: number
+    stopped: number
+    stopped_users: number
+    completed: number
+    early: number
+    other_stop: number
+    complete_rate: number | null
+    early_rate: number | null
+    stop_per_start: number | null
+  }
+  by_reason: FastingReason[]
+  daily: FastingDaily[]
+}
+
 type DaypartPayload = {
   ok: boolean
   error?: string
@@ -1120,6 +1144,41 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoFasting(days: WindowDays): FastingPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
+  const daily = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const started = Math.max(1, Math.round(6 + Math.sin(i / 2.4) * 2))
+    const completed = Math.max(0, Math.round(started * 0.55))
+    const early = Math.max(0, Math.round(started * 0.3))
+    return { day: d.toISOString().slice(0, 10), started, completed, early }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      started: Math.round(140 * scale),
+      started_users: Math.round(72 * scale),
+      stopped: Math.round(120 * scale),
+      stopped_users: Math.round(65 * scale),
+      completed: Math.round(70 * scale),
+      early: Math.round(42 * scale),
+      other_stop: Math.round(8 * scale),
+      complete_rate: 0.583,
+      early_rate: 0.35,
+      stop_per_start: 0.857,
+    },
+    by_reason: [
+      { reason: 'complete', events: Math.round(70 * scale), users: Math.round(45 * scale) },
+      { reason: 'early', events: Math.round(42 * scale), users: Math.round(30 * scale) },
+      { reason: '(unknown)', events: Math.round(8 * scale), users: Math.round(6 * scale) },
+    ],
+    daily,
+  }
+}
+
 function buildDemoNewReturning(days: WindowDays): NewReturningPayload {
   const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
   const openers = Math.round(520 * scale)
@@ -1703,6 +1762,7 @@ export default function ProductInsightsAdminPage() {
   const [daypart, setDaypart] = useState<DaypartPayload | null>(null)
   const [shareFunnel, setShareFunnel] = useState<ShareFunnelPayload | null>(null)
   const [newReturning, setNewReturning] = useState<NewReturningPayload | null>(null)
+  const [fasting, setFasting] = useState<FastingPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -1725,7 +1785,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp, sh, nr] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp, sh, nr, fa] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1746,6 +1806,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_daypart', { p_days: windowDays }),
       supabase.rpc('admin_product_share_funnel', { p_days: windowDays }),
       supabase.rpc('admin_product_new_returning', { p_days: windowDays }),
+      supabase.rpc('admin_product_fasting', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1771,6 +1832,7 @@ export default function ProductInsightsAdminPage() {
       setDaypart(null)
       setShareFunnel(null)
       setNewReturning(null)
+      setFasting(null)
       return
     }
     if (fu.error) {
@@ -1795,6 +1857,7 @@ export default function ProductInsightsAdminPage() {
       setDaypart(null)
       setShareFunnel(null)
       setNewReturning(null)
+      setFasting(null)
       return
     }
 
@@ -1826,6 +1889,7 @@ export default function ProductInsightsAdminPage() {
       setDaypart(null)
       setShareFunnel(null)
       setNewReturning(null)
+      setFasting(null)
       return
     }
     if (!fuData?.ok) {
@@ -1854,6 +1918,7 @@ export default function ProductInsightsAdminPage() {
       setDaypart(null)
       setShareFunnel(null)
       setNewReturning(null)
+      setFasting(null)
       return
     }
     setOverview(ovData)
@@ -1985,6 +2050,13 @@ export default function ProductInsightsAdminPage() {
       setNewReturning(nrData?.ok ? nrData : null)
     }
 
+    if (fa.error) {
+      setFasting(null)
+    } else {
+      const faData = fa.data as FastingPayload | null
+      setFasting(faData?.ok ? faData : null)
+    }
+
     setLastUpdatedAt(new Date().toISOString())
   }, [supabase, demoMode, windowDays])
 
@@ -2023,6 +2095,7 @@ export default function ProductInsightsAdminPage() {
     setDaypart(buildDemoDaypart(windowDays))
     setShareFunnel(buildDemoShareFunnel(windowDays))
     setNewReturning(buildDemoNewReturning(windowDays))
+    setFasting(buildDemoFasting(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -2058,6 +2131,7 @@ export default function ProductInsightsAdminPage() {
       setDaypart(null)
       setShareFunnel(null)
       setNewReturning(null)
+      setFasting(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -2086,6 +2160,7 @@ export default function ProductInsightsAdminPage() {
     setDaypart(buildDemoDaypart(windowDays))
     setShareFunnel(buildDemoShareFunnel(windowDays))
     setNewReturning(buildDemoNewReturning(windowDays))
+    setFasting(buildDemoFasting(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -2230,6 +2305,7 @@ export default function ProductInsightsAdminPage() {
     setDaypart(buildDemoDaypart(windowDays))
     setShareFunnel(buildDemoShareFunnel(windowDays))
     setNewReturning(buildDemoNewReturning(windowDays))
+    setFasting(buildDemoFasting(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -2388,6 +2464,7 @@ export default function ProductInsightsAdminPage() {
                 ['daypart', 'Horários'],
                 ['share', 'Partilha'],
                 ['newret', 'New/Ret'],
+                ['fasting', 'Jejum'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -3773,6 +3850,95 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {fasting ? (
+              <Section
+                id="fasting"
+                title="Jejum (Fase Y)"
+                subtitle="fasting_started → fasting_stopped (complete vs early)."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Started"
+                    value={fmt(fasting.summary.started)}
+                    hint={`${fmt(fasting.summary.started_users)} users`}
+                  />
+                  <StatCard
+                    label="Stopped"
+                    value={fmt(fasting.summary.stopped)}
+                    hint={
+                      fasting.summary.stop_per_start != null
+                        ? `${fasting.summary.stop_per_start} / start`
+                        : null
+                    }
+                  />
+                  <StatCard
+                    label="Complete"
+                    value={fmt(fasting.summary.completed)}
+                    hint={pct(fasting.summary.complete_rate)}
+                    tone="up"
+                  />
+                  <StatCard
+                    label="Early"
+                    value={fmt(fasting.summary.early)}
+                    hint={pct(fasting.summary.early_rate)}
+                    tone="down"
+                  />
+                  <StatCard
+                    label="Other stop"
+                    value={fmt(fasting.summary.other_stop)}
+                  />
+                  <StatCard
+                    label="Reasons"
+                    value={fmt(fasting.by_reason.length)}
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Started / dia
+                  </p>
+                  <SparkBars
+                    label="Fasting started por dia"
+                    values={fasting.daily.map((d) => d.started)}
+                  />
+                  <p className="mb-3 mt-4 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Complete / dia
+                  </p>
+                  <SparkBars
+                    label="Fasting complete por dia"
+                    values={fasting.daily.map((d) => d.completed)}
+                  />
+                </div>
+                {fasting.by_reason.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <table className="w-full min-w-[360px] border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">Reason</th>
+                          <th className="px-4 py-3">Events</th>
+                          <th className="px-4 py-3">Users</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {fasting.by_reason.map((row) => (
+                          <tr key={row.reason} className="border-t border-border/70">
+                            <td className="px-4 py-3 font-semibold">
+                              {row.reason === 'complete'
+                                ? 'Complete'
+                                : row.reason === 'early'
+                                  ? 'Early'
+                                  : row.reason}
+                            </td>
+                            <td className="px-4 py-3">{fmt(row.events)}</td>
+                            <td className="px-4 py-3">{fmt(row.users)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -4512,7 +4678,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase X · new vs returning. A–W continuam ativos.
+          Fase Y · jejum. A–X continuam ativos.
         </p>
       </div>
     </main>
