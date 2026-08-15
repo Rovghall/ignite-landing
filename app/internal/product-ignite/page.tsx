@@ -82,6 +82,53 @@ type FeatureUsagePayload = {
   }>
 }
 
+const SOURCE_LABELS_PT: Record<string, string> = {
+  'snap-track': 'Snap Track',
+  snap_track_reviewed_ai: 'Snap Track (revisão AI)',
+  snap_track_reviewed_db: 'Snap Track (revisão DB)',
+  snap_track_packaged_reviewed_ai: 'Snap Track embalado',
+  snap_cook: 'Snap Cook',
+  quick_log: 'Registo rápido',
+  quick_log_exercise: 'Exercício (manual)',
+  quick_log_activity_ai: 'Exercício (AI)',
+  manual_macro_entry: 'Macros manuais',
+  manual_ingredients_ai: 'Ingredientes manuais AI',
+  recipe: 'Receita',
+  health_connect: 'Health Connect',
+  '(unknown)': 'Desconhecido / legado',
+}
+
+const FAMILY_LABELS_PT: Record<string, string> = {
+  snap_track: 'Snap Track',
+  snap_cook: 'Snap Cook',
+  quick_log: 'Registo rápido',
+  exercise: 'Exercício',
+  manual: 'Entrada manual',
+  recipe: 'Receitas',
+  health: 'Health Connect',
+  other: 'Outros',
+}
+
+const FEATURE_LABELS_PT: Record<string, string> = {
+  groups: 'Grupos de amigos criados',
+  group_posts: 'Posts no feed do grupo',
+  group_chat: 'Mensagens de chat em grupo',
+  friendships: 'Amizades criadas',
+  share_export: 'Exportações do cartão de partilha',
+}
+
+function labelSource(source: string, fallback: string): string {
+  return SOURCE_LABELS_PT[source] ?? fallback
+}
+
+function labelFamily(key: string, fallback: string): string {
+  return FAMILY_LABELS_PT[key] ?? fallback
+}
+
+function labelFeature(key: string, fallback: string): string {
+  return FEATURE_LABELS_PT[key] ?? fallback
+}
+
 function pct(rate: number | null | undefined): string {
   if (rate == null || !Number.isFinite(rate)) return '—'
   return `${(rate * 100).toFixed(1)}%`
@@ -89,7 +136,7 @@ function pct(rate: number | null | undefined): string {
 
 function fmt(n: number | null | undefined): string {
   if (n == null || !Number.isFinite(n)) return '—'
-  return new Intl.NumberFormat('en-US').format(Math.round(n))
+  return new Intl.NumberFormat('pt-PT').format(Math.round(n))
 }
 
 function deltaPct(current: number, previous: number): string | null {
@@ -156,25 +203,25 @@ function buildDemoFeatures(days: WindowDays): FeatureUsagePayload {
     total_meal_logs: Math.round(4120 * scale),
     sources: [
       { source: 'snap-track', label: 'Snap Track', family: 'snap_track', logs: Math.round(1680 * scale), users: Math.round(320 * scale), pct_logs: 40.8 },
-      { source: 'quick_log', label: 'Quick Log', family: 'quick_log', logs: Math.round(980 * scale), users: Math.round(260 * scale), pct_logs: 23.8 },
+      { source: 'quick_log', label: 'Registo rápido', family: 'quick_log', logs: Math.round(980 * scale), users: Math.round(260 * scale), pct_logs: 23.8 },
       { source: 'snap_cook', label: 'Snap Cook', family: 'snap_cook', logs: Math.round(520 * scale), users: Math.round(140 * scale), pct_logs: 12.6 },
-      { source: 'recipe', label: 'Recipe', family: 'recipe', logs: Math.round(410 * scale), users: Math.round(110 * scale), pct_logs: 9.9 },
-      { source: 'quick_log_exercise', label: 'Exercise (manual)', family: 'exercise', logs: Math.round(280 * scale), users: Math.round(95 * scale), pct_logs: 6.8 },
-      { source: 'manual_macro_entry', label: 'Manual macros', family: 'manual', logs: Math.round(150 * scale), users: Math.round(70 * scale), pct_logs: 3.6 },
+      { source: 'recipe', label: 'Receita', family: 'recipe', logs: Math.round(410 * scale), users: Math.round(110 * scale), pct_logs: 9.9 },
+      { source: 'quick_log_exercise', label: 'Exercício (manual)', family: 'exercise', logs: Math.round(280 * scale), users: Math.round(95 * scale), pct_logs: 6.8 },
+      { source: 'manual_macro_entry', label: 'Macros manuais', family: 'manual', logs: Math.round(150 * scale), users: Math.round(70 * scale), pct_logs: 3.6 },
     ],
     families: [
       { key: 'snap_track', label: 'Snap Track', events: Math.round(1880 * scale), users: Math.round(340 * scale), pct_logs: 45.6 },
-      { key: 'quick_log', label: 'Quick Log', events: Math.round(980 * scale), users: Math.round(260 * scale), pct_logs: 23.8 },
+      { key: 'quick_log', label: 'Registo rápido', events: Math.round(980 * scale), users: Math.round(260 * scale), pct_logs: 23.8 },
       { key: 'snap_cook', label: 'Snap Cook', events: Math.round(520 * scale), users: Math.round(140 * scale), pct_logs: 12.6 },
-      { key: 'recipe', label: 'Recipes', events: Math.round(410 * scale), users: Math.round(110 * scale), pct_logs: 9.9 },
-      { key: 'exercise', label: 'Exercise', events: Math.round(330 * scale), users: Math.round(110 * scale), pct_logs: 8.0 },
+      { key: 'recipe', label: 'Receitas', events: Math.round(410 * scale), users: Math.round(110 * scale), pct_logs: 9.9 },
+      { key: 'exercise', label: 'Exercício', events: Math.round(330 * scale), users: Math.round(110 * scale), pct_logs: 8.0 },
     ],
     features: [
-      { key: 'group_chat', label: 'Group chat messages', events: Math.round(1680 * scale), users: Math.round(88 * scale) },
-      { key: 'share_export', label: 'Share card exports', events: Math.round(310 * scale), users: Math.round(142 * scale) },
-      { key: 'group_posts', label: 'Group feed posts', events: Math.round(240 * scale), users: Math.round(96 * scale) },
-      { key: 'friendships', label: 'Friendships formed', events: Math.round(110 * scale), users: Math.round(180 * scale) },
-      { key: 'groups', label: 'Friend groups created', events: Math.round(34 * scale), users: Math.round(30 * scale) },
+      { key: 'group_chat', label: 'Mensagens de chat em grupo', events: Math.round(1680 * scale), users: Math.round(88 * scale) },
+      { key: 'share_export', label: 'Exportações do cartão de partilha', events: Math.round(310 * scale), users: Math.round(142 * scale) },
+      { key: 'group_posts', label: 'Posts no feed do grupo', events: Math.round(240 * scale), users: Math.round(96 * scale) },
+      { key: 'friendships', label: 'Amizades criadas', events: Math.round(110 * scale), users: Math.round(180 * scale) },
+      { key: 'groups', label: 'Grupos de amigos criados', events: Math.round(34 * scale), users: Math.round(30 * scale) },
     ],
   }
 }
@@ -281,7 +328,7 @@ export default function ProductInsightsAdminPage() {
 
   useEffect(() => {
     if (!supabase) {
-      setConfigError('Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY')
+      setConfigError('Faltam NEXT_PUBLIC_SUPABASE_URL ou NEXT_PUBLIC_SUPABASE_ANON_KEY')
     }
   }, [supabase])
 
@@ -336,13 +383,21 @@ export default function ProductInsightsAdminPage() {
     const ovData = ov.data as OverviewPayload | null
     const fuData = fu.data as FeatureUsagePayload | null
     if (!ovData?.ok) {
-      setListError(ovData?.error === 'forbidden' ? 'Forbidden — not in app_admins.' : 'Overview failed.')
+      setListError(
+        ovData?.error === 'forbidden'
+          ? 'Sem permissão — o email não está em app_admins.'
+          : 'Falha ao carregar o resumo.',
+      )
       setOverview(null)
       setFeatures(null)
       return
     }
     if (!fuData?.ok) {
-      setListError(fuData?.error === 'forbidden' ? 'Forbidden — not in app_admins.' : 'Feature usage failed.')
+      setListError(
+        fuData?.error === 'forbidden'
+          ? 'Sem permissão — o email não está em app_admins.'
+          : 'Falha ao carregar a utilização de funções.',
+      )
       setOverview(null)
       setFeatures(null)
       return
@@ -402,12 +457,15 @@ export default function ProductInsightsAdminPage() {
       <main className="min-h-screen bg-[radial-gradient(1200px_600px_at_10%_-10%,#fff7ed,transparent),linear-gradient(#fafafa,#ffffff)] px-4 py-10">
         <div className="mx-auto max-w-3xl">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            IGNITE · Internal
+            IGNITE · Interno
           </p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">Product insights</h1>
+          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
+            Insights de produto
+          </h1>
           <p className="mt-3 text-sm font-semibold text-red-600">{configError}</p>
           <p className="mt-2 text-sm text-muted-foreground">
-            Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY on Vercel, then redeploy.
+            Define NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY no Vercel e volta a fazer
+            deploy.
           </p>
         </div>
       </main>
@@ -419,10 +477,14 @@ export default function ProductInsightsAdminPage() {
       <main className="min-h-screen bg-[radial-gradient(1200px_600px_at_10%_-10%,#fff7ed,transparent),linear-gradient(#fafafa,#ffffff)] px-4 py-10">
         <div className="mx-auto w-full max-w-md">
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            IGNITE · Internal
+            IGNITE · Interno
           </p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">Product insights</h1>
-          <p className="mt-2 text-sm text-muted-foreground">Sign in with your Ignite admin account.</p>
+          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
+            Insights de produto
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Entra com a tua conta de admin Ignite.
+          </p>
           <form
             onSubmit={onSignIn}
             className="mt-6 flex flex-col gap-3.5 rounded-2xl border border-border bg-card p-6 shadow-[0_12px_40px_rgba(15,23,42,0.06)]"
@@ -439,7 +501,7 @@ export default function ProductInsightsAdminPage() {
               />
             </label>
             <label className="flex flex-col gap-2 text-sm font-semibold text-foreground/80">
-              Password
+              Palavra-passe
               <input
                 className="rounded-xl border border-border bg-muted/40 px-3.5 py-3 text-base outline-none focus:border-foreground/30"
                 type="password"
@@ -454,14 +516,14 @@ export default function ProductInsightsAdminPage() {
               type="submit"
               className="mt-1 rounded-full bg-foreground px-4 py-2.5 text-sm font-bold text-background"
             >
-              Sign in
+              Entrar
             </button>
             <button
               type="button"
               onClick={toggleDemo}
               className="rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold"
             >
-              Demo preview
+              Pré-visualização demo
             </button>
           </form>
         </div>
@@ -475,13 +537,13 @@ export default function ProductInsightsAdminPage() {
         <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-              IGNITE · Internal
+              IGNITE · Interno
             </p>
             <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Product insights
+              Insights de produto
             </h1>
             <p className="mt-1 text-sm text-muted-foreground">
-              {user?.email ?? 'Demo preview'}
+              {user?.email ?? 'Pré-visualização demo'}
             </p>
           </div>
           <div className="flex flex-wrap items-center gap-2">
@@ -495,7 +557,7 @@ export default function ProductInsightsAdminPage() {
                   : 'border-border bg-card text-foreground',
               )}
             >
-              {demoMode ? 'Exit demo' : 'Demo preview'}
+              {demoMode ? 'Sair da demo' : 'Pré-visualização demo'}
             </button>
             <button
               type="button"
@@ -509,7 +571,7 @@ export default function ProductInsightsAdminPage() {
               }}
               className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
             >
-              Refresh
+              Atualizar
             </button>
             {session && user ? (
               <button
@@ -517,7 +579,7 @@ export default function ProductInsightsAdminPage() {
                 onClick={() => void onSignOut()}
                 className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
               >
-                Sign out
+                Sair
               </button>
             ) : null}
           </div>
@@ -525,7 +587,7 @@ export default function ProductInsightsAdminPage() {
 
         {demoMode ? (
           <p className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900">
-            Demo mode — fake data only. Apply migration `admin_product_insights` for live RPCs.
+            Modo demo — dados fictícios. Aplica a migration `admin_product_insights` para RPCs reais.
           </p>
         ) : null}
 
@@ -536,17 +598,17 @@ export default function ProductInsightsAdminPage() {
               type="button"
               onClick={() => setWindowDays(d)}
               className={cn(
-                'rounded-full border px-3.5 py-2 text-sm font-semibold capitalize',
+                'rounded-full border px-3.5 py-2 text-sm font-semibold',
                 windowDays === d
                   ? 'border-foreground bg-foreground text-background'
                   : 'border-border bg-card text-foreground/80',
               )}
             >
-              Last {d}d
+              Últimos {d} dias
             </button>
           ))}
           {loading && !demoMode ? (
-            <span className="ml-2 text-sm text-muted-foreground">Loading…</span>
+            <span className="ml-2 text-sm text-muted-foreground">A carregar…</span>
           ) : null}
         </div>
 
@@ -557,19 +619,31 @@ export default function ProductInsightsAdminPage() {
         {overview ? (
           <>
             <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
-              <StatCard label="DAU" value={fmt(overview.users.dau)} hint="Meal loggers · 24h" />
-              <StatCard label="WAU" value={fmt(overview.users.wau)} hint="Meal loggers · 7d" />
-              <StatCard label="MAU" value={fmt(overview.users.mau)} hint="Meal loggers · 30d" />
               <StatCard
-                label="Meals"
+                label="DAU"
+                value={fmt(overview.users.dau)}
+                hint="Utilizadores com refeições · 24h"
+              />
+              <StatCard
+                label="WAU"
+                value={fmt(overview.users.wau)}
+                hint="Utilizadores com refeições · 7d"
+              />
+              <StatCard
+                label="MAU"
+                value={fmt(overview.users.mau)}
+                hint="Utilizadores com refeições · 30d"
+              />
+              <StatCard
+                label="Refeições"
                 value={fmt(overview.meals.logs_window)}
-                hint={mealDelta ? `${mealDelta} vs prior` : null}
+                hint={mealDelta ? `${mealDelta} vs período anterior` : null}
                 tone={mealTone}
               />
               <StatCard
-                label="Signups"
+                label="Registos"
                 value={fmt(overview.users.signups_window)}
-                hint={`${fmt(overview.users.total_profiles)} profiles`}
+                hint={`${fmt(overview.users.total_profiles)} perfis`}
               />
               <StatCard
                 label="Premium"
@@ -578,37 +652,43 @@ export default function ProductInsightsAdminPage() {
               />
             </div>
 
-            <Section title="Activity" subtitle="Active users and meals by day (nutrition_logs).">
+            <Section
+              title="Atividade"
+              subtitle="Utilizadores ativos e refeições por dia (nutrition_logs)."
+            >
               <div className="grid gap-3 md:grid-cols-2">
                 <div className="rounded-2xl border border-border bg-card p-4">
                   <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
-                    Daily active (meal loggers)
+                    Ativos diários (com refeições)
                   </p>
                   <SparkBars
-                    label="Daily active users"
+                    label="Utilizadores ativos diários"
                     values={overview.daily.map((d) => d.active_users)}
                   />
                   <p className="mt-2 text-xs text-muted-foreground">
-                    Avg / logger: {overview.meals.avg_per_logger ?? '—'} · Loggers in window:{' '}
-                    {fmt(overview.users.meal_loggers_window)}
+                    Média / utilizador: {overview.meals.avg_per_logger ?? '—'} · Com registos no
+                    período: {fmt(overview.users.meal_loggers_window)}
                   </p>
                 </div>
                 <div className="rounded-2xl border border-border bg-card p-4">
                   <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
-                    Meals logged / day
+                    Refeições registadas / dia
                   </p>
-                  <SparkBars label="Meals per day" values={overview.daily.map((d) => d.meals)} />
+                  <SparkBars
+                    label="Refeições por dia"
+                    values={overview.daily.map((d) => d.meals)}
+                  />
                   <p className="mt-2 text-xs text-muted-foreground">
-                    Peak day:{' '}
-                    {fmt(Math.max(0, ...overview.daily.map((d) => d.meals)))} meals
+                    Pico do dia:{' '}
+                    {fmt(Math.max(0, ...overview.daily.map((d) => d.meals)))} refeições
                   </p>
                 </div>
               </div>
             </Section>
 
             <Section
-              title="Retention"
-              subtitle="Users who logged a meal on day N after signup (cohorts from last 60 days)."
+              title="Retenção"
+              subtitle="Utilizadores que registaram uma refeição no dia N após o signup (coortes dos últimos 60 dias)."
             >
               <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
                 {(
@@ -623,35 +703,41 @@ export default function ProductInsightsAdminPage() {
                     className="rounded-2xl border border-border bg-card p-4 shadow-[0_8px_24px_rgba(15,23,42,0.04)]"
                   >
                     <p className="text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
-                      {label} retention
+                      Retenção {label}
                     </p>
                     <p className="mt-1.5 font-display text-2xl font-bold tracking-tight">
                       {pct(bucket.rate)}
                     </p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      {fmt(bucket.retained)} / {fmt(bucket.cohort)} users
+                      {fmt(bucket.retained)} / {fmt(bucket.cohort)} utilizadores
                     </p>
                   </div>
                 ))}
               </div>
             </Section>
 
-            <Section title="Social & share" subtitle={`Last ${overview.window_days} days.`}>
+            <Section
+              title="Social e partilha"
+              subtitle={`Últimos ${overview.window_days} dias.`}
+            >
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
-                <StatCard label="Groups" value={fmt(overview.social.groups_created)} />
-                <StatCard label="Feed posts" value={fmt(overview.social.group_posts)} />
-                <StatCard label="Chat msgs" value={fmt(overview.social.group_messages)} />
-                <StatCard label="Friendships" value={fmt(overview.social.friendships)} />
-                <StatCard label="Share exports" value={fmt(overview.social.share_exports)} />
-                <StatCard label="Sharers" value={fmt(overview.social.share_export_users)} />
+                <StatCard label="Grupos" value={fmt(overview.social.groups_created)} />
+                <StatCard label="Posts no feed" value={fmt(overview.social.group_posts)} />
+                <StatCard label="Msgs chat" value={fmt(overview.social.group_messages)} />
+                <StatCard label="Amizades" value={fmt(overview.social.friendships)} />
+                <StatCard label="Exportações" value={fmt(overview.social.share_exports)} />
+                <StatCard label="Quem partilhou" value={fmt(overview.social.share_export_users)} />
               </div>
             </Section>
 
-            <Section title="Creator program" subtitle="Application pipeline (all-time status counts).">
+            <Section
+              title="Programa de creators"
+              subtitle="Pipeline de candidaturas (contagens por estado, total)."
+            >
               <div className="grid grid-cols-3 gap-2.5">
-                <StatCard label="Pending" value={fmt(overview.creator.pending)} />
-                <StatCard label="Approved" value={fmt(overview.creator.approved)} />
-                <StatCard label="Rejected" value={fmt(overview.creator.rejected)} />
+                <StatCard label="Pendentes" value={fmt(overview.creator.pending)} />
+                <StatCard label="Aprovadas" value={fmt(overview.creator.approved)} />
+                <StatCard label="Rejeitadas" value={fmt(overview.creator.rejected)} />
               </div>
             </Section>
           </>
@@ -660,24 +746,26 @@ export default function ProductInsightsAdminPage() {
         {features ? (
           <>
             <Section
-              title="Feature ranking"
-              subtitle="Meal log families + social actions (by event volume)."
+              title="Ranking de funções"
+              subtitle="Famílias de registo de refeições + ações sociais (por volume)."
             >
               <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[560px] border-collapse text-sm">
                     <thead>
                       <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
-                        <th className="px-4 py-3">Family</th>
-                        <th className="px-4 py-3">Events</th>
-                        <th className="px-4 py-3">Users</th>
-                        <th className="px-4 py-3">Share of meals</th>
+                        <th className="px-4 py-3">Família</th>
+                        <th className="px-4 py-3">Eventos</th>
+                        <th className="px-4 py-3">Utilizadores</th>
+                        <th className="px-4 py-3">% das refeições</th>
                       </tr>
                     </thead>
                     <tbody>
                       {features.families.map((row) => (
                         <tr key={row.key} className="border-t border-border/70">
-                          <td className="px-4 py-3 font-semibold">{row.label}</td>
+                          <td className="px-4 py-3 font-semibold">
+                            {labelFamily(row.key, row.label)}
+                          </td>
                           <td className="px-4 py-3">{fmt(row.events)}</td>
                           <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
                           <td className="px-4 py-3">
@@ -698,15 +786,18 @@ export default function ProductInsightsAdminPage() {
               </div>
             </Section>
 
-            <Section title="Meal sources" subtitle="Raw nutrition_logs.source breakdown.">
+            <Section
+              title="Fontes de refeição"
+              subtitle="Detalhe por nutrition_logs.source."
+            >
               <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[640px] border-collapse text-sm">
                     <thead>
                       <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
-                        <th className="px-4 py-3">Source</th>
-                        <th className="px-4 py-3">Logs</th>
-                        <th className="px-4 py-3">Users</th>
+                        <th className="px-4 py-3">Fonte</th>
+                        <th className="px-4 py-3">Registos</th>
+                        <th className="px-4 py-3">Utilizadores</th>
                         <th className="px-4 py-3">%</th>
                       </tr>
                     </thead>
@@ -714,7 +805,9 @@ export default function ProductInsightsAdminPage() {
                       {features.sources.map((row) => (
                         <tr key={row.source} className="border-t border-border/70">
                           <td className="px-4 py-3">
-                            <div className="font-semibold">{row.label}</div>
+                            <div className="font-semibold">
+                              {labelSource(row.source, row.label)}
+                            </div>
                             <div className="font-mono text-[11px] text-muted-foreground">
                               {row.source}
                             </div>
@@ -736,7 +829,7 @@ export default function ProductInsightsAdminPage() {
                       {features.sources.length === 0 ? (
                         <tr>
                           <td colSpan={4} className="px-4 py-10 text-center text-muted-foreground">
-                            No meal logs in this window.
+                            Sem registos de refeição neste período.
                           </td>
                         </tr>
                       ) : null}
@@ -746,21 +839,26 @@ export default function ProductInsightsAdminPage() {
               </div>
             </Section>
 
-            <Section title="Other product actions" subtitle="Not meal logs — groups, chat, share.">
+            <Section
+              title="Outras ações de produto"
+              subtitle="Não são refeições — grupos, chat, partilha."
+            >
               <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[480px] border-collapse text-sm">
                     <thead>
                       <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
-                        <th className="px-4 py-3">Feature</th>
-                        <th className="px-4 py-3">Events</th>
-                        <th className="px-4 py-3">Users</th>
+                        <th className="px-4 py-3">Função</th>
+                        <th className="px-4 py-3">Eventos</th>
+                        <th className="px-4 py-3">Utilizadores</th>
                       </tr>
                     </thead>
                     <tbody>
                       {features.features.map((row) => (
                         <tr key={row.key} className="border-t border-border/70">
-                          <td className="px-4 py-3 font-semibold">{row.label}</td>
+                          <td className="px-4 py-3 font-semibold">
+                            {labelFeature(row.key, row.label)}
+                          </td>
                           <td className="px-4 py-3">{fmt(row.events)}</td>
                           <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
                         </tr>
@@ -774,11 +872,14 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         {!overview && !loading && !listError ? (
-          <p className="mt-8 text-sm text-muted-foreground">No data yet — hit Refresh after signing in.</p>
+          <p className="mt-8 text-sm text-muted-foreground">
+            Ainda sem dados — clica em Atualizar depois de entrar.
+          </p>
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Phase A · Domain tables only. Fasting and screen funnels need product events (Phase B).
+          Fase A · Só tabelas de domínio. Jejum e funis de ecrã precisam de eventos de produto (Fase
+          B).
         </p>
       </div>
     </main>
