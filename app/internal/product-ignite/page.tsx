@@ -171,6 +171,42 @@ type EngagementPayload = {
   top_errors?: Array<{ message: string; events: number; users: number }>
 }
 
+type MonetizationPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    paywall_shown: number
+    paywall_users: number
+    paywall_dismissed: number
+    paywall_dismissed_users: number
+    premium_converted: number
+    premium_users: number
+    convert_rate: number | null
+    convert_rate_users: number | null
+    dismiss_rate: number | null
+  }
+  by_from: Array<{
+    from: string
+    shown: number
+    shown_users: number
+    converted: number
+    converted_users: number
+    convert_rate: number | null
+  }>
+  by_source: Array<{ source: string; events: number; users: number }>
+  by_platform: Array<{
+    platform: string
+    shown: number
+    shown_users: number
+    converted: number
+    converted_users: number
+    convert_rate: number | null
+  }>
+  daily: Array<{ day: string; shown: number; converted: number }>
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -220,6 +256,7 @@ const EVENT_LABELS_PT: Record<string, string> = {
   meal_logged: 'Refeição registada',
   snap_track_open: 'Abrir Snap Track',
   paywall_shown: 'Paywall mostrado',
+  paywall_dismissed: 'Paywall dispensado',
   premium_converted: 'Conversão premium',
   group_created: 'Grupo criado',
   group_open: 'Abrir grupo',
@@ -485,6 +522,77 @@ function buildDemoEngagement(days: WindowDays): EngagementPayload {
   }
 }
 
+function buildDemoMonetization(days: WindowDays): MonetizationPayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  const daily = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const shown = Math.max(2, Math.round((8 + (i % 4) * 2) * scale))
+    return {
+      day: d.toISOString().slice(0, 10),
+      shown,
+      converted: Math.max(0, Math.round(shown * 0.18)),
+    }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      paywall_shown: Math.round(95 * scale),
+      paywall_users: Math.round(90 * scale),
+      paywall_dismissed: Math.round(70 * scale),
+      paywall_dismissed_users: Math.round(68 * scale),
+      premium_converted: Math.round(18 * scale),
+      premium_users: Math.round(18 * scale),
+      convert_rate: 0.189,
+      convert_rate_users: 0.2,
+      dismiss_rate: 0.737,
+    },
+    by_from: [
+      {
+        from: 'onboarding',
+        shown: Math.round(55 * scale),
+        shown_users: Math.round(52 * scale),
+        converted: Math.round(12 * scale),
+        converted_users: Math.round(12 * scale),
+        convert_rate: 0.218,
+      },
+      {
+        from: 'other',
+        shown: Math.round(40 * scale),
+        shown_users: Math.round(38 * scale),
+        converted: Math.round(6 * scale),
+        converted_users: Math.round(6 * scale),
+        convert_rate: 0.15,
+      },
+    ],
+    by_source: [
+      { source: 'main', events: Math.round(14 * scale), users: Math.round(14 * scale) },
+      { source: 'downsell', events: Math.round(4 * scale), users: Math.round(4 * scale) },
+    ],
+    by_platform: [
+      {
+        platform: 'ios',
+        shown: Math.round(58 * scale),
+        shown_users: Math.round(55 * scale),
+        converted: Math.round(12 * scale),
+        converted_users: Math.round(12 * scale),
+        convert_rate: 0.207,
+      },
+      {
+        platform: 'android',
+        shown: Math.round(37 * scale),
+        shown_users: Math.round(35 * scale),
+        converted: Math.round(6 * scale),
+        converted_users: Math.round(6 * scale),
+        convert_rate: 0.162,
+      },
+    ],
+    daily,
+  }
+}
+
 const ERROR_SOURCE_LABELS_PT: Record<string, string> = {
   react_boundary: 'React boundary',
   global_handler: 'Handler global',
@@ -608,6 +716,7 @@ export default function ProductInsightsAdminPage() {
   const [features, setFeatures] = useState<FeatureUsagePayload | null>(null)
   const [events, setEvents] = useState<EventsPayload | null>(null)
   const [engagement, setEngagement] = useState<EngagementPayload | null>(null)
+  const [monetization, setMonetization] = useState<MonetizationPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -629,11 +738,12 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg] = await Promise.all([
+    const [ov, fu, ev, eg, mo] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
       supabase.rpc('admin_product_engagement', { p_days: windowDays }),
+      supabase.rpc('admin_product_monetization', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -643,6 +753,7 @@ export default function ProductInsightsAdminPage() {
       setFeatures(null)
       setEvents(null)
       setEngagement(null)
+      setMonetization(null)
       return
     }
     if (fu.error) {
@@ -651,6 +762,7 @@ export default function ProductInsightsAdminPage() {
       setFeatures(null)
       setEvents(null)
       setEngagement(null)
+      setMonetization(null)
       return
     }
 
@@ -666,6 +778,7 @@ export default function ProductInsightsAdminPage() {
       setFeatures(null)
       setEvents(null)
       setEngagement(null)
+      setMonetization(null)
       return
     }
     if (!fuData?.ok) {
@@ -678,6 +791,7 @@ export default function ProductInsightsAdminPage() {
       setFeatures(null)
       setEvents(null)
       setEngagement(null)
+      setMonetization(null)
       return
     }
     setOverview(ovData)
@@ -696,6 +810,13 @@ export default function ProductInsightsAdminPage() {
       const egData = eg.data as EngagementPayload | null
       setEngagement(egData?.ok ? egData : null)
     }
+
+    if (mo.error) {
+      setMonetization(null)
+    } else {
+      const moData = mo.data as MonetizationPayload | null
+      setMonetization(moData?.ok ? moData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -709,6 +830,7 @@ export default function ProductInsightsAdminPage() {
     setFeatures(buildDemoFeatures(windowDays))
     setEvents(buildDemoEvents(windowDays))
     setEngagement(buildDemoEngagement(windowDays))
+    setMonetization(buildDemoMonetization(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -727,6 +849,7 @@ export default function ProductInsightsAdminPage() {
     setFeatures(null)
     setEvents(null)
     setEngagement(null)
+    setMonetization(null)
     setDemoMode(false)
   }
 
@@ -738,6 +861,7 @@ export default function ProductInsightsAdminPage() {
         setFeatures(buildDemoFeatures(windowDays))
         setEvents(buildDemoEvents(windowDays))
         setEngagement(buildDemoEngagement(windowDays))
+        setMonetization(buildDemoMonetization(windowDays))
         setListError(null)
       }
       return next
@@ -865,6 +989,7 @@ export default function ProductInsightsAdminPage() {
                   setFeatures(buildDemoFeatures(windowDays))
                   setEvents(buildDemoEvents(windowDays))
                   setEngagement(buildDemoEngagement(windowDays))
+                  setMonetization(buildDemoMonetization(windowDays))
                   return
                 }
                 void load()
@@ -1493,6 +1618,164 @@ export default function ProductInsightsAdminPage() {
               </div>
             </Section>
 
+            {monetization ? (
+              <Section
+                title="Monetização (Fase H)"
+                subtitle="Paywall → premium por origem, oferta (main/downsell) e plataforma."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Paywall"
+                    value={fmt(monetization.summary.paywall_shown)}
+                    hint={`${fmt(monetization.summary.paywall_users)} users`}
+                  />
+                  <StatCard
+                    label="Convertidos"
+                    value={fmt(monetization.summary.premium_converted)}
+                    hint={`${fmt(monetization.summary.premium_users)} users`}
+                    tone="up"
+                  />
+                  <StatCard
+                    label="Conv. rate"
+                    value={pct(monetization.summary.convert_rate)}
+                    hint="eventos"
+                  />
+                  <StatCard
+                    label="Conv. users"
+                    value={pct(monetization.summary.convert_rate_users)}
+                    hint="utilizadores únicos"
+                  />
+                  <StatCard
+                    label="Dismiss"
+                    value={fmt(monetization.summary.paywall_dismissed)}
+                    hint={
+                      monetization.summary.dismiss_rate != null
+                        ? pct(monetization.summary.dismiss_rate)
+                        : null
+                    }
+                  />
+                  <StatCard
+                    label="Fontes"
+                    value={fmt(monetization.by_source.length)}
+                    hint="main / downsell"
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Paywall shown / dia
+                  </p>
+                  <SparkBars
+                    label="Paywall shown por dia"
+                    values={monetization.daily.map((d) => d.shown)}
+                  />
+                  <p className="mb-3 mt-4 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Conversões / dia
+                  </p>
+                  <SparkBars
+                    label="Conversões premium por dia"
+                    values={monetization.daily.map((d) => d.converted)}
+                  />
+                </div>
+                {monetization.by_from.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[480px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Origem</th>
+                            <th className="px-4 py-3">Shown</th>
+                            <th className="px-4 py-3">Convert</th>
+                            <th className="px-4 py-3">Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {monetization.by_from.map((row) => (
+                            <tr key={row.from} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {row.from === 'onboarding'
+                                  ? 'Onboarding'
+                                  : row.from === 'other'
+                                    ? 'Outro'
+                                    : row.from}
+                              </td>
+                              <td className="px-4 py-3">
+                                {fmt(row.shown)}
+                                <span className="text-muted-foreground"> · {fmt(row.shown_users)} u</span>
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.converted)}</td>
+                              <td className="px-4 py-3">{pct(row.convert_rate)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+                {monetization.by_source.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[420px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Oferta</th>
+                            <th className="px-4 py-3">Conversões</th>
+                            <th className="px-4 py-3">Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {monetization.by_source.map((row) => (
+                            <tr key={row.source} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {row.source === 'main'
+                                  ? 'Main'
+                                  : row.source === 'downsell'
+                                    ? 'Downsell'
+                                    : row.source}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+                {monetization.by_platform.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[480px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Plataforma</th>
+                            <th className="px-4 py-3">Shown</th>
+                            <th className="px-4 py-3">Convert</th>
+                            <th className="px-4 py-3">Rate</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {monetization.by_platform.map((row) => (
+                            <tr key={row.platform} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {row.platform === 'ios'
+                                  ? 'iOS'
+                                  : row.platform === 'android'
+                                    ? 'Android'
+                                    : row.platform}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.shown)}</td>
+                              <td className="px-4 py-3">{fmt(row.converted)}</td>
+                              <td className="px-4 py-3">{pct(row.convert_rate)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
             {events.retention_opens ? (
               <Section
                 title="Retenção (app_open)"
@@ -1674,7 +1957,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase G · stickiness, versões e top erros. A–F continuam ativos.
+          Fase H · monetização paywall → premium. A–G continuam ativos.
         </p>
       </div>
     </main>
