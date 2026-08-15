@@ -1,8 +1,9 @@
 'use client'
 
-import { FormEvent, useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react'
+import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
+import { cn } from '@/lib/utils'
 
 type Filter = 'all' | 'holding' | 'pending' | 'requested' | 'paid' | 'cancelled' | 'refunded'
 type CountdownSort = 'default' | 'asc' | 'desc'
@@ -25,6 +26,16 @@ type RewardRow = {
   refunded_at: string | null
   payout_eligible: boolean
   days_until_eligible: number | null
+}
+
+const FILTER_LABELS: Record<Filter, string> = {
+  requested: 'Pedidos',
+  holding: 'Holding',
+  pending: 'Prontos',
+  paid: 'Pagos',
+  refunded: 'Reembolsos',
+  cancelled: 'Cancelados',
+  all: 'Todos',
 }
 
 function money(cents: number, currency: string): string {
@@ -63,6 +74,26 @@ function matchesPayoutSearch(row: RewardRow, q: string): boolean {
     .join(' ')
     .toLowerCase()
   return hay.includes(q)
+}
+
+function statusBadgeClass(status: string): string {
+  if (status === 'paid') return 'inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold capitalize text-emerald-700'
+  if (status === 'refunded' || status === 'cancelled')
+    return 'inline-flex rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold capitalize text-red-700'
+  return 'inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-bold capitalize text-foreground/70'
+}
+
+function StatCard({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-border bg-card p-4 shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+        {label}
+      </p>
+      <p className="mt-1.5 font-display text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+        {value}
+      </p>
+    </div>
+  )
 }
 
 const DEMO_ROWS: RewardRow[] = [
@@ -196,6 +227,9 @@ function rowMatchesFilter(row: RewardRow, filter: Filter): boolean {
   }
 }
 
+const PAGE_BG =
+  'min-h-screen bg-[radial-gradient(1200px_600px_at_10%_-10%,#fff7ed,transparent),linear-gradient(#fafafa,#ffffff)]'
+
 export default function ReferralPayoutsAdminPage() {
   const [configError, setConfigError] = useState<string | null>(null)
   const supabase = useMemo(() => {
@@ -244,7 +278,6 @@ export default function ReferralPayoutsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    // Always load all so tab counts stay accurate; filter client-side.
     const { data, error } = await supabase.rpc('admin_list_referral_rewards', {
       p_filter: 'all',
       p_source: 'friend',
@@ -287,7 +320,8 @@ export default function ReferralPayoutsAdminPage() {
     ]
     const counts = {} as Record<Filter, number>
     for (const key of keys) {
-      counts[key] = key === 'all' ? rowSource.length : rowSource.filter((r) => rowMatchesFilter(r, key)).length
+      counts[key] =
+        key === 'all' ? rowSource.length : rowSource.filter((r) => rowMatchesFilter(r, key)).length
     }
     return counts
   }, [rowSource])
@@ -398,31 +432,45 @@ export default function ReferralPayoutsAdminPage() {
 
   if (configError) {
     return (
-      <main style={styles.page}>
-        <div style={styles.shell}>
-          <p style={styles.kicker}>IGNITE · Internal</p>
-          <h1 style={styles.h1}>Referral payouts</h1>
-          <p style={styles.error}>{configError}</p>
-          <p style={styles.muted}>
-            Set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY on Vercel, then redeploy.
+      <main className={cn(PAGE_BG, 'px-4 py-10')}>
+        <div className="mx-auto max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            IGNITE · Interno
+          </p>
+          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
+            Pagamentos referral
+          </h1>
+          <p className="mt-3 text-sm font-semibold text-red-600">{configError}</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Define NEXT_PUBLIC_SUPABASE_URL e NEXT_PUBLIC_SUPABASE_ANON_KEY no Vercel e volta a fazer
+            deploy.
           </p>
         </div>
       </main>
     )
   }
 
-  if (!session || !user) {
+  if ((!session || !user) && !demoMode) {
     return (
-      <main style={styles.page}>
-        <div style={styles.shellNarrow}>
-          <p style={styles.kicker}>IGNITE · Internal</p>
-          <h1 style={styles.h1}>Referral payouts</h1>
-          <p style={styles.muted}>Sign in with your Ignite admin account.</p>
-          <form onSubmit={onSignIn} style={styles.card}>
-            <label style={styles.label}>
+      <main className={cn(PAGE_BG, 'px-4 py-10')}>
+        <div className="mx-auto w-full max-w-md">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            IGNITE · Interno
+          </p>
+          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
+            Pagamentos referral
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Entra com a tua conta de admin Ignite.
+          </p>
+          <form
+            onSubmit={onSignIn}
+            className="mt-6 flex flex-col gap-3.5 rounded-2xl border border-border bg-card p-6 shadow-[0_12px_40px_rgba(15,23,42,0.06)]"
+          >
+            <label className="flex flex-col gap-2 text-sm font-semibold text-foreground/80">
               Email
               <input
-                style={styles.input}
+                className="rounded-xl border border-border bg-muted/40 px-3.5 py-3 text-base outline-none focus:border-foreground/30"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -430,10 +478,10 @@ export default function ReferralPayoutsAdminPage() {
                 autoComplete="username"
               />
             </label>
-            <label style={styles.label}>
-              Password
+            <label className="flex flex-col gap-2 text-sm font-semibold text-foreground/80">
+              Palavra-passe
               <input
-                style={styles.input}
+                className="rounded-xl border border-border bg-muted/40 px-3.5 py-3 text-base outline-none focus:border-foreground/30"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -441,9 +489,19 @@ export default function ReferralPayoutsAdminPage() {
                 autoComplete="current-password"
               />
             </label>
-            {authError ? <p style={styles.error}>{authError}</p> : null}
-            <button type="submit" style={styles.btnPrimary}>
-              Sign in
+            {authError ? <p className="text-sm font-semibold text-red-600">{authError}</p> : null}
+            <button
+              type="submit"
+              className="mt-1 rounded-full bg-foreground px-4 py-2.5 text-sm font-bold text-background"
+            >
+              Entrar
+            </button>
+            <button
+              type="button"
+              onClick={toggleDemo}
+              className="rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold"
+            >
+              Pré-visualização demo
             </button>
           </form>
         </div>
@@ -452,75 +510,33 @@ export default function ReferralPayoutsAdminPage() {
   }
 
   return (
-    <main style={styles.page}>
-      <div style={styles.shell}>
-        <header style={styles.header}>
+    <main className={cn(PAGE_BG, 'px-4 py-8 sm:px-6')}>
+      <div className="mx-auto max-w-6xl">
+        <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p style={styles.kicker}>IGNITE · Internal</p>
-            <h1 style={styles.h1}>Referral payouts</h1>
-            <p style={styles.muted}>{user.email}</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              IGNITE · Interno
+            </p>
+            <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Pagamentos referral
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {user?.email ?? 'Pré-visualização demo'}
+            </p>
           </div>
-          <div style={styles.headerActions}>
+          <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
               onClick={toggleDemo}
-              style={demoMode ? styles.btnDemoOn : styles.btnGhost}
+              className={cn(
+                'rounded-full border px-3.5 py-2 text-sm font-semibold',
+                demoMode
+                  ? 'border-amber-500 bg-amber-50 text-amber-900'
+                  : 'border-border bg-card text-foreground',
+              )}
             >
-              {demoMode ? 'Exit demo' : 'Demo preview'}
+              {demoMode ? 'Sair da demo' : 'Pré-visualização demo'}
             </button>
-            <button type="button" onClick={() => void onSignOut()} style={styles.btnGhost}>
-              Sign out
-            </button>
-          </div>
-        </header>
-
-        {demoMode ? (
-          <p style={styles.demoBanner}>
-            Demo mode — fake data only. Filters and Mark paid work locally; nothing is saved.
-          </p>
-        ) : null}
-
-        <div style={styles.filters}>
-          <div style={styles.filterGroup}>
-            {(['requested', 'holding', 'pending', 'paid', 'refunded', 'cancelled', 'all'] as Filter[]).map(
-              (f) => (
-                <button
-                  key={f}
-                  type="button"
-                  onClick={() => setFilter(f)}
-                  style={{
-                    ...styles.chip,
-                    ...(filter === f ? styles.chipActive : null),
-                  }}
-                >
-                  {f} ({filterCounts[f]})
-                </button>
-              ),
-            )}
-          </div>
-          <div style={styles.filterActions}>
-            <input
-              style={styles.searchInput}
-              type="search"
-              placeholder="Search referrer, PayPal, friend…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              aria-label="Search payouts"
-            />
-            {filter === 'holding' ? (
-              <label style={styles.sortLabel}>
-                Countdown
-                <select
-                  style={styles.sortSelect}
-                  value={countdownSort}
-                  onChange={(e) => setCountdownSort(e.target.value as CountdownSort)}
-                >
-                  <option value="default">Default</option>
-                  <option value="asc">Lowest first</option>
-                  <option value="desc">Highest first</option>
-                </select>
-              </label>
-            ) : null}
             <button
               type="button"
               onClick={() => {
@@ -530,63 +546,129 @@ export default function ReferralPayoutsAdminPage() {
                 }
                 void load()
               }}
-              style={styles.btnGhost}
+              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
             >
-              Refresh
+              Atualizar
             </button>
+            {session && user ? (
+              <button
+                type="button"
+                onClick={() => void onSignOut()}
+                className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
+              >
+                Sair
+              </button>
+            ) : null}
           </div>
+        </header>
+
+        {demoMode ? (
+          <p className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900">
+            Modo demo — dados fictícios. Filtros e Marcar pago funcionam localmente; nada é guardado.
+          </p>
+        ) : null}
+
+        <nav className="sticky top-2 z-20 mb-5 -mx-1 overflow-x-auto rounded-2xl border border-border/80 bg-card/95 px-2 py-2 shadow-sm backdrop-blur">
+          <div className="flex min-w-max gap-1">
+            {(['requested', 'holding', 'pending', 'paid', 'refunded', 'cancelled', 'all'] as Filter[]).map(
+              (f) => (
+                <button
+                  key={f}
+                  type="button"
+                  onClick={() => setFilter(f)}
+                  className={cn(
+                    'rounded-full px-3.5 py-2 text-sm font-semibold',
+                    filter === f
+                      ? 'bg-foreground text-background'
+                      : 'text-foreground/70 hover:bg-muted/60 hover:text-foreground',
+                  )}
+                >
+                  {FILTER_LABELS[f]} ({filterCounts[f]})
+                </button>
+              ),
+            )}
+          </div>
+        </nav>
+
+        <div className="mb-5 flex flex-wrap items-center gap-2">
+          <input
+            className="min-w-[220px] max-w-xs flex-1 rounded-full border border-border bg-card px-3.5 py-2 text-sm outline-none focus:border-foreground/30"
+            type="search"
+            placeholder="Pesquisar referrer, PayPal, amigo…"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            aria-label="Pesquisar pagamentos"
+          />
+          {filter === 'holding' ? (
+            <label className="inline-flex items-center gap-2 text-sm font-semibold text-muted-foreground">
+              Countdown
+              <select
+                className="rounded-full border border-border bg-card px-3 py-2 text-sm font-semibold text-foreground outline-none"
+                value={countdownSort}
+                onChange={(e) => setCountdownSort(e.target.value as CountdownSort)}
+              >
+                <option value="default">Predefinição</option>
+                <option value="asc">Mais baixo primeiro</option>
+                <option value="desc">Mais alto primeiro</option>
+              </select>
+            </label>
+          ) : null}
+          {loading && !demoMode ? (
+            <span className="text-sm text-muted-foreground">A carregar…</span>
+          ) : null}
         </div>
 
-        <div style={styles.statsRow}>
-          <div style={styles.statCard}>
-            <p style={styles.statKey}>Rows</p>
-            <p style={styles.statVal}>{payoutStats.count}</p>
-          </div>
-          <div style={styles.statCard}>
-            <p style={styles.statKey}>Referrers</p>
-            <p style={styles.statVal}>{payoutStats.referrers}</p>
-          </div>
-          <div style={styles.statCard}>
-            <p style={styles.statKey}>Pending</p>
-            <p style={styles.statVal}>{formatMoneyMap(payoutStats.pending)}</p>
-          </div>
-          <div style={styles.statCard}>
-            <p style={styles.statKey}>Paid</p>
-            <p style={styles.statVal}>{formatMoneyMap(payoutStats.paid)}</p>
-          </div>
-          <div style={styles.statCard}>
-            <p style={styles.statKey}>Ready / holding</p>
-            <p style={styles.statVal}>
-              {payoutStats.ready} / {payoutStats.holding}
-            </p>
-          </div>
+        {listError && !demoMode ? (
+          <p className="mb-4 text-sm font-semibold text-red-600">{listError}</p>
+        ) : null}
+
+        <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          <StatCard label="Linhas" value={String(payoutStats.count)} />
+          <StatCard label="Referrers" value={String(payoutStats.referrers)} />
+          <StatCard label="Pendente" value={formatMoneyMap(payoutStats.pending)} />
+          <StatCard label="Pago" value={formatMoneyMap(payoutStats.paid)} />
+          <StatCard
+            label="Prontos / holding"
+            value={`${payoutStats.ready} / ${payoutStats.holding}`}
+          />
         </div>
 
-        {loading && !demoMode ? <p style={styles.muted}>Loading…</p> : null}
-        {listError && !demoMode ? <p style={styles.error}>{listError}</p> : null}
-
-        <div style={styles.tableCard}>
-          <div style={styles.tableWrap}>
-            <table style={styles.table}>
+        <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[1040px] border-collapse">
               <thead>
                 <tr>
-                  <th style={styles.th}>Referrer</th>
-                  <th style={styles.th}>PayPal</th>
-                  <th style={styles.th}>Friend</th>
-                  <th style={styles.th}>Amount</th>
-                  <th style={styles.th}>Annual bought</th>
-                  <th style={styles.th}>Countdown</th>
-                  <th style={styles.th}>Refunded</th>
-                  <th style={styles.th}>Requested</th>
-                  <th style={styles.th}>Status</th>
-                  <th style={styles.th} />
+                  {(
+                    [
+                      'Referrer',
+                      'PayPal',
+                      'Amigo',
+                      'Valor',
+                      'Annual comprado',
+                      'Countdown',
+                      'Reembolso',
+                      'Pedido',
+                      'Estado',
+                      '',
+                    ] as const
+                  ).map((h, i) => (
+                    <th
+                      key={h || `a-${i}`}
+                      className="bg-muted/40 px-4 py-3 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground"
+                    >
+                      {h}
+                    </th>
+                  ))}
                 </tr>
               </thead>
               <tbody>
                 {visibleRows.length === 0 && !loading ? (
                   <tr>
-                    <td colSpan={10} style={styles.tdEmpty}>
-                      No rows for this filter.
+                    <td
+                      colSpan={10}
+                      className="px-4 py-9 text-center text-sm text-muted-foreground"
+                    >
+                      Sem linhas para este filtro.
                     </td>
                   </tr>
                 ) : null}
@@ -601,41 +683,44 @@ export default function ReferralPayoutsAdminPage() {
                         : '—'
                   return (
                     <tr key={row.reward_id}>
-                      <td style={styles.td}>
-                        <span style={styles.cellStrong}>{row.referrer_name}</span>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm">
+                        <span className="font-bold text-foreground">{row.referrer_name}</span>
                       </td>
-                      <td style={styles.tdMuted}>{row.paypal_email ?? '—'}</td>
-                      <td style={styles.td}>{row.friend_name}</td>
-                      <td style={styles.td}>
-                        <span style={styles.amount}>{money(row.amount_cents, row.currency)}</span>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm text-muted-foreground">
+                        {row.paypal_email ?? '—'}
                       </td>
-                      <td style={styles.tdMuted}>{shortDate(row.annual_purchased_at)}</td>
-                      <td style={styles.td}>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm">{row.friend_name}</td>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm">
+                        <span className="font-extrabold tracking-tight">
+                          {money(row.amount_cents, row.currency)}
+                        </span>
+                      </td>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm text-muted-foreground">
+                        {shortDate(row.annual_purchased_at)}
+                      </td>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm">
                         {countdownLabel === 'Ready' ? (
-                          <span style={styles.badgeReady}>Ready</span>
+                          <span className="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700">
+                            Ready
+                          </span>
                         ) : countdownLabel === '—' ? (
                           '—'
                         ) : (
-                          <span style={styles.badgeHold}>{countdownLabel}</span>
+                          <span className="inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-xs font-bold text-orange-700">
+                            {countdownLabel}
+                          </span>
                         )}
                       </td>
-                      <td style={styles.tdMuted}>{shortDate(row.refunded_at)}</td>
-                      <td style={styles.tdMuted}>{shortDate(row.payout_requested_at)}</td>
-                      <td style={styles.td}>
-                        <span
-                          style={{
-                            ...styles.badgeStatus,
-                            ...(status === 'paid'
-                              ? styles.badgePaid
-                              : status === 'refunded' || status === 'cancelled'
-                                ? styles.badgeDanger
-                                : styles.badgePending),
-                          }}
-                        >
-                          {status}
-                        </span>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm text-muted-foreground">
+                        {shortDate(row.refunded_at)}
                       </td>
-                      <td style={styles.td}>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm text-muted-foreground">
+                        {shortDate(row.payout_requested_at)}
+                      </td>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm">
+                        <span className={statusBadgeClass(status)}>{status}</span>
+                      </td>
+                      <td className="border-t border-border/60 px-4 py-4 text-sm">
                         {row.reward_status === 'pending' &&
                         !row.refunded_at &&
                         (row.payout_eligible || !!row.payout_requested_at) ? (
@@ -643,12 +728,12 @@ export default function ReferralPayoutsAdminPage() {
                             type="button"
                             disabled={busyId === row.reward_id}
                             onClick={() => void markPaid(row.reward_id)}
-                            style={styles.btnPrimary}
+                            className="rounded-full bg-foreground px-3.5 py-2 text-sm font-bold text-background disabled:opacity-40"
                           >
-                            {busyId === row.reward_id ? '…' : 'Mark paid'}
+                            {busyId === row.reward_id ? '…' : 'Marcar pago'}
                           </button>
                         ) : (
-                          <span style={styles.tdMuted}>—</span>
+                          <span className="text-muted-foreground">—</span>
                         )}
                       </td>
                     </tr>
@@ -661,300 +746,4 @@ export default function ReferralPayoutsAdminPage() {
       </div>
     </main>
   )
-}
-
-const styles: Record<string, CSSProperties> = {
-  page: {
-    minHeight: '100vh',
-    background: 'linear-gradient(180deg, #FFFFFF 0%, #F4F4F5 100%)',
-    color: '#111827',
-    padding: '40px 24px 80px',
-    fontFamily:
-      'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
-  },
-  shell: {
-    maxWidth: 1180,
-    margin: '0 auto',
-  },
-  shellNarrow: {
-    maxWidth: 440,
-    margin: '64px auto 0',
-  },
-  kicker: {
-    margin: 0,
-    fontSize: 12,
-    fontWeight: 700,
-    letterSpacing: 1.2,
-    textTransform: 'uppercase',
-    color: '#71717A',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    gap: 16,
-    marginBottom: 28,
-  },
-  headerActions: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: 8,
-    justifyContent: 'flex-end',
-  },
-  h1: {
-    fontSize: 34,
-    fontWeight: 800,
-    margin: '8px 0 0',
-    letterSpacing: -0.8,
-    color: '#09090B',
-  },
-  muted: { color: '#71717A', marginTop: 8, fontSize: 14, lineHeight: 1.45 },
-  error: { color: '#DC2626', marginTop: 10, fontSize: 14, fontWeight: 600 },
-  demoBanner: {
-    marginBottom: 18,
-    padding: '12px 16px',
-    borderRadius: 14,
-    background: '#FFFBEB',
-    border: '1px solid #FDE68A',
-    color: '#92400E',
-    fontSize: 14,
-    fontWeight: 600,
-  },
-  card: {
-    marginTop: 24,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 14,
-    background: '#FFFFFF',
-    padding: 24,
-    borderRadius: 20,
-    border: '1px solid #E4E4E7',
-    boxShadow: '0 12px 40px rgba(15, 23, 42, 0.06)',
-  },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8,
-    fontSize: 13,
-    fontWeight: 600,
-    color: '#3F3F46',
-  },
-  input: {
-    borderRadius: 12,
-    border: '1px solid #E4E4E7',
-    background: '#FAFAFA',
-    color: '#111827',
-    padding: '12px 14px',
-    fontSize: 16,
-    outline: 'none',
-  },
-  btnPrimary: {
-    border: 0,
-    borderRadius: 999,
-    background: '#111827',
-    color: '#FFFFFF',
-    fontWeight: 700,
-    padding: '10px 16px',
-    cursor: 'pointer',
-    fontSize: 14,
-    whiteSpace: 'nowrap',
-  },
-  btnGhost: {
-    border: '1px solid #E4E4E7',
-    borderRadius: 999,
-    background: '#FFFFFF',
-    color: '#18181B',
-    fontWeight: 600,
-    padding: '8px 14px',
-    cursor: 'pointer',
-    fontSize: 14,
-  },
-  btnDemoOn: {
-    border: '1px solid #F59E0B',
-    borderRadius: 999,
-    background: '#FFFBEB',
-    color: '#92400E',
-    fontWeight: 700,
-    padding: '8px 14px',
-    cursor: 'pointer',
-    fontSize: 14,
-  },
-  filters: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: 10,
-    marginBottom: 20,
-  },
-  filterGroup: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: 8,
-    alignItems: 'center',
-  },
-  filterActions: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: 8,
-    alignItems: 'center',
-    marginLeft: 'auto',
-  },
-  searchInput: {
-    borderRadius: 999,
-    border: '1px solid #E4E4E7',
-    background: '#FFFFFF',
-    color: '#111827',
-    padding: '8px 14px',
-    fontSize: 14,
-    minWidth: 220,
-    maxWidth: 320,
-    outline: 'none',
-  },
-  statsRow: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
-    gap: 10,
-    marginBottom: 16,
-  },
-  statCard: {
-    background: '#FFFFFF',
-    border: '1px solid #E4E4E7',
-    borderRadius: 14,
-    padding: '12px 14px',
-    boxShadow: '0 8px 24px rgba(15, 23, 42, 0.04)',
-  },
-  statKey: {
-    margin: 0,
-    fontSize: 11,
-    fontWeight: 600,
-    color: '#71717A',
-    textTransform: 'uppercase',
-    letterSpacing: 0.3,
-  },
-  statVal: {
-    margin: '6px 0 0',
-    fontSize: 16,
-    fontWeight: 700,
-    color: '#18181B',
-  },
-  sortLabel: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: 8,
-    fontSize: 13,
-    fontWeight: 600,
-    color: '#52525B',
-  },
-  sortSelect: {
-    border: '1px solid #E4E4E7',
-    borderRadius: 999,
-    background: '#FFFFFF',
-    color: '#18181B',
-    padding: '8px 12px',
-    fontSize: 13,
-    fontWeight: 600,
-    fontFamily: 'inherit',
-    cursor: 'pointer',
-    outline: 'none',
-  },
-  chip: {
-    border: '1px solid #E4E4E7',
-    borderRadius: 999,
-    background: '#FFFFFF',
-    color: '#52525B',
-    padding: '8px 14px',
-    cursor: 'pointer',
-    textTransform: 'capitalize',
-    fontWeight: 600,
-    fontSize: 13,
-  },
-  chipActive: {
-    background: '#111827',
-    color: '#FFFFFF',
-    borderColor: '#111827',
-  },
-  tableCard: {
-    background: '#FFFFFF',
-    borderRadius: 20,
-    border: '1px solid #E4E4E7',
-    boxShadow: '0 18px 50px rgba(15, 23, 42, 0.06)',
-    overflow: 'hidden',
-  },
-  tableWrap: { overflowX: 'auto' },
-  table: { width: '100%', borderCollapse: 'collapse', minWidth: 1040 },
-  th: {
-    textAlign: 'left',
-    padding: '14px 16px',
-    fontSize: 11,
-    textTransform: 'uppercase',
-    letterSpacing: 0.6,
-    color: '#71717A',
-    background: '#FAFAFA',
-    borderBottom: '1px solid #E4E4E7',
-    fontWeight: 700,
-  },
-  td: {
-    padding: '16px',
-    borderTop: '1px solid #F4F4F5',
-    fontSize: 14,
-    verticalAlign: 'middle',
-    color: '#18181B',
-  },
-  tdMuted: {
-    padding: '16px',
-    borderTop: '1px solid #F4F4F5',
-    fontSize: 13,
-    verticalAlign: 'middle',
-    color: '#71717A',
-  },
-  tdEmpty: {
-    padding: '36px 16px',
-    textAlign: 'center',
-    color: '#71717A',
-    fontSize: 14,
-  },
-  cellStrong: { fontWeight: 700 },
-  amount: { fontWeight: 800, letterSpacing: -0.2 },
-  badgeReady: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    borderRadius: 999,
-    padding: '4px 10px',
-    background: '#ECFDF5',
-    color: '#047857',
-    fontSize: 12,
-    fontWeight: 700,
-  },
-  badgeHold: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    borderRadius: 999,
-    padding: '4px 10px',
-    background: '#FFF7ED',
-    color: '#C2410C',
-    fontSize: 12,
-    fontWeight: 700,
-  },
-  badgeStatus: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    borderRadius: 999,
-    padding: '4px 10px',
-    fontSize: 12,
-    fontWeight: 700,
-    textTransform: 'capitalize',
-  },
-  badgePending: {
-    background: '#F4F4F5',
-    color: '#3F3F46',
-  },
-  badgePaid: {
-    background: '#ECFDF5',
-    color: '#047857',
-  },
-  badgeDanger: {
-    background: '#FEF2F2',
-    color: '#B91C1C',
-  },
 }

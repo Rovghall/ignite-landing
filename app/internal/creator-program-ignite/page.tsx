@@ -1,8 +1,9 @@
 'use client'
 
-import { FormEvent, useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react'
+import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
+import { cn } from '@/lib/utils'
 
 type AppFilter = 'all' | 'pending' | 'approved' | 'rejected' | 'trial'
 type AppSort = 'default' | 'ending_soon'
@@ -571,9 +572,11 @@ export default function CreatorProgramAdminPage() {
   )
   const [extendDaysById, setExtendDaysById] = useState<Record<string, string>>({})
   const [extendEndsDateById, setExtendEndsDateById] = useState<Record<string, string>>({})
+  const [editCodeById, setEditCodeById] = useState<Record<string, string>>({})
   const [rejectNoteById, setRejectNoteById] = useState<Record<string, string>>({})
   const [internalNotesById, setInternalNotesById] = useState<Record<string, string>>({})
   const [savingNotesId, setSavingNotesId] = useState<string | null>(null)
+  const [savingCodeId, setSavingCodeId] = useState<string | null>(null)
 
   const [newCode, setNewCode] = useState('')
   const [newLabel, setNewLabel] = useState('')
@@ -717,9 +720,37 @@ export default function CreatorProgramAdminPage() {
     if (tab === 'applications') {
       await loadApplications()
       await loadAttributionRewards()
-    } else if (tab === 'codes') await loadCodes()
-    else await loadRewards()
-  }, [tab, loadApplications, loadCodes, loadRewards, loadAttributionRewards, demoMode])
+      // Needed to show Active / Deactivated on complimentary Premium cards.
+      if (supabase) {
+        const { data } = await supabase.rpc('admin_list_creator_codes')
+        const payload = data as { ok?: boolean; codes?: CodeRow[] } | null
+        if (payload?.ok) {
+          setCodes(Array.isArray(payload.codes) ? payload.codes : [])
+        }
+      }
+    } else if (tab === 'codes') {
+      await loadCodes()
+      // Needed so Codes tab can refuse codes already assigned on applications.
+      if (supabase) {
+        const { data } = await supabase.rpc('admin_list_creator_applications', {
+          p_filter: 'all',
+        })
+        const payload = data as {
+          ok?: boolean
+          applications?: ApplicationRow[]
+        } | null
+        if (payload?.ok && Array.isArray(payload.applications)) {
+          setApps(
+            payload.applications.map((row) => ({
+              ...row,
+              internal_notes:
+                typeof row.internal_notes === 'string' ? row.internal_notes : '',
+            })),
+          )
+        }
+      }
+    } else await loadRewards()
+  }, [tab, loadApplications, loadCodes, loadRewards, loadAttributionRewards, demoMode, supabase])
 
   useEffect(() => {
     if (!session || demoMode) return
@@ -763,7 +794,41 @@ export default function CreatorProgramAdminPage() {
   }, [appSource, filter, appSort, appSearch])
 
   const visibleCodes = demoMode ? demoCodes : codes
+  const codeSource = visibleCodes
   const rewardSource = demoMode ? demoRewards : rewards
+
+  function codeRowForAssigned(assigned: string | null | undefined): CodeRow | undefined {
+    const code = (assigned ?? '').trim().toUpperCase()
+    if (!code) return undefined
+    return codeSource.find((c) => c.code === code)
+  }
+
+  /** Same code must not be owned by / assigned to a different creator. */
+  function codeOwnershipConflict(
+    codeRaw: string,
+    userId: string | null,
+    applicationId?: string | null,
+  ): string | null {
+    const code = codeRaw.trim().toUpperCase()
+    if (!code) return null
+
+    const existing = codeSource.find((c) => c.code === code)
+    if (existing?.creator_user_id && userId && existing.creator_user_id !== userId) {
+      return `Code ${code} is already assigned to another user.`
+    }
+
+    const conflictingApp = appSource.find((a) => {
+      if ((a.assigned_code ?? '').trim().toUpperCase() !== code) return false
+      if (applicationId && a.id === applicationId) return false
+      if (userId && a.user_id === userId) return false
+      return true
+    })
+    if (conflictingApp) {
+      return `Code ${code} is already assigned to ${conflictingApp.display_name}.`
+    }
+
+    return null
+  }
 
   const payoutCounts = useMemo(() => {
     const keys: PayoutFilter[] = [
@@ -910,6 +975,11 @@ export default function CreatorProgramAdminPage() {
     const code = (approveCodeById[app.id] ?? '').trim().toUpperCase()
     if (code.length < 4) {
       alert('Enter a code (4–16 letters/numbers) before approving.')
+      return
+    }
+    const conflict = codeOwnershipConflict(code, app.user_id, app.id)
+    if (conflict) {
+      alert(conflict)
       return
     }
     const premiumDays = premiumDaysForApprove(app.id)
@@ -1299,11 +1369,136 @@ export default function CreatorProgramAdminPage() {
     await loadApplications()
   }
 
+  async function saveAssignedCode(app: ApplicationRow): Promise<boolean> {
+    const code = (editCodeById[app.id] ?? app.assigned_code ?? '').trim().toUpperCase()
+    if (code.length < 4 || code.length > 16) {
+      alert('Enter a code (4–16 letters/numbers).')
+      return false
+    }
+    const previous = (app.assigned_code ?? '').trim().toUpperCase()
+    if (code === previous) return true
+
+    const conflict = codeOwnershipConflict(code, app.user_id, app.id)
+    if (conflict) {
+      alert(conflict)
+      return false
+    }
+
+    if (demoMode) {
+      setDemoApps((prev) =>
+        prev.map((row) => (row.id === app.id ? { ...row, assigned_code: code } : row)),
+      )
+      setDemoCodes((prev) => {
+        const now = new Date().toISOString()
+        const withoutConflict = prev.filter((c) => c.code !== code)
+        const next = withoutConflict.map((c) => {
+          if (c.application_id === app.id || (previous && c.code === previous)) {
+            return {
+              ...c,
+              active: false,
+              creator_user_id:
+                c.code === previous || c.application_id === app.id ? null : c.creator_user_id,
+              application_id:
+                c.code === previous || c.application_id === app.id ? null : c.application_id,
+              updated_at: now,
+            }
+          }
+          return c
+        })
+        return [
+          {
+            id: `demo-code-${code}`,
+            code,
+            label: app.display_name,
+            creator_user_id: app.user_id,
+            application_id: app.id,
+            active: true,
+            notes: previous ? `Replaced ${previous}` : 'Assigned from application',
+            created_at: now,
+            updated_at: now,
+          },
+          ...next,
+        ]
+      })
+      setEditCodeById((prev) => ({ ...prev, [app.id]: code }))
+      return true
+    }
+
+    if (!supabase) return false
+    setSavingCodeId(app.id)
+    const { data, error } = await supabase.rpc('admin_upsert_creator_code', {
+      p_code: code,
+      p_label: app.display_name,
+      p_creator_user_id: app.user_id,
+      p_application_id: app.id,
+      p_active: true,
+      p_notes: previous ? `Replaced ${previous}` : 'Assigned from application',
+    })
+    if (error) {
+      setSavingCodeId(null)
+      alert(error.message)
+      return false
+    }
+    const payload = data as { ok?: boolean; error?: string } | null
+    if (!payload?.ok) {
+      setSavingCodeId(null)
+      alert(payload?.error ?? 'Failed to save code')
+      return false
+    }
+
+    if (previous && previous !== code) {
+      const oldRow = codes.find((c) => c.code === previous)
+      await supabase.rpc('admin_upsert_creator_code', {
+        p_code: previous,
+        p_label: oldRow?.label ?? app.display_name,
+        p_creator_user_id: null,
+        p_application_id: null,
+        p_active: false,
+        p_notes: oldRow?.notes || `Replaced by ${code}`,
+      })
+    }
+
+    setSavingCodeId(null)
+    setEditCodeById((prev) => ({ ...prev, [app.id]: code }))
+    setApps((prev) =>
+      prev.map((row) => (row.id === app.id ? { ...row, assigned_code: code } : row)),
+    )
+    await loadCodes()
+    await loadApplications()
+    // Keep UI in sync if list payload still lags behind the upserted code link.
+    setApps((prev) =>
+      prev.map((row) => (row.id === app.id ? { ...row, assigned_code: code } : row)),
+    )
+    return true
+  }
+
+  /** Activate/Deactivate — if the input was edited, persist the new code (and activate it) first. */
+  async function saveOrToggleCreatorCode(app: ApplicationRow, row: CodeRow | undefined) {
+    const draft = (editCodeById[app.id] ?? app.assigned_code ?? '').trim().toUpperCase()
+    const assigned = (app.assigned_code ?? '').trim().toUpperCase()
+
+    if (draft !== assigned) {
+      await saveAssignedCode(app)
+      return
+    }
+    if (!row) {
+      alert('Code not found in Codes. Use Save code to create it.')
+      return
+    }
+    await toggleActive(row)
+  }
+
   async function createCode(e: FormEvent) {
     e.preventDefault()
     const code = newCode.trim().toUpperCase()
     if (code.length < 4) {
       alert('Code must be 4–16 alphanumeric characters.')
+      return
+    }
+    const creatorUserId = newUserId.trim() || null
+    const conflict = codeOwnershipConflict(code, creatorUserId, null)
+    if (conflict) {
+      alert(conflict)
       return
     }
 
@@ -1386,61 +1581,122 @@ export default function CreatorProgramAdminPage() {
     await loadCodes()
   }
 
-  function statusBadgeStyle(status: string): CSSProperties {
-    if (status === 'approved') return { ...styles.badgeStatus, ...styles.badgePaid }
-    if (status === 'rejected') return { ...styles.badgeStatus, ...styles.badgeDanger }
-    return { ...styles.badgeStatus, ...styles.badgePending }
+  function statusBadgeClass(status: string): string {
+    if (status === 'approved') {
+      return 'inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold capitalize text-emerald-700'
+    }
+    if (status === 'rejected') {
+      return 'inline-flex rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold capitalize text-red-700'
+    }
+    return 'inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-bold capitalize text-foreground/70'
   }
 
-  function subscriptionLabel(app: ApplicationRow): { label: string; style: CSSProperties } {
+  function subscriptionLabel(app: ApplicationRow): { label: string; className: string } {
     if (app.rc_premium_active) {
-      return { label: 'Premium (RC)', style: { ...styles.badgeStatus, ...styles.badgePaid } }
+      return {
+        label: 'Premium (RC)',
+        className:
+          'inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold capitalize text-emerald-700',
+      }
     }
     if (app.creator_premium_paused) {
       const leftSec = Number(app.creator_premium_pause_remaining_seconds ?? 0)
       const left = Math.max(0, Math.ceil(leftSec / 86400))
       return {
         label: left > 0 ? `Creator paused · ${left}d` : 'Creator paused',
-        style: { ...styles.badgeStatus, ...styles.badgeHold },
+        className:
+          'inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-xs font-bold capitalize text-orange-700',
       }
     }
     if (app.creator_premium_active) {
       const left = creatorPremiumDaysLeft(app.creator_premium_ends_at)
       return {
         label: left != null ? `Creator Premium · ${left}d` : 'Creator Premium',
-        style: { ...styles.badgeStatus, ...styles.badgePaid },
+        className:
+          'inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold capitalize text-emerald-700',
       }
     }
     if (app.referral_trial_active) {
-      return { label: 'Trial', style: { ...styles.badgeStatus, ...styles.badgeHold } }
+      return {
+        label: 'Trial',
+        className:
+          'inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-xs font-bold capitalize text-orange-700',
+      }
     }
-    return { label: 'Free', style: { ...styles.badgeStatus, ...styles.badgePending } }
+    return {
+      label: 'Free',
+      className:
+        'inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-bold capitalize text-foreground/70',
+    }
+  }
+
+  const pageShell =
+    'min-h-screen bg-[radial-gradient(1200px_600px_at_10%_-10%,#fff7ed,transparent),linear-gradient(#fafafa,#ffffff)] px-4 py-8 sm:px-6'
+  const chipClass = (active: boolean) =>
+    cn(
+      'rounded-full border px-3.5 py-2 text-sm font-semibold capitalize',
+      active
+        ? 'border-foreground bg-foreground text-background'
+        : 'border-border bg-card text-foreground/80',
+    )
+  const btnPrimary =
+    'rounded-full bg-foreground px-4 py-2 text-sm font-bold text-background disabled:opacity-40'
+  const btnGhost =
+    'rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold disabled:opacity-40'
+  const btnDanger =
+    'rounded-full bg-red-700 px-4 py-2 text-sm font-bold text-white disabled:opacity-40'
+  const inputClass =
+    'rounded-xl border border-border bg-muted/40 px-3.5 py-2.5 text-sm outline-none focus:border-foreground/30'
+  const inputGrow = cn(inputClass, 'min-w-[140px] flex-1')
+  const searchClass =
+    'rounded-full border border-border bg-card px-3.5 py-2 text-sm outline-none focus:border-foreground/30'
+  const thClass =
+    'bg-muted/40 px-4 py-3 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground'
+  const tdClass = 'border-t border-border/60 px-4 py-4 text-sm'
+  const tdMuted = cn(tdClass, 'text-muted-foreground')
+  const tabLabels: Record<Tab, string> = {
+    applications: 'Candidaturas',
+    codes: 'Códigos',
+    payouts: 'Pagamentos',
   }
 
   if (configError) {
     return (
-      <main style={styles.page}>
-        <div style={styles.shell}>
-          <p style={styles.kicker}>IGNITE · Internal</p>
-          <h1 style={styles.h1}>Creator program</h1>
-          <p style={styles.error}>{configError}</p>
+      <main className={pageShell}>
+        <div className="mx-auto max-w-3xl">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            IGNITE · Interno
+          </p>
+          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
+            Programa de creators
+          </h1>
+          <p className="mt-3 text-sm font-semibold text-red-600">{configError}</p>
         </div>
       </main>
     )
   }
 
-  if (!session || !user) {
+  if ((!session || !user) && !demoMode) {
     return (
-      <main style={styles.page}>
-        <div style={styles.shellNarrow}>
-          <p style={styles.kicker}>IGNITE · Internal</p>
-          <h1 style={styles.h1}>Creator program</h1>
-          <p style={styles.muted}>Sign in with your Ignite admin account.</p>
-          <form onSubmit={onSignIn} style={styles.card}>
-            <label style={styles.label}>
+      <main className={cn(pageShell, 'py-10')}>
+        <div className="mx-auto w-full max-w-md">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            IGNITE · Interno
+          </p>
+          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">
+            Programa de creators
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Entra com a tua conta de admin Ignite.
+          </p>
+          <form
+            onSubmit={onSignIn}
+            className="mt-6 flex flex-col gap-3.5 rounded-2xl border border-border bg-card p-6 shadow-[0_12px_40px_rgba(15,23,42,0.06)]"
+          >
+            <label className="flex flex-col gap-2 text-sm font-semibold text-foreground/80">
               Email
               <input
-                style={styles.input}
+                className="rounded-xl border border-border bg-muted/40 px-3.5 py-3 text-base outline-none focus:border-foreground/30"
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -1448,10 +1704,10 @@ export default function CreatorProgramAdminPage() {
                 autoComplete="username"
               />
             </label>
-            <label style={styles.label}>
-              Password
+            <label className="flex flex-col gap-2 text-sm font-semibold text-foreground/80">
+              Palavra-passe
               <input
-                style={styles.input}
+                className="rounded-xl border border-border bg-muted/40 px-3.5 py-3 text-base outline-none focus:border-foreground/30"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -1459,9 +1715,12 @@ export default function CreatorProgramAdminPage() {
                 autoComplete="current-password"
               />
             </label>
-            {authError ? <p style={styles.error}>{authError}</p> : null}
-            <button type="submit" style={styles.btnPrimary}>
-              Sign in
+            {authError ? <p className="text-sm font-semibold text-red-600">{authError}</p> : null}
+            <button type="submit" className="mt-1 rounded-full bg-foreground px-4 py-2.5 text-sm font-bold text-background">
+              Entrar
+            </button>
+            <button type="button" onClick={toggleDemo} className={btnGhost}>
+              Pré-visualização demo
             </button>
           </form>
         </div>
@@ -1470,65 +1729,86 @@ export default function CreatorProgramAdminPage() {
   }
 
   return (
-    <main style={styles.page}>
-      <div style={styles.shell}>
-        <header style={styles.header}>
-          <div style={styles.headerMain}>
-            <p style={styles.kicker}>IGNITE · Internal</p>
-            <div style={styles.titleRow}>
-              <h1 style={styles.h1}>Creator program</h1>
-              <div style={styles.toolbarGroup}>
-                {(['applications', 'codes', 'payouts'] as Tab[]).map((t) => (
-                  <button
-                    key={t}
-                    type="button"
-                    onClick={() => setTab(t)}
-                    style={{
-                      ...styles.chip,
-                      ...(tab === t ? styles.chipActive : null),
-                    }}
-                  >
-                    {t}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <p style={styles.muted}>{user.email}</p>
+    <main className={pageShell}>
+      <div className="mx-auto max-w-6xl">
+        <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+              IGNITE · Interno
+            </p>
+            <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight sm:text-4xl">
+              Programa de creators
+            </h1>
+            <p className="mt-1 text-sm text-muted-foreground">
+              {user?.email ?? 'Pré-visualização demo'}
+            </p>
           </div>
-          <div style={styles.headerActions}>
+          <div className="flex flex-wrap items-center gap-2">
             <button
               type="button"
               onClick={toggleDemo}
-              style={demoMode ? styles.btnDemoOn : styles.btnGhost}
+              className={cn(
+                'rounded-full border px-3.5 py-2 text-sm font-semibold',
+                demoMode
+                  ? 'border-amber-500 bg-amber-50 text-amber-900'
+                  : 'border-border bg-card text-foreground',
+              )}
             >
-              {demoMode ? 'Exit demo' : 'Demo preview'}
+              {demoMode ? 'Sair da demo' : 'Pré-visualização demo'}
             </button>
-            <button type="button" onClick={() => void onSignOut()} style={styles.btnGhost}>
-              Sign out
+            <button
+              type="button"
+              onClick={() => {
+                if (demoMode) {
+                  if (tab === 'payouts') setDemoRewards(DEMO_PAYOUTS)
+                  return
+                }
+                void load()
+              }}
+              className={btnGhost}
+            >
+              Atualizar
             </button>
+            {session && user ? (
+              <button type="button" onClick={() => void onSignOut()} className={btnGhost}>
+                Sair
+              </button>
+            ) : null}
           </div>
         </header>
 
         {demoMode ? (
-          <p style={styles.demoBanner}>
-            Demo mode — fake data only. Approve / reject / codes / payouts work locally; nothing is
-            saved.
+          <p className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900">
+            Modo demo — dados fictícios. Aprovar / rejeitar / códigos / pagamentos funcionam localmente;
+            nada é guardado.
           </p>
         ) : null}
 
-        <div style={styles.toolbar}>
+        <nav className="sticky top-2 z-20 mb-6 -mx-1 overflow-x-auto rounded-2xl border border-border/80 bg-card/95 px-2 py-2 shadow-sm backdrop-blur">
+          <div className="flex min-w-max gap-1">
+            {(['applications', 'codes', 'payouts'] as Tab[]).map((t) => (
+              <button
+                key={t}
+                type="button"
+                onClick={() => setTab(t)}
+                className={cn(
+                  'rounded-full px-3.5 py-2 text-sm font-semibold',
+                  tab === t
+                    ? 'bg-foreground text-background'
+                    : 'text-foreground/70 hover:bg-muted/60',
+                )}
+              >
+                {tabLabels[t]}
+              </button>
+            ))}
+          </div>
+        </nav>
+
+        <div className="mb-5 flex flex-col gap-3">
           {tab === 'applications' ? (
-            <div style={styles.toolbarGroup}>
+            <div className="flex flex-wrap gap-2">
               {(['pending', 'trial', 'approved', 'rejected', 'all'] as AppFilter[]).map((f) => (
-                <button
-                  key={f}
-                  type="button"
-                  onClick={() => setFilter(f)}
-                  style={{
-                    ...styles.chip,
-                    ...(filter === f ? styles.chipActive : null),
-                  }}
-                >
+                <button key={f} type="button" onClick={() => setFilter(f)} className={chipClass(filter === f)}>
                   {f} ({appCounts[f]})
                 </button>
               ))}
@@ -1536,7 +1816,7 @@ export default function CreatorProgramAdminPage() {
           ) : null}
 
           {tab === 'payouts' ? (
-            <div style={styles.toolbarGroup}>
+            <div className="flex flex-wrap gap-2">
               {(
                 ['requested', 'holding', 'pending', 'paid', 'refunded', 'cancelled', 'all'] as PayoutFilter[]
               ).map((f) => (
@@ -1544,10 +1824,7 @@ export default function CreatorProgramAdminPage() {
                   key={f}
                   type="button"
                   onClick={() => setPayoutFilter(f)}
-                  style={{
-                    ...styles.chip,
-                    ...(payoutFilter === f ? styles.chipActive : null),
-                  }}
+                  className={chipClass(payoutFilter === f)}
                 >
                   {f} ({payoutCounts[f]})
                 </button>
@@ -1555,85 +1832,85 @@ export default function CreatorProgramAdminPage() {
             </div>
           ) : null}
 
-          <div style={styles.toolbarSpacer} />
+          <div className="flex flex-wrap items-center gap-2">
+            {tab === 'applications' ? (
+              <input
+                className={cn(searchClass, 'min-w-[220px] flex-1 max-w-sm')}
+                type="search"
+                placeholder="Pesquisar nome, email, código…"
+                value={appSearch}
+                onChange={(e) => setAppSearch(e.target.value)}
+                aria-label="Search applications"
+              />
+            ) : null}
 
-          {tab === 'applications' ? (
-            <input
-              style={styles.searchInput}
-              type="search"
-              placeholder="Search name, email, code…"
-              value={appSearch}
-              onChange={(e) => setAppSearch(e.target.value)}
-              aria-label="Search applications"
-            />
-          ) : null}
+            {tab === 'payouts' ? (
+              <input
+                className={cn(searchClass, 'min-w-[220px] flex-1 max-w-sm')}
+                type="search"
+                placeholder="Pesquisar creator, PayPal, follower, código…"
+                value={payoutSearch}
+                onChange={(e) => setPayoutSearch(e.target.value)}
+                aria-label="Search payouts"
+              />
+            ) : null}
 
-          {tab === 'payouts' ? (
-            <input
-              style={styles.searchInput}
-              type="search"
-              placeholder="Search creator, PayPal, follower, code…"
-              value={payoutSearch}
-              onChange={(e) => setPayoutSearch(e.target.value)}
-              aria-label="Search payouts"
-            />
-          ) : null}
+            {tab === 'applications' && filter === 'approved' ? (
+              <label className="inline-flex items-center gap-2 text-sm font-semibold text-foreground/70">
+                Ordenar
+                <select
+                  className="rounded-full border border-border bg-card px-3 py-2 text-sm font-semibold outline-none"
+                  value={appSort}
+                  onChange={(e) => setAppSort(e.target.value as AppSort)}
+                >
+                  <option value="default">Predefinido</option>
+                  <option value="ending_soon">A terminar em breve</option>
+                </select>
+              </label>
+            ) : null}
 
-          {tab === 'applications' && filter === 'approved' ? (
-            <label style={styles.sortLabel}>
-              Sort
-              <select
-                style={styles.sortSelect}
-                value={appSort}
-                onChange={(e) => setAppSort(e.target.value as AppSort)}
-              >
-                <option value="default">Default</option>
-                <option value="ending_soon">Ending soon</option>
-              </select>
-            </label>
-          ) : null}
-
-          <button
-            type="button"
-            onClick={() => {
-              if (demoMode) {
-                if (tab === 'payouts') setDemoRewards(DEMO_PAYOUTS)
-                return
-              }
-              void load()
-            }}
-            style={styles.btnGhost}
-          >
-            Refresh
-          </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (demoMode) {
+                  if (tab === 'payouts') setDemoRewards(DEMO_PAYOUTS)
+                  return
+                }
+                void load()
+              }}
+              className={btnGhost}
+            >
+              Atualizar
+            </button>
+          </div>
         </div>
 
-        {loading ? <p style={styles.muted}>Loading…</p> : null}
-        {listError ? <p style={styles.error}>{listError}</p> : null}
+        {loading ? <p className="mb-4 text-sm text-muted-foreground">A carregar…</p> : null}
+        {listError ? <p className="mb-4 text-sm font-semibold text-red-600">{listError}</p> : null}
 
         {tab === 'payouts' ? (
-          <div style={styles.tableCard}>
-            <div style={styles.tableWrap}>
-              <table style={styles.table}>
+          <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+            <div className="overflow-x-auto">
+              <table className="w-full min-w-[720px] border-collapse">
                 <thead>
                   <tr>
-                    <th style={styles.th}>Creator</th>
-                    <th style={styles.th}>PayPal</th>
-                    <th style={styles.th}>Follower</th>
-                    <th style={styles.th}>Code</th>
-                    <th style={styles.th}>Amount</th>
-                    <th style={styles.th}>Annual bought</th>
-                    <th style={styles.th}>Countdown</th>
-                    <th style={styles.th}>Requested</th>
-                    <th style={styles.th}>Status</th>
-                    <th style={styles.th} />
+                    <th className={thClass}>Creator</th>
+                    <th className={thClass}>PayPal</th>
+                    <th className={thClass}>Follower</th>
+                    <th className={thClass}>Código</th>
+                    <th className={thClass}>Valor</th>
+                    <th className={thClass}>Compra anual</th>
+                    <th className={thClass}>Countdown</th>
+                    <th className={thClass}>Pedido</th>
+                    <th className={thClass}>Estado</th>
+                    <th className={thClass} />
                   </tr>
                 </thead>
                 <tbody>
                   {visibleRewards.length === 0 && !loading ? (
                     <tr>
-                      <td colSpan={10} style={styles.tdEmpty}>
-                        No creator payouts for this filter.
+                      <td colSpan={10} className="px-4 py-9 text-center text-sm text-muted-foreground">
+                        Sem pagamentos de creators para este filtro.
                       </td>
                     </tr>
                   ) : null}
@@ -1648,41 +1925,47 @@ export default function CreatorProgramAdminPage() {
                           : '—'
                     return (
                       <tr key={row.reward_id}>
-                        <td style={styles.td}>
-                          <span style={styles.cellStrong}>{row.referrer_name}</span>
+                        <td className={tdClass}>
+                          <span className="font-bold tracking-wide">{row.referrer_name}</span>
                         </td>
-                        <td style={styles.tdMuted}>{row.paypal_email ?? '—'}</td>
-                        <td style={styles.td}>{row.friend_name}</td>
-                        <td style={styles.tdMuted}>{row.code_used ?? '—'}</td>
-                        <td style={styles.td}>
-                          <span style={styles.amount}>{money(row.amount_cents, row.currency)}</span>
+                        <td className={tdMuted}>{row.paypal_email ?? '—'}</td>
+                        <td className={tdClass}>{row.friend_name}</td>
+                        <td className={tdMuted}>{row.code_used ?? '—'}</td>
+                        <td className={tdClass}>
+                          <span className="font-extrabold tracking-tight">
+                            {money(row.amount_cents, row.currency)}
+                          </span>
                         </td>
-                        <td style={styles.tdMuted}>{shortDate(row.annual_purchased_at)}</td>
-                        <td style={styles.td}>
+                        <td className={tdMuted}>{shortDate(row.annual_purchased_at)}</td>
+                        <td className={tdClass}>
                           {countdownLabel === 'Ready' ? (
-                            <span style={styles.badgeReady}>Ready</span>
+                            <span className="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700">
+                              Ready
+                            </span>
                           ) : countdownLabel === '—' ? (
                             '—'
                           ) : (
-                            <span style={styles.badgeHold}>{countdownLabel}</span>
+                            <span className="inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-xs font-bold text-orange-700">
+                              {countdownLabel}
+                            </span>
                           )}
                         </td>
-                        <td style={styles.tdMuted}>{shortDate(row.payout_requested_at)}</td>
-                        <td style={styles.td}>
+                        <td className={tdMuted}>{shortDate(row.payout_requested_at)}</td>
+                        <td className={tdClass}>
                           <span
-                            style={{
-                              ...styles.badgeStatus,
-                              ...(status === 'paid'
-                                ? styles.badgePaid
+                            className={cn(
+                              'inline-flex rounded-full px-2.5 py-1 text-xs font-bold capitalize',
+                              status === 'paid'
+                                ? 'bg-emerald-50 text-emerald-700'
                                 : status === 'refunded' || status === 'cancelled'
-                                  ? styles.badgeDanger
-                                  : styles.badgePending),
-                            }}
+                                  ? 'bg-red-50 text-red-700'
+                                  : 'bg-muted text-foreground/70',
+                            )}
                           >
                             {status}
                           </span>
                         </td>
-                        <td style={styles.td}>
+                        <td className={tdClass}>
                           {row.reward_status === 'pending' &&
                           !row.refunded_at &&
                           (row.payout_eligible || !!row.payout_requested_at) ? (
@@ -1690,12 +1973,12 @@ export default function CreatorProgramAdminPage() {
                               type="button"
                               disabled={busyId === row.reward_id}
                               onClick={() => void markRewardPaid(row.reward_id)}
-                              style={styles.btnPrimary}
+                              className={btnPrimary}
                             >
-                              {busyId === row.reward_id ? '…' : 'Mark paid'}
+                              {busyId === row.reward_id ? '…' : 'Marcar pago'}
                             </button>
                           ) : (
-                            <span style={styles.tdMuted}>—</span>
+                            <span className="text-muted-foreground">—</span>
                           )}
                         </td>
                       </tr>
@@ -1706,54 +1989,63 @@ export default function CreatorProgramAdminPage() {
             </div>
           </div>
         ) : tab === 'applications' ? (
-          <div style={styles.stack}>
+          <div className="flex flex-col gap-3">
             {visibleApps.length === 0 && !loading ? (
-              <div style={styles.emptyCard}>No applications for this filter.</div>
+              <div className="rounded-2xl border border-border bg-card px-4 py-9 text-center text-sm text-muted-foreground shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
+                Sem candidaturas para este filtro.
+              </div>
             ) : null}
             {visibleApps.map((app) => (
-              <article key={app.id} style={styles.cardWide}>
-                <div style={styles.cardTop}>
+              <article
+                key={app.id}
+                className="rounded-2xl border border-border bg-card p-5 shadow-[0_12px_40px_rgba(15,23,42,0.05)]"
+              >
+                <div className="flex items-start justify-between gap-3">
                   <div>
-                    <h2 style={styles.h2}>{app.display_name}</h2>
-                    <p style={styles.mutedTight}>
-                      <span style={styles.metaLabel}>E-mail</span> {app.contact_email}
+                    <h2 className="text-lg font-bold tracking-tight">{app.display_name}</h2>
+                    <p className="mt-1.5 text-sm text-muted-foreground">
+                      <span className="font-bold text-foreground/70">E-mail</span> {app.contact_email}
                     </p>
                   </div>
-                  <div style={styles.badgeCol}>
+                  <div className="flex flex-col items-end gap-1.5">
                     {(() => {
                       const sub = subscriptionLabel(app)
-                      return <span style={sub.style}>{sub.label}</span>
+                      return <span className={sub.className}>{sub.label}</span>
                     })()}
-                    <span style={statusBadgeStyle(app.status)}>{app.status}</span>
+                    <span className={statusBadgeClass(app.status)}>{app.status}</span>
                   </div>
                 </div>
-                <p style={styles.meta}>
-                  <span style={styles.metaLabel}>Platforms</span> {platformsLabel(app.platforms)} ·{' '}
-                  Handle: {app.primary_handle || '—'} · Audience: {app.audience_size || '—'}
+                <p className="mt-2.5 text-[13px] text-muted-foreground">
+                  <span className="font-bold text-foreground/70">Plataformas</span>{' '}
+                  {platformsLabel(app.platforms)} · Handle: {app.primary_handle || '—'} · Audiência:{' '}
+                  {app.audience_size || '—'}
                 </p>
                 {app.notes ? (
-                  <p style={styles.notes}>
-                    <span style={styles.metaLabel}>Applicant notes</span> {app.notes}
+                  <p className="mt-2 text-sm text-foreground/80">
+                    <span className="font-bold text-foreground/70">Notas do candidato</span> {app.notes}
                   </p>
                 ) : null}
-                <p style={styles.meta}>
-                  <span style={styles.metaLabel}>Applied</span> {shortDate(app.created_at)}
-                  {app.assigned_code ? ` · Code: ${app.assigned_code}` : ''}
-                  {app.admin_note ? ` · Reject note: ${app.admin_note}` : ''}
+                <p className="mt-2.5 text-[13px] text-muted-foreground">
+                  <span className="font-bold text-foreground/70">Candidatura</span>{' '}
+                  {shortDate(app.created_at)}
+                  {app.assigned_code ? ` · Código: ${app.assigned_code}` : ''}
+                  {app.admin_note ? ` · Nota de rejeição: ${app.admin_note}` : ''}
                   {app.rc_premium_active && app.rc_premium_product_id
-                    ? ` · Product: ${app.rc_premium_product_id}`
+                    ? ` · Produto: ${app.rc_premium_product_id}`
                     : ''}
                   {app.rc_premium_active && app.rc_premium_expires_at
-                    ? ` · RC expires ${shortDate(app.rc_premium_expires_at)}`
+                    ? ` · RC expira ${shortDate(app.rc_premium_expires_at)}`
                     : ''}
                 </p>
 
-                <div style={styles.internalNotesBox}>
-                  <p style={styles.internalNotesLabel}>My notes (admin only)</p>
+                <div className="mt-3.5 flex flex-col gap-2.5 rounded-xl border border-border bg-muted/40 p-3.5">
+                  <p className="text-xs font-bold uppercase tracking-wide text-foreground/60">
+                    As minhas notas (só admin)
+                  </p>
                   <textarea
-                    style={styles.textarea}
+                    className="min-h-[72px] resize-y rounded-xl border border-border bg-card px-3 py-2.5 text-sm outline-none focus:border-foreground/30"
                     rows={3}
-                    placeholder="e.g. Contacted on IG 8 Aug — waiting reply"
+                    placeholder="ex.: Contactei no IG 8 Ago — à espera de resposta"
                     value={internalNotesById[app.id] ?? app.internal_notes ?? ''}
                     onChange={(e) =>
                       setInternalNotesById((prev) => ({
@@ -1766,17 +2058,17 @@ export default function CreatorProgramAdminPage() {
                     type="button"
                     disabled={savingNotesId === app.id}
                     onClick={() => void saveInternalNotes(app)}
-                    style={styles.btnGhost}
+                    className={cn(btnGhost, 'self-start')}
                   >
-                    {savingNotesId === app.id ? '…' : 'Save my notes'}
+                    {savingNotesId === app.id ? '…' : 'Guardar notas'}
                   </button>
                 </div>
 
                 {app.status === 'pending' ? (
-                  <div style={styles.actions}>
+                  <div className="mt-3.5 flex flex-wrap items-center gap-2">
                     <input
-                      style={styles.inputGrow}
-                      placeholder="CODE (e.g. ANA10)"
+                      className={inputGrow}
+                      placeholder="CÓDIGO (ex. ANA10)"
                       value={approveCodeById[app.id] ?? ''}
                       onChange={(e) =>
                         setApproveCodeById((prev) => ({
@@ -1786,11 +2078,11 @@ export default function CreatorProgramAdminPage() {
                       }
                     />
                     <input
-                      style={{ ...styles.inputGrow, maxWidth: 120 }}
+                      className={cn(inputGrow, 'max-w-[120px]')}
                       type="number"
                       min={1}
                       max={3660}
-                      placeholder="Days"
+                      placeholder="Dias"
                       title="Complimentary Premium days (default 90)"
                       value={approvePremiumDaysById[app.id] ?? '90'}
                       onChange={(e) =>
@@ -1804,13 +2096,13 @@ export default function CreatorProgramAdminPage() {
                       type="button"
                       disabled={busyId === app.id}
                       onClick={() => void approve(app)}
-                      style={styles.btnPrimary}
+                      className={btnPrimary}
                     >
-                      {busyId === app.id ? '…' : 'Approve + assign code'}
+                      {busyId === app.id ? '…' : 'Aprovar + atribuir código'}
                     </button>
                     <input
-                      style={styles.inputGrow}
-                      placeholder="Reject note (optional)"
+                      className={inputGrow}
+                      placeholder="Nota de rejeição (opcional)"
                       value={rejectNoteById[app.id] ?? ''}
                       onChange={(e) =>
                         setRejectNoteById((prev) => ({
@@ -1823,51 +2115,139 @@ export default function CreatorProgramAdminPage() {
                       type="button"
                       disabled={busyId === app.id}
                       onClick={() => void reject(app)}
-                      style={styles.btnDanger}
+                      className={btnDanger}
                     >
-                      Reject
+                      Rejeitar
                     </button>
                   </div>
                 ) : null}
 
                 {app.status === 'approved' ? (
-                  <div style={styles.creatorPremiumBox}>
-                    <p style={styles.creatorPremiumLabel}>Creator complimentary Premium</p>
+                  <div className="mt-3.5 flex flex-col gap-2.5 rounded-xl border border-emerald-200 bg-emerald-50/80 p-3.5">
+                    <p className="text-xs font-bold uppercase tracking-wide text-emerald-800">
+                      Premium complementar do creator
+                    </p>
+                    <div className="flex flex-wrap items-center gap-2">
+                      <input
+                        className={cn(inputGrow, 'max-w-[220px] font-bold')}
+                        placeholder="CÓDIGO"
+                        title="Assigned creator code"
+                        value={editCodeById[app.id] ?? app.assigned_code ?? ''}
+                        onChange={(e) =>
+                          setEditCodeById((prev) => ({
+                            ...prev,
+                            [app.id]: e.target.value.toUpperCase(),
+                          }))
+                        }
+                      />
+                      {(() => {
+                        const draft = (editCodeById[app.id] ?? app.assigned_code ?? '')
+                          .trim()
+                          .toUpperCase()
+                        const assigned = (app.assigned_code ?? '').trim().toUpperCase()
+                        const dirty = draft !== assigned
+                        const row = codeRowForAssigned(app.assigned_code)
+                        if (!assigned && !draft) {
+                          return (
+                            <span className="inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-bold capitalize text-foreground/70">
+                              Sem código
+                            </span>
+                          )
+                        }
+                        if (!dirty && assigned && !row) {
+                          return (
+                            <span className="inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-bold capitalize text-foreground/70">
+                              Não está em Códigos
+                            </span>
+                          )
+                        }
+                        const busy =
+                          savingCodeId === app.id ||
+                          (row ? busyId === row.id : false) ||
+                          busyId === app.id
+                        let actionLabel = 'Ativar'
+                        if (dirty) actionLabel = 'Guardar e ativar'
+                        else if (row?.active) actionLabel = 'Desativar'
+                        return (
+                          <>
+                            <span
+                              className={cn(
+                                'inline-flex rounded-full px-2.5 py-1 text-xs font-bold capitalize',
+                                dirty
+                                  ? 'bg-muted text-foreground/70'
+                                  : row?.active
+                                    ? 'bg-emerald-50 text-emerald-700'
+                                    : 'bg-red-50 text-red-700',
+                              )}
+                            >
+                              {dirty
+                                ? 'Edição por guardar'
+                                : row?.active
+                                  ? 'Código ativo'
+                                  : 'Código desativado'}
+                            </span>
+                            <button
+                              type="button"
+                              disabled={busy || (!dirty && !row)}
+                              onClick={() => void saveOrToggleCreatorCode(app, row)}
+                              className={dirty ? btnPrimary : btnGhost}
+                            >
+                              {busy ? '…' : actionLabel}
+                            </button>
+                          </>
+                        )
+                      })()}
+                      <button
+                        type="button"
+                        disabled={
+                          savingCodeId === app.id ||
+                          busyId === app.id ||
+                          (editCodeById[app.id] ?? app.assigned_code ?? '').trim().toUpperCase() ===
+                            (app.assigned_code ?? '').trim().toUpperCase()
+                        }
+                        onClick={() => void saveAssignedCode(app)}
+                        className={btnGhost}
+                      >
+                        {savingCodeId === app.id ? '…' : 'Guardar código'}
+                      </button>
+                    </div>
                     {(() => {
                       const bar = creatorPremiumBarState(app)
                       if (!bar && !app.creator_premium_ends_at && !app.creator_premium_paused) {
                         return (
-                          <p style={styles.mutedTight}>No complimentary Premium grant yet.</p>
+                          <p className="text-sm text-muted-foreground">
+                            Ainda sem Premium complementar.
+                          </p>
                         )
                       }
                       if (!bar || (bar.leftDays <= 0 && !bar.paused)) {
                         return (
-                          <p style={styles.mutedTight}>
-                            Ended {shortDate(app.creator_premium_ends_at ?? null)}
+                          <p className="text-sm text-muted-foreground">
+                            Terminou {shortDate(app.creator_premium_ends_at ?? null)}
                           </p>
                         )
                       }
                       return (
                         <>
-                          <p style={styles.mutedTight}>
+                          <p className="text-sm text-muted-foreground">
                             {bar.paused ? (
                               <>
-                                <span style={styles.metaLabel}>Paused</span>
+                                <span className="font-bold text-foreground/70">Em pausa</span>
                                 {' · '}
-                                {bar.leftDays} day(s) frozen
+                                {bar.leftDays} dia(s) congelados
                               </>
                             ) : (
                               <>
-                                <span style={styles.metaLabel}>
-                                  {bar.usedDays}d used · {bar.leftDays}d left
+                                <span className="font-bold text-foreground/70">
+                                  {bar.usedDays}d usados · {bar.leftDays}d restantes
                                 </span>
-                                {' · ends '}
+                                {' · termina '}
                                 {shortDate(app.creator_premium_ends_at ?? null)}
                               </>
                             )}
                           </p>
                           <div
-                            style={styles.premiumBarTrack}
+                            className="h-2 overflow-hidden rounded-full bg-emerald-100"
                             role="progressbar"
                             aria-valuenow={bar.usedPct}
                             aria-valuemin={0}
@@ -1875,8 +2255,8 @@ export default function CreatorProgramAdminPage() {
                             aria-label={`${bar.usedDays} days used, ${bar.leftDays} days remaining`}
                           >
                             <div
+                              className="h-full rounded-full transition-[width,background] duration-200 ease-out"
                               style={{
-                                ...styles.premiumBarFill,
                                 width: `${bar.usedPct}%`,
                                 background: bar.fill,
                               }}
@@ -1888,58 +2268,74 @@ export default function CreatorProgramAdminPage() {
                     {(() => {
                       const stats = summarizeCreatorRewards(attributionSource, app.user_id)
                       return (
-                        <div style={styles.creatorStatsBox}>
-                          <p style={styles.creatorStatsLabel}>Referral performance</p>
-                          <div style={styles.creatorStatsGrid}>
+                        <div className="mt-1 flex flex-col gap-2.5 rounded-xl border border-emerald-200 bg-card p-3">
+                          <p className="text-[11px] font-bold uppercase tracking-wide text-emerald-700">
+                            Desempenho de referrals
+                          </p>
+                          <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-2.5">
                             <div>
-                              <p style={styles.statKey}>Followers (code used)</p>
-                              <p style={styles.statVal}>{stats.followers}</p>
+                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                                Followers (código usado)
+                              </p>
+                              <p className="mt-1 text-sm font-bold">{stats.followers}</p>
                             </div>
                             <div>
-                              <p style={styles.statKey}>Pending</p>
-                              <p style={styles.statVal}>
+                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                                Pendente
+                              </p>
+                              <p className="mt-1 text-sm font-bold">
                                 {formatMoneyMap(stats.pendingCentsByCurrency)}
                               </p>
                             </div>
                             <div>
-                              <p style={styles.statKey}>Paid</p>
-                              <p style={styles.statVal}>
+                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                                Pago
+                              </p>
+                              <p className="mt-1 text-sm font-bold">
                                 {formatMoneyMap(stats.paidCentsByCurrency)}
                               </p>
                             </div>
                             <div>
-                              <p style={styles.statKey}>Last annual buy</p>
-                              <p style={styles.statVal}>{shortDate(stats.lastAnnualAt)}</p>
+                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                                Última compra anual
+                              </p>
+                              <p className="mt-1 text-sm font-bold">{shortDate(stats.lastAnnualAt)}</p>
                             </div>
                             <div>
-                              <p style={styles.statKey}>Last paid</p>
-                              <p style={styles.statVal}>{shortDate(stats.lastPaidAt)}</p>
+                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                                Último pagamento
+                              </p>
+                              <p className="mt-1 text-sm font-bold">{shortDate(stats.lastPaidAt)}</p>
                             </div>
                             <div>
-                              <p style={styles.statKey}>Last requested</p>
-                              <p style={styles.statVal}>{shortDate(stats.lastRequestedAt)}</p>
+                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                                Último pedido
+                              </p>
+                              <p className="mt-1 text-sm font-bold">
+                                {shortDate(stats.lastRequestedAt)}
+                              </p>
                             </div>
                           </div>
                         </div>
                       )
                     })()}
-                    <div style={styles.actions}>
+                    <div className="flex flex-wrap items-center gap-2">
                       {!app.creator_premium_active && !app.creator_premium_paused ? (
                         <button
                           type="button"
                           disabled={busyId === app.id}
                           onClick={() => void grantCreatorPremium(app, 90)}
-                          style={styles.btnPrimary}
+                          className={btnPrimary}
                         >
-                          Grant 90 days
+                          Conceder 90 dias
                         </button>
                       ) : null}
                       <input
-                        style={{ ...styles.inputGrow, maxWidth: 110 }}
+                        className={cn(inputGrow, 'max-w-[110px]')}
                         type="number"
                         min={1}
                         max={3660}
-                        placeholder="Days"
+                        placeholder="Dias"
                         title="Days to add"
                         value={extendDaysById[app.id] ?? ''}
                         onChange={(e) =>
@@ -1953,7 +2349,7 @@ export default function CreatorProgramAdminPage() {
                         type="button"
                         disabled={busyId === app.id}
                         onClick={() => setExtendPreset(app.id, 30)}
-                        style={styles.btnGhost}
+                        className={btnGhost}
                       >
                         +30
                       </button>
@@ -1961,7 +2357,7 @@ export default function CreatorProgramAdminPage() {
                         type="button"
                         disabled={busyId === app.id}
                         onClick={() => setExtendPreset(app.id, 90)}
-                        style={styles.btnGhost}
+                        className={btnGhost}
                       >
                         +90
                       </button>
@@ -1969,12 +2365,12 @@ export default function CreatorProgramAdminPage() {
                         type="button"
                         disabled={busyId === app.id}
                         onClick={() => void confirmExtendCreatorPremium(app)}
-                        style={styles.btnPrimary}
+                        className={btnPrimary}
                       >
-                        {busyId === app.id ? '…' : 'Extend'}
+                        {busyId === app.id ? '…' : 'Prolongar'}
                       </button>
                       <input
-                        style={{ ...styles.inputGrow, maxWidth: 150 }}
+                        className={cn(inputGrow, 'max-w-[150px]')}
                         type="date"
                         title="Extend until date"
                         value={
@@ -1992,36 +2388,36 @@ export default function CreatorProgramAdminPage() {
                         type="button"
                         disabled={busyId === app.id}
                         onClick={() => void confirmSetCreatorPremiumEndDate(app)}
-                        style={styles.btnGhost}
+                        className={btnGhost}
                       >
-                        Set end date
+                        Definir data fim
                       </button>
                       {app.creator_premium_paused ? (
                         <button
                           type="button"
                           disabled={busyId === app.id}
                           onClick={() => void resumeCreatorPremium(app)}
-                          style={styles.btnPrimary}
+                          className={btnPrimary}
                         >
-                          Resume
+                          Retomar
                         </button>
                       ) : (
                         <button
                           type="button"
                           disabled={busyId === app.id || !app.creator_premium_active}
                           onClick={() => void pauseCreatorPremium(app)}
-                          style={styles.btnGhost}
+                          className={btnGhost}
                         >
-                          Pause
+                          Pausar
                         </button>
                       )}
                       <button
                         type="button"
                         disabled={busyId === app.id}
                         onClick={() => void endCreatorPremium(app)}
-                        style={styles.btnDanger}
+                        className={btnDanger}
                       >
-                        End now
+                        Terminar agora
                       </button>
                     </div>
                   </div>
@@ -2031,92 +2427,102 @@ export default function CreatorProgramAdminPage() {
           </div>
         ) : (
           <>
-            <form onSubmit={createCode} style={styles.cardWide}>
-              <h2 style={styles.h2}>Create / update code</h2>
-              <p style={styles.mutedTight}>
-                For creators you approached directly (no app application needed).
+            <form
+              onSubmit={createCode}
+              className="mb-4 rounded-2xl border border-border bg-card p-5 shadow-[0_12px_40px_rgba(15,23,42,0.05)]"
+            >
+              <h2 className="text-lg font-bold tracking-tight">Criar / atualizar código</h2>
+              <p className="mt-1.5 text-sm text-muted-foreground">
+                Para creators contactados diretamente (sem candidatura na app).
               </p>
-              <div style={styles.actions}>
+              <div className="mt-3.5 flex flex-wrap items-center gap-2">
                 <input
-                  style={styles.inputGrow}
-                  placeholder="CODE"
+                  className={inputGrow}
+                  placeholder="CÓDIGO"
                   value={newCode}
                   onChange={(e) => setNewCode(e.target.value.toUpperCase())}
                   required
                 />
                 <input
-                  style={styles.inputGrow}
-                  placeholder="Label (creator name)"
+                  className={inputGrow}
+                  placeholder="Label (nome do creator)"
                   value={newLabel}
                   onChange={(e) => setNewLabel(e.target.value)}
                 />
                 <input
-                  style={styles.inputGrow}
-                  placeholder="Creator user_id (optional)"
+                  className={inputGrow}
+                  placeholder="Creator user_id (opcional)"
                   value={newUserId}
                   onChange={(e) => setNewUserId(e.target.value)}
                 />
                 <input
-                  style={styles.inputGrow}
-                  placeholder="Notes"
+                  className={inputGrow}
+                  placeholder="Notas"
                   value={newNotes}
                   onChange={(e) => setNewNotes(e.target.value)}
                 />
-                <button type="submit" disabled={creating} style={styles.btnPrimary}>
-                  {creating ? '…' : 'Save code'}
+                <button type="submit" disabled={creating} className={btnPrimary}>
+                  {creating ? '…' : 'Guardar código'}
                 </button>
               </div>
             </form>
 
-            <div style={styles.tableCard}>
-              <div style={styles.tableWrap}>
-                <table style={styles.table}>
+            <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+              <div className="overflow-x-auto">
+                <table className="w-full min-w-[720px] border-collapse">
                   <thead>
                     <tr>
-                      <th style={styles.th}>Code</th>
-                      <th style={styles.th}>Label</th>
-                      <th style={styles.th}>User</th>
-                      <th style={styles.th}>Active</th>
-                      <th style={styles.th}>Created</th>
-                      <th style={styles.th} />
+                      <th className={thClass}>Código</th>
+                      <th className={thClass}>Label</th>
+                      <th className={thClass}>User</th>
+                      <th className={thClass}>Ativo</th>
+                      <th className={thClass}>Criado</th>
+                      <th className={thClass} />
                     </tr>
                   </thead>
                   <tbody>
                     {visibleCodes.length === 0 && !loading ? (
                       <tr>
-                        <td colSpan={6} style={styles.tdEmpty}>
-                          No creator codes yet.
+                        <td
+                          colSpan={6}
+                          className="px-4 py-9 text-center text-sm text-muted-foreground"
+                        >
+                          Ainda sem códigos de creators.
                         </td>
                       </tr>
                     ) : null}
                     {visibleCodes.map((row) => (
                       <tr key={row.id}>
-                        <td style={styles.td}>
-                          <span style={styles.cellStrong}>{row.code}</span>
+                        <td className={tdClass}>
+                          <span className="font-bold tracking-wide">{row.code}</span>
                         </td>
-                        <td style={styles.td}>{row.label || '—'}</td>
-                        <td style={styles.tdMuted}>
-                          <code style={styles.code}>{row.creator_user_id ?? '—'}</code>
+                        <td className={tdClass}>{row.label || '—'}</td>
+                        <td className={tdMuted}>
+                          <code className="text-xs text-muted-foreground">
+                            {row.creator_user_id ?? '—'}
+                          </code>
                         </td>
-                        <td style={styles.td}>
+                        <td className={tdClass}>
                           <span
-                            style={{
-                              ...styles.badgeStatus,
-                              ...(row.active ? styles.badgePaid : styles.badgePending),
-                            }}
+                            className={cn(
+                              'inline-flex rounded-full px-2.5 py-1 text-xs font-bold capitalize',
+                              row.active
+                                ? 'bg-emerald-50 text-emerald-700'
+                                : 'bg-muted text-foreground/70',
+                            )}
                           >
                             {row.active ? 'active' : 'off'}
                           </span>
                         </td>
-                        <td style={styles.tdMuted}>{shortDate(row.created_at)}</td>
-                        <td style={styles.td}>
+                        <td className={tdMuted}>{shortDate(row.created_at)}</td>
+                        <td className={tdClass}>
                           <button
                             type="button"
                             disabled={busyId === row.id}
                             onClick={() => void toggleActive(row)}
-                            style={styles.btnGhost}
+                            className={btnGhost}
                           >
-                            {busyId === row.id ? '…' : row.active ? 'Deactivate' : 'Activate'}
+                            {busyId === row.id ? '…' : row.active ? 'Desativar' : 'Ativar'}
                           </button>
                         </td>
                       </tr>
@@ -2130,455 +2536,4 @@ export default function CreatorProgramAdminPage() {
       </div>
     </main>
   )
-}
-
-const styles: Record<string, CSSProperties> = {
-  page: {
-    minHeight: '100vh',
-    background: 'linear-gradient(180deg, #F8FAFC 0%, #F1F5F9 100%)',
-    color: '#09090B',
-    padding: '40px 20px 72px',
-    fontFamily: 'ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif',
-  },
-  shell: {
-    maxWidth: 1120,
-    margin: '0 auto',
-  },
-  shellNarrow: {
-    maxWidth: 440,
-    margin: '0 auto',
-    paddingTop: 48,
-  },
-  kicker: {
-    margin: 0,
-    fontSize: 12,
-    fontWeight: 700,
-    letterSpacing: 1.2,
-    textTransform: 'uppercase',
-    color: '#71717A',
-  },
-  header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    gap: 16,
-    marginBottom: 28,
-  },
-  headerMain: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 0,
-    minWidth: 0,
-    flex: 1,
-  },
-  titleRow: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    gap: 12,
-    marginTop: 8,
-  },
-  headerActions: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    gap: 8,
-    justifyContent: 'flex-end',
-  },
-  h1: {
-    fontSize: 34,
-    fontWeight: 800,
-    margin: 0,
-    letterSpacing: -0.8,
-    color: '#09090B',
-  },
-  h2: {
-    fontSize: 18,
-    fontWeight: 700,
-    margin: 0,
-    letterSpacing: -0.3,
-    color: '#09090B',
-  },
-  muted: { color: '#71717A', marginTop: 8, fontSize: 14, lineHeight: 1.45 },
-  mutedTight: { color: '#71717A', marginTop: 6, marginBottom: 0, fontSize: 14 },
-  metaLabel: { fontWeight: 700, color: '#3F3F46' },
-  error: { color: '#DC2626', marginTop: 10, fontSize: 14, fontWeight: 600 },
-  demoBanner: {
-    marginBottom: 18,
-    padding: '12px 16px',
-    borderRadius: 14,
-    background: '#FFFBEB',
-    border: '1px solid #FDE68A',
-    color: '#92400E',
-    fontSize: 14,
-    fontWeight: 600,
-  },
-  toolbar: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    gap: 10,
-    marginBottom: 20,
-  },
-  toolbarGroup: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    alignItems: 'center',
-  },
-  toolbarSpacer: {
-    flex: 1,
-    minWidth: 8,
-  },
-  sortLabel: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: 8,
-    fontSize: 13,
-    fontWeight: 600,
-    color: '#52525B',
-  },
-  sortSelect: {
-    border: '1px solid #E4E4E7',
-    borderRadius: 999,
-    background: '#FFFFFF',
-    color: '#18181B',
-    padding: '8px 12px',
-    fontSize: 13,
-    fontWeight: 600,
-    fontFamily: 'inherit',
-    cursor: 'pointer',
-    outline: 'none',
-  },
-  card: {
-    marginTop: 24,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 14,
-    background: '#FFFFFF',
-    padding: 24,
-    borderRadius: 20,
-    border: '1px solid #E4E4E7',
-    boxShadow: '0 12px 40px rgba(15, 23, 42, 0.06)',
-  },
-  cardWide: {
-    background: '#FFFFFF',
-    padding: 22,
-    borderRadius: 20,
-    border: '1px solid #E4E4E7',
-    boxShadow: '0 12px 40px rgba(15, 23, 42, 0.05)',
-  },
-  emptyCard: {
-    background: '#FFFFFF',
-    border: '1px solid #E4E4E7',
-    borderRadius: 20,
-    padding: '36px 16px',
-    textAlign: 'center',
-    color: '#71717A',
-    fontSize: 14,
-    boxShadow: '0 12px 40px rgba(15, 23, 42, 0.04)',
-  },
-  cardTop: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    gap: 12,
-    alignItems: 'flex-start',
-  },
-  badgeCol: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-end',
-    gap: 6,
-  },
-  stack: { display: 'flex', flexDirection: 'column', gap: 12 },
-  label: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 8,
-    fontSize: 13,
-    fontWeight: 600,
-    color: '#3F3F46',
-  },
-  input: {
-    borderRadius: 12,
-    border: '1px solid #E4E4E7',
-    background: '#FAFAFA',
-    color: '#111827',
-    padding: '12px 14px',
-    fontSize: 16,
-    outline: 'none',
-  },
-  inputGrow: {
-    borderRadius: 12,
-    border: '1px solid #E4E4E7',
-    background: '#FAFAFA',
-    color: '#111827',
-    padding: '10px 12px',
-    fontSize: 14,
-    minWidth: 140,
-    flex: 1,
-    outline: 'none',
-  },
-  btnPrimary: {
-    border: 0,
-    borderRadius: 999,
-    background: '#111827',
-    color: '#FFFFFF',
-    fontWeight: 700,
-    padding: '10px 16px',
-    cursor: 'pointer',
-    fontSize: 14,
-    whiteSpace: 'nowrap',
-  },
-  btnDanger: {
-    border: 0,
-    borderRadius: 999,
-    background: '#B91C1C',
-    color: '#FFFFFF',
-    fontWeight: 700,
-    padding: '10px 16px',
-    cursor: 'pointer',
-    fontSize: 14,
-    whiteSpace: 'nowrap',
-  },
-  btnGhost: {
-    border: '1px solid #E4E4E7',
-    borderRadius: 999,
-    background: '#FFFFFF',
-    color: '#18181B',
-    fontWeight: 600,
-    padding: '8px 14px',
-    cursor: 'pointer',
-    fontSize: 14,
-  },
-  btnDemoOn: {
-    border: '1px solid #F59E0B',
-    borderRadius: 999,
-    background: '#FFFBEB',
-    color: '#92400E',
-    fontWeight: 700,
-    padding: '8px 14px',
-    cursor: 'pointer',
-    fontSize: 14,
-  },
-  chip: {
-    border: '1px solid #E4E4E7',
-    borderRadius: 999,
-    background: '#FFFFFF',
-    color: '#52525B',
-    padding: '8px 14px',
-    cursor: 'pointer',
-    textTransform: 'capitalize',
-    fontWeight: 600,
-    fontSize: 13,
-  },
-  chipActive: {
-    background: '#111827',
-    color: '#FFFFFF',
-    borderColor: '#111827',
-  },
-  meta: { color: '#71717A', fontSize: 13, marginTop: 10, marginBottom: 0 },
-  notes: { color: '#3F3F46', fontSize: 14, marginTop: 8, marginBottom: 0 },
-  internalNotesBox: {
-    marginTop: 14,
-    padding: 14,
-    borderRadius: 14,
-    background: '#F4F4F5',
-    border: '1px solid #E4E4E7',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-  },
-  creatorPremiumBox: {
-    marginTop: 14,
-    padding: 14,
-    borderRadius: 14,
-    background: '#ECFDF5',
-    border: '1px solid #A7F3D0',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-  },
-  creatorPremiumLabel: {
-    margin: 0,
-    fontSize: 12,
-    fontWeight: 700,
-    letterSpacing: 0.4,
-    textTransform: 'uppercase',
-    color: '#065F46',
-  },
-  creatorStatsBox: {
-    marginTop: 4,
-    padding: 12,
-    borderRadius: 12,
-    background: '#FFFFFF',
-    border: '1px solid #A7F3D0',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-  },
-  creatorStatsLabel: {
-    margin: 0,
-    fontSize: 11,
-    fontWeight: 700,
-    letterSpacing: 0.4,
-    textTransform: 'uppercase',
-    color: '#047857',
-  },
-  creatorStatsGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
-    gap: 10,
-  },
-  statKey: {
-    margin: 0,
-    fontSize: 11,
-    fontWeight: 600,
-    color: '#71717A',
-    textTransform: 'uppercase',
-    letterSpacing: 0.3,
-  },
-  statVal: {
-    margin: '4px 0 0',
-    fontSize: 14,
-    fontWeight: 700,
-    color: '#18181B',
-  },
-  searchInput: {
-    borderRadius: 999,
-    border: '1px solid #E4E4E7',
-    background: '#FFFFFF',
-    color: '#111827',
-    padding: '8px 14px',
-    fontSize: 14,
-    minWidth: 220,
-    maxWidth: 320,
-    flex: '1 1 220px',
-    outline: 'none',
-  },
-  premiumBarTrack: {
-    height: 8,
-    borderRadius: 999,
-    background: '#D1FAE5',
-    overflow: 'hidden',
-  },
-  premiumBarFill: {
-    height: '100%',
-    borderRadius: 999,
-    transition: 'width 200ms ease, background 200ms ease',
-  },
-  internalNotesLabel: {
-    margin: 0,
-    fontSize: 12,
-    fontWeight: 700,
-    letterSpacing: 0.4,
-    textTransform: 'uppercase',
-    color: '#52525B',
-  },
-  textarea: {
-    borderRadius: 12,
-    border: '1px solid #E4E4E7',
-    background: '#FFFFFF',
-    color: '#111827',
-    padding: '10px 12px',
-    fontSize: 14,
-    fontFamily: 'inherit',
-    resize: 'vertical',
-    outline: 'none',
-    minHeight: 72,
-  },
-  actions: {
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-    marginTop: 14,
-    alignItems: 'center',
-  },
-  tableCard: {
-    marginTop: 16,
-    background: '#FFFFFF',
-    borderRadius: 20,
-    border: '1px solid #E4E4E7',
-    boxShadow: '0 18px 50px rgba(15, 23, 42, 0.06)',
-    overflow: 'hidden',
-  },
-  tableWrap: { overflowX: 'auto' },
-  table: { width: '100%', borderCollapse: 'collapse', minWidth: 720 },
-  th: {
-    textAlign: 'left',
-    padding: '14px 16px',
-    fontSize: 11,
-    textTransform: 'uppercase',
-    letterSpacing: 0.6,
-    color: '#71717A',
-    background: '#FAFAFA',
-    borderBottom: '1px solid #E4E4E7',
-    fontWeight: 700,
-  },
-  td: {
-    padding: '16px',
-    borderTop: '1px solid #F4F4F5',
-    fontSize: 14,
-    verticalAlign: 'middle',
-    color: '#18181B',
-  },
-  tdMuted: {
-    padding: '16px',
-    borderTop: '1px solid #F4F4F5',
-    fontSize: 13,
-    verticalAlign: 'middle',
-    color: '#71717A',
-  },
-  tdEmpty: {
-    padding: '36px 16px',
-    textAlign: 'center',
-    color: '#71717A',
-    fontSize: 14,
-  },
-  cellStrong: { fontWeight: 700, letterSpacing: 0.3 },
-  amount: { fontWeight: 800, letterSpacing: -0.2 },
-  code: { fontSize: 12, color: '#71717A' },
-  badgeReady: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    borderRadius: 999,
-    padding: '4px 10px',
-    background: '#ECFDF5',
-    color: '#047857',
-    fontSize: 12,
-    fontWeight: 700,
-  },
-  badgeHold: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    borderRadius: 999,
-    padding: '4px 10px',
-    background: '#FFF7ED',
-    color: '#C2410C',
-    fontSize: 12,
-    fontWeight: 700,
-  },
-  badgeStatus: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    borderRadius: 999,
-    padding: '4px 10px',
-    fontSize: 12,
-    fontWeight: 700,
-    textTransform: 'capitalize',
-  },
-  badgePending: {
-    background: '#F4F4F5',
-    color: '#3F3F46',
-  },
-  badgePaid: {
-    background: '#ECFDF5',
-    color: '#047857',
-  },
-  badgeDanger: {
-    background: '#FEF2F2',
-    color: '#B91C1C',
-  },
 }
