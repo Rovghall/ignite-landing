@@ -430,6 +430,36 @@ type DaypartCell = { dow: number; hour: number; opens: number; meals: number }
 type DaypartHour = { hour: number; opens: number; meals: number }
 type DaypartDow = { dow: number; opens: number; meals: number }
 
+type ShareFunnelDaily = { day: string; shown: number; dismissed: number; shared: number }
+type ShareFunnelKind = {
+  kind: string
+  shown: number
+  shared: number
+  shown_users: number
+  shared_users: number
+  share_rate: number | null
+}
+
+type ShareFunnelPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    shown: number
+    shown_users: number
+    dismissed: number
+    dismissed_users: number
+    shared: number
+    shared_users: number
+    share_rate: number | null
+    dismiss_rate: number | null
+    share_rate_users: number | null
+  }
+  by_kind: ShareFunnelKind[]
+  daily: ShareFunnelDaily[]
+}
+
 type DaypartPayload = {
   ok: boolean
   error?: string
@@ -1062,6 +1092,40 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoShareFunnel(days: WindowDays): ShareFunnelPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.3
+  const daily = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const shown = Math.max(3, Math.round(14 + Math.sin(i / 2.2) * 5 + (i % 3)))
+    const shared = Math.max(1, Math.round(shown * 0.38))
+    const dismissed = Math.max(0, Math.round(shown * 0.42))
+    return { day: d.toISOString().slice(0, 10), shown, dismissed, shared }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      shown: Math.round(320 * scale),
+      shown_users: Math.round(180 * scale),
+      dismissed: Math.round(130 * scale),
+      dismissed_users: Math.round(95 * scale),
+      shared: Math.round(120 * scale),
+      shared_users: Math.round(88 * scale),
+      share_rate: 0.375,
+      dismiss_rate: 0.406,
+      share_rate_users: 0.489,
+    },
+    by_kind: [
+      { kind: 'meal', shown: Math.round(210 * scale), shared: Math.round(90 * scale), shown_users: Math.round(120 * scale), shared_users: Math.round(70 * scale), share_rate: 0.429 },
+      { kind: 'exercise', shown: Math.round(70 * scale), shared: Math.round(20 * scale), shown_users: Math.round(40 * scale), shared_users: Math.round(15 * scale), share_rate: 0.286 },
+      { kind: 'generic', shown: Math.round(40 * scale), shared: Math.round(10 * scale), shown_users: Math.round(28 * scale), shared_users: Math.round(8 * scale), share_rate: 0.25 },
+    ],
+    daily,
+  }
+}
+
 function buildDemoDaypart(days: WindowDays): DaypartPayload {
   const by_hour: DaypartHour[] = Array.from({ length: 24 }, (_, hour) => {
     const wave = hour >= 7 && hour <= 22 ? Math.sin(((hour - 7) / 15) * Math.PI) : 0.05
@@ -1568,6 +1632,7 @@ export default function ProductInsightsAdminPage() {
   const [intensity, setIntensity] = useState<IntensityPayload | null>(null)
   const [snapFunnel, setSnapFunnel] = useState<SnapFunnelPayload | null>(null)
   const [daypart, setDaypart] = useState<DaypartPayload | null>(null)
+  const [shareFunnel, setShareFunnel] = useState<ShareFunnelPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -1590,7 +1655,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp, sh] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1609,6 +1674,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_intensity', { p_days: windowDays }),
       supabase.rpc('admin_product_snap_funnel', { p_days: windowDays }),
       supabase.rpc('admin_product_daypart', { p_days: windowDays }),
+      supabase.rpc('admin_product_share_funnel', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1632,6 +1698,7 @@ export default function ProductInsightsAdminPage() {
       setIntensity(null)
       setSnapFunnel(null)
       setDaypart(null)
+      setShareFunnel(null)
       return
     }
     if (fu.error) {
@@ -1654,6 +1721,7 @@ export default function ProductInsightsAdminPage() {
       setIntensity(null)
       setSnapFunnel(null)
       setDaypart(null)
+      setShareFunnel(null)
       return
     }
 
@@ -1683,6 +1751,7 @@ export default function ProductInsightsAdminPage() {
       setIntensity(null)
       setSnapFunnel(null)
       setDaypart(null)
+      setShareFunnel(null)
       return
     }
     if (!fuData?.ok) {
@@ -1709,6 +1778,7 @@ export default function ProductInsightsAdminPage() {
       setIntensity(null)
       setSnapFunnel(null)
       setDaypart(null)
+      setShareFunnel(null)
       return
     }
     setOverview(ovData)
@@ -1826,6 +1896,13 @@ export default function ProductInsightsAdminPage() {
       setDaypart(dpData?.ok ? dpData : null)
     }
 
+    if (sh.error) {
+      setShareFunnel(null)
+    } else {
+      const shData = sh.data as ShareFunnelPayload | null
+      setShareFunnel(shData?.ok ? shData : null)
+    }
+
     setLastUpdatedAt(new Date().toISOString())
   }, [supabase, demoMode, windowDays])
 
@@ -1862,6 +1939,7 @@ export default function ProductInsightsAdminPage() {
     setIntensity(buildDemoIntensity(windowDays))
     setSnapFunnel(buildDemoSnapFunnel(windowDays))
     setDaypart(buildDemoDaypart(windowDays))
+    setShareFunnel(buildDemoShareFunnel(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -1895,6 +1973,7 @@ export default function ProductInsightsAdminPage() {
       setIntensity(null)
       setSnapFunnel(null)
       setDaypart(null)
+      setShareFunnel(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -1921,6 +2000,7 @@ export default function ProductInsightsAdminPage() {
     setIntensity(buildDemoIntensity(windowDays))
     setSnapFunnel(buildDemoSnapFunnel(windowDays))
     setDaypart(buildDemoDaypart(windowDays))
+    setShareFunnel(buildDemoShareFunnel(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -2063,6 +2143,7 @@ export default function ProductInsightsAdminPage() {
     setIntensity(buildDemoIntensity(windowDays))
     setSnapFunnel(buildDemoSnapFunnel(windowDays))
     setDaypart(buildDemoDaypart(windowDays))
+    setShareFunnel(buildDemoShareFunnel(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -2219,6 +2300,7 @@ export default function ProductInsightsAdminPage() {
                 ['intensity', 'Intensidade'],
                 ['snap', 'Snap Track'],
                 ['daypart', 'Horários'],
+                ['share', 'Partilha'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -3459,6 +3541,100 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {shareFunnel ? (
+              <Section
+                id="share"
+                title="Partilha (Fase W)"
+                subtitle="Prompt de partilha: shown → dismiss / share, por kind (meal / exercise / generic)."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Shown"
+                    value={fmt(shareFunnel.summary.shown)}
+                    hint={`${fmt(shareFunnel.summary.shown_users)} users`}
+                  />
+                  <StatCard
+                    label="Shared"
+                    value={fmt(shareFunnel.summary.shared)}
+                    hint={`${fmt(shareFunnel.summary.shared_users)} users`}
+                    tone="up"
+                  />
+                  <StatCard
+                    label="Share rate"
+                    value={pct(shareFunnel.summary.share_rate)}
+                    hint="eventos"
+                  />
+                  <StatCard
+                    label="Share users"
+                    value={pct(shareFunnel.summary.share_rate_users)}
+                    hint="utilizadores"
+                  />
+                  <StatCard
+                    label="Dismiss"
+                    value={fmt(shareFunnel.summary.dismissed)}
+                    hint={
+                      shareFunnel.summary.dismiss_rate != null
+                        ? pct(shareFunnel.summary.dismiss_rate)
+                        : null
+                    }
+                    tone="down"
+                  />
+                  <StatCard
+                    label="Kinds"
+                    value={fmt(shareFunnel.by_kind.length)}
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Shown / dia
+                  </p>
+                  <SparkBars
+                    label="Share prompt shown por dia"
+                    values={shareFunnel.daily.map((d) => d.shown)}
+                  />
+                  <p className="mb-3 mt-4 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Shared / dia
+                  </p>
+                  <SparkBars
+                    label="Share taps por dia"
+                    values={shareFunnel.daily.map((d) => d.shared)}
+                  />
+                </div>
+                {shareFunnel.by_kind.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <table className="w-full min-w-[480px] border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">Kind</th>
+                          <th className="px-4 py-3">Shown</th>
+                          <th className="px-4 py-3">Shared</th>
+                          <th className="px-4 py-3">Rate</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {shareFunnel.by_kind.map((row) => (
+                          <tr key={row.kind} className="border-t border-border/70">
+                            <td className="px-4 py-3 font-semibold">
+                              {row.kind === 'meal'
+                                ? 'Meal'
+                                : row.kind === 'exercise'
+                                  ? 'Exercise'
+                                  : row.kind === 'generic'
+                                    ? 'Generic'
+                                    : row.kind}
+                            </td>
+                            <td className="px-4 py-3">{fmt(row.shown)}</td>
+                            <td className="px-4 py-3">{fmt(row.shared)}</td>
+                            <td className="px-4 py-3">{pct(row.share_rate)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -4198,7 +4374,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase V · horários (heatmap). A–U continuam ativos.
+          Fase W · funil de partilha. A–V continuam ativos.
         </p>
       </div>
     </main>
