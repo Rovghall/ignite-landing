@@ -263,6 +263,28 @@ type GrowthPayload = {
   daily: Array<{ day: string; referrals: number; friend: number; creator: number }>
 }
 
+type SurfacesPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    quick_log_opens: number
+    quick_log_open_users: number
+    quick_log_actions: number
+    quick_log_action_users: number
+    action_per_open: number | null
+    snap_track_opens: number
+    snap_track_users: number
+    fasting_started: number
+    fasting_stopped: number
+    fasting_complete_rate: number | null
+  }
+  quick_actions: Array<{ action: string; events: number; users: number; pct: number }>
+  fasting_reasons: Array<{ reason: string; events: number; users: number }>
+  daily_quick_log: Array<{ day: string; opens: number; actions: number }>
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -734,6 +756,49 @@ function buildDemoGrowth(days: WindowDays): GrowthPayload {
   }
 }
 
+function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  const daily_quick_log = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const opens = Math.max(5, Math.round((20 + (i % 6) * 2) * scale))
+    return {
+      day: d.toISOString().slice(0, 10),
+      opens,
+      actions: Math.max(3, Math.round(opens * 0.85)),
+    }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      quick_log_opens: Math.round(620 * scale),
+      quick_log_open_users: Math.round(210 * scale),
+      quick_log_actions: Math.round(540 * scale),
+      quick_log_action_users: Math.round(190 * scale),
+      action_per_open: 0.871,
+      snap_track_opens: Math.round(280 * scale),
+      snap_track_users: Math.round(140 * scale),
+      fasting_started: Math.round(90 * scale),
+      fasting_stopped: Math.round(75 * scale),
+      fasting_complete_rate: 0.68,
+    },
+    quick_actions: [
+      { action: 'scan', events: Math.round(220 * scale), users: Math.round(110 * scale), pct: 41 },
+      { action: 'describe', events: Math.round(150 * scale), users: Math.round(80 * scale), pct: 28 },
+      { action: 'activity', events: Math.round(80 * scale), users: Math.round(45 * scale), pct: 15 },
+      { action: 'voice', events: Math.round(55 * scale), users: Math.round(30 * scale), pct: 10 },
+      { action: 'weight', events: Math.round(35 * scale), users: Math.round(22 * scale), pct: 6 },
+    ],
+    fasting_reasons: [
+      { reason: 'complete', events: Math.round(51 * scale), users: Math.round(40 * scale) },
+      { reason: 'early', events: Math.round(24 * scale), users: Math.round(20 * scale) },
+    ],
+    daily_quick_log,
+  }
+}
+
 const ERROR_SOURCE_LABELS_PT: Record<string, string> = {
   react_boundary: 'React boundary',
   global_handler: 'Handler global',
@@ -801,14 +866,16 @@ function StatCard({
 function Section({
   title,
   subtitle,
+  id,
   children,
 }: {
   title: string
   subtitle?: string
+  id?: string
   children: ReactNode
 }) {
   return (
-    <section className="mt-8">
+    <section id={id} className="mt-8 scroll-mt-24">
       <div className="mb-3">
         <h2 className="font-display text-lg font-bold tracking-tight text-foreground">
           {title}
@@ -860,6 +927,7 @@ export default function ProductInsightsAdminPage() {
   const [monetization, setMonetization] = useState<MonetizationPayload | null>(null)
   const [activation, setActivation] = useState<ActivationPayload | null>(null)
   const [growth, setGrowth] = useState<GrowthPayload | null>(null)
+  const [surfaces, setSurfaces] = useState<SurfacesPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -881,7 +949,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -889,6 +957,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_monetization', { p_days: windowDays }),
       supabase.rpc('admin_product_activation', { p_days: windowDays }),
       supabase.rpc('admin_product_growth', { p_days: windowDays }),
+      supabase.rpc('admin_product_surfaces', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -901,6 +970,7 @@ export default function ProductInsightsAdminPage() {
       setMonetization(null)
       setActivation(null)
       setGrowth(null)
+      setSurfaces(null)
       return
     }
     if (fu.error) {
@@ -912,6 +982,7 @@ export default function ProductInsightsAdminPage() {
       setMonetization(null)
       setActivation(null)
       setGrowth(null)
+      setSurfaces(null)
       return
     }
 
@@ -930,6 +1001,7 @@ export default function ProductInsightsAdminPage() {
       setMonetization(null)
       setActivation(null)
       setGrowth(null)
+      setSurfaces(null)
       return
     }
     if (!fuData?.ok) {
@@ -945,6 +1017,7 @@ export default function ProductInsightsAdminPage() {
       setMonetization(null)
       setActivation(null)
       setGrowth(null)
+      setSurfaces(null)
       return
     }
     setOverview(ovData)
@@ -984,6 +1057,13 @@ export default function ProductInsightsAdminPage() {
       const grData = gr.data as GrowthPayload | null
       setGrowth(grData?.ok ? grData : null)
     }
+
+    if (su.error) {
+      setSurfaces(null)
+    } else {
+      const suData = su.data as SurfacesPayload | null
+      setSurfaces(suData?.ok ? suData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -1000,6 +1080,7 @@ export default function ProductInsightsAdminPage() {
     setMonetization(buildDemoMonetization(windowDays))
     setActivation(buildDemoActivation(windowDays))
     setGrowth(buildDemoGrowth(windowDays))
+    setSurfaces(buildDemoSurfaces(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -1021,6 +1102,7 @@ export default function ProductInsightsAdminPage() {
     setMonetization(null)
     setActivation(null)
     setGrowth(null)
+    setSurfaces(null)
     setDemoMode(false)
   }
 
@@ -1035,6 +1117,7 @@ export default function ProductInsightsAdminPage() {
         setMonetization(buildDemoMonetization(windowDays))
         setActivation(buildDemoActivation(windowDays))
         setGrowth(buildDemoGrowth(windowDays))
+        setSurfaces(buildDemoSurfaces(windowDays))
         setListError(null)
       }
       return next
@@ -1165,6 +1248,7 @@ export default function ProductInsightsAdminPage() {
                   setMonetization(buildDemoMonetization(windowDays))
                   setActivation(buildDemoActivation(windowDays))
                   setGrowth(buildDemoGrowth(windowDays))
+                  setSurfaces(buildDemoSurfaces(windowDays))
                   return
                 }
                 void load()
@@ -1213,13 +1297,39 @@ export default function ProductInsightsAdminPage() {
           ) : null}
         </div>
 
+        <nav className="sticky top-2 z-20 mb-6 -mx-1 overflow-x-auto rounded-2xl border border-border/80 bg-card/95 px-2 py-2 shadow-sm backdrop-blur">
+          <div className="flex min-w-max gap-1">
+            {(
+              [
+                ['kpi', 'KPIs'],
+                ['engagement', 'Engagement'],
+                ['health', 'Saúde'],
+                ['quality', 'Qualidade'],
+                ['funnel', 'Funil'],
+                ['monetization', 'Paywall'],
+                ['activation', 'Ativação'],
+                ['growth', 'Growth'],
+                ['surfaces', 'Surfaces'],
+              ] as const
+            ).map(([id, label]) => (
+              <a
+                key={id}
+                href={`#${id}`}
+                className="rounded-full px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:bg-muted hover:text-foreground"
+              >
+                {label}
+              </a>
+            ))}
+          </div>
+        </nav>
+
         {listError && !demoMode ? (
           <p className="mb-4 text-sm font-semibold text-red-600">{listError}</p>
         ) : null}
 
         {overview ? (
           <>
-            <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+            <div id="kpi" className="scroll-mt-24 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
               <StatCard
                 label="DAU"
                 value={fmt(overview.users.dau)}
@@ -1257,6 +1367,7 @@ export default function ProductInsightsAdminPage() {
               <Section
                 title="Engagement (Fase E)"
                 subtitle="DAU por app_open (abre a app) + split iOS/Android."
+                id="engagement"
               >
                 <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
                   <StatCard
@@ -1345,6 +1456,7 @@ export default function ProductInsightsAdminPage() {
               <Section
                 title="Saúde / erros (Fase F)"
                 subtitle="Crashes e erros JS reportados via app_error · sem Sentry ainda."
+                id="health"
               >
                 <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
                   <StatCard
@@ -1406,6 +1518,7 @@ export default function ProductInsightsAdminPage() {
               <Section
                 title="Qualidade / releases (Fase G)"
                 subtitle="Stickiness (DAU÷MAU), distribuição por app_version e top mensagens de erro."
+                id="quality"
               >
                 <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
                   <StatCard
@@ -1758,6 +1871,7 @@ export default function ProductInsightsAdminPage() {
             <Section
               title="Funil core"
               subtitle="Onboarding → refeição → partilha → paywall → premium."
+              id="funnel"
             >
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
                 <StatCard
@@ -1797,6 +1911,7 @@ export default function ProductInsightsAdminPage() {
               <Section
                 title="Monetização (Fase H)"
                 subtitle="Paywall → premium por origem, oferta (main/downsell) e plataforma."
+                id="monetization"
               >
                 <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
                   <StatCard
@@ -1955,6 +2070,7 @@ export default function ProductInsightsAdminPage() {
               <Section
                 title="Ativação (Fase I)"
                 subtitle="Signup → app_open / onboarding / 1ª refeição em 24h e 7d (coortes elegíveis)."
+                id="activation"
               >
                 <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
                   <StatCard
@@ -2020,6 +2136,7 @@ export default function ProductInsightsAdminPage() {
               <Section
                 title="Crescimento / referrals (Fase J)"
                 subtitle="Atribuições friend vs creator, estados, rewards e % dos signups referidos."
+                id="growth"
               >
                 <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
                   <StatCard
@@ -2131,6 +2248,140 @@ export default function ProductInsightsAdminPage() {
                           {growth.by_status.map((row) => (
                             <tr key={row.status} className="border-t border-border/70">
                               <td className="px-4 py-3 font-semibold">{row.status}</td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
+            {surfaces ? (
+              <Section
+                title="Surfaces / Quick Log (Fase K)"
+                subtitle="Mix de ações do Quick Log, Snap Track e razões de fim de jejum."
+                id="surfaces"
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="QL opens"
+                    value={fmt(surfaces.summary.quick_log_opens)}
+                    hint={`${fmt(surfaces.summary.quick_log_open_users)} users`}
+                  />
+                  <StatCard
+                    label="QL actions"
+                    value={fmt(surfaces.summary.quick_log_actions)}
+                    hint={
+                      surfaces.summary.action_per_open != null
+                        ? `${surfaces.summary.action_per_open.toFixed(2)} / open`
+                        : null
+                    }
+                  />
+                  <StatCard
+                    label="Snap Track"
+                    value={fmt(surfaces.summary.snap_track_opens)}
+                    hint={`${fmt(surfaces.summary.snap_track_users)} users`}
+                  />
+                  <StatCard
+                    label="Jejum start"
+                    value={fmt(surfaces.summary.fasting_started)}
+                  />
+                  <StatCard
+                    label="Jejum stop"
+                    value={fmt(surfaces.summary.fasting_stopped)}
+                    hint={
+                      surfaces.summary.fasting_complete_rate != null
+                        ? `${pct(surfaces.summary.fasting_complete_rate)} complete`
+                        : null
+                    }
+                  />
+                  <StatCard
+                    label="Ações distintas"
+                    value={fmt(surfaces.quick_actions.length)}
+                    hint="scan / describe / …"
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Quick Log opens / dia
+                  </p>
+                  <SparkBars
+                    label="Quick Log opens por dia"
+                    values={surfaces.daily_quick_log.map((d) => d.opens)}
+                  />
+                </div>
+                {surfaces.quick_actions.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[480px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Ação</th>
+                            <th className="px-4 py-3">Eventos</th>
+                            <th className="px-4 py-3">Users</th>
+                            <th className="px-4 py-3">%</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {surfaces.quick_actions.map((row) => (
+                            <tr key={row.action} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {row.action === 'scan'
+                                  ? 'Scan'
+                                  : row.action === 'describe'
+                                    ? 'Describe'
+                                    : row.action === 'voice'
+                                      ? 'Voice'
+                                      : row.action === 'activity'
+                                        ? 'Activity'
+                                        : row.action === 'weight'
+                                          ? 'Weight'
+                                          : row.action}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                              <td className="px-4 py-3">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-24">
+                                    <UsageBar pctValue={row.pct} />
+                                  </div>
+                                  <span className="tabular-nums text-muted-foreground">
+                                    {row.pct.toFixed(1)}%
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+                {surfaces.fasting_reasons.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[420px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Fim de jejum</th>
+                            <th className="px-4 py-3">Eventos</th>
+                            <th className="px-4 py-3">Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {surfaces.fasting_reasons.map((row) => (
+                            <tr key={row.reason} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {row.reason === 'complete'
+                                  ? 'Completo'
+                                  : row.reason === 'early'
+                                    ? 'Cedo'
+                                    : row.reason}
+                              </td>
                               <td className="px-4 py-3">{fmt(row.events)}</td>
                               <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
                             </tr>
@@ -2324,7 +2575,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase J · crescimento referrals. A–I continuam ativos.
+          Fase K · Quick Log surfaces + nav. A–J continuam ativos.
         </p>
       </div>
     </main>
