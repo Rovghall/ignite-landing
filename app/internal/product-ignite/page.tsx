@@ -1994,28 +1994,159 @@ function StatCard({
   )
 }
 
+const SECTION_HELP: Record<string, string> = {
+  kpi: 'KPIs de domínio a partir de nutrition_logs / profiles (não precisam de product_events). DAU/WAU/MAU = users com refeições. Premium = rc_premium_active. Serve para ver se o núcleo (registar comida) cresce.',
+  engagement:
+    'DAU/WAU/MAU por app_open (abriu a app), não só por refeições. Stickiness implícito: se opens ≫ meals, há abertura sem uso. Split iOS/Android mostra onde investir QA/marketing.',
+  health:
+    'Volume de app_error (JS/boundary). Subida súbita = release má. Fail rate alto vs opens = regressão. Ainda não é Sentry (sem stack nativa completa).',
+  quality:
+    'Stickiness DAU÷MAU (ex. 20–40% é comum em consumer). Versões: erros concentrados numa version = rollout mau. Top erros = o que corrigir primeiro.',
+  funnel:
+    'Funil core de eventos: onboarding → meal → share → paywall → premium. Quedas grandes entre passos = fricção. Compara rates, não só counts absolutos.',
+  monetization:
+    'Paywall shown → convert / dismiss. by_from e plataforma dizem onde converte melhor (onboarding vs mid-funnel, iOS vs Android). Conv. users costuma ser mais fiável que events.',
+  ttc: 'Tempo paywall→premium. Mediana baixa = compra impulsiva; P90 alto = muitos demoram dias. Buckets mostram se a maioria converte em <24h ou depois.',
+  intensity:
+    'Profundidade: quantas meals/opens por opener. Muitos no bucket 0 meals = abriram e não registaram. Heavy users sustentam retenção; se a massa está em 0–1, o produto não “agarra”.',
+  snap: 'Funil Snap Track: open → fail → meal Snap. Fail/open alto = problema de análise. Open→meal users baixo = abandonam antes de guardar. by_source mostra qual pipeline (AI/DB/packaged) manda.',
+  daypart:
+    'Quando usam a app (Europe/Lisbon). Peak open vs peak meal: se abrem de manhã mas registam à noite, o reminder pode falhar. Serve para timing de push/campanhas.',
+  share:
+    'Prompt de partilha: shown → share vs dismiss. Share rate baixo = copy/timing mau. Kind meal vs exercise: prioriza o que partilha mais (viralidade).',
+  newret:
+    'Openers/loggers novos vs returning. Se new_share sobe e returning cai, estás a “encher” com trials sem retenção. Returning alto = base saudável.',
+  fasting:
+    'Jejum: started → stopped (complete vs early). Early rate alto = planos irrealistas ou UX de stop fácil demais. Complete rate é o norte.',
+  ai: 'AI chat: open → message e profundidade. Open→msg baixo = abrem e não falam. Mediana 1 = uso superficial; heavy = power users do Lab.',
+  demographics:
+    'Sexo/idade dos openers + premium rate e convert na janela. Diz quem é a base e quem paga mais. “Unknown” alto = onboarding incompleto. País não existe no perfil.',
+  finance:
+    'MRR/COGS = estimativas (ARPU e $/API assumidos). Payouts friend/creator = dinheiro real em referral_rewards. Usa para ordem de grandeza, não contabilidade; RevenueCat/App Store = verdade da receita.',
+  activation:
+    'Signup → open / onboarding / 1ª meal em 24h e 7d. Meal 24h é o “aha” crítico. Se open alto e meal baixo, o onboarding ou 1º log falha.',
+  growth:
+    'Referrals friend vs creator, estados e rewards. % signups referidos = contribuição do loop viral. Pending cents = liability a pagar.',
+  adoption:
+    'Entre quem abriu a app, % que usou cada feature. Ranking de prioridade: features com adoção baixa e impacto alto = candidatos a redesign.',
+  'top-referrers':
+    'Leaderboard de quem traz referred. Ativação 7d e premium dos referred medem qualidade (não só volume). Creators vs friends.',
+  'retention-matrix':
+    'Retenção por semana de signup (D1/D7/D14 via app_open). Linhas recentes ainda “quentes”. Queda D1→D7 = problema de hábito na 1ª semana.',
+  compare:
+    'Período atual vs período anterior da mesma duração. Deltas % mostram aceleração/desaceleração. Olha opens, meals, premium, errors juntos.',
+  cohorts:
+    'Organic vs referred: ativação e premium. Se referred converte melhor, o canal vale investimento; se pior, qualidade do tráfego é baixa.',
+  surfaces:
+    'Quick Log actions, Snap e razões de fim de jejum. Mix de ações = como as pessoas escolhem registar. Mudanças bruscas = regressão de UX.',
+  alerts:
+    'Regras automáticas de atenção (erros, convert, etc.). Não substitui análise — é um farol. Severidade high = olhar já.',
+}
+
+function HelpTip({
+  text,
+  label,
+  inline = false,
+}: {
+  text: string
+  label: string
+  inline?: boolean
+}) {
+  const [open, setOpen] = useState(false)
+  return (
+    <div className={inline ? 'relative inline-flex' : 'relative'}>
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-label={`Ajuda: ${label}`}
+        title="O que significa esta secção?"
+        className={cn(
+          'inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold leading-none',
+          open
+            ? 'border-foreground bg-foreground text-background'
+            : 'border-border bg-card text-muted-foreground hover:border-foreground/40 hover:text-foreground',
+        )}
+      >
+        i
+      </button>
+      {open ? (
+        <div
+          className={cn(
+            'z-30 rounded-xl border border-sky-200 bg-sky-50 px-3.5 py-3 text-sm leading-relaxed text-sky-950 shadow-lg',
+            inline
+              ? 'absolute left-0 top-8 w-[min(22rem,calc(100vw-2rem))]'
+              : 'mt-2',
+          )}
+        >
+          <p className="text-[11px] font-bold uppercase tracking-[0.06em] text-sky-800/80">
+            Como ler
+          </p>
+          <p className="mt-1">{text}</p>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
 function Section({
   title,
   subtitle,
   id,
+  help,
   children,
 }: {
   title: string
   subtitle?: string
   id?: string
+  help?: string
   children: ReactNode
 }) {
+  const [helpOpen, setHelpOpen] = useState(false)
+  const helpText = help ?? (id ? SECTION_HELP[id] : undefined)
+
   return (
     <section id={id} className="mt-8 scroll-mt-24">
       <div className="mb-3">
-        <h2 className="font-display text-lg font-bold tracking-tight text-foreground">
-          {title}
-        </h2>
+        <div className="flex items-start gap-2">
+          <h2 className="font-display text-lg font-bold tracking-tight text-foreground">
+            {title}
+          </h2>
+          {helpText ? (
+            <button
+              type="button"
+              onClick={() => setHelpOpen((v) => !v)}
+              aria-expanded={helpOpen}
+              aria-label={`Ajuda: ${title}`}
+              title="O que significa esta secção?"
+              className={cn(
+                'mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold leading-none',
+                helpOpen
+                  ? 'border-foreground bg-foreground text-background'
+                  : 'border-border bg-card text-muted-foreground hover:border-foreground/40 hover:text-foreground',
+              )}
+            >
+              i
+            </button>
+          ) : null}
+        </div>
         {subtitle ? <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p> : null}
+        {helpOpen && helpText ? (
+          <div className="mt-2 rounded-xl border border-sky-200 bg-sky-50 px-3.5 py-3 text-sm leading-relaxed text-sky-950">
+            <p className="text-[11px] font-bold uppercase tracking-[0.06em] text-sky-800/80">
+              Como ler
+            </p>
+            <p className="mt-1">{helpText}</p>
+          </div>
+        ) : null}
       </div>
       {children}
     </section>
   )
+}
+
+function KpiHelp() {
+  return <HelpTip text={SECTION_HELP.kpi} label="KPIs" inline />
 }
 
 function UsageBar({ pctValue }: { pctValue: number }) {
@@ -2799,9 +2930,12 @@ export default function ProductInsightsAdminPage() {
 
         {alerts?.alerts?.length ? (
           <div id="alerts" className="mb-5 scroll-mt-24 space-y-2">
-            <p className="text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
-              Alertas (Fase L)
-            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                Alertas (Fase L)
+              </p>
+              <SectionHelpInline text={SECTION_HELP.alerts} label="Alertas" />
+            </div>
             {alerts.alerts.map((a) => (
               <div
                 key={a.code}
@@ -2828,7 +2962,14 @@ export default function ProductInsightsAdminPage() {
 
         {overview ? (
           <>
-            <div id="kpi" className="scroll-mt-24 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+            <div id="kpi" className="scroll-mt-24">
+              <div className="mb-3 flex items-start gap-2">
+                <p className="font-display text-lg font-bold tracking-tight text-foreground">
+                  KPIs
+                </p>
+                <KpiHelp />
+              </div>
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
               <StatCard
                 label="DAU"
                 value={fmt(overview.users.dau)}
@@ -2860,6 +3001,7 @@ export default function ProductInsightsAdminPage() {
                 value={fmt(overview.users.premium_active)}
                 hint="rc_premium_active"
               />
+            </div>
             </div>
 
             {engagement ? (
@@ -3118,6 +3260,7 @@ export default function ProductInsightsAdminPage() {
             <Section
               title="Atividade"
               subtitle="Utilizadores ativos e refeições por dia (nutrition_logs)."
+              help="Série diária de quem registou refeições. Tendência a subir = core engagement. Oscilação forte fim de semana é normal; queda contínua = alerta."
             >
               <div className="grid gap-3 md:grid-cols-2">
                 <div className="rounded-2xl border border-border bg-card p-4">
@@ -3152,6 +3295,7 @@ export default function ProductInsightsAdminPage() {
             <Section
               title="Retenção"
               subtitle="Utilizadores que registaram uma refeição no dia N após o signup (coortes dos últimos 60 dias)."
+              help="Retenção por meal no dia N pós-signup. D1/D7/D30 baixos = hábito não formou. Compara com a matriz de app_open (pode reter abrir sem registar)."
             >
               <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
                 {(
@@ -3182,6 +3326,7 @@ export default function ProductInsightsAdminPage() {
             <Section
               title="Social e partilha"
               subtitle={`Últimos ${overview.window_days} dias.`}
+              help="Volume social (grupos/partilha) no overview de domínio. Crescer aqui sem meals = engajamento paralelo; cair com meals estáveis = social a esfriar."
             >
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
                 <StatCard label="Grupos" value={fmt(overview.social.groups_created)} />
@@ -3196,6 +3341,7 @@ export default function ProductInsightsAdminPage() {
             <Section
               title="Programa de creators"
               subtitle="Pipeline de candidaturas (contagens por estado, total)."
+              help="Funil de candidaturas a creator. Pending alto sem review = bottleneck ops. Approved sem códigos ativos = setup incompleto."
             >
               <div className="grid grid-cols-3 gap-2.5">
                 <StatCard label="Pendentes" value={fmt(overview.creator.pending)} />
@@ -3211,6 +3357,7 @@ export default function ProductInsightsAdminPage() {
             <Section
               title="Ranking de funções"
               subtitle="Famílias de registo de refeições + ações sociais (por volume)."
+              help="Onde o volume de logs e ações sociais acontece (famílias). Domínio Snap vs Quick Log vs manual = preferência real dos users."
             >
               <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
                 <div className="overflow-x-auto">
@@ -3252,6 +3399,7 @@ export default function ProductInsightsAdminPage() {
             <Section
               title="Fontes de refeição"
               subtitle="Detalhe por nutrition_logs.source."
+              help="Source exacto de cada meal. Útil para ver se Snap AI vs DB vs packaged ganham share. Queda numa source = regressão nessa feature."
             >
               <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
                 <div className="overflow-x-auto">
@@ -3305,6 +3453,7 @@ export default function ProductInsightsAdminPage() {
             <Section
               title="Outras ações de produto"
               subtitle="Não são refeições — grupos, chat, partilha."
+              help="Ações sociais/não-meal no overview. Complementa o ranking: se meals sobem e social cai, o produto fica mais “solo tracker”."
             >
               <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
                 <div className="overflow-x-auto">
@@ -3339,6 +3488,7 @@ export default function ProductInsightsAdminPage() {
             <Section
               title="Eventos de produto (Fase B+C)"
               subtitle="Instrumentação na app — abertura, tabs, Quick Log, partilha, jejum, funil core."
+              help="Totais de product_events. Sem eventos aqui, as secções de funil/engagement de eventos ficam vazias. Serve de sanidade: a instrumentação está a chegar?"
             >
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
                 <StatCard label="Eventos" value={fmt(events.totals.events)} />
@@ -5233,6 +5383,7 @@ export default function ProductInsightsAdminPage() {
               <Section
                 title="Retenção (app_open)"
                 subtitle="Voltou a abrir a app no dia N após signup (melhor proxy que só refeições)."
+                help="Retenção por abertura da app (não meal). Costuma ser mais alta que retenção por refeição. Se D1 opens alto e D1 meals baixo, abrem mas não registam."
               >
                 <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
                   {(
@@ -5261,10 +5412,11 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
-            <Section
-              title="Social, AI e Diet (Fase D)"
-              subtitle="Grupos, chat AI e falhas de análise."
-            >
+              <Section
+                title="Social, AI e Diet (Fase D)"
+                subtitle="Grupos, chat AI e falhas de análise."
+                help="Uso de grupos, AI e Diet + meal_analysis_failed. Failures a subir com Snap opens estáveis = qualidade da análise a degradar."
+              >
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
                 <StatCard label="Grupos criados" value={fmt(events.funnel.group_created ?? 0)} />
                 <StatCard label="Aberturas grupo" value={fmt(events.funnel.group_open ?? 0)} />
@@ -5299,7 +5451,11 @@ export default function ProductInsightsAdminPage() {
               </div>
             </Section>
 
-            <Section title="Funil de partilha" subtitle="Prompt pós-refeição / exercício.">
+            <Section
+              title="Funil de partilha"
+              subtitle="Prompt pós-refeição / exercício."
+              help="Resumo rápido do prompt de partilha nos eventos. Para detalhe por kind, usa a secção Partilha (Fase W)."
+            >
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
                 <StatCard label="Mostrado" value={fmt(events.funnel.share_prompt_shown)} />
                 <StatCard label="Partilhar" value={fmt(events.funnel.share_prompt_share)} />
@@ -5308,7 +5464,11 @@ export default function ProductInsightsAdminPage() {
               </div>
             </Section>
 
-            <Section title="Tabs" subtitle="tab_view por área da app.">
+            <Section
+              title="Tabs"
+              subtitle="tab_view por área da app."
+              help="Que tabs abrem. Home/Diet/AI/Friends: desequilíbrio extremo pode indicar navegação confusa ou feature pouco descoberta."
+            >
               <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[420px] border-collapse text-sm">
@@ -5342,7 +5502,11 @@ export default function ProductInsightsAdminPage() {
               </div>
             </Section>
 
-            <Section title="Ranking de eventos" subtitle="Todos os nomes em product_events.">
+            <Section
+              title="Ranking de eventos"
+              subtitle="Todos os nomes em product_events."
+              help="Lista crua de eventos. Bom para spotting de nomes novos/typos ou eventos que dispararam demais após um release."
+            >
               <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[560px] border-collapse text-sm">
@@ -5410,7 +5574,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase AC · finance (MRR est. + payouts reais + COGS est.). A–AB continuam ativos.
+          Clique no “i” de cada secção para ver o que mede e como interpretar. · Fase AC finance + ajuda inline.
         </p>
       </div>
     </main>
