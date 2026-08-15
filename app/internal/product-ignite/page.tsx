@@ -103,6 +103,23 @@ type EventsPayload = {
     share_convert_rate: number | null
     fasting_started: number
     fasting_stopped: number
+    onboarding_completed?: number
+    onboarding_users?: number
+    meal_logged?: number
+    meal_logged_users?: number
+    snap_track_opens?: number
+    snap_track_users?: number
+    paywall_shown?: number
+    paywall_users?: number
+    premium_converted?: number
+    premium_users?: number
+    meal_to_share_rate?: number | null
+    paywall_convert_rate?: number | null
+  }
+  retention_opens?: {
+    d1: { cohort: number; retained: number; rate: number | null }
+    d7: { cohort: number; retained: number; rate: number | null }
+    d30: { cohort: number; retained: number; rate: number | null }
   }
 }
 
@@ -151,6 +168,11 @@ const EVENT_LABELS_PT: Record<string, string> = {
   share_prompt_share: 'Prompt de partilha → partilhar',
   fasting_started: 'Jejum iniciado',
   fasting_stopped: 'Jejum terminado',
+  onboarding_completed: 'Onboarding concluído',
+  meal_logged: 'Refeição registada',
+  snap_track_open: 'Abrir Snap Track',
+  paywall_shown: 'Paywall mostrado',
+  premium_converted: 'Conversão premium',
 }
 
 const TAB_LABELS_PT: Record<string, string> = {
@@ -317,6 +339,23 @@ function buildDemoEvents(days: WindowDays): EventsPayload {
       share_convert_rate: shown > 0 ? Number((tapped / shown).toFixed(3)) : null,
       fasting_started: Math.round(55 * scale),
       fasting_stopped: Math.round(48 * scale),
+      onboarding_completed: Math.round(40 * scale),
+      onboarding_users: Math.round(40 * scale),
+      meal_logged: Math.round(620 * scale),
+      meal_logged_users: Math.round(210 * scale),
+      snap_track_opens: Math.round(280 * scale),
+      snap_track_users: Math.round(150 * scale),
+      paywall_shown: Math.round(95 * scale),
+      paywall_users: Math.round(90 * scale),
+      premium_converted: Math.round(18 * scale),
+      premium_users: Math.round(18 * scale),
+      meal_to_share_rate: 0.34,
+      paywall_convert_rate: 0.189,
+    },
+    retention_opens: {
+      d1: { cohort: 120, retained: 61, rate: 0.508 },
+      d7: { cohort: 98, retained: 34, rate: 0.347 },
+      d30: { cohort: 64, retained: 16, rate: 0.25 },
     },
   }
 }
@@ -987,8 +1026,8 @@ export default function ProductInsightsAdminPage() {
         {events ? (
           <>
             <Section
-              title="Eventos de produto (Fase B)"
-              subtitle="Instrumentação na app — aberturas, tabs, Quick Log, partilha e jejum."
+              title="Eventos de produto (Fase B+C)"
+              subtitle="Instrumentação na app — abertura, tabs, Quick Log, partilha, jejum, funil core."
             >
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
                 <StatCard label="Eventos" value={fmt(events.totals.events)} />
@@ -1016,6 +1055,76 @@ export default function ProductInsightsAdminPage() {
                 />
               </div>
             </Section>
+
+            <Section
+              title="Funil core"
+              subtitle="Onboarding → refeição → partilha → paywall → premium."
+            >
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                <StatCard
+                  label="Onboarding"
+                  value={fmt(events.funnel.onboarding_completed ?? 0)}
+                />
+                <StatCard
+                  label="Refeições (evento)"
+                  value={fmt(events.funnel.meal_logged ?? 0)}
+                  hint={`${fmt(events.funnel.meal_logged_users ?? 0)} users`}
+                />
+                <StatCard
+                  label="Snap Track"
+                  value={fmt(events.funnel.snap_track_opens ?? 0)}
+                />
+                <StatCard
+                  label="Meal → share"
+                  value={pct(events.funnel.meal_to_share_rate ?? null)}
+                />
+                <StatCard
+                  label="Paywall"
+                  value={fmt(events.funnel.paywall_shown ?? 0)}
+                />
+                <StatCard
+                  label="Premium"
+                  value={fmt(events.funnel.premium_converted ?? 0)}
+                  hint={
+                    events.funnel.paywall_convert_rate != null
+                      ? `${pct(events.funnel.paywall_convert_rate)} convert`
+                      : null
+                  }
+                />
+              </div>
+            </Section>
+
+            {events.retention_opens ? (
+              <Section
+                title="Retenção (app_open)"
+                subtitle="Voltou a abrir a app no dia N após signup (melhor proxy que só refeições)."
+              >
+                <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+                  {(
+                    [
+                      ['D1', events.retention_opens.d1],
+                      ['D7', events.retention_opens.d7],
+                      ['D30', events.retention_opens.d30],
+                    ] as const
+                  ).map(([label, bucket]) => (
+                    <div
+                      key={label}
+                      className="rounded-2xl border border-border bg-card p-4 shadow-[0_8px_24px_rgba(15,23,42,0.04)]"
+                    >
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                        Retenção {label}
+                      </p>
+                      <p className="mt-1.5 font-display text-2xl font-bold tracking-tight">
+                        {pct(bucket.rate)}
+                      </p>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {fmt(bucket.retained)} / {fmt(bucket.cohort)} utilizadores
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </Section>
+            ) : null}
 
             <Section title="Funil de partilha" subtitle="Prompt pós-refeição / exercício.">
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
@@ -1128,7 +1237,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase B · Eventos na app (`product_events`). Fase A continua a alimentar KPIs de domínio.
+          Fase C · Funil core + retenção por app_open. Fase A = domínio; Fase B = eventos base.
         </p>
       </div>
     </main>
