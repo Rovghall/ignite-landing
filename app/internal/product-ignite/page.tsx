@@ -150,6 +150,13 @@ type EngagementPayload = {
   }
   platforms: Array<{ platform: string; events: number; users: number; pct: number }>
   daily_opens: Array<{ day: string; opens: number; users: number }>
+  health?: {
+    app_errors: number
+    app_error_users: number
+    meal_analysis_failed: number
+    error_per_open: number | null
+  }
+  error_sources?: Array<{ source: string; events: number; users: number }>
 }
 
 const SOURCE_LABELS_PT: Record<string, string> = {
@@ -438,7 +445,25 @@ function buildDemoEngagement(days: WindowDays): EngagementPayload {
       { platform: 'android', events: Math.round(1600 * scale), users: Math.round(160 * scale), pct: 38 },
     ],
     daily_opens,
+    health: {
+      app_errors: Math.round(18 * scale),
+      app_error_users: Math.round(11 * scale),
+      meal_analysis_failed: Math.round(22 * scale),
+      error_per_open: 0.012,
+    },
+    error_sources: [
+      { source: 'react_boundary', events: Math.round(8 * scale), users: Math.round(5 * scale) },
+      { source: 'global_handler', events: Math.round(7 * scale), users: Math.round(4 * scale) },
+      { source: 'unknown', events: Math.round(3 * scale), users: Math.round(2 * scale) },
+    ],
   }
+}
+
+const ERROR_SOURCE_LABELS_PT: Record<string, string> = {
+  react_boundary: 'React boundary',
+  global_handler: 'Handler global',
+  unknown: 'Desconhecido',
+  '(unknown)': 'Desconhecido',
 }
 
 function SparkBars({
@@ -980,6 +1005,67 @@ export default function ProductInsightsAdminPage() {
                                   </span>
                                 </div>
                               </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
+            {engagement?.health ? (
+              <Section
+                title="Saúde / erros (Fase F)"
+                subtitle="Crashes e erros JS reportados via app_error · sem Sentry ainda."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+                  <StatCard
+                    label="App errors"
+                    value={fmt(engagement.health.app_errors)}
+                    hint={`${fmt(engagement.health.app_error_users)} users`}
+                    tone={engagement.health.app_errors > 0 ? 'down' : undefined}
+                  />
+                  <StatCard
+                    label="Errors / open"
+                    value={
+                      engagement.health.error_per_open == null
+                        ? '—'
+                        : engagement.health.error_per_open.toFixed(3)
+                    }
+                    hint="app_error ÷ app_open"
+                  />
+                  <StatCard
+                    label="Analysis fails"
+                    value={fmt(engagement.health.meal_analysis_failed)}
+                    hint="meal_analysis_failed"
+                  />
+                  <StatCard
+                    label="Fontes"
+                    value={fmt(engagement.error_sources?.length ?? 0)}
+                    hint="origens distintas"
+                  />
+                </div>
+                {(engagement.error_sources?.length ?? 0) > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[420px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Fonte</th>
+                            <th className="px-4 py-3">Eventos</th>
+                            <th className="px-4 py-3">Utilizadores</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {engagement.error_sources!.map((row) => (
+                            <tr key={row.source} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {ERROR_SOURCE_LABELS_PT[row.source] ?? row.source}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
                             </tr>
                           ))}
                         </tbody>
