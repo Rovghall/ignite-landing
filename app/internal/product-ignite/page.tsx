@@ -365,6 +365,26 @@ type ComparePayload = {
   }
 }
 
+type RetentionMatrixRow = {
+  week_start: string
+  cohort: number
+  d1_retained: number
+  d7_retained: number
+  d14_retained: number
+  d1_rate: number | null
+  d7_rate: number | null
+  d14_rate: number | null
+}
+
+type RetentionMatrixPayload = {
+  ok: boolean
+  error?: string
+  weeks: number
+  generated_at: string
+  metric?: string
+  rows: RetentionMatrixRow[]
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -897,6 +917,34 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoRetentionMatrix(): RetentionMatrixPayload {
+  const rows = Array.from({ length: 8 }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (i + 1) * 7)
+    const cohort = Math.max(20, 55 - i * 3)
+    const d1 = Math.round(cohort * (0.52 - i * 0.01))
+    const d7 = Math.round(cohort * (0.34 - i * 0.008))
+    const d14 = Math.round(cohort * (0.22 - i * 0.006))
+    return {
+      week_start: d.toISOString().slice(0, 10),
+      cohort,
+      d1_retained: d1,
+      d7_retained: d7,
+      d14_retained: d14,
+      d1_rate: Number((d1 / cohort).toFixed(3)),
+      d7_rate: Number((d7 / cohort).toFixed(3)),
+      d14_rate: i < 2 ? null : Number((d14 / cohort).toFixed(3)),
+    }
+  })
+  return {
+    ok: true,
+    weeks: 8,
+    generated_at: new Date().toISOString(),
+    metric: 'app_open',
+    rows,
+  }
+}
+
 function buildDemoCompare(days: WindowDays): ComparePayload {
   const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
   return {
@@ -1144,6 +1192,7 @@ export default function ProductInsightsAdminPage() {
   const [alerts, setAlerts] = useState<AlertsPayload | null>(null)
   const [cohorts, setCohorts] = useState<CohortsPayload | null>(null)
   const [compare, setCompare] = useState<ComparePayload | null>(null)
+  const [retentionMatrix, setRetentionMatrix] = useState<RetentionMatrixPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -1165,7 +1214,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1177,6 +1226,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_alerts', { p_days: windowDays }),
       supabase.rpc('admin_product_cohorts', { p_days: windowDays }),
       supabase.rpc('admin_product_compare', { p_days: windowDays }),
+      supabase.rpc('admin_product_retention_matrix', { p_weeks: 8 }),
     ])
     setLoading(false)
 
@@ -1193,6 +1243,7 @@ export default function ProductInsightsAdminPage() {
       setAlerts(null)
       setCohorts(null)
       setCompare(null)
+      setRetentionMatrix(null)
       return
     }
     if (fu.error) {
@@ -1208,6 +1259,7 @@ export default function ProductInsightsAdminPage() {
       setAlerts(null)
       setCohorts(null)
       setCompare(null)
+      setRetentionMatrix(null)
       return
     }
 
@@ -1230,6 +1282,7 @@ export default function ProductInsightsAdminPage() {
       setAlerts(null)
       setCohorts(null)
       setCompare(null)
+      setRetentionMatrix(null)
       return
     }
     if (!fuData?.ok) {
@@ -1249,6 +1302,7 @@ export default function ProductInsightsAdminPage() {
       setAlerts(null)
       setCohorts(null)
       setCompare(null)
+      setRetentionMatrix(null)
       return
     }
     setOverview(ovData)
@@ -1316,6 +1370,13 @@ export default function ProductInsightsAdminPage() {
       const cmpData = cmp.data as ComparePayload | null
       setCompare(cmpData?.ok ? cmpData : null)
     }
+
+    if (rm.error) {
+      setRetentionMatrix(null)
+    } else {
+      const rmData = rm.data as RetentionMatrixPayload | null
+      setRetentionMatrix(rmData?.ok ? rmData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -1336,6 +1397,7 @@ export default function ProductInsightsAdminPage() {
     setAlerts(buildDemoAlerts(windowDays))
     setCohorts(buildDemoCohorts(windowDays))
     setCompare(buildDemoCompare(windowDays))
+    setRetentionMatrix(buildDemoRetentionMatrix())
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -1361,6 +1423,7 @@ export default function ProductInsightsAdminPage() {
     setAlerts(null)
     setCohorts(null)
     setCompare(null)
+    setRetentionMatrix(null)
     setDemoMode(false)
   }
 
@@ -1379,6 +1442,7 @@ export default function ProductInsightsAdminPage() {
         setAlerts(buildDemoAlerts(windowDays))
         setCohorts(buildDemoCohorts(windowDays))
         setCompare(buildDemoCompare(windowDays))
+        setRetentionMatrix(buildDemoRetentionMatrix())
         setListError(null)
       }
       return next
@@ -1513,6 +1577,7 @@ export default function ProductInsightsAdminPage() {
                   setAlerts(buildDemoAlerts(windowDays))
                   setCohorts(buildDemoCohorts(windowDays))
                   setCompare(buildDemoCompare(windowDays))
+                  setRetentionMatrix(buildDemoRetentionMatrix())
                   return
                 }
                 void load()
@@ -1651,6 +1716,7 @@ export default function ProductInsightsAdminPage() {
                 ['alerts', 'Alertas'],
                 ['cohorts', 'Cohorts'],
                 ['compare', 'Δ período'],
+                ['retention-matrix', 'Retenção'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -2626,6 +2692,41 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {retentionMatrix ? (
+              <Section
+                title="Retenção semanal (Fase P)"
+                subtitle="Coorte por semana de signup · D1 / D7 / D14 com app_open."
+                id="retention-matrix"
+              >
+                <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[560px] border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">Semana</th>
+                          <th className="px-4 py-3">Cohort</th>
+                          <th className="px-4 py-3">D1</th>
+                          <th className="px-4 py-3">D7</th>
+                          <th className="px-4 py-3">D14</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {retentionMatrix.rows.map((row) => (
+                          <tr key={row.week_start} className="border-t border-border/70">
+                            <td className="px-4 py-3 font-semibold tabular-nums">{row.week_start}</td>
+                            <td className="px-4 py-3">{fmt(row.cohort)}</td>
+                            <td className="px-4 py-3">{pct(row.d1_rate)}</td>
+                            <td className="px-4 py-3">{pct(row.d7_rate)}</td>
+                            <td className="px-4 py-3">{pct(row.d14_rate)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </Section>
+            ) : null}
+
             {compare ? (
               <Section
                 title="Comparação (Fase N)"
@@ -3039,7 +3140,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase O · índices de performance + export CSV. A–N continuam ativos.
+          Fase P · matriz de retenção semanal. A–O continuam ativos.
         </p>
       </div>
     </main>
