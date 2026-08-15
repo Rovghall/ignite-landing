@@ -207,6 +207,30 @@ type MonetizationPayload = {
   daily: Array<{ day: string; shown: number; converted: number }>
 }
 
+type ActivationPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    signups: number
+    cohort_24h: number
+    opened_app_24h: number
+    onboarding_24h: number
+    first_meal_24h: number
+    open_rate_24h: number | null
+    onboarding_rate_24h: number | null
+    meal_rate_24h: number | null
+    cohort_7d: number
+    first_meal_7d: number
+    meal_rate_7d: number | null
+    median_hours_to_meal: number | null
+    avg_hours_to_meal: number | null
+    users_with_meal: number
+  }
+  daily: Array<{ day: string; signups: number; activated_24h: number }>
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -593,6 +617,42 @@ function buildDemoMonetization(days: WindowDays): MonetizationPayload {
   }
 }
 
+function buildDemoActivation(days: WindowDays): ActivationPayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  const daily = Array.from({ length: days }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - (days - 1 - i))
+    const signups = Math.max(2, Math.round((6 + (i % 5)) * scale))
+    return {
+      day: d.toISOString().slice(0, 10),
+      signups,
+      activated_24h: Math.max(1, Math.round(signups * 0.55)),
+    }
+  })
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      signups: Math.round(180 * scale),
+      cohort_24h: Math.round(170 * scale),
+      opened_app_24h: Math.round(150 * scale),
+      onboarding_24h: Math.round(130 * scale),
+      first_meal_24h: Math.round(95 * scale),
+      open_rate_24h: 0.882,
+      onboarding_rate_24h: 0.765,
+      meal_rate_24h: 0.559,
+      cohort_7d: Math.round(140 * scale),
+      first_meal_7d: Math.round(105 * scale),
+      meal_rate_7d: 0.75,
+      median_hours_to_meal: 4.2,
+      avg_hours_to_meal: 11.5,
+      users_with_meal: Math.round(120 * scale),
+    },
+    daily,
+  }
+}
+
 const ERROR_SOURCE_LABELS_PT: Record<string, string> = {
   react_boundary: 'React boundary',
   global_handler: 'Handler global',
@@ -717,6 +777,7 @@ export default function ProductInsightsAdminPage() {
   const [events, setEvents] = useState<EventsPayload | null>(null)
   const [engagement, setEngagement] = useState<EngagementPayload | null>(null)
   const [monetization, setMonetization] = useState<MonetizationPayload | null>(null)
+  const [activation, setActivation] = useState<ActivationPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -738,12 +799,13 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
       supabase.rpc('admin_product_engagement', { p_days: windowDays }),
       supabase.rpc('admin_product_monetization', { p_days: windowDays }),
+      supabase.rpc('admin_product_activation', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -754,6 +816,7 @@ export default function ProductInsightsAdminPage() {
       setEvents(null)
       setEngagement(null)
       setMonetization(null)
+      setActivation(null)
       return
     }
     if (fu.error) {
@@ -763,6 +826,7 @@ export default function ProductInsightsAdminPage() {
       setEvents(null)
       setEngagement(null)
       setMonetization(null)
+      setActivation(null)
       return
     }
 
@@ -779,6 +843,7 @@ export default function ProductInsightsAdminPage() {
       setEvents(null)
       setEngagement(null)
       setMonetization(null)
+      setActivation(null)
       return
     }
     if (!fuData?.ok) {
@@ -792,6 +857,7 @@ export default function ProductInsightsAdminPage() {
       setEvents(null)
       setEngagement(null)
       setMonetization(null)
+      setActivation(null)
       return
     }
     setOverview(ovData)
@@ -817,6 +883,13 @@ export default function ProductInsightsAdminPage() {
       const moData = mo.data as MonetizationPayload | null
       setMonetization(moData?.ok ? moData : null)
     }
+
+    if (ac.error) {
+      setActivation(null)
+    } else {
+      const acData = ac.data as ActivationPayload | null
+      setActivation(acData?.ok ? acData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -831,6 +904,7 @@ export default function ProductInsightsAdminPage() {
     setEvents(buildDemoEvents(windowDays))
     setEngagement(buildDemoEngagement(windowDays))
     setMonetization(buildDemoMonetization(windowDays))
+    setActivation(buildDemoActivation(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -850,6 +924,7 @@ export default function ProductInsightsAdminPage() {
     setEvents(null)
     setEngagement(null)
     setMonetization(null)
+    setActivation(null)
     setDemoMode(false)
   }
 
@@ -862,6 +937,7 @@ export default function ProductInsightsAdminPage() {
         setEvents(buildDemoEvents(windowDays))
         setEngagement(buildDemoEngagement(windowDays))
         setMonetization(buildDemoMonetization(windowDays))
+        setActivation(buildDemoActivation(windowDays))
         setListError(null)
       }
       return next
@@ -990,6 +1066,7 @@ export default function ProductInsightsAdminPage() {
                   setEvents(buildDemoEvents(windowDays))
                   setEngagement(buildDemoEngagement(windowDays))
                   setMonetization(buildDemoMonetization(windowDays))
+                  setActivation(buildDemoActivation(windowDays))
                   return
                 }
                 void load()
@@ -1776,6 +1853,71 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {activation ? (
+              <Section
+                title="Ativação (Fase I)"
+                subtitle="Signup → app_open / onboarding / 1ª refeição em 24h e 7d (coortes elegíveis)."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Signups"
+                    value={fmt(activation.summary.signups)}
+                    hint="auth.users"
+                  />
+                  <StatCard
+                    label="Open 24h"
+                    value={pct(activation.summary.open_rate_24h)}
+                    hint={`${fmt(activation.summary.opened_app_24h)} / ${fmt(activation.summary.cohort_24h)}`}
+                  />
+                  <StatCard
+                    label="Onboarding 24h"
+                    value={pct(activation.summary.onboarding_rate_24h)}
+                    hint={`${fmt(activation.summary.onboarding_24h)} users`}
+                  />
+                  <StatCard
+                    label="Meal 24h"
+                    value={pct(activation.summary.meal_rate_24h)}
+                    hint={`${fmt(activation.summary.first_meal_24h)} users`}
+                    tone="up"
+                  />
+                  <StatCard
+                    label="Meal 7d"
+                    value={pct(activation.summary.meal_rate_7d)}
+                    hint={`${fmt(activation.summary.first_meal_7d)} / ${fmt(activation.summary.cohort_7d)}`}
+                  />
+                  <StatCard
+                    label="Mediana → meal"
+                    value={
+                      activation.summary.median_hours_to_meal == null
+                        ? '—'
+                        : `${activation.summary.median_hours_to_meal}h`
+                    }
+                    hint={
+                      activation.summary.avg_hours_to_meal == null
+                        ? null
+                        : `média ${activation.summary.avg_hours_to_meal}h`
+                    }
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Signups / dia
+                  </p>
+                  <SparkBars
+                    label="Signups por dia"
+                    values={activation.daily.map((d) => d.signups)}
+                  />
+                  <p className="mb-3 mt-4 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Ativados em 24h / dia de signup
+                  </p>
+                  <SparkBars
+                    label="Ativados 24h por dia"
+                    values={activation.daily.map((d) => d.activated_24h)}
+                  />
+                </div>
+              </Section>
+            ) : null}
+
             {events.retention_opens ? (
               <Section
                 title="Retenção (app_open)"
@@ -1957,7 +2099,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase H · monetização paywall → premium. A–G continuam ativos.
+          Fase I · ativação signup → 1ª refeição. A–H continuam ativos.
         </p>
       </div>
     </main>
