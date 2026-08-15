@@ -157,6 +157,18 @@ type EngagementPayload = {
     error_per_open: number | null
   }
   error_sources?: Array<{ source: string; events: number; users: number }>
+  quality?: {
+    dau_mau: number | null
+    wau_mau: number | null
+  }
+  versions?: Array<{
+    version: string
+    events: number
+    users: number
+    errors: number
+    pct: number
+  }>
+  top_errors?: Array<{ message: string; events: number; users: number }>
 }
 
 const SOURCE_LABELS_PT: Record<string, string> = {
@@ -455,6 +467,20 @@ function buildDemoEngagement(days: WindowDays): EngagementPayload {
       { source: 'react_boundary', events: Math.round(8 * scale), users: Math.round(5 * scale) },
       { source: 'global_handler', events: Math.round(7 * scale), users: Math.round(4 * scale) },
       { source: 'unknown', events: Math.round(3 * scale), users: Math.round(2 * scale) },
+    ],
+    quality: {
+      dau_mau: 0.076,
+      wau_mau: 0.31,
+    },
+    versions: [
+      { version: '1.4.2', events: Math.round(2800 * scale), users: Math.round(260 * scale), errors: Math.round(6 * scale), pct: 67 },
+      { version: '1.4.1', events: Math.round(900 * scale), users: Math.round(90 * scale), errors: Math.round(9 * scale), pct: 22 },
+      { version: '1.3.9', events: Math.round(450 * scale), users: Math.round(40 * scale), errors: Math.round(3 * scale), pct: 11 },
+    ],
+    top_errors: [
+      { message: 'Network request failed', events: Math.round(7 * scale), users: Math.round(5 * scale) },
+      { message: 'Cannot read property of undefined', events: Math.round(4 * scale), users: Math.round(3 * scale) },
+      { message: 'JSON Parse error', events: Math.round(3 * scale), users: Math.round(2 * scale) },
     ],
   }
 }
@@ -1076,6 +1102,107 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {engagement?.quality || (engagement?.versions && engagement.versions.length > 0) ? (
+              <Section
+                title="Qualidade / releases (Fase G)"
+                subtitle="Stickiness (DAU÷MAU), distribuição por app_version e top mensagens de erro."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
+                  <StatCard
+                    label="DAU / MAU"
+                    value={
+                      engagement.quality?.dau_mau == null
+                        ? '—'
+                        : `${(engagement.quality.dau_mau * 100).toFixed(1)}%`
+                    }
+                    hint="Stickiness diária"
+                  />
+                  <StatCard
+                    label="WAU / MAU"
+                    value={
+                      engagement.quality?.wau_mau == null
+                        ? '—'
+                        : `${(engagement.quality.wau_mau * 100).toFixed(1)}%`
+                    }
+                    hint="Stickiness semanal"
+                  />
+                  <StatCard
+                    label="Versões"
+                    value={fmt(engagement.versions?.length ?? 0)}
+                    hint="app_version distintas"
+                  />
+                  <StatCard
+                    label="Top erros"
+                    value={fmt(engagement.top_errors?.length ?? 0)}
+                    hint="mensagens distintas"
+                  />
+                </div>
+                {(engagement.versions?.length ?? 0) > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[480px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Versão</th>
+                            <th className="px-4 py-3">Eventos</th>
+                            <th className="px-4 py-3">Users</th>
+                            <th className="px-4 py-3">Erros</th>
+                            <th className="px-4 py-3">%</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {engagement.versions!.map((row) => (
+                            <tr key={row.version} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold tabular-nums">{row.version}</td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                              <td className="px-4 py-3">{fmt(row.errors)}</td>
+                              <td className="px-4 py-3">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-24">
+                                    <UsageBar pctValue={row.pct} />
+                                  </div>
+                                  <span className="tabular-nums text-muted-foreground">
+                                    {row.pct.toFixed(1)}%
+                                  </span>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+                {(engagement.top_errors?.length ?? 0) > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[480px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Mensagem</th>
+                            <th className="px-4 py-3">Eventos</th>
+                            <th className="px-4 py-3">Users</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {engagement.top_errors!.map((row) => (
+                            <tr key={row.message} className="border-t border-border/70">
+                              <td className="max-w-[420px] truncate px-4 py-3 font-medium" title={row.message}>
+                                {row.message}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.events)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
             <Section
               title="Atividade"
               subtitle="Utilizadores ativos e refeições por dia (nutrition_logs)."
@@ -1547,7 +1674,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase E · DAU por app_open + plataformas. A–D continuam ativos.
+          Fase G · stickiness, versões e top erros. A–F continuam ativos.
         </p>
       </div>
     </main>
