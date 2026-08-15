@@ -426,6 +426,31 @@ type SnapFunnelDaily = { day: string; opens: number; fails: number; meals: numbe
 type SnapFunnelSource = { source: string; meals: number; users: number }
 type SnapFunnelFail = { source: string; events: number; users: number }
 
+type DaypartCell = { dow: number; hour: number; opens: number; meals: number }
+type DaypartHour = { hour: number; opens: number; meals: number }
+type DaypartDow = { dow: number; opens: number; meals: number }
+
+type DaypartPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  timezone: string
+  summary: {
+    peak_open_dow: number | null
+    peak_open_hour: number | null
+    peak_opens: number
+    peak_meal_dow: number | null
+    peak_meal_hour: number | null
+    peak_meals: number
+    total_opens: number
+    total_meals: number
+  }
+  by_hour: DaypartHour[]
+  by_dow: DaypartDow[]
+  heatmap: DaypartCell[]
+}
+
 type SnapFunnelPayload = {
   ok: boolean
   error?: string
@@ -575,6 +600,15 @@ function labelFamily(key: string, fallback: string): string {
 
 function labelFeature(key: string, fallback: string): string {
   return FEATURE_LABELS_PT[key] ?? fallback
+}
+
+function dowLabelPt(dow: number): string {
+  const labels = ['', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom']
+  return labels[dow] ?? String(dow)
+}
+
+function hourLabel(hour: number): string {
+  return `${String(hour).padStart(2, '0')}h`
 }
 
 function pct(rate: number | null | undefined): string {
@@ -1025,6 +1059,58 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
       { reason: 'early', events: Math.round(24 * scale), users: Math.round(20 * scale) },
     ],
     daily_quick_log,
+  }
+}
+
+function buildDemoDaypart(days: WindowDays): DaypartPayload {
+  const by_hour: DaypartHour[] = Array.from({ length: 24 }, (_, hour) => {
+    const wave = hour >= 7 && hour <= 22 ? Math.sin(((hour - 7) / 15) * Math.PI) : 0.05
+    const opens = Math.round((8 + wave * 40) * (days / 30))
+    const meals = Math.round(opens * (hour >= 12 && hour <= 14 ? 1.4 : 0.7))
+    return { hour, opens, meals }
+  })
+  const by_dow: DaypartDow[] = Array.from({ length: 7 }, (_, i) => {
+    const dow = i + 1
+    const mul = dow >= 6 ? 0.75 : 1
+    return {
+      dow,
+      opens: Math.round(by_hour.reduce((a, h) => a + h.opens, 0) / 7 * mul),
+      meals: Math.round(by_hour.reduce((a, h) => a + h.meals, 0) / 7 * mul),
+    }
+  })
+  const heatmap: DaypartCell[] = []
+  for (let dow = 1; dow <= 7; dow++) {
+    for (let hour = 0; hour < 24; hour++) {
+      const base = by_hour[hour]
+      const mul = dow >= 6 ? 0.7 : 1
+      heatmap.push({
+        dow,
+        hour,
+        opens: Math.max(0, Math.round(base.opens * mul * (0.7 + ((dow + hour) % 5) * 0.08))),
+        meals: Math.max(0, Math.round(base.meals * mul * (0.7 + ((dow * 2 + hour) % 4) * 0.1))),
+      })
+    }
+  }
+  const peakOpen = [...heatmap].sort((a, b) => b.opens - a.opens)[0]
+  const peakMeal = [...heatmap].sort((a, b) => b.meals - a.meals)[0]
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    timezone: 'Europe/Lisbon',
+    summary: {
+      peak_open_dow: peakOpen.dow,
+      peak_open_hour: peakOpen.hour,
+      peak_opens: peakOpen.opens,
+      peak_meal_dow: peakMeal.dow,
+      peak_meal_hour: peakMeal.hour,
+      peak_meals: peakMeal.meals,
+      total_opens: by_hour.reduce((a, h) => a + h.opens, 0),
+      total_meals: by_hour.reduce((a, h) => a + h.meals, 0),
+    },
+    by_hour,
+    by_dow,
+    heatmap,
   }
 }
 
@@ -1481,6 +1567,7 @@ export default function ProductInsightsAdminPage() {
   const [timeToConvert, setTimeToConvert] = useState<TimeToConvertPayload | null>(null)
   const [intensity, setIntensity] = useState<IntensityPayload | null>(null)
   const [snapFunnel, setSnapFunnel] = useState<SnapFunnelPayload | null>(null)
+  const [daypart, setDaypart] = useState<DaypartPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -1503,7 +1590,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it, sf, dp] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1521,6 +1608,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_time_to_convert', { p_days: windowDays }),
       supabase.rpc('admin_product_intensity', { p_days: windowDays }),
       supabase.rpc('admin_product_snap_funnel', { p_days: windowDays }),
+      supabase.rpc('admin_product_daypart', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1543,6 +1631,7 @@ export default function ProductInsightsAdminPage() {
       setTimeToConvert(null)
       setIntensity(null)
       setSnapFunnel(null)
+      setDaypart(null)
       return
     }
     if (fu.error) {
@@ -1564,6 +1653,7 @@ export default function ProductInsightsAdminPage() {
       setTimeToConvert(null)
       setIntensity(null)
       setSnapFunnel(null)
+      setDaypart(null)
       return
     }
 
@@ -1592,6 +1682,7 @@ export default function ProductInsightsAdminPage() {
       setTimeToConvert(null)
       setIntensity(null)
       setSnapFunnel(null)
+      setDaypart(null)
       return
     }
     if (!fuData?.ok) {
@@ -1617,6 +1708,7 @@ export default function ProductInsightsAdminPage() {
       setTimeToConvert(null)
       setIntensity(null)
       setSnapFunnel(null)
+      setDaypart(null)
       return
     }
     setOverview(ovData)
@@ -1727,6 +1819,13 @@ export default function ProductInsightsAdminPage() {
       setSnapFunnel(sfData?.ok ? sfData : null)
     }
 
+    if (dp.error) {
+      setDaypart(null)
+    } else {
+      const dpData = dp.data as DaypartPayload | null
+      setDaypart(dpData?.ok ? dpData : null)
+    }
+
     setLastUpdatedAt(new Date().toISOString())
   }, [supabase, demoMode, windowDays])
 
@@ -1762,6 +1861,7 @@ export default function ProductInsightsAdminPage() {
     setTimeToConvert(buildDemoTimeToConvert(windowDays))
     setIntensity(buildDemoIntensity(windowDays))
     setSnapFunnel(buildDemoSnapFunnel(windowDays))
+    setDaypart(buildDemoDaypart(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -1794,6 +1894,7 @@ export default function ProductInsightsAdminPage() {
     setTimeToConvert(null)
       setIntensity(null)
       setSnapFunnel(null)
+      setDaypart(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -1819,6 +1920,7 @@ export default function ProductInsightsAdminPage() {
         setTimeToConvert(buildDemoTimeToConvert(windowDays))
     setIntensity(buildDemoIntensity(windowDays))
     setSnapFunnel(buildDemoSnapFunnel(windowDays))
+    setDaypart(buildDemoDaypart(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -1960,6 +2062,7 @@ export default function ProductInsightsAdminPage() {
                   setTimeToConvert(buildDemoTimeToConvert(windowDays))
     setIntensity(buildDemoIntensity(windowDays))
     setSnapFunnel(buildDemoSnapFunnel(windowDays))
+    setDaypart(buildDemoDaypart(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -2115,6 +2218,7 @@ export default function ProductInsightsAdminPage() {
                 ['ttc', 'Time-to-pay'],
                 ['intensity', 'Intensidade'],
                 ['snap', 'Snap Track'],
+                ['daypart', 'Horários'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -3235,6 +3339,126 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {daypart ? (
+              <Section
+                id="daypart"
+                title="Horários (Fase V)"
+                subtitle={`Quando a app é aberta e quando se registam refeições (${daypart.timezone}).`}
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Peak open"
+                    value={
+                      daypart.summary.peak_open_hour != null &&
+                      daypart.summary.peak_open_dow != null
+                        ? `${dowLabelPt(daypart.summary.peak_open_dow)} ${hourLabel(daypart.summary.peak_open_hour)}`
+                        : '—'
+                    }
+                    hint={`${fmt(daypart.summary.peak_opens)} opens`}
+                  />
+                  <StatCard
+                    label="Peak meal"
+                    value={
+                      daypart.summary.peak_meal_hour != null &&
+                      daypart.summary.peak_meal_dow != null
+                        ? `${dowLabelPt(daypart.summary.peak_meal_dow)} ${hourLabel(daypart.summary.peak_meal_hour)}`
+                        : '—'
+                    }
+                    hint={`${fmt(daypart.summary.peak_meals)} meals`}
+                  />
+                  <StatCard label="Opens" value={fmt(daypart.summary.total_opens)} />
+                  <StatCard label="Meals" value={fmt(daypart.summary.total_meals)} />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Opens por hora
+                  </p>
+                  <SparkBars
+                    label="Opens por hora"
+                    values={daypart.by_hour.map((h) => h.opens)}
+                  />
+                  <p className="mb-3 mt-4 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Meals por hora
+                  </p>
+                  <SparkBars
+                    label="Meals por hora"
+                    values={daypart.by_hour.map((h) => h.meals)}
+                  />
+                </div>
+                <div className="mt-3 overflow-x-auto rounded-2xl border border-border bg-card p-4 shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.06em] text-muted-foreground">
+                    Heatmap opens (dia × hora)
+                  </p>
+                  {(() => {
+                    const max = Math.max(1, ...daypart.heatmap.map((c) => c.opens))
+                    const cell = (dow: number, hour: number) =>
+                      daypart.heatmap.find((c) => c.dow === dow && c.hour === hour)?.opens ?? 0
+                    return (
+                      <div className="min-w-[720px]">
+                        <div className="mb-1 grid grid-cols-[52px_repeat(24,minmax(0,1fr))] gap-0.5 text-[9px] text-muted-foreground">
+                          <span />
+                          {Array.from({ length: 24 }, (_, h) => (
+                            <span key={h} className="text-center">
+                              {h % 3 === 0 ? h : ''}
+                            </span>
+                          ))}
+                        </div>
+                        {Array.from({ length: 7 }, (_, i) => {
+                          const dow = i + 1
+                          return (
+                            <div
+                              key={dow}
+                              className="mb-0.5 grid grid-cols-[52px_repeat(24,minmax(0,1fr))] gap-0.5"
+                            >
+                              <span className="flex items-center text-[11px] font-semibold text-muted-foreground">
+                                {dowLabelPt(dow)}
+                              </span>
+                              {Array.from({ length: 24 }, (_, hour) => {
+                                const v = cell(dow, hour)
+                                const t = v / max
+                                return (
+                                  <div
+                                    key={hour}
+                                    title={`${dowLabelPt(dow)} ${hourLabel(hour)}: ${v} opens`}
+                                    className="h-4 rounded-[2px]"
+                                    style={{
+                                      backgroundColor: `rgba(15, 23, 42, ${0.06 + t * 0.72})`,
+                                    }}
+                                  />
+                                )
+                              })}
+                            </div>
+                          )
+                        })}
+                      </div>
+                    )
+                  })()}
+                </div>
+                {daypart.by_dow.length > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <table className="w-full border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">Dia</th>
+                          <th className="px-4 py-3">Opens</th>
+                          <th className="px-4 py-3">Meals</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {daypart.by_dow.map((row) => (
+                          <tr key={row.dow} className="border-t border-border/70">
+                            <td className="px-4 py-3 font-semibold">{dowLabelPt(row.dow)}</td>
+                            <td className="px-4 py-3">{fmt(row.opens)}</td>
+                            <td className="px-4 py-3">{fmt(row.meals)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -3974,7 +4198,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase U · funil Snap Track. A–T continuam ativos.
+          Fase V · horários (heatmap). A–U continuam ativos.
         </p>
       </div>
     </main>
