@@ -464,6 +464,24 @@ function deltaPct(current: number, previous: number): string | null {
   return `${sign}${d.toFixed(0)}%`
 }
 
+function csvEscape(value: string | number | null | undefined): string {
+  if (value == null) return ''
+  const s = String(value)
+  if (/[",\n]/.test(s)) return `"${s.replace(/"/g, '""')}"`
+  return s
+}
+
+function downloadCsv(filename: string, rows: Array<Array<string | number | null | undefined>>) {
+  const body = rows.map((r) => r.map(csvEscape).join(',')).join('\n')
+  const blob = new Blob([`\uFEFF${body}`], { type: 'text/csv;charset=utf-8' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
 function buildDemoOverview(days: WindowDays): OverviewPayload {
   const daily = Array.from({ length: days }, (_, i) => {
     const d = new Date()
@@ -1502,6 +1520,80 @@ export default function ProductInsightsAdminPage() {
               className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
             >
               Atualizar
+            </button>
+            <button
+              type="button"
+              disabled={!overview && !compare && !events}
+              onClick={() => {
+                const day = new Date().toISOString().slice(0, 10)
+                const rows: Array<Array<string | number | null | undefined>> = [
+                  ['section', 'metric', 'value', 'hint'],
+                  ['meta', 'window_days', windowDays, demoMode ? 'demo' : 'live'],
+                  ['meta', 'exported_at', new Date().toISOString(), null],
+                ]
+                if (overview) {
+                  rows.push(
+                    ['kpi', 'dau', overview.users.dau, 'meals'],
+                    ['kpi', 'wau', overview.users.wau, null],
+                    ['kpi', 'mau', overview.users.mau, null],
+                    ['kpi', 'signups', overview.users.signups_window, null],
+                    ['kpi', 'premium_active', overview.users.premium_active, null],
+                    ['kpi', 'meals', overview.meals.logs_window, null],
+                  )
+                }
+                if (engagement?.opens) {
+                  rows.push(
+                    ['engagement', 'dau_opens', engagement.opens.dau, 'app_open'],
+                    ['engagement', 'wau_opens', engagement.opens.wau, null],
+                    ['engagement', 'mau_opens', engagement.opens.mau, null],
+                  )
+                }
+                if (compare) {
+                  ;(
+                    [
+                      ['signups', compare.current.signups, compare.delta_pct.signups],
+                      ['meals', compare.current.meals, compare.delta_pct.meals],
+                      ['opens', compare.current.opens, compare.delta_pct.opens],
+                      ['premium', compare.current.premium, compare.delta_pct.premium],
+                      ['referrals', compare.current.referrals, compare.delta_pct.referrals],
+                      ['errors', compare.current.errors, compare.delta_pct.errors],
+                    ] as const
+                  ).forEach(([k, v, d]) => {
+                    rows.push(['compare', k, v, d == null ? null : `${d}%`])
+                  })
+                }
+                if (monetization?.summary) {
+                  rows.push(
+                    ['monetization', 'paywall_shown', monetization.summary.paywall_shown, null],
+                    ['monetization', 'premium_converted', monetization.summary.premium_converted, null],
+                    ['monetization', 'convert_rate', monetization.summary.convert_rate, null],
+                  )
+                }
+                if (activation?.summary) {
+                  rows.push(
+                    ['activation', 'meal_rate_24h', activation.summary.meal_rate_24h, null],
+                    ['activation', 'meal_rate_7d', activation.summary.meal_rate_7d, null],
+                  )
+                }
+                if (events?.by_name?.length) {
+                  events.by_name.forEach((r) => {
+                    rows.push(['events', r.name, r.events, `${r.users} users`])
+                  })
+                }
+                if (cohorts?.cohorts?.length) {
+                  cohorts.cohorts.forEach((r) => {
+                    rows.push(
+                      ['cohorts', `${r.cohort}_users`, r.users, null],
+                      ['cohorts', `${r.cohort}_meal_rate_24h`, r.meal_rate_24h, null],
+                      ['cohorts', `${r.cohort}_premium_rate_7d`, r.premium_rate_7d, null],
+                    )
+                  })
+                }
+                downloadCsv(`ignite-product-${windowDays}d-${day}.csv`, rows)
+              }}
+              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold disabled:opacity-40"
+            >
+              Export CSV
             </button>
             {session && user ? (
               <button
@@ -2947,7 +3039,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase N · comparação vs período anterior. A–M continuam ativos.
+          Fase O · índices de performance + export CSV. A–N continuam ativos.
         </p>
       </div>
     </main>
