@@ -285,6 +285,29 @@ type SurfacesPayload = {
   daily_quick_log: Array<{ day: string; opens: number; actions: number }>
 }
 
+type AlertItem = {
+  severity: 'high' | 'medium' | 'low' | 'ok'
+  code: string
+  title: string
+  detail: string
+}
+
+type AlertsPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  alerts: AlertItem[]
+  signals?: {
+    error_per_open: number | null
+    meal_rate_24h: number | null
+    paywall_convert_rate: number | null
+    referral_share: number | null
+    app_errors: number
+    signups: number
+  }
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -799,6 +822,37 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoAlerts(days: WindowDays): AlertsPayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    alerts: [
+      {
+        severity: 'medium',
+        code: 'error_rate_watch',
+        title: 'Erros a vigiar',
+        detail: 'app_error / app_open = 0.024',
+      },
+      {
+        severity: 'ok',
+        code: 'activation_ok_demo',
+        title: 'Ativação ok (demo)',
+        detail: `Meal 24h ~55% · ${Math.round(170 * scale)} cohort`,
+      },
+    ],
+    signals: {
+      error_per_open: 0.024,
+      meal_rate_24h: 0.559,
+      paywall_convert_rate: 0.189,
+      referral_share: 0.211,
+      app_errors: Math.round(18 * scale),
+      signups: Math.round(180 * scale),
+    },
+  }
+}
+
 const ERROR_SOURCE_LABELS_PT: Record<string, string> = {
   react_boundary: 'React boundary',
   global_handler: 'Handler global',
@@ -928,6 +982,7 @@ export default function ProductInsightsAdminPage() {
   const [activation, setActivation] = useState<ActivationPayload | null>(null)
   const [growth, setGrowth] = useState<GrowthPayload | null>(null)
   const [surfaces, setSurfaces] = useState<SurfacesPayload | null>(null)
+  const [alerts, setAlerts] = useState<AlertsPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -949,7 +1004,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -958,6 +1013,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_activation', { p_days: windowDays }),
       supabase.rpc('admin_product_growth', { p_days: windowDays }),
       supabase.rpc('admin_product_surfaces', { p_days: windowDays }),
+      supabase.rpc('admin_product_alerts', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -971,6 +1027,7 @@ export default function ProductInsightsAdminPage() {
       setActivation(null)
       setGrowth(null)
       setSurfaces(null)
+      setAlerts(null)
       return
     }
     if (fu.error) {
@@ -983,6 +1040,7 @@ export default function ProductInsightsAdminPage() {
       setActivation(null)
       setGrowth(null)
       setSurfaces(null)
+      setAlerts(null)
       return
     }
 
@@ -1002,6 +1060,7 @@ export default function ProductInsightsAdminPage() {
       setActivation(null)
       setGrowth(null)
       setSurfaces(null)
+      setAlerts(null)
       return
     }
     if (!fuData?.ok) {
@@ -1018,6 +1077,7 @@ export default function ProductInsightsAdminPage() {
       setActivation(null)
       setGrowth(null)
       setSurfaces(null)
+      setAlerts(null)
       return
     }
     setOverview(ovData)
@@ -1064,6 +1124,13 @@ export default function ProductInsightsAdminPage() {
       const suData = su.data as SurfacesPayload | null
       setSurfaces(suData?.ok ? suData : null)
     }
+
+    if (al.error) {
+      setAlerts(null)
+    } else {
+      const alData = al.data as AlertsPayload | null
+      setAlerts(alData?.ok ? alData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -1081,6 +1148,7 @@ export default function ProductInsightsAdminPage() {
     setActivation(buildDemoActivation(windowDays))
     setGrowth(buildDemoGrowth(windowDays))
     setSurfaces(buildDemoSurfaces(windowDays))
+    setAlerts(buildDemoAlerts(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -1103,6 +1171,7 @@ export default function ProductInsightsAdminPage() {
     setActivation(null)
     setGrowth(null)
     setSurfaces(null)
+    setAlerts(null)
     setDemoMode(false)
   }
 
@@ -1118,6 +1187,7 @@ export default function ProductInsightsAdminPage() {
         setActivation(buildDemoActivation(windowDays))
         setGrowth(buildDemoGrowth(windowDays))
         setSurfaces(buildDemoSurfaces(windowDays))
+        setAlerts(buildDemoAlerts(windowDays))
         setListError(null)
       }
       return next
@@ -1249,6 +1319,7 @@ export default function ProductInsightsAdminPage() {
                   setActivation(buildDemoActivation(windowDays))
                   setGrowth(buildDemoGrowth(windowDays))
                   setSurfaces(buildDemoSurfaces(windowDays))
+                  setAlerts(buildDemoAlerts(windowDays))
                   return
                 }
                 void load()
@@ -1310,6 +1381,7 @@ export default function ProductInsightsAdminPage() {
                 ['activation', 'Ativação'],
                 ['growth', 'Growth'],
                 ['surfaces', 'Surfaces'],
+                ['alerts', 'Alertas'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -1322,6 +1394,31 @@ export default function ProductInsightsAdminPage() {
             ))}
           </div>
         </nav>
+
+        {alerts?.alerts?.length ? (
+          <div id="alerts" className="mb-5 scroll-mt-24 space-y-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+              Alertas (Fase L)
+            </p>
+            {alerts.alerts.map((a) => (
+              <div
+                key={a.code}
+                className={
+                  a.severity === 'high'
+                    ? 'rounded-2xl border border-red-200 bg-red-50 px-4 py-3'
+                    : a.severity === 'medium'
+                      ? 'rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3'
+                      : a.severity === 'ok'
+                        ? 'rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3'
+                        : 'rounded-2xl border border-border bg-card px-4 py-3'
+                }
+              >
+                <p className="text-sm font-bold text-foreground">{a.title}</p>
+                <p className="mt-0.5 text-sm text-muted-foreground">{a.detail}</p>
+              </div>
+            ))}
+          </div>
+        ) : null}
 
         {listError && !demoMode ? (
           <p className="mb-4 text-sm font-semibold text-red-600">{listError}</p>
@@ -2575,7 +2672,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase K · Quick Log surfaces + nav. A–J continuam ativos.
+          Fase L · alertas de atenção. A–K continuam ativos.
         </p>
       </div>
     </main>
