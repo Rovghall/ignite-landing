@@ -538,6 +538,35 @@ type AiFunnelPayload = {
   daily: AiFunnelDaily[]
 }
 
+type DemographicsBucket = {
+  key: string
+  users: number
+  premium_users: number
+  converted_users: number
+  premium_rate: number | null
+  convert_rate_window: number | null
+  share: number | null
+}
+
+type DemographicsPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  note?: string
+  summary: {
+    openers: number
+    with_gender: number
+    with_age: number
+    premium_active: number
+    converted_window: number
+    premium_rate: number | null
+    convert_rate_window: number | null
+  }
+  by_gender: DemographicsBucket[]
+  by_age: DemographicsBucket[]
+}
+
 type BundlePayload = {
   ok: boolean
   error?: string
@@ -552,6 +581,7 @@ type BundlePayload = {
   new_returning: NewReturningPayload | null
   fasting: FastingPayload | null
   ai_funnel: AiFunnelPayload | null
+  demographics: DemographicsPayload | null
 }
 
 type DaypartPayload = {
@@ -733,6 +763,27 @@ function dowLabelPt(dow: number): string {
 
 function hourLabel(hour: number): string {
   return `${String(hour).padStart(2, '0')}h`
+}
+
+function genderLabelPt(key: string): string {
+  if (key === 'male') return 'Homem'
+  if (key === 'female') return 'Mulher'
+  if (key === 'other') return 'Outro'
+  if (key === 'unknown') return 'Desconhecido'
+  return key
+}
+
+function ageBandLabelPt(key: string): string {
+  const map: Record<string, string> = {
+    under_18: '< 18',
+    '18_24': '18–24',
+    '25_34': '25–34',
+    '35_44': '35–44',
+    '45_54': '45–54',
+    '55_plus': '55+',
+    unknown: 'Desconhecido',
+  }
+  return map[key] ?? key
 }
 
 function pct(rate: number | null | undefined): string {
@@ -1183,6 +1234,58 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
       { reason: 'early', events: Math.round(24 * scale), users: Math.round(20 * scale) },
     ],
     daily_quick_log,
+  }
+}
+
+function buildDemoDemographics(days: WindowDays): DemographicsPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
+  const openers = Math.round(520 * scale)
+  const mk = (
+    key: string,
+    share: number,
+    premiumRate: number,
+    convertRate: number,
+  ): DemographicsBucket => {
+    const users = Math.round(openers * share)
+    return {
+      key,
+      users,
+      premium_users: Math.round(users * premiumRate),
+      converted_users: Math.round(users * convertRate),
+      premium_rate: premiumRate,
+      convert_rate_window: convertRate,
+      share,
+    }
+  }
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    note: 'Demo — país não está no perfil.',
+    summary: {
+      openers,
+      with_gender: Math.round(openers * 0.86),
+      with_age: Math.round(openers * 0.81),
+      premium_active: Math.round(openers * 0.18),
+      converted_window: Math.round(openers * 0.06),
+      premium_rate: 0.18,
+      convert_rate_window: 0.06,
+    },
+    by_gender: [
+      mk('male', 0.48, 0.16, 0.05),
+      mk('female', 0.36, 0.22, 0.08),
+      mk('other', 0.02, 0.15, 0.04),
+      mk('unknown', 0.14, 0.12, 0.03),
+    ],
+    by_age: [
+      mk('under_18', 0.04, 0.08, 0.02),
+      mk('18_24', 0.22, 0.14, 0.05),
+      mk('25_34', 0.34, 0.21, 0.08),
+      mk('35_44', 0.18, 0.2, 0.07),
+      mk('45_54', 0.08, 0.17, 0.05),
+      mk('55_plus', 0.03, 0.15, 0.04),
+      mk('unknown', 0.11, 0.1, 0.03),
+    ],
   }
 }
 
@@ -1841,6 +1944,7 @@ export default function ProductInsightsAdminPage() {
   const [newReturning, setNewReturning] = useState<NewReturningPayload | null>(null)
   const [fasting, setFasting] = useState<FastingPayload | null>(null)
   const [aiFunnel, setAiFunnel] = useState<AiFunnelPayload | null>(null)
+  const [demographics, setDemographics] = useState<DemographicsPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -1905,6 +2009,7 @@ export default function ProductInsightsAdminPage() {
       setNewReturning(null)
       setFasting(null)
       setAiFunnel(null)
+      setDemographics(null)
       return
     }
     if (fu.error) {
@@ -1931,6 +2036,7 @@ export default function ProductInsightsAdminPage() {
       setNewReturning(null)
       setFasting(null)
       setAiFunnel(null)
+      setDemographics(null)
       return
     }
 
@@ -1964,6 +2070,7 @@ export default function ProductInsightsAdminPage() {
       setNewReturning(null)
       setFasting(null)
       setAiFunnel(null)
+      setDemographics(null)
       return
     }
     if (!fuData?.ok) {
@@ -1994,6 +2101,7 @@ export default function ProductInsightsAdminPage() {
       setNewReturning(null)
       setFasting(null)
       setAiFunnel(null)
+      setDemographics(null)
       return
     }
     setOverview(ovData)
@@ -2086,6 +2194,7 @@ export default function ProductInsightsAdminPage() {
       setNewReturning(null)
       setFasting(null)
       setAiFunnel(null)
+      setDemographics(null)
     } else {
       const bunData = bun.data as BundlePayload | null
       if (!bunData?.ok) {
@@ -2098,6 +2207,7 @@ export default function ProductInsightsAdminPage() {
         setNewReturning(null)
         setFasting(null)
         setAiFunnel(null)
+        setDemographics(null)
       } else {
         const pick = <T extends { ok?: boolean }>(v: T | null | undefined): T | null =>
           v && v.ok !== false ? v : null
@@ -2110,6 +2220,7 @@ export default function ProductInsightsAdminPage() {
         setNewReturning(pick(bunData.new_returning))
         setFasting(pick(bunData.fasting))
         setAiFunnel(pick(bunData.ai_funnel))
+        setDemographics(pick(bunData.demographics))
       }
     }
 
@@ -2153,6 +2264,7 @@ export default function ProductInsightsAdminPage() {
     setNewReturning(buildDemoNewReturning(windowDays))
     setFasting(buildDemoFasting(windowDays))
     setAiFunnel(buildDemoAiFunnel(windowDays))
+    setDemographics(buildDemoDemographics(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -2190,6 +2302,7 @@ export default function ProductInsightsAdminPage() {
       setNewReturning(null)
       setFasting(null)
       setAiFunnel(null)
+      setDemographics(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -2220,6 +2333,7 @@ export default function ProductInsightsAdminPage() {
     setNewReturning(buildDemoNewReturning(windowDays))
     setFasting(buildDemoFasting(windowDays))
     setAiFunnel(buildDemoAiFunnel(windowDays))
+    setDemographics(buildDemoDemographics(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -2366,6 +2480,7 @@ export default function ProductInsightsAdminPage() {
     setNewReturning(buildDemoNewReturning(windowDays))
     setFasting(buildDemoFasting(windowDays))
     setAiFunnel(buildDemoAiFunnel(windowDays))
+    setDemographics(buildDemoDemographics(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -2526,6 +2641,7 @@ export default function ProductInsightsAdminPage() {
                 ['newret', 'New/Ret'],
                 ['fasting', 'Jejum'],
                 ['ai', 'AI chat'],
+                ['demographics', 'Demografia'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -4107,6 +4223,104 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {demographics ? (
+              <Section
+                id="demographics"
+                title="Demografia (Fase AB)"
+                subtitle={
+                  demographics.note ??
+                  'Openers no período por sexo e idade; premium ativo vs convert no período.'
+                }
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard label="Openers" value={fmt(demographics.summary.openers)} />
+                  <StatCard
+                    label="Com sexo"
+                    value={fmt(demographics.summary.with_gender)}
+                  />
+                  <StatCard
+                    label="Com idade"
+                    value={fmt(demographics.summary.with_age)}
+                  />
+                  <StatCard
+                    label="Premium"
+                    value={fmt(demographics.summary.premium_active)}
+                    hint={pct(demographics.summary.premium_rate)}
+                    tone="up"
+                  />
+                  <StatCard
+                    label="Convert janela"
+                    value={fmt(demographics.summary.converted_window)}
+                    hint={pct(demographics.summary.convert_rate_window)}
+                  />
+                </div>
+                <div className="mt-3 grid gap-3 lg:grid-cols-2">
+                  <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="border-b border-border bg-muted/40 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                      Por sexo
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[480px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Sexo</th>
+                            <th className="px-4 py-3">Users</th>
+                            <th className="px-4 py-3">%</th>
+                            <th className="px-4 py-3">Premium</th>
+                            <th className="px-4 py-3">Conv. janela</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {demographics.by_gender.map((row) => (
+                            <tr key={row.key} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {genderLabelPt(row.key)}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.users)}</td>
+                              <td className="px-4 py-3">{pct(row.share)}</td>
+                              <td className="px-4 py-3">{pct(row.premium_rate)}</td>
+                              <td className="px-4 py-3">{pct(row.convert_rate_window)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="border-b border-border bg-muted/40 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                      Por idade
+                    </div>
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[480px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Faixa</th>
+                            <th className="px-4 py-3">Users</th>
+                            <th className="px-4 py-3">%</th>
+                            <th className="px-4 py-3">Premium</th>
+                            <th className="px-4 py-3">Conv. janela</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {demographics.by_age.map((row) => (
+                            <tr key={row.key} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">
+                                {ageBandLabelPt(row.key)}
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.users)}</td>
+                              <td className="px-4 py-3">{pct(row.share)}</td>
+                              <td className="px-4 py-3">{pct(row.premium_rate)}</td>
+                              <td className="px-4 py-3">{pct(row.convert_rate_window)}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -4846,7 +5060,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase AA · bundle R–Z (1 RPC). A–Z continuam ativos.
+          Fase AB · demografia (sexo/idade × premium). A–AA continuam ativos.
         </p>
       </div>
     </main>
