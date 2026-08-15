@@ -115,6 +115,19 @@ type EventsPayload = {
     premium_users?: number
     meal_to_share_rate?: number | null
     paywall_convert_rate?: number | null
+    group_created?: number
+    group_open?: number
+    group_post?: number
+    group_chat_send?: number
+    group_users?: number
+    diet_open?: number
+    diet_users?: number
+    ai_open?: number
+    ai_message_sent?: number
+    ai_message_users?: number
+    meal_analysis_failed?: number
+    ai_engage_rate?: number | null
+    analysis_fail_rate?: number | null
   }
   retention_opens?: {
     d1: { cohort: number; retained: number; rate: number | null }
@@ -173,6 +186,14 @@ const EVENT_LABELS_PT: Record<string, string> = {
   snap_track_open: 'Abrir Snap Track',
   paywall_shown: 'Paywall mostrado',
   premium_converted: 'Conversão premium',
+  group_created: 'Grupo criado',
+  group_open: 'Abrir grupo',
+  group_post: 'Post no feed',
+  group_chat_send: 'Mensagem no chat',
+  diet_open: 'Abrir Diet',
+  ai_open: 'Abrir AI',
+  ai_message_sent: 'Mensagem AI enviada',
+  meal_analysis_failed: 'Análise de refeição falhou',
 }
 
 const TAB_LABELS_PT: Record<string, string> = {
@@ -351,6 +372,19 @@ function buildDemoEvents(days: WindowDays): EventsPayload {
       premium_users: Math.round(18 * scale),
       meal_to_share_rate: 0.34,
       paywall_convert_rate: 0.189,
+      group_created: Math.round(12 * scale),
+      group_open: Math.round(180 * scale),
+      group_post: Math.round(95 * scale),
+      group_chat_send: Math.round(420 * scale),
+      group_users: Math.round(70 * scale),
+      diet_open: Math.round(210 * scale),
+      diet_users: Math.round(120 * scale),
+      ai_open: Math.round(160 * scale),
+      ai_message_sent: Math.round(340 * scale),
+      ai_message_users: Math.round(90 * scale),
+      meal_analysis_failed: Math.round(22 * scale),
+      ai_engage_rate: 2.1,
+      analysis_fail_rate: 0.034,
     },
     retention_opens: {
       d1: { cohort: 120, retained: 61, rate: 0.508 },
@@ -1126,6 +1160,44 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            <Section
+              title="Social, AI e Diet (Fase D)"
+              subtitle="Grupos, chat AI e falhas de análise."
+            >
+              <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                <StatCard label="Grupos criados" value={fmt(events.funnel.group_created ?? 0)} />
+                <StatCard label="Aberturas grupo" value={fmt(events.funnel.group_open ?? 0)} />
+                <StatCard label="Posts" value={fmt(events.funnel.group_post ?? 0)} />
+                <StatCard label="Msgs chat" value={fmt(events.funnel.group_chat_send ?? 0)} />
+                <StatCard label="Diet opens" value={fmt(events.funnel.diet_open ?? 0)} />
+                <StatCard
+                  label="AI msgs"
+                  value={fmt(events.funnel.ai_message_sent ?? 0)}
+                  hint={
+                    events.funnel.ai_engage_rate != null
+                      ? `${events.funnel.ai_engage_rate.toFixed(1)}x / open`
+                      : null
+                  }
+                />
+              </div>
+              <div className="mt-2.5 grid grid-cols-2 gap-2.5 sm:grid-cols-3">
+                <StatCard
+                  label="Users em grupos"
+                  value={fmt(events.funnel.group_users ?? 0)}
+                />
+                <StatCard label="AI opens" value={fmt(events.funnel.ai_open ?? 0)} />
+                <StatCard
+                  label="Análises falhadas"
+                  value={fmt(events.funnel.meal_analysis_failed ?? 0)}
+                  hint={
+                    events.funnel.analysis_fail_rate != null
+                      ? `${pct(events.funnel.analysis_fail_rate)} fail rate`
+                      : null
+                  }
+                />
+              </div>
+            </Section>
+
             <Section title="Funil de partilha" subtitle="Prompt pós-refeição / exercício.">
               <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-4">
                 <StatCard label="Mostrado" value={fmt(events.funnel.share_prompt_shown)} />
@@ -1237,7 +1309,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase C · Funil core + retenção por app_open. Fase A = domínio; Fase B = eventos base.
+          Fase D · Social/AI/Diet + falhas de análise. A–C continuam ativos.
         </p>
       </div>
     </main>
