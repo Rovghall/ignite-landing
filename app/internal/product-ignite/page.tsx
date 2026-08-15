@@ -332,6 +332,39 @@ type CohortsPayload = {
   cohorts: CohortRow[]
 }
 
+type CompareBucket = {
+  signups: number
+  meals: number
+  meal_users: number
+  opens: number
+  open_users: number
+  paywall_shown: number
+  premium: number
+  paywall_convert_rate: number | null
+  errors: number
+  referrals: number
+}
+
+type ComparePayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  current: CompareBucket
+  previous: CompareBucket
+  delta_pct: {
+    signups: number | null
+    meals: number | null
+    meal_users: number | null
+    opens: number | null
+    open_users: number | null
+    paywall_shown: number | null
+    premium: number | null
+    errors: number | null
+    referrals: number | null
+  }
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -846,6 +879,50 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoCompare(days: WindowDays): ComparePayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    current: {
+      signups: Math.round(180 * scale),
+      meals: Math.round(4200 * scale),
+      meal_users: Math.round(420 * scale),
+      opens: Math.round(1400 * scale),
+      open_users: Math.round(520 * scale),
+      paywall_shown: Math.round(95 * scale),
+      premium: Math.round(18 * scale),
+      paywall_convert_rate: 0.189,
+      errors: Math.round(18 * scale),
+      referrals: Math.round(42 * scale),
+    },
+    previous: {
+      signups: Math.round(150 * scale),
+      meals: Math.round(3900 * scale),
+      meal_users: Math.round(400 * scale),
+      opens: Math.round(1250 * scale),
+      open_users: Math.round(480 * scale),
+      paywall_shown: Math.round(88 * scale),
+      premium: Math.round(14 * scale),
+      paywall_convert_rate: 0.159,
+      errors: Math.round(22 * scale),
+      referrals: Math.round(35 * scale),
+    },
+    delta_pct: {
+      signups: 20,
+      meals: 7.7,
+      meal_users: 5,
+      opens: 12,
+      open_users: 8.3,
+      paywall_shown: 8,
+      premium: 28.6,
+      errors: -18.2,
+      referrals: 20,
+    },
+  }
+}
+
 function buildDemoCohorts(days: WindowDays): CohortsPayload {
   const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
   return {
@@ -1048,6 +1125,7 @@ export default function ProductInsightsAdminPage() {
   const [surfaces, setSurfaces] = useState<SurfacesPayload | null>(null)
   const [alerts, setAlerts] = useState<AlertsPayload | null>(null)
   const [cohorts, setCohorts] = useState<CohortsPayload | null>(null)
+  const [compare, setCompare] = useState<ComparePayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -1069,7 +1147,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1080,6 +1158,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_surfaces', { p_days: windowDays }),
       supabase.rpc('admin_product_alerts', { p_days: windowDays }),
       supabase.rpc('admin_product_cohorts', { p_days: windowDays }),
+      supabase.rpc('admin_product_compare', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1095,6 +1174,7 @@ export default function ProductInsightsAdminPage() {
       setSurfaces(null)
       setAlerts(null)
       setCohorts(null)
+      setCompare(null)
       return
     }
     if (fu.error) {
@@ -1109,6 +1189,7 @@ export default function ProductInsightsAdminPage() {
       setSurfaces(null)
       setAlerts(null)
       setCohorts(null)
+      setCompare(null)
       return
     }
 
@@ -1130,6 +1211,7 @@ export default function ProductInsightsAdminPage() {
       setSurfaces(null)
       setAlerts(null)
       setCohorts(null)
+      setCompare(null)
       return
     }
     if (!fuData?.ok) {
@@ -1148,6 +1230,7 @@ export default function ProductInsightsAdminPage() {
       setSurfaces(null)
       setAlerts(null)
       setCohorts(null)
+      setCompare(null)
       return
     }
     setOverview(ovData)
@@ -1208,6 +1291,13 @@ export default function ProductInsightsAdminPage() {
       const coData = co.data as CohortsPayload | null
       setCohorts(coData?.ok ? coData : null)
     }
+
+    if (cmp.error) {
+      setCompare(null)
+    } else {
+      const cmpData = cmp.data as ComparePayload | null
+      setCompare(cmpData?.ok ? cmpData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -1227,6 +1317,7 @@ export default function ProductInsightsAdminPage() {
     setSurfaces(buildDemoSurfaces(windowDays))
     setAlerts(buildDemoAlerts(windowDays))
     setCohorts(buildDemoCohorts(windowDays))
+    setCompare(buildDemoCompare(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -1251,6 +1342,7 @@ export default function ProductInsightsAdminPage() {
     setSurfaces(null)
     setAlerts(null)
     setCohorts(null)
+    setCompare(null)
     setDemoMode(false)
   }
 
@@ -1268,6 +1360,7 @@ export default function ProductInsightsAdminPage() {
         setSurfaces(buildDemoSurfaces(windowDays))
         setAlerts(buildDemoAlerts(windowDays))
         setCohorts(buildDemoCohorts(windowDays))
+        setCompare(buildDemoCompare(windowDays))
         setListError(null)
       }
       return next
@@ -1401,6 +1494,7 @@ export default function ProductInsightsAdminPage() {
                   setSurfaces(buildDemoSurfaces(windowDays))
                   setAlerts(buildDemoAlerts(windowDays))
                   setCohorts(buildDemoCohorts(windowDays))
+                  setCompare(buildDemoCompare(windowDays))
                   return
                 }
                 void load()
@@ -1464,6 +1558,7 @@ export default function ProductInsightsAdminPage() {
                 ['surfaces', 'Surfaces'],
                 ['alerts', 'Alertas'],
                 ['cohorts', 'Cohorts'],
+                ['compare', 'Δ período'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -2439,6 +2534,56 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {compare ? (
+              <Section
+                title="Comparação (Fase N)"
+                subtitle={`Janela atual vs ${compare.window_days} dias anteriores (mesma duração).`}
+                id="compare"
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-5">
+                  {(
+                    [
+                      ['Signups', compare.current.signups, compare.delta_pct.signups],
+                      ['Meals', compare.current.meals, compare.delta_pct.meals],
+                      ['Opens', compare.current.opens, compare.delta_pct.opens],
+                      ['Premium', compare.current.premium, compare.delta_pct.premium],
+                      ['Referrals', compare.current.referrals, compare.delta_pct.referrals],
+                      ['Meal users', compare.current.meal_users, compare.delta_pct.meal_users],
+                      ['Open users', compare.current.open_users, compare.delta_pct.open_users],
+                      ['Paywall', compare.current.paywall_shown, compare.delta_pct.paywall_shown],
+                      ['Errors', compare.current.errors, compare.delta_pct.errors],
+                    ] as const
+                  ).map(([label, value, delta]) => (
+                    <StatCard
+                      key={label}
+                      label={label}
+                      value={fmt(value)}
+                      hint={
+                        delta == null
+                          ? 'vs período anterior'
+                          : `${delta > 0 ? '+' : ''}${delta}% vs ant.`
+                      }
+                      tone={
+                        delta == null
+                          ? undefined
+                          : label === 'Errors'
+                            ? delta > 0
+                              ? 'down'
+                              : delta < 0
+                                ? 'up'
+                                : undefined
+                            : delta > 0
+                              ? 'up'
+                              : delta < 0
+                                ? 'down'
+                                : undefined
+                      }
+                    />
+                  ))}
+                </div>
+              </Section>
+            ) : null}
+
             {cohorts ? (
               <Section
                 title="Cohorts (Fase M)"
@@ -2802,7 +2947,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase M · organic vs referred. A–L continuam ativos.
+          Fase N · comparação vs período anterior. A–M continuam ativos.
         </p>
       </div>
     </main>
