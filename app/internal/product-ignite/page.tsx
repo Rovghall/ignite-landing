@@ -422,6 +422,35 @@ type AdoptionPayload = {
   features: AdoptionFeature[]
 }
 
+type IntensityPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    openers: number
+    meal_loggers: number
+    logger_rate: number | null
+    median_meals: number | null
+    avg_meals: number | null
+    median_opens: number | null
+    avg_opens: number | null
+  }
+  meal_buckets: {
+    zero: number
+    one: number
+    light: number
+    medium: number
+    heavy: number
+  }
+  open_buckets: {
+    one: number
+    light: number
+    medium: number
+    heavy: number
+  }
+}
+
 type TimeToConvertPayload = {
   ok: boolean
   error?: string
@@ -974,6 +1003,37 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoIntensity(days: WindowDays): IntensityPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
+  const openers = Math.round(520 * scale)
+  const zero = Math.round(openers * 0.28)
+  const one = Math.round(openers * 0.18)
+  const light = Math.round(openers * 0.24)
+  const medium = Math.round(openers * 0.2)
+  const heavy = Math.max(0, openers - zero - one - light - medium)
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      openers,
+      meal_loggers: openers - zero,
+      logger_rate: Number(((openers - zero) / openers).toFixed(3)),
+      median_meals: days === 7 ? 2 : days === 30 ? 6 : 14,
+      avg_meals: days === 7 ? 3.4 : days === 30 ? 8.1 : 18.2,
+      median_opens: days === 7 ? 3 : days === 30 ? 8 : 18,
+      avg_opens: days === 7 ? 4.2 : days === 30 ? 11.5 : 24.0,
+    },
+    meal_buckets: { zero, one, light, medium, heavy },
+    open_buckets: {
+      one: Math.round(openers * 0.22),
+      light: Math.round(openers * 0.28),
+      medium: Math.round(openers * 0.3),
+      heavy: Math.round(openers * 0.2),
+    },
+  }
+}
+
 function buildDemoTimeToConvert(days: WindowDays): TimeToConvertPayload {
   const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2
   return {
@@ -1354,6 +1414,7 @@ export default function ProductInsightsAdminPage() {
   const [topReferrers, setTopReferrers] = useState<TopReferrersPayload | null>(null)
   const [adoption, setAdoption] = useState<AdoptionPayload | null>(null)
   const [timeToConvert, setTimeToConvert] = useState<TimeToConvertPayload | null>(null)
+  const [intensity, setIntensity] = useState<IntensityPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -1376,7 +1437,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc, it] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1392,6 +1453,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_top_referrers', { p_days: windowDays, p_limit: 15 }),
       supabase.rpc('admin_product_adoption', { p_days: windowDays }),
       supabase.rpc('admin_product_time_to_convert', { p_days: windowDays }),
+      supabase.rpc('admin_product_intensity', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1412,6 +1474,7 @@ export default function ProductInsightsAdminPage() {
       setTopReferrers(null)
       setAdoption(null)
       setTimeToConvert(null)
+      setIntensity(null)
       return
     }
     if (fu.error) {
@@ -1431,6 +1494,7 @@ export default function ProductInsightsAdminPage() {
       setTopReferrers(null)
       setAdoption(null)
       setTimeToConvert(null)
+      setIntensity(null)
       return
     }
 
@@ -1457,6 +1521,7 @@ export default function ProductInsightsAdminPage() {
       setTopReferrers(null)
       setAdoption(null)
       setTimeToConvert(null)
+      setIntensity(null)
       return
     }
     if (!fuData?.ok) {
@@ -1480,6 +1545,7 @@ export default function ProductInsightsAdminPage() {
       setTopReferrers(null)
       setAdoption(null)
       setTimeToConvert(null)
+      setIntensity(null)
       return
     }
     setOverview(ovData)
@@ -1576,6 +1642,13 @@ export default function ProductInsightsAdminPage() {
       setTimeToConvert(ttcData?.ok ? ttcData : null)
     }
 
+    if (it.error) {
+      setIntensity(null)
+    } else {
+      const itData = it.data as IntensityPayload | null
+      setIntensity(itData?.ok ? itData : null)
+    }
+
     setLastUpdatedAt(new Date().toISOString())
   }, [supabase, demoMode, windowDays])
 
@@ -1609,6 +1682,7 @@ export default function ProductInsightsAdminPage() {
     setTopReferrers(buildDemoTopReferrers(windowDays))
     setAdoption(buildDemoAdoption(windowDays))
     setTimeToConvert(buildDemoTimeToConvert(windowDays))
+    setIntensity(buildDemoIntensity(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -1639,6 +1713,7 @@ export default function ProductInsightsAdminPage() {
     setTopReferrers(null)
     setAdoption(null)
     setTimeToConvert(null)
+      setIntensity(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -1662,6 +1737,7 @@ export default function ProductInsightsAdminPage() {
         setTopReferrers(buildDemoTopReferrers(windowDays))
         setAdoption(buildDemoAdoption(windowDays))
         setTimeToConvert(buildDemoTimeToConvert(windowDays))
+    setIntensity(buildDemoIntensity(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -1801,6 +1877,7 @@ export default function ProductInsightsAdminPage() {
                   setTopReferrers(buildDemoTopReferrers(windowDays))
                   setAdoption(buildDemoAdoption(windowDays))
                   setTimeToConvert(buildDemoTimeToConvert(windowDays))
+    setIntensity(buildDemoIntensity(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -1954,6 +2031,7 @@ export default function ProductInsightsAdminPage() {
                 ['top-referrers', 'Referrers'],
                 ['adoption', 'Adoção'],
                 ['ttc', 'Time-to-pay'],
+                ['intensity', 'Intensidade'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -2816,6 +2894,141 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {intensity ? (
+              <Section
+                id="intensity"
+                title="Intensidade (Fase T)"
+                subtitle="Profundidade entre openers (app_open): refeições (nutrition_logs) e opens por utilizador."
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Openers"
+                    value={fmt(intensity.summary.openers)}
+                    hint="app_open no período"
+                  />
+                  <StatCard
+                    label="Loggers"
+                    value={fmt(intensity.summary.meal_loggers)}
+                    hint={
+                      intensity.summary.logger_rate != null
+                        ? pct(intensity.summary.logger_rate)
+                        : null
+                    }
+                  />
+                  <StatCard
+                    label="Mediana meals"
+                    value={
+                      intensity.summary.median_meals != null
+                        ? String(intensity.summary.median_meals)
+                        : '—'
+                    }
+                    hint="por opener"
+                  />
+                  <StatCard
+                    label="Média meals"
+                    value={
+                      intensity.summary.avg_meals != null
+                        ? String(intensity.summary.avg_meals)
+                        : '—'
+                    }
+                  />
+                  <StatCard
+                    label="Mediana opens"
+                    value={
+                      intensity.summary.median_opens != null
+                        ? String(intensity.summary.median_opens)
+                        : '—'
+                    }
+                  />
+                  <StatCard
+                    label="Média opens"
+                    value={
+                      intensity.summary.avg_opens != null
+                        ? String(intensity.summary.avg_opens)
+                        : '—'
+                    }
+                  />
+                </div>
+                <div className="mt-3 grid gap-3 lg:grid-cols-2">
+                  <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="border-b border-border bg-muted/40 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                      Refeições / opener
+                    </div>
+                    <table className="w-full border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">Bucket</th>
+                          <th className="px-4 py-3">Users</th>
+                          <th className="px-4 py-3">%</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(
+                          [
+                            ['zero', '0'],
+                            ['one', '1'],
+                            ['light', '2–4'],
+                            ['medium', '5–14'],
+                            ['heavy', '15+'],
+                          ] as const
+                        ).map(([key, label]) => {
+                          const users = intensity.meal_buckets[key]
+                          const share =
+                            intensity.summary.openers > 0
+                              ? users / intensity.summary.openers
+                              : 0
+                          return (
+                            <tr key={key} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">{label}</td>
+                              <td className="px-4 py-3">{fmt(users)}</td>
+                              <td className="px-4 py-3">{pct(share)}</td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="border-b border-border bg-muted/40 px-4 py-3 text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                      Opens / opener
+                    </div>
+                    <table className="w-full border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">Bucket</th>
+                          <th className="px-4 py-3">Users</th>
+                          <th className="px-4 py-3">%</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {(
+                          [
+                            ['one', '1'],
+                            ['light', '2–4'],
+                            ['medium', '5–14'],
+                            ['heavy', '15+'],
+                          ] as const
+                        ).map(([key, label]) => {
+                          const users = intensity.open_buckets[key]
+                          const share =
+                            intensity.summary.openers > 0
+                              ? users / intensity.summary.openers
+                              : 0
+                          return (
+                            <tr key={key} className="border-t border-border/70">
+                              <td className="px-4 py-3 font-semibold">{label}</td>
+                              <td className="px-4 py-3">{fmt(users)}</td>
+                              <td className="px-4 py-3">{pct(share)}</td>
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -3555,7 +3768,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase S · time-to-pay + auto-refresh 5m. A–R continuam ativos.
+          Fase T · intensidade (power users). A–S continuam ativos.
         </p>
       </div>
     </main>
