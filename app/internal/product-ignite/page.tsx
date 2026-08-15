@@ -422,6 +422,26 @@ type AdoptionPayload = {
   features: AdoptionFeature[]
 }
 
+type TimeToConvertPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  summary: {
+    converters: number
+    median_hours: number | null
+    avg_hours: number | null
+    p90_hours: number | null
+  }
+  buckets: {
+    under_1h: number
+    h1_to_24: number
+    d1_to_3: number
+    d3_to_7: number
+    over_7d: number
+  }
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -954,6 +974,28 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoTimeToConvert(days: WindowDays): TimeToConvertPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    summary: {
+      converters: Math.round(18 * scale),
+      median_hours: 6.5,
+      avg_hours: 28.2,
+      p90_hours: 96,
+    },
+    buckets: {
+      under_1h: Math.round(5 * scale),
+      h1_to_24: Math.round(7 * scale),
+      d1_to_3: Math.round(3 * scale),
+      d3_to_7: Math.round(2 * scale),
+      over_7d: Math.round(1 * scale),
+    },
+  }
+}
+
 function buildDemoAdoption(days: WindowDays): AdoptionPayload {
   const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
   const openers = Math.round(520 * scale)
@@ -1311,7 +1353,9 @@ export default function ProductInsightsAdminPage() {
   const [retentionMatrix, setRetentionMatrix] = useState<RetentionMatrixPayload | null>(null)
   const [topReferrers, setTopReferrers] = useState<TopReferrersPayload | null>(null)
   const [adoption, setAdoption] = useState<AdoptionPayload | null>(null)
+  const [timeToConvert, setTimeToConvert] = useState<TimeToConvertPayload | null>(null)
   const [loading, setLoading] = useState(false)
+  const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
 
@@ -1332,7 +1376,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr, ad, ttc] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1347,6 +1391,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_retention_matrix', { p_weeks: 8 }),
       supabase.rpc('admin_product_top_referrers', { p_days: windowDays, p_limit: 15 }),
       supabase.rpc('admin_product_adoption', { p_days: windowDays }),
+      supabase.rpc('admin_product_time_to_convert', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1366,6 +1411,7 @@ export default function ProductInsightsAdminPage() {
       setRetentionMatrix(null)
       setTopReferrers(null)
       setAdoption(null)
+      setTimeToConvert(null)
       return
     }
     if (fu.error) {
@@ -1384,6 +1430,7 @@ export default function ProductInsightsAdminPage() {
       setRetentionMatrix(null)
       setTopReferrers(null)
       setAdoption(null)
+      setTimeToConvert(null)
       return
     }
 
@@ -1409,6 +1456,7 @@ export default function ProductInsightsAdminPage() {
       setRetentionMatrix(null)
       setTopReferrers(null)
       setAdoption(null)
+      setTimeToConvert(null)
       return
     }
     if (!fuData?.ok) {
@@ -1431,6 +1479,7 @@ export default function ProductInsightsAdminPage() {
       setRetentionMatrix(null)
       setTopReferrers(null)
       setAdoption(null)
+      setTimeToConvert(null)
       return
     }
     setOverview(ovData)
@@ -1519,12 +1568,29 @@ export default function ProductInsightsAdminPage() {
       const adData = ad.data as AdoptionPayload | null
       setAdoption(adData?.ok ? adData : null)
     }
+
+    if (ttc.error) {
+      setTimeToConvert(null)
+    } else {
+      const ttcData = ttc.data as TimeToConvertPayload | null
+      setTimeToConvert(ttcData?.ok ? ttcData : null)
+    }
+
+    setLastUpdatedAt(new Date().toISOString())
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
     if (!session || demoMode) return
     void load()
   }, [session, load, demoMode])
+
+  useEffect(() => {
+    if (!session || demoMode) return
+    const id = window.setInterval(() => {
+      if (document.visibilityState === 'visible') void load()
+    }, 5 * 60 * 1000)
+    return () => window.clearInterval(id)
+  }, [session, demoMode, load])
 
   useEffect(() => {
     if (!demoMode) return
@@ -1542,6 +1608,8 @@ export default function ProductInsightsAdminPage() {
     setRetentionMatrix(buildDemoRetentionMatrix())
     setTopReferrers(buildDemoTopReferrers(windowDays))
     setAdoption(buildDemoAdoption(windowDays))
+    setTimeToConvert(buildDemoTimeToConvert(windowDays))
+    setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -1570,6 +1638,8 @@ export default function ProductInsightsAdminPage() {
     setRetentionMatrix(null)
     setTopReferrers(null)
     setAdoption(null)
+    setTimeToConvert(null)
+    setLastUpdatedAt(null)
     setDemoMode(false)
   }
 
@@ -1591,6 +1661,8 @@ export default function ProductInsightsAdminPage() {
         setRetentionMatrix(buildDemoRetentionMatrix())
         setTopReferrers(buildDemoTopReferrers(windowDays))
         setAdoption(buildDemoAdoption(windowDays))
+        setTimeToConvert(buildDemoTimeToConvert(windowDays))
+        setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
       return next
@@ -1728,6 +1800,8 @@ export default function ProductInsightsAdminPage() {
                   setRetentionMatrix(buildDemoRetentionMatrix())
                   setTopReferrers(buildDemoTopReferrers(windowDays))
                   setAdoption(buildDemoAdoption(windowDays))
+                  setTimeToConvert(buildDemoTimeToConvert(windowDays))
+                  setLastUpdatedAt(new Date().toISOString())
                   return
                 }
                 void load()
@@ -1848,6 +1922,16 @@ export default function ProductInsightsAdminPage() {
           {loading && !demoMode ? (
             <span className="ml-2 text-sm text-muted-foreground">A carregar…</span>
           ) : null}
+          {lastUpdatedAt ? (
+            <span className="ml-auto text-xs text-muted-foreground">
+              Atualizado{' '}
+              {new Date(lastUpdatedAt).toLocaleTimeString('pt-PT', {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+              {!demoMode ? ' · auto 5m' : null}
+            </span>
+          ) : null}
         </div>
 
         <nav className="sticky top-2 z-20 mb-6 -mx-1 overflow-x-auto rounded-2xl border border-border/80 bg-card/95 px-2 py-2 shadow-sm backdrop-blur">
@@ -1869,6 +1953,7 @@ export default function ProductInsightsAdminPage() {
                 ['retention-matrix', 'Retenção'],
                 ['top-referrers', 'Referrers'],
                 ['adoption', 'Adoção'],
+                ['ttc', 'Time-to-pay'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -2650,6 +2735,87 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {timeToConvert ? (
+              <Section
+                id="ttc"
+                title="Time-to-pay (Fase S)"
+                subtitle="Horas entre primeiro paywall_shown e premium_converted (mesmo utilizador). Só conversões no período."
+              >
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  <StatCard
+                    label="Conversões"
+                    value={fmt(timeToConvert.summary.converters)}
+                    hint="Com paywall → premium"
+                  />
+                  <StatCard
+                    label="Mediana"
+                    value={
+                      timeToConvert.summary.median_hours != null
+                        ? `${timeToConvert.summary.median_hours}h`
+                        : '—'
+                    }
+                    hint="Metade converte mais rápido"
+                  />
+                  <StatCard
+                    label="Média"
+                    value={
+                      timeToConvert.summary.avg_hours != null
+                        ? `${timeToConvert.summary.avg_hours}h`
+                        : '—'
+                    }
+                  />
+                  <StatCard
+                    label="P90"
+                    value={
+                      timeToConvert.summary.p90_hours != null
+                        ? `${timeToConvert.summary.p90_hours}h`
+                        : '—'
+                    }
+                    hint="90% converte até este tempo"
+                  />
+                </div>
+                {timeToConvert.summary.converters > 0 ? (
+                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                    <div className="overflow-x-auto">
+                      <table className="w-full min-w-[360px] border-collapse text-sm">
+                        <thead>
+                          <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                            <th className="px-4 py-3">Bucket</th>
+                            <th className="px-4 py-3">Users</th>
+                            <th className="px-4 py-3">%</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {(
+                            [
+                              ['under_1h', '< 1h'],
+                              ['h1_to_24', '1–24h'],
+                              ['d1_to_3', '1–3 dias'],
+                              ['d3_to_7', '3–7 dias'],
+                              ['over_7d', '> 7 dias'],
+                            ] as const
+                          ).map(([key, label]) => {
+                            const users = timeToConvert.buckets[key]
+                            const share =
+                              timeToConvert.summary.converters > 0
+                                ? users / timeToConvert.summary.converters
+                                : 0
+                            return (
+                              <tr key={key} className="border-t border-border/70">
+                                <td className="px-4 py-3 font-semibold">{label}</td>
+                                <td className="px-4 py-3">{fmt(users)}</td>
+                                <td className="px-4 py-3">{pct(share)}</td>
+                              </tr>
+                            )
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                ) : null}
+              </Section>
+            ) : null}
+
             {activation ? (
               <Section
                 title="Ativação (Fase I)"
@@ -3389,7 +3555,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase R · adoção de features. A–Q continuam ativos.
+          Fase S · time-to-pay + auto-refresh 5m. A–R continuam ativos.
         </p>
       </div>
     </main>
