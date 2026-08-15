@@ -385,6 +385,26 @@ type RetentionMatrixPayload = {
   rows: RetentionMatrixRow[]
 }
 
+type TopReferrerRow = {
+  referrer_id: string
+  display_name: string
+  referral_code: string
+  referrals: number
+  friend: number
+  creator: number
+  activated_7d: number
+  activation_rate_7d: number | null
+  premium_active: number
+}
+
+type TopReferrersPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  rows: TopReferrerRow[]
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -917,6 +937,50 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoTopReferrers(days: WindowDays): TopReferrersPayload {
+  const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    rows: [
+      {
+        referrer_id: 'demo-1',
+        display_name: 'Ana Silva',
+        referral_code: 'ANA10',
+        referrals: Math.round(12 * scale),
+        friend: Math.round(10 * scale),
+        creator: Math.round(2 * scale),
+        activated_7d: Math.round(8 * scale),
+        activation_rate_7d: 0.667,
+        premium_active: Math.round(3 * scale),
+      },
+      {
+        referrer_id: 'demo-2',
+        display_name: 'FitWithJo',
+        referral_code: 'JOCREATOR',
+        referrals: Math.round(9 * scale),
+        friend: 0,
+        creator: Math.round(9 * scale),
+        activated_7d: Math.round(6 * scale),
+        activation_rate_7d: 0.667,
+        premium_active: Math.round(4 * scale),
+      },
+      {
+        referrer_id: 'demo-3',
+        display_name: 'Miguel',
+        referral_code: 'MIGUEL',
+        referrals: Math.round(5 * scale),
+        friend: Math.round(5 * scale),
+        creator: 0,
+        activated_7d: Math.round(2 * scale),
+        activation_rate_7d: 0.4,
+        premium_active: 1,
+      },
+    ],
+  }
+}
+
 function buildDemoRetentionMatrix(): RetentionMatrixPayload {
   const rows = Array.from({ length: 8 }, (_, i) => {
     const d = new Date()
@@ -1193,6 +1257,7 @@ export default function ProductInsightsAdminPage() {
   const [cohorts, setCohorts] = useState<CohortsPayload | null>(null)
   const [compare, setCompare] = useState<ComparePayload | null>(null)
   const [retentionMatrix, setRetentionMatrix] = useState<RetentionMatrixPayload | null>(null)
+  const [topReferrers, setTopReferrers] = useState<TopReferrersPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -1214,7 +1279,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co, cmp, rm, tr] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1227,6 +1292,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_cohorts', { p_days: windowDays }),
       supabase.rpc('admin_product_compare', { p_days: windowDays }),
       supabase.rpc('admin_product_retention_matrix', { p_weeks: 8 }),
+      supabase.rpc('admin_product_top_referrers', { p_days: windowDays, p_limit: 15 }),
     ])
     setLoading(false)
 
@@ -1244,6 +1310,7 @@ export default function ProductInsightsAdminPage() {
       setCohorts(null)
       setCompare(null)
       setRetentionMatrix(null)
+      setTopReferrers(null)
       return
     }
     if (fu.error) {
@@ -1260,6 +1327,7 @@ export default function ProductInsightsAdminPage() {
       setCohorts(null)
       setCompare(null)
       setRetentionMatrix(null)
+      setTopReferrers(null)
       return
     }
 
@@ -1283,6 +1351,7 @@ export default function ProductInsightsAdminPage() {
       setCohorts(null)
       setCompare(null)
       setRetentionMatrix(null)
+      setTopReferrers(null)
       return
     }
     if (!fuData?.ok) {
@@ -1303,6 +1372,7 @@ export default function ProductInsightsAdminPage() {
       setCohorts(null)
       setCompare(null)
       setRetentionMatrix(null)
+      setTopReferrers(null)
       return
     }
     setOverview(ovData)
@@ -1377,6 +1447,13 @@ export default function ProductInsightsAdminPage() {
       const rmData = rm.data as RetentionMatrixPayload | null
       setRetentionMatrix(rmData?.ok ? rmData : null)
     }
+
+    if (tr.error) {
+      setTopReferrers(null)
+    } else {
+      const trData = tr.data as TopReferrersPayload | null
+      setTopReferrers(trData?.ok ? trData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -1398,6 +1475,7 @@ export default function ProductInsightsAdminPage() {
     setCohorts(buildDemoCohorts(windowDays))
     setCompare(buildDemoCompare(windowDays))
     setRetentionMatrix(buildDemoRetentionMatrix())
+    setTopReferrers(buildDemoTopReferrers(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -1424,6 +1502,7 @@ export default function ProductInsightsAdminPage() {
     setCohorts(null)
     setCompare(null)
     setRetentionMatrix(null)
+    setTopReferrers(null)
     setDemoMode(false)
   }
 
@@ -1443,6 +1522,7 @@ export default function ProductInsightsAdminPage() {
         setCohorts(buildDemoCohorts(windowDays))
         setCompare(buildDemoCompare(windowDays))
         setRetentionMatrix(buildDemoRetentionMatrix())
+        setTopReferrers(buildDemoTopReferrers(windowDays))
         setListError(null)
       }
       return next
@@ -1578,6 +1658,7 @@ export default function ProductInsightsAdminPage() {
                   setCohorts(buildDemoCohorts(windowDays))
                   setCompare(buildDemoCompare(windowDays))
                   setRetentionMatrix(buildDemoRetentionMatrix())
+                  setTopReferrers(buildDemoTopReferrers(windowDays))
                   return
                 }
                 void load()
@@ -1717,6 +1798,7 @@ export default function ProductInsightsAdminPage() {
                 ['cohorts', 'Cohorts'],
                 ['compare', 'Δ período'],
                 ['retention-matrix', 'Retenção'],
+                ['top-referrers', 'Referrers'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -2689,6 +2771,61 @@ export default function ProductInsightsAdminPage() {
                     </div>
                   </div>
                 ) : null}
+              </Section>
+            ) : null}
+
+            {topReferrers ? (
+              <Section
+                title="Top referrers (Fase Q)"
+                subtitle="Quem mais atribui referrals no período · ativação 7d e premium entre referred."
+                id="top-referrers"
+              >
+                <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[640px] border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">#</th>
+                          <th className="px-4 py-3">Nome</th>
+                          <th className="px-4 py-3">Código</th>
+                          <th className="px-4 py-3">Total</th>
+                          <th className="px-4 py-3">Friend</th>
+                          <th className="px-4 py-3">Creator</th>
+                          <th className="px-4 py-3">Meal 7d</th>
+                          <th className="px-4 py-3">Premium</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {topReferrers.rows.length === 0 ? (
+                          <tr>
+                            <td colSpan={8} className="px-4 py-8 text-center text-muted-foreground">
+                              Sem referrals neste período.
+                            </td>
+                          </tr>
+                        ) : (
+                          topReferrers.rows.map((row, i) => (
+                            <tr key={row.referrer_id} className="border-t border-border/70">
+                              <td className="px-4 py-3 text-muted-foreground">{i + 1}</td>
+                              <td className="px-4 py-3 font-semibold">{row.display_name}</td>
+                              <td className="px-4 py-3 font-mono text-xs">{row.referral_code}</td>
+                              <td className="px-4 py-3">{fmt(row.referrals)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.friend)}</td>
+                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.creator)}</td>
+                              <td className="px-4 py-3">
+                                {fmt(row.activated_7d)}
+                                <span className="text-muted-foreground">
+                                  {' '}
+                                  · {pct(row.activation_rate_7d)}
+                                </span>
+                              </td>
+                              <td className="px-4 py-3">{fmt(row.premium_active)}</td>
+                            </tr>
+                          ))
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
               </Section>
             ) : null}
 
