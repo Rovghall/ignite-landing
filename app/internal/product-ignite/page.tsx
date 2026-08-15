@@ -2844,6 +2844,48 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {adoption ? (
+              <Section
+                title="Adoção de features (Fase R)"
+                subtitle={`% dos ${fmt(adoption.openers)} openers (app_open) que usaram cada feature no período.`}
+                id="adoption"
+              >
+                <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[520px] border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">Feature</th>
+                          <th className="px-4 py-3">Users</th>
+                          <th className="px-4 py-3">Eventos</th>
+                          <th className="px-4 py-3">Adoção</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {adoption.features.map((row) => (
+                          <tr key={row.event} className="border-t border-border/70">
+                            <td className="px-4 py-3 font-semibold">{row.label}</td>
+                            <td className="px-4 py-3">{fmt(row.users)}</td>
+                            <td className="px-4 py-3 text-muted-foreground">{fmt(row.events)}</td>
+                            <td className="px-4 py-3">
+                              <div className="flex items-center gap-3">
+                                <div className="w-28">
+                                  <UsageBar pctValue={(row.adoption_rate ?? 0) * 100} />
+                                </div>
+                                <span className="tabular-nums text-muted-foreground">
+                                  {pct(row.adoption_rate)}
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </Section>
+            ) : null}
+
             {topReferrers ? (
               <Section
                 title="Top referrers (Fase Q)"
@@ -3347,7 +3389,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase Q · top referrers. A–P continuam ativos.
+          Fase R · adoção de features. A–Q continuam ativos.
         </p>
       </div>
     </main>
