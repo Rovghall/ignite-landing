@@ -308,6 +308,30 @@ type AlertsPayload = {
   }
 }
 
+type CohortRow = {
+  cohort: string
+  users: number
+  opened_24h: number
+  onboarding_24h: number
+  meal_24h: number
+  paywall_7d: number
+  premium_7d: number
+  open_rate_24h: number | null
+  onboarding_rate_24h: number | null
+  meal_rate_24h: number | null
+  paywall_rate_7d: number | null
+  premium_rate_7d: number | null
+}
+
+type CohortsPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  note?: string
+  cohorts: CohortRow[]
+}
+
 const SOURCE_LABELS_PT: Record<string, string> = {
   'snap-track': 'Snap Track',
   snap_track_reviewed_ai: 'Snap Track (revisão AI)',
@@ -822,6 +846,46 @@ function buildDemoSurfaces(days: WindowDays): SurfacesPayload {
   }
 }
 
+function buildDemoCohorts(days: WindowDays): CohortsPayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    note: 'Demo — organic vs referred.',
+    cohorts: [
+      {
+        cohort: 'organic',
+        users: Math.round(140 * scale),
+        opened_24h: Math.round(120 * scale),
+        onboarding_24h: Math.round(105 * scale),
+        meal_24h: Math.round(72 * scale),
+        paywall_7d: Math.round(48 * scale),
+        premium_7d: Math.round(9 * scale),
+        open_rate_24h: 0.857,
+        onboarding_rate_24h: 0.75,
+        meal_rate_24h: 0.514,
+        paywall_rate_7d: 0.343,
+        premium_rate_7d: 0.064,
+      },
+      {
+        cohort: 'referred',
+        users: Math.round(40 * scale),
+        opened_24h: Math.round(36 * scale),
+        onboarding_24h: Math.round(32 * scale),
+        meal_24h: Math.round(26 * scale),
+        paywall_7d: Math.round(18 * scale),
+        premium_7d: Math.round(5 * scale),
+        open_rate_24h: 0.9,
+        onboarding_rate_24h: 0.8,
+        meal_rate_24h: 0.65,
+        paywall_rate_7d: 0.45,
+        premium_rate_7d: 0.125,
+      },
+    ],
+  }
+}
+
 function buildDemoAlerts(days: WindowDays): AlertsPayload {
   const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
   return {
@@ -983,6 +1047,7 @@ export default function ProductInsightsAdminPage() {
   const [growth, setGrowth] = useState<GrowthPayload | null>(null)
   const [surfaces, setSurfaces] = useState<SurfacesPayload | null>(null)
   const [alerts, setAlerts] = useState<AlertsPayload | null>(null)
+  const [cohorts, setCohorts] = useState<CohortsPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
@@ -1004,7 +1069,7 @@ export default function ProductInsightsAdminPage() {
     if (!supabase || demoMode) return
     setLoading(true)
     setListError(null)
-    const [ov, fu, ev, eg, mo, ac, gr, su, al] = await Promise.all([
+    const [ov, fu, ev, eg, mo, ac, gr, su, al, co] = await Promise.all([
       supabase.rpc('admin_product_overview', { p_days: windowDays }),
       supabase.rpc('admin_product_feature_usage', { p_days: windowDays }),
       supabase.rpc('admin_product_events', { p_days: windowDays }),
@@ -1014,6 +1079,7 @@ export default function ProductInsightsAdminPage() {
       supabase.rpc('admin_product_growth', { p_days: windowDays }),
       supabase.rpc('admin_product_surfaces', { p_days: windowDays }),
       supabase.rpc('admin_product_alerts', { p_days: windowDays }),
+      supabase.rpc('admin_product_cohorts', { p_days: windowDays }),
     ])
     setLoading(false)
 
@@ -1028,6 +1094,7 @@ export default function ProductInsightsAdminPage() {
       setGrowth(null)
       setSurfaces(null)
       setAlerts(null)
+      setCohorts(null)
       return
     }
     if (fu.error) {
@@ -1041,6 +1108,7 @@ export default function ProductInsightsAdminPage() {
       setGrowth(null)
       setSurfaces(null)
       setAlerts(null)
+      setCohorts(null)
       return
     }
 
@@ -1061,6 +1129,7 @@ export default function ProductInsightsAdminPage() {
       setGrowth(null)
       setSurfaces(null)
       setAlerts(null)
+      setCohorts(null)
       return
     }
     if (!fuData?.ok) {
@@ -1078,6 +1147,7 @@ export default function ProductInsightsAdminPage() {
       setGrowth(null)
       setSurfaces(null)
       setAlerts(null)
+      setCohorts(null)
       return
     }
     setOverview(ovData)
@@ -1131,6 +1201,13 @@ export default function ProductInsightsAdminPage() {
       const alData = al.data as AlertsPayload | null
       setAlerts(alData?.ok ? alData : null)
     }
+
+    if (co.error) {
+      setCohorts(null)
+    } else {
+      const coData = co.data as CohortsPayload | null
+      setCohorts(coData?.ok ? coData : null)
+    }
   }, [supabase, demoMode, windowDays])
 
   useEffect(() => {
@@ -1149,6 +1226,7 @@ export default function ProductInsightsAdminPage() {
     setGrowth(buildDemoGrowth(windowDays))
     setSurfaces(buildDemoSurfaces(windowDays))
     setAlerts(buildDemoAlerts(windowDays))
+    setCohorts(buildDemoCohorts(windowDays))
     setListError(null)
   }, [demoMode, windowDays])
 
@@ -1172,6 +1250,7 @@ export default function ProductInsightsAdminPage() {
     setGrowth(null)
     setSurfaces(null)
     setAlerts(null)
+    setCohorts(null)
     setDemoMode(false)
   }
 
@@ -1188,6 +1267,7 @@ export default function ProductInsightsAdminPage() {
         setGrowth(buildDemoGrowth(windowDays))
         setSurfaces(buildDemoSurfaces(windowDays))
         setAlerts(buildDemoAlerts(windowDays))
+        setCohorts(buildDemoCohorts(windowDays))
         setListError(null)
       }
       return next
@@ -1320,6 +1400,7 @@ export default function ProductInsightsAdminPage() {
                   setGrowth(buildDemoGrowth(windowDays))
                   setSurfaces(buildDemoSurfaces(windowDays))
                   setAlerts(buildDemoAlerts(windowDays))
+                  setCohorts(buildDemoCohorts(windowDays))
                   return
                 }
                 void load()
@@ -1382,6 +1463,7 @@ export default function ProductInsightsAdminPage() {
                 ['growth', 'Growth'],
                 ['surfaces', 'Surfaces'],
                 ['alerts', 'Alertas'],
+                ['cohorts', 'Cohorts'],
               ] as const
             ).map(([id, label]) => (
               <a
@@ -2357,6 +2439,54 @@ export default function ProductInsightsAdminPage() {
               </Section>
             ) : null}
 
+            {cohorts ? (
+              <Section
+                title="Cohorts (Fase M)"
+                subtitle={
+                  cohorts.note ??
+                  'Organic vs referred — ativação 24h e paywall/premium 7d.'
+                }
+                id="cohorts"
+              >
+                <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[720px] border-collapse text-sm">
+                      <thead>
+                        <tr className="border-b border-border bg-muted/40 text-left text-[11px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                          <th className="px-4 py-3">Cohort</th>
+                          <th className="px-4 py-3">Users</th>
+                          <th className="px-4 py-3">Open 24h</th>
+                          <th className="px-4 py-3">Onboard 24h</th>
+                          <th className="px-4 py-3">Meal 24h</th>
+                          <th className="px-4 py-3">Paywall 7d</th>
+                          <th className="px-4 py-3">Premium 7d</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {cohorts.cohorts.map((row) => (
+                          <tr key={row.cohort} className="border-t border-border/70">
+                            <td className="px-4 py-3 font-semibold">
+                              {row.cohort === 'organic'
+                                ? 'Organic'
+                                : row.cohort === 'referred'
+                                  ? 'Referred'
+                                  : row.cohort}
+                            </td>
+                            <td className="px-4 py-3">{fmt(row.users)}</td>
+                            <td className="px-4 py-3">{pct(row.open_rate_24h)}</td>
+                            <td className="px-4 py-3">{pct(row.onboarding_rate_24h)}</td>
+                            <td className="px-4 py-3 font-semibold">{pct(row.meal_rate_24h)}</td>
+                            <td className="px-4 py-3">{pct(row.paywall_rate_7d)}</td>
+                            <td className="px-4 py-3">{pct(row.premium_rate_7d)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </Section>
+            ) : null}
+
             {surfaces ? (
               <Section
                 title="Surfaces / Quick Log (Fase K)"
@@ -2672,7 +2802,7 @@ export default function ProductInsightsAdminPage() {
         ) : null}
 
         <p className="mt-10 text-xs text-muted-foreground">
-          Fase L · alertas de atenção. A–K continuam ativos.
+          Fase M · organic vs referred. A–L continuam ativos.
         </p>
       </div>
     </main>
