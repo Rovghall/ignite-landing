@@ -2043,6 +2043,14 @@ const SECTION_HELP: Record<string, string> = {
     'Regras automáticas de atenção (erros, convert, etc.). Não substitui análise — é um farol. Severidade high = olhar já.',
 }
 
+const helpBtnClass = (open: boolean) =>
+  cn(
+    'mt-0.5 inline-flex shrink-0 items-center justify-center px-0.5 text-[11px] font-medium leading-none tracking-tight transition-colors',
+    open
+      ? 'text-foreground underline decoration-foreground/30 underline-offset-2'
+      : 'text-muted-foreground/45 hover:text-muted-foreground',
+  )
+
 function HelpTip({
   text,
   label,
@@ -2061,28 +2069,23 @@ function HelpTip({
         aria-expanded={open}
         aria-label={`Ajuda: ${label}`}
         title="O que significa esta secção?"
-        className={cn(
-          'inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold leading-none',
-          open
-            ? 'border-foreground bg-foreground text-background'
-            : 'border-border bg-card text-muted-foreground hover:border-foreground/40 hover:text-foreground',
-        )}
+        className={helpBtnClass(open)}
       >
         i
       </button>
       {open ? (
         <div
           className={cn(
-            'z-30 rounded-xl border border-sky-200 bg-sky-50 px-3.5 py-3 text-sm leading-relaxed text-sky-950 shadow-lg',
+            'z-30 rounded-lg border border-border/70 bg-muted/40 px-3 py-2.5 text-sm leading-relaxed text-muted-foreground shadow-sm backdrop-blur-sm',
             inline
-              ? 'absolute left-0 top-8 w-[min(22rem,calc(100vw-2rem))]'
+              ? 'absolute left-0 top-7 w-[min(22rem,calc(100vw-2rem))]'
               : 'mt-2',
           )}
         >
-          <p className="text-[11px] font-bold uppercase tracking-[0.06em] text-sky-800/80">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.05em] text-muted-foreground/80">
             Como ler
           </p>
-          <p className="mt-1">{text}</p>
+          <p className="mt-1 text-foreground/80">{text}</p>
         </div>
       ) : null}
     </div>
@@ -2108,7 +2111,7 @@ function Section({
   return (
     <section id={id} className="mt-8 scroll-mt-24">
       <div className="mb-3">
-        <div className="flex items-start gap-2">
+        <div className="flex items-start gap-1.5">
           <h2 className="font-display text-lg font-bold tracking-tight text-foreground">
             {title}
           </h2>
@@ -2119,12 +2122,7 @@ function Section({
               aria-expanded={helpOpen}
               aria-label={`Ajuda: ${title}`}
               title="O que significa esta secção?"
-              className={cn(
-                'mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold leading-none',
-                helpOpen
-                  ? 'border-foreground bg-foreground text-background'
-                  : 'border-border bg-card text-muted-foreground hover:border-foreground/40 hover:text-foreground',
-              )}
+              className={helpBtnClass(helpOpen)}
             >
               i
             </button>
@@ -2132,11 +2130,11 @@ function Section({
         </div>
         {subtitle ? <p className="mt-1 text-sm text-muted-foreground">{subtitle}</p> : null}
         {helpOpen && helpText ? (
-          <div className="mt-2 rounded-xl border border-sky-200 bg-sky-50 px-3.5 py-3 text-sm leading-relaxed text-sky-950">
-            <p className="text-[11px] font-bold uppercase tracking-[0.06em] text-sky-800/80">
+          <div className="mt-2 rounded-lg border border-border/70 bg-muted/40 px-3 py-2.5 text-sm leading-relaxed text-muted-foreground">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.05em] text-muted-foreground/80">
               Como ler
             </p>
-            <p className="mt-1">{helpText}</p>
+            <p className="mt-1 text-foreground/80">{helpText}</p>
           </div>
         ) : null}
       </div>
