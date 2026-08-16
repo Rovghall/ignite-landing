@@ -457,6 +457,16 @@ function endOfLocalDayIso(dateStr: string): string | null {
   return dt.toISOString()
 }
 
+/** Start of UTC calendar day for a YYYY-MM-DD value. */
+function startOfUtcDayIso(dateStr: string): string | null {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return null
+  return `${dateStr}T00:00:00.000Z`
+}
+
+function todayDateInputValue(): string {
+  return toDateInputValue(new Date().toISOString())
+}
+
 type PremiumBarState = {
   usedPct: number
   leftDays: number
@@ -697,7 +707,21 @@ function isCreatorProgramEnded(app: ApplicationRow): boolean {
   if (!app.creator_premium_ends_at) return false
   const ends = new Date(app.creator_premium_ends_at).getTime()
   if (!Number.isFinite(ends)) return false
+  if (app.creator_premium_started_at) {
+    const starts = new Date(app.creator_premium_started_at).getTime()
+    if (Number.isFinite(starts) && starts > Date.now()) return false
+  }
   return ends <= Date.now()
+}
+
+function isCreatorPremiumScheduled(app: ApplicationRow): boolean {
+  if (app.status !== 'approved') return false
+  if (app.creator_premium_active || app.creator_premium_paused) return false
+  if (!app.creator_premium_started_at || !app.creator_premium_ends_at) return false
+  const starts = new Date(app.creator_premium_started_at).getTime()
+  const ends = new Date(app.creator_premium_ends_at).getTime()
+  if (!Number.isFinite(starts) || !Number.isFinite(ends)) return false
+  return starts > Date.now() && ends > Date.now()
 }
 
 function matchesAppFilter(app: ApplicationRow, filter: AppFilter): boolean {
@@ -978,6 +1002,9 @@ export default function CreatorProgramAdminPage() {
 
   const [approveCodeById, setApproveCodeById] = useState<Record<string, string>>({})
   const [approvePremiumDaysById, setApprovePremiumDaysById] = useState<Record<string, string>>(
+    {},
+  )
+  const [approvePremiumStartById, setApprovePremiumStartById] = useState<Record<string, string>>(
     {},
   )
   const [extendDaysById, setExtendDaysById] = useState<Record<string, string>>({})
@@ -1433,6 +1460,11 @@ export default function CreatorProgramAdminPage() {
     return Math.min(n, 3660)
   }
 
+  function premiumStartIsoForApprove(appId: string): string {
+    const raw = (approvePremiumStartById[appId] ?? todayDateInputValue()).trim()
+    return startOfUtcDayIso(raw) ?? new Date().toISOString()
+  }
+
   async function approve(app: ApplicationRow) {
     const code = (approveCodeById[app.id] ?? '').trim().toUpperCase()
     if (code.length < 4) {
@@ -1445,9 +1477,13 @@ export default function CreatorProgramAdminPage() {
       return
     }
     const premiumDays = premiumDaysForApprove(app.id)
+    const premiumStartsAt = premiumStartIsoForApprove(app.id)
+    const premiumEndsAt = new Date(
+      new Date(premiumStartsAt).getTime() + premiumDays * 86400000,
+    ).toISOString()
+    const startsInFuture = new Date(premiumStartsAt).getTime() > Date.now()
 
     if (demoMode) {
-      const ends = daysAhead(premiumDays)
       setDemoApps((prev) =>
         prev.map((row) =>
           row.id === app.id
@@ -1456,9 +1492,9 @@ export default function CreatorProgramAdminPage() {
                 status: 'approved',
                 assigned_code: code,
                 reviewed_at: new Date().toISOString(),
-                creator_premium_ends_at: ends,
-                creator_premium_started_at: new Date().toISOString(),
-                creator_premium_active: true,
+                creator_premium_ends_at: premiumEndsAt,
+                creator_premium_started_at: premiumStartsAt,
+                creator_premium_active: !startsInFuture,
                 creator_premium_paused: false,
                 creator_premium_paused_at: null,
                 creator_premium_pause_remaining_seconds: null,
@@ -1492,6 +1528,7 @@ export default function CreatorProgramAdminPage() {
       p_code: code,
       p_code_label: app.display_name,
       p_premium_days: premiumDays,
+      p_premium_starts_at: premiumStartsAt,
     })
     setBusyId(null)
     if (error) {
@@ -2766,6 +2803,10 @@ export default function CreatorProgramAdminPage() {
                           >
                             {creatorPremiumDaysLeft(app.creator_premium_ends_at) ?? 0}d restantes
                           </span>
+                        ) : isCreatorPremiumScheduled(app) ? (
+                          <span className="text-xs font-bold text-sky-700">
+                            Começa {shortDate(app.creator_premium_started_at ?? null)}
+                          </span>
                         ) : (
                           <span className="text-xs font-medium text-muted-foreground">
                             Terminado
@@ -2817,21 +2858,39 @@ export default function CreatorProgramAdminPage() {
                         }))
                       }
                     />
-                    <input
-                      className={cn(inputGrow, 'max-w-[120px]')}
-                      type="number"
-                      min={1}
-                      max={3660}
-                      placeholder="Dias"
-                      title="Complimentary Premium days (default 90)"
-                      value={approvePremiumDaysById[app.id] ?? '90'}
-                      onChange={(e) =>
-                        setApprovePremiumDaysById((prev) => ({
-                          ...prev,
-                          [app.id]: e.target.value,
-                        }))
-                      }
-                    />
+                    <label className="flex flex-col gap-0.5 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
+                      Início
+                      <input
+                        className={cn(inputClass, 'min-w-[150px]')}
+                        type="date"
+                        title="Data de início do Premium complementar"
+                        value={approvePremiumStartById[app.id] ?? todayDateInputValue()}
+                        onChange={(e) =>
+                          setApprovePremiumStartById((prev) => ({
+                            ...prev,
+                            [app.id]: e.target.value,
+                          }))
+                        }
+                      />
+                    </label>
+                    <label className="flex flex-col gap-0.5 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">
+                      Dias
+                      <input
+                        className={cn(inputClass, 'max-w-[100px]')}
+                        type="number"
+                        min={1}
+                        max={3660}
+                        placeholder="90"
+                        title="Duração do Premium complementar (fim = início + dias)"
+                        value={approvePremiumDaysById[app.id] ?? '90'}
+                        onChange={(e) =>
+                          setApprovePremiumDaysById((prev) => ({
+                            ...prev,
+                            [app.id]: e.target.value,
+                          }))
+                        }
+                      />
+                    </label>
                     <button
                       type="button"
                       disabled={busyId === app.id}
