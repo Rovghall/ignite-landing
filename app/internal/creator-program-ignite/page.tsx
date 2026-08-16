@@ -6,7 +6,7 @@ import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
 import { cn } from '@/lib/utils'
 
-type AppFilter = 'all' | 'pending' | 'approved' | 'rejected' | 'trial'
+type AppFilter = 'all' | 'pending' | 'approved' | 'rejected' | 'trial' | 'ended'
 type AppSort = 'default' | 'ending_soon'
 type PayoutFilter = 'all' | 'holding' | 'pending' | 'requested' | 'paid' | 'cancelled' | 'refunded'
 type Tab = 'applications' | 'codes' | 'payouts'
@@ -330,10 +330,34 @@ function isOnTrial(app: ApplicationRow): boolean {
   return Boolean(app.referral_trial_active)
 }
 
+/** Approved creators whose complimentary Premium grant has ended (manual or by date). */
+function isCreatorProgramEnded(app: ApplicationRow): boolean {
+  if (app.status !== 'approved') return false
+  if (app.creator_premium_active) return false
+  if (app.creator_premium_paused) return false
+  if (!app.creator_premium_ends_at) return false
+  const ends = new Date(app.creator_premium_ends_at).getTime()
+  if (!Number.isFinite(ends)) return false
+  return ends <= Date.now()
+}
+
 function matchesAppFilter(app: ApplicationRow, filter: AppFilter): boolean {
   if (filter === 'all') return true
   if (filter === 'trial') return isOnTrial(app)
+  if (filter === 'ended') return isCreatorProgramEnded(app)
+  if (filter === 'approved') {
+    return app.status === 'approved' && !isCreatorProgramEnded(app)
+  }
   return app.status === filter
+}
+
+const APP_FILTER_LABELS: Record<AppFilter, string> = {
+  pending: 'Pendentes',
+  trial: 'Trial',
+  approved: 'Aprovados',
+  ended: 'Terminados',
+  rejected: 'Rejeitados',
+  all: 'Todos',
 }
 
 const DEMO_APPS: ApplicationRow[] = [
@@ -384,6 +408,30 @@ const DEMO_APPS: ApplicationRow[] = [
     creator_premium_paused_at: null,
     creator_premium_pause_remaining_seconds: null,
     creator_premium_active: true,
+    creator_premium_paused: false,
+  },
+  {
+    id: 'demo-app-4',
+    user_id: 'demo-user-4',
+    display_name: 'Sofia Ended',
+    contact_email: 'sofia@creators.demo',
+    platforms: ['instagram'],
+    primary_handle: '@sofiafit',
+    audience_size: '40k',
+    notes: 'Program finished last month',
+    status: 'approved',
+    admin_note: null,
+    internal_notes: 'Ended after 90d — may renew later',
+    created_at: daysAgo(120),
+    reviewed_at: daysAgo(110),
+    assigned_code: 'SOFIA10',
+    rc_premium_active: false,
+    referral_trial_active: false,
+    creator_premium_ends_at: daysAgo(5),
+    creator_premium_started_at: daysAgo(95),
+    creator_premium_paused_at: null,
+    creator_premium_pause_remaining_seconds: null,
+    creator_premium_active: false,
     creator_premium_paused: false,
   },
   {
@@ -764,12 +812,14 @@ export default function CreatorProgramAdminPage() {
     const counts: Record<AppFilter, number> = {
       pending: 0,
       approved: 0,
+      ended: 0,
       rejected: 0,
       trial: 0,
       all: appSource.length,
     }
     for (const app of appSource) {
       if (app.status === 'pending') counts.pending += 1
+      else if (isCreatorProgramEnded(app)) counts.ended += 1
       else if (app.status === 'approved') counts.approved += 1
       else if (app.status === 'rejected') counts.rejected += 1
       if (isOnTrial(app)) counts.trial += 1
@@ -1811,9 +1861,9 @@ export default function CreatorProgramAdminPage() {
         <div className="mb-5 flex flex-col gap-3">
           {tab === 'applications' ? (
             <div className="flex flex-wrap gap-2">
-              {(['pending', 'trial', 'approved', 'rejected', 'all'] as AppFilter[]).map((f) => (
+              {(['pending', 'trial', 'approved', 'ended', 'rejected', 'all'] as AppFilter[]).map((f) => (
                 <button key={f} type="button" onClick={() => setFilter(f)} className={chipClass(filter === f)}>
-                  {f} ({appCounts[f]})
+                  {APP_FILTER_LABELS[f]} ({appCounts[f]})
                 </button>
               ))}
             </div>
