@@ -650,6 +650,26 @@ type AscentPayload = {
   daily: AscentDaily[]
 }
 
+type MembershipPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  note?: string
+  summary: {
+    members_total: number
+    profiles_total: number
+    paying_total: number
+    creator_comp_active: number
+    paying_share: number | null
+    deleted_total: number
+    signups_window: number
+    deleted_window: number
+    deleted_was_premium_window: number
+    net_members_window: number
+  }
+}
+
 type BundlePayload = {
   ok: boolean
   error?: string
@@ -667,6 +687,7 @@ type BundlePayload = {
   demographics: DemographicsPayload | null
   finance: FinancePayload | null
   ascent: AscentPayload | null
+  membership: MembershipPayload | null
 }
 
 type DaypartPayload = {
@@ -1435,6 +1456,32 @@ function buildDemoAscent(days: WindowDays): AscentPayload {
       active_share_now: users > 0 ? Math.round((premium * 0.72) / users * 1000) / 1000 : null,
     },
     daily,
+  }
+}
+
+function buildDemoMembership(days: WindowDays): MembershipPayload {
+  const scale = days === 7 ? 0.35 : days === 30 ? 1 : 2.4
+  const members = 5120
+  const paying = 418
+  const signups = Math.round(95 * scale)
+  const deletedWindow = Math.round(12 * scale)
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    note: 'Demo — eliminações só contam após o log account_deletions.',
+    summary: {
+      members_total: members,
+      profiles_total: members - 40,
+      paying_total: paying,
+      creator_comp_active: 14,
+      paying_share: Math.round((paying / members) * 1000) / 1000,
+      deleted_total: Math.round(180 * Math.min(1, scale / 2 + 0.5)),
+      signups_window: signups,
+      deleted_window: deletedWindow,
+      deleted_was_premium_window: Math.round(deletedWindow * 0.2),
+      net_members_window: signups - deletedWindow,
+    },
   }
 }
 
@@ -2235,6 +2282,8 @@ const SECTION_HELP: Record<string, string> = {
     'MRR/COGS = estimativas (ARPU e $/API assumidos). Payouts friend/creator = dinheiro real em referral_rewards. Usa para ordem de grandeza, não contabilidade; RevenueCat/App Store = verdade da receita.',
   ascent:
     'Ascensão da base: users cumulativos (auth.users) vs 1ª conversão premium_converted cumulativa. Não é stock diário de rc_premium_active (isso só existe como snapshot agora). Se premium cresce muito mais lento que users, a monetização não acompanha o crescimento.',
+  membership:
+    'Stock de contas: membros (auth.users), pagantes (rc_premium_active), eliminados (account_deletions). Net na janela = signups − deletes. Deletes só existem depois do deploy do log — histórico anterior fica a zero.',
   activation:
     'Signup → open / onboarding / 1ª meal em 24h e 7d. Meal 24h é o “aha” crítico. Se open alto e meal baixo, o onboarding ou 1º log falha.',
   growth:
@@ -2417,6 +2466,7 @@ export default function ProductInsightsAdminPage() {
   const [demographics, setDemographics] = useState<DemographicsPayload | null>(null)
   const [finance, setFinance] = useState<FinancePayload | null>(null)
   const [ascent, setAscent] = useState<AscentPayload | null>(null)
+  const [membership, setMembership] = useState<MembershipPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -2484,6 +2534,7 @@ export default function ProductInsightsAdminPage() {
       setDemographics(null)
       setFinance(null)
       setAscent(null)
+      setMembership(null)
       return
     }
     if (fu.error) {
@@ -2513,6 +2564,7 @@ export default function ProductInsightsAdminPage() {
       setDemographics(null)
       setFinance(null)
       setAscent(null)
+      setMembership(null)
       return
     }
 
@@ -2549,6 +2601,7 @@ export default function ProductInsightsAdminPage() {
       setDemographics(null)
       setFinance(null)
       setAscent(null)
+      setMembership(null)
       return
     }
     if (!fuData?.ok) {
@@ -2582,6 +2635,7 @@ export default function ProductInsightsAdminPage() {
       setDemographics(null)
       setFinance(null)
       setAscent(null)
+      setMembership(null)
       return
     }
     setOverview(ovData)
@@ -2677,6 +2731,7 @@ export default function ProductInsightsAdminPage() {
       setDemographics(null)
       setFinance(null)
       setAscent(null)
+      setMembership(null)
     } else {
       const bunData = bun.data as BundlePayload | null
       if (!bunData?.ok) {
@@ -2692,6 +2747,7 @@ export default function ProductInsightsAdminPage() {
         setDemographics(null)
         setFinance(null)
         setAscent(null)
+      setMembership(null)
       } else {
         const pick = <T extends { ok?: boolean }>(v: T | null | undefined): T | null =>
           v && v.ok !== false ? v : null
@@ -2707,6 +2763,7 @@ export default function ProductInsightsAdminPage() {
         setDemographics(pick(bunData.demographics))
         setFinance(pick(bunData.finance))
         setAscent(pick(bunData.ascent))
+        setMembership(pick(bunData.membership))
       }
     }
 
@@ -2753,6 +2810,7 @@ export default function ProductInsightsAdminPage() {
     setDemographics(buildDemoDemographics(windowDays))
     setFinance(buildDemoFinance(windowDays))
     setAscent(buildDemoAscent(windowDays))
+    setMembership(buildDemoMembership(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -2793,6 +2851,7 @@ export default function ProductInsightsAdminPage() {
       setDemographics(null)
       setFinance(null)
       setAscent(null)
+      setMembership(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -2826,6 +2885,7 @@ export default function ProductInsightsAdminPage() {
     setDemographics(buildDemoDemographics(windowDays))
     setFinance(buildDemoFinance(windowDays))
     setAscent(buildDemoAscent(windowDays))
+    setMembership(buildDemoMembership(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -2978,6 +3038,7 @@ export default function ProductInsightsAdminPage() {
     setDemographics(buildDemoDemographics(windowDays))
     setFinance(buildDemoFinance(windowDays))
     setAscent(buildDemoAscent(windowDays))
+    setMembership(buildDemoMembership(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -3005,6 +3066,16 @@ export default function ProductInsightsAdminPage() {
                     ['kpi', 'signups', overview.users.signups_window, null],
                     ['kpi', 'premium_active', overview.users.premium_active, null],
                     ['kpi', 'meals', overview.meals.logs_window, null],
+                  )
+                }
+                if (membership?.summary) {
+                  rows.push(
+                    ['membership', 'members_total', membership.summary.members_total, 'auth.users'],
+                    ['membership', 'paying_total', membership.summary.paying_total, 'rc_premium_active'],
+                    ['membership', 'deleted_total', membership.summary.deleted_total, 'account_deletions'],
+                    ['membership', 'signups_window', membership.summary.signups_window, null],
+                    ['membership', 'deleted_window', membership.summary.deleted_window, null],
+                    ['membership', 'net_members_window', membership.summary.net_members_window, null],
                   )
                 }
                 if (engagement?.opens) {
@@ -3116,6 +3187,7 @@ export default function ProductInsightsAdminPage() {
             {(
               [
                 ['kpi', 'KPIs'],
+                ['membership', 'Membros'],
                 ['ascent', 'Ascensão'],
                 ['engagement', 'Engagement'],
                 ['health', 'Saúde'],
@@ -3229,6 +3301,70 @@ export default function ProductInsightsAdminPage() {
               />
             </div>
             </div>
+
+            {membership?.summary ? (
+              <Section
+                title="Membros"
+                subtitle="Stock de contas · pagantes · eliminações (após log account_deletions)."
+                id="membership"
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Membros totais"
+                    value={fmt(membership.summary.members_total)}
+                    hint={`${fmt(membership.summary.profiles_total)} perfis`}
+                  />
+                  <StatCard
+                    label="Pagantes"
+                    value={fmt(membership.summary.paying_total)}
+                    hint={
+                      membership.summary.paying_share != null
+                        ? `${pct(membership.summary.paying_share)} da base`
+                        : 'rc_premium_active'
+                    }
+                  />
+                  <StatCard
+                    label="Eliminados (total)"
+                    value={fmt(membership.summary.deleted_total)}
+                    hint="account_deletions (desde o log)"
+                  />
+                  <StatCard
+                    label="Registos (janela)"
+                    value={fmt(membership.summary.signups_window)}
+                    hint={`auth.users · ${membership.window_days}d`}
+                  />
+                  <StatCard
+                    label="Eliminações (janela)"
+                    value={fmt(membership.summary.deleted_window)}
+                    hint={
+                      membership.summary.deleted_was_premium_window
+                        ? `${fmt(membership.summary.deleted_was_premium_window)} eram premium`
+                        : `${membership.window_days}d`
+                    }
+                  />
+                  <StatCard
+                    label="Net (janela)"
+                    value={fmt(membership.summary.net_members_window)}
+                    hint="signups − deletes"
+                    tone={
+                      membership.summary.net_members_window > 0
+                        ? 'up'
+                        : membership.summary.net_members_window < 0
+                          ? 'down'
+                          : 'default'
+                    }
+                  />
+                </div>
+                {membership.summary.creator_comp_active > 0 ? (
+                  <p className="mt-3 text-xs text-muted-foreground">
+                    Creator comp ativo agora: {fmt(membership.summary.creator_comp_active)}
+                  </p>
+                ) : null}
+                {membership.note ? (
+                  <p className="mt-2 text-xs text-muted-foreground">{membership.note}</p>
+                ) : null}
+              </Section>
+            ) : null}
 
             {ascent?.daily?.length ? (
               <Section
