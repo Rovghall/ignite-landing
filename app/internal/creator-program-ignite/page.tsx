@@ -9,7 +9,59 @@ import { cn } from '@/lib/utils'
 type AppFilter = 'all' | 'pending' | 'approved' | 'rejected' | 'trial' | 'ended'
 type AppSort = 'default' | 'ending_soon'
 type PayoutFilter = 'all' | 'holding' | 'pending' | 'requested' | 'paid' | 'cancelled' | 'refunded'
-type Tab = 'applications' | 'codes' | 'payouts'
+type Tab = 'applications' | 'codes' | 'payouts' | 'evolution'
+type EvolutionWindow = 7 | 30 | 90
+
+type EvolutionDaily = {
+  day: string
+  applications: number
+  approved: number
+  codes_created: number
+  referrals: number
+  qualified: number
+  paid_cents: number
+  creators_cumulative: number
+}
+
+type EvolutionPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  note?: string
+  summary: {
+    applications_pending: number
+    creators_approved: number
+    applications_rejected: number
+    approved_window: number
+    applications_window: number
+    codes_total: number
+    codes_active: number
+    codes_created_window: number
+    premium_comp_active: number
+    premium_comp_paused: number
+    premium_comp_ending_14d: number
+    referrals_total: number
+    referrals_window: number
+    qualified_total: number
+    qualified_window: number
+    qualify_rate_total: number | null
+    qualify_rate_window: number | null
+    refunded_total: number
+    refunded_window: number
+    creators_with_referrals: number
+    creators_with_referrals_window: number
+    referred_premium_active: number
+    rewards_pending_n: number
+    rewards_paid_n: number
+    rewards_cancelled_n: number
+    pending_cents: number
+    paid_cents: number
+    paid_cents_window: number
+    rewards_created_cents_window: number
+  }
+  daily: EvolutionDaily[]
+}
 
 type RewardRow = {
   reward_id: string
@@ -84,6 +136,250 @@ function money(cents: number, currency: string): string {
   if (currency === 'EUR') return `€${n}`
   if (currency === 'GBP') return `£${n}`
   return `$${n}`
+}
+
+function fmtNum(n: number | null | undefined): string {
+  if (n == null || !Number.isFinite(n)) return '—'
+  return new Intl.NumberFormat('pt-PT').format(Math.round(n))
+}
+
+function pctRate(rate: number | null | undefined): string {
+  if (rate == null || !Number.isFinite(rate)) return '—'
+  return `${(rate * 100).toFixed(1)}%`
+}
+
+function buildDemoEvolution(days: EvolutionWindow): EvolutionPayload {
+  const scale = days === 7 ? 0.35 : days === 30 ? 1 : 2.2
+  const daily: EvolutionDaily[] = []
+  let creators = 8
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date()
+    d.setHours(12, 0, 0, 0)
+    d.setDate(d.getDate() - i)
+    const approved = i % 5 === 0 ? 1 : 0
+    creators += approved
+    daily.push({
+      day: d.toISOString().slice(0, 10),
+      applications: i % 3 === 0 ? 1 : 0,
+      approved,
+      codes_created: approved,
+      referrals: 1 + (i % 4),
+      qualified: i % 6 === 0 ? 1 : 0,
+      paid_cents: i % 7 === 0 ? 1000 : 0,
+      creators_cumulative: creators,
+    })
+  }
+  const referralsWindow = daily.reduce((s, x) => s + x.referrals, 0)
+  const qualifiedWindow = daily.reduce((s, x) => s + x.qualified, 0)
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    note: 'Demo — métricas fictícias do programa de creators.',
+    summary: {
+      applications_pending: 1,
+      creators_approved: creators,
+      applications_rejected: 2,
+      approved_window: daily.reduce((s, x) => s + x.approved, 0),
+      applications_window: daily.reduce((s, x) => s + x.applications, 0),
+      codes_total: creators,
+      codes_active: Math.max(1, creators - 1),
+      codes_created_window: daily.reduce((s, x) => s + x.codes_created, 0),
+      premium_comp_active: Math.max(1, creators - 2),
+      premium_comp_paused: 0,
+      premium_comp_ending_14d: 1,
+      referrals_total: Math.round(40 * scale),
+      referrals_window: referralsWindow,
+      qualified_total: Math.round(12 * scale),
+      qualified_window: qualifiedWindow,
+      qualify_rate_total: 0.3,
+      qualify_rate_window:
+        referralsWindow > 0 ? Math.round((qualifiedWindow / referralsWindow) * 1000) / 1000 : null,
+      refunded_total: 1,
+      refunded_window: 0,
+      creators_with_referrals: Math.max(1, creators - 3),
+      creators_with_referrals_window: Math.min(creators, 4),
+      referred_premium_active: Math.round(9 * scale),
+      rewards_pending_n: 3,
+      rewards_paid_n: Math.round(8 * scale),
+      rewards_cancelled_n: 0,
+      pending_cents: 3000,
+      paid_cents: Math.round(8000 * scale),
+      paid_cents_window: daily.reduce((s, x) => s + x.paid_cents, 0),
+      rewards_created_cents_window: Math.round(qualifiedWindow * 1000),
+    },
+    daily,
+  }
+}
+
+function EvoStat({
+  label,
+  value,
+  hint,
+}: {
+  label: string
+  value: string
+  hint?: string | null
+}) {
+  return (
+    <div className="rounded-2xl border border-border/80 bg-card px-3.5 py-3 shadow-sm">
+      <p className="text-[10px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+        {label}
+      </p>
+      <p className="mt-1 font-display text-2xl font-extrabold tracking-tight text-foreground">
+        {value}
+      </p>
+      {hint ? <p className="mt-1 text-xs text-muted-foreground">{hint}</p> : null}
+    </div>
+  )
+}
+
+function DualLineChart({
+  labels,
+  seriesA,
+  seriesB,
+  nameA,
+  nameB,
+}: {
+  labels: string[]
+  seriesA: number[]
+  seriesB: number[]
+  nameA: string
+  nameB: string
+}) {
+  const w = 640
+  const h = 220
+  const pad = { t: 16, r: 44, b: 28, l: 44 }
+  const innerW = w - pad.l - pad.r
+  const innerH = h - pad.t - pad.b
+  const n = Math.max(labels.length, 1)
+  const minA = seriesA.length ? Math.min(...seriesA) : 0
+  const maxA = seriesA.length ? Math.max(...seriesA) : 1
+  const minB = seriesB.length ? Math.min(...seriesB) : 0
+  const maxB = seriesB.length ? Math.max(...seriesB) : 1
+  const spanA = Math.max(1, maxA - minA)
+  const spanB = Math.max(1, maxB - minB)
+  const xAt = (i: number) => pad.l + (n <= 1 ? innerW / 2 : (i / (n - 1)) * innerW)
+  const yA = (v: number) => pad.t + innerH - ((v - minA) / spanA) * innerH
+  const yB = (v: number) => pad.t + innerH - ((v - minB) / spanB) * innerH
+  const pathOf = (vals: number[], yFn: (v: number) => number) =>
+    vals
+      .map((v, i) => `${i === 0 ? 'M' : 'L'} ${xAt(i).toFixed(1)} ${yFn(v).toFixed(1)}`)
+      .join(' ')
+  const tickIdx = [0, Math.floor((n - 1) / 2), n - 1].filter((v, i, a) => a.indexOf(v) === i && v >= 0)
+
+  return (
+    <div className="w-full overflow-x-auto">
+      <svg
+        viewBox={`0 0 ${w} ${h}`}
+        className="h-auto w-full min-w-[320px]"
+        role="img"
+        aria-label={`${nameA} vs ${nameB}`}
+      >
+        <line
+          x1={pad.l}
+          y1={pad.t + innerH}
+          x2={pad.l + innerW}
+          y2={pad.t + innerH}
+          stroke="currentColor"
+          strokeOpacity="0.15"
+        />
+        {[0.25, 0.5, 0.75].map((t) => (
+          <line
+            key={t}
+            x1={pad.l}
+            y1={pad.t + innerH * (1 - t)}
+            x2={pad.l + innerW}
+            y2={pad.t + innerH * (1 - t)}
+            stroke="currentColor"
+            strokeOpacity="0.06"
+          />
+        ))}
+        <path d={pathOf(seriesA, yA)} fill="none" stroke="#18181B" strokeWidth="2.25" />
+        <path
+          d={pathOf(seriesB, yB)}
+          fill="none"
+          stroke="#EA580C"
+          strokeWidth="2"
+          strokeDasharray="5 4"
+        />
+        {tickIdx.map((i) => (
+          <text
+            key={i}
+            x={xAt(i)}
+            y={h - 8}
+            textAnchor="middle"
+            className="fill-current text-[10px]"
+            opacity={0.45}
+          >
+            {(labels[i] ?? '').slice(5)}
+          </text>
+        ))}
+        <text x={pad.l} y={12} className="fill-current text-[10px]" opacity={0.7}>
+          {nameA}
+        </text>
+        <text
+          x={pad.l + innerW}
+          y={12}
+          textAnchor="end"
+          className="fill-current text-[10px]"
+          opacity={0.7}
+          fill="#EA580C"
+        >
+          {nameB}
+        </text>
+      </svg>
+    </div>
+  )
+}
+
+function BarChart({ labels, values, name }: { labels: string[]; values: number[]; name: string }) {
+  const w = 640
+  const h = 180
+  const pad = { t: 12, r: 12, b: 28, l: 12 }
+  const innerW = w - pad.l - pad.r
+  const innerH = h - pad.t - pad.b
+  const n = Math.max(values.length, 1)
+  const maxV = Math.max(1, ...values)
+  const gap = 2
+  const barW = Math.max(2, (innerW - gap * (n - 1)) / n)
+  const tickIdx = [0, Math.floor((n - 1) / 2), n - 1].filter((v, i, a) => a.indexOf(v) === i && v >= 0)
+
+  return (
+    <div className="w-full overflow-x-auto">
+      <svg viewBox={`0 0 ${w} ${h}`} className="h-auto w-full min-w-[320px]" role="img" aria-label={name}>
+        {values.map((v, i) => {
+          const bh = (v / maxV) * innerH
+          const x = pad.l + i * (barW + gap)
+          const y = pad.t + innerH - bh
+          return (
+            <rect
+              key={i}
+              x={x}
+              y={y}
+              width={barW}
+              height={Math.max(bh, v > 0 ? 1.5 : 0)}
+              rx={1.5}
+              fill="#18181B"
+              opacity={0.85}
+            />
+          )
+        })}
+        {tickIdx.map((i) => (
+          <text
+            key={i}
+            x={pad.l + i * (barW + gap) + barW / 2}
+            y={h - 8}
+            textAnchor="middle"
+            className="fill-current text-[10px]"
+            opacity={0.45}
+          >
+            {(labels[i] ?? '').slice(5)}
+          </text>
+        ))}
+      </svg>
+    </div>
+  )
 }
 
 function filterDemoPayouts(all: RewardRow[], filter: PayoutFilter): RewardRow[] {
@@ -664,6 +960,8 @@ export default function CreatorProgramAdminPage() {
   const [filter, setFilter] = useState<AppFilter>('pending')
   const [appSort, setAppSort] = useState<AppSort>('default')
   const [payoutFilter, setPayoutFilter] = useState<PayoutFilter>('requested')
+  const [evolutionWindow, setEvolutionWindow] = useState<EvolutionWindow>(30)
+  const [evolution, setEvolution] = useState<EvolutionPayload | null>(null)
   const [apps, setApps] = useState<ApplicationRow[]>([])
   const [codes, setCodes] = useState<CodeRow[]>([])
   const [rewards, setRewards] = useState<RewardRow[]>([])
@@ -827,6 +1125,37 @@ export default function CreatorProgramAdminPage() {
     setAttributionRewards(Array.isArray(payload.rewards) ? payload.rewards : [])
   }, [supabase])
 
+  const loadEvolution = useCallback(async () => {
+    if (!supabase) return
+    setLoading(true)
+    setListError(null)
+    const { data, error } = await supabase.rpc('admin_creator_evolution', {
+      p_days: evolutionWindow,
+    })
+    setLoading(false)
+    if (error) {
+      setListError(
+        error.message.toLowerCase().includes('could not find') ||
+          error.message.toLowerCase().includes('admin_creator_evolution')
+          ? 'Aplica a migration 20260815460000_admin_creator_evolution.sql'
+          : error.message,
+      )
+      setEvolution(null)
+      return
+    }
+    const payload = data as EvolutionPayload | null
+    if (!payload?.ok) {
+      setListError(
+        payload?.error === 'forbidden'
+          ? 'Forbidden — add your email to app_admins'
+          : 'Failed to load evolution',
+      )
+      setEvolution(null)
+      return
+    }
+    setEvolution(payload)
+  }, [supabase, evolutionWindow])
+
   const load = useCallback(async () => {
     if (demoMode) return
     if (tab === 'applications') {
@@ -861,13 +1190,31 @@ export default function CreatorProgramAdminPage() {
           )
         }
       }
-    } else await loadRewards()
-  }, [tab, loadApplications, loadCodes, loadRewards, loadAttributionRewards, demoMode, supabase])
+    } else if (tab === 'payouts') {
+      await loadRewards()
+    } else if (tab === 'evolution') {
+      await loadEvolution()
+    }
+  }, [
+    tab,
+    loadApplications,
+    loadCodes,
+    loadRewards,
+    loadAttributionRewards,
+    loadEvolution,
+    demoMode,
+    supabase,
+  ])
 
   useEffect(() => {
     if (!session || demoMode) return
     void load()
   }, [session, load, demoMode])
+
+  useEffect(() => {
+    if (!demoMode) return
+    if (tab === 'evolution') setEvolution(buildDemoEvolution(evolutionWindow))
+  }, [demoMode, tab, evolutionWindow])
 
   const appSource = demoMode ? demoApps : apps
 
@@ -998,6 +1345,7 @@ export default function CreatorProgramAdminPage() {
         setDemoApps(DEMO_APPS)
         setDemoCodes(DEMO_CODES)
         setDemoRewards(DEMO_PAYOUTS)
+        setEvolution(buildDemoEvolution(evolutionWindow))
         setListError(null)
         setFilter('all')
         setPayoutFilter('requested')
@@ -1772,6 +2120,7 @@ export default function CreatorProgramAdminPage() {
     applications: 'Candidaturas',
     codes: 'Códigos',
     payouts: 'Pagamentos',
+    evolution: 'Evolução',
   }
 
   if (configError) {
@@ -1878,6 +2227,7 @@ export default function CreatorProgramAdminPage() {
               onClick={() => {
                 if (demoMode) {
                   if (tab === 'payouts') setDemoRewards(DEMO_PAYOUTS)
+                  if (tab === 'evolution') setEvolution(buildDemoEvolution(evolutionWindow))
                   return
                 }
                 void load()
@@ -1903,7 +2253,7 @@ export default function CreatorProgramAdminPage() {
 
         <nav className="sticky top-2 z-20 mb-6 -mx-1 overflow-x-auto rounded-2xl border border-border/80 bg-card/95 px-2 py-2 shadow-sm backdrop-blur">
           <div className="flex min-w-max gap-1">
-            {(['applications', 'codes', 'payouts'] as Tab[]).map((t) => (
+            {(['applications', 'codes', 'payouts', 'evolution'] as Tab[]).map((t) => (
               <button
                 key={t}
                 type="button"
@@ -1944,6 +2294,21 @@ export default function CreatorProgramAdminPage() {
                   className={chipClass(payoutFilter === f)}
                 >
                   {f} ({payoutCounts[f]})
+                </button>
+              ))}
+            </div>
+          ) : null}
+
+          {tab === 'evolution' ? (
+            <div className="flex flex-wrap gap-2">
+              {([7, 30, 90] as EvolutionWindow[]).map((d) => (
+                <button
+                  key={d}
+                  type="button"
+                  onClick={() => setEvolutionWindow(d)}
+                  className={chipClass(evolutionWindow === d)}
+                >
+                  {d}d
                 </button>
               ))}
             </div>
@@ -1991,6 +2356,7 @@ export default function CreatorProgramAdminPage() {
               onClick={() => {
                 if (demoMode) {
                   if (tab === 'payouts') setDemoRewards(DEMO_PAYOUTS)
+                  if (tab === 'evolution') setEvolution(buildDemoEvolution(evolutionWindow))
                   return
                 }
                 void load()
@@ -2005,7 +2371,141 @@ export default function CreatorProgramAdminPage() {
         {loading ? <p className="mb-4 text-sm text-muted-foreground">A carregar…</p> : null}
         {listError ? <p className="mb-4 text-sm font-semibold text-red-600">{listError}</p> : null}
 
-        {tab === 'payouts' ? (
+        {tab === 'evolution' ? (
+          evolution?.summary ? (
+            <div className="space-y-6">
+              <div>
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                  Stock atual
+                </p>
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <EvoStat
+                    label="Creators aprovados"
+                    value={fmtNum(evolution.summary.creators_approved)}
+                    hint={`+${fmtNum(evolution.summary.approved_window)} na janela`}
+                  />
+                  <EvoStat
+                    label="Códigos ativos"
+                    value={fmtNum(evolution.summary.codes_active)}
+                    hint={`${fmtNum(evolution.summary.codes_total)} códigos`}
+                  />
+                  <EvoStat
+                    label="Premium comp ativo"
+                    value={fmtNum(evolution.summary.premium_comp_active)}
+                    hint={
+                      evolution.summary.premium_comp_ending_14d
+                        ? `${fmtNum(evolution.summary.premium_comp_ending_14d)} ≤14d`
+                        : evolution.summary.premium_comp_paused
+                          ? `${fmtNum(evolution.summary.premium_comp_paused)} pausados`
+                          : null
+                    }
+                  />
+                  <EvoStat
+                    label="Pendentes"
+                    value={fmtNum(evolution.summary.applications_pending)}
+                    hint={`${fmtNum(evolution.summary.applications_window)} candidaturas · ${evolutionWindow}d`}
+                  />
+                  <EvoStat
+                    label="Referrals (total)"
+                    value={fmtNum(evolution.summary.referrals_total)}
+                    hint={`${fmtNum(evolution.summary.referrals_window)} na janela`}
+                  />
+                  <EvoStat
+                    label="Subs anuais (total)"
+                    value={fmtNum(evolution.summary.qualified_total)}
+                    hint={
+                      evolution.summary.qualify_rate_total != null
+                        ? `${pctRate(evolution.summary.qualify_rate_total)} qualify rate`
+                        : null
+                    }
+                  />
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.06em] text-muted-foreground">
+                  Janela {evolution.window_days}d · conversão & payouts
+                </p>
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <EvoStat
+                    label="Subs na janela"
+                    value={fmtNum(evolution.summary.qualified_window)}
+                    hint={
+                      evolution.summary.qualify_rate_window != null
+                        ? `${pctRate(evolution.summary.qualify_rate_window)} dos referrals`
+                        : 'compra anual via código'
+                    }
+                  />
+                  <EvoStat
+                    label="Premium ativos (referred)"
+                    value={fmtNum(evolution.summary.referred_premium_active)}
+                    hint="rc_premium_active agora"
+                  />
+                  <EvoStat
+                    label="Creators com referrals"
+                    value={fmtNum(evolution.summary.creators_with_referrals)}
+                    hint={`${fmtNum(evolution.summary.creators_with_referrals_window)} ativos na janela`}
+                  />
+                  <EvoStat
+                    label="Payouts pendentes"
+                    value={money(evolution.summary.pending_cents, 'USD')}
+                    hint={`${fmtNum(evolution.summary.rewards_pending_n)} rewards`}
+                  />
+                  <EvoStat
+                    label="Pago (total)"
+                    value={money(evolution.summary.paid_cents, 'USD')}
+                    hint={`${fmtNum(evolution.summary.rewards_paid_n)} pagos`}
+                  />
+                  <EvoStat
+                    label="Pago na janela"
+                    value={money(evolution.summary.paid_cents_window, 'USD')}
+                    hint={`criados ${money(evolution.summary.rewards_created_cents_window, 'USD')}`}
+                  />
+                </div>
+              </div>
+
+              {evolution.daily.length ? (
+                <>
+                  <div className="rounded-2xl border border-border/80 bg-card p-4 shadow-sm">
+                    <p className="mb-1 text-sm font-bold text-foreground">
+                      Creators cumulativos vs subs diárias
+                    </p>
+                    <p className="mb-3 text-xs text-muted-foreground">
+                      Linha preta = creators aprovados acumulados · tracejado laranja = compras anuais / dia
+                    </p>
+                    <DualLineChart
+                      labels={evolution.daily.map((d) => d.day)}
+                      seriesA={evolution.daily.map((d) => d.creators_cumulative)}
+                      seriesB={evolution.daily.map((d) => d.qualified)}
+                      nameA="Creators"
+                      nameB="Subs"
+                    />
+                  </div>
+
+                  <div className="rounded-2xl border border-border/80 bg-card p-4 shadow-sm">
+                    <p className="mb-1 text-sm font-bold text-foreground">Referrals por dia</p>
+                    <p className="mb-3 text-xs text-muted-foreground">
+                      Atribuições com código de creator
+                    </p>
+                    <BarChart
+                      labels={evolution.daily.map((d) => d.day)}
+                      values={evolution.daily.map((d) => d.referrals)}
+                      name="Referrals diários"
+                    />
+                  </div>
+                </>
+              ) : null}
+
+              {evolution.note ? (
+                <p className="text-xs text-muted-foreground">{evolution.note}</p>
+              ) : null}
+            </div>
+          ) : !loading ? (
+            <p className="rounded-2xl border border-border bg-card px-4 py-9 text-center text-sm text-muted-foreground">
+              Sem dados de evolução. Aplica a migration e atualiza.
+            </p>
+          ) : null
+        ) : tab === 'payouts' ? (
           <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
             <div className="overflow-x-auto">
               <table className="w-full min-w-[720px] border-collapse">
