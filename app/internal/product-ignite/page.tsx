@@ -622,6 +622,34 @@ type FinancePayload = {
   }
 }
 
+type AscentDaily = {
+  day: string
+  signups: number
+  premium_new: number
+  users_cumulative: number
+  premium_cumulative: number
+}
+
+type AscentPayload = {
+  ok: boolean
+  error?: string
+  window_days: number
+  generated_at: string
+  note?: string
+  summary: {
+    users_before: number
+    users_end: number
+    signups_window: number
+    premium_before: number
+    premium_end: number
+    premium_new_window: number
+    premium_active_now: number
+    premium_share_end: number | null
+    active_share_now: number | null
+  }
+  daily: AscentDaily[]
+}
+
 type BundlePayload = {
   ok: boolean
   error?: string
@@ -638,6 +666,7 @@ type BundlePayload = {
   ai_funnel: AiFunnelPayload | null
   demographics: DemographicsPayload | null
   finance: FinancePayload | null
+  ascent: AscentPayload | null
 }
 
 type DaypartPayload = {
@@ -1367,6 +1396,48 @@ function buildDemoFinance(days: WindowDays): FinancePayload {
   }
 }
 
+function buildDemoAscent(days: WindowDays): AscentPayload {
+  const usersBefore = 4200
+  const premiumBefore = 180
+  const daily: AscentDaily[] = []
+  let users = usersBefore
+  let premium = premiumBefore
+  for (let i = days - 1; i >= 0; i--) {
+    const d = new Date()
+    d.setHours(12, 0, 0, 0)
+    d.setDate(d.getDate() - i)
+    const signups = 8 + ((days - i) % 5) + (i % 3)
+    const premiumNew = i % 4 === 0 ? 2 : i % 7 === 0 ? 3 : 1
+    users += signups
+    premium += premiumNew
+    daily.push({
+      day: d.toISOString().slice(0, 10),
+      signups,
+      premium_new: premiumNew,
+      users_cumulative: users,
+      premium_cumulative: premium,
+    })
+  }
+  return {
+    ok: true,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    note: 'Demo — users cumulativos vs 1ª conversão premium.',
+    summary: {
+      users_before: usersBefore,
+      users_end: users,
+      signups_window: users - usersBefore,
+      premium_before: premiumBefore,
+      premium_end: premium,
+      premium_new_window: premium - premiumBefore,
+      premium_active_now: Math.round(premium * 0.72),
+      premium_share_end: users > 0 ? Math.round((premium / users) * 1000) / 1000 : null,
+      active_share_now: users > 0 ? Math.round((premium * 0.72) / users * 1000) / 1000 : null,
+    },
+    daily,
+  }
+}
+
 function buildDemoDemographics(days: WindowDays): DemographicsPayload {
   const scale = days === 7 ? 0.4 : days === 30 ? 1 : 2.2
   const openers = Math.round(520 * scale)
@@ -1960,6 +2031,144 @@ function SparkBars({
   )
 }
 
+function DualLineChart({
+  labels,
+  seriesA,
+  seriesB,
+  nameA,
+  nameB,
+}: {
+  labels: string[]
+  seriesA: number[]
+  seriesB: number[]
+  nameA: string
+  nameB: string
+}) {
+  const w = 640
+  const h = 220
+  const pad = { t: 16, r: 44, b: 28, l: 44 }
+  const innerW = w - pad.l - pad.r
+  const innerH = h - pad.t - pad.b
+  const n = Math.max(labels.length, 1)
+  const minA = seriesA.length ? Math.min(...seriesA) : 0
+  const maxA = seriesA.length ? Math.max(...seriesA) : 1
+  const minB = seriesB.length ? Math.min(...seriesB) : 0
+  const maxB = seriesB.length ? Math.max(...seriesB) : 1
+  const spanA = Math.max(1, maxA - minA)
+  const spanB = Math.max(1, maxB - minB)
+  const xAt = (i: number) => pad.l + (n <= 1 ? innerW / 2 : (i / (n - 1)) * innerW)
+  const yA = (v: number) => pad.t + innerH - ((v - minA) / spanA) * innerH
+  const yB = (v: number) => pad.t + innerH - ((v - minB) / spanB) * innerH
+  const pathOf = (vals: number[], yFn: (v: number) => number) =>
+    vals
+      .map((v, i) => `${i === 0 ? 'M' : 'L'} ${xAt(i).toFixed(1)} ${yFn(v).toFixed(1)}`)
+      .join(' ')
+  const tickIdx = [0, Math.floor((n - 1) / 2), n - 1].filter((v, i, a) => a.indexOf(v) === i && v >= 0)
+
+  return (
+    <div className="w-full overflow-x-auto">
+      <svg
+        viewBox={`0 0 ${w} ${h}`}
+        className="h-auto w-full min-w-[320px]"
+        role="img"
+        aria-label={`${nameA} vs ${nameB}`}
+      >
+        <line
+          x1={pad.l}
+          y1={pad.t}
+          x2={pad.l}
+          y2={pad.t + innerH}
+          stroke="currentColor"
+          strokeOpacity="0.12"
+        />
+        <line
+          x1={pad.l + innerW}
+          y1={pad.t}
+          x2={pad.l + innerW}
+          y2={pad.t + innerH}
+          stroke="currentColor"
+          strokeOpacity="0.12"
+        />
+        <line
+          x1={pad.l}
+          y1={pad.t + innerH}
+          x2={pad.l + innerW}
+          y2={pad.t + innerH}
+          stroke="currentColor"
+          strokeOpacity="0.15"
+        />
+        {[0.25, 0.5, 0.75].map((t) => (
+          <line
+            key={t}
+            x1={pad.l}
+            y1={pad.t + innerH * (1 - t)}
+            x2={pad.l + innerW}
+            y2={pad.t + innerH * (1 - t)}
+            stroke="currentColor"
+            strokeOpacity="0.06"
+          />
+        ))}
+        <path d={pathOf(seriesA, yA)} fill="none" stroke="#18181B" strokeWidth="2.25" />
+        <path d={pathOf(seriesB, yB)} fill="none" stroke="#EA580C" strokeWidth="2.25" />
+        <text x={pad.l} y={12} className="fill-foreground" fontSize="10" fontWeight="600">
+          {fmt(maxA)}
+        </text>
+        <text
+          x={pad.l}
+          y={pad.t + innerH + 4}
+          className="fill-muted-foreground"
+          fontSize="10"
+          dominantBaseline="hanging"
+        >
+          {fmt(minA)}
+        </text>
+        <text
+          x={pad.l + innerW}
+          y={12}
+          className="fill-orange-600"
+          fontSize="10"
+          fontWeight="600"
+          textAnchor="end"
+        >
+          {fmt(maxB)}
+        </text>
+        <text
+          x={pad.l + innerW}
+          y={pad.t + innerH + 4}
+          className="fill-orange-600/70"
+          fontSize="10"
+          textAnchor="end"
+          dominantBaseline="hanging"
+        >
+          {fmt(minB)}
+        </text>
+        {tickIdx.map((i) => (
+          <text
+            key={i}
+            x={xAt(i)}
+            y={h - 4}
+            className="fill-muted-foreground"
+            fontSize="9"
+            textAnchor="middle"
+          >
+            {labels[i]?.slice(5) ?? ''}
+          </text>
+        ))}
+      </svg>
+      <div className="mt-2 flex flex-wrap gap-4 text-xs font-semibold">
+        <span className="inline-flex items-center gap-1.5 text-foreground">
+          <span className="h-0.5 w-4 rounded bg-foreground" />
+          {nameA}
+        </span>
+        <span className="inline-flex items-center gap-1.5 text-orange-700">
+          <span className="h-0.5 w-4 rounded bg-orange-600" />
+          {nameB}
+        </span>
+      </div>
+    </div>
+  )
+}
+
 function StatCard({
   label,
   value,
@@ -2024,6 +2233,8 @@ const SECTION_HELP: Record<string, string> = {
     'Sexo/idade dos openers + premium rate e convert na janela. Diz quem é a base e quem paga mais. “Unknown” alto = onboarding incompleto. País não existe no perfil.',
   finance:
     'MRR/COGS = estimativas (ARPU e $/API assumidos). Payouts friend/creator = dinheiro real em referral_rewards. Usa para ordem de grandeza, não contabilidade; RevenueCat/App Store = verdade da receita.',
+  ascent:
+    'Ascensão da base: users cumulativos (auth.users) vs 1ª conversão premium_converted cumulativa. Não é stock diário de rc_premium_active (isso só existe como snapshot agora). Se premium cresce muito mais lento que users, a monetização não acompanha o crescimento.',
   activation:
     'Signup → open / onboarding / 1ª meal em 24h e 7d. Meal 24h é o “aha” crítico. Se open alto e meal baixo, o onboarding ou 1º log falha.',
   growth:
@@ -2205,6 +2416,7 @@ export default function ProductInsightsAdminPage() {
   const [aiFunnel, setAiFunnel] = useState<AiFunnelPayload | null>(null)
   const [demographics, setDemographics] = useState<DemographicsPayload | null>(null)
   const [finance, setFinance] = useState<FinancePayload | null>(null)
+  const [ascent, setAscent] = useState<AscentPayload | null>(null)
   const [loading, setLoading] = useState(false)
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
@@ -2271,6 +2483,7 @@ export default function ProductInsightsAdminPage() {
       setAiFunnel(null)
       setDemographics(null)
       setFinance(null)
+      setAscent(null)
       return
     }
     if (fu.error) {
@@ -2299,6 +2512,7 @@ export default function ProductInsightsAdminPage() {
       setAiFunnel(null)
       setDemographics(null)
       setFinance(null)
+      setAscent(null)
       return
     }
 
@@ -2334,6 +2548,7 @@ export default function ProductInsightsAdminPage() {
       setAiFunnel(null)
       setDemographics(null)
       setFinance(null)
+      setAscent(null)
       return
     }
     if (!fuData?.ok) {
@@ -2366,6 +2581,7 @@ export default function ProductInsightsAdminPage() {
       setAiFunnel(null)
       setDemographics(null)
       setFinance(null)
+      setAscent(null)
       return
     }
     setOverview(ovData)
@@ -2460,6 +2676,7 @@ export default function ProductInsightsAdminPage() {
       setAiFunnel(null)
       setDemographics(null)
       setFinance(null)
+      setAscent(null)
     } else {
       const bunData = bun.data as BundlePayload | null
       if (!bunData?.ok) {
@@ -2474,6 +2691,7 @@ export default function ProductInsightsAdminPage() {
         setAiFunnel(null)
         setDemographics(null)
         setFinance(null)
+        setAscent(null)
       } else {
         const pick = <T extends { ok?: boolean }>(v: T | null | undefined): T | null =>
           v && v.ok !== false ? v : null
@@ -2488,6 +2706,7 @@ export default function ProductInsightsAdminPage() {
         setAiFunnel(pick(bunData.ai_funnel))
         setDemographics(pick(bunData.demographics))
         setFinance(pick(bunData.finance))
+        setAscent(pick(bunData.ascent))
       }
     }
 
@@ -2533,6 +2752,7 @@ export default function ProductInsightsAdminPage() {
     setAiFunnel(buildDemoAiFunnel(windowDays))
     setDemographics(buildDemoDemographics(windowDays))
     setFinance(buildDemoFinance(windowDays))
+    setAscent(buildDemoAscent(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
   }, [demoMode, windowDays])
@@ -2572,6 +2792,7 @@ export default function ProductInsightsAdminPage() {
       setAiFunnel(null)
       setDemographics(null)
       setFinance(null)
+      setAscent(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
   }
@@ -2604,6 +2825,7 @@ export default function ProductInsightsAdminPage() {
     setAiFunnel(buildDemoAiFunnel(windowDays))
     setDemographics(buildDemoDemographics(windowDays))
     setFinance(buildDemoFinance(windowDays))
+    setAscent(buildDemoAscent(windowDays))
         setLastUpdatedAt(new Date().toISOString())
         setListError(null)
       }
@@ -2755,6 +2977,7 @@ export default function ProductInsightsAdminPage() {
     setAiFunnel(buildDemoAiFunnel(windowDays))
     setDemographics(buildDemoDemographics(windowDays))
     setFinance(buildDemoFinance(windowDays))
+    setAscent(buildDemoAscent(windowDays))
                   setLastUpdatedAt(new Date().toISOString())
                   return
                 }
@@ -2893,6 +3116,7 @@ export default function ProductInsightsAdminPage() {
             {(
               [
                 ['kpi', 'KPIs'],
+                ['ascent', 'Ascensão'],
                 ['engagement', 'Engagement'],
                 ['health', 'Saúde'],
                 ['quality', 'Qualidade'],
@@ -3005,6 +3229,62 @@ export default function ProductInsightsAdminPage() {
               />
             </div>
             </div>
+
+            {ascent?.daily?.length ? (
+              <Section
+                title="Ascensão (users vs premium)"
+                subtitle="Base cumulativa de contas vs 1ª conversão premium. Escalas independentes (esq. users · dir. premium)."
+                id="ascent"
+              >
+                <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+                  <StatCard
+                    label="Users (fim)"
+                    value={fmt(ascent.summary.users_end)}
+                    hint={`+${fmt(ascent.summary.signups_window)} na janela`}
+                  />
+                  <StatCard
+                    label="Premium 1ª (fim)"
+                    value={fmt(ascent.summary.premium_end)}
+                    hint={`+${fmt(ascent.summary.premium_new_window)} conversões`}
+                  />
+                  <StatCard
+                    label="Share convertidos"
+                    value={pct(ascent.summary.premium_share_end)}
+                    hint="premium_end ÷ users_end"
+                  />
+                  <StatCard
+                    label="Premium ativos agora"
+                    value={fmt(ascent.summary.premium_active_now)}
+                    hint="rc_premium_active (snapshot)"
+                  />
+                  <StatCard
+                    label="Share ativos"
+                    value={pct(ascent.summary.active_share_now)}
+                    hint="ativos ÷ users_end"
+                  />
+                  <StatCard
+                    label="Antes da janela"
+                    value={fmt(ascent.summary.users_before)}
+                    hint={`${fmt(ascent.summary.premium_before)} premium 1ª`}
+                  />
+                </div>
+                <div className="mt-3 rounded-2xl border border-border bg-card p-4 shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                  <p className="mb-2 text-xs font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                    Curva cumulativa · {ascent.window_days}d
+                  </p>
+                  <DualLineChart
+                    labels={ascent.daily.map((d) => d.day)}
+                    seriesA={ascent.daily.map((d) => d.users_cumulative)}
+                    seriesB={ascent.daily.map((d) => d.premium_cumulative)}
+                    nameA="Users cumulativos"
+                    nameB="Premium (1ª conversão) cumulativo"
+                  />
+                  {ascent.note ? (
+                    <p className="mt-3 text-xs text-muted-foreground">{ascent.note}</p>
+                  ) : null}
+                </div>
+              </Section>
+            ) : null}
 
             {engagement ? (
               <Section
