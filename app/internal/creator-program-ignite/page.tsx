@@ -226,7 +226,7 @@ function EvoStat({
       <p className="text-[10px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
         {label}
       </p>
-      <p className="mt-1 font-display text-2xl font-extrabold tracking-tight text-foreground">
+      <p className="mt-1 text-2xl font-semibold tabular-nums tracking-tight text-foreground">
         {value}
       </p>
       {hint ? <p className="mt-1 text-xs text-muted-foreground">{hint}</p> : null}
