@@ -2195,7 +2195,7 @@ export default function CreatorProgramAdminPage() {
                   </p>
                 ) : null}
 
-                <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
                   <MetaField label="Candidatura">
                     <span className="font-medium text-foreground/90">{shortDate(app.created_at)}</span>
                   </MetaField>
@@ -2226,20 +2226,54 @@ export default function CreatorProgramAdminPage() {
                       {app.rc_premium_product_id || '—'}
                     </span>
                   </MetaField>
-                  <MetaField label="RC expira" urgent={rcUrgentDays != null}>
+                  <MetaField label="Expira RC (loja)" urgent={rcUrgentDays != null}>
                     {app.rc_premium_expires_at ? (
-                      <div className="flex flex-wrap items-center gap-2">
+                      <div className="flex flex-col gap-0.5">
                         <span>{shortDate(app.rc_premium_expires_at)}</span>
                         {rcUrgentDays != null ? (
                           <span className="text-xs font-bold text-orange-700">
                             {rcUrgentDays}d restantes
                           </span>
                         ) : app.rc_premium_active ? (
-                          <span className="text-xs font-medium text-emerald-700">Ativo</span>
-                        ) : null}
+                          <span className="text-xs font-medium text-emerald-700">Ativo · App Store / Play</span>
+                        ) : (
+                          <span className="text-xs font-medium text-muted-foreground">
+                            RevenueCat (não editável aqui)
+                          </span>
+                        )}
                       </div>
                     ) : (
                       <span className="font-medium text-muted-foreground">—</span>
+                    )}
+                  </MetaField>
+                  <MetaField
+                    label="Premium complementar"
+                    urgent={creatorUrgentDays != null}
+                  >
+                    {app.creator_premium_ends_at ? (
+                      <div className="flex flex-col gap-0.5">
+                        <span>{shortDate(app.creator_premium_ends_at)}</span>
+                        {app.creator_premium_paused ? (
+                          <span className="text-xs font-bold text-orange-700">Em pausa</span>
+                        ) : app.creator_premium_active ? (
+                          <span
+                            className={cn(
+                              'text-xs font-bold',
+                              creatorUrgentDays != null
+                                ? 'text-orange-700'
+                                : 'text-emerald-700',
+                            )}
+                          >
+                            {creatorPremiumDaysLeft(app.creator_premium_ends_at) ?? 0}d restantes
+                          </span>
+                        ) : (
+                          <span className="text-xs font-medium text-muted-foreground">
+                            Terminado
+                          </span>
+                        )}
+                      </div>
+                    ) : (
+                      <span className="font-medium text-muted-foreground">Sem grant</span>
                     )}
                   </MetaField>
                 </div>
