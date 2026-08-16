@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
@@ -246,6 +246,69 @@ function platformsLabel(raw: unknown): string {
   if (!Array.isArray(raw)) return '—'
   const list = raw.map((x) => String(x)).filter(Boolean)
   return list.length ? list.join(', ') : '—'
+}
+
+function socialHandleHref(handle: string, platforms: unknown): string | null {
+  const clean = handle.replace(/^@/, '').trim()
+  if (!clean) return null
+  const list = Array.isArray(platforms)
+    ? platforms.map((x) => String(x).toLowerCase())
+    : []
+  if (list.includes('tiktok')) return `https://www.tiktok.com/@${clean}`
+  if (list.includes('youtube')) return `https://www.youtube.com/@${clean}`
+  return `https://www.instagram.com/${clean}`
+}
+
+function expiryUrgency(iso: string | null | undefined, active: boolean): number | null {
+  if (!active || !iso) return null
+  const left = creatorPremiumDaysLeft(iso)
+  if (left == null) return null
+  if (left <= 7) return left
+  return null
+}
+
+function CopyButton({ value, ariaLabel }: { value: string; ariaLabel: string }) {
+  const [copied, setCopied] = useState(false)
+  return (
+    <button
+      type="button"
+      title={copied ? 'Copiado' : 'Copiar'}
+      aria-label={ariaLabel}
+      className="rounded-md border border-border bg-card px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground transition-colors hover:border-foreground/30 hover:text-foreground"
+      onClick={() => {
+        void navigator.clipboard.writeText(value).then(() => {
+          setCopied(true)
+          window.setTimeout(() => setCopied(false), 1200)
+        })
+      }}
+    >
+      {copied ? 'OK' : 'Copiar'}
+    </button>
+  )
+}
+
+function MetaField({
+  label,
+  children,
+  urgent,
+}: {
+  label: string
+  children: ReactNode
+  urgent?: boolean
+}) {
+  return (
+    <div
+      className={cn(
+        'rounded-xl border px-3 py-2.5',
+        urgent ? 'border-orange-200 bg-orange-50/80' : 'border-border/70 bg-muted/30',
+      )}
+    >
+      <p className="text-[10px] font-bold uppercase tracking-[0.06em] text-muted-foreground">
+        {label}
+      </p>
+      <div className="mt-1 text-sm font-semibold text-foreground">{children}</div>
+    </div>
+  )
 }
 
 type CreatorRewardStats = {
@@ -2049,19 +2112,68 @@ export default function CreatorProgramAdminPage() {
                 Sem candidaturas para este filtro.
               </div>
             ) : null}
-            {visibleApps.map((app) => (
+            {visibleApps.map((app) => {
+              const handleHref = app.primary_handle
+                ? socialHandleHref(app.primary_handle, app.platforms)
+                : null
+              const rcUrgentDays = expiryUrgency(app.rc_premium_expires_at, !!app.rc_premium_active)
+              const creatorUrgentDays =
+                app.creator_premium_active && !app.creator_premium_paused
+                  ? expiryUrgency(app.creator_premium_ends_at, true)
+                  : null
+              const codeRow = codeRowForAssigned(app.assigned_code)
+              return (
               <article
                 key={app.id}
                 className="rounded-2xl border border-border bg-card p-5 shadow-[0_12px_40px_rgba(15,23,42,0.05)]"
               >
                 <div className="flex items-start justify-between gap-3">
-                  <div>
+                  <div className="min-w-0">
                     <h2 className="text-lg font-bold tracking-tight">{app.display_name}</h2>
-                    <p className="mt-1.5 text-sm text-muted-foreground">
-                      <span className="font-bold text-foreground/70">E-mail</span> {app.contact_email}
+                    <div className="mt-1.5 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
+                      <a
+                        href={`mailto:${app.contact_email}`}
+                        className="font-medium text-foreground/80 underline-offset-2 hover:text-foreground hover:underline"
+                      >
+                        {app.contact_email}
+                      </a>
+                      <CopyButton value={app.contact_email} ariaLabel="Copiar email" />
+                    </div>
+                    <p className="mt-1.5 text-[13px] text-muted-foreground">
+                      {platformsLabel(app.platforms)}
+                      {app.primary_handle ? (
+                        <>
+                          {' · '}
+                          {handleHref ? (
+                            <a
+                              href={handleHref}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="font-semibold text-foreground/80 underline-offset-2 hover:underline"
+                            >
+                              {app.primary_handle}
+                            </a>
+                          ) : (
+                            <span className="font-semibold text-foreground/80">
+                              {app.primary_handle}
+                            </span>
+                          )}
+                        </>
+                      ) : null}
+                      {app.audience_size ? ` · Audiência ${app.audience_size}` : null}
                     </p>
                   </div>
                   <div className="flex flex-col items-end gap-1.5">
+                    {rcUrgentDays != null ? (
+                      <span className="inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-xs font-bold text-orange-700">
+                        RC · {rcUrgentDays}d
+                      </span>
+                    ) : null}
+                    {creatorUrgentDays != null ? (
+                      <span className="inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-xs font-bold text-orange-700">
+                        Complimentary · {creatorUrgentDays}d
+                      </span>
+                    ) : null}
                     {(() => {
                       const sub = subscriptionLabel(app)
                       return <span className={sub.className}>{sub.label}</span>
@@ -2069,28 +2181,68 @@ export default function CreatorProgramAdminPage() {
                     <span className={statusBadgeClass(app.status)}>{app.status}</span>
                   </div>
                 </div>
-                <p className="mt-2.5 text-[13px] text-muted-foreground">
-                  <span className="font-bold text-foreground/70">Plataformas</span>{' '}
-                  {platformsLabel(app.platforms)} · Handle: {app.primary_handle || '—'} · Audiência:{' '}
-                  {app.audience_size || '—'}
-                </p>
+
                 {app.notes ? (
-                  <p className="mt-2 text-sm text-foreground/80">
-                    <span className="font-bold text-foreground/70">Notas do candidato</span> {app.notes}
+                  <p className="mt-3 text-sm text-foreground/80">
+                    <span className="font-bold text-foreground/70">Notas do candidato</span>{' '}
+                    {app.notes}
                   </p>
                 ) : null}
-                <p className="mt-2.5 text-[13px] text-muted-foreground">
-                  <span className="font-bold text-foreground/70">Candidatura</span>{' '}
-                  {shortDate(app.created_at)}
-                  {app.assigned_code ? ` · Código: ${app.assigned_code}` : ''}
-                  {app.admin_note ? ` · Nota de rejeição: ${app.admin_note}` : ''}
-                  {app.rc_premium_active && app.rc_premium_product_id
-                    ? ` · Produto: ${app.rc_premium_product_id}`
-                    : ''}
-                  {app.rc_premium_active && app.rc_premium_expires_at
-                    ? ` · RC expira ${shortDate(app.rc_premium_expires_at)}`
-                    : ''}
-                </p>
+
+                {app.admin_note ? (
+                  <p className="mt-2 rounded-xl border border-red-100 bg-red-50/60 px-3 py-2 text-sm text-red-800">
+                    <span className="font-bold">Nota de rejeição</span> {app.admin_note}
+                  </p>
+                ) : null}
+
+                <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
+                  <MetaField label="Candidatura">
+                    <span className="font-medium text-foreground/90">{shortDate(app.created_at)}</span>
+                  </MetaField>
+                  <MetaField label="Código">
+                    {app.assigned_code ? (
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-mono font-bold tracking-wide">{app.assigned_code}</span>
+                        <CopyButton value={app.assigned_code} ariaLabel="Copiar código" />
+                        {codeRow ? (
+                          <span
+                            className={cn(
+                              'inline-flex rounded-full px-2 py-0.5 text-[10px] font-bold',
+                              codeRow.active
+                                ? 'bg-emerald-50 text-emerald-700'
+                                : 'bg-muted text-foreground/60',
+                            )}
+                          >
+                            {codeRow.active ? 'Ativo' : 'Off'}
+                          </span>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <span className="font-medium text-muted-foreground">—</span>
+                    )}
+                  </MetaField>
+                  <MetaField label="Produto RC">
+                    <span className="break-all font-mono text-[13px] font-semibold">
+                      {app.rc_premium_product_id || '—'}
+                    </span>
+                  </MetaField>
+                  <MetaField label="RC expira" urgent={rcUrgentDays != null}>
+                    {app.rc_premium_expires_at ? (
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span>{shortDate(app.rc_premium_expires_at)}</span>
+                        {rcUrgentDays != null ? (
+                          <span className="text-xs font-bold text-orange-700">
+                            {rcUrgentDays}d restantes
+                          </span>
+                        ) : app.rc_premium_active ? (
+                          <span className="text-xs font-medium text-emerald-700">Ativo</span>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <span className="font-medium text-muted-foreground">—</span>
+                    )}
+                  </MetaField>
+                </div>
 
                 <div className="mt-3.5 flex flex-col gap-2.5 rounded-xl border border-border bg-muted/40 p-3.5">
                   <p className="text-xs font-bold uppercase tracking-wide text-foreground/60">
@@ -2477,7 +2629,8 @@ export default function CreatorProgramAdminPage() {
                   </div>
                 ) : null}
               </article>
-            ))}
+              )
+            })}
           </div>
         ) : (
           <>
