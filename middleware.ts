@@ -48,15 +48,26 @@ export async function middleware(request: NextRequest) {
   const isComingSoon = pathname === '/coming-soon' || pathname.startsWith('/coming-soon/')
   const isCommunityInvite =
     pathname === '/community' || pathname.startsWith('/community/')
+  const isGroupInvite = pathname === '/groups' || pathname.startsWith('/groups/')
   const isInternalOps =
     pathname === '/internal' || pathname.startsWith('/internal/')
 
-  if (isComingSoon || isCommunityInvite || isInternalOps) {
+  if (isComingSoon || isCommunityInvite || isGroupInvite || isInternalOps) {
     const preferred = resolvePreferredLocale(request)
     return withGeoCookie(request, NextResponse.next(), preferred)
   }
 
-  if (isGateEnabled()) {
+  // Legal pages must stay public (App Store / in-app links) in every locale.
+  const { pathname: localeRest } = splitLocalePath(pathname)
+  const legalPaths = new Set([
+    '/privacy',
+    '/terms',
+    '/referral-terms',
+    '/creator-program-terms',
+  ])
+  const isPublicLegal = legalPaths.has(pathname) || legalPaths.has(localeRest)
+
+  if (isGateEnabled() && !isPublicLegal) {
     const expected = await expectedGateToken()
     const cookie = request.cookies.get(GATE_COOKIE)?.value
     if (!(expected && cookie === expected)) {
