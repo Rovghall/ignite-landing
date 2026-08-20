@@ -66,7 +66,15 @@ const DEMO_ROWS: WatchRow[] = [
     rc_premium_active: false,
     meal_count: 0,
     events_first_15m: 2,
-    reasons: ['play_robo', 'email_otp', 'email_unconfirmed', 'empty_name', 'onboarding_incomplete', 'zero_meals', 'created_24h'],
+    reasons: [
+      'play_robo',
+      'email_otp',
+      'email_unconfirmed',
+      'empty_name',
+      'onboarding_incomplete',
+      'zero_meals',
+      'created_24h',
+    ],
     bot_score: 110,
     watch_class: 'google_test',
   },
@@ -83,9 +91,43 @@ const DEMO_ROWS: WatchRow[] = [
     rc_premium_active: false,
     meal_count: 0,
     events_first_15m: 0,
-    reasons: ['gmail_farm', 'empty_name', 'onboarding_incomplete', 'zero_meals'],
-    bot_score: 90,
+    reasons: ['gmail_farm', 'empty_name', 'onboarding_incomplete', 'zero_meals', 'instant_session'],
+    bot_score: 115,
     watch_class: 'farm',
+  },
+  {
+    id: 'demo-watch',
+    email: 'temp.signup@outlook.com',
+    created_at: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+    last_sign_in_at: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+    email_confirmed_at: null,
+    provider: 'email',
+    providers: 'email',
+    onboarding_completed: false,
+    display_name: null,
+    rc_premium_active: false,
+    meal_count: 0,
+    events_first_15m: 1,
+    reasons: ['email_otp', 'email_unconfirmed', 'empty_name', 'onboarding_incomplete', 'zero_meals', 'created_24h'],
+    bot_score: 70,
+    watch_class: 'watch',
+  },
+  {
+    id: 'demo-ok',
+    email: 'real.user@gmail.com',
+    created_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+    last_sign_in_at: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+    email_confirmed_at: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+    provider: 'google',
+    providers: 'google',
+    onboarding_completed: true,
+    display_name: 'Maria Silva',
+    rc_premium_active: true,
+    meal_count: 42,
+    events_first_15m: 3,
+    reasons: [],
+    bot_score: 0,
+    watch_class: 'ok',
   },
 ]
 
@@ -244,6 +286,10 @@ export default function BotWatchAdminPage() {
     setDemoMode(false)
   }
 
+  function toggleDemo() {
+    setDemoMode((on) => !on)
+  }
+
   if (configError) {
     return (
       <main className={cn(PAGE_BG, 'px-4 py-10')}>
@@ -333,27 +379,45 @@ export default function BotWatchAdminPage() {
             <InternalAdminNav active="bots" className="mt-3" />
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            {demoMode ? (
-              <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
-                Demo
-              </span>
+            <button
+              type="button"
+              onClick={toggleDemo}
+              className={cn(
+                'rounded-full border px-3.5 py-2 text-sm font-semibold',
+                demoMode
+                  ? 'border-amber-500 bg-amber-50 text-amber-900'
+                  : 'border-border bg-card text-foreground',
+              )}
+            >
+              {demoMode ? 'Sair da demo' : 'Pré-visualização demo'}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (demoMode) return
+                void load()
+              }}
+              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
+            >
+              {loading && !demoMode ? 'A carregar…' : 'Actualizar'}
+            </button>
+            {session && user ? (
+              <button
+                type="button"
+                onClick={() => void onSignOut()}
+                className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
+              >
+                Sair
+              </button>
             ) : null}
-            <button
-              type="button"
-              onClick={() => void load()}
-              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
-            >
-              {loading ? 'A carregar…' : 'Actualizar'}
-            </button>
-            <button
-              type="button"
-              onClick={() => void onSignOut()}
-              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
-            >
-              Sair
-            </button>
           </div>
         </header>
+
+        {demoMode ? (
+          <p className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900">
+            Modo demo — exemplos fictícios (Farm, Play Robo, Vigiar, OK). Nada é guardado.
+          </p>
+        ) : null}
 
         <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <StatCard label="A vigiar" value={String(filterCounts.watch)} />
@@ -386,7 +450,7 @@ export default function BotWatchAdminPage() {
           />
         </div>
 
-        {listError ? (
+        {listError && !demoMode ? (
           <p className="mb-4 text-sm font-semibold text-red-600">{listError}</p>
         ) : null}
 

@@ -58,6 +58,21 @@ const DEMO_ROWS: AbuserRow[] = [
     last_snap_at: new Date(Date.now() - 3 * 60 * 60 * 1000).toISOString(),
     total_n: 46,
   },
+  {
+    id: 'demo-3',
+    email: 'active.user@gmail.com',
+    user_created_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+    provider: 'apple',
+    display_name: 'João Costa',
+    rc_premium_active: true,
+    snap_track_n: 18,
+    snap_cook_n: 4,
+    snap_track_24h: 3,
+    snap_cook_24h: 0,
+    peak_day_n: 7,
+    last_snap_at: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+    total_n: 22,
+  },
 ]
 
 function shortDate(iso: string | null): string {
@@ -204,6 +219,10 @@ export default function AbusersAdminPage() {
     setDemoMode(false)
   }
 
+  function toggleDemo() {
+    setDemoMode((on) => !on)
+  }
+
   if (configError) {
     return (
       <main className={cn(PAGE_BG, 'px-4 py-10')}>
@@ -293,27 +312,45 @@ export default function AbusersAdminPage() {
             <InternalAdminNav active="abusers" className="mt-3" />
           </div>
           <div className="flex flex-wrap items-center gap-2">
-            {demoMode ? (
-              <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900">
-                Demo
-              </span>
+            <button
+              type="button"
+              onClick={toggleDemo}
+              className={cn(
+                'rounded-full border px-3.5 py-2 text-sm font-semibold',
+                demoMode
+                  ? 'border-amber-500 bg-amber-50 text-amber-900'
+                  : 'border-border bg-card text-foreground',
+              )}
+            >
+              {demoMode ? 'Sair da demo' : 'Pré-visualização demo'}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (demoMode) return
+                void load()
+              }}
+              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
+            >
+              {loading && !demoMode ? 'A carregar…' : 'Actualizar'}
+            </button>
+            {session && user ? (
+              <button
+                type="button"
+                onClick={() => void onSignOut()}
+                className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
+              >
+                Sair
+              </button>
             ) : null}
-            <button
-              type="button"
-              onClick={() => void load()}
-              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
-            >
-              {loading ? 'A carregar…' : 'Actualizar'}
-            </button>
-            <button
-              type="button"
-              onClick={() => void onSignOut()}
-              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
-            >
-              Sair
-            </button>
           </div>
         </header>
+
+        {demoMode ? (
+          <p className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm font-semibold text-amber-900">
+            Modo demo — exemplos fictícios de volume Snap. Nada é guardado.
+          </p>
+        ) : null}
 
         <div className="mb-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <StatCard label="Users listados" value={String(stats.n)} />
@@ -346,7 +383,7 @@ export default function AbusersAdminPage() {
           />
         </div>
 
-        {listError ? (
+        {listError && !demoMode ? (
           <p className="mb-4 text-sm font-semibold text-red-600">{listError}</p>
         ) : null}
 
