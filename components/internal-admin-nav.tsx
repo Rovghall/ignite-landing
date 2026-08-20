@@ -3,12 +3,14 @@
 import Link from 'next/link'
 import { cn } from '@/lib/utils'
 
-export type InternalAdminPage = 'product' | 'referrals' | 'creators'
+export type InternalAdminPage = 'product' | 'referrals' | 'creators' | 'bots' | 'abusers'
 
 const LINKS: { id: InternalAdminPage; href: string; label: string }[] = [
   { id: 'product', href: '/internal/product-ignite', label: 'Produto' },
   { id: 'referrals', href: '/internal/rc-payouts-ignite', label: 'Referrals' },
   { id: 'creators', href: '/internal/creator-program-ignite', label: 'Creators' },
+  { id: 'bots', href: '/internal/bot-watch-ignite', label: 'Bots' },
+  { id: 'abusers', href: '/internal/abusers-ignite', label: 'Abusers' },
 ]
 
 export function InternalAdminNav({
