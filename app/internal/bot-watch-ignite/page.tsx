@@ -48,7 +48,7 @@ const REASON_LABELS: Record<string, string> = {
   onboarding_incomplete: 'Onboarding incompleto',
   zero_meals: '0 refeições',
   created_24h: 'Criado nas últimas 24h',
-  instant_session: 'Sessão em <20s',
+  instant_session: 'OAuth em <2s (script)',
   event_burst: 'Muitos eventos nos primeiros 15 min',
 }
 
@@ -327,7 +327,7 @@ export default function BotWatchAdminPage() {
             </p>
             <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight">Bots</h1>
             <p className="mt-1 max-w-xl text-sm text-muted-foreground">
-              Só leitura. Score a partir de login, perfil vazio, farm Gmail e testes do Play.
+              Só leitura. Farm Gmail, Play Robo e OAuth sub-segundo. Onboarding completo = safe.
               Não apaga contas.
             </p>
             <InternalAdminNav active="bots" className="mt-3" />
