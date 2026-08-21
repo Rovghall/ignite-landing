@@ -1,5 +1,1441 @@
 [
   {
+    "slug": "how-many-calories-cycling",
+    "title": "How Many Calories Does Cycling Burn?",
+    "date": "2026-08-21",
+    "description": "A cycling session burns about 238 kcal in 30 minutes for a 70 kg person at MET ≈ 6.8 (about 476/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "Cycling is one of the most searched calorie questions in fitness — and one of the most misread. Seat time is not the same as continuous hard pedaling, and outdoor hills change everything.",
+          "Using a working MET of about 6.8 (moderate road/indoor effort, roughly 12–14 mph pace equivalent), a 70 kg person lands near 238 calories in 30 minutes — roughly 476 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Cycling (MET ≈ 6.8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~94 · 30 min: ~187 · 45 min: ~281 · 60 min: ~374",
+          "70 kg: 15 min: ~119 · 30 min: ~238 · 45 min: ~357 · 60 min: ~476",
+          "85 kg: 15 min: ~145 · 30 min: ~289 · 45 min: ~434 · 60 min: ~578",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "For moderate steady cycling we use MET ≈ 6.8. Easy recovery spins sit closer to 4–5; hard intervals or steep climbs can push toward 8–12. Cadence, gearing, and wind matter as much as the clock.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Cycling builds aerobic engine and is joint-friendlier than pounding pavement for many people. Use it for conditioning and recovery capacity; do not expect a casual spin to erase a weekend of unlogged meals.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log cycling for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Curious how it stacks up against running? See our running vs cycling comparison once you have a baseline week of logged rides and meals."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 238 kcal in 30 minutes at 70 kg for cycling at MET ≈ 6.8, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-hiit",
+    "title": "How Many Calories Does HIIT Burn?",
+    "date": "2026-08-20",
+    "description": "A hiit session burns about 280 kcal in 30 minutes for a 70 kg person at MET ≈ 8 (about 560/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "HIIT marketing loves afterburn myths. The real story is simpler: hard intervals raise average intensity, but rest periods and how “HIIT” is coached change the total a lot.",
+          "Using a working MET of about 8 (vigorous intermittent conditioning — average across work and short rests), a 70 kg person lands near 280 calories in 30 minutes — roughly 560 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for HIIT (MET ≈ 8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "We use MET ≈ 8.0 as a working average for vigorous circuit-style HIIT. True all-out intervals with long rests may average lower across the whole hour; continuous hard efforts can average higher. Name recognition is not a MET.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "HIIT is useful when time is short and you can recover. It is a poor excuse to skip protein or to “earn” takeout without logging. Strength work still needs its own place in the week.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log hiit for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Compare HIIT to circuit training if your studio uses those labels interchangeably — the calorie tables are close, the programming is not always."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 280 kcal in 30 minutes at 70 kg for hiit at MET ≈ 8, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-yoga",
+    "title": "How Many Calories Does Yoga Burn?",
+    "date": "2026-08-19",
+    "description": "A yoga session burns about 105 kcal in 30 minutes for a 70 kg person at MET ≈ 3 (about 210/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "People under- and over-estimate yoga calories. Restorative classes barely move the needle; sweaty power flows look more like light cardio. Most “yoga calories” searches need that intensity split.",
+          "Using a working MET of about 3 (general hatha / mixed class; power yoga can sit closer to 4), a 70 kg person lands near 105 calories in 30 minutes — roughly 210 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Yoga (MET ≈ 3) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~41 · 30 min: ~83 · 45 min: ~124 · 60 min: ~165",
+          "70 kg: 15 min: ~53 · 30 min: ~105 · 45 min: ~158 · 60 min: ~210",
+          "85 kg: 15 min: ~64 · 30 min: ~128 · 45 min: ~191 · 60 min: ~255",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 3.0 fits many standard mixed yoga classes. Yin/restorative is lower; vigorous vinyasa or hot power classes trend higher. Stillness, breathwork, and long holds pull averages down.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Yoga’s best ROI is often mobility, stress, and training longevity — not max kcal. If fat loss is the goal, pair yoga with steps, protein, and an honest food log rather than chasing a studio board number.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log yoga for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Walking often burns more per minute than gentle yoga. That does not make yoga useless — it makes the comparison honest."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 105 kcal in 30 minutes at 70 kg for yoga at MET ≈ 3, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-zumba",
+    "title": "How Many Calories Does Zumba Burn?",
+    "date": "2026-08-18",
+    "description": "A zumba session burns about 228 kcal in 30 minutes for a 70 kg person at MET ≈ 6.5 (about 455/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "Zumba feels like a party, which is why adherence is high — and why calorie boards in studios get optimistic. Continuous dancing drives the burn; water breaks and demos cut it.",
+          "Using a working MET of about 6.5 (typical energetic group dance-fitness class), a 70 kg person lands near 228 calories in 30 minutes — roughly 455 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Zumba (MET ≈ 6.5) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~89 · 30 min: ~179 · 45 min: ~268 · 60 min: ~358",
+          "70 kg: 15 min: ~114 · 30 min: ~228 · 45 min: ~341 · 60 min: ~455",
+          "85 kg: 15 min: ~138 · 30 min: ~276 · 45 min: ~414 · 60 min: ~553",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 6.5 is a solid mid estimate for continuous Zumba-style dance fitness. Beginner classes with lots of instruction trend lower; advanced nonstop tracks trend higher.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Zumba shines for consistency and cardio without feeling like punishment. Treat it as conditioning. Keep strength work and protein if physique change matters.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log zumba for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "If you are choosing between Zumba and a run for calorie density, compare equal continuous minutes — not “I went to class” vs “I ran for 20.”"
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 228 kcal in 30 minutes at 70 kg for zumba at MET ≈ 6.5, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-elliptical",
+    "title": "How Many Calories Does an Elliptical Burn?",
+    "date": "2026-08-17",
+    "description": "A elliptical training session burns about 175 kcal in 30 minutes for a 70 kg person at MET ≈ 5 (about 350/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "Elliptical consoles are notorious for generous calorie readouts. The movement is real; the screen is often salesmanship. Use MET-based ranges as a sanity check.",
+          "Using a working MET of about 5 (moderate machine effort), a 70 kg person lands near 175 calories in 30 minutes — roughly 350 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Elliptical training (MET ≈ 5) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~69 · 30 min: ~138 · 45 min: ~206 · 60 min: ~275",
+          "70 kg: 15 min: ~88 · 30 min: ~175 · 45 min: ~263 · 60 min: ~350",
+          "85 kg: 15 min: ~106 · 30 min: ~213 · 45 min: ~319 · 60 min: ~425",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 5.0 fits moderate continuous elliptical work. Higher resistance and faster cadence raise cost; holding the rails and coasting lowers it. Hands-free vs holding rails changes both effort and the estimate.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Ellipticals are useful low-impact cardio. Great for steps-of-sorts when joints complain. Still not a license to ignore dinner logging.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log elliptical training for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Cross-check against walking or cycling weeks in your log. If the elliptical “burns” twice as much as those at similar RPE, distrust the machine first."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 175 kcal in 30 minutes at 70 kg for elliptical training at MET ≈ 5, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-rowing",
+    "title": "How Many Calories Does Rowing Burn?",
+    "date": "2026-08-16",
+    "description": "A rowing session burns about 245 kcal in 30 minutes for a 70 kg person at MET ≈ 7 (about 490/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "Rowing recruits a lot of muscle mass, so calorie cost per minute is legitimately high when technique is solid and splits are honest. Soft paddling is a different sport.",
+          "Using a working MET of about 7 (moderate continuous erg / boat effort), a 70 kg person lands near 245 calories in 30 minutes — roughly 490 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Rowing (MET ≈ 7) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~96 · 30 min: ~193 · 45 min: ~289 · 60 min: ~385",
+          "70 kg: 15 min: ~123 · 30 min: ~245 · 45 min: ~368 · 60 min: ~490",
+          "85 kg: 15 min: ~149 · 30 min: ~298 · 45 min: ~446 · 60 min: ~595",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 7.0 for moderate continuous rowing. Hard pieces and race-pace work climb; long rests between intervals drop the session average. Damper setting is not a magic calorie dial by itself.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Rowing builds engine and posterior-chain endurance. Technique protects ribs and low back — chasing calories with ugly pulls is a bad trade.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log rowing for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Against running, rowing can match or beat expenditure at similar hard efforts with less impact. Skill ceiling is higher; be patient."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 245 kcal in 30 minutes at 70 kg for rowing at MET ≈ 7, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-stair-climbing",
+    "title": "How Many Calories Does Stair Climbing Burn?",
+    "date": "2026-08-15",
+    "description": "A stair climbing session burns about 308 kcal in 30 minutes for a 70 kg person at MET ≈ 8.8 (about 616/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "Stairs are a dense calorie modality: vertical work is expensive. That is why short stair sessions punch above their clock time — and why machine calorie screens still deserve skepticism.",
+          "Using a working MET of about 8.8 (vigorous stair / stair-climber effort), a 70 kg person lands near 308 calories in 30 minutes — roughly 616 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Stair climbing (MET ≈ 8.8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~121 · 30 min: ~242 · 45 min: ~363 · 60 min: ~484",
+          "70 kg: 15 min: ~154 · 30 min: ~308 · 45 min: ~462 · 60 min: ~616",
+          "85 kg: 15 min: ~187 · 30 min: ~374 · 45 min: ~561 · 60 min: ~748",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 8.8 reflects vigorous stair climbing or a hard stair-climber pace. Leisurely steps between floors are closer to brisk walking with a vertical tax, not this MET.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Stairs hammer legs and lungs. Dose carefully if knees or calves are cranky. Pair with protein if you are also lifting.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log stair climbing for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Per minute, stairs often beat easy jogging. Per recovery cost, they can also leave you wrecked — plan the week, not just the screenshot."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 308 kcal in 30 minutes at 70 kg for stair climbing at MET ≈ 8.8, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-kettlebell",
+    "title": "How Many Calories Does Kettlebell Training Burn?",
+    "date": "2026-08-14",
+    "description": "A kettlebell training session burns about 280 kcal in 30 minutes for a 70 kg person at MET ≈ 8 (about 560/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "Kettlebell calories depend entirely on whether you mean continuous swings and complexes or slow strength practice with long rests. Those are different energy sports wearing the same bell.",
+          "Using a working MET of about 8 (continuous swings / conditioning-style kettlebell work), a 70 kg person lands near 280 calories in 30 minutes — roughly 560 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Kettlebell training (MET ≈ 8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 8.0 fits conditioning-style kettlebell work with limited rest. Heavy strength sets with long rests behave more like other resistance training (often closer to MET 3.5–6).",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Kettlebells excel at dense conditioning and hip-power patterns. Log them for training quality. Do not invent EPOC fairy tales to unlock dessert.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log kettlebell training for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Versus classic weight lifting, continuous kettlebell conditioning usually burns more per minute; heavy strength work is a different goal."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 280 kcal in 30 minutes at 70 kg for kettlebell training at MET ≈ 8, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-dance",
+    "title": "How Many Calories Does Dance Burn?",
+    "date": "2026-08-13",
+    "description": "A dance session burns about 193 kcal in 30 minutes for a 70 kg person at MET ≈ 5.5 (about 385/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "“Dance calories” is a wide bucket: slow social dancing is not a cardio dance class. Search intent usually wants the sweaty middle — continuous movement with music.",
+          "Using a working MET of about 5.5 (general social / recreational dance; aerobic dance classes can run higher), a 70 kg person lands near 193 calories in 30 minutes — roughly 385 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Dance (MET ≈ 5.5) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~76 · 30 min: ~151 · 45 min: ~227 · 60 min: ~303",
+          "70 kg: 15 min: ~96 · 30 min: ~193 · 45 min: ~289 · 60 min: ~385",
+          "85 kg: 15 min: ~117 · 30 min: ~234 · 45 min: ~351 · 60 min: ~468",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 5.5 for general continuous dance. Ballroom with lots of standing may sit lower; vigorous aerobic or street styles can climb toward 7+.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Dance wins on adherence and coordination. Use it as enjoyable cardio. Add strength and protein if body composition is the real target.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log dance for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Studio dance-fitness brands (including Zumba-style classes) often sit a bit higher than casual social dance — match the intensity you actually did."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 193 kcal in 30 minutes at 70 kg for dance at MET ≈ 5.5, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-walking-dog",
+    "title": "How Many Calories Does Walking the Dog Burn?",
+    "date": "2026-08-12",
+    "description": "A walking the dog session burns about 105 kcal in 30 minutes for a 70 kg person at MET ≈ 3 (about 210/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "Dog walking is underrated NEAT — and overrated as a “workout calorie” flex. Sniff breaks, leash tangles, and neighbor chats turn a walk into interval standing.",
+          "Using a working MET of about 3 (leisure dog walking with typical stops), a 70 kg person lands near 105 calories in 30 minutes — roughly 210 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Walking the dog (MET ≈ 3) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~41 · 30 min: ~83 · 45 min: ~124 · 60 min: ~165",
+          "70 kg: 15 min: ~53 · 30 min: ~105 · 45 min: ~158 · 60 min: ~210",
+          "85 kg: 15 min: ~64 · 30 min: ~128 · 45 min: ~191 · 60 min: ~255",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 3.0 fits typical dog walking. Brisk continuous walking without stops lands higher (closer to 3.5–4.3). If your dog trains you to sprint, that is a different session.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Consistency beats intensity here. Daily dog walks raise weekly expenditure quietly. Still log food; puppies do not burn burritos for you.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log walking the dog for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Track weekly steps and bodyweight trends. Dog walking shines as a steps floor, not as HIIT."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 105 kcal in 30 minutes at 70 kg for walking the dog at MET ≈ 3, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-house-cleaning",
+    "title": "How Many Calories Does House Cleaning Burn?",
+    "date": "2026-08-11",
+    "description": "A house cleaning session burns about 116 kcal in 30 minutes for a 70 kg person at MET ≈ 3.3 (about 231/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "Cleaning calories are real NEAT, not a fat-loss hack. Moderate housework moves the needle slowly; sitting between tasks does not count as a circuit.",
+          "Using a working MET of about 3.3 (moderate cleaning — mopping, vacuuming, scrubbing), a 70 kg person lands near 116 calories in 30 minutes — roughly 231 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for House cleaning (MET ≈ 3.3) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~45 · 30 min: ~91 · 45 min: ~136 · 60 min: ~182",
+          "70 kg: 15 min: ~58 · 30 min: ~116 · 45 min: ~173 · 60 min: ~231",
+          "85 kg: 15 min: ~70 · 30 min: ~140 · 45 min: ~210 · 60 min: ~281",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 3.3 for moderate cleaning. Light dusting is lower; vigorous scrubbing or moving furniture spikes briefly. Most people overestimate continuous hard effort.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Count cleaning as lifestyle activity. Keep intentional training and protein for physique goals. Do not “earn” takeout with a bathroom scrub.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log house cleaning for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Steps and weekly weight trends tell the truth better than a single chore’s calorie guess."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 116 kcal in 30 minutes at 70 kg for house cleaning at MET ≈ 3.3, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-calisthenics",
+    "title": "How Many Calories Does Calisthenics Burn?",
+    "date": "2026-08-10",
+    "description": "A calisthenics session burns about 280 kcal in 30 minutes for a 70 kg person at MET ≈ 8 (about 560/hour). See calorie tables by bodyweight and duration, what changes the estimate, and how to log training without eating the whole burn back.",
+    "sections": [
+      {
+        "body": [
+          "Calisthenics calorie answers split into two worlds: slow strength skills with long rests, versus dense circuits of push-ups, squats, and burpees. Search traffic usually wants the sweaty circuit.",
+          "Using a working MET of about 8 (vigorous continuous calisthenics — push-ups, burpees, dense circuits), a 70 kg person lands near 280 calories in 30 minutes — roughly 560 per hour. Heavier bodies burn more for the same effort; lighter bodies burn less.",
+          "Fat loss still follows weekly energy balance. Treat wearable and class “calories burned” as a range, not a dinner coupon."
+        ]
+      },
+      {
+        "heading": "Calorie estimates by bodyweight and duration",
+        "body": [
+          "Estimated calories for Calisthenics (MET ≈ 8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680",
+          "These are order-of-magnitude estimates for continuous effort at the stated intensity. Long rests, chatting, or easy recovery intervals pull the real total down."
+        ]
+      },
+      {
+        "heading": "What actually drives the burn",
+        "body": [
+          "MET ≈ 8.0 for vigorous continuous calisthenics. Skill work with long rests behaves more like resistance training at lower average METs. Density is the variable.",
+          "Bodyweight scales energy cost almost linearly for the same movement pattern. Intensity and continuous work time matter more than the exercise nickname on the class schedule."
+        ]
+      },
+      {
+        "heading": "Wearables, class boards, and machine screens",
+        "body": [
+          "Wrist estimates can miss load, rest, and non-step movements. Group-fitness boards and cardio consoles are convenient and often optimistic.",
+          "In a fat-loss phase, plan food as if the printed burn were 20–40% lower unless you have a reason to trust the device."
+        ]
+      },
+      {
+        "heading": "Training value vs calorie theater",
+        "body": [
+          "Calisthenics builds relative strength and work capacity with minimal gear. Progressive overload still matters — reps, tempo, range, and harder variations.",
+          "If you lift or train hard in a deficit, keep protein around 1.6–2.2 g/kg and protect sleep. Session kcal badges do not replace progressive overload or an honest food log."
+        ]
+      },
+      {
+        "heading": "A practical logging approach",
+        "body": [
+          "Log calisthenics for consistency and recovery context. Separately log meals — especially the chaotic ones after training.",
+          "IGNITE AI keeps workouts and photo meal snaps on one timeline so a hard session does not become an excuse to stop logging dinner.",
+          "Similar calorie density to many HIIT/circuit sessions when rest is short. Log the style you actually did."
+        ]
+      },
+      {
+        "heading": "Measurement feedback loop",
+        "body": [
+          "The useful scoreboard is a two-to-four-week trend: average morning weight, waist or photos, training performance, and average intake.",
+          "Single-day scale spikes from sodium, carbs, hard lower-body work, or menstrual fluid are noise. Act on slopes, not points."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "You can run this with any honest logger. IGNITE AI is built for the friction that usually breaks plans: mixed meals, oils and sauces, repeat staples, and training next to food.",
+          "Snap → edit → confirm for new plates. Saved meals for repeats. Workouts beside food so fueling is a decision, not a guess."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "Expect roughly 280 kcal in 30 minutes at 70 kg for calisthenics at MET ≈ 8, scale for your weight and intensity, and keep the food log honest.",
+          "When logging has to stay honest on busy days, IGNITE AI helps with photo meal snaps, macro edits, Saved repeats, and workouts in one loop. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "running-vs-cycling-calories",
+    "title": "Running vs Cycling: Calories Burned Compared (2026)",
+    "date": "2026-08-09",
+    "description": "At MET ≈ 9.8 vs ≈ 6.8, a 70 kg person burns about 343 kcal in 30 minutes of running versus about 238 for cycling (105 kcal difference). Compare tables, intensity caveats, and how to choose for fat loss vs training goals.",
+    "sections": [
+      {
+        "body": [
+          "Running vs cycling is the classic “which burns more?” search. At moderate continuous efforts, running usually costs more per minute — but joints, weather, and adherence decide the winner for your week.",
+          "For a 70 kg person over 30 minutes, ballpark numbers are ~343 kcal for running (MET ≈ 9.8) and ~238 for cycling (MET ≈ 6.8). Running sits higher by roughly 105 kcal in that window — before rests and intensity drift.",
+          "Neither modality “wins” fat loss by itself. Weekly average intake, protein, steps, and adherence beat a single session comparison."
+        ]
+      },
+      {
+        "heading": "Running: calorie table (MET ≈ 9.8)",
+        "body": [
+          "Estimated calories for Running (MET ≈ 9.8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~135 · 30 min: ~270 · 45 min: ~404 · 60 min: ~539",
+          "70 kg: 15 min: ~172 · 30 min: ~343 · 45 min: ~515 · 60 min: ~686",
+          "85 kg: 15 min: ~208 · 30 min: ~417 · 45 min: ~625 · 60 min: ~833"
+        ]
+      },
+      {
+        "heading": "Cycling: calorie table (MET ≈ 6.8)",
+        "body": [
+          "Estimated calories for Cycling (MET ≈ 6.8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~94 · 30 min: ~187 · 45 min: ~281 · 60 min: ~374",
+          "70 kg: 15 min: ~119 · 30 min: ~238 · 45 min: ~357 · 60 min: ~476",
+          "85 kg: 15 min: ~145 · 30 min: ~289 · 45 min: ~434 · 60 min: ~578"
+        ]
+      },
+      {
+        "heading": "How to read the comparison",
+        "body": [
+          "Running burns more per minute at these working METs, so equal time favors running for pure expenditure. Equal effort feelings are different: cycling may feel harder or easier depending on skill and conditioning.",
+          "If one session includes long rests, demos, or water breaks, the real gap shrinks. Match apples to apples: continuous work time, not clock time on the class schedule."
+        ]
+      },
+      {
+        "heading": "Which should you pick?",
+        "body": [
+          "Pick running when you want denser burn and can tolerate impact. Pick cycling when you need lower impact, longer easy volume, or commute cardio you will actually do. Many athletes use both.",
+          "For physique goals, the better choice is often the one you will repeat, recover from, and still log food after — not the one with the flashier board number."
+        ]
+      },
+      {
+        "heading": "Logging without eating the burn back",
+        "body": [
+          "Log the workout for context. Log the meal with a photo when plates are messy. Do not auto-add the full console total to your budget unless you have validated it against trends.",
+          "IGNITE AI puts training and meal snaps on one timeline so post-workout hunger gets measured, not guessed."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "Snap → edit → confirm for mixed plates. Saved for staples. Workouts beside food so you can see whether a bigger burn week actually moved the scale."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "At these METs, running edges cycling by about 105 kcal per 30 minutes at 70 kg — useful context, not a free pass.",
+          "Keep protein solid, log honestly, and use IGNITE AI when photo logging plus workouts in one place keeps you consistent. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "running-vs-weight-lifting-calories",
+    "title": "Running vs Weight Lifting: Calories Burned Compared (2026)",
+    "date": "2026-08-08",
+    "description": "At MET ≈ 9.8 vs ≈ 5, a 70 kg person burns about 343 kcal in 30 minutes of running versus about 175 for weight lifting (168 kcal difference). Compare tables, intensity caveats, and how to choose for fat loss vs training goals.",
+    "sections": [
+      {
+        "body": [
+          "Comparing running to weight lifting on calories alone misses the point of lifting. Per continuous minute, running usually burns more; lifting wins on muscle stimulus and long-term shape at a given weight.",
+          "For a 70 kg person over 30 minutes, ballpark numbers are ~343 kcal for running (MET ≈ 9.8) and ~175 for weight lifting (MET ≈ 5). Running sits higher by roughly 168 kcal in that window — before rests and intensity drift.",
+          "Neither modality “wins” fat loss by itself. Weekly average intake, protein, steps, and adherence beat a single session comparison."
+        ]
+      },
+      {
+        "heading": "Running: calorie table (MET ≈ 9.8)",
+        "body": [
+          "Estimated calories for Running (MET ≈ 9.8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~135 · 30 min: ~270 · 45 min: ~404 · 60 min: ~539",
+          "70 kg: 15 min: ~172 · 30 min: ~343 · 45 min: ~515 · 60 min: ~686",
+          "85 kg: 15 min: ~208 · 30 min: ~417 · 45 min: ~625 · 60 min: ~833"
+        ]
+      },
+      {
+        "heading": "Weight lifting: calorie table (MET ≈ 5)",
+        "body": [
+          "Estimated calories for Weight lifting (MET ≈ 5) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~69 · 30 min: ~138 · 45 min: ~206 · 60 min: ~275",
+          "70 kg: 15 min: ~88 · 30 min: ~175 · 45 min: ~263 · 60 min: ~350",
+          "85 kg: 15 min: ~106 · 30 min: ~213 · 45 min: ~319 · 60 min: ~425"
+        ]
+      },
+      {
+        "heading": "How to read the comparison",
+        "body": [
+          "Running burns more per minute at these working METs, so equal time favors running for pure expenditure. Equal effort feelings are different: weight lifting may feel harder or easier depending on skill and conditioning.",
+          "If one session includes long rests, demos, or water breaks, the real gap shrinks. Match apples to apples: continuous work time, not clock time on the class schedule."
+        ]
+      },
+      {
+        "heading": "Which should you pick?",
+        "body": [
+          "If the only goal is session expenditure, running (or other continuous cardio) wins. If the goal is body composition, keep lifting and protein, and add steps or cardio as needed. Do both when recovery allows.",
+          "For physique goals, the better choice is often the one you will repeat, recover from, and still log food after — not the one with the flashier board number."
+        ]
+      },
+      {
+        "heading": "Logging without eating the burn back",
+        "body": [
+          "Log the workout for context. Log the meal with a photo when plates are messy. Do not auto-add the full console total to your budget unless you have validated it against trends.",
+          "IGNITE AI puts training and meal snaps on one timeline so post-workout hunger gets measured, not guessed."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "Snap → edit → confirm for mixed plates. Saved for staples. Workouts beside food so you can see whether a bigger burn week actually moved the scale."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "At these METs, running edges weight lifting by about 168 kcal per 30 minutes at 70 kg — useful context, not a free pass.",
+          "Keep protein solid, log honestly, and use IGNITE AI when photo logging plus workouts in one place keeps you consistent. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "hiit-vs-circuit-calories",
+    "title": "HIIT vs Circuit Training: Calories Burned Compared (2026)",
+    "date": "2026-08-07",
+    "description": "At MET ≈ 8 vs ≈ 8, a 70 kg person burns about 280 kcal in 30 minutes of hiit versus about 280 for circuit training (0 kcal difference). Compare tables, intensity caveats, and how to choose for fat loss vs training goals.",
+    "sections": [
+      {
+        "body": [
+          "HIIT vs circuit training is often a branding fight. At similar vigorous densities, calorie tables look almost identical — the programming and rest structure matter more than the label.",
+          "For a 70 kg person over 30 minutes, ballpark numbers are ~280 kcal for hiit (MET ≈ 8) and ~280 for circuit training (MET ≈ 8). HIIT sits higher by roughly 0 kcal in that window — before rests and intensity drift.",
+          "Neither modality “wins” fat loss by itself. Weekly average intake, protein, steps, and adherence beat a single session comparison."
+        ]
+      },
+      {
+        "heading": "HIIT: calorie table (MET ≈ 8)",
+        "body": [
+          "Estimated calories for HIIT (MET ≈ 8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680"
+        ]
+      },
+      {
+        "heading": "Circuit training: calorie table (MET ≈ 8)",
+        "body": [
+          "Estimated calories for Circuit training (MET ≈ 8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680"
+        ]
+      },
+      {
+        "heading": "How to read the comparison",
+        "body": [
+          "HIIT burns more per minute at these working METs, so equal time favors hiit for pure expenditure. Equal effort feelings are different: circuit training may feel harder or easier depending on skill and conditioning.",
+          "If one session includes long rests, demos, or water breaks, the real gap shrinks. Match apples to apples: continuous work time, not clock time on the class schedule."
+        ]
+      },
+      {
+        "heading": "Which should you pick?",
+        "body": [
+          "Choose based on coaching quality, recovery, and whether you need strength emphasis (circuits with loads) or interval engine work. Ignore the name on the timetable; watch work-to-rest ratio.",
+          "For physique goals, the better choice is often the one you will repeat, recover from, and still log food after — not the one with the flashier board number."
+        ]
+      },
+      {
+        "heading": "Logging without eating the burn back",
+        "body": [
+          "Log the workout for context. Log the meal with a photo when plates are messy. Do not auto-add the full console total to your budget unless you have validated it against trends.",
+          "IGNITE AI puts training and meal snaps on one timeline so post-workout hunger gets measured, not guessed."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "Snap → edit → confirm for mixed plates. Saved for staples. Workouts beside food so you can see whether a bigger burn week actually moved the scale."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "At these METs, hiit edges circuit training by about 0 kcal per 30 minutes at 70 kg — useful context, not a free pass.",
+          "Keep protein solid, log honestly, and use IGNITE AI when photo logging plus workouts in one place keeps you consistent. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "swimming-vs-walking-calories",
+    "title": "Swimming vs Walking: Calories Burned Compared (2026)",
+    "date": "2026-08-06",
+    "description": "At MET ≈ 6 vs ≈ 4.3, a 70 kg person burns about 210 kcal in 30 minutes of swimming versus about 151 for walking (59 kcal difference). Compare tables, intensity caveats, and how to choose for fat loss vs training goals.",
+    "sections": [
+      {
+        "body": [
+          "Swimming vs walking depends on stroke intensity and walking pace. Continuous freestyle usually beats an easy stroll per minute; a hard hike can close the gap. Access and skill decide adherence.",
+          "For a 70 kg person over 30 minutes, ballpark numbers are ~210 kcal for swimming (MET ≈ 6) and ~151 for walking (MET ≈ 4.3). Swimming sits higher by roughly 59 kcal in that window — before rests and intensity drift.",
+          "Neither modality “wins” fat loss by itself. Weekly average intake, protein, steps, and adherence beat a single session comparison."
+        ]
+      },
+      {
+        "heading": "Swimming: calorie table (MET ≈ 6)",
+        "body": [
+          "Estimated calories for Swimming (MET ≈ 6) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~83 · 30 min: ~165 · 45 min: ~248 · 60 min: ~330",
+          "70 kg: 15 min: ~105 · 30 min: ~210 · 45 min: ~315 · 60 min: ~420",
+          "85 kg: 15 min: ~128 · 30 min: ~255 · 45 min: ~383 · 60 min: ~510"
+        ]
+      },
+      {
+        "heading": "Walking: calorie table (MET ≈ 4.3)",
+        "body": [
+          "Estimated calories for Walking (MET ≈ 4.3) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~59 · 30 min: ~118 · 45 min: ~177 · 60 min: ~237",
+          "70 kg: 15 min: ~75 · 30 min: ~151 · 45 min: ~226 · 60 min: ~301",
+          "85 kg: 15 min: ~91 · 30 min: ~183 · 45 min: ~274 · 60 min: ~366"
+        ]
+      },
+      {
+        "heading": "How to read the comparison",
+        "body": [
+          "Swimming burns more per minute at these working METs, so equal time favors swimming for pure expenditure. Equal effort feelings are different: walking may feel harder or easier depending on skill and conditioning.",
+          "If one session includes long rests, demos, or water breaks, the real gap shrinks. Match apples to apples: continuous work time, not clock time on the class schedule."
+        ]
+      },
+      {
+        "heading": "Which should you pick?",
+        "body": [
+          "Swim when you want low-impact full-body work and have lap access. Walk when you need daily NEAT that fits any street. Many fat-loss weeks are won with walking volume plus two skill sessions in the pool.",
+          "For physique goals, the better choice is often the one you will repeat, recover from, and still log food after — not the one with the flashier board number."
+        ]
+      },
+      {
+        "heading": "Logging without eating the burn back",
+        "body": [
+          "Log the workout for context. Log the meal with a photo when plates are messy. Do not auto-add the full console total to your budget unless you have validated it against trends.",
+          "IGNITE AI puts training and meal snaps on one timeline so post-workout hunger gets measured, not guessed."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "Snap → edit → confirm for mixed plates. Saved for staples. Workouts beside food so you can see whether a bigger burn week actually moved the scale."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "At these METs, swimming edges walking by about 59 kcal per 30 minutes at 70 kg — useful context, not a free pass.",
+          "Keep protein solid, log honestly, and use IGNITE AI when photo logging plus workouts in one place keeps you consistent. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "yoga-vs-walking-calories",
+    "title": "Yoga vs Walking: Calories Burned Compared (2026)",
+    "date": "2026-08-05",
+    "description": "At MET ≈ 4.3 vs ≈ 3, a 70 kg person burns about 151 kcal in 30 minutes of walking versus about 105 for yoga (46 kcal difference). Compare tables, intensity caveats, and how to choose for fat loss vs training goals.",
+    "sections": [
+      {
+        "body": [
+          "Yoga vs walking for calories is usually a walking win at typical intensities. Yoga still earns its place for mobility and stress — just do not market a gentle flow as a calorie furnace.",
+          "For a 70 kg person over 30 minutes, ballpark numbers are ~151 kcal for walking (MET ≈ 4.3) and ~105 for yoga (MET ≈ 3). Walking sits higher by roughly 46 kcal in that window — before rests and intensity drift.",
+          "Neither modality “wins” fat loss by itself. Weekly average intake, protein, steps, and adherence beat a single session comparison."
+        ]
+      },
+      {
+        "heading": "Walking: calorie table (MET ≈ 4.3)",
+        "body": [
+          "Estimated calories for Walking (MET ≈ 4.3) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~59 · 30 min: ~118 · 45 min: ~177 · 60 min: ~237",
+          "70 kg: 15 min: ~75 · 30 min: ~151 · 45 min: ~226 · 60 min: ~301",
+          "85 kg: 15 min: ~91 · 30 min: ~183 · 45 min: ~274 · 60 min: ~366"
+        ]
+      },
+      {
+        "heading": "Yoga: calorie table (MET ≈ 3)",
+        "body": [
+          "Estimated calories for Yoga (MET ≈ 3) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~41 · 30 min: ~83 · 45 min: ~124 · 60 min: ~165",
+          "70 kg: 15 min: ~53 · 30 min: ~105 · 45 min: ~158 · 60 min: ~210",
+          "85 kg: 15 min: ~64 · 30 min: ~128 · 45 min: ~191 · 60 min: ~255"
+        ]
+      },
+      {
+        "heading": "How to read the comparison",
+        "body": [
+          "Walking burns more per minute at these working METs, so equal time favors walking for pure expenditure. Equal effort feelings are different: yoga may feel harder or easier depending on skill and conditioning.",
+          "If one session includes long rests, demos, or water breaks, the real gap shrinks. Match apples to apples: continuous work time, not clock time on the class schedule."
+        ]
+      },
+      {
+        "heading": "Which should you pick?",
+        "body": [
+          "Walk for expenditure and steps. Practice yoga for recovery, range of motion, and nervous system. Ideal weeks often include both instead of forcing one to do the other’s job.",
+          "For physique goals, the better choice is often the one you will repeat, recover from, and still log food after — not the one with the flashier board number."
+        ]
+      },
+      {
+        "heading": "Logging without eating the burn back",
+        "body": [
+          "Log the workout for context. Log the meal with a photo when plates are messy. Do not auto-add the full console total to your budget unless you have validated it against trends.",
+          "IGNITE AI puts training and meal snaps on one timeline so post-workout hunger gets measured, not guessed."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "Snap → edit → confirm for mixed plates. Saved for staples. Workouts beside food so you can see whether a bigger burn week actually moved the scale."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "At these METs, walking edges yoga by about 46 kcal per 30 minutes at 70 kg — useful context, not a free pass.",
+          "Keep protein solid, log honestly, and use IGNITE AI when photo logging plus workouts in one place keeps you consistent. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "weight-lifting-vs-kettlebell-calories",
+    "title": "Weight Lifting vs Kettlebell: Calories Burned Compared (2026)",
+    "date": "2026-08-04",
+    "description": "At MET ≈ 8 vs ≈ 5, a 70 kg person burns about 280 kcal in 30 minutes of kettlebell training versus about 175 for weight lifting (105 kcal difference). Compare tables, intensity caveats, and how to choose for fat loss vs training goals.",
+    "sections": [
+      {
+        "body": [
+          "Weight lifting vs kettlebell calories hinges on continuous swings versus long-rest strength sets. Conditioning kettlebell work usually burns more per minute; heavy barbell strength is not trying to win that race.",
+          "For a 70 kg person over 30 minutes, ballpark numbers are ~280 kcal for kettlebell training (MET ≈ 8) and ~175 for weight lifting (MET ≈ 5). Kettlebell training sits higher by roughly 105 kcal in that window — before rests and intensity drift.",
+          "Neither modality “wins” fat loss by itself. Weekly average intake, protein, steps, and adherence beat a single session comparison."
+        ]
+      },
+      {
+        "heading": "Kettlebell training: calorie table (MET ≈ 8)",
+        "body": [
+          "Estimated calories for Kettlebell training (MET ≈ 8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680"
+        ]
+      },
+      {
+        "heading": "Weight lifting: calorie table (MET ≈ 5)",
+        "body": [
+          "Estimated calories for Weight lifting (MET ≈ 5) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~69 · 30 min: ~138 · 45 min: ~206 · 60 min: ~275",
+          "70 kg: 15 min: ~88 · 30 min: ~175 · 45 min: ~263 · 60 min: ~350",
+          "85 kg: 15 min: ~106 · 30 min: ~213 · 45 min: ~319 · 60 min: ~425"
+        ]
+      },
+      {
+        "heading": "How to read the comparison",
+        "body": [
+          "Kettlebell training burns more per minute at these working METs, so equal time favors kettlebell training for pure expenditure. Equal effort feelings are different: weight lifting may feel harder or easier depending on skill and conditioning.",
+          "If one session includes long rests, demos, or water breaks, the real gap shrinks. Match apples to apples: continuous work time, not clock time on the class schedule."
+        ]
+      },
+      {
+        "heading": "Which should you pick?",
+        "body": [
+          "Use kettlebell complexes when you want dense conditioning. Use classic lifting when progressive strength is the priority. Mixing both is normal — just log the style you trained.",
+          "For physique goals, the better choice is often the one you will repeat, recover from, and still log food after — not the one with the flashier board number."
+        ]
+      },
+      {
+        "heading": "Logging without eating the burn back",
+        "body": [
+          "Log the workout for context. Log the meal with a photo when plates are messy. Do not auto-add the full console total to your budget unless you have validated it against trends.",
+          "IGNITE AI puts training and meal snaps on one timeline so post-workout hunger gets measured, not guessed."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "Snap → edit → confirm for mixed plates. Saved for staples. Workouts beside food so you can see whether a bigger burn week actually moved the scale."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "At these METs, kettlebell training edges weight lifting by about 105 kcal per 30 minutes at 70 kg — useful context, not a free pass.",
+          "Keep protein solid, log honestly, and use IGNITE AI when photo logging plus workouts in one place keeps you consistent. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "running-vs-rowing-calories",
+    "title": "Running vs Rowing: Calories Burned Compared (2026)",
+    "date": "2026-08-03",
+    "description": "At MET ≈ 9.8 vs ≈ 7, a 70 kg person burns about 343 kcal in 30 minutes of running versus about 245 for rowing (98 kcal difference). Compare tables, intensity caveats, and how to choose for fat loss vs training goals.",
+    "sections": [
+      {
+        "body": [
+          "Running vs rowing is a high-engine comparison. Moderate running often edges moderate rowing per minute, but hard rowing pieces can feel equally brutal with less impact.",
+          "For a 70 kg person over 30 minutes, ballpark numbers are ~343 kcal for running (MET ≈ 9.8) and ~245 for rowing (MET ≈ 7). Running sits higher by roughly 98 kcal in that window — before rests and intensity drift.",
+          "Neither modality “wins” fat loss by itself. Weekly average intake, protein, steps, and adherence beat a single session comparison."
+        ]
+      },
+      {
+        "heading": "Running: calorie table (MET ≈ 9.8)",
+        "body": [
+          "Estimated calories for Running (MET ≈ 9.8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~135 · 30 min: ~270 · 45 min: ~404 · 60 min: ~539",
+          "70 kg: 15 min: ~172 · 30 min: ~343 · 45 min: ~515 · 60 min: ~686",
+          "85 kg: 15 min: ~208 · 30 min: ~417 · 45 min: ~625 · 60 min: ~833"
+        ]
+      },
+      {
+        "heading": "Rowing: calorie table (MET ≈ 7)",
+        "body": [
+          "Estimated calories for Rowing (MET ≈ 7) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~96 · 30 min: ~193 · 45 min: ~289 · 60 min: ~385",
+          "70 kg: 15 min: ~123 · 30 min: ~245 · 45 min: ~368 · 60 min: ~490",
+          "85 kg: 15 min: ~149 · 30 min: ~298 · 45 min: ~446 · 60 min: ~595"
+        ]
+      },
+      {
+        "heading": "How to read the comparison",
+        "body": [
+          "Running burns more per minute at these working METs, so equal time favors running for pure expenditure. Equal effort feelings are different: rowing may feel harder or easier depending on skill and conditioning.",
+          "If one session includes long rests, demos, or water breaks, the real gap shrinks. Match apples to apples: continuous work time, not clock time on the class schedule."
+        ]
+      },
+      {
+        "heading": "Which should you pick?",
+        "body": [
+          "Run if you enjoy outdoor pace and impact is fine. Row if joints need a break or you want seated full-body pulls. Alternate when one modality beats up recovery.",
+          "For physique goals, the better choice is often the one you will repeat, recover from, and still log food after — not the one with the flashier board number."
+        ]
+      },
+      {
+        "heading": "Logging without eating the burn back",
+        "body": [
+          "Log the workout for context. Log the meal with a photo when plates are messy. Do not auto-add the full console total to your budget unless you have validated it against trends.",
+          "IGNITE AI puts training and meal snaps on one timeline so post-workout hunger gets measured, not guessed."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "Snap → edit → confirm for mixed plates. Saved for staples. Workouts beside food so you can see whether a bigger burn week actually moved the scale."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "At these METs, running edges rowing by about 98 kcal per 30 minutes at 70 kg — useful context, not a free pass.",
+          "Keep protein solid, log honestly, and use IGNITE AI when photo logging plus workouts in one place keeps you consistent. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
+    "slug": "zumba-vs-running-calories",
+    "title": "Zumba vs Running: Calories Burned Compared (2026)",
+    "date": "2026-08-02",
+    "description": "At MET ≈ 9.8 vs ≈ 6.5, a 70 kg person burns about 343 kcal in 30 minutes of running versus about 228 for zumba (115 kcal difference). Compare tables, intensity caveats, and how to choose for fat loss vs training goals.",
+    "sections": [
+      {
+        "body": [
+          "Zumba vs running: per continuous minute, running typically burns more at moderate-hard efforts. Zumba often wins on fun and class adherence — which can matter more for weekly totals.",
+          "For a 70 kg person over 30 minutes, ballpark numbers are ~343 kcal for running (MET ≈ 9.8) and ~228 for zumba (MET ≈ 6.5). Running sits higher by roughly 115 kcal in that window — before rests and intensity drift.",
+          "Neither modality “wins” fat loss by itself. Weekly average intake, protein, steps, and adherence beat a single session comparison."
+        ]
+      },
+      {
+        "heading": "Running: calorie table (MET ≈ 9.8)",
+        "body": [
+          "Estimated calories for Running (MET ≈ 9.8) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~135 · 30 min: ~270 · 45 min: ~404 · 60 min: ~539",
+          "70 kg: 15 min: ~172 · 30 min: ~343 · 45 min: ~515 · 60 min: ~686",
+          "85 kg: 15 min: ~208 · 30 min: ~417 · 45 min: ~625 · 60 min: ~833"
+        ]
+      },
+      {
+        "heading": "Zumba: calorie table (MET ≈ 6.5)",
+        "body": [
+          "Estimated calories for Zumba (MET ≈ 6.5) — approximate, from Compendium-style intensity:",
+          "55 kg: 15 min: ~89 · 30 min: ~179 · 45 min: ~268 · 60 min: ~358",
+          "70 kg: 15 min: ~114 · 30 min: ~228 · 45 min: ~341 · 60 min: ~455",
+          "85 kg: 15 min: ~138 · 30 min: ~276 · 45 min: ~414 · 60 min: ~553"
+        ]
+      },
+      {
+        "heading": "How to read the comparison",
+        "body": [
+          "Running burns more per minute at these working METs, so equal time favors running for pure expenditure. Equal effort feelings are different: zumba may feel harder or easier depending on skill and conditioning.",
+          "If one session includes long rests, demos, or water breaks, the real gap shrinks. Match apples to apples: continuous work time, not clock time on the class schedule."
+        ]
+      },
+      {
+        "heading": "Which should you pick?",
+        "body": [
+          "Choose running for denser solo cardio. Choose Zumba when community and music keep you showing up. A hybrid week (two runs, one dance class) is a practical compromise.",
+          "For physique goals, the better choice is often the one you will repeat, recover from, and still log food after — not the one with the flashier board number."
+        ]
+      },
+      {
+        "heading": "Logging without eating the burn back",
+        "body": [
+          "Log the workout for context. Log the meal with a photo when plates are messy. Do not auto-add the full console total to your budget unless you have validated it against trends.",
+          "IGNITE AI puts training and meal snaps on one timeline so post-workout hunger gets measured, not guessed."
+        ]
+      },
+      {
+        "heading": "Where IGNITE AI fits",
+        "body": [
+          "Snap → edit → confirm for mixed plates. Saved for staples. Workouts beside food so you can see whether a bigger burn week actually moved the scale."
+        ]
+      },
+      {
+        "heading": "Bottom line",
+        "body": [
+          "At these METs, running edges zumba by about 115 kcal per 30 minutes at 70 kg — useful context, not a free pass.",
+          "Keep protein solid, log honestly, and use IGNITE AI when photo logging plus workouts in one place keeps you consistent. Snap it. Log it. Crush it."
+        ]
+      }
+    ]
+  },
+  {
     "slug": "snap-meal-photo-calories-macros-guide",
     "title": "How to Snap a Meal Photo for Instant Calories & Macros (Without Weighing Everything)",
     "date": "2026-07-20",
