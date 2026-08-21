@@ -1,11 +1,15 @@
 'use client'
 
-import { CreatorProgramForm } from '@/components/creator-program-form'
-import { useT } from '@/lib/i18n/provider'
+import Link from 'next/link'
+import { CreatorProgramHero } from '@/components/creator-program-hero'
+import { StoreButtons } from '@/components/store-buttons'
+import { useLanguage, useT } from '@/lib/i18n/provider'
 
 export function CreatorProgramPageContent() {
   const t = useT()
+  const { href } = useLanguage()
   const steps = t.creatorProgram.steps
+  const ctaSteps = t.creatorProgram.ctaSteps
 
   return (
     <main className="relative min-h-[70vh] overflow-hidden">
@@ -25,6 +29,10 @@ export function CreatorProgramPageContent() {
         <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground text-pretty sm:text-lg">
           {t.creatorProgram.subtitle}
         </p>
+
+        <div className="mt-10">
+          <CreatorProgramHero />
+        </div>
 
         <section className="mt-12 w-full text-left" aria-labelledby="creator-how">
           <h2
@@ -53,12 +61,49 @@ export function CreatorProgramPageContent() {
           </ol>
         </section>
 
-        <div className="mt-12 w-full text-left">
-          <CreatorProgramForm />
-        </div>
+        <section
+          className="mt-12 w-full rounded-2xl border border-black/5 bg-white p-6 text-left shadow-[0_12px_40px_rgba(0,0,0,0.08)] sm:p-8"
+          aria-labelledby="creator-cta"
+        >
+          <h2
+            id="creator-cta"
+            className="font-brand text-center text-xl font-semibold tracking-tight text-foreground"
+          >
+            {t.creatorProgram.ctaTitle}
+          </h2>
+          <p className="mt-2 text-center text-sm leading-relaxed text-muted-foreground text-pretty">
+            {t.creatorProgram.ctaSubtitle}
+          </p>
 
-        <p className="mt-8 max-w-md text-sm leading-relaxed text-muted-foreground text-pretty">
-          {t.creatorProgram.appNote}
+          <ol className="mt-6 flex flex-col gap-3">
+            {ctaSteps.map((label, index) => (
+              <li
+                key={label}
+                className="flex items-center gap-3 rounded-xl border border-black/8 bg-black/[0.02] px-3.5 py-3"
+              >
+                <span
+                  className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-foreground font-brand text-xs font-semibold text-background"
+                  aria-hidden="true"
+                >
+                  {index + 1}
+                </span>
+                <span className="font-brand text-sm font-medium text-foreground">{label}</span>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-7 flex justify-center" id="download">
+            <StoreButtons size="default" />
+          </div>
+        </section>
+
+        <p className="mt-8 text-sm text-muted-foreground">
+          <Link
+            href={href('/creator-program-terms')}
+            className="font-medium text-foreground underline underline-offset-2"
+          >
+            {t.creatorProgram.termsLink}
+          </Link>
         </p>
       </div>
     </main>
