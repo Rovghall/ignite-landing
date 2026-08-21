@@ -2,7 +2,11 @@ import Link from 'next/link'
 import { BlogBackLink, BlogPostAside } from '@/components/blog-post-chrome'
 import { BlogIndexHeader } from '@/components/blog-index-header'
 import type { BlogPost } from '@/lib/content/types'
+import {
+  getBlogPaginationItems,
+} from '@/lib/blog-pagination'
 import { localeMeta, type Locale } from '@/lib/i18n/locales'
+import { messages } from '@/lib/i18n/messages'
 import { localePath } from '@/lib/i18n/paths'
 
 function formatBlogDate(iso: string, locale: Locale) {
@@ -15,12 +19,94 @@ function formatBlogDate(iso: string, locale: Locale) {
   }).format(date)
 }
 
+function blogIndexHref(locale: Locale, page: number) {
+  const base = localePath(locale, '/blog')
+  return page <= 1 ? base : `${base}?page=${page}`
+}
+
+function BlogPagination({
+  locale,
+  page,
+  totalPages,
+}: {
+  locale: Locale
+  page: number
+  totalPages: number
+}) {
+  if (totalPages <= 1) return null
+
+  const t = messages[locale].blog
+  const items = getBlogPaginationItems(page, totalPages)
+
+  return (
+    <nav
+      className="mt-16 flex flex-wrap items-center justify-center gap-2"
+      aria-label={t.paginationLabel}
+    >
+      {page > 1 ? (
+        <Link
+          href={blogIndexHref(locale, page - 1)}
+          className="rounded-lg px-3 py-2 font-brand text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {t.previous}
+        </Link>
+      ) : (
+        <span className="rounded-lg px-3 py-2 font-brand text-sm text-muted-foreground/40">
+          {t.previous}
+        </span>
+      )}
+
+      {items.map((item, i) =>
+        item === 'ellipsis' ? (
+          <span
+            key={`e-${i}`}
+            className="px-1 font-brand text-sm text-muted-foreground"
+            aria-hidden
+          >
+            …
+          </span>
+        ) : (
+          <Link
+            key={item}
+            href={blogIndexHref(locale, item)}
+            aria-current={item === page ? 'page' : undefined}
+            className={
+              item === page
+                ? 'rounded-lg bg-foreground px-3 py-2 font-brand text-sm font-semibold text-background'
+                : 'rounded-lg px-3 py-2 font-brand text-sm font-medium text-muted-foreground transition-colors hover:text-foreground'
+            }
+          >
+            {item}
+          </Link>
+        ),
+      )}
+
+      {page < totalPages ? (
+        <Link
+          href={blogIndexHref(locale, page + 1)}
+          className="rounded-lg px-3 py-2 font-brand text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+        >
+          {t.next}
+        </Link>
+      ) : (
+        <span className="rounded-lg px-3 py-2 font-brand text-sm text-muted-foreground/40">
+          {t.next}
+        </span>
+      )}
+    </nav>
+  )
+}
+
 export function LocalizedBlogIndex({
   locale,
   posts,
+  page,
+  totalPages,
 }: {
   locale: Locale
   posts: BlogPost[]
+  page: number
+  totalPages: number
 }) {
   return (
     <main className="min-h-screen bg-background">
@@ -40,6 +126,7 @@ export function LocalizedBlogIndex({
             </li>
           ))}
         </ul>
+        <BlogPagination locale={locale} page={page} totalPages={totalPages} />
       </div>
     </main>
   )
