@@ -1,0 +1,177 @@
+[
+  {
+    "slug": "snap-track-mixed-plates-vs-mfp-cal-ai-yazio",
+    "title": "Snap Track vs MyFitnessPal, Cal AI, and Yazio: Why Prepared Plates Are Where IGNITE Wins",
+    "date": "2026-06-01",
+    "feature": "Snap Track (meal/plate photo)",
+    "problem": "Homemade and restaurant plates are nearly impossible to log accurately in search-first apps; photo apps often miss oils, sides, and overlapping ingredients."
+  },
+  {
+    "slug": "snap-track-solves-search-fatigue",
+    "title": "The Problem Snap Track Solves: Stop Searching Your Dinner Into Oblivion",
+    "date": "2026-06-02",
+    "feature": "Snap Track",
+    "problem": "Database search turns every mixed meal into a 10-minute chore, so people quit logging."
+  },
+  {
+    "slug": "snap-track-label-scan-problem-solved",
+    "title": "Snap Track Label Scan: The Problem Packaged Food Logging Still Gets Wrong",
+    "date": "2026-06-03",
+    "feature": "Snap Track nutrition label mode",
+    "problem": "Typing every label field is slow and error-prone; wrong serving sizes wreck weekly averages."
+  },
+  {
+    "slug": "snap-track-barcode-problem-solved",
+    "title": "Snap Track Barcode Mode: Fast Pack Logging Without Crowdsourced Chaos",
+    "date": "2026-06-04",
+    "feature": "Snap Track barcode",
+    "problem": "Barcode hits that map to wrong products or unverified macros quietly poison your diary."
+  },
+  {
+    "slug": "snap-track-drink-mode-problem-solved",
+    "title": "Snap Track Drink Mode: The Problem of Invisible Liquid Calories",
+    "date": "2026-06-05",
+    "feature": "Snap Track drink path",
+    "problem": "Lattes, juices, and cocktails get skipped or logged as vague food entries."
+  },
+  {
+    "slug": "quick-log-solves-friction-problem",
+    "title": "Quick Log: The Problem of Opening Five Screens Just to Log Lunch",
+    "date": "2026-06-06",
+    "feature": "Quick Log FAB",
+    "problem": "Menu hunting kills adherence; people need scan/describe/voice/activity/weight in one tap."
+  },
+  {
+    "slug": "ai-lab-solves-coaching-gap",
+    "title": "IGNITE AI Lab: The Problem of Nutrition Questions With Nowhere to Ask",
+    "date": "2026-06-07",
+    "feature": "AI Lab",
+    "problem": "Users bounce between Google, Reddit, and a diary that never answers context-aware questions."
+  },
+  {
+    "slug": "diet-planner-solves-decision-fatigue",
+    "title": "Diet Planner: The Problem of Staring Into the Fridge With No Plan",
+    "date": "2026-06-08",
+    "feature": "Diet planner",
+    "problem": "Decision fatigue leads to takeout; users need AI meal slots and smart swaps they can log."
+  },
+  {
+    "slug": "snap-cook-solves-ingredient-chaos",
+    "title": "Snap Cook: The Problem of Having Ingredients but No Macro-Friendly Recipe",
+    "date": "2026-06-09",
+    "feature": "Snap Cook",
+    "problem": "Leftover ingredients sit unused while people order food they cannot track."
+  },
+  {
+    "slug": "exercise-logging-solves-split-brain",
+    "title": "Exercise Logging: The Problem of Training in One App and Eating in Another",
+    "date": "2026-06-11",
+    "feature": "Exercise",
+    "problem": "Food and training live in different apps so energy balance stays guesswork."
+  },
+  {
+    "slug": "fasting-inside-tracker-problem-solved",
+    "title": "Fasting Inside Your Tracker: The Problem of Timer Apps That Ignore Your Food Log",
+    "date": "2026-06-12",
+    "feature": "Fasting",
+    "problem": "Separate fasting timers never connect to meals, macros, or weekly averages."
+  },
+  {
+    "slug": "friends-groups-solve-accountability",
+    "title": "Friends and Private Groups: The Problem of Solo Tracking That Quietly Dies",
+    "date": "2026-06-13",
+    "feature": "Friends & private groups",
+    "problem": "Solo diaries lose motivation; people need private accountability without a toxic public feed."
+  },
+  {
+    "slug": "creator-groups-solve-audience-gap",
+    "title": "Creator Groups: The Problem Influencers Have When Followers Cannot Follow the Log",
+    "date": "2026-06-15",
+    "feature": "Creator Groups",
+    "problem": "Creators post screenshots; audiences cannot join a real feed of the creator’s logs."
+  },
+  {
+    "slug": "share-cards-solve-ugly-screenshots",
+    "title": "Share Cards: The Problem of Ugly Screenshots Killing Your Progress Content",
+    "date": "2026-06-16",
+    "feature": "Share Cards",
+    "problem": "Raw app screenshots look unprofessional and do not convert followers into trackers."
+  },
+  {
+    "slug": "health-sync-solves-data-silos",
+    "title": "Apple Health and Health Connect: The Problem of Steps Living Nowhere Near Your Food",
+    "date": "2026-06-17",
+    "feature": "Health sync",
+    "problem": "Steps, sleep, and workouts stay siloed from the calorie diary."
+  },
+  {
+    "slug": "progress-averages-solve-daily-panic",
+    "title": "Progress and Weekly Averages: The Problem of Judging Fat Loss by One Bad Day",
+    "date": "2026-06-18",
+    "feature": "Progress / weekly averages",
+    "problem": "Daily scale and calorie swings create panic; weekly truth is missing."
+  },
+  {
+    "slug": "log-reminders-solve-skipped-meals",
+    "title": "Log Reminders: The Problem of Busy Days That Erase Your Food Diary",
+    "date": "2026-06-19",
+    "feature": "Log reminders",
+    "problem": "Busy schedules skip breakfast/lunch logs and corrupt weekly averages."
+  },
+  {
+    "slug": "smart-pantry-solves-grocery-waste",
+    "title": "Smart Pantry: The Problem of Buying Food You Forget and Cannot Macro-Plan",
+    "date": "2026-06-20",
+    "feature": "Smart Pantry",
+    "problem": "Groceries expire unused and meal planning ignores what is already at home."
+  },
+  {
+    "slug": "onboarding-plan-solves-guesswork-targets",
+    "title": "Onboarding Plan: The Problem of Starting a Tracker With Random Calorie Targets",
+    "date": "2026-06-21",
+    "feature": "Onboarding personalized plan",
+    "problem": "New users pick arbitrary kcal numbers and quit when results do not match reality."
+  },
+  {
+    "slug": "rollover-calories-solve-all-or-nothing",
+    "title": "Rollover Calories: The Problem of Wasting Unused Calories Overnight",
+    "date": "2026-06-23",
+    "feature": "Rollover calories",
+    "problem": "All-or-nothing days punish light eaters; unused budget vanishes at midnight."
+  },
+  {
+    "slug": "add-burned-calories-solves-budget-confusion",
+    "title": "Add Burned Calories: The Problem of Workouts That Never Touch Your Food Budget",
+    "date": "2026-06-25",
+    "feature": "Add burned calories toggle",
+    "problem": "Users train hard but the diary still treats the day like a rest day."
+  },
+  {
+    "slug": "water-tracking-solves-ignored-hydration",
+    "title": "Water Tracking on Home: The Problem of Hydration Falling Off the Nutrition Radar",
+    "date": "2026-06-27",
+    "feature": "Water tracking",
+    "problem": "Hydration is ignored while users obsess over food macros alone."
+  },
+  {
+    "slug": "streaks-badges-solve-consistency-fade",
+    "title": "Streaks and Badges: The Problem of Tracking That Feels Pointless After Week Two",
+    "date": "2026-06-28",
+    "feature": "Streaks & badges",
+    "problem": "Without visible momentum, logging becomes a chore and streaks die."
+  },
+  {
+    "slug": "summary-report-solves-coach-checkins",
+    "title": "Summary Reports: The Problem of Sending Your Coach a Mess of Screenshots",
+    "date": "2026-06-29",
+    "feature": "Summary report",
+    "problem": "Online coaches need clean period summaries; clients send chaotic screenshots."
+  },
+  {
+    "slug": "progress-photos-solve-scale-obsession",
+    "title": "Progress Photos: The Problem of Letting the Scale Gaslight Your Cut",
+    "date": "2026-07-01",
+    "feature": "Progress photos",
+    "problem": "Scale weight alone hides recomp and water noise; visual history is missing."
+  }
+]
