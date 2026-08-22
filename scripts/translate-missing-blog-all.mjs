@@ -241,7 +241,7 @@ async function translateLocale(locale, enBlog, limit, ptBySlug) {
 }
 
 function gitPush() {
-  execSync('git add content/*/blog.json content/.translate-cache.json', { cwd: ROOT, stdio: 'inherit' })
+  execSync('git add content/*/blog.json', { cwd: ROOT, stdio: 'inherit' })
   execSync('git commit -m "Translate missing blog posts to all locales."', { cwd: ROOT, stdio: 'inherit' })
   execSync('git push origin HEAD', { cwd: ROOT, stdio: 'inherit' })
 }

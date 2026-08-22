@@ -16,6 +16,8 @@ node_modules
 
 # i18n translation scratch
 content/**/*.progress.json
+content/**/blog.missing.progress.json
+content/.translate-cache.json
 content/**/*-translate.log
 content/**/*-translate.err.log
 content/**/blog-part-*.json
