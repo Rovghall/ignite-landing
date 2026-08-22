@@ -3210,14 +3210,31 @@ export default function CreatorProgramAdminPage() {
                           Pausar
                         </button>
                       )}
-                      <button
-                        type="button"
-                        disabled={busyId === app.id}
-                        onClick={() => void endCreatorPremium(app)}
-                        className={btnDanger}
-                      >
-                        Terminar agora
-                      </button>
+                      {isCreatorProgramEnded(app) ? (
+                        <button
+                          type="button"
+                          disabled
+                          className={cn(
+                            btnDanger,
+                            'cursor-not-allowed opacity-40 saturate-50',
+                          )}
+                          title="Premium complementar já terminado"
+                        >
+                          Terminado
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          disabled={
+                            busyId === app.id ||
+                            (!app.creator_premium_active && !app.creator_premium_paused)
+                          }
+                          onClick={() => void endCreatorPremium(app)}
+                          className={btnDanger}
+                        >
+                          Terminar agora
+                        </button>
+                      )}
                     </div>
                   </div>
                 ) : null}
