@@ -3,7 +3,18 @@ import { getAllPosts } from '@/lib/blog-posts'
 import { locales } from '@/lib/i18n/locales'
 import { localePath, SITE_URL } from '@/lib/i18n/paths'
 
-const staticPaths = ['/', '/blog', '/press', '/contact', '/faq', '/privacy', '/terms'] as const
+const staticPaths = [
+  '/',
+  '/blog',
+  '/press',
+  '/contact',
+  '/faq',
+  '/privacy',
+  '/terms',
+  '/referral-terms',
+  '/creator-program-terms',
+  '/creator-program',
+] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts()

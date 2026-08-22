@@ -705,5 +705,572 @@
         ]
       }
     ]
+  },
+  "referralTerms": {
+    "title": "Termos do Programa de Referral",
+    "lastUpdated": "Última atualização: 19 de julho de 2026",
+    "intro": "Estes Termos do Programa de Referral (\"Termos do Programa\") regulam a tua participação no programa Indique um Amigo da IGNITE AI (o \"Programa\"), operado pela IGNITE AI (\"IGNITE\", \"nós\" ou \"nosso\") a partir do Reino Unido. O Programa faz parte da aplicação móvel IGNITE AI e serviços relacionados (o \"Serviço\"). Ao participares no Programa — incluindo partilhar um código de referral, aceitar um benefício de referral ou reclamar uma recompensa — aceitas estes Termos do Programa, os nossos Termos e Condições e a nossa Política de Privacidade. Se não concordares, não participes no Programa.",
+    "sections": [
+      {
+        "title": "1. Relação com outros termos",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Estes Termos do Programa complementam os nossos Termos e Condições. Em caso de conflito entre estes Termos do Programa e os Termos e Condições quanto ao Programa, prevalecem estes Termos do Programa nesse tema. Termos com maiúscula não definidos aqui têm o significado dado nos Termos e Condições, quando aplicável."
+          },
+          {
+            "type": "p",
+            "text": "Podemos atualizar estes Termos do Programa publicando uma versão revista na app e atualizando a data de \"Última atualização\". A participação continuada após as alterações produzirem efeitos significa que aceitas os Termos do Programa revistos."
+          }
+        ]
+      },
+      {
+        "title": "2. Elegibilidade",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Para participares como referrer, deves ter uma conta IGNITE válida e em bom estado, e cumprir os requisitos de elegibilidade dos nossos Termos e Condições, incluindo os de idade aplicáveis."
+          },
+          {
+            "type": "p",
+            "text": "O Programa destina-se a uso pessoal e não comercial. Podemos restringir a elegibilidade por região, estado da conta, histórico de pagamentos ou outros critérios indicados na app. Colaboradores, prestadores e agentes da IGNITE, e os seus familiares próximos, podem ser excluídos quando o indicarmos na app ou por aviso."
+          },
+          {
+            "type": "p",
+            "text": "Podemos recusar, suspender ou terminar a participação no Programa de qualquer conta que, razoavelmente, consideremos violar estes Termos do Programa, os Termos e Condições ou a lei aplicável."
+          }
+        ]
+      },
+      {
+        "title": "3. Como funciona o Programa",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Referrers elegíveis recebem um código promocional ou de referral pessoal (o \"Código de Referral\") no Serviço. Podes partilhar o teu Código de Referral com amigos e família através de canais pessoais habituais (por exemplo mensagens ou email)."
+          },
+          {
+            "type": "p",
+            "text": "Uma pessoa que crie uma nova conta IGNITE e aplique o teu Código de Referral conforme indicado na app (um \"Utilizador Referido\") pode receber um benefício de referral descrito na app, e tu podes tornar-te elegível para uma recompensa se se cumprirem as condições destes Termos do Programa."
+          },
+          {
+            "type": "p",
+            "text": "A disponibilidade de códigos, benefícios e recompensas pode variar por região e ao longo do tempo. O que vês na app no momento da participação define a oferta atual, sujeito a estes Termos do Programa."
+          }
+        ]
+      },
+      {
+        "title": "4. Benefício para o Utilizador Referido",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Salvo oferta diferente indicada na app no momento do registo, um Utilizador Referido elegível que aplique corretamente um Código de Referral válido pode receber sete (7) dias de acesso IGNITE Premium sem custo (o \"Trial de Referral\")."
+          },
+          {
+            "type": "p",
+            "text": "A duração do trial, as funcionalidades Premium incluídas e qualquer renovação automática ou faturação após o trial são mostradas no registo e regem-se também pelos Termos e Condições (incluindo a secção de subscrições) e pelos termos da App Store ou Google Play aplicáveis."
+          },
+          {
+            "type": "p",
+            "text": "O Trial de Referral limita-se a um por pessoa e a uma por conta nova elegível, salvo indicação expressa em contrário. Utilizadores IGNITE anteriores, antigos subscritores Premium e contas que determinemos não serem genuinamente novas podem não ser elegíveis."
+          }
+        ]
+      },
+      {
+        "title": "5. Recompensa de referral para o referrer",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Salvo recompensa diferente indicada na app, podes ganhar uma Recompensa de Referral de cinco unidades na moeda da tua região por cada Referral Qualificado: países da zona euro — EUR €5; Reino Unido e outras regiões de libra esterlina — GBP £5; Estados Unidos e outras regiões de dólar americano — USD $5. Todas as outras regiões usam por defeito USD $5. O montante e a moeda mostrados na app para a tua região definem a recompensa que podes ganhar."
+          },
+          {
+            "type": "p",
+            "text": "Um \"Referral Qualificado\" significa um Utilizador Referido que: (a) é uma pessoa singular a criar uma conta IGNITE genuinamente nova; (b) aplica corretamente o teu Código de Referral no registo ou conforme indicado na app; (c) não és tu, nem um membro do teu agregado familiar a criar uma conta duplicada ou relacionada para obter recompensas, nem está de outro modo proibido nestes Termos do Programa; e (d) compra e paga com sucesso um plano anual IGNITE Premium com atribuição a esse Código de Referral, sujeito a regras de arrependimento, reembolso, chargeback ou cancelamento aplicáveis."
+          },
+          {
+            "type": "p",
+            "text": "Compras de planos semanais, mensais ou outros planos não anuais não qualificam para a Recompensa de Referral, salvo indicação expressa em contrário na app. Trials gratuitos, contas não pagas e subscrições anuais canceladas ou reembolsadas não qualificam."
+          },
+          {
+            "type": "p",
+            "text": "Apenas um referrer pode receber Recompensa de Referral por um dado Utilizador Referido. Se forem usados vários códigos ou a atribuição for pouco clara, decidimos a atribuição segundo o nosso critério razoável com base nos nossos registos."
+          }
+        ]
+      },
+      {
+        "title": "6. Pagamento da recompensa",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "As Recompensas de Referral são pagas via PayPal ou outro método de pagamento que designemos na app ou por email. És responsável por fornecer dados de pagamento corretos e por quaisquer taxas, impostos ou requisitos da conta do prestador de pagamento."
+          },
+          {
+            "type": "p",
+            "text": "Podemos exigir verificação de identidade, fiscal ou de conta antes de pagar uma Recompensa de Referral. Podemos reter, atrasar ou cancelar o pagamento se precisarmos de rever um referral por fraude, reembolsos, chargebacks ou violações de política."
+          },
+          {
+            "type": "p",
+            "text": "Salvo prazo diferente indicado na app, procuramos processar Recompensas de Referral elegíveis depois de o Referral Qualificado ser confirmado e de ter decorrido qualquer janela aplicável de reembolso ou chargeback. Os prazos de processamento podem variar. Recompensas pendentes não geram juros e não são transferíveis, exceto quando a lei o exija."
+          },
+          {
+            "type": "p",
+            "text": "As Recompensas de Referral não têm valor monetário até serem aprovadas e pagas. Não são cartões-presente, crédito de loja nem crédito de subscrição Premium, salvo indicação expressa."
+          }
+        ]
+      },
+      {
+        "title": "7. Limites",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Podemos definir limites ao número de Recompensas de Referral que podes ganhar num período, ao número de códigos que podes partilhar, ou ao total de pagamentos do Programa. Quaisquer limites serão mostrados na app ou comunicados."
+          },
+          {
+            "type": "p",
+            "text": "Podemos reter recompensas que pareçam duplicadas, abusivas ou inconsistentes com partilha pessoal normal."
+          }
+        ]
+      },
+      {
+        "title": "8. Condutas proibidas",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Concordas em não:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Criar contas falsas, duplicadas ou enganadoras, ou referir-te a ti próprio (incluindo através de aliases, contas familiares criadas sobretudo para obter recompensas, ou esquemas semelhantes).",
+              "Usar bots, scripts, tráfego comprado, listas de leads pagas ou ferramentas automatizadas para distribuir Códigos de Referral ou gerar registos.",
+              "Fazer spam, envios em massa ou distribuir Códigos de Referral de forma assediante ou ilegal.",
+              "Publicar Códigos de Referral em sites de cupões, descontos ou agregadores de códigos promocionais, ou vender, leiloar ou trocar Códigos de Referral, salvo autorização prévia por escrito.",
+              "Deturpar o Programa, a IGNITE, os preços Premium, a duração do trial ou os montantes das recompensas.",
+              "Interferir com o tracking de atribuição, tentar reivindicar o referral de outra pessoa ou manipular de outro modo o Programa.",
+              "Violar os Termos e Condições, a Política de Privacidade ou a lei aplicável no contexto do Programa."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "9. Verificação, fraude e cumprimento",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Podemos rever referrals, contas, pagamentos e sinais de dispositivo ou utilização para verificar o cumprimento do Programa. Podemos pedir informações adicionais a ti ou a um Utilizador Referido."
+          },
+          {
+            "type": "p",
+            "text": "Se razoavelmente considerarmos que um referral ou conta viola estes Termos do Programa, podemos negar ou reverter Recompensas de Referral, cancelar Trials de Referral, suspender o acesso ao Programa e/ou suspender ou terminar contas IGNITE relacionadas, sem prejuízo de outros remédios."
+          },
+          {
+            "type": "p",
+            "text": "Os nossos registos do Programa (incluindo atribuição de códigos e registos de compra) são conclusivos para administrar o Programa, salvo erro manifesto."
+          }
+        ]
+      },
+      {
+        "title": "10. Alterações, suspensão e termo do Programa",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Podemos modificar, suspender ou terminar o Programa (ou qualquer recompensa, trial ou região) a qualquer momento, com ou sem aviso, na máxima medida permitida por lei. Isto inclui alterar montantes de recompensa, planos qualificantes, duração do trial, métodos de pagamento e regras de elegibilidade."
+          },
+          {
+            "type": "p",
+            "text": "Se o Programa terminar, trataremos Referrals Qualificados pendentes e recompensas aprovadas não pagas de acordo com os Termos do Programa então em vigor e a lei aplicável. Não somos obrigados a honrar referrals concluídos após o termo do Programa, nem ofertas que nunca tenham sido validamente ganhas."
+          }
+        ]
+      },
+      {
+        "title": "11. Impostos",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "És o único responsável por quaisquer impostos que possam aplicar-se às Recompensas de Referral que recebas. Quando a lei o exigir, podemos reportar pagamentos ou reter montantes. Fornece qualquer informação fiscal que razoavelmente solicitemos."
+          }
+        ]
+      },
+      {
+        "title": "12. Privacidade",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Tratamos dados pessoais relacionados com o Programa (incluindo Códigos de Referral, atribuição e dados de pagamento) conforme descrito na nossa Política de Privacidade. Não partilhes dados pessoais de terceiros sem base legal para o fazer."
+          }
+        ]
+      },
+      {
+        "title": "13. Exclusões de garantia",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "NA MÁXIMA MEDIDA PERMITIDA POR LEI, O PROGRAMA É FORNECIDO \"TAL COMO ESTÁ\". Não garantimos disponibilidade ininterrupta de códigos, atribuição, trials, recompensas ou pagamentos, nem que qualquer amigo concreto se vá registar ou comprar Premium."
+          },
+          {
+            "type": "p",
+            "text": "A faturação, reembolsos e gestão de subscrições da App Store e Google Play são tratados por essas plataformas segundo as suas regras. Não somos responsáveis por atrasos da plataforma, erros de faturação fora do nosso controlo, ou pela falha de um Utilizador Referido em concluir a compra."
+          }
+        ]
+      },
+      {
+        "title": "14. Limitação de responsabilidade",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "NA MÁXIMA MEDIDA PERMITIDA POR LEI, A IGNITE E OS SEUS ADMINISTRADORES, DIRIGENTES, COLABORADORES, AGENTES E FORNECEDORES NÃO SERÃO RESPONSÁVEIS POR QUAISQUER DANOS INDIRETOS, INCIDENTAIS, ESPECIAIS, CONSEQUENTES OU PUNITIVOS, NEM POR LUCROS CESSANTES OU PERDA DE DADOS, DECORRENTES OU RELACIONADOS COM O PROGRAMA."
+          },
+          {
+            "type": "p",
+            "text": "NA MÁXIMA MEDIDA PERMITIDA POR LEI, A NOSSA RESPONSABILIDADE TOTAL DECORRENTE OU RELACIONADA COM O PROGRAMA NÃO EXCEDERÁ O MAIOR DE (A) O TOTAL DE RECOMPENSAS DE REFERRAL QUE EFETIVAMENTE TE PAGÁMOS NOS DOZE MESES ANTERIORES À RECLAMAÇÃO, OU (B) CINQUENTA LIBRAS ESTERLINAS (£50) OU O EQUIVALENTE APROXIMADO NA MOEDA LOCAL."
+          },
+          {
+            "type": "p",
+            "text": "Nada nestes Termos do Programa limita responsabilidade que não possa ser limitada ao abrigo de lei imperativa de proteção do consumidor, incluindo direitos aplicáveis no Reino Unido, EEE, Portugal, EUA ou Austrália quando aplicáveis."
+          }
+        ]
+      },
+      {
+        "title": "15. Indemnização",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Na máxima medida permitida por lei, concordas em indemnizar e isentar a IGNITE de reclamações, danos, perdas e despesas (incluindo honorários legais razoáveis) decorrentes do teu uso indevido do Programa, da distribuição de Códigos de Referral, ou da violação destes Termos do Programa ou da lei aplicável."
+          }
+        ]
+      },
+      {
+        "title": "16. Lei aplicável",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Estes Termos do Programa regem-se pelas leis de Inglaterra e do País de Gales, salvo quando leis imperativas de proteção do consumidor no teu país de residência exijam de outro modo. A resolução de litígios e a jurisdição seguem as disposições correspondentes dos nossos Termos e Condições."
+          },
+          {
+            "type": "p",
+            "text": "Se fores consumidor, nada nestes Termos do Programa exclui ou limita direitos legais que não possam ser renunciados ao abrigo das leis do teu país de residência."
+          }
+        ]
+      },
+      {
+        "title": "17. Disposições gerais",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Se alguma disposição destes Termos do Programa for considerada inaplicável, as restantes mantêm-se em vigor. A nossa falha em fazer cumprir uma disposição não constitui renúncia. Não podes ceder os teus direitos no Programa sem o nosso consentimento; podemos ceder estes Termos do Programa no âmbito de uma reorganização, fusão ou venda de ativos."
+          },
+          {
+            "type": "p",
+            "text": "Estes Termos do Programa, em conjunto com os Termos e Condições e a Política de Privacidade, constituem o acordo integral entre ti e a IGNITE relativo ao Programa e substituem discussões anteriores sobre ofertas de referral, exceto detalhes específicos de oferta na app mostrados no momento da participação."
+          }
+        ]
+      },
+      {
+        "title": "18. Contacto",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Questões sobre o Programa ou estes Termos do Programa podem ser enviadas para support@ignitehub.app."
+          },
+          {
+            "type": "p",
+            "text": "Para pedidos relacionados com privacidade, consulta a nossa Política de Privacidade. Para termos gerais do Serviço, consulta os Termos e Condições."
+          }
+        ]
+      }
+    ]
+  },
+  "creatorProgramTerms": {
+    "title": "Termos do Programa de Criadores",
+    "lastUpdated": "Última atualização: 8 de agosto de 2026",
+    "intro": "Estes Termos do Creator Program (\"Termos do Programa\") regem a tua participação no Creator Program da IGNITE AI (o \"Programa\"), operado pela IGNITE AI (\"IGNITE,\" \"nós,\" \"nos,\" ou \"nosso\") a partir do Reino Unido. O Programa faz parte da aplicação móvel IGNITE AI e serviços relacionados (o \"Serviço\"). Ao candidatar-te ao Programa, aceitares a aprovação, partilhares um Código de Criador ou pedires recompensas de criador ou Premium complementar, concordas com estes Termos do Programa, os nossos Termos e Condições e a Política de Privacidade. Se não concordares, não participes no Programa.",
+    "sections": [
+      {
+        "title": "1. Relação com outros termos",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Estes Termos do Programa complementam os nossos Termos e Condições. Em caso de conflito entre estes Termos do Programa e os Termos e Condições quanto ao Programa, prevalecem estes Termos do Programa nesse tema. Termos com maiúscula não definidos aqui têm o significado dos Termos e Condições quando aplicável."
+          },
+          {
+            "type": "p",
+            "text": "O Creator Program é separado do Refer a Friend. O Refer a Friend rege-se pelos Termos do Programa de Referral. Benefícios, códigos, atribuição e recompensas de cada programa não são intercambiáveis, salvo indicação expressa na app."
+          },
+          {
+            "type": "p",
+            "text": "Podemos atualizar estes Termos do Programa publicando uma versão revista na app e atualizando a data \"Última atualização\". A participação continuada após as alterações entrarem em vigor significa que aceitas os Termos do Programa revistos."
+          }
+        ]
+      },
+      {
+        "title": "2. Elegibilidade e candidatura",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Para te candidatares, tens de ter uma conta IGNITE válida e em bom estado e cumprir os requisitos de elegibilidade dos Termos e Condições, incluindo requisitos de idade aplicáveis."
+          },
+          {
+            "type": "p",
+            "text": "A aceitação no Programa é discricionária. Podemos aprovar, recusar, suspender ou terminar a participação com base na candidatura, audiência, nicho de conteúdo, estado da conta, histórico de cumprimento, região ou outros critérios mostrados na app ou comunicados a ti."
+          },
+          {
+            "type": "p",
+            "text": "Deves fornecer dados de candidatura exatos (incluindo contacto, plataformas, handles e tamanho de audiência). Podemos pedir verificação adicional antes ou depois da aprovação."
+          }
+        ]
+      },
+      {
+        "title": "3. Como funciona o Programa",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Se fores aprovado, podes receber um código de criador personalizado (o \"Código de Criador\") para partilhares com a tua audiência. Seguidores que criem uma conta IGNITE e apliquem o teu Código de Criador conforme instruído podem ser atribuídos a ti para efeitos do Programa."
+          },
+          {
+            "type": "p",
+            "text": "Criadores aprovados podem também receber acesso Premium complementar por um período que definimos e mostramos na app. O Premium complementar pode ser pausado, prolongado ou terminado conforme a app e estes Termos do Programa."
+          },
+          {
+            "type": "p",
+            "text": "A disponibilidade de códigos, preços exclusivos para a tua audiência, Premium complementar e recompensas pode variar por região e ao longo do tempo. O que vês na app no momento da participação define a oferta atual, sujeito a estes Termos do Programa."
+          }
+        ]
+      },
+      {
+        "title": "4. Código de Criador e preços para a audiência",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "O teu Código de Criador é pessoal. Podes partilhá-lo por canais habituais de criador (por exemplo posts, stories, bio, newsletters ou lives) de forma lícita e não enganosa."
+          },
+          {
+            "type": "p",
+            "text": "Quando oferecido, o teu Código de Criador pode desbloquear preços anuais Premium exclusivos para seguidores atribuídos. Preços e elegibilidade exactos são mostrados no Serviço no registo ou compra e podem mudar."
+          },
+          {
+            "type": "p",
+            "text": "Podemos desativar, substituir ou revogar um Código de Criador se razoavelmente considerarmos que foi abusado, vendido, extraído ou usado em violação destes Termos do Programa."
+          }
+        ]
+      },
+      {
+        "title": "5. Recompensas de criador",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Salvo recompensa diferente indicada na app, podes ganhar uma Recompensa de Criador de dez unidades na moeda da tua região por cada Inscrição Qualificada de Criador: países da zona euro — EUR €10; Reino Unido e outras regiões de libra — GBP £10; Estados Unidos e outras regiões de dólar — USD $10. As restantes regiões usam por defeito USD $10. O montante e a moeda mostrados na app para a tua região definem a recompensa."
+          },
+          {
+            "type": "p",
+            "text": "Uma \"Inscrição Qualificada de Criador\" significa um seguidor que: (a) é uma pessoa singular a criar uma conta IGNITE genuinamente nova; (b) aplica corretamente o teu Código de Criador no registo ou conforme indicado na app; (c) não és tu, nem uma conta duplicada ou relacionada criada para obter recompensas, nem está de outro modo proibido nestes Termos do Programa; e (d) compra e paga com sucesso um plano anual IGNITE Premium com atribuição a esse Código de Criador, sujeito a regras de arrependimento, reembolso, chargeback ou cancelamento aplicáveis."
+          },
+          {
+            "type": "p",
+            "text": "Compras de planos semanais, mensais ou outros planos não anuais não qualificam para a Recompensa de Criador, salvo indicação expressa na app. Trials gratuitos, contas não pagas e subscrições anuais canceladas ou reembolsadas não qualificam."
+          },
+          {
+            "type": "p",
+            "text": "Apenas uma atribuição de criador pode receber Recompensa de Criador por uma dada conta de seguidor. As Recompensas de Criador são separadas das recompensas Refer a Friend. Se a atribuição for pouco clara, decidimos com critério razoável com base nos nossos registos."
+          }
+        ]
+      },
+      {
+        "title": "6. Premium complementar",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Se concedermos Premium complementar, a data de início, data de fim, dias restantes e qualquer estado de pausa são mostrados nos ecrãs do Creator Program. O Premium complementar é um benefício do Programa, não uma subscrição comprada, salvo indicação expressa em contrário."
+          },
+          {
+            "type": "p",
+            "text": "Podemos pausar, retomar, prolongar, encurtar ou terminar o Premium complementar por razões operacionais, de cumprimento ou de gestão do Programa, incluindo se a tua participação terminar ou se razoavelmente suspeitarmos de abuso."
+          },
+          {
+            "type": "p",
+            "text": "O Premium complementar não garante acesso contínuo após o período indicado e não se converte em subscrição paga salvo se comprares uma através da App Store ou Google Play."
+          }
+        ]
+      },
+      {
+        "title": "7. Pagamento de recompensas",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "As Recompensas de Criador são pagas via PayPal ou outro método que designemos na app ou por email. És responsável por fornecer dados de pagamento exactos e por quaisquer taxas, impostos ou requisitos da conta do prestador de pagamento."
+          },
+          {
+            "type": "p",
+            "text": "Podemos exigir verificação de identidade, fiscal ou de conta antes de pagar. Podemos reter, atrasar ou cancelar o pagamento se precisarmos de rever a atribuição por fraude, reembolsos, chargebacks ou violações de política."
+          },
+          {
+            "type": "p",
+            "text": "Salvo timing diferente indicado na app, procuramos processar Recompensas de Criador elegíveis após a compra anual qualificante ser confirmada e após qualquer janela de reembolso ou chargeback aplicável. Os prazos podem variar. Recompensas pendentes não rendem juros e não são transferíveis salvo exigência legal."
+          },
+          {
+            "type": "p",
+            "text": "As Recompensas de Criador não têm valor monetário até serem aprovadas e pagas. Não são gift cards, crédito de loja nem crédito de subscrição Premium, salvo indicação expressa."
+          }
+        ]
+      },
+      {
+        "title": "8. Limites",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Podemos definir limites a Recompensas de Criador, duração do Premium complementar, distribuição de códigos ou totais de pagamentos do Programa. Quaisquer limites serão mostrados na app ou comunicados a ti."
+          },
+          {
+            "type": "p",
+            "text": "Podemos reter recompensas ou benefícios do Programa que pareçam duplicados, abusivos ou inconsistentes com promoção normal de criador."
+          }
+        ]
+      },
+      {
+        "title": "9. Conduta proibida",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Concordas em não:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Criar contas falsas, duplicadas ou enganosas, ou atribuir-te a ti próprio (incluindo aliases ou contas relacionadas criadas principalmente para obter recompensas).",
+              "Usar bots, scripts, tráfego comprado, listas de leads pagas ou ferramentas automatizadas para distribuir Códigos de Criador ou gerar registos de forma enganosa.",
+              "Fazer spam, assediar ou distribuir Códigos de Criador de forma ilícita.",
+              "Vender, leiloar ou trocar Códigos de Criador, ou publicá-los em sites de cupões ou agregadores de promoções, salvo autorização escrita prévia.",
+              "Deturpar o Programa, a IGNITE, preços Premium, Premium complementar, duração de trial ou montantes de recompensa.",
+              "Interferir com o tracking de atribuição, tentar reivindicar a atribuição de outro criador ou manipular o Programa.",
+              "Violar os Termos e Condições, a Política de Privacidade ou a lei aplicável em ligação com o Programa."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "10. Verificação, fraude e enforcement",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Podemos rever candidaturas, atribuições, contas, pagamentos e sinais de dispositivo ou uso para verificar o cumprimento do Programa. Podemos pedir informação adicional a ti ou a utilizadores atribuídos."
+          },
+          {
+            "type": "p",
+            "text": "Se razoavelmente considerarmos que uma candidatura, atribuição ou conta viola estes Termos do Programa, podemos negar ou reverter Recompensas de Criador, pausar ou terminar Premium complementar, desativar Códigos de Criador, suspender o acesso ao Programa e/ou suspender ou terminar contas IGNITE relacionadas, sem limitar outros remédios."
+          },
+          {
+            "type": "p",
+            "text": "Os nossos registos do Programa (incluindo atribuição de códigos e compras) são conclusivos para administrar o Programa, salvo erro manifesto."
+          }
+        ]
+      },
+      {
+        "title": "11. Alterações, suspensão e termo do Programa",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Podemos modificar, suspender ou terminar o Programa (ou qualquer recompensa, Premium complementar, código ou região) a qualquer momento, com ou sem aviso, na máxima medida permitida por lei. Isto inclui alterar montantes de recompensa, planos qualificantes, períodos de retenção, métodos de pagamento e regras de elegibilidade."
+          },
+          {
+            "type": "p",
+            "text": "Se o Programa terminar, trataremos Inscrições Qualificadas de Criador pendentes e recompensas aprovadas não pagas de acordo com os Termos do Programa então em vigor e a lei aplicável. Não somos obrigados a honrar atribuições concluídas após o termo do Programa, nem ofertas que nunca tenham sido validamente ganhas."
+          }
+        ]
+      },
+      {
+        "title": "12. Impostos",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "És o único responsável por quaisquer impostos aplicáveis às Recompensas de Criador ou outros benefícios do Programa que recebas. Quando a lei o exigir, podemos reportar pagamentos ou reter montantes. Fornece qualquer informação fiscal que razoavelmente peçamos."
+          }
+        ]
+      },
+      {
+        "title": "13. Privacidade",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Tratamos dados pessoais relacionados com o Programa (incluindo candidaturas, Códigos de Criador, atribuição e dados de pagamento) conforme a Política de Privacidade. Não partilhes dados pessoais de terceiros sem base legal para o fazer."
+          }
+        ]
+      },
+      {
+        "title": "14. Exclusão de garantias",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "NA MÁXIMA MEDIDA PERMITIDA POR LEI, O PROGRAMA É FORNECIDO \"TAL COMO ESTÁ\". Não garantimos disponibilidade ininterrupta de códigos, atribuição, Premium complementar, recompensas ou pagamentos, nem que qualquer seguidor concreto se vá registar ou comprar Premium."
+          },
+          {
+            "type": "p",
+            "text": "A faturação, reembolsos e gestão de subscrições da App Store e Google Play são tratados por essas plataformas segundo as suas regras. Não somos responsáveis por atrasos da plataforma, erros de faturação fora do nosso controlo, ou pela falha de um seguidor em concluir a compra."
+          }
+        ]
+      },
+      {
+        "title": "15. Limitação de responsabilidade",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "NA MÁXIMA MEDIDA PERMITIDA POR LEI, A IGNITE E OS SEUS DIRIGENTES, ADMINISTRADORES, COLABORADORES, AGENTES E FORNECEDORES NÃO SERÃO RESPONSÁVEIS POR QUAISQUER DANOS INDIRETOS, INCIDENTAIS, ESPECIAIS, CONSEQUENCIAIS OU PUNITIVOS, NEM POR LUCROS OU DADOS PERDIDOS, DECORRENTES OU RELACIONADOS COM O PROGRAMA."
+          },
+          {
+            "type": "p",
+            "text": "NA MÁXIMA MEDIDA PERMITIDA POR LEI, A NOSSA RESPONSABILIDADE TOTAL DECORRENTE OU RELACIONADA COM O PROGRAMA NÃO EXCEDERÁ O MAIOR DE (A) O TOTAL DE RECOMPENSAS DE CRIADOR QUE EFETIVAMENTE TE PAGÁMOS NOS DOZE MESES ANTERIORES À RECLAMAÇÃO, OU (B) CINQUENTA LIBRAS ESTERLINAS (£50) OU O EQUIVALENTE APROXIMADO EM MOEDA LOCAL."
+          },
+          {
+            "type": "p",
+            "text": "Nada nestes Termos do Programa limita responsabilidade que não possa ser limitada ao abrigo de lei imperativa de proteção do consumidor, incluindo direitos aplicáveis no Reino Unido, EEE, Portugal, EUA ou Austrália quando aplicáveis."
+          }
+        ]
+      },
+      {
+        "title": "16. Indemnização",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Na máxima medida permitida por lei, concordas em indemnizar e isentar a IGNITE de reclamações, danos, perdas e despesas (incluindo honorários legais razoáveis) decorrentes do teu uso indevido do Programa, da distribuição de Códigos de Criador ou da violação destes Termos do Programa ou da lei aplicável."
+          }
+        ]
+      },
+      {
+        "title": "17. Lei aplicável",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Estes Termos do Programa regem-se pelas leis de Inglaterra e País de Gales, salvo quando leis imperativas de proteção do consumidor do teu país de residência exijam de outro modo. A resolução de litígios e a jurisdição seguem as disposições correspondentes dos Termos e Condições."
+          },
+          {
+            "type": "p",
+            "text": "Se fores consumidor, nada nestes Termos do Programa exclui ou limita direitos legais que não possam ser renunciados ao abrigo das leis do teu país de residência."
+          }
+        ]
+      },
+      {
+        "title": "18. Geral",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Se alguma disposição destes Termos do Programa for considerada inexequível, as restantes mantêm-se em vigor. A nossa falha em fazer cumprir uma disposição não constitui renúncia. Não podes ceder os teus direitos no Programa sem o nosso consentimento; podemos ceder estes Termos do Programa em ligação com reorganização, fusão ou venda de ativos."
+          },
+          {
+            "type": "p",
+            "text": "Estes Termos do Programa, em conjunto com os Termos e Condições e a Política de Privacidade, constituem o acordo integral entre ti e a IGNITE quanto ao Programa e substituem discussões anteriores sobre ofertas de criador, salvo detalhes específicos de oferta na app no momento da participação."
+          }
+        ]
+      },
+      {
+        "title": "19. Contacto",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Questões sobre o Programa ou estes Termos do Programa podem ser enviadas para support@ignitehub.app."
+          },
+          {
+            "type": "p",
+            "text": "Para pedidos de privacidade, consulta a Política de Privacidade. Para termos gerais do Serviço, os Termos e Condições. Para Refer a Friend, os Termos do Programa de Referral."
+          }
+        ]
+      }
+    ]
   }
 }

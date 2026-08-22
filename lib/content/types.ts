@@ -17,6 +17,8 @@ export type LegalDoc = {
 export type LegalBundle = {
   privacyPolicy: LegalDoc
   termsOfUse: LegalDoc
+  referralTerms: LegalDoc
+  creatorProgramTerms: LegalDoc
 }
 
 export type BlogPost = {

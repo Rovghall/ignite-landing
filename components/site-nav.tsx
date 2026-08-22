@@ -39,10 +39,10 @@ export function SiteNav() {
 
   const navLinks = useMemo(
     () => [
-      { label: t.nav.home, path: '/' },
-      { label: t.nav.press, path: '/press' },
-      { label: t.nav.blogs, path: '/blog' },
-      { label: t.nav.creatorProgram, path: '/creator-program' },
+      { label: t.nav.home, path: '/', pill: false },
+      { label: t.nav.press, path: '/press', pill: false },
+      { label: t.nav.blogs, path: '/blog', pill: false },
+      { label: t.nav.creatorProgram, path: '/creator-program', pill: true },
     ],
     [t],
   )
@@ -97,7 +97,12 @@ export function SiteNav() {
             <Link
               key={link.path}
               href={href(link.path)}
-              className="font-brand text-[15px] font-medium text-foreground/85 transition-colors duration-200 hover:text-foreground"
+              className={cn(
+                'font-brand text-[15px] font-medium transition-colors duration-200',
+                link.pill
+                  ? 'rounded-full border border-black/10 bg-black/[0.04] px-3.5 py-1.5 text-foreground hover:border-black/18 hover:bg-black/[0.07]'
+                  : 'text-foreground/85 hover:text-foreground',
+              )}
             >
               {link.label}
             </Link>
@@ -138,7 +143,12 @@ export function SiteNav() {
                 <Link
                   key={link.path}
                   href={href(link.path)}
-                  className="rounded-lg px-3 py-3 font-brand text-base font-medium text-foreground/90 transition-colors hover:bg-secondary"
+                  className={cn(
+                    'font-brand text-base font-medium transition-colors',
+                    link.pill
+                      ? 'mt-1 self-start rounded-full border border-black/10 bg-black/[0.04] px-3.5 py-2 text-foreground hover:border-black/18 hover:bg-black/[0.07]'
+                      : 'rounded-lg px-3 py-3 text-foreground/90 hover:bg-secondary',
+                  )}
                   onClick={() => setOpen(false)}
                 >
                   {link.label}

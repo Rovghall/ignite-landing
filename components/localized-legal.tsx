@@ -1,10 +1,9 @@
 import { LegalDocument } from '@/components/legal-document'
-import { LegalBackHome, LegalRelated } from '@/components/legal-page-chrome'
+import { LegalBackHome, LegalRelatedLinks } from '@/components/legal-page-chrome'
 import type { LegalDoc } from '@/lib/content/types'
-import { localePath } from '@/lib/i18n/paths'
 import type { Locale } from '@/lib/i18n/locales'
 
-type Kind = 'privacy' | 'terms'
+export type LegalPageKind = 'privacy' | 'terms' | 'referralTerms' | 'creatorProgramTerms'
 
 export function LocalizedLegalPage({
   locale,
@@ -12,7 +11,7 @@ export function LocalizedLegalPage({
   doc,
 }: {
   locale: Locale
-  kind: Kind
+  kind: LegalPageKind
   doc: LegalDoc
 }) {
   return (
@@ -21,10 +20,7 @@ export function LocalizedLegalPage({
       <h1 className="mt-8 font-brand text-4xl font-bold tracking-tight text-foreground">{doc.title}</h1>
       <p className="mt-3 text-sm text-muted-foreground">{doc.lastUpdated}</p>
       <LegalDocument doc={doc} />
-      <LegalRelated
-        href={localePath(locale, kind === 'privacy' ? '/terms' : '/privacy')}
-        kind={kind === 'privacy' ? 'terms' : 'privacy'}
-      />
+      <LegalRelatedLinks locale={locale} current={kind} />
     </main>
   )
 }

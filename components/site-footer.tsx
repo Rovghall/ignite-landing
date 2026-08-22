@@ -55,6 +55,8 @@ export function SiteFooter() {
   const legalLinks = [
     { label: t.footer.privacy, path: '/privacy' },
     { label: t.footer.terms, path: '/terms' },
+    { label: t.footer.referralTerms, path: '/referral-terms' },
+    { label: t.footer.creatorProgramTerms, path: '/creator-program-terms' },
   ]
   const companyLinks = [
     { label: t.footer.faq, path: '/faq' },

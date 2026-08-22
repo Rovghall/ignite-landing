@@ -705,5 +705,572 @@
         ]
       }
     ]
+  },
+  "referralTerms": {
+    "title": "Referral Program Terms",
+    "lastUpdated": "Last updated: July 19, 2026",
+    "intro": "These Referral Program Terms (\"Program Terms\") govern your participation in the IGNITE AI Refer a Friend program (the \"Program\"), operated by IGNITE AI (\"IGNITE,\" \"we,\" \"us,\" or \"our\") from the United Kingdom. The Program is part of the IGNITE AI mobile application and related services (the \"Service\"). By participating in the Program—including by sharing a referral code, accepting a referral benefit, or claiming a reward—you agree to these Program Terms, our Terms and Conditions, and our Privacy Policy. If you do not agree, do not participate in the Program.",
+    "sections": [
+      {
+        "title": "1. Relationship to other terms",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "These Program Terms supplement our Terms and Conditions. If there is a conflict between these Program Terms and the Terms and Conditions regarding the Program, these Program Terms control for that topic. Capitalized terms not defined here have the meaning given in the Terms and Conditions where applicable."
+          },
+          {
+            "type": "p",
+            "text": "We may update these Program Terms by posting a revised version in the app and updating the \"Last updated\" date. Continued participation after changes take effect means you accept the revised Program Terms."
+          }
+        ]
+      },
+      {
+        "title": "2. Eligibility",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "To participate as a referrer, you must have a valid IGNITE account in good standing and meet the eligibility requirements in our Terms and Conditions, including applicable age requirements."
+          },
+          {
+            "type": "p",
+            "text": "The Program is intended for personal, non-commercial use. We may restrict eligibility by region, account status, payment history, or other criteria shown in the app. Employees, contractors, and agents of IGNITE, and their immediate family members, may be excluded where we say so in the app or by notice."
+          },
+          {
+            "type": "p",
+            "text": "We may refuse, suspend, or terminate Program participation for any account that we reasonably believe violates these Program Terms, our Terms and Conditions, or applicable law."
+          }
+        ]
+      },
+      {
+        "title": "3. How the Program works",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Eligible referrers receive a personal promo or referral code (the \"Referral Code\") in the Service. You may share your Referral Code with friends and family through ordinary personal channels (for example messaging apps or email)."
+          },
+          {
+            "type": "p",
+            "text": "A person who creates a new IGNITE account and applies your Referral Code as instructed in the app (a \"Referred User\") may receive a referral benefit described in the app, and you may become eligible for a referral reward if the conditions in these Program Terms are met."
+          },
+          {
+            "type": "p",
+            "text": "Availability of codes, benefits, and rewards may vary by region and over time. What you see in the app at the time of participation controls the current offer, subject to these Program Terms."
+          }
+        ]
+      },
+      {
+        "title": "4. Benefit for the Referred User",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Unless a different offer is shown in the app at the time of signup, a qualifying Referred User who correctly applies a valid Referral Code may receive seven (7) days of IGNITE Premium access at no charge (the \"Referral Trial\")."
+          },
+          {
+            "type": "p",
+            "text": "Trial length, Premium features included, and any auto-renewal or billing after the trial are shown at signup and are also governed by our Terms and Conditions (including the subscriptions section) and the applicable App Store or Google Play terms."
+          },
+          {
+            "type": "p",
+            "text": "The Referral Trial is limited to one per person and one per eligible new account, unless we expressly state otherwise. Prior IGNITE users, prior Premium subscribers, and accounts that we determine are not genuinely new may be ineligible."
+          }
+        ]
+      },
+      {
+        "title": "5. Referral reward for the referrer",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Unless a different reward is shown in the app, you may earn a Referral Reward of five units in the currency of your region for each Qualified Referral: euro-area countries — EUR €5; United Kingdom and other pound-sterling regions — GBP £5; United States and other US-dollar regions — USD $5. All other regions default to USD $5. The amount and currency shown in the app for your region control the reward you can earn."
+          },
+          {
+            "type": "p",
+            "text": "A \"Qualified Referral\" means a Referred User who: (a) is a natural person creating a genuinely new IGNITE account; (b) correctly applies your Referral Code during signup or as otherwise instructed in the app; (c) is not you, a member of your household creating a duplicate or related account for reward farming, or otherwise prohibited under these Program Terms; and (d) purchases and successfully pays for an IGNITE Premium annual plan using that Referral Code attribution, subject to any cooling-off, refund, chargeback, or cancellation rules that apply."
+          },
+          {
+            "type": "p",
+            "text": "Purchases of weekly, monthly, or other non-annual plans do not qualify for the Referral Reward unless we expressly state otherwise in the app. Free trials, unpaid accounts, and cancelled or refunded annual subscriptions do not qualify."
+          },
+          {
+            "type": "p",
+            "text": "Only one referrer may receive a Referral Reward for a given Referred User. If multiple codes are used or attribution is unclear, we decide attribution in our reasonable discretion based on our records."
+          }
+        ]
+      },
+      {
+        "title": "6. Reward payment",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Referral Rewards are paid through PayPal or another payout method we designate in the app or by email. You are responsible for providing accurate payout details and for any fees, taxes, or account requirements of the payout provider."
+          },
+          {
+            "type": "p",
+            "text": "We may require identity, tax, or account verification before paying a Referral Reward. We may hold, delay, or cancel payment if we need to review a referral for fraud, refunds, chargebacks, or policy violations."
+          },
+          {
+            "type": "p",
+            "text": "Unless a different timing is shown in the app, we aim to process eligible Referral Rewards after the Qualifying Referral is confirmed and any applicable refund or chargeback window has passed. Processing times may vary. Pending rewards do not earn interest and are not transferable except as required by law."
+          },
+          {
+            "type": "p",
+            "text": "Referral Rewards have no cash value until approved and paid. They are not gift cards, store credit, or Premium subscription credit unless we expressly say so."
+          }
+        ]
+      },
+      {
+        "title": "7. Limits",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "We may set caps on the number of Referral Rewards you can earn in a period, the number of codes you may share, or total Program payouts. Any limits will be shown in the app or communicated to you."
+          },
+          {
+            "type": "p",
+            "text": "We may withhold rewards that appear duplicate, abusive, or inconsistent with ordinary personal sharing."
+          }
+        ]
+      },
+      {
+        "title": "8. Prohibited conduct",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "You agree not to:"
+          },
+          {
+            "type": "ul",
+            "items": [
+              "Create fake, duplicate, or misleading accounts, or refer yourself (including through aliases, family accounts created primarily to obtain rewards, or similar schemes).",
+              "Use bots, scripts, purchased traffic, paid lead lists, or automated tools to distribute Referral Codes or generate signups.",
+              "Spam, bulk message, or otherwise distribute Referral Codes in a harassing or unlawful way.",
+              "Post Referral Codes on coupon, deal, or promo-code aggregation websites, or sell, auction, or barter Referral Codes, unless we give prior written permission.",
+              "Misrepresent the Program, IGNITE, Premium pricing, trial length, or reward amounts.",
+              "Interfere with attribution tracking, attempt to claim another person's referral, or otherwise manipulate the Program.",
+              "Violate our Terms and Conditions, Privacy Policy, or applicable law in connection with the Program."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "9. Verification, fraud, and enforcement",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "We may review referrals, accounts, payments, and device or usage signals to verify Program compliance. We may request additional information from you or a Referred User."
+          },
+          {
+            "type": "p",
+            "text": "If we reasonably believe a referral or account violates these Program Terms, we may deny or reverse Referral Rewards, cancel Referral Trials, suspend Program access, and/or suspend or terminate related IGNITE accounts, without limiting other remedies."
+          },
+          {
+            "type": "p",
+            "text": "Our Program records (including code attribution and purchase records) are conclusive for administering the Program, absent manifest error."
+          }
+        ]
+      },
+      {
+        "title": "10. Changes, suspension, and termination of the Program",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "We may modify, suspend, or end the Program (or any reward, trial, or region) at any time, with or without notice, to the fullest extent permitted by law. This includes changing reward amounts, qualifying plans, trial length, payout methods, and eligibility rules."
+          },
+          {
+            "type": "p",
+            "text": "If the Program ends, we will handle pending Qualified Referrals and approved unpaid rewards in accordance with the Program Terms then in effect and applicable law. We are not obligated to honor referrals completed after the Program ends, or offers that were never validly earned."
+          }
+        ]
+      },
+      {
+        "title": "11. Taxes",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "You are solely responsible for any taxes that may apply to Referral Rewards you receive. Where required by law, we may report payments or withhold amounts. Provide any tax information we reasonably request."
+          }
+        ]
+      },
+      {
+        "title": "12. Privacy",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "We process personal data related to the Program (including Referral Codes, attribution, and payout details) as described in our Privacy Policy. Do not share personal information of others without a lawful basis to do so."
+          }
+        ]
+      },
+      {
+        "title": "13. Disclaimers",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "TO THE MAXIMUM EXTENT PERMITTED BY LAW, THE PROGRAM IS PROVIDED \"AS IS.\" We do not guarantee uninterrupted availability of codes, attribution, trials, rewards, or payouts, or that any particular friend will sign up or purchase Premium."
+          },
+          {
+            "type": "p",
+            "text": "App Store and Google Play billing, refunds, and subscription management are handled by those platforms under their rules. We are not responsible for platform delays, billing errors outside our control, or a Referred User's failure to complete purchase."
+          }
+        ]
+      },
+      {
+        "title": "14. Limitation of liability",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "TO THE MAXIMUM EXTENT PERMITTED BY LAW, IGNITE AND ITS OFFICERS, DIRECTORS, EMPLOYEES, AGENTS, AND SUPPLIERS WILL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES, OR FOR LOST PROFITS OR DATA, ARISING FROM OR RELATED TO THE PROGRAM."
+          },
+          {
+            "type": "p",
+            "text": "TO THE MAXIMUM EXTENT PERMITTED BY LAW, OUR TOTAL LIABILITY ARISING OUT OF OR RELATING TO THE PROGRAM WILL NOT EXCEED THE GREATER OF (A) THE TOTAL REFERRAL REWARDS WE ACTUALLY PAID YOU IN THE TWELVE MONTHS BEFORE THE CLAIM, OR (B) FIFTY POUNDS STERLING (£50) OR THE APPROXIMATE LOCAL CURRENCY EQUIVALENT."
+          },
+          {
+            "type": "p",
+            "text": "Nothing in these Program Terms limits liability that cannot be limited under mandatory consumer protection law, including applicable UK, EEA, Portuguese, US, or Australian consumer rights where they apply."
+          }
+        ]
+      },
+      {
+        "title": "15. Indemnification",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "To the maximum extent permitted by law, you agree to indemnify and hold harmless IGNITE from claims, damages, losses, and expenses (including reasonable legal fees) arising from your misuse of the Program, your distribution of Referral Codes, or your violation of these Program Terms or applicable law."
+          }
+        ]
+      },
+      {
+        "title": "16. Governing law",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "These Program Terms are governed by the laws of England and Wales, except where mandatory consumer protection laws in your country of residence require otherwise. Dispute resolution and jurisdiction follow the corresponding provisions in our Terms and Conditions."
+          },
+          {
+            "type": "p",
+            "text": "If you are a consumer, nothing in these Program Terms excludes or limits statutory rights that cannot be waived under the laws of your country of residence."
+          }
+        ]
+      },
+      {
+        "title": "17. General",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "If any provision of these Program Terms is held unenforceable, the remaining provisions remain in effect. Our failure to enforce a provision is not a waiver. You may not assign your rights under the Program without our consent; we may assign these Program Terms in connection with a reorganization, merger, or sale of assets."
+          },
+          {
+            "type": "p",
+            "text": "These Program Terms, together with the Terms and Conditions and Privacy Policy, are the entire agreement between you and IGNITE regarding the Program and supersede prior discussions about referral offers, except for any specific in-app offer details displayed at the time of participation."
+          }
+        ]
+      },
+      {
+        "title": "18. Contact",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "Questions about the Program or these Program Terms may be sent to support@ignitehub.app."
+          },
+          {
+            "type": "p",
+            "text": "For privacy-related requests, see our Privacy Policy. For general Service terms, see our Terms and Conditions."
+          }
+        ]
+      }
+    ]
+  },
+  "creatorProgramTerms": {
+    "title": "Creator Program 条款",
+    "lastUpdated": "最后更新：2026年8月8日",
+    "intro": "本 Creator Program 条款（“计划条款”）规范您对由 IGNITE AI（“IGNITE”、“我们”或“我们的”）从英国运营的 IGNITE AI Creator Program（“本计划”）的参与。本计划是 IGNITE AI 移动应用程序及相关服务（“服务”）的一部分。通过申请本计划、接受批准、分享 Creator Code，或领取创作者奖励或免费 Premium，即表示您同意本计划条款、我们的使用条款以及隐私政策。如不同意，请勿参与本计划。",
+    "sections": [
+      {
+        "title": "1. 与其他条款的关系",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "本计划条款补充我们的使用条款。如本计划条款与使用条款在本计划相关事项上存在冲突，则以本计划条款为准。此处未定义的术语，在适用时具有使用条款中赋予的含义。"
+          },
+          {
+            "type": "p",
+            "text": "Creator Program 与 Refer a Friend 计划相互独立。Refer a Friend 受推荐计划条款约束。除非我们在应用中明确说明，否则各计划下的权益、代码、归因和奖励不可互换。"
+          },
+          {
+            "type": "p",
+            "text": "我们可能通过在应用中发布修订版本并更新“最后更新”日期来更新本计划条款。变更生效后继续参与，即表示您接受修订后的计划条款。"
+          }
+        ]
+      },
+      {
+        "title": "2. 资格与申请",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "申请须持有有效且状况良好的 IGNITE 账户，并满足我们使用条款中的资格要求，包括适用的年龄要求。"
+          },
+          {
+            "type": "p",
+            "text": "是否接纳您加入本计划由我们酌情决定。我们可能根据您的申请、受众、内容领域、账户状态、合规记录、地区，或应用中显示或另行告知您的其他标准，批准、拒绝、暂停或终止参与。"
+          },
+          {
+            "type": "p",
+            "text": "您必须提供准确的申请信息（包括联系方式、平台、账号名称和受众规模）。我们可能在批准之前或之后要求额外核实。"
+          }
+        ]
+      },
+      {
+        "title": "3. 本计划的运作方式",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "获批后，您可能获得个性化创作者代码（“Creator Code”），以便与受众分享。按照说明创建 IGNITE 账户并应用您的 Creator Code 的关注者，可能在本计划目的上归因于您。"
+          },
+          {
+            "type": "p",
+            "text": "获批创作者还可能在我们设定并在应用中显示的期限内获得免费 Premium 使用权。免费 Premium 可按应用及本计划条款所述暂停、延长或终止。"
+          },
+          {
+            "type": "p",
+            "text": "代码、面向您受众的专属定价、免费 Premium 和奖励的可用性可能因地区和时间而异。在遵守本计划条款的前提下，您参与时在应用中看到的内容决定当前优惠。"
+          }
+        ]
+      },
+      {
+        "title": "4. Creator Code 与受众定价",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "您的 Creator Code 仅供您本人使用。您可通过常规创作者渠道（例如社交帖子、快拍、简介链接、新闻通讯或直播）以合法且不具误导性的方式分享。"
+          },
+          {
+            "type": "p",
+            "text": "在提供该功能时，您的 Creator Code 可为被归因的关注者解锁专属年度 Premium 定价。确切价格和资格在注册或购买时于服务中显示，并可能变更。"
+          },
+          {
+            "type": "p",
+            "text": "如果我们合理认为 Creator Code 遭到滥用、出售、抓取，或被用于违反本计划条款，我们可能停用、更换或撤销该 Creator Code。"
+          }
+        ]
+      },
+      {
+        "title": "5. 创作者奖励",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "除非应用中显示不同奖励，否则您可就每笔合格创作者注册获得以您所在地区货币计的十个单位的创作者奖励：欧元区国家 — EUR €10；英国及其他英镑地区 — GBP £10；美国及其他美元地区 — USD $10。所有其他地区默认 USD $10。应用中针对您所在地区显示的金额和货币决定您可获得的奖励。"
+          },
+          {
+            "type": "p",
+            "text": "“合格创作者注册”是指同时满足以下条件的关注者：（a）为创建真正全新 IGNITE 账户的自然人；（b）在注册时或按应用中的其他指示正确应用您的 Creator Code；（c）不是您本人、为刷取奖励而创建的重复或关联账户，或本计划条款另行禁止的对象；以及（d）在该 Creator Code 归因下购买并成功支付 IGNITE Premium 年付套餐，但须遵守适用的冷静期、退款、拒付或取消规则。"
+          },
+          {
+            "type": "p",
+            "text": "除非我们在应用中另行明确说明，否则购买周付、月付或其他非年付套餐不符合创作者奖励条件。免费试用、未付费账户以及已取消或已退款的年付订阅均不符合条件。"
+          },
+          {
+            "type": "p",
+            "text": "就同一关注者账户，仅一项创作者归因可获得创作者奖励。创作者奖励与 Refer a Friend 奖励相互独立。如归因不明确，我们根据记录以合理酌情权作出决定。"
+          }
+        ]
+      },
+      {
+        "title": "6. 免费 Premium",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "如果我们授予免费 Premium，开始日期、结束日期、剩余天数以及任何暂停状态将显示在 Creator Program 界面中。除非我们另行明确说明，免费 Premium 属于本计划权益，而非已购买的订阅。"
+          },
+          {
+            "type": "p",
+            "text": "我们可能出于运营、合规或计划管理原因暂停、恢复、延长、缩短或终止免费 Premium，包括在您的计划参与结束时，或我们合理怀疑存在滥用时。"
+          },
+          {
+            "type": "p",
+            "text": "免费 Premium 不保证在所述期限结束后继续使用，也不会自动转为付费订阅，除非您通过 App Store 或 Google Play 另行购买。"
+          }
+        ]
+      },
+      {
+        "title": "7. 奖励支付",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "创作者奖励通过 PayPal 或我们在应用中或通过电子邮件指定的其他支付方式发放。您有责任提供准确的收款信息，并承担支付服务商的任何费用、税费或账户要求。"
+          },
+          {
+            "type": "p",
+            "text": "我们可能在支付创作者奖励前要求身份、税务或账户核实。如需就欺诈、退款、拒付或违反政策审查归因，我们可能暂扣、延迟或取消付款。"
+          },
+          {
+            "type": "p",
+            "text": "除非应用中显示不同时间安排，我们力求在合格年付购买确认且任何适用的退款或拒付期限届满后处理符合条件的创作者奖励。处理时间可能有所不同。待发放奖励不计利息，除法律要求外不可转让。"
+          },
+          {
+            "type": "p",
+            "text": "创作者奖励在获得批准并支付之前不具有现金价值。除非我们另行明确说明，它们不是礼品卡、商店积分或 Premium 订阅额度。"
+          }
+        ]
+      },
+      {
+        "title": "8. 限制",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "我们可能对创作者奖励、免费 Premium 期限、代码分发或本计划支付总额设定上限。任何限制将在应用中显示或另行告知您。"
+          },
+          {
+            "type": "p",
+            "text": "我们可能扣留看起来重复、滥用或与常规创作者推广不符的奖励或计划权益。"
+          }
+        ]
+      },
+      {
+        "title": "9. 禁止行为",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "您同意不得："
+          },
+          {
+            "type": "ul",
+            "items": [
+              "创建虚假、重复或具有误导性的账户，或将自己归因（包括通过主要为获取奖励而创建的别名或关联账户）。",
+              "使用机器人、脚本、购买的流量、付费线索名单或自动化工具，以欺骗性方式分发 Creator Code 或生成注册。",
+              "以垃圾信息、骚扰或非法方式分发 Creator Code。",
+              "出售、拍卖或交换 Creator Code，或将其发布在优惠券或优惠聚合网站上，除非我们事先书面许可。",
+              "对本计划、IGNITE、Premium 定价、免费 Premium、试用时长或奖励金额作出不实陈述。",
+              "干扰归因追踪、试图主张其他创作者的归因，或以其他方式操纵本计划。",
+              "在与本计划相关的活动中违反我们的使用条款、隐私政策或适用法律。"
+            ]
+          }
+        ]
+      },
+      {
+        "title": "10. 核实、欺诈与执行",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "我们可能审查申请、归因、账户、付款以及设备或使用信号，以核实本计划合规情况。我们可能向您或被归因用户要求额外信息。"
+          },
+          {
+            "type": "p",
+            "text": "如果我们合理认为某项申请、归因或账户违反本计划条款，我们可能拒绝或追回创作者奖励、暂停或终止免费 Premium、停用 Creator Code、暂停计划访问，和/或暂停或终止相关 IGNITE 账户，且不影响其他救济。"
+          },
+          {
+            "type": "p",
+            "text": "除明显错误外，我们的计划记录（包括代码归因和购买记录）对本计划的管理具有决定性效力。"
+          }
+        ]
+      },
+      {
+        "title": "11. 本计划的变更、暂停与终止",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "在法律允许的最大范围内，我们可随时修改、暂停或终止本计划（或任何奖励、免费 Premium、代码或地区），无论是否发出通知。这包括更改奖励金额、合格套餐、冻结期、支付方式和资格规则。"
+          },
+          {
+            "type": "p",
+            "text": "如本计划终止，我们将按照当时有效的计划条款及适用法律处理待处理的合格创作者注册以及已批准但尚未支付的奖励。我们没有义务兑现本计划终止后完成的归因，或从未有效获得的优惠。"
+          }
+        ]
+      },
+      {
+        "title": "12. 税务",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "您对创作者奖励或其他您获得的计划权益可能适用的任何税费独自承担责任。在法律要求时，我们可能申报付款或预扣款项。请提供我们合理要求的任何税务信息。"
+          }
+        ]
+      },
+      {
+        "title": "13. 隐私",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "我们按照隐私政策所述处理与本计划相关的个人数据（包括申请、Creator Code、归因和支付详情）。请勿在没有合法依据的情况下分享他人的个人信息。"
+          }
+        ]
+      },
+      {
+        "title": "14. 免责声明",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "在法律允许的最大范围内，本计划按“现状”提供。我们不保证代码、归因、免费 Premium、奖励或付款不间断可用，也不保证任何特定关注者将注册或购买 Premium。"
+          },
+          {
+            "type": "p",
+            "text": "App Store 和 Google Play 的计费、退款和订阅管理由这些平台按其规则处理。我们对平台延迟、超出我们控制范围的计费错误，或关注者未能完成购买不承担责任。"
+          }
+        ]
+      },
+      {
+        "title": "15. 责任限制",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "在法律允许的最大范围内，IGNITE 及其管理人员、董事、员工、代理人与供应商不对因本计划产生或与之相关的任何间接、附带、特殊、后果性或惩罚性损害，或利润或数据损失承担责任。"
+          },
+          {
+            "type": "p",
+            "text": "在法律允许的最大范围内，我们对因本计划引起或与之相关的总责任不超过以下两者中的较高者：（A）索赔前十二个月内我们实际向您支付的创作者奖励总额，或（B）五十英镑（£50）或大致等值的当地货币。"
+          },
+          {
+            "type": "p",
+            "text": "本计划条款中的任何内容都不限制根据强制性消费者保护法不可限制的责任，包括在适用时英国、欧洲经济区、葡萄牙、美国或澳大利亚的消费者权利。"
+          }
+        ]
+      },
+      {
+        "title": "16. 赔偿",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "在法律允许的最大范围内，您同意就因您对本计划的滥用、您分发 Creator Code，或您违反本计划条款或适用法律而产生的索赔、损害、损失与费用（包括合理的律师费）向 IGNITE 作出赔偿并使其免受损害。"
+          }
+        ]
+      },
+      {
+        "title": "17. 管辖法律",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "本计划条款受英格兰和威尔士法律管辖，但您居住国的强制性消费者保护法另有要求的除外。争议解决和管辖权遵循我们使用条款中的相应规定。"
+          },
+          {
+            "type": "p",
+            "text": "如果您是消费者，本计划条款中的任何内容均不排除或限制根据您居住国法律不可放弃的法定权利。"
+          }
+        ]
+      },
+      {
+        "title": "18. 一般条款",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "如本计划条款的任何条款被认定不可执行，其余条款仍然有效。我们未执行某条款不构成弃权。未经我们同意，您不得转让您在本计划下的权利；我们可能在重组、合并或资产出售相关情况下转让本计划条款。"
+          },
+          {
+            "type": "p",
+            "text": "本计划条款连同使用条款和隐私政策，构成您与 IGNITE 之间关于本计划的完整协议，并取代此前关于创作者优惠的讨论，但参与时显示的任何特定应用内优惠详情除外。"
+          }
+        ]
+      },
+      {
+        "title": "19. 联系方式",
+        "blocks": [
+          {
+            "type": "p",
+            "text": "有关本计划或本计划条款的问题，可发送至 support@ignitehub.app。"
+          },
+          {
+            "type": "p",
+            "text": "有关隐私相关请求，请参阅我们的隐私政策。有关服务的一般条款，请参阅我们的使用条款。有关 Refer a Friend，请参阅推荐计划条款。"
+          }
+        ]
+      }
+    ]
   }
 }
