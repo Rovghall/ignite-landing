@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
+import { FormEvent, Fragment, useCallback, useEffect, useMemo, useState, type ReactNode } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
@@ -170,6 +170,25 @@ type EngagementPayload = {
     pct: number
   }>
   top_errors?: Array<{ message: string; events: number; users: number }>
+}
+
+type PlatformBucket = 'ios' | 'android' | 'other'
+
+type PlatformUserRow = {
+  email: string | null
+  created_at: string
+  events: number
+}
+
+type PlatformUsersPayload = {
+  ok: boolean
+  error?: string
+  platform: PlatformBucket
+  window_days: number
+  generated_at: string
+  total: number
+  truncated: boolean
+  users: PlatformUserRow[]
 }
 
 type MonetizationPayload = {
@@ -1112,8 +1131,9 @@ function buildDemoEngagement(days: WindowDays): EngagementPayload {
       openers_window: Math.round(420 * scale),
     },
     platforms: [
-      { platform: 'ios', events: Math.round(2600 * scale), users: Math.round(240 * scale), pct: 62 },
-      { platform: 'android', events: Math.round(1600 * scale), users: Math.round(160 * scale), pct: 38 },
+      { platform: 'ios', events: Math.round(2600 * scale), users: Math.round(240 * scale), pct: 58 },
+      { platform: 'android', events: Math.round(1600 * scale), users: Math.round(160 * scale), pct: 36 },
+      { platform: 'other', events: Math.round(280 * scale), users: Math.round(48 * scale), pct: 6 },
     ],
     daily_opens,
     health: {
@@ -2254,7 +2274,7 @@ function StatCard({
 const SECTION_HELP: Record<string, string> = {
   kpi: 'KPIs de domínio a partir de nutrition_logs / profiles (não precisam de product_events). DAU/WAU/MAU = users com refeições. Premium = rc_premium_active. Serve para ver se o núcleo (registar comida) cresce.',
   engagement:
-    'DAU/WAU/MAU por app_open (abriu a app), não só por refeições. Stickiness implícito: se opens ≫ meals, há abertura sem uso. Split iOS/Android mostra onde investir QA/marketing.',
+    'DAU/WAU/MAU por app_open (abriu a app), não só por refeições. Stickiness implícito: se opens ≫ meals, há abertura sem uso. Split iOS/Android/Outro (web ou sem app). Clica numa linha para ver os emails registados.',
   health:
     'Volume de app_error (JS/boundary). Subida súbita = release má. Fail rate alto vs opens = regressão. Ainda não é Sentry (sem stack nativa completa).',
   quality:
@@ -2419,6 +2439,71 @@ function UsageBar({ pctValue }: { pctValue: number }) {
   )
 }
 
+function platformBucket(platform: string): PlatformBucket {
+  const p = platform.trim().toLowerCase()
+  if (p === 'ios' || p === 'iphone' || p === 'ipad') return 'ios'
+  if (p === 'android') return 'android'
+  return 'other'
+}
+
+function platformLabel(platform: string): string {
+  const bucket = platformBucket(platform)
+  if (bucket === 'ios') return 'iOS'
+  if (bucket === 'android') return 'Android'
+  return 'Outro'
+}
+
+function mergePlatformRows(
+  rows: Array<{ platform: string; events: number; users: number; pct: number }>,
+): Array<{ platform: PlatformBucket; events: number; users: number; pct: number }> {
+  const buckets: Record<PlatformBucket, { events: number; users: number }> = {
+    android: { events: 0, users: 0 },
+    ios: { events: 0, users: 0 },
+    other: { events: 0, users: 0 },
+  }
+  for (const row of rows) {
+    const key = platformBucket(row.platform)
+    buckets[key].events += row.events
+    buckets[key].users += row.users
+  }
+  const totalEvents = buckets.android.events + buckets.ios.events + buckets.other.events
+  return (['android', 'ios', 'other'] as const).map((platform) => ({
+    platform,
+    events: buckets[platform].events,
+    users: buckets[platform].users,
+    pct: totalEvents > 0 ? (buckets[platform].events / totalEvents) * 100 : 0,
+  }))
+}
+
+function buildDemoPlatformUsers(platform: PlatformBucket, days: WindowDays): PlatformUsersPayload {
+  const scale = days === 7 ? 0.3 : days === 30 ? 1 : 2.4
+  const count =
+    platform === 'ios'
+      ? Math.max(3, Math.round(8 * scale))
+      : platform === 'android'
+        ? Math.max(3, Math.round(12 * scale))
+        : Math.max(2, Math.round(6 * scale))
+  const domain = platform === 'other' ? 'web.demo' : `${platform}.demo`
+  const users = Array.from({ length: count }, (_, i) => {
+    const d = new Date()
+    d.setDate(d.getDate() - i)
+    return {
+      email: `${platform}.user${i + 1}@${domain}`,
+      created_at: d.toISOString(),
+      events: platform === 'other' ? (i % 3 === 0 ? 0 : 2 + (i % 4)) : 8 + ((i * 3) % 20),
+    }
+  })
+  return {
+    ok: true,
+    platform,
+    window_days: days,
+    generated_at: new Date().toISOString(),
+    total: users.length,
+    truncated: false,
+    users,
+  }
+}
+
 export default function ProductInsightsAdminPage() {
   const [configError, setConfigError] = useState<string | null>(null)
   const supabase = useMemo(() => {
@@ -2471,6 +2556,12 @@ export default function ProductInsightsAdminPage() {
   const [lastUpdatedAt, setLastUpdatedAt] = useState<string | null>(null)
   const [listError, setListError] = useState<string | null>(null)
   const [demoMode, setDemoMode] = useState(false)
+  const [openPlatform, setOpenPlatform] = useState<PlatformBucket | null>(null)
+  const [platformUsersByKey, setPlatformUsersByKey] = useState<
+    Partial<Record<PlatformBucket, PlatformUsersPayload>>
+  >({})
+  const [platformUsersLoading, setPlatformUsersLoading] = useState<PlatformBucket | null>(null)
+  const [platformUsersError, setPlatformUsersError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!supabase) return
@@ -2813,6 +2904,9 @@ export default function ProductInsightsAdminPage() {
     setMembership(buildDemoMembership(windowDays))
     setLastUpdatedAt(new Date().toISOString())
     setListError(null)
+    setOpenPlatform(null)
+    setPlatformUsersByKey({})
+    setPlatformUsersError(null)
   }, [demoMode, windowDays])
 
   async function onSignIn(e: FormEvent) {
@@ -2854,6 +2948,9 @@ export default function ProductInsightsAdminPage() {
       setMembership(null)
     setLastUpdatedAt(null)
     setDemoMode(false)
+    setOpenPlatform(null)
+    setPlatformUsersByKey({})
+    setPlatformUsersError(null)
   }
 
   function toggleDemo() {
@@ -2891,6 +2988,58 @@ export default function ProductInsightsAdminPage() {
       }
       return next
     })
+  }
+
+  useEffect(() => {
+    setOpenPlatform(null)
+    setPlatformUsersByKey({})
+    setPlatformUsersError(null)
+  }, [windowDays])
+
+  const platformRows = useMemo(
+    () => mergePlatformRows(engagement?.platforms ?? []),
+    [engagement],
+  )
+
+  async function togglePlatformEmails(platform: PlatformBucket) {
+    if (openPlatform === platform) {
+      setOpenPlatform(null)
+      return
+    }
+    setOpenPlatform(platform)
+    setPlatformUsersError(null)
+    if (platformUsersByKey[platform]) return
+    if (demoMode) {
+      setPlatformUsersByKey((prev) => ({
+        ...prev,
+        [platform]: buildDemoPlatformUsers(platform, windowDays),
+      }))
+      return
+    }
+    if (!supabase) return
+    setPlatformUsersLoading(platform)
+    const { data, error } = await supabase.rpc('admin_product_platform_users', {
+      p_days: windowDays,
+      p_platform: platform,
+    })
+    setPlatformUsersLoading(null)
+    if (error) {
+      const missing = /could not find|schema cache|does not exist/i.test(error.message)
+      setPlatformUsersError(
+        missing
+          ? 'Aplica a migration no Supabase para listar os emails por plataforma.'
+          : error.message,
+      )
+      return
+    }
+    const payload = data as PlatformUsersPayload | null
+    if (!payload?.ok) {
+      setPlatformUsersError(
+        payload?.error === 'forbidden' ? 'Sem permissão.' : 'Falha ao carregar emails.',
+      )
+      return
+    }
+    setPlatformUsersByKey((prev) => ({ ...prev, [platform]: payload }))
   }
 
   const mealDelta = overview
@@ -3425,7 +3574,7 @@ export default function ProductInsightsAdminPage() {
             {engagement ? (
               <Section
                 title="Engagement (Fase E)"
-                subtitle="DAU por app_open (abre a app) + split iOS/Android."
+                subtitle="DAU por app_open (abre a app) + split iOS / Android / Outro."
                 id="engagement"
               >
                 <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
@@ -3449,12 +3598,16 @@ export default function ProductInsightsAdminPage() {
                     value={fmt(engagement.opens.opens_window)}
                     hint={`${fmt(engagement.opens.openers_window)} users`}
                   />
-                  {engagement.platforms.slice(0, 2).map((p) => (
+                  {platformRows.map((p) => (
                     <StatCard
                       key={p.platform}
-                      label={p.platform === 'ios' ? 'iOS' : p.platform === 'android' ? 'Android' : p.platform}
+                      label={platformLabel(p.platform)}
                       value={fmt(p.users)}
-                      hint={`${p.pct.toFixed(0)}% eventos`}
+                      hint={
+                        p.platform === 'other'
+                          ? 'web / sem iOS·Android'
+                          : `${p.pct.toFixed(0)}% eventos`
+                      }
                     />
                   ))}
                 </div>
@@ -3467,8 +3620,7 @@ export default function ProductInsightsAdminPage() {
                     values={engagement.daily_opens.map((d) => d.opens)}
                   />
                 </div>
-                {engagement.platforms.length > 0 ? (
-                  <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
+                <div className="mt-3 overflow-hidden rounded-2xl border border-border bg-card shadow-[0_12px_40px_rgba(15,23,42,0.05)]">
                     <div className="overflow-x-auto">
                       <table className="w-full min-w-[420px] border-collapse text-sm">
                         <thead>
@@ -3480,34 +3632,109 @@ export default function ProductInsightsAdminPage() {
                           </tr>
                         </thead>
                         <tbody>
-                          {engagement.platforms.map((row) => (
-                            <tr key={row.platform} className="border-t border-border/70">
-                              <td className="px-4 py-3 font-semibold">
-                                {row.platform === 'ios'
-                                  ? 'iOS'
-                                  : row.platform === 'android'
-                                    ? 'Android'
-                                    : row.platform}
-                              </td>
-                              <td className="px-4 py-3">{fmt(row.events)}</td>
-                              <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
-                              <td className="px-4 py-3">
-                                <div className="flex items-center gap-3">
-                                  <div className="w-28">
-                                    <UsageBar pctValue={row.pct} />
-                                  </div>
-                                  <span className="tabular-nums text-muted-foreground">
-                                    {row.pct.toFixed(1)}%
-                                  </span>
-                                </div>
-                              </td>
-                            </tr>
-                          ))}
+                          {platformRows.map((row) => {
+                            const open = openPlatform === row.platform
+                            const emails = platformUsersByKey[row.platform]
+                            const loadingEmails = platformUsersLoading === row.platform
+                            return (
+                              <Fragment key={row.platform}>
+                                <tr
+                                  className="cursor-pointer border-t border-border/70 hover:bg-muted/40"
+                                  onClick={() => void togglePlatformEmails(row.platform)}
+                                >
+                                  <td className="px-4 py-3 font-semibold">
+                                    <span className="inline-flex items-center gap-2">
+                                      {platformLabel(row.platform)}
+                                      <span className="text-[11px] font-medium text-muted-foreground">
+                                        {open ? '▲' : '▼'}
+                                      </span>
+                                    </span>
+                                    {row.platform === 'other' ? (
+                                      <p className="mt-0.5 text-[11px] font-normal text-muted-foreground">
+                                        Web, desconhecido ou registo sem iOS/Android
+                                      </p>
+                                    ) : null}
+                                  </td>
+                                  <td className="px-4 py-3">{fmt(row.events)}</td>
+                                  <td className="px-4 py-3 text-muted-foreground">{fmt(row.users)}</td>
+                                  <td className="px-4 py-3">
+                                    <div className="flex items-center gap-3">
+                                      <div className="w-28">
+                                        <UsageBar pctValue={row.pct} />
+                                      </div>
+                                      <span className="tabular-nums text-muted-foreground">
+                                        {row.pct.toFixed(1)}%
+                                      </span>
+                                    </div>
+                                  </td>
+                                </tr>
+                                {open ? (
+                                  <tr className="border-t border-border/50 bg-muted/20">
+                                    <td colSpan={4} className="px-4 py-3">
+                                      {loadingEmails ? (
+                                        <p className="text-xs text-muted-foreground">A carregar emails…</p>
+                                      ) : platformUsersError && !emails ? (
+                                        <p className="text-xs text-red-600">{platformUsersError}</p>
+                                      ) : emails ? (
+                                        <div>
+                                          <div className="mb-2 flex flex-wrap items-center gap-2">
+                                            <p className="text-xs font-semibold text-muted-foreground">
+                                              {emails.total} email{emails.total === 1 ? '' : 's'} ·{' '}
+                                              {platformLabel(row.platform)}
+                                              {emails.truncated ? ' · primeiros 400' : ''}
+                                            </p>
+                                            {emails.users.length > 0 ? (
+                                              <button
+                                                type="button"
+                                                className="rounded-md border border-border bg-card px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground hover:text-foreground"
+                                                onClick={(e) => {
+                                                  e.stopPropagation()
+                                                  const list = emails.users
+                                                    .map((u) => u.email)
+                                                    .filter(Boolean)
+                                                    .join('\n')
+                                                  void navigator.clipboard.writeText(list)
+                                                }}
+                                              >
+                                                Copiar todos
+                                              </button>
+                                            ) : null}
+                                          </div>
+                                          {emails.users.length === 0 ? (
+                                            <p className="text-xs text-muted-foreground">
+                                              Sem emails nesta plataforma na janela.
+                                            </p>
+                                          ) : (
+                                            <ul className="grid gap-1 sm:grid-cols-2">
+                                              {emails.users.map((u, i) => (
+                                                <li
+                                                  key={`${u.email ?? 'none'}-${i}`}
+                                                  className="flex items-baseline justify-between gap-3 rounded-lg px-2 py-1 text-xs hover:bg-card"
+                                                >
+                                                  <span className="min-w-0 truncate font-medium">
+                                                    {u.email ?? '(sem email)'}
+                                                  </span>
+                                                  <span className="shrink-0 tabular-nums text-muted-foreground">
+                                                    {new Date(u.created_at).toLocaleDateString('pt-PT')}
+                                                  </span>
+                                                </li>
+                                              ))}
+                                            </ul>
+                                          )}
+                                        </div>
+                                      ) : (
+                                        <p className="text-xs text-muted-foreground">A abrir…</p>
+                                      )}
+                                    </td>
+                                  </tr>
+                                ) : null}
+                              </Fragment>
+                            )
+                          })}
                         </tbody>
                       </table>
                     </div>
                   </div>
-                ) : null}
               </Section>
             ) : null}
 
