@@ -8,6 +8,7 @@
  */
 import fs from 'node:fs'
 import path from 'node:path'
+import { execSync } from 'node:child_process'
 import { translate } from '@vitalets/google-translate-api'
 
 const ROOT = process.cwd()
@@ -28,8 +29,24 @@ const LOCALES = [
 ]
 
 const SKIP_KEYS = new Set(['slug', 'date', 'type', 'id'])
+const CACHE_PATH = path.join(ROOT, 'content', '.translate-cache.json')
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 const cache = new Map()
+
+function loadCache() {
+  if (!fs.existsSync(CACHE_PATH)) return
+  try {
+    const data = JSON.parse(fs.readFileSync(CACHE_PATH, 'utf8'))
+    for (const [k, v] of Object.entries(data)) cache.set(k, v)
+    console.log(`Loaded ${cache.size} cached strings`)
+  } catch {
+    /* ignore corrupt cache */
+  }
+}
+
+function saveCache() {
+  fs.writeFileSync(CACHE_PATH, JSON.stringify(Object.fromEntries(cache), null, 2) + '\n')
+}
 
 const BR_REPLACEMENTS = [
   ['registar', 'registrar'],
@@ -107,7 +124,8 @@ function toBr(text) {
   return out
 }
 
-let delayMs = 400
+let delayMs = 2500
+let cacheWrites = 0
 
 async function translateText(text, target) {
   if (!text || !String(text).trim()) return text
@@ -115,23 +133,26 @@ async function translateText(text, target) {
   const key = `${target}::${protectedText}`
   if (cache.has(key)) return cache.get(key)
 
-  for (let attempt = 0; attempt < 12; attempt++) {
+  for (let attempt = 0; attempt < 16; attempt++) {
     try {
       const res = await translate(protectedText, { from: 'en', to: target })
       const out = restoreText(res.text || text)
       cache.set(key, out)
+      cacheWrites++
+      if (cacheWrites % 25 === 0) saveCache()
       await sleep(delayMs)
-      delayMs = Math.max(300, delayMs - 5)
+      delayMs = Math.max(2000, delayMs - 10)
       return out
     } catch (err) {
       const msg = String(err.message || err)
       const rate = /too many requests|429/i.test(msg)
-      delayMs = rate ? Math.min(30000, Math.max(delayMs * 2, 4000)) : delayMs + 300
-      console.warn(`  backoff ${delayMs}ms (${attempt + 1}/12): ${msg.slice(0, 72)}`)
+      delayMs = rate ? Math.min(90000, Math.max(delayMs * 1.5, 8000)) : delayMs + 500
+      console.warn(`  backoff ${Math.round(delayMs)}ms (${attempt + 1}/16): ${msg.slice(0, 72)}`)
       await sleep(delayMs)
     }
   }
   cache.set(key, text)
+  saveCache()
   return text
 }
 
@@ -172,9 +193,15 @@ function sortLikeEn(blog, enBlog) {
   return [...blog].sort((a, b) => (order.get(a.slug) ?? 99999) - (order.get(b.slug) ?? 99999))
 }
 
-async function translateLocale(locale, enBlog, limit) {
+function loadPtSource() {
+  const ptPath = path.join(ROOT, 'content', 'pt', 'blog.json')
+  if (!fs.existsSync(ptPath)) return new Map()
+  const pt = JSON.parse(fs.readFileSync(ptPath, 'utf8'))
+  return new Map(pt.map((p) => [p.slug, p]))
+}
+
+async function translateLocale(locale, enBlog, limit, ptBySlug) {
   const blogPath = path.join(ROOT, 'content', locale.code, 'blog.json')
-  const progressPath = path.join(ROOT, 'content', locale.code, 'blog.missing.progress.json')
   fs.mkdirSync(path.dirname(blogPath), { recursive: true })
 
   let blog = []
@@ -182,13 +209,8 @@ async function translateLocale(locale, enBlog, limit) {
     blog = JSON.parse(fs.readFileSync(blogPath, 'utf8'))
   }
 
-  let doneSlugs = new Set()
-  if (fs.existsSync(progressPath)) {
-    doneSlugs = new Set(JSON.parse(fs.readFileSync(progressPath, 'utf8')))
-  }
-
   const have = new Set(blog.map((p) => p.slug))
-  const missing = enBlog.filter((p) => !have.has(p.slug) && !doneSlugs.has(p.slug))
+  const missing = enBlog.filter((p) => !have.has(p.slug))
   const todo = limit ? missing.slice(0, limit) : missing
 
   console.log(`\n[${locale.code}] have ${have.size}, missing ${missing.length}, translating ${todo.length}`)
@@ -196,29 +218,41 @@ async function translateLocale(locale, enBlog, limit) {
   for (let i = 0; i < todo.length; i++) {
     const post = todo[i]
     console.log(`[${locale.code}] ${i + 1}/${todo.length} ${post.slug}`)
-    let translated = await walk(structuredClone(post), locale.target)
-    if (locale.br) translated = walkBr(translated)
+    let translated
+    if (locale.br && ptBySlug.has(post.slug)) {
+      translated = walkBr(structuredClone(ptBySlug.get(post.slug)))
+    } else {
+      translated = await walk(structuredClone(post), locale.target)
+      if (locale.br) translated = walkBr(translated)
+    }
     blog.push(translated)
-    doneSlugs.add(post.slug)
-    fs.writeFileSync(progressPath, JSON.stringify([...doneSlugs], null, 2) + '\n')
+    if (locale.code === 'pt') ptBySlug.set(post.slug, translated)
     fs.writeFileSync(blogPath, JSON.stringify(sortLikeEn(blog, enBlog), null, 2) + '\n')
+    saveCache()
   }
 
-  if (todo.length === missing.length && missing.length > 0) {
-    fs.unlinkSync(progressPath)
-    console.log(`[${locale.code}] complete — ${blog.length} posts`)
-  } else if (missing.length === 0) {
-    if (fs.existsSync(progressPath)) fs.unlinkSync(progressPath)
+  if (missing.length === 0) {
     console.log(`[${locale.code}] already complete — ${blog.length} posts`)
+  } else if (todo.length === missing.length) {
+    console.log(`[${locale.code}] complete — ${blog.length} posts`)
   } else {
     console.log(`[${locale.code}] partial — ${blog.length} posts (${missing.length - todo.length} still pending)`)
   }
+}
+
+function gitPush() {
+  execSync('git add content/*/blog.json content/.translate-cache.json', { cwd: ROOT, stdio: 'inherit' })
+  execSync('git commit -m "Translate missing blog posts to all locales."', { cwd: ROOT, stdio: 'inherit' })
+  execSync('git push origin HEAD', { cwd: ROOT, stdio: 'inherit' })
 }
 
 async function main() {
   const only = process.argv.find((a) => a.startsWith('--locale='))?.split('=')[1]
   const limitArg = process.argv.find((a) => a.startsWith('--limit='))?.split('=')[1]
   const limit = limitArg ? Number.parseInt(limitArg, 10) : 0
+  const shouldPush = process.argv.includes('--push')
+
+  loadCache()
 
   const enBlog = JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'en', 'blog.json'), 'utf8'))
   const list = only ? LOCALES.filter((l) => l.code === only) : LOCALES
@@ -229,13 +263,27 @@ async function main() {
 
   console.log('EN posts:', enBlog.length)
   console.log('Locales:', list.map((l) => l.code).join(', '))
+  console.log('Mode: translate missing posts only')
   if (limit) console.log('Limit per locale:', limit)
 
+  const ptBySlug = loadPtSource()
+
   for (const locale of list) {
-    await translateLocale(locale, enBlog, limit)
+    await translateLocale(locale, enBlog, limit, ptBySlug)
+    if (locale.code === 'pt') {
+      for (const p of JSON.parse(fs.readFileSync(path.join(ROOT, 'content', 'pt', 'blog.json'), 'utf8'))) {
+        ptBySlug.set(p.slug, p)
+      }
+    }
   }
 
+  saveCache()
   console.log('\nAll requested locales finished.')
+
+  if (shouldPush) {
+    console.log('\nPushing to remote…')
+    gitPush()
+  }
 }
 
 main().catch((err) => {
