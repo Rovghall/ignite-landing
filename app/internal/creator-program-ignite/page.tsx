@@ -3225,10 +3225,7 @@ export default function CreatorProgramAdminPage() {
                       ) : (
                         <button
                           type="button"
-                          disabled={
-                            busyId === app.id ||
-                            (!app.creator_premium_active && !app.creator_premium_paused)
-                          }
+                          disabled={busyId === app.id}
                           onClick={() => void endCreatorPremium(app)}
                           className={btnDanger}
                         >
