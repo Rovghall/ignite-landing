@@ -288,7 +288,7 @@ export default function AbusersAdminPage() {
     setListError(null)
     const { data, error } = await supabase.rpc('admin_list_snap_abusers', {
       p_days: windowDays,
-      p_min_total: windowDays === 1 ? 3 : 8,
+      p_min_total: 1,
       p_limit: 100,
     })
     setLoading(false)
@@ -598,7 +598,7 @@ export default function AbusersAdminPage() {
               {visibleRows.length === 0 ? (
                 <tr>
                   <td colSpan={9} className="px-4 py-8 text-center text-muted-foreground">
-                    Ninguém acima do mínimo neste período.
+                    Sem Snap Track / Snap &amp; Cook neste período (quick log / manual não entram).
                   </td>
                 </tr>
               ) : (
