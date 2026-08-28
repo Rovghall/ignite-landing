@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { useRef } from 'react'
 import { motion, useMotionValue, useSpring, useReducedMotion } from 'motion/react'
+import { APP_STORE_URL, GOOGLE_PLAY_URL } from '@/lib/store-links'
 import { cn } from '@/lib/utils'
 
 function MagneticLink({
@@ -16,6 +17,7 @@ function MagneticLink({
   children: React.ReactNode
   className?: string
 }) {
+  const external = href.startsWith('http')
   const ref = useRef<HTMLAnchorElement>(null)
   const reduce = useReducedMotion()
   const x = useMotionValue(0)
@@ -42,6 +44,8 @@ function MagneticLink({
       ref={ref}
       href={href}
       aria-label={ariaLabel}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
       className={className}
       style={{ x: springX, y: springY }}
       onMouseMove={onMove}
@@ -72,7 +76,7 @@ export function StoreButtons({
   return (
     <div className={cn('flex flex-nowrap items-center', gap, className)}>
       <MagneticLink
-        href="#download"
+        href={APP_STORE_URL}
         ariaLabel="Download IGNITE AI on the App Store"
         className="inline-flex shrink-0 will-change-transform focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
@@ -86,7 +90,7 @@ export function StoreButtons({
       </MagneticLink>
 
       <MagneticLink
-        href="#download"
+        href={GOOGLE_PLAY_URL}
         ariaLabel="Get IGNITE AI on Google Play"
         className="inline-flex shrink-0 will-change-transform focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
