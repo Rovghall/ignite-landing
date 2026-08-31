@@ -14,12 +14,12 @@ import {
   type YearBreakdown,
 } from '@/lib/unit-economics-model'
 
-/** Friendly sans for dashboard copy; extra right padding keeps values clear of number spinners. */
+/** Extra right padding keeps values clear of native number spinners (arrows kept). */
 const NUMBER_INPUT_CLASS =
-  'w-[7.25rem] rounded-lg border border-zinc-700 bg-zinc-900 py-2 pl-3 pr-10 text-right text-sm font-medium tabular-nums text-white outline-none focus:border-zinc-500 [appearance:textfield] [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+  'w-[7.75rem] rounded-lg border border-zinc-700 bg-zinc-900 py-2 pl-3 pr-10 text-right text-sm font-medium tabular-nums text-white outline-none focus:border-zinc-500'
 
 const NUMBER_INPUT_COMPACT_CLASS =
-  'rounded-lg border border-zinc-700 bg-zinc-950 py-1.5 pl-2.5 pr-9 text-sm tabular-nums text-white outline-none focus:border-zinc-500 [appearance:textfield] [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+  'rounded-lg border border-zinc-700 bg-zinc-950 py-1.5 pl-2.5 pr-9 text-sm tabular-nums text-white outline-none focus:border-zinc-500'
 
 function SliderField({
   label,
