@@ -178,14 +178,18 @@ function StackedBar({
       <p className="text-sm font-semibold text-zinc-300">{label}</p>
       <div className="h-9 overflow-hidden rounded-md bg-zinc-800/80">
         <div className="flex h-full" style={{ width: `${widthPct}%` }}>
-          {segments.map((seg) => (
-            <div
-              key={seg.key}
-              className={cn('h-full min-w-0', seg.color)}
-              style={{ width: `${(seg.value / total) * 100}%` }}
-              title={`${seg.label}: ${formatMoney(seg.value, currency)}`}
-            />
-          ))}
+          {segments.map((seg) => {
+            const pct = (seg.value / total) * 100
+            const minW = seg.key === 'creator' && seg.value > 0 ? '6px' : undefined
+            return (
+              <div
+                key={seg.key}
+                className={cn('h-full min-w-0', seg.color)}
+                style={{ width: `${pct}%`, minWidth: minW }}
+                title={`${seg.label}: ${formatMoney(seg.value, currency)}`}
+              />
+            )
+          })}
         </div>
       </div>
       <p className="text-sm font-bold tabular-nums text-white">{formatMoney(breakdown.netProfit, currency)}</p>
@@ -199,7 +203,18 @@ export function InternalUnitEconomicsDashboard() {
   const result = useMemo(() => computeUnitEconomics(inputs), [inputs])
 
   const apiCostInCurrency = convertFromUsd(inputs.apiCostUsd, inputs.currency, inputs)
-  const chartMax = Math.max(result.year1PerUser.grossRevenue, result.year2PerUser.grossRevenue, 1)
+  const chartMax = Math.max(
+    result.year1PerUser.grossRevenue,
+    result.year2PerUser.grossRevenue,
+    result.creatorPlanYear1?.grossRevenue ?? 0,
+    result.creatorPlanYear2?.grossRevenue ?? 0,
+    1,
+  )
+  const creatorTier = inputs.tiers.find((t) => t.id === '12m-creator')
+  const creatorRenewalGain =
+    result.creatorPlanYear1 && result.creatorPlanYear2
+      ? result.creatorPlanYear2.netProfit - result.creatorPlanYear1.netProfit
+      : 0
 
   function patchInputs(patch: Partial<UnitEconomicsInputs>) {
     setInputs((prev) => ({ ...prev, ...patch }))
@@ -245,7 +260,7 @@ export function InternalUnitEconomicsDashboard() {
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
               <h3 className="text-sm font-bold uppercase tracking-[0.1em] text-zinc-400">
-                Receita vs custos / utilizador / ano
+                Mix total — receita vs custos / user / ano
               </h3>
               <div className="flex gap-1 rounded-full border border-zinc-700 p-1">
                 {(['EUR', 'USD', 'GBP'] as DisplayCurrency[]).map((c) => (
@@ -281,6 +296,12 @@ export function InternalUnitEconomicsDashboard() {
               />
             </div>
 
+            <p className="mt-4 text-xs leading-relaxed text-zinc-500">
+              Média ponderada de todos os tiers ({result.totalSubscribers.toLocaleString()} subs).
+              Payout creator dilui-se: ex. 100 creator / 1.000 subs → ~€1/user/ano, não €10 — por isso
+              Ano 1 e Ano 2 parecem quase iguais aqui.
+            </p>
+
             <div className="mt-5 flex flex-wrap gap-4 text-xs text-zinc-400">
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-sm bg-sky-500" /> Loja
@@ -300,15 +321,54 @@ export function InternalUnitEconomicsDashboard() {
             </div>
           </div>
 
-          <div className="flex flex-col gap-4 rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 sm:flex-row">
+          {result.creatorPlanYear1 && result.creatorPlanYear2 && creatorTier ? (
+            <div className="rounded-2xl border border-emerald-900/40 bg-emerald-950/20 p-5">
+              <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+                <h3 className="text-sm font-bold uppercase tracking-[0.1em] text-emerald-400/90">
+                  Plano creator — {formatMoney(creatorTier.price, inputs.currency)}/ano · 1 sub
+                </h3>
+                <p className="text-xs font-semibold text-emerald-300">
+                  Renovação +{formatMoney(creatorRenewalGain, inputs.currency)}/ano
+                </p>
+              </div>
+              <p className="mb-4 text-xs leading-relaxed text-zinc-400">
+                1.ª subscrição: pagas {formatMoney(creatorTier.creatorPayout, inputs.currency)} ao creator
+                (ficas com {formatMoney(creatorTier.price - creatorTier.creatorPayout, inputs.currency)} antes
+                da loja). Renovação: {formatMoney(creatorTier.price, inputs.currency)} sem novo payout — recebes
+                os {formatMoney(creatorTier.creatorPayout, inputs.currency)} a mais.
+              </p>
+              <div className="space-y-4">
+                <StackedBar
+                  label="1.ª sub"
+                  breakdown={result.creatorPlanYear1}
+                  currency={inputs.currency}
+                  maxValue={chartMax}
+                />
+                <StackedBar
+                  label="Renovação"
+                  breakdown={result.creatorPlanYear2}
+                  currency={inputs.currency}
+                  maxValue={chartMax}
+                />
+              </div>
+            </div>
+          ) : null}
+
+          <div className="grid grid-cols-1 gap-4 rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5 sm:grid-cols-2 lg:grid-cols-4">
             <KpiCard
-              label="Lucro ano 1 / user"
+              label="Lucro mix ano 1 / user"
               value={formatMoney(result.year1PerUser.netProfit, inputs.currency)}
             />
             <KpiCard
-              label="Lucro ano 2 / user"
+              label="Lucro mix ano 2 / user"
               value={formatMoney(result.year2PerUser.netProfit, inputs.currency)}
             />
+            {result.creatorPlanYear1 && result.creatorPlanYear2 ? (
+              <KpiCard
+                label="Creator: renovação − 1.ª sub"
+                value={formatMoney(creatorRenewalGain, inputs.currency)}
+              />
+            ) : null}
             <KpiCard
               label="Campanha (conversões)"
               value={formatMoney(result.campaignNetProfit, inputs.currency)}

@@ -61,6 +61,9 @@ export type UnitEconomicsResult = {
   annualOperatingMargin: number
   year1PerUser: YearBreakdown
   year2PerUser: YearBreakdown
+  /** Per subscriber on the creator tier (12m) — 1.ª subscrição vs renovação */
+  creatorPlanYear1: YearBreakdown | null
+  creatorPlanYear2: YearBreakdown | null
   campaignNetProfit: number
 }
 
@@ -172,6 +175,28 @@ function weightedAverage(values: { weight: number; value: number }[]): number {
   return values.reduce((s, v) => s + v.weight * v.value, 0) / totalWeight
 }
 
+/** One subscription period (e.g. 12 months) for a single tier — not blended across the mix. */
+export function yearBreakdownForTier(
+  tier: SubscriptionTier,
+  storeFeePercent: number,
+  apiCostPerUserMonth: number,
+  infraPerUserMonth: number,
+  includeCreatorPayout: boolean,
+): YearBreakdown {
+  const storeCut = tier.price * (storeFeePercent / 100)
+  const creatorPayout = includeCreatorPayout ? tier.creatorPayout : 0
+  const apiCost = apiCostPerUserMonth * 12
+  const infraCost = infraPerUserMonth * 12
+  return {
+    grossRevenue: tier.price,
+    storeFee: storeCut,
+    creatorPayout,
+    apiCost,
+    infraCost,
+    netProfit: tier.price - storeCut - creatorPayout - apiCost - infraCost,
+  }
+}
+
 export function computeUnitEconomics(inputs: UnitEconomicsInputs): UnitEconomicsResult {
   const apiCostDisplay = convertFromUsd(inputs.apiCostUsd, inputs.currency, inputs)
   const apiCostPerUserMonth = inputs.mealsPerDay * 30 * apiCostDisplay
@@ -224,6 +249,26 @@ export function computeUnitEconomics(inputs: UnitEconomicsInputs): UnitEconomics
 
   const campaignNetProfit = inputs.campaignConversions * year1PerUser.netProfit
 
+  const creatorTier = inputs.tiers.find((t) => t.id === '12m-creator') ?? null
+  const creatorPlanYear1 = creatorTier
+    ? yearBreakdownForTier(
+        creatorTier,
+        inputs.storeFeePercent,
+        apiCostPerUserMonth,
+        infraPerUserMonth,
+        true,
+      )
+    : null
+  const creatorPlanYear2 = creatorTier
+    ? yearBreakdownForTier(
+        creatorTier,
+        inputs.storeFeePercent,
+        apiCostPerUserMonth,
+        infraPerUserMonth,
+        false,
+      )
+    : null
+
   return {
     tiers,
     totalSubscribers,
@@ -237,6 +282,8 @@ export function computeUnitEconomics(inputs: UnitEconomicsInputs): UnitEconomics
     annualOperatingMargin,
     year1PerUser,
     year2PerUser,
+    creatorPlanYear1,
+    creatorPlanYear2,
     campaignNetProfit,
   }
 }
