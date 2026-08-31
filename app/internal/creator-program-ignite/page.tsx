@@ -705,13 +705,10 @@ function isCreatorProgramEnded(app: ApplicationRow): boolean {
   if (app.creator_premium_active) return false
   if (app.creator_premium_paused) return false
   if (!app.creator_premium_ends_at) return false
-  const ends = new Date(app.creator_premium_ends_at).getTime()
-  if (!Number.isFinite(ends)) return false
-  if (app.creator_premium_started_at) {
-    const starts = new Date(app.creator_premium_started_at).getTime()
-    if (Number.isFinite(starts) && starts > Date.now()) return false
-  }
-  return ends <= Date.now()
+  // Scheduled start (future) is still "approved", not ended — do not use client clock vs
+  // ends_at alone (server `ends_at = now()` can briefly look future on the client).
+  if (isCreatorPremiumScheduled(app)) return false
+  return true
 }
 
 function isCreatorPremiumScheduled(app: ApplicationRow): boolean {
@@ -1750,24 +1747,26 @@ export default function CreatorProgramAdminPage() {
     await loadApplications()
   }
 
+  function markCreatorPremiumEndedLocally(appId: string) {
+    const patch = {
+      creator_premium_ends_at: new Date().toISOString(),
+      creator_premium_active: false,
+      creator_premium_paused: false,
+      creator_premium_paused_at: null as string | null,
+      creator_premium_pause_remaining_seconds: null as number | null,
+    }
+    const apply = (prev: ApplicationRow[]) =>
+      prev.map((row) => (row.id === appId ? { ...row, ...patch } : row))
+    if (demoMode) setDemoApps(apply)
+    else setApps(apply)
+    setFilter('ended')
+  }
+
   async function endCreatorPremium(app: ApplicationRow) {
-    if (!confirm(`End complimentary Premium for ${app.display_name} now?`)) return
+    if (!confirm(`Terminar Premium complementar de ${app.display_name} agora?`)) return
 
     if (demoMode) {
-      setDemoApps((prev) =>
-        prev.map((row) =>
-          row.id === app.id
-            ? {
-                ...row,
-                creator_premium_ends_at: new Date().toISOString(),
-                creator_premium_active: false,
-                creator_premium_paused: false,
-                creator_premium_paused_at: null,
-                creator_premium_pause_remaining_seconds: null,
-              }
-            : row,
-        ),
-      )
+      markCreatorPremiumEndedLocally(app.id)
       return
     }
     if (!supabase) return
@@ -1785,6 +1784,8 @@ export default function CreatorProgramAdminPage() {
       alert(payload?.error ?? 'Failed to end Premium')
       return
     }
+    // Immediate UI: gray "Terminado" + move to Terminados (don't wait on list reload).
+    markCreatorPremiumEndedLocally(app.id)
     await loadApplications()
   }
 
@@ -3214,10 +3215,7 @@ export default function CreatorProgramAdminPage() {
                         <button
                           type="button"
                           disabled
-                          className={cn(
-                            btnDanger,
-                            'cursor-not-allowed opacity-40 saturate-50',
-                          )}
+                          className="cursor-not-allowed rounded-full bg-zinc-300 px-4 py-2 text-sm font-bold text-zinc-600"
                           title="Premium complementar já terminado"
                         >
                           Terminado

@@ -1,0 +1,60 @@
+{
+  "slug": "snap-meal-photo-calories-macros-guide",
+  "title": "How to Snap a Meal Photo for Instant Calories & Macros (Without Weighing Everything)",
+  "date": "2026-07-20",
+  "description": "A practical field guide to photo meal logging with estimation science: camera angles, lighting, macro review, personal calibration, Saved meals for repeats, and how to stay consistent without a food scale at every meal.",
+  "sections": [
+    {
+      "body": [
+        "You do not need a laboratory to track macros. You need a log you will still use when you are tired. Photo meal logging exists because food scales and 12-tap database searches are why trackers get deleted.",
+        "Portion estimation, by humans or models, has error bars. Classic dietetics research on visual portion estimation shows people misjudge volumes, especially for amorphous foods like rice, pasta, and chopped mixes. AI helps with speed. Your edits close the gap.",
+        "Here is how to shoot, review, and edit so the estimate is useful, not fantasy."
+      ]
+    },
+    {
+      "heading": "Shoot the plate like you mean it",
+      "body": [
+        "Get the whole meal in frame. Overhead or 45° both work; what fails is cropping half the rice. Use normal lighting, silhouette-against-window photos make portion size guesswork for any vision system.",
+        "Shoot before you destroy the architecture of the meal. A half-eaten plate is harder to estimate than a composed one. Include sides and the drink if it has calories.",
+        "A reference object can help depth intuition, but consistency of angle week to week matters more than gadgetry."
+      ]
+    },
+    {
+      "heading": "Always review protein, carbs, fats, not only calories",
+      "body": [
+        "Calories can look “fine” while protein is quietly low. Check the macro split. If the AI called your bowl 35g protein and you know there was barely a palm of chicken, fix it.",
+        "Common miss list: cooking oils, creamy sauces, cheese pulls, deep-fried coatings, drinks on the table, and second helpings you “forgot.”",
+        "From an energy-balance perspective, systematic underestimation of fats is how photo logs drift high on weekends. Bias slightly up on glossy or fried foods."
+      ]
+    },
+    {
+      "heading": "Build a personal accuracy loop",
+      "body": [
+        "For meals you repeat (weekday oats, gym bowl), compare a weighed version once, then reuse that knowledge when you snap next time. AI gets you into the neighborhood; your edits teach the habit.",
+        "This is calibration, the same idea as comparing a home blood pressure cuff to a clinic reading. One careful reference improves dozens of later estimates.",
+        "In IGNITE AI the loop is snap → macros → confirm, then log training in the same app so the day is one story, not three."
+      ]
+    },
+    {
+      "heading": "Save meals you eat often",
+      "body": [
+        "If the same lunch shows up three times a week, you should not re-photograph it every time. After you snap, edit, and confirm a meal you like, save it to Saved.",
+        "Next time you eat that meal, open Saved and log it again. Same calories and macros, zero camera friction. Use this for staples: overnight oats, gym bowls, protein shakes, the sandwich you always buy.",
+        "Photo logging is for new or messy plates. Saved is for the meals you already trust. Together they keep tracking fast on busy days."
+      ]
+    },
+    {
+      "heading": "When to weigh anyway",
+      "body": [
+        "Weigh calorie-dense items you use daily (oils, nut butters, rice portions) once in a while. You are training your eyes, not marrying the scale.",
+        "Competitive athletes in peak week may need tighter weighing. Most people need sustainable honesty more than lab precision."
+      ]
+    },
+    {
+      "heading": "Bottom line",
+      "body": [
+        "Clear photo, full plate, edit fats and protein, save repeats. That is enough accuracy for weekly fat-loss and muscle trends."
+      ]
+    }
+  ]
+}

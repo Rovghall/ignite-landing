@@ -1,0 +1,48 @@
+{
+  "slug": "ignite-ai-vs-myfitnesspal",
+  "title": "IGNITE AI vs MyFitnessPal: Which Macro Tracker Fits How You Actually Eat?",
+  "date": "2026-07-16",
+  "description": "A deep comparison of IGNITE AI and MyFitnessPal: logging speed, databases vs computer vision, underreporting risk, workouts, social features, Saved meals, and who should switch.",
+  "sections": [
+    {
+      "body": [
+        "MyFitnessPal taught a generation to count. IGNITE AI is betting that generation is tired of scrolling a database while dinner gets cold. Here is the practical difference, without fanboy fog.",
+        "Both can support fat loss if you are consistent. They fail differently. MFP fails when mixed meals take too long. Photo-first tools fail when you never edit oils. Pick based on how you eat, not based on which logo is older."
+      ]
+    },
+    {
+      "heading": "Logging speed on real meals",
+      "body": [
+        "MyFitnessPal: search → pick food → enter serving. Fast for barcodes and repeats. Slow for a mixed bowl you have never saved.",
+        "IGNITE AI: photo → AI estimate → edit → confirm. Fast for bowls, plates, and takeout. You should still correct oils, dressings, and “hidden” calories, that is normal, not a failure of the app.",
+        "Adherence research keeps reminding us: the diary only works if it gets filled. Speed is a scientific feature, not a luxury."
+      ]
+    },
+    {
+      "heading": "Food database vs computer vision",
+      "body": [
+        "MFP’s advantage is scale: millions of foods, recipes, and community entries (quality varies). IGNITE AI’s advantage is vision on unstructured meals. Different tools for different plates.",
+        "If 80% of your calories come from labeled products, MFP feels native. If 80% come from cooking and restaurants, photo-first feels native."
+      ]
+    },
+    {
+      "heading": "Workouts and progress",
+      "body": [
+        "MFP can track exercise, but many people still keep training in another app. IGNITE AI pushes meals + workouts + shareable progress as one habit loop, useful if accountability is why you stay consistent.",
+        "Accountability psychology is simple: tiny social visibility increases follow-through for many people. Private streak counters are weaker for some personalities."
+      ]
+    },
+    {
+      "heading": "Saved meals and custom foods",
+      "body": [
+        "Both ecosystems reward building a personal library. In IGNITE AI, Saved turns a calibrated plate into one-tap logging. In MFP, custom foods and meals do the same job with more manual setup."
+      ]
+    },
+    {
+      "heading": "Verdict",
+      "body": [
+        "Pick MyFitnessPal if you want the biggest database and you already have years of history there. Pick IGNITE AI if logging friction is why you quit, and you want snap macros, training, and progress sharing without living in search bars."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "slug": "restaurant-calories-estimate",
+  "title": "How to Estimate Restaurant Calories Without Ruining the Night Out",
+  "date": "2026-05-24",
+  "description": "A realistic, science-aware protocol for restaurant calories: photo first, bias high on oils, protect protein, use menu data when available, and keep social meals from destroying weekly tracking.",
+  "sections": [
+    {
+      "body": [
+        "Restaurant meals break trackers because nobody brings a scale to date night. Menu analyses and dietetics experience both suggest restaurant meals are often denser than diners expect, especially in fat.",
+        "The winning move is speed plus slight conservatism, not perfection theater."
+      ]
+    },
+    {
+      "heading": "A simple restaurant protocol",
+      "body": [
+        "1) Photograph before you dig in. 2) Accept the AI estimate as a draft. 3) Bump fats and calories if the dish is glossy, creamy, or fried. 4) Keep protein honest. 5) Skip the shame spiral. Log it and enjoy the night."
+      ]
+    },
+    {
+      "heading": "Why oils destroy estimates",
+      "body": [
+        "Visible volume is mostly the starch and protein. Invisible calories are the butter finish and fryer oil. Systematic underestimation of fats is the classic restaurant logging error for humans and models alike."
+      ]
+    },
+    {
+      "heading": "Menu calories help, but verify",
+      "body": [
+        "Chain restaurants sometimes publish nutrition info. Use it when available. Independent kitchens vary by cook. Treat published numbers as better than pure guessing, not as sacred."
+      ]
+    },
+    {
+      "heading": "Weekly averages save your sanity",
+      "body": [
+        "One restaurant meal does not erase a good week. A silent unlogged restaurant meal every Friday does. Log it, bias slightly high, move on.",
+        "This is exactly where IGNITE AI snap flow earns its keep."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,899 @@
+{
+  "how-long-does-reverse-dieting-take": {
+    "title": "反向饮食要多久才能见效？",
+    "description": "深入的反向饮食指南：温和与激进减脂后的时间线、适应性代谢与 NEAT、每周加热量协议，以及如何判断你已回到可用的维持水平。",
+    "intro": [
+      "反向饮食是从减脂阶段有控制地爬升。你按计划逐步提高热量，让训练质量、饥饿感和日常精力恢复，同时避免退出变成意外的脏增肌。",
+      "它并不打破能量平衡。体重下降后，维持热量通常也会下降，因为更小的身体耗能更少。长期减脂还可能抑制 NEAT，让高强度训练更难受。反向饮食用每周数据管理回归。",
+      "需要多久取决于减脂深度、时长、最终瘦度、睡眠，以及步数被压制的程度。温和减脂和激进备赛周不是同一个项目。"
+    ]
+  },
+  "how-many-calories-15000-steps": {
+    "title": "走 15,000 步大约消耗多少卡路里？",
+    "description": "按体重与配速划分的现实 15,000 步热量区间、MET 背景、可穿戴误差，以及如何用高步数减脂而不把消耗吃回去。",
+    "intro": [
+      "15,000 步是较高的日活动目标。它通常比 10,000 步消耗更多，但体重、配速、地形和走走停停模式决定总量。",
+      "许多成年人在大量步行日落在数百千卡区间；更重的身体和更快配速更高，平坦慢走更低。",
+      "把换算器和手表当作方向性参考。减脂仍取决于每周摄入与消耗。"
+    ]
+  },
+  "how-many-calories-20000-steps": {
+    "title": "走 20,000 步大约消耗多少卡路里？",
+    "description": "20,000 步对消耗、饥饿、恢复和减脂意味着什么，以及何时更低但可重复的步数目标才是更好的减脂策略。",
+    "intro": [
+      "对多数日程来说，20,000 步是极端目标。它能造成很大步行能耗，也会放大饥饿、抢走举重时间、毁掉晚上。",
+      "若为减脂追求 2 万步，食物日志必须毫不留情。超高步数日是经典的“我应得奖励”陷阱。"
+    ]
+  },
+  "walk-10000-steps-weight-loss-month": {
+    "title": "如果我每天走 10,000 步，一个月能减多少？",
+    "description": "来自 10,000 步习惯的现实月减重预期：热量区间、饮食交互与水分体重噪音。",
+    "intro": [
+      "每天 10,000 步好记，但不是保证月脂肪减少的合同。步数提高消耗；脂肪是否下降由摄入与补偿决定。",
+      "粗略脂肪数学用约 3,500 kcal/磅作教学工具，但月体重变化还包括水分和糖原噪音。"
+    ]
+  },
+  "burn-1000-calories-a-day": {
+    "title": "如何每天消耗 1,000 卡（又不毁掉恢复）",
+    "description": "如何在不毁掉恢复的前提下接近每天约 1,000 活动热量：先做 NEAT、举重、有氧剂量、对可穿戴保持怀疑，以及诚实的食物日志。",
+    "intro": [
+      "每天消耗 1,000 卡通常指相对久坐基线约多 1,000 kcal 活动，不是全天总能耗只有 1,000。多数成年人仅维持生命就远超每天 1,000 kcal。",
+      "用无尽 HIIT 追逐活动消耗，往往通向受伤、极度饥饿和无法坚持。更聪明的组合是步数+举重，并只加恢复允许的有氧。"
+    ]
+  },
+  "convert-steps-to-calories": {
+    "title": "如何把步数换算成消耗卡路里？",
+    "description": "步数到热量换算如何运作、为何体重与配速主导、为何换算器不一致，以及如何在不破坏赤字的情况下使用它们。",
+    "intro": [
+      "每个步数热量计算器都对步态、强度和体重做假设。它不知道你的坡度、负重或走走停停。",
+      "若像看天气一样当作方向而非法庭证据，换算有助于规划。"
+    ]
+  },
+  "if-i-burn-1000-calories-weight-loss": {
+    "title": "如果我每天消耗 1,000 卡，一周能减多少？",
+    "description": "声称每天多消耗 1,000 kcal 的周减脂预期：粗略能量数学、水分体重、可穿戴乐观，以及验证步骤。",
+    "intro": [
+      "若你真的每天多消耗 1,000 kcal 且没有吃回去，粗略教学数学接近每周约 7,000 kcal，常被说成约两磅脂肪能量。真实的一周更乱。",
+      "可穿戴的 1,000 kcal 声称往往偏乐观，补偿进食也能抹掉赤字。"
+    ]
+  },
+  "cut-1000-calories-weight-loss-speed": {
+    "title": "如果我每天减 1,000 卡，能减多少、多快？",
+    "description": "每天 1,000 kcal 赤字对速度、瘦体重风险、依从性的含义，以及为何中等赤字往往更能赢下一年。",
+    "intro": [
+      "对许多成年人，每天 1,000 kcal 赤字偏激进。纸面上预测快速下降；实务上常预测饥饿、训练崩盘和反弹。",
+      "若赤字真实，粗略数学再次指向每周约两磅脂肪能量，而水分会让第一周看起来比纯脂肪更夸张。"
+    ]
+  },
+  "most-accurate-measure-calories-burned": {
+    "title": "测量消耗卡路里最准确的方法是什么？",
+    "description": "实验室与消费级消耗测量：热量测定、双标水、MET 表、可穿戴，以及为何摄入+每周体重往往胜过追逐完美消耗。",
+    "intro": [
+      "最准确的消耗方法在实验室。手腕在估计。让工具匹配决策。",
+      "对减脂而言，诚实摄入加上每周平均体重，通常胜过完美的消耗仪表盘。"
+    ]
+  },
+  "how-many-calories-burn-per-day": {
+    "title": "我每天应该消耗多少卡路里？",
+    "description": "如何用 TDEE 组成部分（BMR、TEF、NEAT、运动）设定每日消耗思路，并用真实日志验证。",
+    "intro": [
+      "每日消耗是 TDEE，不是励志海报数字。",
+      "问一问：哪种消耗模式既能支撑目标，又能让你恢复并记录饮食。"
+    ]
+  },
+  "calories-from-fat-calculate": {
+    "title": "如何从脂肪计算卡路里",
+    "description": "用 9 kcal/g 规则把脂肪克数换成热量，标签陷阱、油脂与拍照记录编辑。",
+    "intro": [
+      "脂肪约每克 9 kcal。脂肪克数乘以 9。",
+      "含 20 g 脂肪的一餐大约贡献 180 kcal 来自脂肪。"
+    ]
+  },
+  "bodybuilder-calories-how-many": {
+    "title": "健美运动员吃多少卡？",
+    "description": "为什么健美热量因阶段与体型而异，以及可复制的盈余/赤字方法（不必抄别人的数字）。",
+    "intro": [
+      "没有普适的健美摄入量。",
+      "可迁移的方法：找到维持、设定小盈余或受控赤字、保持高蛋白、努力训练。"
+    ]
+  },
+  "calories-per-meal-guide": {
+    "title": "一餐应该多少卡？",
+    "description": "不靠教条地把每日热量拆到各餐，包括蛋白质分配与间歇性禁食窗口。",
+    "intro": [
+      "餐热量是按日程打包的每日热量。",
+      "没有神圣的午餐数字。"
+    ]
+  },
+  "calories-to-gain-muscle": {
+    "title": "增肌应该吃多少卡？",
+    "description": "用小盈余、增重速度目标与反脏增肌日志设定增肌热量。",
+    "intro": [
+      "增肌需要训练、蛋白质、时间，新手期后通常还需要盈余。",
+      "许多中阶者在真实维持上约 +200 到 +300 kcal 表现良好。"
+    ]
+  },
+  "calories-dinner-weight-loss": {
+    "title": "减脂晚餐应该多少卡？",
+    "description": "在减脂日里设定晚餐热量：预算、蛋白质锚点与餐厅策略。",
+    "intro": [
+      "晚餐没有魔法减脂热量。",
+      "由当天和当周决定。"
+    ]
+  },
+  "calories-lunch-fitness-goals": {
+    "title": "为达成健身目标，午餐该多少卡？",
+    "description": "用默认方案和 Saved 餐构建兼顾表现与依从性的午餐热量。",
+    "intro": [
+      "午餐应防止晚餐失控。",
+      "确切热量取决于每日目标。"
+    ]
+  },
+  "how-long-burn-500-calories": {
+    "title": "消耗 500 卡要多久？",
+    "description": "不同方式消耗约 500 kcal 要多久，以及体重如何改变时钟。",
+    "intro": [
+      "消耗 500 kcal 的时间随强度和体重上升而缩短。",
+      "没有这些变量就没有单一答案。"
+    ]
+  },
+  "500-calorie-meals-weight-loss": {
+    "title": "500 卡一餐能用来减脂吗？",
+    "description": "500 卡餐在减脂日何时有效，以及如何保持高蛋白且有饱腹感。",
+    "intro": [
+      "500 卡餐可以在有计划的一天里奏效。",
+      "若小到让你稍后暴食，就会失败。"
+    ]
+  },
+  "eating-1000-calories-a-day": {
+    "title": "每天吃 1,000 卡能减肥吗？",
+    "description": "关于每天吃 1,000 卡能否减肥的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "1,000 kcal 日通常给许多成年人造成很大赤字。",
+      "快速下降包含水分，并提高反弹风险。"
+    ]
+  },
+  "how-calories-are-measured": {
+    "title": "卡路里如何测量？9 种实用方法",
+    "description": "从实验室系数到标签、秤、照片和菜单，卡路里被测量的九种实用方式。",
+    "intro": [
+      "食品标签热量使用既定能量系数，不是你的个人弹式量热计。",
+      "你的工作是达到足以做每周决策的准确度。"
+    ]
+  },
+  "food-scale-for-calories-macros": {
+    "title": "如何用食物秤记录热量与宏量营养素",
+    "description": "食物秤流程：称什么、去皮、生熟对照，校准后放松。",
+    "intro": [
+      "若你称高密度食物而不是每片生菜，秤的杠杆很高。",
+      "油、米、肉、奶酪和坚果酱最重要。"
+    ]
+  },
+  "measure-calories-food-at-home": {
+    "title": "如何在家测量食物热量",
+    "description": "关于如何在家测量食物热量的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "家庭方法不会匹配代谢病房。",
+      "若偏差保持很小，它们仍可指导减脂。"
+    ]
+  },
+  "count-calories-when-cooking": {
+    "title": "做饭时如何计算热量",
+    "description": "通过记录整锅、按真实份量分割并保存批次来计算自制餐。",
+    "intro": [
+      "忘记油脂或份量虚构时，做饭会搞垮追踪器。",
+      "先算整锅，再按你盛出的量分割。"
+    ]
+  },
+  "track-calorie-deficit-healthy": {
+    "title": "如何以健康方式追踪热量赤字",
+    "description": "用温和削减、蛋白质、举重、平均值和可持续记录来追踪健康赤字。",
+    "intro": [
+      "健康赤字在脂肪连续数周下行时，仍支持训练与生活。",
+      "追踪不应变成羞耻工作。"
+    ]
+  },
+  "active-vs-total-calories": {
+    "title": "活动热量 vs 总热量：该追踪哪个",
+    "description": "关于活动热量 vs 总热量该追踪哪个的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "活动通常指运动消耗；总热量通常包含静息代谢。",
+      "品牌定义各不相同。"
+    ]
+  },
+  "active-vs-resting-calories": {
+    "title": "活动热量与静息热量解释",
+    "description": "静息 vs 活动热量：BMR/RMR 与运动，以及聪明提高消耗的方式。",
+    "intro": [
+      "静息热量维持静息时的生存；活动热量覆盖运动。",
+      "与 TEF 一起构成 TDEE。"
+    ]
+  },
+  "track-calories-burned-tools": {
+    "title": "如何追踪消耗热量：12 种实用工具",
+    "description": "从可穿戴到每周体重加摄入这个裁判，追踪消耗的十二种工具。",
+    "intro": [
+      "你需要一两个会真正用的工具，外加现实核对。",
+      "更多设备修不好漏报的晚餐。"
+    ]
+  },
+  "how-many-calories-running-mile": {
+    "title": "跑一英里消耗多少卡？",
+    "description": "详解跑一英里的卡路里消耗：驱动估算的因素、体重与强度影响、可穿戴误差、肌肉 vs 卡路里表演，以及如何记录训练而不把全部消耗吃回去。",
+    "intro": [
+      "人们问跑一英里消耗多少卡，往往是想用那次训练为晚餐辩护。单次消耗是真实的，但通常比“后燃”神话暗示的更小、更噪。",
+      "体重、强度、休息和总做功时间主导跑一英里的估算。两个人做同名训练也可能差很远。",
+      "减脂仍遵循每周能量平衡。训练优先服务刺激与健康；减脂期对卡路里读数要保守。"
+    ]
+  },
+  "how-many-calories-weight-lifting": {
+    "title": "举重消耗多少卡？",
+    "description": "详解举重的卡路里消耗：驱动估算的因素、体重与强度影响、可穿戴误差、肌肉 vs 卡路里表演，以及如何记录训练而不把全部消耗吃回去。",
+    "intro": [
+      "人们问举重消耗多少卡，往往是想用那次训练为晚餐辩护。单次消耗是真实的，但通常比“后燃”神话暗示的更小、更噪。",
+      "体重、强度、休息和总做功时间主导举重的估算。两个人做同名训练也可能差很远。",
+      "减脂仍遵循每周能量平衡。训练优先服务刺激与健康；减脂期对卡路里读数要保守。"
+    ]
+  },
+  "how-many-calories-jumping-jacks": {
+    "title": "开合跳消耗多少卡？",
+    "description": "详解开合跳的卡路里消耗：驱动估算的因素、体重与强度影响、可穿戴误差、肌肉 vs 卡路里表演，以及如何记录训练而不把全部消耗吃回去。",
+    "intro": [
+      "人们问开合跳消耗多少卡，往往是想用那次训练为晚餐辩护。单次消耗是真实的，但通常比“后燃”神话暗示的更小、更噪。",
+      "体重、强度、休息和总做功时间主导开合跳的估算。两个人做同名训练也可能差很远。",
+      "减脂仍遵循每周能量平衡。训练优先服务刺激与健康；减脂期对卡路里读数要保守。"
+    ]
+  },
+  "how-many-calories-pilates": {
+    "title": "普拉提消耗多少卡？",
+    "description": "详解普拉提的卡路里消耗：驱动估算的因素、体重与强度影响、可穿戴误差、肌肉 vs 卡路里表演，以及如何记录训练而不把全部消耗吃回去。",
+    "intro": [
+      "人们问普拉提消耗多少卡，往往是想用那次训练为晚餐辩护。单次消耗是真实的，但通常比“后燃”神话暗示的更小、更噪。",
+      "体重、强度、休息和总做功时间主导普拉提的估算。两个人做同名训练也可能差很远。",
+      "减脂仍遵循每周能量平衡。训练优先服务刺激与健康；减脂期对卡路里读数要保守。"
+    ]
+  },
+  "how-many-calories-swimming": {
+    "title": "游泳消耗多少卡？",
+    "description": "详解游泳的卡路里消耗：驱动估算的因素、体重与强度影响、可穿戴误差、肌肉 vs 卡路里表演，以及如何记录训练而不把全部消耗吃回去。",
+    "intro": [
+      "人们问游泳消耗多少卡，往往是想用那次训练为晚餐辩护。单次消耗是真实的，但通常比“后燃”神话暗示的更小、更噪。",
+      "体重、强度、休息和总做功时间主导游泳的估算。两个人做同名训练也可能差很远。",
+      "减脂仍遵循每周能量平衡。训练优先服务刺激与健康；减脂期对卡路里读数要保守。"
+    ]
+  },
+  "how-many-calories-push-ups": {
+    "title": "俯卧撑消耗多少卡？",
+    "description": "详解俯卧撑的卡路里消耗：驱动估算的因素、体重与强度影响、可穿戴误差、肌肉 vs 卡路里表演，以及如何记录训练而不把全部消耗吃回去。",
+    "intro": [
+      "人们问俯卧撑消耗多少卡，往往是想用那次训练为晚餐辩护。单次消耗是真实的，但通常比“后燃”神话暗示的更小、更噪。",
+      "体重、强度、休息和总做功时间主导俯卧撑的估算。两个人做同名训练也可能差很远。",
+      "减脂仍遵循每周能量平衡。训练优先服务刺激与健康；减脂期对卡路里读数要保守。"
+    ]
+  },
+  "how-many-calories-squats": {
+    "title": "深蹲消耗多少卡？",
+    "description": "详解深蹲的卡路里消耗：驱动估算的因素、体重与强度影响、可穿戴误差、肌肉 vs 卡路里表演，以及如何记录训练而不把全部消耗吃回去。",
+    "intro": [
+      "人们问深蹲消耗多少卡，往往是想用那次训练为晚餐辩护。单次消耗是真实的，但通常比“后燃”神话暗示的更小、更噪。",
+      "体重、强度、休息和总做功时间主导深蹲的估算。两个人做同名训练也可能差很远。",
+      "减脂仍遵循每周能量平衡。训练优先服务刺激与健康；减脂期对卡路里读数要保守。"
+    ]
+  },
+  "how-many-calories-skiing": {
+    "title": "滑雪消耗多少卡？",
+    "description": "详解滑雪的卡路里消耗：驱动估算的因素、体重与强度影响、可穿戴误差、肌肉 vs 卡路里表演，以及如何记录训练而不把全部消耗吃回去。",
+    "intro": [
+      "人们问滑雪消耗多少卡，往往是想用那次训练为晚餐辩护。单次消耗是真实的，但通常比“后燃”神话暗示的更小、更噪。",
+      "体重、强度、休息和总做功时间主导滑雪的估算。两个人做同名训练也可能差很远。",
+      "减脂仍遵循每周能量平衡。训练优先服务刺激与健康；减脂期对卡路里读数要保守。"
+    ]
+  },
+  "how-many-calories-sit-ups": {
+    "title": "仰卧起坐消耗多少卡？",
+    "description": "详解仰卧起坐的卡路里消耗：驱动估算的因素、体重与强度影响、可穿戴误差、肌肉 vs 卡路里表演，以及如何记录训练而不把全部消耗吃回去。",
+    "intro": [
+      "人们问仰卧起坐消耗多少卡，往往是想用那次训练为晚餐辩护。单次消耗是真实的，但通常比“后燃”神话暗示的更小、更噪。",
+      "体重、强度、休息和总做功时间主导仰卧起坐的估算。两个人做同名训练也可能差很远。",
+      "减脂仍遵循每周能量平衡。训练优先服务刺激与健康；减脂期对卡路里读数要保守。"
+    ]
+  },
+  "protein-for-body-recomp": {
+    "title": "身体重组需要多少蛋白质？",
+    "description": "关于身体重组蛋白质需求的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "重组对新手、回归者和体脂较高的训练者最现实。",
+      "蛋白质在接近维持或轻度赤字时，约 1.6 到 2.2 g/kg 往往效果最好。"
+    ]
+  },
+  "gain-muscle-lose-fat-same-time": {
+    "title": "如何同时增肌减脂",
+    "description": "同时减脂增肌如何真正运作，以及谁应期待它。",
+    "intro": [
+      "同时重组在你是新手或回归时最常发生。",
+      "进阶训练者通常交替阶段。"
+    ]
+  },
+  "track-alcohol-macros": {
+    "title": "如何追踪酒精宏量",
+    "description": "用约 7 kcal/g、调酒、睡眠影响和每周预算追踪酒精能量。",
+    "intro": [
+      "酒精约每克 7 kcal，不是像蛋白质那样的经典宏量。",
+      "调酒也算。睡眠与次日依从性往往打击更大。"
+    ]
+  },
+  "protein-carnivore-diet": {
+    "title": "肉食饮食需要多少蛋白质？",
+    "description": "举重者肉食式饮食的蛋白质、肥切能量密度，以及诚实记录。",
+    "intro": [
+      "肉食模式天生高蛋白高脂肪。",
+      "举重者仍受益于偏高区间的有意蛋白质目标。"
+    ]
+  },
+  "track-macros-on-keto": {
+    "title": "如何在生酮上追踪宏量",
+    "description": "用净碳水 vs 总碳水、肌肉所需蛋白和对油脂的警惕来追踪生酮宏量。",
+    "intro": [
+      "生酮优先极低碳水、中等蛋白、较高脂肪。",
+      "选择净碳水或总碳水并保持一致。"
+    ]
+  },
+  "counting-macros-vs-calories": {
+    "title": "算宏量还是算热量：该追踪哪个？",
+    "description": "关于算宏量还是算热量该追踪哪个的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "热量驱动体脂变化。宏量塑造饥饿、肌肉与表现。",
+      "初学者可以从热量加蛋白质开始。"
+    ]
+  },
+  "does-collagen-count-as-protein": {
+    "title": "胶原蛋白算进蛋白质宏量吗？",
+    "description": "胶原按蛋白质克数计算，但对 MPS 而言不如完整蛋白完整。",
+    "intro": [
+      "胶原是蛋白质，但相对乳清、肉、蛋或大豆，对肌肉蛋白合成的关键氨基酸更低。",
+      "想记克数可以记，但别只靠胶原完成举重蛋白目标。"
+    ]
+  },
+  "can-eat-carbs-lose-weight": {
+    "title": "吃碳水也能减肥吗？",
+    "description": "关于吃碳水也能减肥吗的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "减脂需要热量赤字，不是零碳水。",
+      "碳水可以支持训练与依从性。"
+    ]
+  },
+  "do-resting-calories-count-in-deficit": {
+    "title": "静息热量算进赤字吗？",
+    "description": "关于静息热量是否算进赤字的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "静息消耗是许多人 TDEE 的大部分。",
+      "你的赤字是摄入相对包含静息热量在内的总消耗。"
+    ]
+  },
+  "do-carbs-make-you-fat": {
+    "title": "碳水会让你发胖吗？",
+    "description": "关于碳水是否让人发胖的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "碳水不会在能量盈余之外单独独特地制造脂肪。",
+      "超加工模式可能使一些人摄入增加。"
+    ]
+  },
+  "does-protein-turn-into-carbs": {
+    "title": "蛋白质会变成碳水吗？",
+    "description": "关于蛋白质会不会变成碳水的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "身体在需要时可由氨基酸生成葡萄糖。",
+      "那不是把蛋白质当意面对待的理由。"
+    ]
+  },
+  "why-not-gaining-muscle": {
+    "title": "为什么我增不了肌？14 个关键修正",
+    "description": "关于为什么增不了肌与 14 个关键修正的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "多数停滞来自渐进超负荷不足、蛋白偏低、该盈余时没有盈余、睡眠差和缺乏耐心。",
+      "修正覆盖训练、营养、恢复与诚实记录。"
+    ]
+  },
+  "does-counting-macros-work": {
+    "title": "算宏量长期有效吗？",
+    "description": "关于算宏量是否长期有效的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "当宏量计算提高觉察与依从性时就有效。",
+      "变成完美主义表演就会失败。"
+    ]
+  },
+  "how-to-hit-your-macros": {
+    "title": "如何持续打中宏量",
+    "description": "打中宏量的系统：蛋白质优先、默认餐、奶昔、Saved 餐、晚饭前核对。",
+    "intro": [
+      "一致性胜过每顿午餐都精确追克数。",
+      "建立默认方案，看着剩余宏量决定晚餐。"
+    ]
+  },
+  "ww-vs-keto": {
+    "title": "减脂：Weight Watchers vs 生酮",
+    "description": "WeightWatchers vs 生酮：机制、依从性、举重需求，以及各自适合谁。",
+    "intro": [
+      "WW 用积分和社群。生酮用碳水限制。",
+      "两者都可通过不同规则降低热量。"
+    ]
+  },
+  "ww-vs-macros-tracking": {
+    "title": "Weight Watchers vs 宏量追踪",
+    "description": "关于Weight Watchers vs Macros Tracking的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "积分简化决策。宏量提供训练精度。",
+      "若蛋白质与表现重要，宏量通常更合适。"
+    ]
+  },
+  "ww-vs-calorie-counting": {
+    "title": "Weight Watchers vs 热量计算",
+    "description": "关于Weight Watchers vs Calorie Counting的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "两者都创造摄入结构。",
+      "热量透明；积分加入偏好规则。"
+    ]
+  },
+  "myplate-vs-myfitnesspal": {
+    "title": "MyPlate vs MyFitnessPal：哪个追踪器适合你？",
+    "description": "MyPlate 与 MyFitnessPal 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 MyPlate 与 MyFitnessPal 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 MyPlate 与 MyFitnessPal 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "nutrisystem-vs-weightwatchers": {
+    "title": "Nutrisystem vs WeightWatchers：哪个更利于减脂？",
+    "description": "Nutrisystem 与 WeightWatchers 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 Nutrisystem 与 WeightWatchers 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 Nutrisystem 与 WeightWatchers 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "macrofactor-vs-rp-diet": {
+    "title": "MacroFactor vs RP Diet App：实用对比",
+    "description": "MacroFactor 与 RP Diet 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 MacroFactor 与 RP Diet 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 MacroFactor 与 RP Diet 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "cronometer-vs-carb-manager": {
+    "title": "Cronometer vs Carb Manager：该用哪个？",
+    "description": "Cronometer 与 Carb Manager 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 Cronometer 与 Carb Manager 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 Cronometer 与 Carb Manager 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "cronometer-vs-lose-it": {
+    "title": "Cronometer vs Lose It：详细对比",
+    "description": "Cronometer 与 Lose It! 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 Cronometer 与 Lose It! 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 Cronometer 与 Lose It! 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "carb-manager-vs-myfitnesspal": {
+    "title": "生酮追踪：Carb Manager vs MyFitnessPal",
+    "description": "Carb Manager 与 MyFitnessPal 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 Carb Manager 与 MyFitnessPal 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 Carb Manager 与 MyFitnessPal 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "noom-vs-weightwatchers": {
+    "title": "Noom vs WeightWatchers 评测",
+    "description": "Noom 与 WeightWatchers 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 Noom 与 WeightWatchers 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 Noom 与 WeightWatchers 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "noom-vs-myfitnesspal": {
+    "title": "Noom vs MyFitnessPal 对比",
+    "description": "Noom 与 MyFitnessPal 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 Noom 与 MyFitnessPal 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 Noom 与 MyFitnessPal 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "mynetdiary-vs-myfitnesspal": {
+    "title": "MyNetDiary vs MyFitnessPal 对比",
+    "description": "MyNetDiary 与 MyFitnessPal 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 MyNetDiary 与 MyFitnessPal 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 MyNetDiary 与 MyFitnessPal 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "lose-it-vs-myfitnesspal": {
+    "title": "Lose It vs MyFitnessPal 评测",
+    "description": "Lose It! 与 MyFitnessPal 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 Lose It! 与 MyFitnessPal 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 Lose It! 与 MyFitnessPal 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "macrofactor-vs-myfitnesspal": {
+    "title": "TDEE 追踪：MacroFactor vs MyFitnessPal",
+    "description": "MacroFactor 与 MyFitnessPal 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 MacroFactor 与 MyFitnessPal 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 MacroFactor 与 MyFitnessPal 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "fatsecret-vs-myfitnesspal": {
+    "title": "FatSecret vs MyFitnessPal 评测",
+    "description": "FatSecret 与 MyFitnessPal 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 FatSecret 与 MyFitnessPal 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 FatSecret 与 MyFitnessPal 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "lifesum-vs-myfitnesspal": {
+    "title": "Lifesum vs MyFitnessPal 指南",
+    "description": "Lifesum 与 MyFitnessPal 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 Lifesum 与 MyFitnessPal 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 Lifesum 与 MyFitnessPal 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "macrofactor-vs-cronometer": {
+    "title": "MacroFactor vs Cronometer 评测",
+    "description": "MacroFactor 与 Cronometer 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 MacroFactor 与 Cronometer 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 MacroFactor 与 Cronometer 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "myfitnesspal-vs-cronometer": {
+    "title": "MyFitnessPal vs Cronometer 指南",
+    "description": "MyFitnessPal 与 Cronometer 的深入对比：真实记录、依从性、数据库 vs 结构，以及谁该选哪个工具。",
+    "intro": [
+      "在 MyFitnessPal 与 Cronometer 之间选择，与其说是品牌忠诚，不如说是摩擦。最好的追踪器是你在疲惫的周四仍会填写的那一个。",
+      "记录很烦时，自我报告日记会漏报。这一研究现实应压过功能清单。",
+      "以下是 MyFitnessPal 与 Cronometer 的实用拆解，以及何时像 IGNITE AI 这样的拍照优先应用是更好的第三选项。"
+    ]
+  },
+  "is-cronometer-worth-it": {
+    "title": "Cronometer 应用值得吗？",
+    "description": "关于Is the Cronometer App Worth It的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "Cronometer 在维生素、矿物质与细致食物数据上表现出色。",
+      "对注重精度的用户值得。"
+    ]
+  },
+  "best-apps-gain-weight-2026": {
+    "title": "有效增重的 25 款最佳应用",
+    "description": "25 Best Apps to Help Gain Weight Effectively 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "25 Best Apps to Help Gain Weight Effectively 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-diabetes-weight-loss-apps": {
+    "title": "糖尿病与减重支持的 25 款最佳应用",
+    "description": "25 Best Apps for Diabetes and Weight Loss Support 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "25 Best Apps for Diabetes and Weight Loss Support 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-fitness-nutrition-apps": {
+    "title": "出结果的 20 款最佳健身与营养应用",
+    "description": "20 Best Fitness and Nutrition Apps for Results 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "20 Best Fitness and Nutrition Apps for Results 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-free-macro-tracking-apps": {
+    "title": "15 款最佳免费宏量追踪应用",
+    "description": "15 Best Free Macro Tracking Apps 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "15 Best Free Macro Tracking Apps 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-weight-watchers-alternatives": {
+    "title": "21 个最佳 Weight Watchers 替代",
+    "description": "21 Best Weight Watchers Alternatives 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "21 Best Weight Watchers Alternatives 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-noom-alternatives": {
+    "title": "19 个最佳 Noom 替代",
+    "description": "19 Best Noom Alternatives 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "19 Best Noom Alternatives 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-free-calorie-macro-trackers": {
+    "title": "14 款最佳免费热量与宏量追踪器",
+    "description": "14 Best Free Calorie and Macro Trackers 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "14 Best Free Calorie and Macro Trackers 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "apps-like-weight-watchers": {
+    "title": "19 款类似 Weight Watchers 的应用",
+    "description": "19 Apps Like Weight Watchers 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "19 Apps Like Weight Watchers 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "fitness-apps-like-myfitnesspal": {
+    "title": "28 款类似 MyFitnessPal 的健身应用",
+    "description": "28 Fitness Apps Like MyFitnessPal 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "28 Fitness Apps Like MyFitnessPal 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-food-journal-apps": {
+    "title": "21 款最佳食物日记应用",
+    "description": "21 Best Food Journal Apps 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "21 Best Food Journal Apps 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-carb-counting-apps": {
+    "title": "23 款最佳碳水计算应用",
+    "description": "23 Best Carb Counting Apps 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "23 Best Carb Counting Apps 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-weight-gain-apps": {
+    "title": "13 款定制计划增重应用",
+    "description": "13 Weight Gain Apps for Custom Plans 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "13 Weight Gain Apps for Custom Plans 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-protein-tracker-apps": {
+    "title": "14 款最佳蛋白质追踪应用",
+    "description": "14 Best Protein Tracker Apps 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "14 Best Protein Tracker Apps 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "best-apps-to-track-macros": {
+    "title": "16 款最佳宏量追踪应用",
+    "description": "16 Best Apps to Track Macros 的详细盘点：每个选项擅长什么、适合谁，以及如何不装十个应用就做出选择。",
+    "intro": [
+      "16 Best Apps to Track Macros 只有在选项匹配你的饮食与训练方式时才有用。这份列表解释每个选项的工作，而不只是标志。",
+      "记录很烦时，漏报会上升。选择速度与诚实，而不是囤积功能。"
+    ]
+  },
+  "how-to-use-saved-meals-ignite-ai": {
+    "title": "如何用 IGNITE AI 的 Saved 餐更快记录",
+    "description": "如何在 IGNITE AI 使用 Saved 餐：校准一次、永久复记、何时重新拍照。",
+    "intro": [
+      "Saved 餐把已校准的餐盘变成一键记录。",
+      "拍照、编辑油脂与蛋白质、保存，然后在重复日复用。"
+    ]
+  },
+  "build-streak-without-burning-out": {
+    "title": "如何在不燃尽的情况下建立记录连续天数",
+    "description": "关于How to Build a Logging Streak Without Burning Out的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "连续天数有帮助，直到漏一天就摧毁身份认同。",
+      "困难日使用最小可行记录。"
+    ]
+  },
+  "protein-first-plate-method": {
+    "title": "忙碌举重者的蛋白质优先餐盘法",
+    "description": "关于Protein-First Plate Method for Busy Lifters的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "先蛋白质，再训练用碳水，脂肪补热量。",
+      "拍照记录并调整。"
+    ]
+  },
+  "weekend-calorie-damage-control": {
+    "title": "不放弃追踪的周末热量损伤控制",
+    "description": "关于Weekend Calorie Damage Control Without Quitting Tracking的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "酒水和餐厅未记录时，周末会毁掉平均值。",
+      "为社交餐做预算，晚餐拍照，油脂偏高估计，周一回来不要报复性少吃。"
+    ]
+  },
+  "meal-prep-macros-guide": {
+    "title": "备餐宏量：不靠猜的批量烹饪",
+    "description": "关于Meal Prep Macros: Batch Cook Without Guessing的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "称整批的油脂和淀粉。",
+      "按真实容器分割、保存，复热无需重算。"
+    ]
+  },
+  "high-protein-snacks-macros": {
+    "title": "真正装进宏量的高蛋白零食",
+    "description": "关于High-Protein Snacks That Actually Fit Your Macros的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "酸奶、肉干、茅屋芝士、奶昔、毛豆等。",
+      "额外的要记录；Saved 胜过自动贩卖机惊喜。"
+    ]
+  },
+  "sleep-deficit-hunger-weight": {
+    "title": "睡眠不足如何抬高饥饿与体重秤读数",
+    "description": "关于How Sleep Loss Raises Hunger and Scale Weight的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "睡眠不足可改变食欲信号，并提高压力相关水分体重。",
+      "在极端砍热量之前先修好睡眠。"
+    ]
+  },
+  "fiber-macros-satiety": {
+    "title": "纤维、宏量与饱腹：赤字中如何更饱",
+    "description": "关于Fiber, Macros, and Satiety: How to Get Fuller in a Deficit的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "富含纤维的碳水与蔬菜能改善许多人的饱腹感。",
+      "逐渐增加纤维，并继续追踪总摄入。"
+    ]
+  },
+  "sugar-cravings-calorie-deficit": {
+    "title": "热量赤字中的糖瘾：什么有帮助",
+    "description": "关于Sugar Cravings in a Calorie Deficit: What Helps的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "睡眠债、低蛋白和极端限制会抬高渴望。",
+      "有意记录甜点，而不是偶然漏掉。"
+    ]
+  },
+  "maintenance-calories-find-yours": {
+    "title": "如何在两周内找到维持热量",
+    "description": "关于How to Find Your Maintenance Calories in Two Weeks的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "稳定进食、记录、平均摄入、观察周体重。",
+      "体重走平意味着实用维持。"
+    ]
+  },
+  "diet-break-when-and-how": {
+    "title": "饮食休息：何时进行以及如何执行",
+    "description": "关于Diet Breaks: When to Take One and How to Run It的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "饮食休息可在长期减脂后恢复训练与依从性。",
+      "保持高蛋白、提高碳水、继续举重，然后恢复减脂。"
+    ]
+  },
+  "refeed-day-vs-diet-break": {
+    "title": "回喂日 vs 饮食休息：有何区别？",
+    "description": "关于Refeed Day vs Diet Break: What Is the Difference的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "回喂是较短的高碳水日。饮食休息在维持热量上持续更久。",
+      "把它们计划好；不要变成未记录的混乱。"
+    ]
+  },
+  "travel-macros-airport-food": {
+    "title": "旅行时如何打中宏量",
+    "description": "关于How to Hit Macros While Traveling的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "旅行会毁掉数据库。",
+      "给机场食物拍照，油脂偏高估计，守住蛋白质，保持步数下限。"
+    ]
+  },
+  "late-night-snacking-macros": {
+    "title": "不炸掉宏量的深夜零食",
+    "description": "关于Late-Night Snacking Without Blowing Your Macros的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "若夜晚危险，更早为晚间热量做预算。",
+      "高蛋白零食有帮助；睡眠比说教更能修好问题。"
+    ]
+  },
+  "how-accurate-are-restaurant-menus": {
+    "title": "餐厅菜单热量有多准确？",
+    "description": "关于How Accurate Are Restaurant Menu Calories的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "因厨房差异，公布热量可能不准。",
+      "当作草稿，按油脂与份量调整，并拍照记录。"
+    ]
+  },
+  "protein-timing-myths": {
+    "title": "蛋白质时机的迷思与真正重要的事",
+    "description": "关于Protein Timing Myths vs What Matters的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "每日总蛋白与训练刺激比恐慌“合成窗口”更重要。",
+      "可以时分散摄入；奶昔方便，但不是魔法。"
+    ]
+  },
+  "cardio-vs-steps-fat-loss": {
+    "title": "减脂该优先有氧还是步数？",
+    "description": "关于Cardio vs Steps for Fat Loss: Which Should You Prioritize的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "步数是低压力 NEAT。有氧提升消耗更快，但恢复成本更高。",
+      "许多减脂期偏好步数下限加举重，需要时再加有氧。"
+    ]
+  },
+  "how-to-read-nutrition-labels-macros": {
+    "title": "如何为宏量营养素阅读营养标签",
+    "description": "关于How to Read Nutrition Labels for Macros的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "先看份量。",
+      "再看宏量。留意多份包装与净碳水营销。"
+    ]
+  },
+  "best-time-to-weigh-yourself": {
+    "title": "获得准确趋势的最佳称重时间",
+    "description": "关于Best Time to Weigh Yourself for Accurate Trends的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "多数早晨如厕后、进食前称重。",
+      "取周平均；忽略单次尖峰。"
+    ]
+  },
+  "water-weight-vs-fat-loss": {
+    "title": "水分体重 vs 脂肪减少：如何区分",
+    "description": "关于水分体重 vs 脂肪减少如何区分的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "快速下降往往是水分和糖原。脂肪更慢。",
+      "使用多周平均、腰围、照片。"
+    ]
+  },
+  "how-to-log-shared-meals": {
+    "title": "如何记录共享餐盘与家庭式聚餐",
+    "description": "关于如何记录共享餐盘与家庭式聚餐的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "在桌子毁掉证据前先拍照。",
+      "估算你的份量，油脂偏高估计，保存常吃的家庭餐。"
+    ]
+  },
+  "ignite-ai-for-beginners": {
+    "title": "IGNITE AI 新手：第一周设置",
+    "description": "关于 IGNITE AI 新手第一周设置的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "设定蛋白质与热量目标，每餐拍照，修正误差，记录训练，保存主食，第七天复盘。"
+    ]
+  },
+  "macros-for-women-lifting": {
+    "title": "举重女性的宏量：实用设置",
+    "description": "关于举重女性宏量实用设置的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "足够支撑表现的蛋白质与碳水。",
+      "使用周平均；避免压垮训练的极端赤字。"
+    ]
+  },
+  "macros-for-busy-parents": {
+    "title": "忙碌父母的宏量追踪",
+    "description": "关于忙碌父母宏量追踪的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "从孩子盘子上吃的一口也算。",
+      "快速拍照记录，使用 Saved 主食、蛋白质锚点，优先已记录的日子而非完美日子。"
+    ]
+  },
+  "is-fitness-app-accurate": {
+    "title": "你的健身应用准确吗？如何提高可靠性",
+    "description": "关于健身应用准确性与提高可靠性的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "应用在估算。",
+      "更好的照片、油脂修正、每周称重、保守的活动消耗，足以形成可用准确度。"
+    ]
+  },
+  "how-to-track-macros-fast": {
+    "title": "忙碌日如何快速追踪宏量",
+    "description": "关于忙碌日快速追踪宏量的科学循证详细指南：实用方案、常见错误、测量方法，以及忙碌几周也能坚持的记录系统。",
+    "intro": [
+      "拍照、Saved 餐、奶昔、蛋白质优先的晚餐决策。",
+      "20 秒诚实记录胜过跳过一天。"
+    ]
+  }
+}

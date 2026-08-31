@@ -1,0 +1,40 @@
+{
+  "slug": "ai-food-logging-accuracy",
+  "title": "How Accurate Is AI Food Logging, And How to Make It Accurate Enough",
+  "date": "2026-05-20",
+  "description": "What photo AI food logging gets right and wrong, why volume and oils create error, how human edits create accuracy enough for weekly fat-loss trends, and habits that keep the system trustworthy.",
+  "sections": [
+    {
+      "body": [
+        "AI food logging is not a bomb calorimeter. It is a fast estimator. Accuracy enough means your weekly averages move with reality, not that every gram matches a lab.",
+        "Computer vision can classify foods and estimate portions from images, but depth, occlusion, and energy density still create error. That is expected measurement science, not a scandal."
+      ]
+    },
+    {
+      "heading": "Where models are strong vs weak",
+      "body": [
+        "Strong: common meals, clear plating, distinct proteins and carbs. Weak: depth perception on piles of rice, transparent oils, pale sauces, mixed buffets, dark photos."
+      ]
+    },
+    {
+      "heading": "The last mile is human",
+      "body": [
+        "Your job is to edit what you can see is wrong. Do that for a week and the system becomes a habit amplifier, not a novelty.",
+        "Calibrate repeats: weigh a staple once, save it, reuse. That converts noisy estimates into stable personal data."
+      ]
+    },
+    {
+      "heading": "Accuracy enough for goals",
+      "body": [
+        "Fat loss and muscle gain respond to weekly energy and protein trends. A log with small random error still works. A log with large systematic bias (always missing oils) does not.",
+        "Bias high on glossy foods. Protect protein fields. Keep lighting decent."
+      ]
+    },
+    {
+      "heading": "Bottom line",
+      "body": [
+        "AI gets you speed. Edits get you truth. Together they beat an abandoned perfect database."
+      ]
+    }
+  ]
+}

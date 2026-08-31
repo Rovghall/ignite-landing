@@ -1,0 +1,1354 @@
+[
+  {
+    "slug": "log-reminders-notifications-ignite",
+    "title": "Logherinneringen en meldingen in IGNITE AI: consistent blijven zonder spam",
+    "date": "2026-08-29",
+    "description": "Stel IGNITE AI-logherinneringen in die consistentie beschermen zonder meldingenspam — pings op maaltijdtijd, stille uren en voorkeurshygiëne zodat diner nog gelogd wordt in drukke weken, zonder lockscreen-moeheid.",
+    "sections": [
+      {
+        "body": [
+          "Herinneringen zijn een tweesnijdend zwaard. De juiste ping redt een lege avond; de verkeerde stroom traint je om alles weg te vegen — inclusief de ene melding die ertoe deed. Logherinneringen en meldingsvoorkeuren in IGNITE AI bestaan om consistentie te beschermen — niet om je lockscreen te gamificeren.",
+          "De meeste mensen vergeten niet dat tracking bestaat. Ze vergeten op het exacte moment dat het leven piekt: woon-werkverkeer, kinderen naar bed, late training. Eén schaarse herinnering op dát moment presteert beter dan tien generieke «blijf gemotiveerd»-briefjes.",
+          "Deze gids gaat over timing, wat je uitzet, hoe je herstelt na meldingsmoeheid, en hoe herinneringen samengaan met Quick Log zodat de tap na de ping kort is. Het is gedragsontwerp voor dagboeken, geen medisch advies."
+        ]
+      },
+      {
+        "body": [
+          "Een nuttige herinnering vraagt om één actie: log lunch, log diner, weeg jezelf, of werk het blanco van gisteren bij. Gestapelde berichten die tips, social, marketing en loggen mengen, concurreren tot er geen enkele wint.",
+          "Audit voorkeuren en houd de kanalen die gaten in je week dichten. Produceert een melding nooit een log, dan is het decoratie — zet hem uit."
+        ],
+        "heading": "Eén taak per melding"
+      },
+      {
+        "body": [
+          "Zet dinerherinneringen op wanneer je écht eet, niet op een ambitieuze 18:00. Plateer je routinematig om 20:30, ping dan. Ochtendherinneringen helpen ontbijtskippers; middagpings helpen bureaumensen die lunch «vergeten» tot 15:00.",
+          "Begin met één of twee ankers. Voeg een derde alleen toe als een specifieke maaltijd twee weken uit het dagboek blijft verdwijnen. Schaars wint van slim."
+        ],
+        "heading": "Stem herinneringen af op echte maaltijden"
+      },
+      {
+        "body": [
+          "Bescherm slaap en diep werk. Logherinneringen om 23:30 creëren schuld zonder betere data. Liever eerdere pings plus een ochtend-inhhaalgewoonte voor late avonden.",
+          "Vriendenactiviteit-meldingen zijn optionele accountability. Stressen ze je, houd auto-share aan voor je eigen posts maar mute inbound ruis. Accountability vereist niet dat je in een groepsapp leeft."
+        ],
+        "heading": "Stille uren en sociale ruis"
+      },
+      {
+        "body": [
+          "Genegeerde herinneringen betekenen dat de cue verkeerd is, niet dat jij kapot bent. Verplaats de tijd, verkort de copy in je hoofd («open FAB, foto diner»), of wissel van kanaal. Een mislukte cue harder herhalen werkt zelden.",
+          "Koppel de herinnering aan een omgevingsprikkel: telefoon op het aanrecht tijdens koken, of een sticky note op de airfryer. Digitale cues blijven beter hangen als een fysieke cue meedoet."
+        ],
+        "heading": "Wat te doen als je pings negeert"
+      },
+      {
+        "body": [
+          "Miste je diner, log de volgende ochtend een eerlijke schatting in plaats van een gat te laten. Gaten slopen weekgemiddelden meer dan late, onvolmaakte entries. Gebruik foto als er restjes zijn; beschrijf anders wat je je herinnert en bias oliën omhoog.",
+          "Vermijd «ik log de hele dag zondag». Batchreconstructie is fictiegevoelig. Dezelfde dag of de volgende ochtend wint van weekendmythologie."
+        ],
+        "heading": "Bijwerken zonder geschiedenis te herschrijven"
+      },
+      {
+        "body": [
+          "Herinneringen moeten het systeem dienen: ringen gevuld met echt voedsel, Progress dat de week weerspiegelt. Streakpaniek die je nep-salades laat loggen is erger dan een gemiste dag die je eerlijk corrigeert.",
+          "Stress streak-taal je, negeer het en beoordeel succes op wekelijkse compleetheid. Meldingen zijn tools voor compleetheid, geen perfectiontheater."
+        ],
+        "heading": "Streaks versus systemen"
+      },
+      {
+        "body": [
+          "Tijdzones en vakantiemaaltijden breken statische herinneringsklokken. Retarget pings tijdelijk naar lokaal diner, of pauzeer en steun op Quick Log wanneer je gaat zitten eten. Een herinnering in de verkeerde tijdzone is spam met een logo.",
+          "Terug thuis: herstel de oude ankers meteen. Reizen is een veelvoorkomende manier waarop meldingshygiëne permanent vervalt."
+        ],
+        "heading": "Reizen en roosterwisselingen"
+      },
+      {
+        "body": [
+          "Configureer logherinneringen en meldingsvoorkeuren zodat de ping landt wanneer je de Quick Log FAB kunt openen en binnen een minuut klaar bent — Snap Track-foto voor rommelige borden, beschrijven voor bekende maaltijden, drankmodus voor de latte die je altijd vergeet.",
+          "Premium AI-vastlegging blijft achter Premium; herinneringen vervangen het niet. Ze zorgen er alleen voor dat je de tool opent die Home-ringen eerlijk houdt."
+        ],
+        "heading": "Waar IGNITE AI-herinneringen in de loop passen"
+      },
+      {
+        "body": [
+          "Houd herinneringen schaars, getimed op echte maaltijden, en gekoppeld aan een snelle logactie. Zet alles uit dat nooit een dagboekentry oplevert.",
+          "Gebruik IGNITE AI-meldingsvoorkeuren als adherence-infrastructuur — laat Snap Track of Quick Log de klus dan afmaken voordat de avond verdwijnt."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "feature-request-bug-report-ignite",
+    "title": "Hoe featureverzoeken en bugrapporten werken in IGNITE AI",
+    "date": "2026-08-29",
+    "description": "Hoe je nuttige featureverzoeken en bugrapporten stuurt in IGNITE AI — welke details engineering helpen, wat je overslaat, en waarom in-app-rapporten vage store-reviews verslaan wanneer loggen ’s nachts stukgaat.",
+    "sections": [
+      {
+        "body": [
+          "Productteams kunnen niet fiksen wat ze niet kunnen reproduceren. Een één-sterrenreview die «AI zuigt» zegt, leert niets; een strak bugrapport met device, stappen en een screenshot van de kapotte schatting wel. IGNITE AI heeft in-app-paden voor featureverzoeken en bugrapporten zodat echte logpijn de mensen bereikt die de app shippen.",
+          "De beste feedback komt meestal van mensen midden in de workflow: camera die faalt op een donker bord, barcode-mismatch in het schap, een Friends-share die niet postte. Die context is goud. In-app vastleggen wint van hopen dat een social comment de juiste inbox vindt.",
+          "Deze gids laat zien hoe je rapporten schrijft die tractie krijgen, hoe je bugs van smaakvoorkeuren scheidt, en hoe je features vraagt zonder een tweede productroadmap te schrijven. Het is geen belofte dat elk idee shipped."
+        ]
+      },
+      {
+        "body": [
+          "Een bug is iets dat kapot is ten opzichte van verwacht gedrag: crash, blanco scherm, verkeerde save, syncfout, UI die je vasthoudt. Een featureverzoek is iets nieuws of verbeterds: nóg een export, een slimmere default, een workflow-snelkoppeling.",
+          "Verkeerd labelen vertraagt triage. Als Snap Track de verkeerde maaltijd opsloeg nadat je bewerkingen bevestigde, is dat een bug. Wens je dat de editor een one-tap «voeg eetlepel olie toe» had, dan is dat een featureverzoek — ook al voelt het urgent."
+        ],
+        "heading": "Bug versus feature: label het eerlijk"
+      },
+      {
+        "body": [
+          "Vermeld wat je deed, wat je verwachtte, wat er gebeurde, en of het herhaalt. Voeg OS-versie, appversie indien zichtbaar, en de schermnaam toe. Voeg een screenshot of schermopname toe wanneer privacy het toelaat — blur calorieën desnoods, houd de error-chrome zichtbaar.",
+          "Noteer timing: vlak na een update, op wifi versus mobiel, na lange achtergrond. Intermittente bugs hebben frequentie nodig («3 van 10 fotologs»). Vage woede zonder stappen wordt geparkeerd; precieze rapporten komen in de queue."
+        ],
+        "heading": "Het minimale bruikbare bugrapport"
+      },
+      {
+        "body": [
+          "Bij Snap Track-problemen: zeg welke modus — maaltijdfoto, etiket, barcode, drank, of beschrijven/voice-achtige input. Vermeld belichting, of je bewerkte vóór bevestigen, en of de foute data pas na opslaan verscheen.",
+          "Bij barcodes: merk en productnaam, en of het fysieke etiket afwijkt. Databasemismatches zijn vaak fixbaar als de productidentiteit helder is — niet wanneer het rapport alleen «scan fout» zegt."
+        ],
+        "heading": "Foto- en scanproblemen reproduceren"
+      },
+      {
+        "body": [
+          "Stel de te doen taak in één zin: «Ik moet dezelfde meal-prepbox vijf dagen herloggen zonder hem opnieuw te bouwen.» Beschrijf daarna je huidige workaround en waarom die faalt. Sla mock-UI-colleges over tenzij je een écht doodlopend pad illustreert.",
+          "Prioriteer met jouw week, niet de wishlist van internet. Verzoeken gekoppeld aan adherence — snellere bewerkingen, duidelijkere porties, coach-exports — doen er meestal meer toe dan cosmetische thema’s."
+        ],
+        "heading": "Featureverzoeken schrijven die de review overleven"
+      },
+      {
+        "body": [
+          "Plak geen wachtwoorden, herstelcodes of volledige betaalgegevens. Neem geen privémaaltijden van anderen uit een Friend-feed op. Dreig niet; het versnelt triage niet en kan de thread laten negeren.",
+          "Vermijd tien losse issues in één blob. Splits crashes van wishlist-items zodat elk onafhankelijk kan sluiten."
+        ],
+        "heading": "Wat je niet in een rapport zet"
+      },
+      {
+        "body": [
+          "Store-reviews beïnvloeden downloads; ze zijn een slechte bugdatabase. Gebruik ze voor hoog-niveau-sentiment nádat je al een reproduceerbaar rapport in-app hebt ingediend. Review je alleen, dan ziet engineering misschien nooit het stack-trace-pad dat je om 22:00 raakte.",
+          "Als support follow-upt, antwoord één keer met dezelfde structuur. De originele stappen herhalen wint van de roman elke keer herschrijven."
+        ],
+        "heading": "Store-reviews versus in-app-kanalen"
+      },
+      {
+        "body": [
+          "Vision-loggen, etiket-OCR en social sharing falen van nature in edge cases. Veldrapporten uit echte keukens en gyms leren meer dan labdemo’s. Jouw saaie edge case — stoom op de lens, glanzende takeout, multipack yoghurt — kan de fix van morgen zijn.",
+          "Dat betekent niet dat elk verzoek de volgende sprint shipped. Het betekent dat hoogwaardig signaal compoundt. Laagwaardige ruis vertraagt iedereen, inclusief de features die jij écht wilt."
+        ],
+        "heading": "Hoe feedback een foto-first app vormt"
+      },
+      {
+        "body": [
+          "Gebruik de in-app featureverzoek- en bugrapportflows vanuit Profile of help-oppervlakken zodat metadata met het ticket mee kan. Blijf loggen met Snap Track terwijl je wacht; workarounds zoals beschrijven of opgeslagen maaltijden deblokkeren de dag vaak zelfs als een camerapad zich misdraagt.",
+          "Premium-gebruikers die AI-vastleggingbugs raken, moeten dat zeggen — die paden zijn compute-zwaar en waarderen precieze rapporten. Eerlijkheid over Premium-gates in feedback helpt ook: «onverwacht achter paywall geblokkeerd» is iets anders dan «schatting fout nadat ik betaalde»."
+        ],
+        "heading": "Waar IGNITE AI het signaal wil"
+      },
+      {
+        "body": [
+          "Goede rapporten zijn kort, reproduceerbaar en gelabeld als bug of verzoek. Screenshots en modusnamen verslaan vage één-sterrenessays.",
+          "Gaat iets stuk midden in een log, dien het in via de in-app-kanalen van IGNITE AI met stappen — houd het dagboek daarna in beweging met een fallback-vastlegpad terwijl het team jouw signaal gebruikt."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "summary-report-for-online-coaches",
+    "title": "Stuur je IGNITE AI-samenvattingsrapport naar een online coach",
+    "date": "2026-08-29",
+    "description": "Hoe je een IGNITE AI-samenvattingsrapport naar een online coach stuurt — wat in een coach-klaar artefact hoort, welke screenshots je overslaat, en hoe weektrends chaotische dagboekfotomappen elke keer verslaan.",
+    "sections": [
+      {
+        "body": [
+          "Online coaches hebben geen veertig gecropte screenshots van willekeurige dagen nodig. Ze hebben een samenhangend verhaal nodig: innametrends, proteïneconsistentie, trainingsbelasting, gewichtsrichting, en de weekenden die vetverlies écht beslissen. Samenvattingsrapporten bestaan om dat verhaal te verpakken uit de logs die je al bijhoudt.",
+          "Atleten ondercommuniceren vaak met chaos of overcommuniceren met ruis. Een schoon rapport respecteert beide kanten: jij stopt met slidecks om middernacht; je coach stopt met je leven reverse-engineeren uit wazige Home-schermen.",
+          "Deze gids dekt wat je opneemt, wat je weglaat, hoe vaak je stuurt, en hoe IGNITE AI-samenvattingsrapporten in een remote coachingloop passen. Het vervangt het professionele oordeel van een coach of klinische zorg niet."
+        ]
+      },
+      {
+        "body": [
+          "De meeste aanpassingen gaan over gemiddelden en adherence: Haal je proteïne? Ligt het weekgemiddelde calorieën bij het plan? Matchen stappen en training de cut of bulk? Sloopte reizen vier dagen?",
+          "Eén heroïsche tekort-dag na drie blanco avonden misleidt iedereen. Rapporten moeten compleetheid en centrale tendens benadrukken, niet je beste dinsdag."
+        ],
+        "heading": "Waar coaches écht op beslissen vanuit data"
+      },
+      {
+        "body": [
+          "Garbage in, garbage out. Ontbreken oliën, dranken en gedeelde borden, oogt de samenvatting «perfect» terwijl de weegschaal oneens is. Besteed de week aan loggen met bewerkbare vastlegging — fotoconcepten plus correcties — voordat je in mooiere exports investeert.",
+          "Opgeslagen staples en meal-prep-herhalingen maken coachweken vergelijkbaar. Is maandag–vrijdag-voedsel dezelfde bak, dan worden trendlijnen interpreteerbaar."
+        ],
+        "heading": "Bouw het rapport eerst uit echte logs"
+      },
+      {
+        "body": [
+          "Neem wekelijkse calorie- en macogemiddelden op, gewichtstrend als je die trackt, trainingssamenvatting, en een korte noot over anomalieën: bruiloft, ziekte, slaapcrash, medicatiewijzigingen die je wilt delen. Flag verdacht onderloggen eerlijk.",
+          "Optionele extra’s: slaap- of stappencontext uit Health als jij en je coach die gebruiken, plus één of twee representatieve maaltijdfoto’s voor portiekalibratie — geen volledige camerarol."
+        ],
+        "heading": "Wat in een coach-klaar pakket hoort"
+      },
+      {
+        "body": [
+          "Sla minuut-tot-minuut play-by-plays over, moreel commentaar, en screenshots van irrelevante app-instellingen. Sla posts van andere mensen in Friend-groepen over. Sla betaal- of accountschermen over.",
+          "Stuur geen ruwe exports van elk micronutriëntveld tenzij je coach ernaar vroeg. Overweldiging creëert genegeerde e-mailthreads."
+        ],
+        "heading": "Wat je weglaat"
+      },
+      {
+        "body": [
+          "Spreek een zondag- of maandagverzending af. Dezelfde cadans traint jou om de week af te ronden en traint je coach om op schema te reageren. Midweeke paniekteksten met drie foto’s zijn voor noodgevallen, niet voor routine.",
+          "Mis je een week, zeg dat en stuur een deelrapport met gelabelde gaten. Compleetheid veinzen is hoe programma’s een maand ongemerkt stilvallen."
+        ],
+        "heading": "Cadans: wekelijks wint van willekeurige dumps"
+      },
+      {
+        "body": [
+          "Vraag je coach welke hefbomen ze veranderen: calorieën, proteïne, stappen of training — niet alles tegelijk. Gebruik de volgende week om één primaire wijziging te testen zodat het volgende rapport signaal kan tonen.",
+          "Zijn rapport en weegschaal oneens, audit dranken, weekenden en portiebewerkingen voordat je een steilere cut eist. Coaches kunnen ontbrekende pindakaas niet wegprogrammeren."
+        ],
+        "heading": "Het rapport samen lezen"
+      },
+      {
+        "body": [
+          "Deel alleen wat je coachingovereenkomst dekt. Je kunt locaties blurren of sociale identifiers van Share Cards halen. Houd medische diagnosdetails in het kanaal dat je coach aangeeft.",
+          "Wissel je van coach, trek toegangspatronen in en stop met automatische artefacts sturen. Dataportabiliteit mag geen per ongeluk surveillance worden."
+        ],
+        "heading": "Privacy en professionele grenzen"
+      },
+      {
+        "body": [
+          "Genereer het samenvattingsrapport uit het dagboek dat je al bijhoudt in IGNITE AI — Home-ringen, Progress-trends, Exercise-logs — zodat het coach-artefact de werkelijkheid matcht in plaats van een aparte spreadsheet die je verlaat.",
+          "Premium Snap Track verbetert de onderliggende maaltijdkwaliteit die rapporten betrouwbaar maakt. De export is alleen zo goed als de bevestigde logs van de week; behandel vastleggingskwaliteit als onderdeel van coachinghygiëne."
+        ],
+        "heading": "Waar IGNITE AI-samenvattingsrapporten passen"
+      },
+      {
+        "body": [
+          "Coach-klare communicatie is een wekelijks trendverhaal, geen screenshotstapel. Log eerlijk, vat schoon samen, stuur op cadans, en verander één hefboom tegelijk.",
+          "Gebruik IGNITE AI-samenvattingsrapporten om chaos te vervangen door één artefact — zodat remote coachingtijd naar beslissingen gaat, niet naar archeologie."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "appearance-modes-adherence-ignite",
+    "title": "Waarom weergavemodi in IGNITE AI bepalen of je de app opent",
+    "date": "2026-08-29",
+    "description": "Waarom weergavemodi in IGNITE AI bepalen of je de app opent — licht versus donker comfort, laat-avond loggen, koppelen aan eenheden en taal, en adherence als UX-probleem, niet alleen een mindsetprobleem.",
+    "sections": [
+      {
+        "body": [
+          "Doet de UI pijn aan je ogen om 23:00, dan sla je over. Mensen noemen dat een disciplinefalen; vaak is het een weergavefalen. IGNITE AI Preferences laten je licht, donker of systeemvolgend kiezen zodat het dagboek iets is dat je ná een lange dag nog opent.",
+          "Weergave vervangt geen Snap Track-bewerkingen of proteïnetargets. Het haalt wel een belachelijke reden weg om de app te sluiten voordat het log bestaat.",
+          "Behandel chrome als onderdeel van adherence-ontwerp — dezelfde categorie als eenheden, taal en herinneringstiming."
+        ]
+      },
+      {
+        "body": [
+          "Veel gebruikers ronden dinerlogs af in bed of op de bank in een donkere kamer. Een fel licht thema voelt als een zaklamp in je gezicht. Donkere modi verminderen die flinch.",
+          "Ploegendienstwerkers en ouders op nachtelijke voedingen krijgen hetzelfde voordeel. Comfort is geen ijdelheid; het is vastleggingsverzekering."
+        ],
+        "heading": "Laat-avond loggen is gebruikelijk"
+      },
+      {
+        "body": [
+          "Log je elke maaltijd om twaalf uur op kantoor, dan kan lichtmodus helderder aanvoelen. Is je kritische maaltijd laat, optimaliseer voor dát moment — het moment dat je historisch overslaat.",
+          "Systeemvolgende weergave kan werken als je telefoon al bij zonsondergang wisselt. Handmatig donker is beter als de systeemtiming niet met je maaltijden klopt."
+        ],
+        "heading": "Stem het thema af op wanneer je logt"
+      },
+      {
+        "body": [
+          "Bevestig bij het kiezen van een thema ook taal en metrisch/imperiale eenheden. Een comfortabele donkere UI die nog het verkeerde meetsysteem toont, lost maar de helft van de wrijving op.",
+          "Reizen en campusleven zijn goede momenten om alle drie opnieuw te checken."
+        ],
+        "heading": "Koppel weergave aan eenheden en taal"
+      },
+      {
+        "body": [
+          "Snap Track-reviewschermen, Diet planner, AI Lab en Progress-charts moeten in je gekozen modus leesbaar zijn. Voelt contrast fout, wissel van thema in plaats van AI-vastlegging op te geven.",
+          "Het product is serieus over loggen; flexibele chrome hoort bij die ernst."
+        ],
+        "heading": "Premium-tools verdienen leesbare chrome"
+      },
+      {
+        "body": [
+          "Share Cards hebben eigen thema’s voor export. Je in-app-weergave hoeft niet bij je Instagram-esthetiek te passen — maar creators die tutorials filmen willen soms een consistent look op camera.",
+          "Eis nooit dat volgers jouw thema gebruiken. Leer Preferences in plaats daarvan."
+        ],
+        "heading": "Social posten en Share Cards"
+      },
+      {
+        "body": [
+          "Friends-chat of vastentools ’s nachts openen mag ook geen lichtbombardement zijn. App-brede weergave houdt die oppervlakken comfortabel.",
+          "Wekken meldingen je, fix meldingsinstellingen apart — thema alleen lost slaaphygiëne niet op."
+        ],
+        "heading": "Friends, vasten en nachtelijke UI"
+      },
+      {
+        "body": [
+          "Kies een modus, leef er een week mee, en laat het daarna met rust. Eindeloos thema-hoppen is uitstelgedrag verkleed als productiviteit.",
+          "Herzie alleen wanneer seizoenen, reizen of ploegenwissel de oude keuze fout maken."
+        ],
+        "heading": "Wanneer je moet stoppen met knutselen"
+      },
+      {
+        "body": [
+          "Maak IGNITE AI prettig om naar te kijken; het harde deel is dan alleen diner. Weergavemodi zijn adherence-tools — vooral voor late logs — geen cosmetische nagedachte.",
+          "Zet donker of licht bewust naast taal en eenheden, laat Snap Track en Progress daarna het werk dragen. Serieus loggen verdient flexibele chrome."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "rollover-calories-week-examples",
+    "title": "Hoe calorie-rollover van week tot week werkt (met voorbeelden)",
+    "date": "2026-08-29",
+    "description": "Hoe calorie-rollover van week tot week werkt in IGNITE AI — met concrete voorbeelden voor ongelijke sociale weekenden, wanneer banken adherence helpt, en wanneer rollover een excuus wordt voor blanco of oneerlijke logs.",
+    "sections": [
+      {
+        "body": [
+          "Calorietargets zijn dagelijks voor gemak en wekelijks voor fysiologie. Het leven is geen vlakke lijn: bruiloften, reizen en zware trainingsdagen buigen inname. Rollover-voorkeuren bestaan om ongebruikte calorieën over dagen te verplaatsen zodat een zwaardere zaterdag geen nepwiskunde of stil ondervoeden van maandag tot vrijdag vereist.",
+          "Rollover is geen cheatcode-printer. Ontbreken doordeweekse logs, is er niets eerlijks om te banken. «Rolt» elke dag naar onbeperkte avonden, heb je simpelweg een ongecontroleerd surplus heruitgevonden met extra stappen.",
+          "Hieronder gewone voorbeelden van wanneer rollover helpt, wanneer het schaadt, en hoe je de week in Progress leest in plaats van te onderhandelen met één avond. Pas alleen voorkeuren aan die je begrijpt; dit is geen gepersonaliseerde medische voedingstherapie."
+        ]
+      },
+      {
+        "body": [
+          "Strikte dagelijkse caps straffen sociale realiteit en belonen mensen van wie de agenda nooit verandert. Rollover laat een schoon doordeweeks onderschot een geplande zwaardere maaltijd financieren zonder het wekelijkse energiebudget op te geven.",
+          "De psychologische winst telt ook: geplande flexibiliteit vermindert de binge-restrictlus die begint met «ik heb de dag al verpest». Geplande uitgave is niet hetzelfde als ongelogde chaos."
+        ],
+        "heading": "Wat rollover probeert op te lossen"
+      },
+      {
+        "body": [
+          "Stel dat je target 2.200 kcal is. Je eet ongeveer 2.000 op maandag–vrijdag met complete logs — ruwweg 1.000 kcal gebankt als je rollover-regels het toelaten. Zaterdagdiner kan een stevige restaurantmaaltijd opvangen terwijl het weekgemiddelde het plan nog volgt.",
+          "Dit werkt alleen als maandag–vrijdag-entries echt zijn. Salades fotograferen die je niet oplat, of oliën overslaan, fabriceert een bank die nooit bestond. Rollover versterkt eerlijkheid; het versterkt ook fictie."
+        ],
+        "heading": "Voorbeeld A: bank doordeweeks voor zaterdagdiner"
+      },
+      {
+        "body": [
+          "Sommige atleten willen iets hogere inname rond keusessies. Rollover kan calorieën naar donderdagdiner en vrijdagontbijt schuiven, en lichter draaien op een rustzondag. Het dagboek moet nog steeds tonen dat proteïne hoog blijft op trainingsdagen.",
+          "Is Exercise-loggen actief, beoordeel de week op voedsel plus trainingscontext — niet door te doen alsof verbrande calorieën gratis onbeperkte toppings zijn. Houd rollover-regels conservatief genoeg dat «eet alles terug» nooit het stille beleid wordt."
+        ],
+        "heading": "Voorbeeld B: zware training donderdag, lichter vrijdag"
+      },
+      {
+        "body": [
+          "Je onderschiet door drie dagen lunch te vergeten, «bankt» fantoomcalorieën, blaast dan zaterdag op en vraagt je af waarom gewicht omhoog trendt. Dat is geen flexibel diëten; dat is ontbrekende data plus een feestelijk surplus.",
+          "Een andere faalmodus: oneindig vooruitrollen zonder weekreview. Flexibiliteit heeft een container nodig. Toont Progress drie weken een oplopend weekgemiddelde, strak rollover aan of keer tijdelijk terug naar vlakkere dagelijkse targets."
+        ],
+        "heading": "Voorbeeld C: wanneer rollover een excuus wordt"
+      },
+      {
+        "body": [
+          "Eis complete logs voordat je de bank vertrouwt. Cap hoeveel er per dag mag schuiven als de productinstellingen limieten toelaten. Houd proteïnefloors intact — flexibiliteit moet vooral in koolhydraten en vetten rond sociale maaltijden leven.",
+          "Beslis de zware maaltijd van tevoren wanneer het kan. Pre-commitment maakt rollover tot een plan; achteraf rationaliseren maakt het tot toestemming ná de schade."
+        ],
+        "heading": "Vangrails die flexibiliteit eerlijk houden"
+      },
+      {
+        "body": [
+          "Rollover wordt vaak uitgegeven aan diner plus drankjes. Log alcohol in drankmodus en voedsel met fotobewerkingen zodat de «bank» de werkelijkheid onder ogen ziet. Vloeibare calorieën zijn waar flexibele plannen stilletjes sterven.",
+          "Zijn avonden uit wekelijks, bouw ze expres in het gemiddelde. Een systeem dat kloosterdagen en chaoszaterdagen aanneemt, voelt altijd kapot."
+        ],
+        "heading": "Weekenden, alcohol en vloeibare calorieën"
+      },
+      {
+        "body": [
+          "Open Progress en kijk naar het weekgemiddelde, niet de luidste dag. Vraag: Verminderde rollover stress zonder het gemiddelde voorbij het doel te tillen? Hield proteïne stand? Waren logs compleet?",
+          "Zo ja, houd de voorkeur. Zo nee, verminder flexibiliteit twee weken en herbouw de gewoonte van dezelfde-dag-loggen voordat je banken weer ontgrendelt."
+        ],
+        "heading": "Hoe je rollover op maandag reviewt"
+      },
+      {
+        "body": [
+          "Gebruik IGNITE AI calorie-rollover-voorkeuren als een bewuste weektool, en voed ze met eerlijke Snap Track- en Quick Log-entries. Lege dagen kunnen geen echte diners financieren — alleen complete dagboeken kunnen dat.",
+          "Premium AI-vastlegging helpt de eerlijkheidslaag op gemengde restaurantborden; rollover zonder bewerkbaar loggen is alleen een zachtere manier om te gokken. Koppel voorkeuren aan Progress-reviews zodat de feature een stuurwiel blijft, geen verhaal dat je jezelf vertelt."
+        ],
+        "heading": "Waar IGNITE AI-voorkeuren passen"
+      },
+      {
+        "body": [
+          "Rollover maakt ongelijke weken glad wanneer doordeweekse logs compleet zijn en het weekgemiddelde intentioneel blijft. Het faalt wanneer het blanco dagen of onbegrensde weekenden witwast.",
+          "Bank expres, geef expres uit, review op maandag in IGNITE AI Progress — en behandel rollover als flexibel budgetteren, niet als een loophole-machine."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "add-burned-calories-on-vs-off",
+    "title": "Moet je verbrande calorieën terugtellen in IGNITE AI?",
+    "date": "2026-08-30",
+    "description": "Wanneer je «verbrande calorieën toevoegen» inschakelt in IGNITE AI — vetverliesfases versus high-output training, wearable-overschatting, Health-sync-kanttekeningen, en hoe je de instelling beoordeelt met Progress-gemiddelden.",
+    "sections": [
+      {
+        "body": [
+          "Weinig voorkeurstoggles starten meer ruzie dan verbrande calorieën terugtellen naar je dagbudget. Sommige atleten hebben de flexibiliteit nodig; veel vetverliesfases stagneren stilletjes omdat horloges honderden bonus-kcal verzinnen. IGNITE AI predikt geen enkele religie — het laat je kiezen of workout-verbranding targets aanpast.",
+          "Wearables en Health Connect- / Apple Health-syncs kunnen activiteitsdata voeden. Dat gemak is niet hetzelfde als metabolische waarheid. Overschatting is gebruikelijk; onderschatting gebeurt ook. Je weegschaaltrends en Progress-energiegemiddelden zijn de scheidsrechter.",
+          "Deze gids helpt je on versus off te kiezen voor een afgebakende fase, het twee weken te draaien, en met data te beslissen in plaats van gymforumdogma."
+        ]
+      },
+      {
+        "body": [
+          "Wanneer ingeschakeld kan gelogde of gesyncte trainingsenergie verhogen wat je die dag mag eten. Wanneer uitgeschakeld blijven voedingstargets verankerd aan je geplande inname, ongeacht optimistische verbranding.",
+          "Geen van beide modi vervangt het bewerken van voedingslogs. Olie die je vergat telt nog steeds meer dan een vijf-minuten-ruzie over horlogecredits."
+        ],
+        "heading": "Wat de instelling écht verandert"
+      },
+      {
+        "body": [
+          "Is het doel een tekort, doen veel mensen het beter met verbrande calorieën uit. Je traint voor prestatie en gezondheid; je eet niet automatisch de verbeelding van het horloge.",
+          "Kies je voor aan, verlaag verbranding mentaal of log sessies licht tot Progress toont dat de combinatie weekgemiddelden nog de goede kant op beweegt."
+        ],
+        "heading": "Vetverliesfases: standaard uit of mentaal verlagen"
+      },
+      {
+        "body": [
+          "Atleten in zware blokken of mensen die onderhouden op hoge NEAT hebben soms add-back nodig om onderfueling te vermijden. Aan kan rationeel zijn wanneer trainingsvolume echt is en eetlust achterblijft.",
+          "Verifieer nog steeds met lichaamsgewichttrends, energie in sessies, en Progress — niet met één hongersignaal na de workout."
+        ],
+        "heading": "High-output atleten en onderhoud"
+      },
+      {
+        "body": [
+          "Onrustige slaap, autovibraties mislezen als stappen, en genereuze krachttrainingsschattingen creëren fantoombudget. Ogen weekenden «verdiend» ondanks sedentaire brunchdagen, is argwaan terecht.",
+          "Cross-check Exercise-logs die je handmatig vertrouwt tegen automatische credits. Liever helderheid dan dubbeltellen."
+        ],
+        "heading": "Wearable-inflatiepatronen om in de gaten te houden"
+      },
+      {
+        "body": [
+          "Kies één instelling. Houd voedingslogkwaliteit constant — inclusief Snap Track-bewerkingen. Verander proteïnetargets niet midden in de test. Weeg onder vergelijkbare omstandigheden.",
+          "Lees Progress-energiegemiddelden op dag veertien. Stagneerde gewicht terwijl inname hoog oogt met burn-aan, flip uit en hertest. Crashte prestatie met burn-uit, heroverweeg aan of verhoog geplande inname expres."
+        ],
+        "heading": "Hoe je een schone twee-weken-test draait"
+      },
+      {
+        "body": [
+          "Daalt training, wordt fantoomverbranding gevaarlijker. Liever uit tot activiteit terugkomt. Update Profile-doelen zodat ringen de werkelijkheid matchen.",
+          "Zie ook herstelloggewoonten: houd het dagboek, vereenvoudig proteïne, sla hero-tekorten over."
+        ],
+        "heading": "Blessure- en lage-activiteituitzonderingen"
+      },
+      {
+        "body": [
+          "Post je workoutcards, onthoud dat volgers jouw burn-filosofie kunnen kopiëren zonder jouw volume te kopiëren. Zeg welke voorkeur je gebruikt wanneer je lesgeeft.",
+          "Creators moeten niet impliceren dat IGNITE AI eat-back afdwingt. Het product biedt een keuze — nauwkeurigheid in content bouwt vertrouwen."
+        ],
+        "heading": "Share Cards en sociale context"
+      },
+      {
+        "body": [
+          "Verbrande calorieën aan voor high-output fueling wanneer Progress instemt; houd het uit voor veel vetverliesfases om wearable-theater te vermijden. IGNITE AI laat je kiezen in plaats van te prediken.",
+          "Kies een regel, draai twee eerlijke weken met Snap Track en Progress, en beoordeel gemiddelden — niet vibes. Herzie de toggle wanneer trainingsvolume of doelen veranderen."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "progress-energy-averages-read-a-stall",
+    "title": "Hoe je energiegemiddelden in IGNITE AI leest wanneer gewicht stagneert",
+    "date": "2026-08-30",
+    "description": "Hoe je Progress-energiegemiddelden in IGNITE AI leest wanneer gewicht stagneert — scheid natriumnuis van écht surplus, check fotolog-eerlijkheid, en verander één hefboom zonder paniekkappen.",
+    "sections": [
+      {
+        "body": [
+          "Stagnaties zijn niet altijd surplus. Natrium, menstruatievocht, ontsteking, glycogeen, onderrapporterde oliën, of een échte behoefte aan innameverandering kunnen de weegschaal allemaal bevriezen. Paniekkappen van 500 kcal leert ellende vaker dan vetverlies. Progress-energiegemiddelden bestaan zodat je diagnoseert voordat je het plan verbrandt.",
+          "De Progress-tab van IGNITE AI koppelt voedingstrends aan de logkwaliteit die je écht produceerde — vooral wanneer Snap Track-bewerkingen eerlijk waren over dressings en weekenddranken.",
+          "Deze gids is een leesmethode, geen medische work-up. Aanhoudende symptomen of extreem gedrag vragen professionals, geen diepere app-instellingen."
+        ]
+      },
+      {
+        "body": [
+          "Ontbreken drie diners, heb je geen stagnatie — je hebt een datagat. Vul het dagboek zeven complete dagen voordat je targets wijzigt.",
+          "Herzie restaurant- en drankentries. Het «mysterieplateau» is vaak ongelogde gedeelde voorgerechten."
+        ],
+        "heading": "Begin met logcompleetheid"
+      },
+      {
+        "body": [
+          "Vergelijk een rollende week inname met je beoogde target. Eén bruiloftbuffet definieert de fase niet; veertien dagen stil surplus misschien wel.",
+          "Splits doordeweeks versus weekend mentaal. Veel «stagnaties» zijn vrijdag–zondag-gemiddeldeproblemen met een maandagmasker."
+        ],
+        "heading": "Lees energiegemiddelden, niet losse dagen"
+      },
+      {
+        "body": [
+          "Bevestig dat proteïnedagen gehaald worden. Lage proteïne met «prima calorieën» voelt nog steeds als een mislukte cut. Jaag daarna vetten: oliën, notenpasta’s, kaas, romige sauzen — de Snap Track-bewerkingslaag.",
+          "AI Lab kan helpen brainstormen waar verborgen energie in je gebruikelijke maaltijden zit; jij verifieert nog steeds op het bord."
+        ],
+        "heading": "Proteïne- en vetkwaliteitschecks"
+      },
+      {
+        "body": [
+          "Staat verbrande calorieën toevoegen aan, vraag of wearable-credits het tekort op papier uitwisten. Probeer een week uit en vergelijk Progress.",
+          "Stappen kunnen echt zijn; bonus-kcal van onrustige nachten zijn minder heilig. Voorkeuren zijn er om filosofieën te testen."
+        ],
+        "heading": "Verbrande calorieën en Health-sync-verdachten"
+      },
+      {
+        "body": [
+          "Gebruik wekelijks gemiddeld gewicht als je dagelijks weegt. Progress-foto’s helpen wanneer vochtruis emotioneel is. Een vlak gemiddelde van drie weken met complete hoge-inname-logs is een sterker signaal dan een sprong van twee dagen na sushi.",
+          "Cyclusgerelateerde schommelingen verdienen geduld gemeten in weken, niet uren — zonder dat als eeuwig excuus te gebruiken om gemiddelden te negeren."
+        ],
+        "heading": "Weegschaalruis versus echte stagnatie"
+      },
+      {
+        "body": [
+          "Opties: weekendloggen strakker, targetcalorieën bescheiden verlagen, proteïne verhogen, bewuste stappen verhogen, of burn-add-back uitzetten. Kies er één. Herbeoordeel in veertien dagen.",
+          "Diet planner-swaps kunnen energiedichtheid verlagen zonder je hele keuken opnieuw uit te vinden. Extreme cuts na een stagnatie rebounden vaak harder."
+        ],
+        "heading": "Verander maar één hefboom"
+      },
+      {
+        "body": [
+          "Friends-groepen moeten voltooide diagnoseweken vieren, niet dunnere Share Cards eisen. Mute auto-share als publiek bewijs angst spiket.",
+          "Creators die stagnaties uitleggen moeten Progress-schermen eerlijk tonen — geen nep before/after-wetenschap."
+        ],
+        "heading": "Sociale features en stagnatiepsychologie"
+      },
+      {
+        "body": [
+          "Lees energiegemiddelden in IGNITE AI voordat je het plan verbrandt. Complete logs, weekendeerlijkheid, oliebewerkingen en burn-toggle-tests verklaren meer stagnaties dan nóg een crashdieet.",
+          "Gebruik Progress als de bewijsfolder die paniek nooit heeft. Verander één hefboom, geef het twee weken, en houd Snap Track-kwaliteit hoog terwijl de weegschaal een trager verhaal vertelt."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "snap-cook-with-diet-planner-swaps",
+    "title": "Koppel Snap Cook-recepten aan IGNITE AI Diet planner-swaps",
+    "date": "2026-08-30",
+    "description": "Hoe je Snap Cook koppelt aan IGNITE AI Diet planner-swaps — kook van wat je hebt, swap wat je niet kunt kopen, Snap Track wat je opschepte, en houd Premium-planning en koken in één loop.",
+    "sections": [
+      {
+        "body": [
+          "Maaltijdplannen sterven wanneer de koelkast oneens is. De Diet planner zegt zalm; jij hebt eieren en spinazie. De winnende zet is niet structuur opgeven — het is het plan swappen en koken wat er is. IGNITE AI verbindt die taken: Diet planner voor de week, Snap Cook voor recept-richting uit foto’s van ingrediënten, Snap Track voor de opgeschepte waarheid.",
+          "Premium ontgrendelt deze AI-plannings- en kookstack. Het punt is één loop, geen drie abonnementen die nooit praten.",
+          "Deze gids toont een praktische keukenworkflow voor drukke weken, batch-prep, en «wat ligt er nog in de lade»-avonden."
+        ]
+      },
+      {
+        "body": [
+          "Genereer of open je Diet-plan nadat onboardingdoelen staan. Let op proteïne-ankers per dag. Is een maaltijd onmogelijk, swap voordat je de dag ghost.",
+          "Swaps houden macro-intentie levend wanneer boodschappen falen. Het is geen valsspelen; het is hoe plannen contact met het echte leven overleven."
+        ],
+        "heading": "Begin bij het plan, niet bij vibes"
+      },
+      {
+        "body": [
+          "Fotografeer wat je écht hebt. Snap Cook stelt een werkbare richting voor zodat restjes en rare groente diner worden in plaats van default bezorging.",
+          "Behandel het recept als hulp. Kruiden, voedselveiligheid en allergeenoordeel blijven van jou. Kook daarna."
+        ],
+        "heading": "Snap Cook wanneer ingrediënten de prompt zijn"
+      },
+      {
+        "body": [
+          "Na het koken, Snap Track de opgeschepte maaltijd. Oliën die je in de pan toevoegde tellen nog. Opgeslagen staples vangen wins die je volgende donderdag herhaalt.",
+          "Week het gekookte resultaat hard af van het planner-item, is jouw log de bron van waarheid voor Progress — update mentale notities voor het plan van volgende week."
+        ],
+        "heading": "Log het bord, niet de fantasie"
+      },
+      {
+        "body": [
+          "Plan proteïnen en bases in Diet planner, kook een flexibele set met Snap Cook-inspiratie, portioneer, en sla staples op. Doordeweekse avonden worden opwarmen plus een groente — nog steeds gelogd.",
+          "Friends auto-share is optioneel als meal-prep-accountability helpt; stilte is prima als je alleen de keukenloop nodig hebt."
+        ],
+        "heading": "Batch-prep-zondagen"
+      },
+      {
+        "body": [
+          "Swap de plannermaaltijd mentaal naar «uit», en fotolog daarna het restaurantbord. Doe niet alsof de zalmkom is gebeurd.",
+          "Weekendstrategieën blijven gelden: dranken, oliën, gedeelde borden. De planner is een gids, geen rechtbanktranscript."
+        ],
+        "heading": "Restaurantavonden in een plannerweek"
+      },
+      {
+        "body": [
+          "Lijken twee swaps gelijk, kan AI Lab helpen opties op hoog niveau te vergelijken. Jij beslist nog en Snap Track nog.",
+          "Besteed medische voedingsbeslissingen niet uit aan chat. De scope blijft lifestyleplanning en loghulp."
+        ],
+        "heading": "AI Lab als tiebreaker"
+      },
+      {
+        "body": [
+          "Filmen van plan → Snap Cook → opgeschepte Share Card is sterke educatieve content. Complimentary Premium via het Creator Program helpt je demo’s zonder paywall-cuts.",
+          "Houd CTA’s accuraat: jaarlijks Premium waar aangeboden via creatorcode — geen verzonnen keukencoupons."
+        ],
+        "heading": "Creators en voedseleducators"
+      },
+      {
+        "body": [
+          "Breekt het plan, houden Snap Cook plus Diet planner-swaps je in beweging binnen IGNITE AI. Kook wat je hebt, swap wat je niet kunt, log wat je at.",
+          "Premium koppelt planning en koken aan Snap Track zodat Progress de werkelijkheid ziet. Die ene loop verslaat een PDF-maaltijdplan en een aparte receptenapp die je dagboek nooit ontmoet."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "calorie-tracker-for-shift-workers",
+    "title": "Beste calorieënteller voor ploegendienst en nachtdiensten",
+    "date": "2026-08-30",
+    "description": "Best practices voor ploegendienstwerkers die calorieën tracken in IGNITE AI — Quick Log om 3:00, Saved staples, flexibele herinneringen, rollover-ideeën, Health-slaapcontext, en Progress-gemiddelden over nachten heen.",
+    "sections": [
+      {
+        "body": [
+          "Nachtdienst sloopt «normale maaltijd»-UI. Ontbijt om 19:00, lunch om 2:00, en een chronobiologische nachtmerrie op de kalender breken elk dagboek dat granen bij zonsopgang aanneemt. Ploegendienstwerkers hebben vastlegging nodig die niet geeft om wat de zon doet.",
+          "IGNITE AI past bij die taak met Quick Log voice en foto, Snap Track voor kantinebakken, Saved staples voor herhaald pauzeruimtevoedsel, Preferences voor weergave, en Progress-gemiddelden die weken beoordelen in plaats van sociaal normale maaltijdtijden.",
+          "Dit is adherence-engineering voor roterende en permanente nachten — geen medisch advies over ploegendienststoornis."
+        ]
+      },
+      {
+        "body": [
+          "Kun je om 3:00 met één hand en slecht tl-licht loggen, log je op makkelijkere tijden ook. Kies foto en voice boven multi-veld-zoeken. Bewerk oliën wanneer het kan; rond de entry hoe dan ook af.",
+          "Donkere weergavemodi verminderen het «fel scherm, sluit de app»-falen na nachtdienst."
+        ],
+        "heading": "Ontwerp het log voor het lelijkste uur"
+      },
+      {
+        "body": [
+          "Dezelfde twee warme maaltijden en één snack herhalen is een feature onder vermoeidheid. Sla ze op. Barcode de verpakte backups in je locker.",
+          "Diet planner kan structuur schetsen voor een rotatie; swaps bestaan wanneer de kantine je verrast. Snap Track nog steeds wat op het blad belandde."
+        ],
+        "heading": "Saved staples verslaan heroïsch koken"
+      },
+      {
+        "body": [
+          "Haal proteïne met voedsel dat je op rare uren écht eet: shakes, yoghurt, eieren, magnetron-lean opties. Quick Log die zonder ceremonie.",
+          "Te weinig proteïne op nachten toont later als ellendig herstel — Progress-trends vangen het als het dagboek compleet is."
+        ],
+        "heading": "Proteïne over ondersteboven-dagen"
+      },
+      {
+        "body": [
+          "Rollover-voorkeuren kunnen helpen wanneer één nacht chaos is en de volgende gecontroleerd — als je ze verdiende met eerlijk loggen, niet creatieve wiskunde. Verbrande-calorie-add-back van onrustige diensten en wearable-verwarring verdient vaak om uit te blijven.",
+          "Test instellingen twee weken op je échte rooster, niet op een hypothetische 9-tot-5."
+        ],
+        "heading": "Rollover en verbrande calorieën op roterende diensten"
+      },
+      {
+        "body": [
+          "Slaapstadia en stappen van Apple Health of Health Connect kunnen ravage verklaren zonder perfectie te eisen. Gebruik ze als context naast voedingsgemiddelden.",
+          "Laat een uitgeputte slaapring geen excuus worden om macro’s helemaal op te geven — of om te bingen als «beloning»."
+        ],
+        "heading": "Health-sync voor context, niet schuld"
+      },
+      {
+        "body": [
+          "Een privé Friends-groep met andere nachtwerkers begrijpt 2:00-maaltijden. Dagploeg-gymflexcultuur misschien niet. Kies accountability die bij je klok past.",
+          "Auto-share optioneel. Vriendelijkheid verplicht."
+        ],
+        "heading": "Friends die het rooster delen"
+      },
+      {
+        "body": [
+          "Log koffiedranken en energy drinks. Ze zijn makkelijk als onzichtbaar te behandelen. Hetzelfde voor de maaltijd die je eet als je thuiskomt «alleen zodat ik kan slapen».",
+          "Helpen vastentools je een eetvenster te zetten dat bij je dienst past, gebruik ze zacht. Verslechteren ze slaap, zet ze uit."
+        ],
+        "heading": "Cafeïne, dranken en «tweede diner»"
+      },
+      {
+        "body": [
+          "Is je klok kapot, mag je logger niet fragiel zijn. IGNITE AI Quick Log en Snap Track werken om 3:00; Saved staples en Progress-gemiddelden overleven roterende weken.",
+          "Zet weergave- en burn/rollover-voorkeuren voor nachtrealiteit, houd Friends optioneel, en beoordeel adherence over het rooster — niet tegen een overdag-maaltijdscript dat je niet leeft."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "macro-app-for-college-dining-hall",
+    "title": "Beste macro-app voor studenten op een mensaplan",
+    "date": "2026-08-30",
+    "description": "Beste macrotracking-aanpak voor studentenantines — Snap Track bladfoto’s, Saved staples voor herhaalstations, Friends-dorm-accountability, en Progress-gemiddelden wanneer barcodes niet bestaan.",
+    "sections": [
+      {
+        "body": [
+          "Mensa’s zijn buffetten met een studentenpas. Barcodes zijn zeldzaam, opscheplepels zijn optimistisch, en laatavond-granen zijn een voedselgroep. Spreadsheetatleten ogen een week gedisciplineerd en verdwijnen dan. Camera-first loggen is hoe campusmacro’s eerlijk blijven.",
+          "IGNITE AI Snap Track is gebouwd voor bladen en kommen: fotografeer, bewerk oliën en gefrituurde randen, bevestig. Saved staples helpen wanneer het grillstation herhaalt. Friends-groepen maken dorm-accountability lichter dan een gedeelde Google Sheet.",
+          "Deze gids neemt een chaotisch mealplan aan, geen privékok. Geen nep campusstudies — alleen workflows die tentamens overleven."
+        ]
+      },
+      {
+        "body": [
+          "Schiet van bovenaf nadat je opschept, voordat je gaat zitten en friet gaat onderhandelen met vrienden. Identificeer eerst proteïne, dan zetmeel, dan vloeistoffen. Bewerk wat je weet dat zwaar is opgeschept.",
+          "Tweede porties tellen als tweede porties. «Ik onthoud het wel» is hoe het weekgemiddelde liegt."
+        ],
+        "heading": "Bladfotoprotocol"
+      },
+      {
+        "body": [
+          "Is maandag’s kip-met-rijst niet te onderscheiden van donderdag’s, sla het op. Barcode verpakte dormsnacks en proteïneshakes zodat late studeersessies niet op geheugen leunen.",
+          "Quick Log voice helpt wanneer je handen vol rugzak en bord zijn — Premium AI-vastlegging verdient zijn plek tijdens spitsuren."
+        ],
+        "heading": "Bouw een campus-staplebibliotheek"
+      },
+      {
+        "body": [
+          "Mensa’s begraven proteïne onder gefrituurde bijgerechten. Default naar eieren, gegrild vlees, yoghurt, bonen en cottage cheese wanneer beschikbaar. Shakes op de kamer vullen gaten zonder nóg een frituurmand.",
+          "Haal proteïne voordat je dessert onderhandelt. Progress toont of «drukke student» een excuus was of een rooster."
+        ],
+        "heading": "Proteïnestrategie op mealplans"
+      },
+      {
+        "body": [
+          "Off-campus pizza-avonden wissen zorgvuldig bladloggen uit. Gebruik dezelfde restaurant-weekendtactieken: snap zoals geserveerd, log dranken, bewerk olie.",
+          "Optionele calorie-rollover alleen als doordeweeks eerlijk was — niet als mythologie die vrijdag om 23:00 verschijnt."
+        ],
+        "heading": "Weekend- en takeoutlekkage"
+      },
+      {
+        "body": [
+          "Maak een privégroep met huisgenoten of teammates. Auto-share maaltijden als het overslaan vermindert; verbied bodyshaming in de regels. Leaderboards zijn optionele tanden, geen vereiste.",
+          "Deel geen logins. Twee accounts, één groep — dezelfde regel als koppels."
+        ],
+        "heading": "Friends-groepen in de dorm"
+      },
+      {
+        "body": [
+          "Log lifts en clubsport in Exercise. Campuslopen kan echt zijn; wearable eat-back verdient tijdens vetverliesfases nog scepticisme. Liever Progress-trends dan horlogetheater.",
+          "Health-sync is prima wanneer beschikbaar op studententelefoons — optioneel, niet moreel."
+        ],
+        "heading": "Training, stappen en verbrande calorieën"
+      },
+      {
+        "body": [
+          "AI-fotologgen is het meest waardevol precies wanneer barcodes verdwijnen. Is het mealplan je hele dieet, kan Premium voor Snap Track goedkoper zijn dan drie keer per semester tracking opgeven.",
+          "Creators op campus moeten Creator Program-codes accuraat gebruiken als ze de app promoten — jaarlijks Premium waar aangeboden, geen verzonnen studentloopholes."
+        ],
+        "heading": "Premium budgetteren op een studentenkalender"
+      },
+      {
+        "body": [
+          "Campusvoedsel is chaotisch. IGNITE AI is een dorm-proof dagboek wanneer je bladen fotografeert, herhalingen opslaat, en Friends optioneel houdt voor accountability.",
+          "Stop met jagen op barcodes die niet bestaan. Snap Track het bord, bescherm proteïne, review Progress door tentamens — en laat mensachaos data worden in plaats van een black-out."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "track-macros-international-travel",
+    "title": "Hoe je macro’s trackt tijdens internationaal reizen",
+    "date": "2026-08-31",
+    "description": "Hoe je macro’s trackt tijdens internationaal reizen — Snap Track voor buitenlandse menu’s, drankloggen, taal- en eenhedenvoorkeuren, en Progress-gemiddelden die jetlag overleven zonder barcodeverslaving.",
+    "sections": [
+      {
+        "body": [
+          "Internationaal reizen breekt barcode-first trackers. Menu’s wisselen van taal, verpakkingen gebruiken andere UPC’s, en hotelontbijten lijken op gedeelde buffetten zonder etiketten. Mensen die macromomentum in het buitenland houden, schakelen over naar foto en beschrijven — en bewerken daarna wat ze weten.",
+          "IGNITE AI is gebouwd voor die modus: Snap Track maaltijdfoto’s, etiketvastlegging wanneer verpakking bestaat, drankbewust loggen, Quick Log voice wanneer je uitgeput bent, en Preferences voor taal plus metrisch/imperiale eenheden voordat je vliegt.",
+          "Dit is praktische reis-hygiëne, geen belofte dat elke schatting een lab matcht. Afgeronde logs verslaan blanco vakantiedagboeken."
+        ]
+      },
+      {
+        "body": [
+          "Wissel eenheden als de bestemming in grammen denkt terwijl jij in ounces denkt — of omgekeerd. Zet taal zodat UI-chrome geen extra wrijving toevoegt wanneer je jetlag hebt.",
+          "Weergave telt ook: donkere modus op nachtvluchten kan het verschil zijn tussen de snack loggen en opgeven."
+        ],
+        "heading": "Zet Preferences voordat je instapt"
+      },
+      {
+        "body": [
+          "Fotografeer zoals geserveerd. Identificeer de dichte items — vlees, rijst, olieschijn, gefrituurde componenten — en bewerk porties. Accepteer dat sauzen schattingen zijn; nog steeds beter dan overslaan.",
+          "Is een gerecht beroemd en herhaalbaar, sla na het eerste goede log een staple op zodat de tweede bestelling op dag vier sneller gaat."
+        ],
+        "heading": "Restaurant- en straatvoedselprotocol"
+      },
+      {
+        "body": [
+          "Bestaat er verpakking, gebruik etiket- of barcodemodi. Regionale catalogusgaten gebeuren — etikettenfoto’s en handmatige bewerkingen zijn het herstelpad, geen rage-quit.",
+          "Minibarnoten en vliegtuigsnoep zijn makkelijk te vergeten en makkelijk te onderloggen. Leg ze hetzelfde uur vast, niet «morgen»."
+        ],
+        "heading": "Etiketten en hotelminibar-realiteit"
+      },
+      {
+        "body": [
+          "Alcohol en gezoete koffiedranken beslissen reissurplus vaker dan brood. Log dranken expres. Helpen vastenvensters je hotelgebak-grazen over te slaan, gebruik ze; sloopt reizen slaap, forceer geen vensters voor esthetiek.",
+          "Waterdoelen op Home blijven ertoe doen in droge cabines en hete steden — simpel, niet performatief."
+        ],
+        "heading": "Dranken, jetlag en vastentools"
+      },
+      {
+        "body": [
+          "Log wandelingen en hotelgymsessies in Exercise wanneer ze gebeuren. Wearable-verbranding kan ruisiger zijn over tijdzones; overweeg verbrande-calorie-add-back conservatief te houden tot je thuis bent.",
+          "Apple Health- of Health Connect-sync is optionele steun — geen vereiste voor een nuttig reisdagboek."
+        ],
+        "heading": "Training en Health-sync onderweg"
+      },
+      {
+        "body": [
+          "Open Progress midden in de trip en bij terugkomst. Energiegemiddelden vertellen of vakantie een gepland surplus was of een per ongeluk black-out. Pas één hefboom aan als je thuiskomt — niet zeven midden in de vlucht.",
+          "Share Cards zijn leuk voor Stories als je creëert; stilte is prima als je alleen een privélog wilt."
+        ],
+        "heading": "Weekgemiddelden verslaan dagelijkse paniek in het buitenland"
+      },
+      {
+        "body": [
+          "Een privégroep kan je eerlijk houden op lange trips. Auto-share alleen als het overslaan vermindert — zet het uit als het performatieve maaltijden creëert.",
+          "Partners die samen reizen houden twee accounts en één Friends-groep, hetzelfde als thuis."
+        ],
+        "heading": "Friends zonder content te forceren"
+      },
+      {
+        "body": [
+          "Trips vereisen geen trackingvakantie. Zet taal en eenheden, foto het bord, log de drank, en review Progress-gemiddelden wanneer je landt.",
+          "IGNITE AI Snap Track reist beter dan barcodeverslaving. Premium AI-vastlegging verdient zijn plek de eerste keer dat een buitenlands menu zoeken doodt — bewerk, sla op, ga door."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "calorie-tracking-after-injury",
+    "title": "Calorietracking na blessure of lage-activiteitweken",
+    "date": "2026-08-31",
+    "description": "Hoe je calorietracking eerlijk houdt na blessure of lage-activiteitweken in IGNITE AI — pas targets aan, herdenk verbrande calorieën, gebruik Progress-foto’s, en bescherm proteïne zonder het log op te geven.",
+    "sections": [
+      {
+        "body": [
+          "Blessureweken breken meer diëten door stilte dan door surplus. Mensen stoppen met loggen omdat training stopte, en verzinnen daarna een comebackplan uit geheugen. De betere zet is stiller: houd het voedingsdagboek, verlaag uitgave-eerlijkheid, en bescherm proteïne terwijl weefsels helen.",
+          "IGNITE AI kan blessures niet diagnosticeren of revalidatie voorschrijven. Het kan ringen, Progress-trends en optionele Health-sync zichtbaar houden terwijl je met een clinicus of fysio aan het échte herstelplan werkt.",
+          "Deze gids is voor tijdelijke lage-activiteitperiodes — verstuikingen, post-op-limieten, gedwongen deloads — niet voor eetstoorniszorg of medische voedingstherapie."
+        ]
+      },
+      {
+        "body": [
+          "Namen onboarding of Profile-doelen vijf zware sessies per week aan, update tempo- en activiteitsaannames wanneer je niet kunt trainen. Een agressief tekort bovenop plotselinge inactiviteit is hoe herstelmaanden ellendig en onhoudbaar voelen.",
+          "Herzie doelen wanneer patronen weken veranderen — niet omdat één zout diner je bang maakte. Continuïteit van loggen telt meer dan vasthouden aan pre-blessure-targets."
+        ],
+        "heading": "Verlaag het verhaal dat je de ringen vertelt"
+      },
+      {
+        "body": [
+          "Wearables verzinnen nog steeds verbranding uit onrustige slaap en mankende boodschappen. Tel je normaal verbrande calorieën terug, overweeg die voorkeur uit te zetten tijdens lage-activiteitfases zodat het budget niet stilletjes opblaast.",
+          "IGNITE AI laat je kiezen of workout-verbranding dagelijkse targets aanpast. Blessureweken zijn een goed moment om de conservatieve instelling te kiezen en later te herbeoordelen."
+        ],
+        "heading": "Verbrande calorieën: draai het theater meestal omlaag"
+      },
+      {
+        "body": [
+          "Heling is geen reden om proteïne op te geven; het is een reden om bronnen te vereenvoudigen. Yoghurt, eieren, shakes, blikvis, tofu — gelogd met Quick Log of barcodes — verslaan uitgebreide meal-prep waar je niet op een zere voet voor kunt koken.",
+          "Snap Track-foto helpt nog voor bezorging en door een partner gekookte borden. Bewerk wat je weet; sla niet over omdat de maaltijd «iemand anders’ keuken» was."
+        ],
+        "heading": "Proteïne en gemak boven hero-koken"
+      },
+      {
+        "body": [
+          "Immobilisatie en ontsteking rommelen met weegschaalgewicht. Progress-foto’s en wekelijkse energiegemiddelden geven je een kalmere map dan dagelijkse wegingen alleen.",
+          "Gebruik Progress om te bevestigen dat je nog consistent logt. Een blanco dagboek plus een enge weegschaal is hoe mensen in chaos rebounden wanneer ze weer mogen trainen."
+        ],
+        "heading": "Progress-foto’s wanneer de weegschaal emotioneel is"
+      },
+      {
+        "body": [
+          "Is je Friends-groep gymflex-zwaar, mute auto-share een tijd of vertel de cirkel dat je in een herstelblok zit. Accountability mag geen PR-content eisen terwijl je een gewricht ijs.",
+          "Een partnergroep die voltooide logs viert — niet alleen lifts — is nuttiger in blessureweken."
+        ],
+        "heading": "Friends zonder prestatiedruk"
+      },
+      {
+        "body": [
+          "Diet planner kan eenvoudiger weken voorstellen wanneer boodschappenenergie laag is. AI Lab kan helpen eiwitrijke makkelijke maaltijden te brainstormen — altijd als hulp, nooit als substituut voor klinisch advies over je blessure.",
+          "Premium ontgrendelt die AI-tools; abonneer je al, gebruik ze voor wrijvingsreductie, niet voor wondergenezingsclaims."
+        ],
+        "heading": "AI Lab en Diet planner als zachte structuur"
+      },
+      {
+        "body": [
+          "Wanneer je weer mag trainen, bouw Exercise-loggen geleidelijk op. Eet niet meteen elke optimistische wearable-calorie terug. Kijk twee weken naar Progress-gemiddelden voordat agressieve cuts hervatten.",
+          "Het dagboek dat de blessure overleefde wordt het dagboek dat de comeback overleeft — als je het nooit hebt opgegeven."
+        ],
+        "heading": "Voorzichtigheid bij terugkeer naar training"
+      },
+      {
+        "body": [
+          "Na blessure: blijf loggen, update targets, en stil meestal verbrande-calorie-add-backs. Bescherm proteïne met makkelijk voedsel en gebruik Progress wanneer de weegschaal ruisig is.",
+          "IGNITE AI blijft nuttig als herstelcompanion voor voedingseerlijkheid — niet als clinicus. Pas Profile-doelen aan, leun op Quick Log en Snap Track, en keer terug naar training met gemiddelden, niet ego."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "couples-tracking-friends-groups",
+    "title": "Hoe koppels samen tracken in IGNITE AI zonder logins te delen",
+    "date": "2026-08-31",
+    "description": "Hoe koppels samen tracken in IGNITE AI zonder logins te delen — privé Friends-groepen, optionele auto-share van maaltijden en workouts, chat, en grenzen die twee dagboeken intact houden.",
+    "sections": [
+      {
+        "body": [
+          "Koppels die één login delen, delen uiteindelijk één ruzie: wiens doelen, wiens historie, wiens Premium, wiens gênante snack om 1:00. Het antwoord van IGNITE AI is twee accounts en één privé Friends-groep — gedeeld bewijs zonder samengevoegde dagboeken.",
+          "Friends en privégroepen (Groups Room) ondersteunen feeds, reacties, chat en optionele auto-share na maaltijden of training. Iedereen bezit nog targets, Progress en voorkeuren.",
+          "Deze gids is voor partners die accountability met vriendelijkheid willen — geen surveillance-cosplay of publieke leaderboardvernedering."
+        ]
+      },
+      {
+        "body": [
+          "Macro’s, lichaamsgewicht en Premium-rechten zijn persoonlijk. Credentials delen breekt securityhygiëne en corrumpeert onboardingaannames. Het maakt breaks of privacybehoeften ook onnodig rommelig.",
+          "Koop of trial Premium per persoon waar nodig. Behandel één abonnement niet als huishoudlogin tenzij het product uitdrukkelijk family plans ondersteunt — en de fair-use-regels van IGNITE AI zijn geen multi-user-deelschema."
+        ],
+        "heading": "Waarom aparte accounts ertoe doen"
+      },
+      {
+        "body": [
+          "Maak een kleine Friends-groep, nodig alleen elkaar uit (of voeg een vertrouwde derde toe voor een triad-challenge). Spreek af wat auto-sharet: diners, workouts, geen van beide, of beide.",
+          "Pin een éénregelregel: geen cijfers bespotten, geen diagnosticeren, vier voltooide logs. Toon is een feature."
+        ],
+        "heading": "Zet een privé koppelsgroep op"
+      },
+      {
+        "body": [
+          "Share Cards en feedposts zijn optioneel bewijs. Gewichtscijfers, medische notities en binge-contextmaaltijden kunnen privé blijven zelfs in een koppelsgroep als een van beide partners dat wil.",
+          "Vraag voordat je het bord van je partner naar Instagram resharet. In-app-toestemming is niet hetzelfde als publieke toestemming."
+        ],
+        "heading": "Wat je deelt versus wat je stil houdt"
+      },
+      {
+        "body": [
+          "De ene partner in een cut en de andere in onderhoud is normaal. Friends vereist geen matchende ringen. Cheer adherence, niet identieke calorieën.",
+          "Gebruik Diet planner onafhankelijk. Samen koken kan nog twee Snap Track-logs uit dezelfde pan betekenen met verschillende porties."
+        ],
+        "heading": "Andere doelen, dezelfde app"
+      },
+      {
+        "body": [
+          "Restaurantavonden doden solo-trackers. Spreek af te snappen zoals geserveerd, oliën te bewerken, dranken te loggen. Vergeet één persoon het, wint een zachte groepsduwtje van een college aan tafel.",
+          "Optionele calorie-rollover-voorkeuren zijn persoonlijk — forceer niet één filosofie op beide dagboeken."
+        ],
+        "heading": "Weekendstrategie voor twee"
+      },
+      {
+        "body": [
+          "Heeft een van beide partners een geschiedenis van voedselsurveillancetrauma, sla feeds over en houd tracking privé. Accountability die angst spiket is geen adherence.",
+          "Coachingrelaties verschillen ook van romantische — meng clientdata niet in een koppelsgroep."
+        ],
+        "heading": "Wanneer Friends de verkeerde tool is"
+      },
+      {
+        "body": [
+          "Creator Groups zijn voor goedgekeurde Creator Program-audiences. Jullie relatie-accountability hoort in privé Friends-ruimte tenzij jullie expres samen een publieke brandcommunity draaien.",
+          "Houd die mentale modellen gescheiden om privacymissers te vermijden."
+        ],
+        "heading": "Creator Groups zijn geen koppelsmodus"
+      },
+      {
+        "body": [
+          "Twee accounts, één privé Friends-groep. IGNITE AI laat koppels bewijs delen — maaltijden, workouts, streaks van inzet — zonder wachtwoorden te delen of doelen samen te voegen.",
+          "Spreek auto-share-regels af, bescherm waardigheid, en laat Snap Track en Exercise het dagelijkse werk doen. Accountability met grenzen houdt langer stand dan gefuseerde logins."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "ignite-ai-for-creators-share-to-code",
+    "title": "IGNITE AI voor creators: van Share Cards naar creatorcodes",
+    "date": "2026-08-31",
+    "description": "Een creatorworkflow in IGNITE AI van Share Cards naar creatorcodes — solliciteer voor het Creator Program, publiceer bewijscontent, ontgrendel jaarlijks Premium-prijzen voor je audience waar aangeboden, en groei Creator Groups.",
+    "sections": [
+      {
+        "body": [
+          "Creators hebben geen nóg een affiliatelink nodig die naar een lelijk dagboek wijst. Ze hebben een loop nodig die als content begint en als attributie eindigt: film de maaltijd of workout, publiceer een Share Card, solliciteer voor het Creator Program, deel een gepersonaliseerde code, draai optioneel een Creator Group.",
+          "IGNITE AI houdt die lagen naast de echte logger — Snap Track, Exercise, Diet planner, AI Lab — zodat demo’s authentiek zijn in plaats van screenshottheater van een product dat je nooit opent.",
+          "Dit artikel mappt het end-to-end creatorpad zonder Creator Program met Refer a Friend te verwarren."
+        ]
+      },
+      {
+        "body": [
+          "Na het loggen van een maaltijd of sessie, genereer een Share Card, bewerk de headline, kies een thema, exporteer via het systeem-share-sheet. Stories en carrousels stoppen eruit te zien als per ongeluk spreadsheetlekken.",
+          "Batch cards op sterke dagen zodat stille dagen nog inventory hebben. Redactionele smaak wint van elke snack posten."
+        ],
+        "heading": "Stap 1: maak Share Cards je default bewijs"
+      },
+      {
+        "body": [
+          "Dien accurate socials en nichedetails in. Acceptatie is discretionair. Bij goedkeuring ontgrendel je Program-mechanics: creatorcode, complimentary Premium-venster getoond in-app, rewards-pad, Creator Groups-eligibility.",
+          "Promoot geen referralcode als creatoraanbod terwijl je wacht. Launch schoon na goedkeuring."
+        ],
+        "heading": "Stap 2: solliciteer in Profile → Creator Program"
+      },
+      {
+        "body": [
+          "Gebruik de grant om Snap Track-bewerkingen, Snap Cook, Diet-swaps, AI Lab-vragen en Exercise-logs te filmen zonder weg te knippen bij een paywall. Vaak begint het venster rond de negentig dagen en kan het verlengen met inzet en resultaten zoals beheerd in Program-schermen.",
+          "Volgers kopen nog steeds Premium voor zichzelf. Jouw complimentary toegang is een productietool, niet hun prijs."
+        ],
+        "heading": "Stap 3: leer het product op complimentary Premium"
+      },
+      {
+        "body": [
+          "Eén zin: creatorcode voor jaarlijks Premium waar aangeboden. Zet hem in bio en kalme end cards. Rewards richten zich op qualified jaarlijks Premium onder jouw attributie; weekly/monthly kwalificeren over het algemeen niet.",
+          "Regionale rewardbedragen en prijzen verschijnen in-app. Zeg «waar aangeboden» als je audience globaal is."
+        ],
+        "heading": "Stap 4: zet de code-CTA live"
+      },
+      {
+        "body": [
+          "Launch een Group nadat je seed posts en regels hebt. Leden joinen via zoeken of invite. Houd Friends voor privékringen; Groups voor audiencecultuur.",
+          "De Group retaineert; de code attribueert. Impliceer niet dat joinen alleen rewards kwalificeert."
+        ],
+        "heading": "Stap 5: Creator Groups wanneer de audience klaar is"
+      },
+      {
+        "body": [
+          "Maandag: trainingscard. Woensdag: olie-edit Reel. Vrijdag: restaurant Snap Track. Zondag: Progress-eerlijkheid. Codevermeldingen blijven licht en accuraat.",
+          "Platformverpakking verschilt — korte demo’s op Reels, cards op Stories, lange context op YouTube — dezelfde code eronder."
+        ],
+        "heading": "Contentkalender die de loop voedt"
+      },
+      {
+        "body": [
+          "Geen nepstudies, geen verzonnen kortingswiskunde, geen Refer a Friend mengen in creator-CTA’s. Misrepresentatie kan Program-voordelen beëindigen onder de Terms.",
+          "Disclose sponsorships waar vereist. Privacy telt nog wanneer je maaltijden van anderen featuret."
+        ],
+        "heading": "Compliance die het merk beschermt"
+      },
+      {
+        "body": [
+          "Creators: stop met lelijke dagboeken screenshotten. Gebruik IGNITE AI end-to-end — Share Cards voor bewijs, Creator Program voor distributie, creatorcodes voor jaarlijks Premium van de audience, Groups voor community.",
+          "Solliciteer in-app, demo met complimentary Premium, houd Refer a Friend gescheiden, en groei op qualified jaarlijkse sign-ups met content die je ook zonder code zou publiceren."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "30-day-ignite-ai-challenge-outline",
+    "title": "Een 30-dagen IGNITE AI-challenge-outline (wat je wekelijks meet)",
+    "date": "2026-08-31",
+    "description": "Een 30-dagen IGNITE AI-challenge-outline — wekelijkse log- en proteïnetargets, Exercise-gewoonten, optioneel Friends-bewijs, Progress-reviews elke zondag, en één hefboom om te veranderen zonder het plan te verbranden.",
+    "sections": [
+      {
+        "body": [
+          "De meeste «30-dagen-challenges» falen omdat ze vibes meten in plaats van voltooide logs. Een nuttige IGNITE AI-maand is simpeler: leg maaltijden eerlijk vast, bescherm proteïne, train een realistische hoeveelheid, en lees weekgemiddelden voordat je calorieën sloopt uit verveling.",
+          "Deze outline neemt Premium-toegang tot Snap Track en gerelateerde AI-tools aan, of een challengehost die duidelijke verwachtingen geeft als deelnemers op gemengde tiers zitten. Het is een framework, geen medisch protocol en geen belofte van een specifieke weegschaalsverandering.",
+          "Gebruik hem solo of in een privé Friends-groep. Het scorebord is adherence en trends — geen publieke vernedering."
+        ]
+      },
+      {
+        "body": [
+          "Log elke eetgelegenheid die je kunt. Liever Snap Track-foto voor gemengde borden; gebruik barcode- of etiketmodi voor verpakkingen; probeer Quick Log voice of beschrijven wanneer je handen vol zijn. Bewerk oliën en sauzen voordat je opslaat.",
+          "Jaag geen perfectie. Jaag nul blanco maaltijden. Sla twee of drie staples op die je herhaalt. Optioneel: zet weergave, eenheden en taal in Preferences zodat de UI je ’s nachts niet tegenwerkt."
+        ],
+        "heading": "Dagen 1–7: leer de vastlegloop"
+      },
+      {
+        "body": [
+          "Plan twee tot vier Exercise-sessies die je écht afkrijgt. Log ze in Activity. Sync je Apple Health of Health Connect, kijk even naar stappen — laat wearable-verbranding je hele tekortfilosofie nog niet herschrijven.",
+          "Houd voedingsloggen als hoofdgewoonte. Een smetteloze workoutweek met drie ontbrekende diners is een cosplay-challenge."
+        ],
+        "heading": "Dagen 8–14: voeg training toe zonder theater"
+      },
+      {
+        "body": [
+          "Leun op Saved staples en Diet planner-swaps wanneer de week rommelig wordt. Helpt Snap Cook je te gebruiken wat in de koelkast ligt, gebruik het — log daarna wat je écht opschepte.",
+          "Optionele accountability: join of maak een privé Friends-groep en auto-share maaltijden of workouts als dat motiveert. Koppels en huisgenoten werken hier goed; vreemden optioneel."
+        ],
+        "heading": "Dagen 15–21: verminder wrijving en voeg bewijs toe"
+      },
+      {
+        "body": [
+          "Open Progress. Lees energiegemiddelden en voedingstrends over de maand. Vergelijk weekend versus doordeweekse logkwaliteit. Pas maar één hefboom aan: proteïnetarget, dagelijkse calorieën, trainingsfrequentie, of verbrande-calorieënvoorkeur — niet alle vier.",
+          "Stagneerde gewicht terwijl gemiddelden hoog ogen, corrigeer onderrapporterde vetten voordat je paniekkapt. Zien de gemiddelden er strak uit en is de weegschaal ruisig, geef natrium en water een stem voordat je het plan sloopt."
+        ],
+        "heading": "Dagen 22–30: Progress-review, één hefboom"
+      },
+      {
+        "body": [
+          "Track vier getallen: gemiddeld lichaamsgewicht (of weekgemiddelde als je dagelijks weegt), proteïnedagen gehaald, workouts voltooid, ongelogde maaltijden (doel: nul). Schrijf ze in een notitie of Share Card voor jezelf — niet per se voor internet.",
+          "Vier voltooide logs luider dan weegschaalsdrama. Adherence is de skill die de volgende dertig dagen nog nodig hebben."
+        ],
+        "heading": "Wekelijks zondagscorebord"
+      },
+      {
+        "body": [
+          "Geen verplichte publieke wegingen. Geen shaming-screenshots. Geen verzonnen medische claims. Vastentools zijn optioneel; forceer geen vensters op mensen die slecht slapen of hard trainen zonder begeleiding.",
+          "Raakt blessure, ziekte of levenschaos, verkort de challenge in plaats van het dagboek te ghosten. Een gelogde «onderhoudsweek» leert het product nog."
+        ],
+        "heading": "Regels die de challenge menselijk houden"
+      },
+      {
+        "body": [
+          "Pin de outline. Definieer wat auto-share betekent. Modereer voedingsruzies. Bied AI Lab als troubleshootinghulp, niet als evangelie.",
+          "Creators die publieke versies draaien moeten Creator Groups onder Creator Program-regels gebruiken en codes accuraat houden — jaarlijks Premium waar aangeboden, geen verzonnen kortingen."
+        ],
+        "heading": "Hosttips voor Friends-groep-challenges"
+      },
+      {
+        "body": [
+          "Een 30-dagen IGNITE AI-challenge slaagt wanneer Snap Track open blijft, Exercise realistisch blijft, en Progress een zondagstem krijgt. Meet voltooide logs en weekgemiddelden, geen motivatieposters.",
+          "Draai de vier fases, verander één hefboom aan het eind, en houd Friends optioneel. Dat is genoeg structuur voor een maand die het product leert in plaats van je uit te branden."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-burpees",
+    "title": "Hoeveel calorieën verbranden burpees?",
+    "date": "2026-08-22",
+    "description": "Burpees verbranden ongeveer 280 kcal in 30 minuten voor iemand van 70 kg bij MET ≈ 8 (~560/uur). Tabellen per gewicht en duur, intensiteitsnoten, en hoe IGNITE AI de sessie eerlijk houdt naast voeding.",
+    "sections": [
+      {
+        "body": [
+          "Burpees zijn de favoriete straf van internet — en een verschrikkelijke plek om een rondeteller te vertrouwen die rust op de vloer negeert.",
+          "Bij MET ≈ 8 (krachtig continu burpeewerk) verwacht ruwweg 280 kcal in 30 minuten bij 70 kg (ongeveer 560/uur). Zwaardere lichamen verbranden meer; rusten en makkelijke intervallen verbranden minder.",
+          "Wekelijkse energiebalans beslist nog steeds vetverlies. Bordcijfers zijn schattingen — geen vouchers."
+        ]
+      },
+      {
+        "body": [
+          "Geschatte calorieën voor burpees (MET ≈ 8) — bij benadering:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680",
+          "Alleen continu werk. Telefoonpauzes tellen niet."
+        ],
+        "heading": "Calorieschattingen per lichaamsgewicht en duur"
+      },
+      {
+        "body": [
+          "MET ≈ 8.0 voor dichte continue burpees. Trage step-back-versies en lange adempauzes crashen het gemiddelde.",
+          "Lichaamsgewicht en continue intensiteit winnen van de lesnaam."
+        ],
+        "heading": "Wat de verbranding drijft"
+      },
+      {
+        "body": [
+          "Brutale conditioning in een piepkleine ruimte. Doseer voorzichtig als polsen en schouders klagen.",
+          "Houd proteïne rond 1,6–2,2 g/kg als je cut en hard traint."
+        ],
+        "heading": "Trainingswaarde"
+      },
+      {
+        "body": [
+          "Na burpees schrijft «ik heb pizza verdiend» zichzelf. IGNITE AI is de noodrem: fotografeer het bord voordat het verhaal vastzet, houd de sessie op dezelfde dag, kijk of het lijden iets anders bewoog dan eetlust."
+        ],
+        "heading": "Waar IGNITE AI past"
+      },
+      {
+        "body": [
+          "Ruwweg 280 kcal / 30 min bij 70 kg voor burpees bij MET ≈ 8.",
+          "Lijd expres. Log expres. IGNITE AI voor mensen die burpees doen en nog een taille willen."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-battle-ropes",
+    "title": "Hoeveel calorieën verbranden battle ropes?",
+    "date": "2026-08-22",
+    "description": "Battle ropes verbranden ongeveer 280 kcal in 30 minuten voor iemand van 70 kg bij MET ≈ 8 (~560/uur). Tabellen per gewicht en duur, intensiteitsnoten, en hoe IGNITE AI de sessie eerlijk houdt naast voeding.",
+    "sections": [
+      {
+        "body": [
+          "Battle ropes zien eruit als calorievuurwerk. De realiteit is work-to-rest-ratio: continue waves verdienen de MET; dertig seconden flexen voor Instagram niet.",
+          "Bij MET ≈ 8 (krachtige continue waves) verwacht ruwweg 280 kcal in 30 minuten bij 70 kg (ongeveer 560/uur). Zwaardere lichamen verbranden meer; rusten en makkelijke intervallen verbranden minder.",
+          "Wekelijkse energiebalans beslist nog steeds vetverlies. Bordcijfers zijn schattingen — geen vouchers."
+        ]
+      },
+      {
+        "body": [
+          "Geschatte calorieën voor battle ropes (MET ≈ 8) — bij benadering:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680",
+          "Alleen continu werk. Telefoonpauzes tellen niet."
+        ],
+        "heading": "Calorieschattingen per lichaamsgewicht en duur"
+      },
+      {
+        "body": [
+          "MET ≈ 8.0 voor harde continue touwwaves. Lange rust tussen intervallen laat de sessie snel zakken.",
+          "Lichaamsgewicht en continue intensiteit winnen van de lesnaam."
+        ],
+        "heading": "Wat de verbranding drijft"
+      },
+      {
+        "body": [
+          "Bovenlijfmotor en grip. Koppel aan benen en proteïne als physique het doel is.",
+          "Houd proteïne rond 1,6–2,2 g/kg als je cut en hard traint."
+        ],
+        "heading": "Trainingswaarde"
+      },
+      {
+        "body": [
+          "Touwen slopen je; de smoothie erna veegt stilletjes het tekort weg. IGNITE AI vangt die tweede ronde — Snap Track de drank, log de ropes, laat «shredded» geen gevoel zijn."
+        ],
+        "heading": "Waar IGNITE AI past"
+      },
+      {
+        "body": [
+          "Ruwweg 280 kcal / 30 min bij 70 kg voor battle ropes bij MET ≈ 8.",
+          "Wave hard. Track harder. IGNITE AI voorkomt dat battle ropes een smoothie-alibi worden."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-rowing-machine",
+    "title": "Hoeveel calorieën verbrandt een roeimachine? (erg-gids)",
+    "date": "2026-08-23",
+    "description": "Roeimachine verbrandt ongeveer 245 kcal in 30 minuten voor iemand van 70 kg bij MET ≈ 7 (~490/uur). Tabellen per gewicht en duur, intensiteitsnoten, en hoe IGNITE AI de sessie eerlijk houdt naast voeding.",
+    "sections": [
+      {
+        "body": [
+          "Erg-calorieën op de monitor zijn verkooptools. Gebruik MET-ranges als sanity check, en roei daarna voor splits en consistentie — niet voor console-eer.",
+          "Bij MET ≈ 7 (matig continu erg) verwacht ruwweg 245 kcal in 30 minuten bij 70 kg (ongeveer 490/uur). Zwaardere lichamen verbranden meer; rusten en makkelijke intervallen verbranden minder.",
+          "Wekelijkse energiebalans beslist nog steeds vetverlies. Bordcijfers zijn schattingen — geen vouchers."
+        ]
+      },
+      {
+        "body": [
+          "Geschatte calorieën voor roeimachine (MET ≈ 7) — bij benadering:",
+          "55 kg: 15 min: ~96 · 30 min: ~193 · 45 min: ~289 · 60 min: ~385",
+          "70 kg: 15 min: ~123 · 30 min: ~245 · 45 min: ~368 · 60 min: ~490",
+          "85 kg: 15 min: ~149 · 30 min: ~298 · 45 min: ~446 · 60 min: ~595",
+          "Alleen continu werk. Telefoonpauzes tellen niet."
+        ],
+        "heading": "Calorieschattingen per lichaamsgewicht en duur"
+      },
+      {
+        "body": [
+          "MET ≈ 7.0 matig continu. Harde stukken klimmen; lange rust tussen intervallen gemiddelden omlaag.",
+          "Lichaamsgewicht en continue intensiteit winnen van de lesnaam."
+        ],
+        "heading": "Wat de verbranding drijft"
+      },
+      {
+        "body": [
+          "Full-body motor met lage impact wanneer techniek schoon is. Lelijke pulls belasten de rug voor nepcalorieën.",
+          "Houd proteïne rond 1,6–2,2 g/kg als je cut en hard traint."
+        ],
+        "heading": "Trainingswaarde"
+      },
+      {
+        "body": [
+          "Concept2 vleit je. IGNITE AI niet — maaltijdsnaps naast de ergsessie zodat «ik heb geroeid» en «ik heb gegeten» eindelijk één waarheid delen."
+        ],
+        "heading": "Waar IGNITE AI past"
+      },
+      {
+        "body": [
+          "Ruwweg 245 kcal / 30 min bij 70 kg voor roeimachine bij MET ≈ 7.",
+          "Vertrouw de split, verifieer het bord. IGNITE AI is de voedingseerlijkheidslaag van de erg-rijder."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-power-walking",
+    "title": "Hoeveel calorieën verbrandt power walking?",
+    "date": "2026-08-23",
+    "description": "Power walking verbrandt ongeveer 175 kcal in 30 minuten voor iemand van 70 kg bij MET ≈ 5 (~350/uur). Tabellen per gewicht en duur, intensiteitsnoten, en hoe IGNITE AI de sessie eerlijk houdt naast voeding.",
+    "sections": [
+      {
+        "body": [
+          "Power walking is de onderschatte vetverlies-volumetool — hoger dan een slenter, vriendelijker dan een jog, makkelijk dagelijks te herhalen.",
+          "Bij MET ≈ 5 (stevig continu lopen ~4 mph-inzet) verwacht ruwweg 175 kcal in 30 minuten bij 70 kg (ongeveer 350/uur). Zwaardere lichamen verbranden meer; rusten en makkelijke intervallen verbranden minder.",
+          "Wekelijkse energiebalans beslist nog steeds vetverlies. Bordcijfers zijn schattingen — geen vouchers."
+        ]
+      },
+      {
+        "body": [
+          "Geschatte calorieën voor power walking (MET ≈ 5) — bij benadering:",
+          "55 kg: 15 min: ~69 · 30 min: ~138 · 45 min: ~206 · 60 min: ~275",
+          "70 kg: 15 min: ~88 · 30 min: ~175 · 45 min: ~263 · 60 min: ~350",
+          "85 kg: 15 min: ~106 · 30 min: ~213 · 45 min: ~319 · 60 min: ~425",
+          "Alleen continu werk. Telefoonpauzes tellen niet."
+        ],
+        "heading": "Calorieschattingen per lichaamsgewicht en duur"
+      },
+      {
+        "body": [
+          "MET ≈ 5.0 voor continu stevig power walking. Telefoon-slenteren ligt dichter bij 2.5–3.5.",
+          "Lichaamsgewicht en continue intensiteit winnen van de lesnaam."
+        ],
+        "heading": "Wat de verbranding drijft"
+      },
+      {
+        "body": [
+          "Stappen waarvan je herstelt. Perfect NEAT-plus wanneer hardlopen je knieën haat.",
+          "Houd proteïne rond 1,6–2,2 g/kg als je cut en hard traint."
+        ],
+        "heading": "Trainingswaarde"
+      },
+      {
+        "body": [
+          "Lopen werkt alleen wanneer de andere 23 uur gelogd zijn. IGNITE AI maakt de saaie wins zichtbaar: stappen uit Health naast fotodiners die vroeger verdwenen."
+        ],
+        "heading": "Waar IGNITE AI past"
+      },
+      {
+        "body": [
+          "Ruwweg 175 kcal / 30 min bij 70 kg voor power walking bij MET ≈ 5.",
+          "Loop met intentie. Track zonder drama. IGNITE AI voor power walkers die willen dat de weegschaal het merkt."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  },
+  {
+    "slug": "burpees-vs-jump-rope-calories",
+    "title": "Burpees vs springtouw: verbrande calorieën vergeleken (2026)",
+    "date": "2026-08-24",
+    "description": "70 kg / 30 min: ~385 kcal springtouw (MET ≈ 11) vs ~280 burpees (MET ≈ 8). Verschil van 105 kcal plus hoe je kiest — en voeding logt in IGNITE AI.",
+    "sections": [
+      {
+        "body": [
+          "Burpees vs springtouw is een densiteitsduel in de woonkamer. Continu touw wint meestal per minuut als je écht blijft skippen.",
+          "Bij 70 kg voor 30 minuten: ~385 vs ~280. Springtouw leidt met ongeveer 105 kcal voordat rusten het verhaal veranderen."
+        ]
+      },
+      {
+        "body": [
+          "Geschatte calorieën voor springtouw (MET ≈ 11) — bij benadering:",
+          "55 kg: 15 min: ~151 · 30 min: ~303 · 45 min: ~454 · 60 min: ~605",
+          "70 kg: 15 min: ~193 · 30 min: ~385 · 45 min: ~578 · 60 min: ~770",
+          "85 kg: 15 min: ~234 · 30 min: ~468 · 45 min: ~701 · 60 min: ~935"
+        ],
+        "heading": "Springtouw (MET ≈ 11)"
+      },
+      {
+        "body": [
+          "Geschatte calorieën voor burpees (MET ≈ 8) — bij benadering:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680"
+        ],
+        "heading": "Burpees (MET ≈ 8)"
+      },
+      {
+        "body": [
+          "Touw voor max verbranding per minuut. Burpees wanneer je full-body strength-endurance wilt zonder touw. Beide straffen slecht herstel."
+        ],
+        "heading": "Welke je kiest"
+      },
+      {
+        "body": [
+          "Home HIIT zonder voedingslog is alleen luid cardio. IGNITE AI is hoe woonkameratleten voorkomen dat de sandwich na de sessie de MET-tabel uitwist."
+        ],
+        "heading": "Waar IGNITE AI past"
+      },
+      {
+        "body": [
+          "Springtouw wint nipt van burpees met ~105 kcal / 30 min bij deze MET's.",
+          "Kies je gif. Open daarna IGNITE AI voordat de koelkast het doet."
+        ],
+        "heading": "Conclusie"
+      }
+    ]
+  }
+]

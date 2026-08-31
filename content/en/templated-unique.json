@@ -1,0 +1,1335 @@
+[
+  {
+    "slug": "how-long-does-reverse-dieting-take",
+    "title": "How Long Does Reverse Dieting Take to Work Well?",
+    "date": "2026-05-08",
+    "description": "A deep reverse dieting guide: timelines after mild vs aggressive cuts, adaptive metabolism and NEAT, weekly calorie-bump protocols, and how to know you have reached workable maintenance.",
+    "intro": [
+      "Reverse dieting is a controlled climb out of a fat-loss phase. You raise calories in planned steps so training quality, hunger, and daily energy can recover without turning the exit into an accidental dirty bulk.",
+      "It does not break energy balance. After you lose weight, maintenance usually falls because a smaller body costs less energy. Long cuts can also suppress NEAT and make hard training feel worse. Reverse dieting manages the return with weekly data.",
+      "How long it takes depends on cut depth, duration, final leanness, sleep, and how suppressed your steps became. Mild cuts and aggressive peak weeks are not the same project."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-15000-steps",
+    "title": "How Many Calories Does Walking 15,000 Steps Burn?",
+    "date": "2026-05-06",
+    "description": "Realistic 15,000-step calorie ranges by bodyweight and pace, MET context, wearable error, and how to use high steps for fat loss without eating the burn back.",
+    "intro": [
+      "15,000 steps is a high daily movement target. It usually burns more than 10,000, but bodyweight, pace, terrain, and stop-and-go patterns decide the calorie total.",
+      "Many adults land in a several-hundred-kcal band for large walking days, with heavier bodies and brisk paces higher. Easy flat shuffling lands lower.",
+      "Treat converters and watches as directional. Fat loss still depends on weekly intake versus expenditure."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-20000-steps",
+    "title": "How Many Calories Does Walking 20,000 Steps Burn?",
+    "date": "2026-05-05",
+    "description": "What 20,000 steps means for calorie burn, hunger, recovery, and fat loss, and when a lower repeatable step target is the better cut strategy.",
+    "intro": [
+      "20,000 steps is an extreme target for most schedules. It can create a large walking energy cost and also inflate hunger, steal lifting time, and wreck evenings.",
+      "If you chase 20k for fat loss, the food log must stay ruthless. Huge step days are classic I earned it setups."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "walk-10000-steps-weight-loss-month",
+    "title": "If I Walk 10,000 Steps a Day, How Much Weight Will I Lose in a Month?",
+    "date": "2026-05-04",
+    "description": "Realistic monthly weight-loss expectations from a 10,000-step habit, including calorie ranges, diet interaction, and water-weight noise.",
+    "intro": [
+      "10,000 steps a day is memorable, not a guaranteed monthly fat-loss contract. Steps raise expenditure. Food intake and compensation decide whether fat drops.",
+      "Crude fat math uses about 3,500 kcal per pound as a teaching tool, but monthly scale change also includes water and glycogen noise."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "burn-1000-calories-a-day",
+    "title": "How to Burn 1,000 Calories a Day (Without Wrecking Recovery)",
+    "date": "2026-05-03",
+    "description": "How to approach burning about 1,000 activity calories a day without wrecking recovery: NEAT first, lifting, cardio dosing, wearable skepticism, and food-log honesty.",
+    "intro": [
+      "Burning 1,000 calories a day usually means roughly 1,000 kcal of activity above a sedentary baseline, not 1,000 total daily energy expenditure. Most adults already burn far more than 1,000 kcal/day just staying alive.",
+      "Chasing that activity burn with endless HIIT is how people get injured, ravenous, and inconsistent. A smarter stack uses steps, lifting, and only as much cardio as recovery allows."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "convert-steps-to-calories",
+    "title": "How Do You Convert Steps to Calories Burned?",
+    "date": "2026-05-02",
+    "description": "How step-to-calorie conversions work, why bodyweight and pace dominate, why converters disagree, and how to use them without sabotaging a deficit.",
+    "intro": [
+      "Every steps-to-calories calculator makes assumptions about gait, intensity, and body mass. It does not know your hills, pack, or stop-and-go pattern.",
+      "Conversions help planning if you treat them like weather: directional, not courtroom evidence."
+    ],
+    "deeper": true,
+    "hasExecute": false
+  },
+  {
+    "slug": "if-i-burn-1000-calories-weight-loss",
+    "title": "If I Burn 1,000 Calories a Day, How Much Weight Will I Lose in a Week?",
+    "date": "2026-05-01",
+    "description": "Weekly fat-loss expectations from a claimed 1,000 kcal daily burn: crude energy math, water weight, wearable optimism, and verification steps.",
+    "intro": [
+      "If you truly expended 1,000 extra kcal per day and did not eat them back, crude teaching math points near about 7,000 kcal per week, often framed around two pounds of fat-energy. Real weeks are messier.",
+      "Wearable 1,000 kcal claims are often optimistic, and compensation eating can erase the deficit."
+    ],
+    "deeper": true,
+    "hasExecute": false
+  },
+  {
+    "slug": "cut-1000-calories-weight-loss-speed",
+    "title": "If I Cut 1,000 Calories a Day, How Much Weight Will I Lose, and How Fast?",
+    "date": "2026-04-30",
+    "description": "What a 1,000 kcal daily deficit implies for speed, lean-mass risk, adherence, and why moderate deficits usually win the year.",
+    "intro": [
+      "A 1,000 kcal daily deficit is aggressive for many adults. On paper it predicts fast loss. In practice it often predicts hunger, training collapse, and rebound.",
+      "Crude math again points near about two pounds of fat-energy per week if the deficit is real, with water making week one look flashier than fat alone."
+    ],
+    "deeper": true,
+    "hasExecute": false
+  },
+  {
+    "slug": "most-accurate-measure-calories-burned",
+    "title": "What Is the Most Accurate Way to Measure Calories Burned?",
+    "date": "2026-04-29",
+    "description": "Lab vs consumer calorie-burn measurement: calorimetry, doubly labeled water, MET charts, wearables, and why intake plus weekly weight often beats perfect burn chasing.",
+    "intro": [
+      "The most accurate expenditure methods live in labs. Wrists estimate. Match the tool to the decision.",
+      "For fat loss, honest intake plus weekly average weight usually beats a perfect burn dashboard."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "how-many-calories-burn-per-day",
+    "title": "How Many Calories Should I Burn a Day?",
+    "date": "2026-04-28",
+    "description": "How to set daily burn thinking using TDEE parts (BMR, TEF, NEAT, exercise) and validate with real-world logging.",
+    "intro": [
+      "Daily burn is TDEE, not a motivational poster number.",
+      "Ask what expenditure pattern supports your goal while you recover and log food."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "calories-from-fat-calculate",
+    "title": "How to Calculate Calories From Fat",
+    "date": "2026-04-27",
+    "description": "Convert fat grams to calories with the 9 kcal/g rule, label pitfalls, oils, and photo-log edits.",
+    "intro": [
+      "Fat has about 9 kcal per gram. Multiply fat grams by 9.",
+      "A 20 g fat meal contributes roughly 180 kcal from fat."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "bodybuilder-calories-how-many",
+    "title": "How Many Calories Do Bodybuilders Eat?",
+    "date": "2026-04-26",
+    "description": "Why bodybuilder calories vary by phase and size, with surplus and deficit methods you can copy without copying someone else's numbers.",
+    "intro": [
+      "There is no universal bodybuilder calorie intake.",
+      "Method transfers: find maintenance, set small surplus or controlled deficit, keep protein high, train hard."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "calories-per-meal-guide",
+    "title": "How Many Calories Should Be in One Meal?",
+    "date": "2026-04-25",
+    "description": "How to split daily calories across meals without dogma, including protein distribution and IF windows.",
+    "intro": [
+      "Meal calories are daily calories packaged by schedule.",
+      "There is no sacred lunch number."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "calories-to-gain-muscle",
+    "title": "How Many Calories Should I Eat to Gain Muscle?",
+    "date": "2026-04-24",
+    "description": "Set calories for muscle gain with small surplus, rate-of-gain targets, and anti-dirty-bulk logging.",
+    "intro": [
+      "Muscle gain needs training, protein, time, and usually a surplus after beginner phases.",
+      "Many intermediates do well at about +200 to +300 kcal over true maintenance."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "calories-dinner-weight-loss",
+    "title": "How Many Calories Should Dinner Be for Weight Loss?",
+    "date": "2026-04-23",
+    "description": "Set dinner calories inside a fat-loss day: budgeting, protein anchors, and restaurant tactics.",
+    "intro": [
+      "Dinner has no magic fat-loss calorie.",
+      "The day and week decide."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "calories-lunch-fitness-goals",
+    "title": "How Many Calories Should Lunch Be to Hit Your Fitness Goals?",
+    "date": "2026-04-22",
+    "description": "Build lunch calories for performance and adherence with defaults and Saved meals.",
+    "intro": [
+      "Lunch should prevent chaotic dinners.",
+      "Exact calories depend on daily targets."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "how-long-burn-500-calories",
+    "title": "How Long Does It Take to Burn 500 Calories?",
+    "date": "2026-04-21",
+    "description": "How long ~500 kcal takes across modalities and why bodyweight changes the clock.",
+    "intro": [
+      "Time to burn 500 kcal shrinks as intensity and bodyweight rise.",
+      "No single answer without those variables."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "500-calorie-meals-weight-loss",
+    "title": "Can 500-Calorie Meals for Weight Loss Work?",
+    "date": "2026-04-20",
+    "description": "When 500-calorie meals work in a fat-loss day and how to keep them high-protein and satisfying.",
+    "intro": [
+      "500-calorie meals can work inside a planned day.",
+      "They fail when they are so small you binge later."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "eating-1000-calories-a-day",
+    "title": "Will Eating 1,000 Calories a Day Help You Lose Weight?",
+    "date": "2026-04-19",
+    "description": "A detailed, science-aware guide to Will Eating 1,000 Calories a Day Help You Lose Weight: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "1,000 kcal days usually create a large deficit for many adults.",
+      "Fast drops include water and raise rebound risk."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "how-calories-are-measured",
+    "title": "How Are Calories Measured? 9 Practical Methods",
+    "date": "2026-04-18",
+    "description": "Nine practical ways calories are measured from lab factors to labels, scales, photos, and menus.",
+    "intro": [
+      "Food label calories use established energy factors, not your personal bomb calorimeter.",
+      "Your job is accuracy enough for weekly decisions."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "food-scale-for-calories-macros",
+    "title": "How to Use a Food Scale for Calories and Macros",
+    "date": "2026-04-17",
+    "description": "Food-scale workflow: what to weigh, tare, raw vs cooked, and calibrate then relax.",
+    "intro": [
+      "A scale is high leverage if you weigh dense foods, not every lettuce leaf.",
+      "Oils, rice, meat, cheese, and nut butters matter most."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "measure-calories-food-at-home",
+    "title": "How to Measure Calories in Food at Home",
+    "date": "2026-04-16",
+    "description": "A detailed, science-aware guide to How to Measure Calories in Food at Home: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Home methods will not match a metabolic ward.",
+      "They can still guide fat loss if bias stays small."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "count-calories-when-cooking",
+    "title": "How to Count Calories When Cooking",
+    "date": "2026-04-15",
+    "description": "Count homemade meals by logging the whole pot, dividing real servings, and saving the batch.",
+    "intro": [
+      "Cooking breaks trackers when oil is forgotten or servings are mythical.",
+      "Count the batch, then divide what you scoop."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "track-calorie-deficit-healthy",
+    "title": "How to Track a Calorie Deficit the Healthy Way",
+    "date": "2026-04-14",
+    "description": "Track a healthy deficit with moderate cuts, protein, lifting, averages, and sustainable logging.",
+    "intro": [
+      "A healthy deficit supports training and life while fat trends down for weeks.",
+      "Tracking should not become a shame job."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "active-vs-total-calories",
+    "title": "Active Calories vs Total Calories: What to Track",
+    "date": "2026-04-13",
+    "description": "A detailed, science-aware guide to Active Calories vs Total Calories: What to Track: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Active usually means movement burn; total usually includes resting metabolism.",
+      "Brands define these differently."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "active-vs-resting-calories",
+    "title": "Active vs Resting Calories Explained",
+    "date": "2026-04-12",
+    "description": "Resting vs active calories: BMR/RMR versus movement, and smart ways to raise expenditure.",
+    "intro": [
+      "Resting calories keep you alive at rest; active cover movement.",
+      "Together with TEF they shape TDEE."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "track-calories-burned-tools",
+    "title": "How to Keep Track of Calories Burned: 12 Practical Tools",
+    "date": "2026-04-11",
+    "description": "Twelve tools for tracking burn from wearables to the referee of weekly weight plus intake.",
+    "intro": [
+      "You need one or two tools you will use, plus a reality check.",
+      "More gadgets do not fix underreported dinners."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "how-many-calories-running-mile",
+    "title": "How Many Calories Do Running a Mile Burn?",
+    "date": "2026-04-10",
+    "description": "A detailed look at calorie burn from running mile: what drives the estimate, bodyweight and intensity effects, wearable error, muscle vs calorie theater, and how to log training without eating the whole burn back.",
+    "intro": [
+      "People ask about running mile calories because they want the session to justify dinner. Session burn is real, but it is usually smaller and noisier than the afterburn myths suggest.",
+      "Bodyweight, intensity, rest periods, and total work time dominate the estimate for running mile. Two people doing the same named workout can land far apart.",
+      "Fat loss still follows weekly energy balance. Use training for stimulus and health first, and treat calorie printouts conservatively in a cut."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-weight-lifting",
+    "title": "How Many Calories Do Weight Lifting Burn?",
+    "date": "2026-04-10",
+    "description": "A detailed look at calorie burn from weight lifting: what drives the estimate, bodyweight and intensity effects, wearable error, muscle vs calorie theater, and how to log training without eating the whole burn back.",
+    "intro": [
+      "People ask about weight lifting calories because they want the session to justify dinner. Session burn is real, but it is usually smaller and noisier than the afterburn myths suggest.",
+      "Bodyweight, intensity, rest periods, and total work time dominate the estimate for weight lifting. Two people doing the same named workout can land far apart.",
+      "Fat loss still follows weekly energy balance. Use training for stimulus and health first, and treat calorie printouts conservatively in a cut."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-jumping-jacks",
+    "title": "How Many Calories Do Jumping Jacks Burn?",
+    "date": "2026-04-10",
+    "description": "A detailed look at calorie burn from jumping jacks: what drives the estimate, bodyweight and intensity effects, wearable error, muscle vs calorie theater, and how to log training without eating the whole burn back.",
+    "intro": [
+      "People ask about jumping jacks calories because they want the session to justify dinner. Session burn is real, but it is usually smaller and noisier than the afterburn myths suggest.",
+      "Bodyweight, intensity, rest periods, and total work time dominate the estimate for jumping jacks. Two people doing the same named workout can land far apart.",
+      "Fat loss still follows weekly energy balance. Use training for stimulus and health first, and treat calorie printouts conservatively in a cut."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-pilates",
+    "title": "How Many Calories Do Pilates Burn?",
+    "date": "2026-04-10",
+    "description": "A detailed look at calorie burn from pilates: what drives the estimate, bodyweight and intensity effects, wearable error, muscle vs calorie theater, and how to log training without eating the whole burn back.",
+    "intro": [
+      "People ask about pilates calories because they want the session to justify dinner. Session burn is real, but it is usually smaller and noisier than the afterburn myths suggest.",
+      "Bodyweight, intensity, rest periods, and total work time dominate the estimate for pilates. Two people doing the same named workout can land far apart.",
+      "Fat loss still follows weekly energy balance. Use training for stimulus and health first, and treat calorie printouts conservatively in a cut."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-swimming",
+    "title": "How Many Calories Do Swimming Burn?",
+    "date": "2026-04-10",
+    "description": "A detailed look at calorie burn from swimming: what drives the estimate, bodyweight and intensity effects, wearable error, muscle vs calorie theater, and how to log training without eating the whole burn back.",
+    "intro": [
+      "People ask about swimming calories because they want the session to justify dinner. Session burn is real, but it is usually smaller and noisier than the afterburn myths suggest.",
+      "Bodyweight, intensity, rest periods, and total work time dominate the estimate for swimming. Two people doing the same named workout can land far apart.",
+      "Fat loss still follows weekly energy balance. Use training for stimulus and health first, and treat calorie printouts conservatively in a cut."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-push-ups",
+    "title": "How Many Calories Do Push-Ups Burn?",
+    "date": "2026-04-10",
+    "description": "A detailed look at calorie burn from push ups: what drives the estimate, bodyweight and intensity effects, wearable error, muscle vs calorie theater, and how to log training without eating the whole burn back.",
+    "intro": [
+      "People ask about push ups calories because they want the session to justify dinner. Session burn is real, but it is usually smaller and noisier than the afterburn myths suggest.",
+      "Bodyweight, intensity, rest periods, and total work time dominate the estimate for push ups. Two people doing the same named workout can land far apart.",
+      "Fat loss still follows weekly energy balance. Use training for stimulus and health first, and treat calorie printouts conservatively in a cut."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-squats",
+    "title": "How Many Calories Do Squats Burn?",
+    "date": "2026-04-10",
+    "description": "A detailed look at calorie burn from squats: what drives the estimate, bodyweight and intensity effects, wearable error, muscle vs calorie theater, and how to log training without eating the whole burn back.",
+    "intro": [
+      "People ask about squats calories because they want the session to justify dinner. Session burn is real, but it is usually smaller and noisier than the afterburn myths suggest.",
+      "Bodyweight, intensity, rest periods, and total work time dominate the estimate for squats. Two people doing the same named workout can land far apart.",
+      "Fat loss still follows weekly energy balance. Use training for stimulus and health first, and treat calorie printouts conservatively in a cut."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-skiing",
+    "title": "How Many Calories Do Skiing Burn?",
+    "date": "2026-04-10",
+    "description": "A detailed look at calorie burn from skiing: what drives the estimate, bodyweight and intensity effects, wearable error, muscle vs calorie theater, and how to log training without eating the whole burn back.",
+    "intro": [
+      "People ask about skiing calories because they want the session to justify dinner. Session burn is real, but it is usually smaller and noisier than the afterburn myths suggest.",
+      "Bodyweight, intensity, rest periods, and total work time dominate the estimate for skiing. Two people doing the same named workout can land far apart.",
+      "Fat loss still follows weekly energy balance. Use training for stimulus and health first, and treat calorie printouts conservatively in a cut."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-many-calories-sit-ups",
+    "title": "How Many Calories Do Sit-Ups Burn?",
+    "date": "2026-04-10",
+    "description": "A detailed look at calorie burn from sit ups: what drives the estimate, bodyweight and intensity effects, wearable error, muscle vs calorie theater, and how to log training without eating the whole burn back.",
+    "intro": [
+      "People ask about sit ups calories because they want the session to justify dinner. Session burn is real, but it is usually smaller and noisier than the afterburn myths suggest.",
+      "Bodyweight, intensity, rest periods, and total work time dominate the estimate for sit ups. Two people doing the same named workout can land far apart.",
+      "Fat loss still follows weekly energy balance. Use training for stimulus and health first, and treat calorie printouts conservatively in a cut."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "protein-for-body-recomp",
+    "title": "How Much Protein for Body Recomp?",
+    "date": "2026-04-09",
+    "description": "A detailed, science-aware guide to How Much Protein for Body Recomp: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Recomp is most realistic for beginners, returners, and higher body-fat lifters.",
+      "Protein often works best toward 1.6 to 2.2 g/kg near maintenance or a mild deficit."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "gain-muscle-lose-fat-same-time",
+    "title": "How to Gain Muscle and Lose Fat at the Same Time",
+    "date": "2026-04-08",
+    "description": "How simultaneous fat loss and muscle gain really works and who should expect it.",
+    "intro": [
+      "Simultaneous recomp happens most when you are new or returning.",
+      "Advanced lifters usually alternate phases."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "track-alcohol-macros",
+    "title": "How to Track Alcohol Macros",
+    "date": "2026-04-07",
+    "description": "Track alcohol energy using ~7 kcal/g, mixers, sleep effects, and weekly budgeting.",
+    "intro": [
+      "Alcohol is about 7 kcal per gram and is not a classic macro like protein.",
+      "Mixers count. Sleep and next-day adherence often take the bigger hit."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "protein-carnivore-diet",
+    "title": "How Much Protein on a Carnivore Diet?",
+    "date": "2026-04-06",
+    "description": "Protein on carnivore-style diets for lifters, energy density of fatty cuts, and tracking honesty.",
+    "intro": [
+      "Carnivore patterns are high protein and fat by design.",
+      "Lifters still benefit from intentional protein targets in elevated ranges."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "track-macros-on-keto",
+    "title": "How to Track Macros on Keto",
+    "date": "2026-04-05",
+    "description": "Track keto macros with net vs total carbs, protein for muscle, and oil vigilance.",
+    "intro": [
+      "Keto prioritizes very low carbs, moderate protein, higher fat.",
+      "Pick net or total carbs and stay consistent."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "counting-macros-vs-calories",
+    "title": "Counting Macros vs Calories: Which Should You Track?",
+    "date": "2026-04-04",
+    "description": "A detailed, science-aware guide to Counting Macros vs Calories: Which Should You Track: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Calories drive fat change. Macros shape hunger, muscle, and performance.",
+      "Beginners can start with calories plus protein."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "does-collagen-count-as-protein",
+    "title": "Does Collagen Count Toward Protein Macros?",
+    "date": "2026-04-03",
+    "description": "Collagen counts as protein grams but is incomplete for MPS compared with complete proteins.",
+    "intro": [
+      "Collagen is protein, yet low in key amino acids for muscle protein synthesis versus whey, meat, eggs, or soy.",
+      "Log grams if you want, but do not rely on collagen alone for lifting protein targets."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "can-eat-carbs-lose-weight",
+    "title": "Can I Eat Carbs and Lose Weight?",
+    "date": "2026-04-02",
+    "description": "A detailed, science-aware guide to Can I Eat Carbs and Lose Weight: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Fat loss needs a calorie deficit, not zero carbs.",
+      "Carbs can support training and adherence."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "do-resting-calories-count-in-deficit",
+    "title": "Do Resting Calories Count Toward Your Deficit?",
+    "date": "2026-04-01",
+    "description": "A detailed, science-aware guide to Do Resting Calories Count Toward Your Deficit: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Resting burn is most of many people's TDEE.",
+      "Your deficit is intake versus total expenditure including resting calories."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "do-carbs-make-you-fat",
+    "title": "Do Carbs Make You Fat?",
+    "date": "2026-03-31",
+    "description": "A detailed, science-aware guide to Do Carbs Make You Fat: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Carbs do not uniquely create fat independent of energy surplus.",
+      "Ultra-processed patterns can increase intake for some people."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "does-protein-turn-into-carbs",
+    "title": "Does Protein Turn Into Carbs?",
+    "date": "2026-03-30",
+    "description": "A detailed, science-aware guide to Does Protein Turn Into Carbs: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "The body can make glucose from amino acids when needed.",
+      "That is not a reason to treat protein like pasta."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "why-not-gaining-muscle",
+    "title": "Why Am I Not Gaining Muscle? 14 Fixes That Matter",
+    "date": "2026-03-29",
+    "description": "A detailed, science-aware guide to Why Am I Not Gaining Muscle? 14 Fixes That Matter: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Most stalled gains come from weak progressive overload, low protein, no surplus when needed, poor sleep, and impatience.",
+      "Fixes span training, nutrition, recovery, and logging honesty."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "does-counting-macros-work",
+    "title": "Does Counting Macros Work Long-Term?",
+    "date": "2026-03-28",
+    "description": "A detailed, science-aware guide to Does Counting Macros Work Long-Term: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Macro counting works when it improves awareness and adherence.",
+      "It fails as perfectionism theater."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "how-to-hit-your-macros",
+    "title": "How to Hit Your Macros Consistently",
+    "date": "2026-03-27",
+    "description": "Systems to hit macros: protein first, defaults, shakes, Saved meals, pre-dinner checks.",
+    "intro": [
+      "Consistency beats exact gram chasing at every lunch.",
+      "Build defaults and decide dinner with remaining macros in view."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "ww-vs-keto",
+    "title": "Weight Watchers vs Keto for Fat Loss",
+    "date": "2026-03-26",
+    "description": "WeightWatchers vs keto: mechanisms, adherence, lifting needs, and who each fits.",
+    "intro": [
+      "WW uses points and community. Keto uses carb restriction.",
+      "Both can reduce calories through different rules."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "ww-vs-macros-tracking",
+    "title": "Weight Watchers vs Macros Tracking",
+    "date": "2026-03-25",
+    "description": "A detailed, science-aware guide to Weight Watchers vs Macros Tracking: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Points simplify decisions. Macros give training precision.",
+      "If protein and performance matter, macros usually fit better."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "ww-vs-calorie-counting",
+    "title": "Weight Watchers vs Calorie Counting",
+    "date": "2026-03-24",
+    "description": "A detailed, science-aware guide to Weight Watchers vs Calorie Counting: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Both create intake structure.",
+      "Calories are transparent; points add preference rules."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "myplate-vs-myfitnesspal",
+    "title": "MyPlate vs MyFitnessPal: Which Tracker Fits You?",
+    "date": "2026-03-23",
+    "description": "An in-depth MyPlate vs MyFitnessPal comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between MyPlate and MyFitnessPal is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of MyPlate versus MyFitnessPal, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "nutrisystem-vs-weightwatchers",
+    "title": "Nutrisystem vs WeightWatchers: Which Is Better for Fat Loss?",
+    "date": "2026-03-22",
+    "description": "An in-depth Nutrisystem vs WeightWatchers comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between Nutrisystem and WeightWatchers is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of Nutrisystem versus WeightWatchers, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "macrofactor-vs-rp-diet",
+    "title": "MacroFactor vs RP Diet App: Practical Comparison",
+    "date": "2026-03-21",
+    "description": "An in-depth MacroFactor vs RP Diet comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between MacroFactor and RP Diet is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of MacroFactor versus RP Diet, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "cronometer-vs-carb-manager",
+    "title": "Cronometer vs Carb Manager: Which Should You Use?",
+    "date": "2026-03-20",
+    "description": "An in-depth Cronometer vs Carb Manager comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between Cronometer and Carb Manager is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of Cronometer versus Carb Manager, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "cronometer-vs-lose-it",
+    "title": "Cronometer vs Lose It: Detailed Comparison",
+    "date": "2026-03-19",
+    "description": "An in-depth Cronometer vs Lose It! comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between Cronometer and Lose It! is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of Cronometer versus Lose It!, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "carb-manager-vs-myfitnesspal",
+    "title": "Carb Manager vs MyFitnessPal for Keto Tracking",
+    "date": "2026-03-18",
+    "description": "An in-depth Carb Manager vs MyFitnessPal comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between Carb Manager and MyFitnessPal is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of Carb Manager versus MyFitnessPal, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "noom-vs-weightwatchers",
+    "title": "Noom vs WeightWatchers Review",
+    "date": "2026-03-17",
+    "description": "An in-depth Noom vs WeightWatchers comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between Noom and WeightWatchers is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of Noom versus WeightWatchers, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "noom-vs-myfitnesspal",
+    "title": "Noom vs MyFitnessPal Comparison",
+    "date": "2026-03-16",
+    "description": "An in-depth Noom vs MyFitnessPal comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between Noom and MyFitnessPal is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of Noom versus MyFitnessPal, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "mynetdiary-vs-myfitnesspal",
+    "title": "MyNetDiary vs MyFitnessPal Comparison",
+    "date": "2026-03-15",
+    "description": "An in-depth MyNetDiary vs MyFitnessPal comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between MyNetDiary and MyFitnessPal is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of MyNetDiary versus MyFitnessPal, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "lose-it-vs-myfitnesspal",
+    "title": "Lose It vs MyFitnessPal Review",
+    "date": "2026-03-14",
+    "description": "An in-depth Lose It! vs MyFitnessPal comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between Lose It! and MyFitnessPal is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of Lose It! versus MyFitnessPal, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "macrofactor-vs-myfitnesspal",
+    "title": "MacroFactor vs MyFitnessPal for TDEE Tracking",
+    "date": "2026-03-13",
+    "description": "An in-depth MacroFactor vs MyFitnessPal comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between MacroFactor and MyFitnessPal is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of MacroFactor versus MyFitnessPal, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "fatsecret-vs-myfitnesspal",
+    "title": "FatSecret vs MyFitnessPal Review",
+    "date": "2026-03-12",
+    "description": "An in-depth FatSecret vs MyFitnessPal comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between FatSecret and MyFitnessPal is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of FatSecret versus MyFitnessPal, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "lifesum-vs-myfitnesspal",
+    "title": "Lifesum vs MyFitnessPal Guide",
+    "date": "2026-03-11",
+    "description": "An in-depth Lifesum vs MyFitnessPal comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between Lifesum and MyFitnessPal is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of Lifesum versus MyFitnessPal, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "macrofactor-vs-cronometer",
+    "title": "MacroFactor vs Cronometer Review",
+    "date": "2026-03-10",
+    "description": "An in-depth MacroFactor vs Cronometer comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between MacroFactor and Cronometer is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of MacroFactor versus Cronometer, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "myfitnesspal-vs-cronometer",
+    "title": "MyFitnessPal vs Cronometer Guide",
+    "date": "2026-03-09",
+    "description": "An in-depth MyFitnessPal vs Cronometer comparison for real-world logging, adherence, databases vs structure, and who should pick which tool.",
+    "intro": [
+      "Choosing between MyFitnessPal and Cronometer is less about brand loyalty and more about friction. The best tracker is the one you still fill in on a tired Thursday.",
+      "Self-reported diaries underreport when logging is annoying. That research-shaped reality should sit above feature checklists.",
+      "Below is a practical breakdown of MyFitnessPal versus Cronometer, then when a photo-first app like IGNITE AI is the better third option."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "is-cronometer-worth-it",
+    "title": "Is the Cronometer App Worth It?",
+    "date": "2026-03-08",
+    "description": "A detailed, science-aware guide to Is the Cronometer App Worth It: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Cronometer shines for vitamins, minerals, and careful food data.",
+      "Worth it for precision-focused users."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "best-apps-gain-weight-2026",
+    "title": "25 Best Apps to Help Gain Weight Effectively",
+    "date": "2026-03-07",
+    "description": "A detailed roundup for 25 Best Apps to Help Gain Weight Effectively: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "25 Best Apps to Help Gain Weight Effectively only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-diabetes-weight-loss-apps",
+    "title": "25 Best Apps for Diabetes and Weight Loss Support",
+    "date": "2026-03-06",
+    "description": "A detailed roundup for 25 Best Apps for Diabetes and Weight Loss Support: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "25 Best Apps for Diabetes and Weight Loss Support only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-fitness-nutrition-apps",
+    "title": "20 Best Fitness and Nutrition Apps for Results",
+    "date": "2026-03-05",
+    "description": "A detailed roundup for 20 Best Fitness and Nutrition Apps for Results: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "20 Best Fitness and Nutrition Apps for Results only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-free-macro-tracking-apps",
+    "title": "15 Best Free Macro Tracking Apps",
+    "date": "2026-03-04",
+    "description": "A detailed roundup for 15 Best Free Macro Tracking Apps: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "15 Best Free Macro Tracking Apps only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-weight-watchers-alternatives",
+    "title": "21 Best Weight Watchers Alternatives",
+    "date": "2026-03-03",
+    "description": "A detailed roundup for 21 Best Weight Watchers Alternatives: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "21 Best Weight Watchers Alternatives only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-noom-alternatives",
+    "title": "19 Best Noom Alternatives",
+    "date": "2026-03-02",
+    "description": "A detailed roundup for 19 Best Noom Alternatives: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "19 Best Noom Alternatives only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-free-calorie-macro-trackers",
+    "title": "14 Best Free Calorie and Macro Trackers",
+    "date": "2026-03-01",
+    "description": "A detailed roundup for 14 Best Free Calorie and Macro Trackers: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "14 Best Free Calorie and Macro Trackers only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "apps-like-weight-watchers",
+    "title": "19 Apps Like Weight Watchers",
+    "date": "2026-02-28",
+    "description": "A detailed roundup for 19 Apps Like Weight Watchers: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "19 Apps Like Weight Watchers only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "fitness-apps-like-myfitnesspal",
+    "title": "28 Fitness Apps Like MyFitnessPal",
+    "date": "2026-02-27",
+    "description": "A detailed roundup for 28 Fitness Apps Like MyFitnessPal: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "28 Fitness Apps Like MyFitnessPal only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-food-journal-apps",
+    "title": "21 Best Food Journal Apps",
+    "date": "2026-02-26",
+    "description": "A detailed roundup for 21 Best Food Journal Apps: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "21 Best Food Journal Apps only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-carb-counting-apps",
+    "title": "23 Best Carb Counting Apps",
+    "date": "2026-02-25",
+    "description": "A detailed roundup for 23 Best Carb Counting Apps: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "23 Best Carb Counting Apps only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-weight-gain-apps",
+    "title": "13 Weight Gain Apps for Custom Plans",
+    "date": "2026-02-24",
+    "description": "A detailed roundup for 13 Weight Gain Apps for Custom Plans: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "13 Weight Gain Apps for Custom Plans only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-protein-tracker-apps",
+    "title": "14 Best Protein Tracker Apps",
+    "date": "2026-02-23",
+    "description": "A detailed roundup for 14 Best Protein Tracker Apps: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "14 Best Protein Tracker Apps only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "best-apps-to-track-macros",
+    "title": "16 Best Apps to Track Macros",
+    "date": "2026-02-22",
+    "description": "A detailed roundup for 16 Best Apps to Track Macros: what each option does well, who it fits, and how to choose without installing ten apps.",
+    "intro": [
+      "16 Best Apps to Track Macros only helps if the picks match how you eat and train. This list explains the job of each option, not just the logo.",
+      "Underreporting rises when logging is annoying. Choose speed and honesty over feature hoarding."
+    ],
+    "deeper": false,
+    "hasExecute": false
+  },
+  {
+    "slug": "how-to-use-saved-meals-ignite-ai",
+    "title": "How to Use Saved Meals in IGNITE AI for Faster Logging",
+    "date": "2026-02-21",
+    "description": "How to use Saved meals in IGNITE AI: calibrate once, re-log forever, when to re-snap.",
+    "intro": [
+      "Saved meals turn calibrated plates into one-tap logs.",
+      "Snap, edit oils and protein, save, then reuse on repeat days."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "build-streak-without-burning-out",
+    "title": "How to Build a Logging Streak Without Burning Out",
+    "date": "2026-02-20",
+    "description": "A detailed, science-aware guide to How to Build a Logging Streak Without Burning Out: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Streaks help until missing one day destroys identity.",
+      "Use minimum viable logs on hard days."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "protein-first-plate-method",
+    "title": "Protein-First Plate Method for Busy Lifters",
+    "date": "2026-02-19",
+    "description": "A detailed, science-aware guide to Protein-First Plate Method for Busy Lifters: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Protein first, then carbs for training, fats for calories.",
+      "Photo-log and adjust."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "weekend-calorie-damage-control",
+    "title": "Weekend Calorie Damage Control Without Quitting Tracking",
+    "date": "2026-02-18",
+    "description": "A detailed, science-aware guide to Weekend Calorie Damage Control Without Quitting Tracking: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Weekends break averages when drinks and restaurants go unlogged.",
+      "Budget social meals, snap dinners, bias fats up, return Monday without revenge under-eating."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "meal-prep-macros-guide",
+    "title": "Meal Prep Macros: Batch Cook Without Guessing",
+    "date": "2026-02-17",
+    "description": "A detailed, science-aware guide to Meal Prep Macros: Batch Cook Without Guessing: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Weigh oils and starches for the whole batch.",
+      "Divide by real containers, save, reheat without re-math."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "high-protein-snacks-macros",
+    "title": "High-Protein Snacks That Actually Fit Your Macros",
+    "date": "2026-02-16",
+    "description": "A detailed, science-aware guide to High-Protein Snacks That Actually Fit Your Macros: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Yogurt, jerky, cottage cheese, shakes, edamame, and similar options.",
+      "Log extras; saves beat vending surprises."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "sleep-deficit-hunger-weight",
+    "title": "How Sleep Loss Raises Hunger and Scale Weight",
+    "date": "2026-02-15",
+    "description": "A detailed, science-aware guide to How Sleep Loss Raises Hunger and Scale Weight: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Sleep loss can alter appetite signaling and raise stress-related water weight.",
+      "Fix sleep before crash-cutting calories."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "fiber-macros-satiety",
+    "title": "Fiber, Macros, and Satiety: How to Get Fuller in a Deficit",
+    "date": "2026-02-14",
+    "description": "A detailed, science-aware guide to Fiber, Macros, and Satiety: How to Get Fuller in a Deficit: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Fiber-rich carbs and vegetables improve fullness for many people.",
+      "Raise fiber gradually and still track total intake."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "sugar-cravings-calorie-deficit",
+    "title": "Sugar Cravings in a Calorie Deficit: What Helps",
+    "date": "2026-02-13",
+    "description": "A detailed, science-aware guide to Sugar Cravings in a Calorie Deficit: What Helps: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Cravings rise with sleep debt, low protein, and extreme restriction.",
+      "Log desserts on purpose instead of accidentally."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "maintenance-calories-find-yours",
+    "title": "How to Find Your Maintenance Calories in Two Weeks",
+    "date": "2026-02-12",
+    "description": "A detailed, science-aware guide to How to Find Your Maintenance Calories in Two Weeks: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Eat consistently, log, average intake, watch weekly weight.",
+      "Flat weight means practical maintenance."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "diet-break-when-and-how",
+    "title": "Diet Breaks: When to Take One and How to Run It",
+    "date": "2026-02-11",
+    "description": "A detailed, science-aware guide to Diet Breaks: When to Take One and How to Run It: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Diet breaks can restore training and adherence after long cuts.",
+      "Keep protein high, raise carbs, keep lifting, then resume."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "refeed-day-vs-diet-break",
+    "title": "Refeed Day vs Diet Break: What Is the Difference?",
+    "date": "2026-02-10",
+    "description": "A detailed, science-aware guide to Refeed Day vs Diet Break: What Is the Difference: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Refeeds are short higher-carb days. Diet breaks last longer at maintenance.",
+      "Plan them; do not turn them into untracked chaos."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "travel-macros-airport-food",
+    "title": "How to Hit Macros While Traveling",
+    "date": "2026-02-09",
+    "description": "A detailed, science-aware guide to How to Hit Macros While Traveling: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Travel wrecks databases.",
+      "Snap airport food, bias fats up, protect protein, keep a step floor."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "late-night-snacking-macros",
+    "title": "Late-Night Snacking Without Blowing Your Macros",
+    "date": "2026-02-08",
+    "description": "A detailed, science-aware guide to Late-Night Snacking Without Blowing Your Macros: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Budget evening calories earlier if nights are dangerous.",
+      "High-protein snacks help; sleep fixes more than speeches."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "how-accurate-are-restaurant-menus",
+    "title": "How Accurate Are Restaurant Menu Calories?",
+    "date": "2026-02-07",
+    "description": "A detailed, science-aware guide to How Accurate Are Restaurant Menu Calories: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Published calories can be off because kitchens vary.",
+      "Use as drafts, adjust for oils and portion size, photo-log."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "protein-timing-myths",
+    "title": "Protein Timing Myths vs What Matters",
+    "date": "2026-02-06",
+    "description": "A detailed, science-aware guide to Protein Timing Myths vs What Matters: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Total daily protein and stimulus matter more than anabolic window panic.",
+      "Spread doses when you can; shakes are convenient, not magic."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "cardio-vs-steps-fat-loss",
+    "title": "Cardio vs Steps for Fat Loss: Which Should You Prioritize?",
+    "date": "2026-02-05",
+    "description": "A detailed, science-aware guide to Cardio vs Steps for Fat Loss: Which Should You Prioritize: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Steps are low-stress NEAT. Cardio raises expenditure faster with more recovery cost.",
+      "Many cuts prefer a step floor plus lifting, adding cardio as needed."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "how-to-read-nutrition-labels-macros",
+    "title": "How to Read Nutrition Labels for Macros",
+    "date": "2026-02-04",
+    "description": "A detailed, science-aware guide to How to Read Nutrition Labels for Macros: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Serving size first.",
+      "Then macros. Watch multi-serving packages and net-carb marketing."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "best-time-to-weigh-yourself",
+    "title": "Best Time to Weigh Yourself for Accurate Trends",
+    "date": "2026-02-03",
+    "description": "A detailed, science-aware guide to Best Time to Weigh Yourself for Accurate Trends: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Weigh most mornings after bathroom before food.",
+      "Average the week; ignore single spikes."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "water-weight-vs-fat-loss",
+    "title": "Water Weight vs Fat Loss: How to Tell the Difference",
+    "date": "2026-02-02",
+    "description": "A detailed, science-aware guide to Water Weight vs Fat Loss: How to Tell the Difference: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Fast drops are often water and glycogen. Fat is slower.",
+      "Use multi-week averages, waist, photos."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "how-to-log-shared-meals",
+    "title": "How to Log Shared Plates and Family-Style Meals",
+    "date": "2026-02-01",
+    "description": "A detailed, science-aware guide to How to Log Shared Plates and Family-Style Meals: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Photograph before the table destroys evidence.",
+      "Estimate your portion, bias fats up, save regular family meals."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "ignite-ai-for-beginners",
+    "title": "IGNITE AI for Beginners: First Week Setup",
+    "date": "2026-01-30",
+    "description": "A detailed, science-aware guide to IGNITE AI for Beginners: First Week Setup: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Set protein and calorie targets, snap every meal, edit misses, log a workout, save a staple, review day seven."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "macros-for-women-lifting",
+    "title": "Macros for Women Who Lift: A Practical Setup",
+    "date": "2026-01-29",
+    "description": "A detailed, science-aware guide to Macros for Women Who Lift: A Practical Setup: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Enough protein and carbs to perform.",
+      "Use weekly averages; avoid crash deficits that crush training."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "macros-for-busy-parents",
+    "title": "Macro Tracking for Busy Parents",
+    "date": "2026-01-28",
+    "description": "A detailed, science-aware guide to Macro Tracking for Busy Parents: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Bites from kids plates count.",
+      "Photo-log fast, use Saved staples, protein anchors, logged days over perfect days."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "is-fitness-app-accurate",
+    "title": "Is Your Fitness App Accurate? How to Improve Reliability",
+    "date": "2026-01-27",
+    "description": "A detailed, science-aware guide to Is Your Fitness App Accurate? How to Improve Reliability: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Apps estimate.",
+      "Better photos, oil edits, weekly weigh-ins, conservative activity burns create accuracy enough."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  },
+  {
+    "slug": "how-to-track-macros-fast",
+    "title": "How to Track Macros Fast on Busy Days",
+    "date": "2026-01-26",
+    "description": "A detailed, science-aware guide to How to Track Macros Fast on Busy Days: practical protocols, common mistakes, measurement methods, and a logging system you can keep on busy weeks.",
+    "intro": [
+      "Photo snap, Saved meals, shakes, protein-first dinner decisions.",
+      "A 20-second honest log beats a skipped day."
+    ],
+    "deeper": true,
+    "hasExecute": true
+  }
+]

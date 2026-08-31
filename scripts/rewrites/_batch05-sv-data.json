@@ -1,0 +1,1354 @@
+[
+  {
+    "slug": "log-reminders-notifications-ignite",
+    "title": "Loggpåminnelser och notiser i IGNITE AI: håll följsamheten utan spam",
+    "date": "2026-08-29",
+    "description": "Ställ in IGNITE AI-loggpåminnelser som skyddar följsamheten utan notisspam — måltidstajmade pingar, tysta timmar och preferenshygien så middagen ändå loggas på hektiska veckor utan låsskärmströtthet.",
+    "sections": [
+      {
+        "body": [
+          "Påminnelser är ett tveeggat verktyg. Rätt ping räddar en tom kväll; fel ström tränar dig att swipa bort allt, inklusive den enda notisen som spelade roll. IGNITE AI-loggpåminnelser och notispreferenser finns för att skydda följsamheten — inte för att gamifiera låsskärmen.",
+          "De flesta glömmer inte att spårning finns. De glömmer i exakt det ögonblick livet toppar: pendlingen hem, barnens läggdags, sen träning. En gles påminnelse tajmad till det ögonblicket slår tio generiska «håll motivationen»-lappar.",
+          "Den här guiden täcker hur du tajmar påminnelser, vad du stänger av, hur du återhämtar efter notiströtthet, och hur påminnelser parar med Quick Log så trycket efter pinget blir kort. Det är beteendedesign för dagböcker, inte medicinsk rådgivning."
+        ]
+      },
+      {
+        "body": [
+          "En användbar påminnelse ber om en enda handling: logga lunchen, logga middagen, väg in, eller fyll gårdagens lucka. Staplad text som blandar tips, socialt, marknadsföring och loggning tävlar tills ingen vinner.",
+          "Granska preferenserna och behåll kanalerna som stänger luckor i din vecka. Om en notis aldrig ger en logg är den dekoration — stäng av den."
+        ],
+        "heading": "Ett jobb per notis"
+      },
+      {
+        "body": [
+          "Sätt middagspåminnelser när du faktiskt äter, inte till en aspirerande klockan 6 på kvällen. Pläterar du rutinmässigt maten klockan 8.30, pinga då. Morgonpåminnelser hjälper frukostskippare; lunchpingar hjälper skrivbordsarbetare som «glömmer» lunchen till klockan 3.",
+          "Börja med ett eller två ankare. Lägg till ett tredje bara om en specifik måltid fortsätter försvinna ur dagboken i två veckor. Gles slår fiffigt."
+        ],
+        "heading": "Tajma påminnelser till riktiga måltider"
+      },
+      {
+        "body": [
+          "Skydda sömn och djupt arbete. Loggpåminnelser klockan 11.30 på kvällen kan skapa skuldkänsla utan bättre data. Föredra tidigare pingar plus en morgon-ikapp-vana för sena nätter.",
+          "Vänaktivitetsnotiser är valfritt ansvar. Stressar de dig, behåll auto-share för dina inlägg men tysta inkommande brus. Ansvar ska inte kräva att du bor i en gruppchatt."
+        ],
+        "heading": "Tysta timmar och socialt brus"
+      },
+      {
+        "body": [
+          "Ignorerade påminnelser betyder att signalen är fel, inte att du är trasig. Flytta tiden, korta texten i huvudet («öppna FAB, fota middagen»), eller byt kanal. Att upprepa en misslyckad signal hårdare funkar sällan.",
+          "Para påminnelsen med en miljötrigger: telefonen på bänken medan du lagar, eller en lapp på airfryern. Digitala signaler fastnar bättre när en fysisk signal nickar med."
+        ],
+        "heading": "När du struntar i pingarna"
+      },
+      {
+        "body": [
+          "Missade du middagen, logga en ärlig uppskattning nästa morgon i stället för att lämna ett hål. Hål sabbar veckogenomsnitt mer än ofullkomliga sena poster. Använd foto om rester finns; annars beskriv det du minns och luta oljor uppåt.",
+          "Undvik «jag loggar hela dagen på söndag.» Batch-rekonstruktion är fiktionbenägen. Samma dag eller nästa morgon slår helgmytologi."
+        ],
+        "heading": "Kom ikapp utan att skriva om historien"
+      },
+      {
+        "body": [
+          "Påminnelser ska tjäna systemet: ringar fyllda med riktig mat, Progress som speglar veckan. Streak-panik som får dig att logga fejkade sallader är värre än en missad dag du rättar ärligt.",
+          "Stressar streak-språket dig, ignorera det och döm framgång på veckans fullständighet. Notiser är verktyg för fullständighet, inte för perfektionsteater."
+        ],
+        "heading": "Streaks kontra system"
+      },
+      {
+        "body": [
+          "Tidszoner och semestermåltider bryter statiska påminnelseklockor. Rikta om pingarna till lokal middag tillfälligt, eller pausa och lita på Quick Log när du sätter dig och äter. En fel-tidszon-påminnelse är bara spam med logotyp.",
+          "När du kommer hem, återställ de gamla ankarna direkt. Resor är ett vanligt sätt för notishygien att ruttna för gott."
+        ],
+        "heading": "Resor och schemaförskjutningar"
+      },
+      {
+        "body": [
+          "Konfigurera loggpåminnelser och notispreferenser så pinget landar när du kan öppna Quick Log-FAB:en och bli klar på under en minut — Snap Track-foto för röriga tallrikar, beskriv för kända måltider, dryckläge för latten du alltid glömmer.",
+          "Premium AI-registrering sitter fortfarande bakom Premium; påminnelser ersätter den inte. De ser bara till att du öppnar verktyget som håller Home-ringarna ärliga."
+        ],
+        "heading": "Var IGNITE AI-påminnelser passar in i loopen"
+      },
+      {
+        "body": [
+          "Håll påminnelserna få, tajmade till riktiga måltider, och kopplade till en snabb logghandling. Stäng av allt som aldrig ger en dagbokspost.",
+          "Använd IGNITE AI-notispreferenser som följsamhetsinfrastruktur — låt sedan Snap Track eller Quick Log avsluta jobbet innan kvällen försvinner."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "feature-request-bug-report-ignite",
+    "title": "Så fungerar funktionsönskemål och buggrapporter i IGNITE AI",
+    "date": "2026-08-29",
+    "description": "Hur du skickar användbara funktionsönskemål och buggrapporter i IGNITE AI — vilka detaljer hjälper utvecklingsteamet, vad du hoppar över, och varför in-app-rapporter slår vaga butiksrecensioner när loggningen går sönder på natten.",
+    "sections": [
+      {
+        "body": [
+          "Produktteam kan inte laga det de inte kan återskapa. En enstjärnig recension som säger «AI suckar» lär ingenting; en tight buggrapport med enhet, steg och en skärmdump av den trasiga uppskattningen gör det. IGNITE AI har in-app-vägar för funktionsönskemål och buggrapporter så riktig loggsmärta når dem som shippar appen.",
+          "Den bästa feedbacken kommer oftast från folk mitt i arbetsflödet: kameran failar på en dunkel tallrik, streckkodsmismatch i hyllan, en Friends-share som inte postades. Den kontexten är guld. Att fånga den in-app slår att hoppas att en social kommentar hittar rätt inkorg.",
+          "Den här guiden visar hur du skriver rapporter som får fäste, hur du skiljer buggar från smakpreferenser, och hur du efterfrågar funktioner utan att skriva en andra produktroadmap. Det är inget löfte att varje idé shippas."
+        ]
+      },
+      {
+        "body": [
+          "En bugg är något trasigt relativt förväntat beteende: krasch, blank skärm, fel sparning, synkfel, UI som fångar dig. Ett funktionsönskemål är något nytt eller förbättrat: ännu en export, en smartare standard, en genväg i arbetsflödet.",
+          "Fellabel saktar triage. Sparade Snap Track fel måltid efter att du bekräftat redigeringar är en bugg. Önskar du att editorn hade ett ett-trycks «lägg till matsked olja» är det ett funktionsönskemål — även om det känns brådskande."
+        ],
+        "heading": "Bugg kontra funktion: märk det ärligt"
+      },
+      {
+        "body": [
+          "Inkludera vad du gjorde, vad du förväntade, vad som hände, och om det upprepar sig. Lägg till OS-version, appversion om den syns, och skärmnamnet. Bifoga skärmdump eller skärminspelning när integriteten tillåter — sudda kalorier om du måste, behåll fel-chromen synlig.",
+          "Notera tajming: direkt efter uppdatering, på Wi-Fi kontra mobildata, efter lång bakgrund. Intermittenta buggar behöver frekvens («3 av 10 fotologgar»). Vag ilska utan steg parkeras; precisa rapporter köas."
+        ],
+        "heading": "Minsta användbara buggrapport"
+      },
+      {
+        "body": [
+          "För Snap Track-problem, säg vilket läge: måltidsfoto, etikett, streckkod, dryck, eller beskriv-/röstliknande inmatning. Nämn belysning, om du redigerade före bekräftelse, och om den dåliga datan dök upp först efter sparning.",
+          "För streckkoder, inkludera varumärke och produktnamn och om den fysiska etiketten säger emot. Databasmismatchar är ofta lagbara när produktidentiteten är tydlig — inte när rapporten bara säger «skanning fel»."
+        ],
+        "heading": "Återskapa foto- och skanningsproblem"
+      },
+      {
+        "body": [
+          "Ange jobbet som ska göras i en mening: «Jag behöver återlogga samma meal-prep-låda fem dagar utan att bygga om den.» Beskriv sedan din nuvarande workaround och varför den failar. Skippa mock-UI-föreläsningar om du inte illustrerar en verklig återvändsgränd.",
+          "Prioritera med din vecka, inte internets önskelista. Önskemål knutna till följsamhet — snabbare redigeringar, tydligare portioner, coachexporter — spelar oftast mer roll än kosmetiska teman."
+        ],
+        "heading": "Skriv funktionsönskemål som överlever granskning"
+      },
+      {
+        "body": [
+          "Klistra inte in lösenord, återställningskoder eller fullständiga betalningsuppgifter. Inkludera inte andras privata måltider från ett Friend-flöde. Hota inte; det accelererar inte triage och kan få tråden att ignoreras.",
+          "Undvik att bunta tio orelaterade issues i en klump. Dela krascher från wishlist-poster så var och en kan stängas självständigt."
+        ],
+        "heading": "Vad du inte ska lägga i en rapport"
+      },
+      {
+        "body": [
+          "Butiksrecensioner påverkar nedladdningar; de är en usel buggdatabas. Använd dem för övergripande omdöme efter att du redan skickat in en reproducerbar rapport in-app. Recenserar du bara kanske utvecklarna aldrig ser stack-trace-vägen du träffade klockan 10 på kvällen.",
+          "Följer support upp, svara en gång med samma struktur. Att eka originalstegen slår att skriva om romanen varje gång."
+        ],
+        "heading": "Butiksrecensioner kontra in-app-kanaler"
+      },
+      {
+        "body": [
+          "Visionloggning, etikett-OCR och social delning failar i edge cases av naturen. Fältrapporter från riktiga kök och gym lär mer än labbdemos. Ditt tråkiga edge case — ånga på linsen, blank takeaway, multipack-yoghurt — kan vara morgondagens fix.",
+          "Det betyder inte att varje önskemål shippas nästa sprint. Det betyder att högkvalitativ signal compoundar. Lågkvalitativt brus saktar alla, inklusive funktionerna du faktiskt vill ha."
+        ],
+        "heading": "Hur feedback formar en foto-först-app"
+      },
+      {
+        "body": [
+          "Använd in-app-flödena för funktionsönskemål och buggrapport från Profile eller hjälpytor så metadata kan följa med ticketen. Fortsätt logga med Snap Track medan du väntar; workarounds som beskrivläge eller sparade måltider låser oftast upp dagen även när en kameraväg beter sig fel.",
+          "Premium-användare som träffar AI-registreringsbuggar ska säga det — de vägarna är compute-tunga och värda precisa rapporter. Ärlighet om Premium-grindar i feedback hjälper också: «blockerad bakom paywall oväntat» skiljer sig från «uppskattning fel efter att jag betalat»."
+        ],
+        "heading": "Var IGNITE AI vill ha signalen"
+      },
+      {
+        "body": [
+          "Bra rapporter är korta, reproducerbara och märkta som bugg eller önskemål. Skärmdumpar och lägesnamn slår vaga enstjärniga essäer.",
+          "När något går sönder mitt i loggen, skicka in det i IGNITE AI:s in-app-kanaler med steg — håll sedan dagboken i rörelse med en reservregistreringsväg medan teamet använder din signal."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "summary-report-for-online-coaches",
+    "title": "Skicka din IGNITE AI-sammanfattning till en onlinecoach",
+    "date": "2026-08-29",
+    "description": "Hur du skickar en IGNITE AI-sammanfattning till en onlinecoach — vad som hör hemma i ett coachklart underlag, vilka skärmdumpar du hoppar över, och hur veckotrender slår kaotiska dagboksfotomappar varje gång.",
+    "sections": [
+      {
+        "body": [
+          "Onlinecoacher behöver inte fyrtio beskurna skärmdumpar av slumpdagar. De behöver en sammanhängande historia: intagstrender, proteinkonsekvens, träningsbelastning, viktriktning, och helgerna som faktiskt avgör fettförlusten. Sammanfattningsrapporter finns för att paketera den historien från samma loggar du redan för.",
+          "Atleter underkommunicerar ofta med kaos eller överkommunicerar med brus. En ren rapport respekterar båda sidor: du slutar sätta ihop bildspel vid midnatt; din coach slutar rekonstruera ditt liv från suddiga Home-skärmar.",
+          "Den här guiden täcker vad du ska inkludera, vad du ska utelämna, hur ofta du skickar, och hur IGNITE AI-sammanfattningar passar en remote coaching-loop. Den ersätter inte en coachs professionella omdöme eller klinisk vård."
+        ]
+      },
+      {
+        "body": [
+          "De flesta justeringar handlar om genomsnitt och följsamhet: Träffar du proteinet? Ligger veckans kalorigenomsnitt nära planen? Matchar steg och träning cuten eller bulken? Saboterade resor fyra dagar?",
+          "En ensam heroisk underskottsdag efter tre tomma kvällar vilseleder alla. Rapporter ska betona fullständighet och central tendens, inte din bästa tisdag."
+        ],
+        "heading": "Vad coacher faktiskt beslutar från data"
+      },
+      {
+        "body": [
+          "Skräp in, skräp ut. Saknas oljor, drycker och delade tallrikar kommer sammanfattningen se «perfekt» ut medan vågen säger emot. Lägg veckan på att logga med redigerbar registrering — fotoutkast plus korrigeringar — innan du investerar i snyggare exporter.",
+          "Sparade stapelvaror och meal-prep-upprepningar gör coachveckor jämförbara. När måndag–fredag-maten är samma låda blir trendlinjer tolkningsbara."
+        ],
+        "heading": "Bygg rapporten från riktiga loggar först"
+      },
+      {
+        "body": [
+          "Inkludera veckovisa kalori- och makrogenomsnitt, vikttrend om du spårar den, träningssammanfattning, och en kort not om anomalier: bröllop, sjukdom, sömnkollaps, medicinändringar du är villig att dela. Flagga misstänkt underloggning ärligt.",
+          "Valfria extras: sömn- eller stegkontext från Health om du och coachen använder det, plus ett eller två representativa måltidsfoton för portionskalibrering — inte en hel kamerarulle."
+        ],
+        "heading": "Vad som hör hemma i ett coachklart paket"
+      },
+      {
+        "body": [
+          "Skippa minut-för-minut-referat, moraliska kommentarer och orelaterade appinställningsskärmdumpar. Skippa andras Friend-gruppinlägg. Skippa betalnings- eller kontoskärmar.",
+          "Skicka inte råa exporter av varje mikronutrientfält om inte coachen bad om det. Överväldigande skapar ignorerade mejltrådar."
+        ],
+        "heading": "Vad du ska lämna utanför"
+      },
+      {
+        "body": [
+          "Kom överens om en söndags- eller måndagssändning. Samma kadens tränar dig att slutföra veckan och tränar coachen att svara på ett schema. Mitt-i-veckan-paniktexter med tre foton är för nödsituationer, inte rutin.",
+          "Missar du en vecka, säg det och skicka en partiell med märkta luckor. Att låtsas fullständighet är hur program stallar en månad obemärkt."
+        ],
+        "heading": "Kadens: veckovis slår slumpdumpningar"
+      },
+      {
+        "body": [
+          "Fråga coachen vilka spakar de kommer ändra: kalorier, protein, steg eller träning — inte allt på en gång. Använd nästa vecka till att testa en primär ändring så följande rapport kan visa signal.",
+          "Säger rapporten och vågen emot varandra, granska drycker, helger och portionsredigeringar innan du kräver en brantare cut. Coacher kan inte bortprogrammera saknad jordnötssmör."
+        ],
+        "heading": "Att läsa rapporten tillsammans"
+      },
+      {
+        "body": [
+          "Dela bara det ditt coachingavtal täcker. Du kan sudda platser eller ta bort sociala identifierare från Share Cards. Håll medicinska diagnosdetaljer i den kanal coachen anger.",
+          "Byter du coach, återkalla accessmönster och sluta skicka automatiska artefact. Dataportabilitet ska inte bli oavsiktlig övervakning."
+        ],
+        "heading": "Integritet och professionella gränser"
+      },
+      {
+        "body": [
+          "Generera sammanfattningen från dagboken du redan för i IGNITE AI — Home-ringar, Progress-trender, Exercise-loggar — så coachunderlaget matchar verkligheten i stället för ett separat kalkylark du överger.",
+          "Premium Snap Track förbättrar den underliggande måltidskvalitet som gör rapporter trovärdiga. Exporten är bara så bra som veckans bekräftade loggar; behandla registreringskvalitet som en del av coachinghygienen."
+        ],
+        "heading": "Var IGNITE AI-sammanfattningar passar in"
+      },
+      {
+        "body": [
+          "Coachklar kommunikation är en veckotrendhistoria, inte en skärmdumpshög. Logga ärligt, sammanfatta rent, skicka på en kadens, och ändra en spak i taget.",
+          "Använd IGNITE AI-sammanfattningar för att byta kaos mot ett enda underlag — så remote coaching-tid går till beslut, inte arkeologi."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "appearance-modes-adherence-ignite",
+    "title": "Varför utseendelägen i IGNITE AI påverkar om du öppnar appen",
+    "date": "2026-08-29",
+    "description": "Varför utseendelägen i IGNITE AI påverkar om du öppnar appen — ljust kontra mörkt komfort, sen loggning, parning med enheter och språk, och följsamhet som ett UX-problem inte bara ett mindset-problem.",
+    "sections": [
+      {
+        "body": [
+          "Gör UI:t ont i ögonen klockan 11 på kvällen hoppar du över. Folk kallar det ett disciplinmisslyckande; ofta är det ett utseendemisslyckande. IGNITE AI Preferences låter dig välja ljust, mörkt eller systemanpassat så dagboken är något du faktiskt öppnar efter en lång dag.",
+          "Utseende ersätter inte Snap Track-redigeringar eller proteinmål. Det tar bort en fånig anledning att stänga appen innan loggen finns.",
+          "Behandla chrome som en del av följsamhetsdesign — samma kategori som enheter, språk och påminnelsetajming."
+        ]
+      },
+      {
+        "body": [
+          "Många användare avslutar middagsloggar i sängen eller i soffan i ett mörkt rum. Ett bländande ljust tema känns som en ficklampa i ansiktet. Mörka lägen minskar den ryckningen.",
+          "Skiftarbetare och föräldrar på nattmatningar får samma vinst. Komfort är inte fåfänga; det är registreringsförsäkring."
+        ],
+        "heading": "Sen nattloggning är vanligt"
+      },
+      {
+        "body": [
+          "Loggar du varje måltid vid lunch på ett kontor kan ljust läge kännas tydligare. Är din kritiska måltid sen, optimera för det ögonblicket — det du historiskt hoppar över.",
+          "Systemföljande utseende kan funka om telefonen redan växlar vid solnedgång. Manuellt mörkt är bättre om systemtajmingen inte stämmer med dina måltider."
+        ],
+        "heading": "Matcha temat med när du loggar"
+      },
+      {
+        "body": [
+          "Medan du väljer tema, bekräfta språk och metriska/imperiala enheter. Ett bekvämt mörkt UI som fortfarande visar fel mätsystem löser bara halva friktionen.",
+          "Resor och campusliv är bra tillfällen att kolla om alla tre."
+        ],
+        "heading": "Para utseende med enheter och språk"
+      },
+      {
+        "body": [
+          "Snap Track-granskningsskärmar, Diet planner, AI Lab och Progress-diagram ska vara lätta att läsa i ditt valda läge. Känns kontrasten fel, byt tema i stället för att överge AI-registrering.",
+          "Produkten tar loggning på allvar; flexibel chrome är en del av det allvaret."
+        ],
+        "heading": "Premium-verktyg förtjänar läsbar chrome"
+      },
+      {
+        "body": [
+          "Share Cards har egna teman för export. Ditt in-app-utseende behöver inte matcha din Instagram-estetik — men creators som filmar tutorials kan vilja ett konsekvent look på kamera.",
+          "Kräv aldrig att följare använder ditt tema. Lär ut Preferences i stället."
+        ],
+        "heading": "Social posting och Share Cards"
+      },
+      {
+        "body": [
+          "Att öppna Friends-chatt eller fasting-verktyg på natten ska inte heller blända. Hela appens utseende håller de ytorna bekväma.",
+          "Väcker notiser dig, fixa notisinställningarna separat — temat ensamt löser inte sömnhygien."
+        ],
+        "heading": "Friends, fasting och natt-UI"
+      },
+      {
+        "body": [
+          "Välj ett läge, lev med det en vecka, lämna det sedan ifred. Ändlöst temahoppande är prokrastinering utklädd till produktivitet.",
+          "Återbesök bara när årstider, resor eller skiftändringar gör det gamla valet fel."
+        ],
+        "heading": "När du ska sluta pilla"
+      },
+      {
+        "body": [
+          "Gör IGNITE AI lätt att titta på, sedan är den svåra delen bara middagen. Utseendelägen är följsamhetsverktyg — särskilt för sena loggar — inte kosmetiska eftertankar.",
+          "Sätt mörkt eller ljust medvetet bredvid språk och enheter, låt sedan Snap Track och Progress bära jobbet. Allvarlig loggning förtjänar flexibel chrome."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "rollover-calories-week-examples",
+    "title": "Så fungerar kalori-rollover från vecka till vecka (med exempel)",
+    "date": "2026-08-29",
+    "description": "Hur kalori-rollover fungerar från vecka till vecka i IGNITE AI — med konkreta exempel för ojämna sociala helger, när banking hjälper följsamheten, och när rollover blir en ursäkt för tomma eller oärliga loggar.",
+    "sections": [
+      {
+        "body": [
+          "Kalorimål är dagliga för bekvämlighet och veckovisa för fysiologi. Livet är ingen platt linje: bröllop, resor och hårda träningsdagar böjer intaget. Rollover-preferenser finns för att flytta oanvända kalorier mellan dagar så en tyngre lördag inte kräver fejkad matte eller tyst undätning måndag till fredag.",
+          "Rollover är ingen cheat-code-printer. Saknas vardagsloggar finns ingenting ärligt att banka. «Rullar» varje dag in i oreglerade nätter har du bara uppfunnit ett okontrollerat överskott med extra steg.",
+          "Nedan finns raka exempel på när rollover hjälper, när den skadar, och hur du läser veckan i Progress i stället för att förhandla med en ensam kväll. Justera bara preferenser du förstår; det här är inte personaliserad medicinsk nutritionsterapi."
+        ]
+      },
+      {
+        "body": [
+          "Strikta dagliga tak straffar social verklighet och belönar folk vars kalendrar aldrig ändras. Rollover låter ett rent vardagsundershoot finansiera en planerad tyngre måltid utan att överge veckans energibudget.",
+          "Den psykologiska vinsten spelar också roll: planerad flexibilitet minskar binge-restrict-loopen som börjar med «jag har redan ruinerat dagen.» Planerad spend är inte samma sak som ologgat kaos."
+        ],
+        "heading": "Vad rollover försöker lösa"
+      },
+      {
+        "body": [
+          "Anta att ditt mål är 2,200 kcal. Du äter cirka 2,000 måndag–fredag med kompletta loggar — ungefär 1,000 kcal bankade om dina rollover-regler tillåter det. Lördagsmiddagen kan absorbera en rejäl restaurangmåltid medan veckogenomsnittet fortfarande följer planen.",
+          "Det funkar bara om måndag–fredag-posterna är verkliga. Att fotografera sallader du inte åt upp, eller hoppa över oljor, fabricerar en bank som aldrig fanns. Rollover förstärker ärlighet; den förstärker också fiktion."
+        ],
+        "heading": "Exempel A: banka vardagar för lördagsmiddag"
+      },
+      {
+        "body": [
+          "Vissa atleter föredrar något högre intag runt nyckelpass. Rollover kan flytta kalorier mot torsdagsmiddag och fredagsfrukost, och sedan köra lättare på en vilande söndag. Dagboken ska fortfarande visa att proteinet hålls högt på träningsdagar.",
+          "Är Exercise-loggning aktiv, döm veckan på mat plus träningskontext — inte genom att låtsas att förbrända kalorier är gratis obegränsade toppingar. Håll rollover-regler tillräckligt konservativa för att «ät tillbaka allt» aldrig blir den tysta policyn."
+        ],
+        "heading": "Exempel B: hård träning torsdag, lättare fredag"
+      },
+      {
+        "body": [
+          "Du undershootar genom att glömma lunch tre dagar, «bankar» fantomkalorier, spränger sedan lördagen och undrar varför vikttrenden går upp. Det är inte flexibel dieting; det är saknad data plus ett festligt överskott.",
+          "Ett annat fail-läge: rulla framåt i oändlighet utan veckogenomgång. Flexibilitet behöver en behållare. Visar Progress att veckogenomsnittet driftar upp i tre veckor, strama rollover eller återgå till plattare dagliga mål tillfälligt."
+        ],
+        "heading": "Exempel C: när rollover blir en ursäkt"
+      },
+      {
+        "body": [
+          "Kräv kompletta loggar innan du litar på banken. Kapa hur mycket som kan flytta på en dag om produktinställningarna tillåter gränser. Håll proteingolv intakta — flexibilitet ska mest leva i kolhydrater och fetter runt sociala måltider.",
+          "Bestäm den tunga måltiden i förväg när det går. Förhandsåtagande gör rollover till en plan; efterhandsrationalisering gör den till tillåtelse efter skadan."
+        ],
+        "heading": "Räcken som håller flexibiliteten ärlig"
+      },
+      {
+        "body": [
+          "Rollover spenderas ofta på middag plus drinkar. Logga alkohol i dryckläge och mat med fotoredigeringar så «banken» möter verkligheten. Flytande kalorier är där flexibla planer tyst dör.",
+          "Är utekvällar veckovisa, bygg in dem i genomsnittet med flit. Ett system som antar klostervardagar och kaoslördagar kommer alltid kännas trasigt."
+        ],
+        "heading": "Helger, alkohol och flytande kalorier"
+      },
+      {
+        "body": [
+          "Öppna Progress och titta på veckogenomsnittet, inte den högljuddaste dagen. Fråga: Minskar rollover stressen utan att höja genomsnittet bortom målet? Höll proteinet? Var loggarna kompletta?",
+          "Om ja, behåll preferensen. Om nej, minska flexibiliteten i två veckor och bygg om vanan att logga samma dag innan du låser upp banking igen."
+        ],
+        "heading": "Så granskar du rollover på måndag"
+      },
+      {
+        "body": [
+          "Använd IGNITE AI kalori-rollover-preferenser som ett medvetet veckoverktyg, mata dem sedan med ärliga Snap Track- och Quick Log-poster. Tomma dagar kan inte finansiera riktiga middagar — bara kompletta dagböcker kan.",
+          "Premium AI-registrering hjälper ärlighetslagret på blandade restaurangtallrikar; rollover utan redigerbar loggning är bara ett mjukare sätt att gissa. Para preferenser med Progress-genomgångar så funktionen förblir en ratt, inte en historia du berättar för dig själv."
+        ],
+        "heading": "Var IGNITE AI-preferenser passar in"
+      },
+      {
+        "body": [
+          "Rollover jämnar ut ojämna veckor när vardagsloggar är kompletta och veckogenomsnittet förblir avsiktligt. Den failar när den används för att tvätta tomma dagar eller obegränsade helger.",
+          "Banka med flit, spendera med flit, granska på måndag i IGNITE AI Progress — och behandla rollover som flexibel budgetering, inte en kryphålsmaskin."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "add-burned-calories-on-vs-off",
+    "title": "Ska du lägga tillbaka förbrända kalorier i IGNITE AI?",
+    "date": "2026-08-30",
+    "description": "När du ska slå på «lägg till förbrända kalorier» i IGNITE AI — fettförlustfaser kontra högoutputträning, wearable-överestimation, Health-synk-förbehåll, och hur du dömer inställningen med Progress-genomsnitt.",
+    "sections": [
+      {
+        "body": [
+          "Få preferensreglage startar fler bråk än att lägga tillbaka förbrända kalorier till dagsbudgeten. Vissa atleter behöver flexibiliteten; många fettförlustfaser stallar tyst för att klockor uppfinner hundratals bonus-kcal. IGNITE AI predikar ingen ensam religion — du väljer om träningsförbränning justerar målen.",
+          "Wearables och Health Connect- / Apple Health-synkar kan mata aktivitetsdata. Den bekvämligheten är inte samma sak som metabol sanning. Överestimation är vanligt; underestimation händer också. Dina vikttrender och Progress-energigenomsnitt är domaren.",
+          "Den här guiden hjälper dig välja på kontra av för en definierad fas, köra den i två veckor, och besluta med data i stället för gymforumsdogm."
+        ]
+      },
+      {
+        "body": [
+          "När den är på kan loggad eller synkad träningsenergi öka vad du får äta den dagen. När den är av sitter matmålen förankrade i ditt planerade intag oavsett optimistisk förbränning.",
+          "Inget av lägena ersätter att redigera matloggar. Oljan du glömde spelar fortfarande mer roll än ett femminutersbråk om klockkrediter."
+        ],
+        "heading": "Vad inställningen faktiskt ändrar"
+      },
+      {
+        "body": [
+          "Är målet ett underskott klarar sig många bättre med förbrända kalorier av. Du tränar för prestation och hälsa; du äter inte automatiskt klockans fantasi.",
+          "Föredrar du på, diskontera förbränningen mentalt eller håll pass lätt loggade tills Progress visar att kombinationen fortfarande flyttar veckogenomsnitt åt rätt håll."
+        ],
+        "heading": "Fettförlustfaser: default mot av eller diskontera"
+      },
+      {
+        "body": [
+          "Atleter i tunga block eller folk som håller vikt vid hög NEAT behöver ibland add-back för att undvika underbränsle. På kan vara rationellt när träningsvolymen är verklig och aptiten släpar.",
+          "Verifiera ändå med kroppsviktstrender, energi i passen och Progress — inte med en ensam hungersignal efter passet."
+        ],
+        "heading": "Högoutputatleter och underhåll"
+      },
+      {
+        "body": [
+          "Orolig sömn, bilvibrationer feltolkade som steg, och generösa styrketräningsuppskattningar skapar fantombudget. Ser helger «intjänade» ut trots stillasittande brunchdagar är misstanke befogad.",
+          "Korskontrollera Exercise-loggar du litar på manuellt mot automatiska krediter. Föredra tydlighet framför dubbelräkning."
+        ],
+        "heading": "Wearable-inflationsmönster att bevaka"
+      },
+      {
+        "body": [
+          "Välj en inställning. Håll matloggningskvaliteten konstant — Snap Track-redigeringar inräknade. Byt inte proteinmål mitt i testet. Väg under liknande förhållanden.",
+          "Läs Progress-energigenomsnitt på dag fjorton. Stallade vikten medan intaget ser högt ut med förbränning-på, slå av och testa om. Kraschade prestationen med förbränning-av, överväg på eller höj planerat intag medvetet."
+        ],
+        "heading": "Så kör du ett rent tvåveckorstest"
+      },
+      {
+        "body": [
+          "När träningen sjunker blir fantomförbränning farligare. Föredra av tills aktiviteten återvänder. Uppdatera Profile-mål så ringarna matchar verkligheten.",
+          "Se också återhämtningsloggningsvanor: behåll dagboken, förenkla protein, skippa heroiska underskott."
+        ],
+        "heading": "Skada och lågaktivitetsundantag"
+      },
+      {
+        "body": [
+          "Postar du träningskort, kom ihåg att följare kan kopiera din förbränningsfilosofi utan att kopiera din volym. Säg vilken preferens du använder när du lär ut.",
+          "Creators ska inte antyda att IGNITE AI tvingar eat-back. Produkten erbjuder ett val — noggrannhet i innehållet bygger förtroende."
+        ],
+        "heading": "Share Cards och social kontext"
+      },
+      {
+        "body": [
+          "Lägg till förbrända kalorier på för högoutput-bränsle när Progress nickar; håll den av för många fettförlustfaser för att undvika wearable-teater. IGNITE AI låter dig välja i stället för att predika.",
+          "Välj en regel, kör två ärliga veckor med Snap Track och Progress, döm sedan genomsnitt — inte vibbar. Återbesök reglaget när träningsvolym eller mål ändras."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "progress-energy-averages-read-a-stall",
+    "title": "Så läser du energigenomsnitt i IGNITE AI när vikten stannar",
+    "date": "2026-08-30",
+    "description": "Hur du läser Progress-energigenomsnitt i IGNITE AI när vikten stannar — skilj natriumbrus från verkligt överskott, kolla fotologgsärlighet, och ändra en spak utan panik-cut.",
+    "sections": [
+      {
+        "body": [
+          "Stallar är inte alltid överskott. Natrium, mensvätska, inflammation, glykogen, underrapporterade oljor, eller ett verkligt behov av intagsändring kan alla frysa vågen. Panik-cut på 500 kcal lär elände oftare än fettförlust. Progress-energigenomsnitt finns så du diagnostiserar innan du bränner planen.",
+          "IGNITE AI:s Progress-flik parar näringstrender med den loggningskvalitet du faktiskt producerade — särskilt när Snap Track-redigeringar var ärliga om dressingar och helgdrinkar.",
+          "Den här guiden är en läsmetod, inte en medicinsk utredning. Ihållande symptom eller extrema beteenden behöver proffs, inte djupare appinställningar."
+        ]
+      },
+      {
+        "body": [
+          "Saknas tre middagar har du ingen stall — du har ett datagap. Fyll dagboken i sju kompletta dagar innan du ändrar mål.",
+          "Återbesök restaurang- och dryckposter. «Mysteriet-platån» är ofta ologgade delade förrätter."
+        ],
+        "heading": "Börja med loggningens fullständighet"
+      },
+      {
+        "body": [
+          "Jämför en rullande vecka av intag mot ditt avsedda mål. En bröllopsbuffé definierar inte fasen; fjorton dagar av tyst överskott kan.",
+          "Dela vardagar kontra helger mentalt. Många «stallar» är fredag–söndag-genomsnittsproblem som bär måndagsmask."
+        ],
+        "heading": "Läs energigenomsnitt, inte enskilda dagar"
+      },
+      {
+        "body": [
+          "Bekräfta att proteindagar träffas. Lågt protein med «fina kalorier» känns ändå som en failad cut. Jaga sedan fetter: oljor, nötssmör, ost, krämiga såser — Snap Track-redigeringslagret.",
+          "AI Lab kan hjälpa brainstorma var dold energi gömmer sig i dina vanliga måltider; du verifierar fortfarande på tallriken."
+        ],
+        "heading": "Protein- och fettkvalitetskollar"
+      },
+      {
+        "body": [
+          "Är lägg till förbrända kalorier på, fråga om wearable-krediter raderade underskottet på papperet. Testa en vecka av och jämför Progress.",
+          "Steg kan vara verkliga; bonus-kcal från oroliga nätter är mindre heliga. Preferenser finns för att testa filosofier."
+        ],
+        "heading": "Förbrända kalorier och Health-synk-misstänkta"
+      },
+      {
+        "body": [
+          "Använd veckovis genomsnittsvikt om du väger dagligen. Progress-foton hjälper när vätskebrus är emotionellt. Ett platt genomsnitt i tre veckor med kompletta höga intagsloggar är en starkare signal än ett tvådagars-hopp efter sushi.",
+          "Kvinnors cykelrelaterade svängningar förtjänar tålamod mätt i veckor, inte timmar — utan att använda det som en evig ursäkt att ignorera genomsnitt."
+        ],
+        "heading": "Vågbrus kontra sann stall"
+      },
+      {
+        "body": [
+          "Alternativ: strama helgloggning, sänk målkalorier måttligt, höj protein, öka medvetna steg, eller slå av burn add-back. Välj en. Omvärdera om fjorton dagar.",
+          "Diet planner-byten kan sänka energitäthet utan att uppfinna hela köket på nytt. Extrema cuts efter en stall reboundar oftast hårdare."
+        ],
+        "heading": "Ändra bara en spak"
+      },
+      {
+        "body": [
+          "Friends-grupper ska fira avslutade diagnosveckor, inte kräva smalare Share Cards. Tysta auto-share om offentligt bevis spikar ångest.",
+          "Creators som lär ut stallar ska visa Progress-skärmar ärligt — ingen fejkad före/efter-vetenskap."
+        ],
+        "heading": "Sociala funktioner och stallpsykologi"
+      },
+      {
+        "body": [
+          "Läs energigenomsnitt i IGNITE AI innan du bränner planen. Kompletta loggar, helgärlighet, oljeredigeringar och burn-toggle-tester förklarar fler stallar än ännu en crash diet.",
+          "Använd Progress som evidensmappen panik aldrig har. Ändra en spak, ge den två veckor, och håll Snap Track-kvaliteten hög medan vågen berättar en långsammare historia."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "snap-cook-with-diet-planner-swaps",
+    "title": "Para Snap Cook-recept med IGNITE AI Diet planner-byten",
+    "date": "2026-08-30",
+    "description": "Hur du parar Snap Cook med IGNITE AI Diet planner-byten — laga från det du har, byt det du inte kan köpa, Snap Track det du pläterade, och håll Premium-planering och matlagning i en loop.",
+    "sections": [
+      {
+        "body": [
+          "Måltidsplaner dör när kylen säger emot. Diet planner säger lax; du har ägg och spenat. Rätt drag är inte att överge struktur — det är att byta planen och laga det som finns. IGNITE AI kopplar de jobben: Diet planner för veckan, Snap Cook för receptriktning från foton av ingredienser, Snap Track för den pläterade sanningen.",
+          "Premium låser upp den här AI-planerings- och matlagningsstacken. Poängen är en loop, inte tre prenumerationer som aldrig pratar.",
+          "Den här guiden visar ett praktiskt köksflöde för hektiska veckor, batch-prep och «vad som ligger i lådan»-kvällar."
+        ]
+      },
+      {
+        "body": [
+          "Generera eller öppna din Diet-plan efter att onboarding-mål är satta. Notera proteinankare för varje dag. När en måltid är omöjlig, byt innan du ghostar dagen.",
+          "Byten håller makroavsikten vid liv när matvarorna failar. De är inte fusk; de är hur planer överlever kontakt med verkligheten."
+        ],
+        "heading": "Börja från planen, inte från vibbar"
+      },
+      {
+        "body": [
+          "Fotografera det du faktiskt har. Snap Cook föreslår en användbar riktning så rester och udda grönt blir middag i stället för delivery som default.",
+          "Behandla receptet som assistans. Kryddning, livsmedelssäkerhet och allergenomdöme förblir ditt. Laga sedan."
+        ],
+        "heading": "Snap Cook när ingredienserna är prompten"
+      },
+      {
+        "body": [
+          "Efter matlagning, Snap Track den pläterade måltiden. Oljor du la i pannan räknas fortfarande. Sparade stapelvaror fångar vinster du kommer upprepa nästa torsdag.",
+          "Divergade det tillagade resultatet hårt från planner-posten är din logg sanningen för Progress — uppdatera mentala noter för nästa veckas plan."
+        ],
+        "heading": "Logga tallriken, inte fantasin"
+      },
+      {
+        "body": [
+          "Planera proteiner och baser i Diet planner, laga en flexibel uppsättning med Snap Cook-inspiration, portionera och spara stapelvaror. Vardagskvällar blir återuppvärmning plus en grönsak — fortfarande loggad.",
+          "Friends auto-share är valfritt om meal-prep-ansvar hjälper; tystnad är okej om du bara behöver köksloopen."
+        ],
+        "heading": "Batch-prep-söndagar"
+      },
+      {
+        "body": [
+          "Byt planner-måltiden till «ute» mentalt, fotologga sedan restaurangtallriken. Låtsas inte att laxbowlen hände.",
+          "Helgstrategier gäller fortfarande: drinkar, oljor, delade tallrikar. Plannern är en guide, inte ett rättegångsprotokoll."
+        ],
+        "heading": "Restaurangkvällar inuti en planner-vecka"
+      },
+      {
+        "body": [
+          "När två byten verkar lika kan AI Lab hjälpa jämföra övergripande alternativ. Du beslutar fortfarande och Snap Trackar fortfarande.",
+          "Outsourca inte medicinska nutritionsbeslut till chatt. Scope stannar vid livsstilsplanering och loggassistans."
+        ],
+        "heading": "AI Lab som utslagsgivare"
+      },
+      {
+        "body": [
+          "Att filma plan → Snap Cook → pläterat Share Card är starkt utbildningsinnehåll. Creator Programs kompletterande Premium hjälper dig demo utan paywall-klipp.",
+          "Håll CTA:er korrekta: årlig Premium där det erbjuds via creator-kod — inte påhittade kökskuponger."
+        ],
+        "heading": "Creators och matutbildare"
+      },
+      {
+        "body": [
+          "När planen går sönder håller Snap Cook plus Diet planner-byten dig i rörelse inuti IGNITE AI. Laga det du har, byt det du inte kan, logga det du åt.",
+          "Premium knyter planering och matlagning till Snap Track så Progress ser verkligheten. Den enda loopen slår en PDF-måltidsplan och en separat receptapp som aldrig möter din dagbok."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "calorie-tracker-for-shift-workers",
+    "title": "Bästa kaloriräknaren för skiftarbetare och nattpass",
+    "date": "2026-08-30",
+    "description": "Bästa praxis för skiftarbetare som spårar kalorier i IGNITE AI — Quick Log klockan 3 på natten, Sparade stapelvaror, flexibla påminnelser, rollover-idéer, Health-sömnkontext, och Progress-genomsnitt över nätter.",
+    "sections": [
+      {
+        "body": [
+          "Nattpass förstör «normal måltid»-UI. Frukost klockan 7 på kvällen, lunch klockan 2 på natten, och en kronobiologs mardröm i kalendern bryter vilken dagbok som helst som antar flingor vid soluppgång. Skiftarbetare behöver registrering som inte bryr sig om vad solen gör.",
+          "IGNITE AI passar det jobbet med Quick Log-röst och foto, Snap Track för cafeteria-brickor, Sparade stapelvaror för upprepad pausrumsmat, Preferences för utseende, och Progress-genomsnitt som dömer veckor i stället för socialt normala måltidstider.",
+          "Det här är följsamhetsteknik för roterande och permanenta nätter — inte medicinsk rådgivning om skiftarbetsstörning."
+        ]
+      },
+      {
+        "body": [
+          "Kan du logga klockan 3 på natten med en hand och usel lysrörsbelysning loggar du också vid lättare tider. Föredra foto och röst framför multifältsökning. Redigera oljor när du kan; avsluta posten oavsett.",
+          "Mörka utseendelägen minskar «ljus skärm, stäng appen»-failen efter nattpass."
+        ],
+        "heading": "Designa loggen för den fulaste timmen"
+      },
+      {
+        "body": [
+          "Att upprepa samma två varma måltider och ett snacks är en tillgång under trötthet. Spara dem. Streckkoda de förpackade backuperna som bor i skåpet.",
+          "Diet planner kan skissa struktur för en rotation; byten finns när cafeterian överraskar. Snap Tracka ändå det som träffade brickan."
+        ],
+        "heading": "Sparade stapelvaror slår heroisk matlagning"
+      },
+      {
+        "body": [
+          "Träffa protein med mat du faktiskt äter på udda timmar: shakes, yoghurt, ägg, mikrovågsvänliga magra alternativ. Quick Logga dem utan ceremoni.",
+          "Underätning av protein på nätter syns senare som miserabel återhämtning — Progress-trender fångar det om dagboken är komplett."
+        ],
+        "heading": "Protein över upp-och-ned-dagar"
+      },
+      {
+        "body": [
+          "Rollover-preferenser kan hjälpa när en natt är kaos och nästa är kontrollerad — om du tjänat dem med ärlig loggning, inte kreativ matte. Förbrända-kalorier-add-back från oroliga skift och wearable-förvirring förtjänar ofta att stanna av.",
+          "Testa inställningar i två veckor av ditt faktiska schema, inte för en hypotetisk 9–5."
+        ],
+        "heading": "Rollover och förbrända kalorier på roterande skift"
+      },
+      {
+        "body": [
+          "Sömnstadier och steg från Apple Health eller Health Connect kan förklara vrak utan att kräva perfektion. Använd dem som kontext bredvid matgenomsnitt.",
+          "Låt inte en tömd sömnring bli ursäkt att överge makron helt — eller att binge:a som «belöning»."
+        ],
+        "heading": "Health-synk för kontext, inte skuld"
+      },
+      {
+        "body": [
+          "En privat Friends-grupp med andra nattarbetare förstår måltider klockan 2 på natten. Dagskifts gymflex-kultur kanske inte. Välj ansvar som matchar din klocka.",
+          "Auto-share valfritt. Vänlighet obligatorisk."
+        ],
+        "heading": "Friends som delar schemat"
+      },
+      {
+        "body": [
+          "Logga kaffedrycker och energidrycker. De är lätta att behandla som osynliga. Samma sak för måltiden du äter när du kommer hem «bara så jag kan sova.»",
+          "Hjälper fasting-verktyg dig sätta ett ätfönster som matchar skiftet, använd dem milt. Försämrar de sömnen, stäng av dem."
+        ],
+        "heading": "Koffein, drycker och «andra middagen»"
+      },
+      {
+        "body": [
+          "Är klockan trasig kan loggern inte vara skör. IGNITE AI Quick Log och Snap Track funkar klockan 3 på natten; Sparade stapelvaror och Progress-genomsnitt överlever roterande veckor.",
+          "Sätt utseende och burn/rollover-preferenser för nattverklighet, håll Friends valfritt, och döm följsamhet över schemat — inte mot ett dagtidsmåltidsscript du inte lever."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "macro-app-for-college-dining-hall",
+    "title": "Bästa makroappen för studenter med campusmatsal",
+    "date": "2026-08-30",
+    "description": "Bästa makrospårningsmetod för campusmatsalar — Snap Track-brickfoton, Sparade stapelvaror för upprepade stationer, Friends-ansvar på korridoren, och Progress-genomsnitt när streckkoder inte finns.",
+    "sections": [
+      {
+        "body": [
+          "Matsalar är bufféer med student-ID. Streckkoder är sällsynta, serveringsskedar är optimistiska, och sen nattflingor är en matgrupp. Kalkylarksatleter ser disciplinerade ut en vecka och försvinner sedan. Kamera-först-loggning är hur campusmakron förblir ärliga.",
+          "IGNITE AI Snap Track är byggt för brickor och bowls: fotografera, redigera oljor och friterade kanter, bekräfta. Sparade stapelvaror hjälper när grillstationen upprepar sig. Friends-grupper gör ansvar på korridoren lättare än ett delat Google Sheet.",
+          "Den här guiden antar ett kaotiskt matabonnemang, inte en privat kock. Inga fejkade campusstudier — bara arbetsflöden som överlever tentaperioder."
+        ]
+      },
+      {
+        "body": [
+          "Skjut uppifrån efter att du pläterat, innan du sätter dig och börjar förhandla pommes med vänner. Identifiera protein först, sedan stärkelse, sedan vätskor. Redigera det du vet östes tungt.",
+          "Seconds räknas som seconds. «Jag kommer ihåg» är hur veckogenomsnittet ljuger."
+        ],
+        "heading": "Brickfoto-protokoll"
+      },
+      {
+        "body": [
+          "När måndagens kyckling och ris är oskiljbart från torsdagens, spara det. Streckkoda förpackade korridor-snacks och proteinshakes så sena pluggsessioner inte litar på minnet.",
+          "Quick Log-röst hjälper när händerna är fulla av ryggsäck och tallrik — Premium AI-registrering tjänar in kostnaden under rusningstid."
+        ],
+        "heading": "Bygg ett campus-stapelvarubibliotek"
+      },
+      {
+        "body": [
+          "Matsalar begraver protein under friterade sidor. Defaulta till ägg, grillat kött, yoghurt, bönor och cottage cheese när det finns. Shakes i rummet fyller luckor utan ännu en friterad korg.",
+          "Träffa protein innan du förhandlar dessert. Progress visar om «upptagen student» var en ursäkt eller ett schema."
+        ],
+        "heading": "Proteinstrategi på matabonnemang"
+      },
+      {
+        "body": [
+          "Off-campus-pizzakvällar raderar omsorgsfull brickloggning. Använd samma restauranghelgtaktiker: snap som serverat, logga drycker, redigera olja.",
+          "Valfri kalori-rollover bara om vardagarna var ärliga — inte som en mytologi som dyker upp fredag klockan 11 på kvällen."
+        ],
+        "heading": "Helg- och takeaway-läckage"
+      },
+      {
+        "body": [
+          "Skapa en privat grupp med rumskompisar eller lagkamrater. Auto-sharea måltider om det minskar skipp; banna body shaming i reglerna. Leaderboards är valfria tänder, inte ett krav.",
+          "Dela inte inloggningar. Två konton, en grupp — samma regel som par."
+        ],
+        "heading": "Friends-grupper i korridoren"
+      },
+      {
+        "body": [
+          "Logga lyft och klubbidrott i Exercise. Campusgång kan vara verklig; wearable eat-back förtjänar fortfarande skepsis under fettförlustfaser. Föredra Progress-trender framför klockteater.",
+          "Health-synk är okej när den finns på studenttelefoner — valfritt, inte moral."
+        ],
+        "heading": "Träning, steg och förbrända kalorier"
+      },
+      {
+        "body": [
+          "AI-fotologgning är mest värdefull just när streckkoder försvinner. Är matabonnemanget hela din diet kan Premium för Snap Track vara billigare än att överge spårning tre gånger per termin.",
+          "Creators på campus ska använda Creator Program-koder korrekt om de marknadsför appen — årlig Premium där det erbjuds, inga påhittade studentkryphål."
+        ],
+        "heading": "Att budgetera Premium i en studentkalender"
+      },
+      {
+        "body": [
+          "Campusmat är kaotisk. IGNITE AI är en korridorsäker dagbok när du fotograferar brickor, sparar upprepningar och håller Friends valfritt för ansvar.",
+          "Sluta jaga streckkoder som inte finns. Snap Tracka tallriken, skydda protein, granska Progress genom tentaperioder — och låt matsalenskaos bli data i stället för blackout."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "track-macros-international-travel",
+    "title": "Så spårar du makron när du reser internationellt",
+    "date": "2026-08-31",
+    "description": "Hur du spårar makron när du reser internationellt — Snap Track för utländska menyer, dryckloggning, språk- och enhetspreferenser, och Progress-genomsnitt som överlever jetlag utan streckkodsberoende.",
+    "sections": [
+      {
+        "body": [
+          "Internationellt resande bryter streckkods-först-trackers. Menyer byter språk, förpackningar använder andra UPC:er, och hotellfrukostar ser ut som delade bufféer utan etiketter. De som behåller makromomentum utomlands byter till foto och beskriv — och redigerar det de vet.",
+          "IGNITE AI är byggt för det läget: Snap Track-måltidsfoton, etikettfångst när förpackning finns, dryckmedveten loggning, Quick Log-röst när du är slut, och Preferences för språk plus metriska/imperiala enheter innan du flyger.",
+          "Det här är praktisk resehygien, inte ett löfte att varje uppskattning matchar ett labb. Avslutade loggar slår tomma semesterdagböcker."
+        ]
+      },
+      {
+        "body": [
+          "Byt enheter om destinationen tänker i gram medan du tänker i ounces — eller tvärtom. Sätt språk så UI-chrome inte lägger till friktion när du är jetlaggad.",
+          "Utseende spelar också roll: mörkt läge på nattflyg kan vara skillnaden mellan att logga snackset och att ge upp."
+        ],
+        "heading": "Sätt Preferences innan du går ombord"
+      },
+      {
+        "body": [
+          "Fotografera som serverat. Identifiera de täta sakerna — kött, ris, oljeglans, friterade komponenter — och redigera portioner. Acceptera att såser är uppskattningar; fortfarande bättre än att hoppa över.",
+          "Är en rätt känd och upprepbar, spara en stapelvara efter första bra loggen så dag fours andra beställning går fortare."
+        ],
+        "heading": "Restaurang- och gatumatprotokoll"
+      },
+      {
+        "body": [
+          "När förpackning finns, använd etikett- eller streckkodslägen. Regionala katalogluckor händer — etikettfoton och manuella redigeringar är återhämtningsvägen, inte rage-quit.",
+          "Minibar-nötter och flygplanssnacks är lätta att glömma och lätta att underlogga. Fånga dem samma timme, inte «imorgon.»"
+        ],
+        "heading": "Etiketter och hotellminibarens verklighet"
+      },
+      {
+        "body": [
+          "Alkohol och sötade kaffedrycker avgör reseöverskott oftare än bröd. Logga drycker medvetet. Hjälper fasting-fönster dig skippa hotellbakelse-betande, använd dem; sabbar resan sömnen, tvinga inte fönster för estetik.",
+          "Vattenmål på Home spelar fortfarande roll i torra kabiner och heta städer — enkelt, inte performativt."
+        ],
+        "heading": "Drycker, jetlag och fasting-verktyg"
+      },
+      {
+        "body": [
+          "Logga promenader och hotellgympass i Exercise när de händer. Wearable-förbränning kan vara brusigare över tidszoner; överväg att hålla förbrända-kalorier-add-back konservativ tills du är hemma.",
+          "Apple Health- eller Health Connect-synk är valfritt stöd — inte ett krav för en användbar resedagbok."
+        ],
+        "heading": "Träning och Health-synk på vägen"
+      },
+      {
+        "body": [
+          "Öppna Progress mitt i resan och vid hemkomst. Energigenomsnitt säger om semestern var ett planerat överskott eller en oavsiktlig blackout. Justera en spak när du kommer hem — inte sju mitt i flygningen.",
+          "Share Cards är kul för Stories om du skapar; tystnad är okej om du bara vill ha en privat logg."
+        ],
+        "heading": "Veckogenomsnitt slår daglig panik utomlands"
+      },
+      {
+        "body": [
+          "En privat grupp kan hålla dig ärlig på långa resor. Auto-share bara om det minskar skipp — stäng av om det skapar performativa måltider.",
+          "Partners som reser tillsammans ska ha två konton och en Friends-grupp, samma som hemma."
+        ],
+        "heading": "Friends utan att tvinga innehåll"
+      },
+      {
+        "body": [
+          "Resor kräver inte en spårningssemester. Sätt språk och enheter, fota tallriken, logga drycken, och granska Progress-genomsnitt när du landar.",
+          "IGNITE AI Snap Track reser bättre än streckkodsberoende. Premium AI-registrering tjänar in kostnaden första gången en utländsk meny dödar sök — redigera, spara, gå vidare."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "calorie-tracking-after-injury",
+    "title": "Kalorispårning efter skada eller lågaktiva veckor",
+    "date": "2026-08-31",
+    "description": "Hur du håller kalorispårning ärlig efter skada eller lågaktiva veckor i IGNITE AI — justera mål, tänk om förbrända kalorier, använd Progress-foton, och skydda protein utan att överge loggen.",
+    "sections": [
+      {
+        "body": [
+          "Skadeveckor bryter fler dieter genom tystnad än genom överskott. Folk slutar logga för att träningen slutade, och hittar sedan på en comebackplan ur minnet. Bättre draget är tystare: behåll matdagboken, sänk utgiftärlighet, och skydda protein medan vävnader läker.",
+          "IGNITE AI kan inte diagnostisera skador eller förskriva rehab. Den kan hålla ringar, Progress-trender och valfri Health-synk synliga medan du arbetar med en kliniker eller fysio på den faktiska återhämtningsplanen.",
+          "Den här guiden är för tillfälliga lågaktivitetsperioder — stukningar, post-op-gränser, tvingade deloads — inte för ätstörningsvård eller medicinsk nutritionsterapi."
+        ]
+      },
+      {
+        "body": [
+          "Antog onboarding eller Profile-mål fem hårda pass i veckan, uppdatera tempo- och aktivitetsantaganden när du inte kan träna. Att lämna ett aggressivt underskott ovanpå plötslig inaktivitet är hur återhämtningsmånader känns miserabla och ohållbara.",
+          "Återbesök mål när mönster ändras i veckor — inte för att en salt middag skrämde dig. Kontinuitet i loggning spelar mer roll än att klamra sig fast vid pre-skade-mål."
+        ],
+        "heading": "Sänk historien du berättar för ringarna"
+      },
+      {
+        "body": [
+          "Wearables uppfinner fortfarande förbränning från orolig sömn och haltande ärenden. Lägger du normalt tillbaka förbrända kalorier, överväg att stänga av den preferensen under lågaktivitetsfaser så budgeten inte tyst blåses upp.",
+          "IGNITE AI låter dig välja om träningsförbränning justerar dagliga mål. Skadeveckor är ett bra tillfälle att välja den konservativa inställningen och omvärdera senare."
+        ],
+        "heading": "Förbrända kalorier: skruva oftast ner teatern"
+      },
+      {
+        "body": [
+          "Läkning är ingen anledning att överge protein; det är en anledning att förenkla källor. Yoghurt, ägg, shakes, fisk på burk, tofu — loggade med Quick Log eller streckkoder — slår elaborerad meal prep du inte kan stå på en öm fot för att laga.",
+          "Snap Track-foto hjälper fortfarande för delivery och partnerlagade tallrikar. Redigera det du vet; hoppa inte över för att måltiden var «någon annans kök.»"
+        ],
+        "heading": "Protein och enkelhet före heroisk matlagning"
+      },
+      {
+        "body": [
+          "Immobilisering och inflammation sabbar vågvikten. Progress-foton och veckovisa energigenomsnitt ger dig en lugnare mapp än enbart dagliga invägningar.",
+          "Använd Progress för att bekräfta att du fortfarande loggar konsekvent. En tom dagbok plus en läskig våg är hur folk reboundar in i kaos när de får klartecken att träna igen."
+        ],
+        "heading": "Progress-foton när vågen är emotionell"
+      },
+      {
+        "body": [
+          "Är din Friends-grupp gymflex-tung, tysta auto-share ett tag eller säg till cirkeln att du är i ett återhämtningsblock. Accountability ska inte kräva PR-innehåll medan du isar en led.",
+          "En partnergrupp som firar avslutade loggar — inte bara lyft — är mer användbar på skadeveckor."
+        ],
+        "heading": "Friends utan prestationspress"
+      },
+      {
+        "body": [
+          "Diet planner kan föreslå enklare veckor när matvaruenergin är låg. AI Lab kan hjälpa brainstorma proteinrika enkla måltider — alltid som assistans, aldrig som substitut för klinisk rådgivning om din skada.",
+          "Premium låser upp de AI-verktygen; prenumererar du redan, använd dem för friktionsminskning, inte för mirakelläkningspåståenden."
+        ],
+        "heading": "AI Lab och Diet planner som mjuk struktur"
+      },
+      {
+        "body": [
+          "När du får klartecken att träna, rampa Exercise-loggning gradvis. Ät inte omedelbart tillbaka varje optimistisk wearable-kalori. Titta på Progress-genomsnitt i två veckor innan aggressiva cuts återupptas.",
+          "Dagboken som överlevde skadan blir dagboken som överlever comebacken — om du aldrig övergav den."
+        ],
+        "heading": "Försiktighet vid återgång till träning"
+      },
+      {
+        "body": [
+          "Efter skada, fortsätt logga, uppdatera mål, och tysta oftast förbrända-kalorier-add-backs. Skydda protein med enkel mat och använd Progress när vågen är brusig.",
+          "IGNITE AI förblir användbar som återhämtningssällskap för matärlighet — inte som kliniker. Justera Profile-mål, luta på Quick Log och Snap Track, och återvänd till träning med genomsnitt, inte ego."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "couples-tracking-friends-groups",
+    "title": "Så kan par spåra tillsammans i IGNITE AI utan att dela inloggning",
+    "date": "2026-08-31",
+    "description": "Hur par spårar tillsammans i IGNITE AI utan att dela inloggning — privata Friends-grupper, valfri auto-share av måltider och pass, chatt, och gränser som håller två dagböcker intakta.",
+    "sections": [
+      {
+        "body": [
+          "Par som delar en inloggning delar till slut ett bråk: vems mål, vems historik, vems Premium, vems pinsamma mellanmål klockan 1 på natten. IGNITE AI:s svar är två konton och en privat Friends-grupp — delat bevis utan sammanslagna dagböcker.",
+          "Friends och privata grupper (Groups Room) stöder flöden, reaktioner, chatt och valfri auto-share efter måltider eller träning. Varje person äger fortfarande mål, Progress och preferenser.",
+          "Den här guiden är för partners som vill ha ansvar med vänlighet — inte övervakningscosplay eller offentlig leaderboard-förnedring."
+        ]
+      },
+      {
+        "body": [
+          "Makron, kroppsvikt och Premium-rättigheter är personliga. Att dela inloggningsuppgifter bryter säkerhetshygien och korrumperar onboarding-antaganden. Det gör också uppbrott eller integritetsbehov onödigt röriga.",
+          "Köp eller prova Premium per person efter behov. Behandla inte en prenumeration som hushållsinloggning om inte produkten uttryckligen stöder familjeplaner — och IGNITE AI:s regler för skälig användning är inget delningsschema för flera användare."
+        ],
+        "heading": "Varför separata konton spelar roll"
+      },
+      {
+        "body": [
+          "Skapa en liten Friends-grupp, bjud bara in varandra (eller lägg till en betrodd tredje om ni vill ha en triad-challenge). Kom överens om vad som auto-sharas: middagar, pass, inget, eller båda.",
+          "Pinna en enradig regel: ingen hån av siffror, ingen diagnostisering, fira avslutade loggar. Ton är en funktion."
+        ],
+        "heading": "Sätt upp en privat pargrupp"
+      },
+      {
+        "body": [
+          "Share Cards och flödesinlägg är valfritt bevis. Viktsiffror, medicinska noter och binge-kontext-måltider kan stanna privata även inuti en pargrupp om någon partner föredrar det.",
+          "Fråga innan du resharar partnerns tallrik till Instagram. In-app-samtycke är inte samma sak som offentligt samtycke."
+        ],
+        "heading": "Vad du ska dela kontra vad du ska hålla tyst"
+      },
+      {
+        "body": [
+          "En partner som cutar och en som håller vikt är normalt. Friends kräver inte matchande ringar. Heja följsamhet, inte identiska kalorier.",
+          "Använd Diet planner självständigt. Att laga tillsammans kan fortfarande betyda två Snap Track-loggar från samma gryta med olika portioner."
+        ],
+        "heading": "Olika mål, samma app"
+      },
+      {
+        "body": [
+          "Restaurangkvällar dödar solotrackers. Kom överens om att snap:a som serverat, redigera oljor, logga drycker. Glömmer en person, en milt grupp-nudge slår en föreläsning vid bordet.",
+          "Valfria kalori-rollover-preferenser är personliga — tvinga inte en filosofi på båda dagböckerna."
+        ],
+        "heading": "Helgstrategi för två"
+      },
+      {
+        "body": [
+          "Har någon partner historik av matövervakningstrauma, skippa flöden och håll spårningen privat. Accountability som spikar ångest är inte följsamhet.",
+          "Coachingrelationer skiljer sig också från romantiska — blanda inte klientdata in i en pargrupp."
+        ],
+        "heading": "När Friends är fel verktyg"
+      },
+      {
+        "body": [
+          "Creator Groups är för godkända Creator Program-publiker. Ert relationsansvar hör hemma i privat Friends-yta om ni inte medvetet kör ett offentligt varumärkescommunity tillsammans.",
+          "Håll de mentala modellerna åtskilda för att undvika integritetsmissar."
+        ],
+        "heading": "Creator Groups är inte parläge"
+      },
+      {
+        "body": [
+          "Två konton, en privat Friends-grupp. IGNITE AI låter par dela bevis — måltider, pass, ansträngningsstreaks — utan att dela lösenord eller slå ihop mål.",
+          "Kom överens om auto-share-regler, skydda värdighet, och låt Snap Track och Exercise göra det dagliga jobbet. Accountability med gränser varar längre än sammanslagna inloggningar."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "ignite-ai-for-creators-share-to-code",
+    "title": "IGNITE AI för creators: från Share Cards till creator-koder",
+    "date": "2026-08-31",
+    "description": "En creator-arbetsgång i IGNITE AI från Share Cards till creator-koder — ansök till Creator Program, publicera bevisinnehåll, lås upp publikens årliga Premium-pris där det erbjuds, och väx Creator Groups.",
+    "sections": [
+      {
+        "body": [
+          "Creators behöver inte ännu en affiliatelänk som pekar mot en ful dagbok. De behöver en loop som börjar som innehåll och slutar som attribution: filma måltiden eller passet, publicera ett Share Card, ansök till Creator Program, dela en personlig kod, kör valfritt en Creator Group.",
+          "IGNITE AI håller de lagren bredvid den riktiga loggern — Snap Track, Exercise, Diet planner, AI Lab — så demos är autentiska i stället för skärmdumpsteater från en produkt du aldrig öppnar.",
+          "Den här artikeln kartlägger creator-vägen från ände till ände utan att blanda ihop Creator Program med Refer a Friend."
+        ]
+      },
+      {
+        "body": [
+          "Efter att ha loggat en måltid eller ett pass, generera ett Share Card, redigera rubriken, välj tema, exportera via systemets share sheet. Stories och carousels slutar se ut som oavsiktliga kalkylarksläckor.",
+          "Batcha kort på starka dagar så tysta dagar fortfarande har lager. Redaktionell smak slår att posta varje snacks."
+        ],
+        "heading": "Steg 1: gör Share Cards till ditt defaultbevis"
+      },
+      {
+        "body": [
+          "Skicka in korrekta sociala och nischdetaljer. Acceptans är diskretionär. När du är godkänd låser du upp Program-mekaniken: creator-kod, kompletterande Premium-fönster visat in-app, rewards-väg, Creator Groups-behörighet.",
+          "Marknadsför inte en referral-kod som ett creator-erbjudande medan du väntar. Lansera rent efter godkännande."
+        ],
+        "heading": "Steg 2: ansök i Profile → Creator Program"
+      },
+      {
+        "body": [
+          "Använd granten till att filma Snap Track-redigeringar, Snap Cook, Diet-byten, AI Lab-frågor och Exercise-loggar utan att klippa bort vid en paywall. Vanligen börjar fönstret nära nittio dagar och kan förlängas med dedication och resultat som hanteras i Program-skärmar.",
+          "Följare köper fortfarande Premium själva. Din kompletterande access är ett produktionsverktyg, inte deras prissättning."
+        ],
+        "heading": "Steg 3: lär ut produkten på kompletterande Premium"
+      },
+      {
+        "body": [
+          "En mening: creator-kod för årlig Premium där det erbjuds. Lägg den i bio och lugna avslutskort. Rewards siktar på kvalificerad årlig Premium under din attribution; vecko-/månadsprenumerationer kvalificerar i allmänhet inte.",
+          "Regionala reward-belopp och priser syns in-app. Säg «där det erbjuds» om din publik är global."
+        ],
+        "heading": "Steg 4: shippa kod-CTA:n"
+      },
+      {
+        "body": [
+          "Lansera en Group efter att du har seed-inlägg och regler. Medlemmar går med via sök eller inbjudan. Håll Friends för privata cirklar; Groups för publikens kultur.",
+          "Groupen behåller; koden attribuerar. Antyd inte att att gå med ensamt kvalificerar rewards."
+        ],
+        "heading": "Steg 5: Creator Groups när publiken är redo"
+      },
+      {
+        "body": [
+          "Måndag: träningskort. Onsdag: oljeredigerings-Reel. Fredag: restaurang-Snap Track. Söndag: Progress-ärlighet. Kodomnämnanden stannar lätta och korrekta.",
+          "Plattformspackaging skiljer sig — korta demos på Reels, kort på Stories, lång kontext på YouTube — samma kod under."
+        ],
+        "heading": "Innehållskalender som matar loopen"
+      },
+      {
+        "body": [
+          "Inga fejkade studier, ingen påhittad rabattmatte, ingen blandning av Refer a Friend in i creator-CTA:er. Felrepresentation kan avsluta Program-förmåner under villkoren.",
+          "Uppge sponsorships där det krävs. Integritet spelar fortfarande roll när du visar andras måltider."
+        ],
+        "heading": "Compliance som skyddar varumärket"
+      },
+      {
+        "body": [
+          "Creators: sluta skärmdumpa fula dagböcker. Använd IGNITE AI ände till ände — Share Cards för bevis, Creator Program för distribution, creator-koder för publikens årliga Premium, Groups för community.",
+          "Ansök in-app, demo med kompletterande Premium, håll Refer a Friend separat, och väx på kvalificerade årliga registreringar med innehåll du skulle publicera även utan kod."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "30-day-ignite-ai-challenge-outline",
+    "title": "En 30-dagars IGNITE AI-utmaning (vad du mäter varje vecka)",
+    "date": "2026-08-31",
+    "description": "En 30-dagars IGNITE AI-utmaningsoutline — veckovisa loggnings- och proteinmål, Exercise-vanor, valfritt Friends-bevis, Progress-genomgång varje söndag, och en spak att ändra utan att bränna planen.",
+    "sections": [
+      {
+        "body": [
+          "De flesta «30-dagarsutmaningar» failar för att de mäter vibbar i stället för avslutade loggar. En användbar IGNITE AI-månad är enklare: fånga måltider ärligt, skydda protein, träna en realistisk mängd, och läs veckogenomsnitt innan du slaktar kalorier av tristess.",
+          "Den här outlinen antar Premium-access till Snap Track och relaterade AI-verktyg, eller en utmaningsvärd som ger tydliga förväntningar om deltagare är på blandade nivåer. Det är ett ramverk, inte ett medicinskt protokoll och inte ett löfte om en specifik vågförändring.",
+          "Använd den solo eller inuti en privat Friends-grupp. Resultattavlan är följsamhet och trender — inte offentlig förnedring."
+        ]
+      },
+      {
+        "body": [
+          "Logga varje ättillfälle du kan. Föredra Snap Track-foto för blandade tallrikar; använd streckkods- eller etikettlägen för förpackningar; prova Quick Log-röst eller beskriv när händerna är fulla. Redigera oljor och såser innan du sparar.",
+          "Jaga inte perfektion. Jaga noll tomma måltider. Spara två eller tre stapelvaror du kommer upprepa. Valfritt: sätt utseende, enheter och språk i Preferences så UI:t inte slåss mot dig på natten."
+        ],
+        "heading": "Dag 1–7: lär dig registreringsloopen"
+      },
+      {
+        "body": [
+          "Schemalägg två till fyra Exercise-pass du faktiskt kan slutföra. Logga dem i Activity. Synkar du Apple Health eller Health Connect, kika på steg — låt inte wearable-förbränning skriva om hela underskottsfilosofin ännu.",
+          "Håll matloggning som huvudvanan. En skinande träningsvecka med tre saknade middagar är en cosplay-utmaning."
+        ],
+        "heading": "Dag 8–14: lägg till träning utan teater"
+      },
+      {
+        "body": [
+          "Luta på Sparade stapelvaror och Diet planner-byten när veckan blir rörig. Hjälper Snap Cook dig använda det som finns i kylen, använd den — logga sedan det du faktiskt pläterade.",
+          "Valfritt ansvar: gå med i eller skapa en privat Friends-grupp och auto-sharea måltider eller pass om det motiverar dig. Par och rumskompisar funkar bra här; främlingar valfritt."
+        ],
+        "heading": "Dag 15–21: minska friktion och lägg till bevis"
+      },
+      {
+        "body": [
+          "Öppna Progress. Läs energigenomsnitt och näringstrender över månaden. Jämför helg- kontra vardagsloggkvalitet. Justera bara en spak: proteinmål, dagliga kalorier, träningsfrekvens eller förbrända-kalorier-preferens — inte alla fyra.",
+          "Stallade vikten medan genomsnitt ser höga ut, fixa underrapporterade fetter innan panik-cut. Ser genomsnitten kalibrerade ut och vågen är brusig, ge natrium och vatten en röst innan du bränner planen."
+        ],
+        "heading": "Dag 22–30: Progress-genomgång, en spak"
+      },
+      {
+        "body": [
+          "Spåra fyra siffror: genomsnittlig kroppsvikt (eller veckogenomsnitt om du väger dagligen), proteindagar träffade, pass slutförda, ologgade måltider (mål: noll). Skriv dem i en not eller Share Card för dig själv — inte nödvändigtvis för internet.",
+          "Fira avslutade loggar högre än vågdrama. Följsamhet är skillen de nästa trettio dagarna fortfarande behöver."
+        ],
+        "heading": "Veckovis söndagsresultattavla"
+      },
+      {
+        "body": [
+          "Inga offentliga invägningar krävs. Inga shaming-skärmdumpar. Inga fabricerade medicinska påståenden. Fasting-verktyg är valfria; tvinga inte fönster på folk som sover dåligt eller tränar hårt utan vägledning.",
+          "Träffar skada, sjukdom eller livskaos, korta utmaningen i stället för att ghosta dagboken. En loggad «underhållsvecka» lär fortfarande produkten."
+        ],
+        "heading": "Regler som håller utmaningen human"
+      },
+      {
+        "body": [
+          "Pinna outlinen. Definiera vad auto-share betyder. Moderera nutritionsbråk. Erbjud AI Lab som felsökningshjälp, inte som evangelium.",
+          "Creators som kör offentliga versioner ska använda Creator Groups under Creator Program-regler och hålla koder korrekta — årlig Premium där det erbjuds, inga påhittade rabatter."
+        ],
+        "heading": "Värdtips för Friends-grupputmaningar"
+      },
+      {
+        "body": [
+          "En 30-dagars IGNITE AI-utmaning lyckas när Snap Track förblir öppen, Exercise förblir realistisk, och Progress får en söndagsröst. Mät avslutade loggar och veckogenomsnitt, inte motivationsaffischer.",
+          "Kör de fyra faserna, ändra en spak i slutet, och håll Friends valfritt. Det är tillräckligt med struktur för en månad som lär produkten i stället för att bränna ut dig."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-burpees",
+    "title": "Hur många kalorier förbränner burpees?",
+    "date": "2026-08-22",
+    "description": "Burpees förbränner cirka 280 kcal på 30 minuter för en person på 70 kg vid MET ≈ 8 (~560/timme). Tabeller efter vikt och duration, intensitetsnoter, och hur IGNITE AI håller passet ärligt bredvid maten.",
+    "sections": [
+      {
+        "body": [
+          "Burpees är internets favoritstraff — och ett uselt ställe att lita på en rundräknare som ignorerar vila på golvet.",
+          "Vid MET ≈ 8 (kraftigt kontinuerligt burpee-arbete), räkna med ungefär 280 kcal på 30 minuter vid 70 kg (cirka 560/timme). Tyngre kroppar förbränner mer; vila och lätta intervaller förbränner mindre.",
+          "Veckans energibalans avgör fortfarande fettförlust. Brädsiffror är uppskattningar — inte kuponger."
+        ]
+      },
+      {
+        "body": [
+          "Uppskattade kalorier för burpees (MET ≈ 8) — ungefärligt:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680",
+          "Endast kontinuerligt arbete. Telefonpauser räknas inte."
+        ],
+        "heading": "Kaloriuppskattningar efter kroppsvikt och duration"
+      },
+      {
+        "body": [
+          "MET ≈ 8.0 för täta kontinuerliga burpees. Långsamma step-back-versioner och långa andningspauser kraschar genomsnittet.",
+          "Kroppsvikt och kontinuerlig intensitet slår klassens smeknamn."
+        ],
+        "heading": "Vad som driver förbränningen"
+      },
+      {
+        "body": [
+          "Brutal konditionering på liten yta. Dosera försiktigt om handleder och axlar klagar.",
+          "Håll proteinet runt 1.6–2.2 g/kg om du deffar och tränar hårt."
+        ],
+        "heading": "Träningsvärde"
+      },
+      {
+        "body": [
+          "Efter burpees skriver «jag förtjänade pizza» sig själv. IGNITE AI är nödstoppet: fotografera tallriken innan historien hårdnar, håll passet på samma dag, se om lidandet flyttade något annat än aptiten."
+        ],
+        "heading": "Var IGNITE AI passar in"
+      },
+      {
+        "body": [
+          "Ungefär 280 kcal / 30 min vid 70 kg för burpees vid MET ≈ 8.",
+          "Lid med flit. Logga med flit. IGNITE AI för folk som kör burpees och fortfarande vill ha en midja."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-battle-ropes",
+    "title": "Hur många kalorier förbränner battle ropes?",
+    "date": "2026-08-22",
+    "description": "Battle ropes förbränner cirka 280 kcal på 30 minuter för en person på 70 kg vid MET ≈ 8 (~560/timme). Tabeller efter vikt och duration, intensitetsnoter, och hur IGNITE AI håller passet ärligt bredvid maten.",
+    "sections": [
+      {
+        "body": [
+          "Battle ropes ser ut som kalorifyrverkeri. Verkligheten är work-to-rest-förhållandet: kontinuerliga vågor tjänar MET; trettio sekunders flexande för Instagram gör det inte.",
+          "Vid MET ≈ 8 (kraftiga kontinuerliga vågor), räkna med ungefär 280 kcal på 30 minuter vid 70 kg (cirka 560/timme). Tyngre kroppar förbränner mer; vila och lätta intervaller förbränner mindre.",
+          "Veckans energibalans avgör fortfarande fettförlust. Brädsiffror är uppskattningar — inte kuponger."
+        ]
+      },
+      {
+        "body": [
+          "Uppskattade kalorier för battle ropes (MET ≈ 8) — ungefärligt:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680",
+          "Endast kontinuerligt arbete. Telefonpauser räknas inte."
+        ],
+        "heading": "Kaloriuppskattningar efter kroppsvikt och duration"
+      },
+      {
+        "body": [
+          "MET ≈ 8.0 för hårda kontinuerliga repvågor. Lång vila mellan intervaller sänker passet snabbt.",
+          "Kroppsvikt och kontinuerlig intensitet slår klassens smeknamn."
+        ],
+        "heading": "Vad som driver förbränningen"
+      },
+      {
+        "body": [
+          "Överkroppsmotor och grepp. Para med ben och protein om fysiken är målet.",
+          "Håll proteinet runt 1.6–2.2 g/kg om du deffar och tränar hårt."
+        ],
+        "heading": "Träningsvärde"
+      },
+      {
+        "body": [
+          "Repen krossar dig; smoothien efteråt suddar tyst undan underskottet. IGNITE AI fångar den andra ronden — Snap Tracka drycken, logga repen, sluta låta «shreddad» vara en känsla."
+        ],
+        "heading": "Var IGNITE AI passar in"
+      },
+      {
+        "body": [
+          "Ungefär 280 kcal / 30 min vid 70 kg för battle ropes vid MET ≈ 8.",
+          "Våga hårt. Spåra hårdare. IGNITE AI hindrar battle ropes från att bli en smoothiealibi."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-rowing-machine",
+    "title": "Hur många kalorier förbränner en romaskin? (Erg-guide)",
+    "date": "2026-08-23",
+    "description": "Romaskin förbränner cirka 245 kcal på 30 minuter för en person på 70 kg vid MET ≈ 7 (~490/timme). Tabeller efter vikt och duration, intensitetsnoter, och hur IGNITE AI håller passet ärligt bredvid maten.",
+    "sections": [
+      {
+        "body": [
+          "Erg-kalorier på monitorn är säljverktyg. Använd MET-intervall som rimlighetskoll, ro sedan för splittider och konsekvens — inte för konsolens ära.",
+          "Vid MET ≈ 7 (måttlig kontinuerlig erg), räkna med ungefär 245 kcal på 30 minuter vid 70 kg (cirka 490/timme). Tyngre kroppar förbränner mer; vila och lätta intervaller förbränner mindre.",
+          "Veckans energibalans avgör fortfarande fettförlust. Brädsiffror är uppskattningar — inte kuponger."
+        ]
+      },
+      {
+        "body": [
+          "Uppskattade kalorier för romaskin (MET ≈ 7) — ungefärligt:",
+          "55 kg: 15 min: ~96 · 30 min: ~193 · 45 min: ~289 · 60 min: ~385",
+          "70 kg: 15 min: ~123 · 30 min: ~245 · 45 min: ~368 · 60 min: ~490",
+          "85 kg: 15 min: ~149 · 30 min: ~298 · 45 min: ~446 · 60 min: ~595",
+          "Endast kontinuerligt arbete. Telefonpauser räknas inte."
+        ],
+        "heading": "Kaloriuppskattningar efter kroppsvikt och duration"
+      },
+      {
+        "body": [
+          "MET ≈ 7.0 måttlig kontinuerlig. Hårda pieces klättrar; lång vila mellan intervaller drar ner genomsnittet.",
+          "Kroppsvikt och kontinuerlig intensitet slår klassens smeknamn."
+        ],
+        "heading": "Vad som driver förbränningen"
+      },
+      {
+        "body": [
+          "Helkroppsmotor med låg impact när tekniken är ren. Fula drag belastar ryggen för fejkade kalorier.",
+          "Håll proteinet runt 1.6–2.2 g/kg om du deffar och tränar hårt."
+        ],
+        "heading": "Träningsvärde"
+      },
+      {
+        "body": [
+          "Concept2 kommer smickra dig. IGNITE AI kommer inte — måltidssnaps bredvid erg-passet så «jag rodde» och «jag åt» äntligen delar en sanning."
+        ],
+        "heading": "Var IGNITE AI passar in"
+      },
+      {
+        "body": [
+          "Ungefär 245 kcal / 30 min vid 70 kg för romaskin vid MET ≈ 7.",
+          "Lita på splitten, verifiera tallriken. IGNITE AI är erg-åkarnas matärlighetslager."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-power-walking",
+    "title": "Hur många kalorier förbränner power walking?",
+    "date": "2026-08-23",
+    "description": "Power walking förbränner cirka 175 kcal på 30 minuter för en person på 70 kg vid MET ≈ 5 (~350/timme). Tabeller efter vikt och duration, intensitetsnoter, och hur IGNITE AI håller passet ärligt bredvid maten.",
+    "sections": [
+      {
+        "body": [
+          "Power walking är det underskattade fettförlustvolymverktyget — högre än en promenad, snällare än en jogg, lätt att upprepa dagligen.",
+          "Vid MET ≈ 5 (rask kontinuerlig gång ~4 mph-ansträngning), räkna med ungefär 175 kcal på 30 minuter vid 70 kg (cirka 350/timme). Tyngre kroppar förbränner mer; vila och lätta intervaller förbränner mindre.",
+          "Veckans energibalans avgör fortfarande fettförlust. Brädsiffror är uppskattningar — inte kuponger."
+        ]
+      },
+      {
+        "body": [
+          "Uppskattade kalorier för power walking (MET ≈ 5) — ungefärligt:",
+          "55 kg: 15 min: ~69 · 30 min: ~138 · 45 min: ~206 · 60 min: ~275",
+          "70 kg: 15 min: ~88 · 30 min: ~175 · 45 min: ~263 · 60 min: ~350",
+          "85 kg: 15 min: ~106 · 30 min: ~213 · 45 min: ~319 · 60 min: ~425",
+          "Endast kontinuerligt arbete. Telefonpauser räknas inte."
+        ],
+        "heading": "Kaloriuppskattningar efter kroppsvikt och duration"
+      },
+      {
+        "body": [
+          "MET ≈ 5.0 för kontinuerlig rask power walking. Telefonsläntrande ligger närmare 2.5–3.5.",
+          "Kroppsvikt och kontinuerlig intensitet slår klassens smeknamn."
+        ],
+        "heading": "Vad som driver förbränningen"
+      },
+      {
+        "body": [
+          "Steg du kan återhämta från. Perfekt NEAT-plus när löpning hatar knäna.",
+          "Håll proteinet runt 1.6–2.2 g/kg om du deffar och tränar hårt."
+        ],
+        "heading": "Träningsvärde"
+      },
+      {
+        "body": [
+          "Gång funkar bara när de andra 23 timmarna är loggade. IGNITE AI gör de tråkiga vinsterna synliga: steg från Health bredvid fotomiddagar som brukade försvinna."
+        ],
+        "heading": "Var IGNITE AI passar in"
+      },
+      {
+        "body": [
+          "Ungefär 175 kcal / 30 min vid 70 kg för power walking vid MET ≈ 5.",
+          "Gå med avsikt. Spåra utan drama. IGNITE AI för power walkers som vill att vågen ska märka."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  },
+  {
+    "slug": "burpees-vs-jump-rope-calories",
+    "title": "Burpees vs hopprep: kalorier jämförda (2026)",
+    "date": "2026-08-24",
+    "description": "70 kg / 30 min: ~385 kcal hopprep (MET ≈ 11) vs ~280 burpees (MET ≈ 8). 105 kcal gap, tabeller, och hur du väljer — sedan loggar maten i IGNITE AI.",
+    "sections": [
+      {
+        "body": [
+          "Burpees mot hopprep är en densitetsduell i vardagsrummet. Kontinuerligt hopprep vinner oftast per minut om du verkligen fortsätter hoppa.",
+          "Vid 70 kg i 30 minuter: ~385 vs ~280. Hopprep leder med cirka 105 kcal innan vila ändrar historien."
+        ]
+      },
+      {
+        "body": [
+          "Uppskattade kalorier för hopprep (MET ≈ 11) — ungefärligt:",
+          "55 kg: 15 min: ~151 · 30 min: ~303 · 45 min: ~454 · 60 min: ~605",
+          "70 kg: 15 min: ~193 · 30 min: ~385 · 45 min: ~578 · 60 min: ~770",
+          "85 kg: 15 min: ~234 · 30 min: ~468 · 45 min: ~701 · 60 min: ~935"
+        ],
+        "heading": "Hopprep (MET ≈ 11)"
+      },
+      {
+        "body": [
+          "Uppskattade kalorier för burpees (MET ≈ 8) — ungefärligt:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680"
+        ],
+        "heading": "Burpees (MET ≈ 8)"
+      },
+      {
+        "body": [
+          "Hopprep för max förbränning per minut. Burpees när du vill ha helkropps styrkeuthållighet utan rep. Båda straffar usel återhämtning."
+        ],
+        "heading": "Vilken du ska välja"
+      },
+      {
+        "body": [
+          "Hem-HIIT utan matlogg är bara högljudd cardio. IGNITE AI är hur vardagsrumsatleter hindrar mackan efter passet från att radera MET-tabellen."
+        ],
+        "heading": "Var IGNITE AI passar in"
+      },
+      {
+        "body": [
+          "Hopprep slår burpees med ~105 kcal / 30 min vid dessa MET.",
+          "Välj ditt gift. Öppna sedan IGNITE AI innan kylen gör det."
+        ],
+        "heading": "Slutsats"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1354 @@
+[
+  {
+    "slug": "log-reminders-notifications-ignite",
+    "title": "Log Reminders and Notifications in IGNITE AI: Stay Consistent Without Spam",
+    "date": "2026-08-29",
+    "description": "Set IGNITE AI log reminders that protect consistency without notification spam—meal-timed pings, quiet hours, and preference hygiene so dinner still gets logged on busy weeks without lock-screen fatigue.",
+    "sections": [
+      {
+        "body": [
+          "Reminders are a double-edged tool. The right ping saves a blank evening; the wrong stream trains you to swipe away everything, including the one alert that mattered. IGNITE AI log reminders and notification preferences exist to protect consistency—not to gamify your lock screen.",
+          "Most people do not forget that tracking exists. They forget at the exact moment life peaks: commute home, kids’ bedtime, late training. A sparse reminder aligned to that moment outperforms ten generic “stay motivated” notes.",
+          "This guide covers how to time reminders, what to turn off, how to recover after notification fatigue, and how reminders pair with Quick Log so the tap after the ping is short. It is behavior design for diaries, not medical advice."
+        ]
+      },
+      {
+        "body": [
+          "A useful reminder asks for a single action: log lunch, log dinner, weigh in, or finish yesterday’s blank. Stacked messages that mix tips, social, marketing, and logging compete until none win.",
+          "Audit preferences and keep the channels that close gaps in your week. If a notification never produces a log, it is decoration—disable it."
+        ],
+        "heading": "One job per notification"
+      },
+      {
+        "body": [
+          "Set dinner reminders for when you actually eat, not for an aspirational 6 p.m. If you routinely plate food at 8:30, ping then. Morning reminders help breakfast skippers; midday pings help desk workers who “forget” lunch until 3.",
+          "Start with one or two anchors. Add a third only if a specific meal keeps disappearing from the diary for two weeks. Sparse beats clever."
+        ],
+        "heading": "Time reminders to real meals"
+      },
+      {
+        "body": [
+          "Protect sleep and deep work. Logging reminders at 11:30 p.m. can create guilt without creating better data. Prefer earlier pings plus a next-morning catch-up habit for late nights.",
+          "Friend activity notifications are optional accountability. If they stress you, keep auto-share on for your posts but mute inbound noise. Accountability should not require living inside a group chat."
+        ],
+        "heading": "Quiet hours and social noise"
+      },
+      {
+        "body": [
+          "Ignored reminders mean the cue is wrong, not that you are broken. Move the time, shorten the copy in your head (“open FAB, photo dinner”), or switch the channel. Repeating a failed cue harder rarely works.",
+          "Pair the reminder with an environmental trigger: phone on the counter while cooking, or a sticky note on the air fryer. Digital cues stick better when a physical cue agrees."
+        ],
+        "heading": "What to do when you ignore pings"
+      },
+      {
+        "body": [
+          "If you missed dinner, log an honest estimate the next morning rather than leaving a hole. Holes wreck weekly averages more than imperfect late entries. Use photo if leftovers remain; otherwise describe what you remember and bias oils upward.",
+          "Avoid “I’ll log the whole day Sunday.” Batch reconstruction is fiction-prone. Same-day or next-morning beats weekend mythology."
+        ],
+        "heading": "Catch-up without rewriting history"
+      },
+      {
+        "body": [
+          "Reminders should serve the system: rings filled with real food, Progress that reflects the week. Streak panic that makes you log fake salads is worse than a missed day you correct honestly.",
+          "If streak language stresses you, ignore it and judge success by weekly completeness. Notifications are tools for completeness, not for perfection theater."
+        ],
+        "heading": "Streaks versus systems"
+      },
+      {
+        "body": [
+          "Time zones and vacation meals break static reminder clocks. Temporarily retarget pings to local dinner, or pause and rely on Quick Log when you sit down to eat. A wrong-timezone reminder is just spam with a logo.",
+          "When you return home, restore the old anchors immediately. Travel is a common way notification hygiene permanently decays."
+        ],
+        "heading": "Travel and schedule shifts"
+      },
+      {
+        "body": [
+          "Configure log reminders and notification preferences so the ping lands when you can open the Quick Log FAB and finish in under a minute—Snap Track photo for messy plates, describe for known meals, drink mode for the latte you always forget.",
+          "Premium AI capture still sits behind Premium; reminders do not replace it. They only make sure you open the tool that keeps Home rings honest."
+        ],
+        "heading": "Where IGNITE AI reminders fit the loop"
+      },
+      {
+        "body": [
+          "Keep reminders few, timed to real meals, and tied to a fast logging action. Turn off everything that never produces a diary entry.",
+          "Use IGNITE AI notification preferences as adherence infrastructure—then let Snap Track or Quick Log finish the job before the evening disappears."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "feature-request-bug-report-ignite",
+    "title": "How Feature Requests and Bug Reports Work in IGNITE AI",
+    "date": "2026-08-29",
+    "description": "How to send useful feature requests and bug reports in IGNITE AI—what details help engineering, what to skip, and why in-app reports beat vague store reviews when logging breaks at night.",
+    "sections": [
+      {
+        "body": [
+          "Product teams cannot fix what they cannot reproduce. A one-star review that says “AI sucks” teaches nothing; a tight bug report with device, steps, and a screenshot of the broken estimate does. IGNITE AI includes in-app paths for feature requests and bug reports so real logging pain reaches the people shipping the app.",
+          "The best feedback usually comes from people mid-workflow: camera failing on a dim plate, barcode mismatch at the shelf, a Friends share that did not post. That context is gold. Capturing it in-app beats hoping a social comment finds the right inbox.",
+          "This guide shows how to write reports that get traction, how to separate bugs from taste preferences, and how to request features without writing a second product roadmap. It is not a promise that every idea ships."
+        ]
+      },
+      {
+        "body": [
+          "A bug is something broken relative to expected behavior: crash, blank screen, wrong save, sync failure, UI that traps you. A feature request is something new or improved: another export, a smarter default, a workflow shortcut.",
+          "Mislabeling slows triage. If Snap Track saved the wrong meal after you confirmed edits, that is a bug. If you wish the editor had a one-tap “add tablespoon oil,” that is a feature request—even if it feels urgent."
+        ],
+        "heading": "Bug versus feature: label it honestly"
+      },
+      {
+        "body": [
+          "Include what you were doing, what you expected, what happened, and whether it repeats. Add OS version, app version if visible, and the screen name. Attach a screenshot or screen recording when privacy allows—blur calories if you must, keep the error chrome visible.",
+          "Note timing: right after update, on Wi-Fi versus cellular, after a long background. Intermittent bugs need frequency (“3 of 10 photo logs”). Vague anger without steps gets parked; precise reports get queued."
+        ],
+        "heading": "The minimum useful bug report"
+      },
+      {
+        "body": [
+          "For Snap Track problems, say which mode: meal photo, label, barcode, drink, or describe/voice-style input. Mention lighting, whether you edited before confirm, and if the bad data appeared only after save.",
+          "For barcodes, include brand and product name and whether the physical label disagrees. Database mismatches are often fixable when the product identity is clear—not when the report only says “scan wrong.”"
+        ],
+        "heading": "Reproducing photo and scan issues"
+      },
+      {
+        "body": [
+          "State the job to be done in one sentence: “I need to re-log the same meal-prep box five days without rebuilding it.” Then describe your current workaround and why it fails. Skip mock UI lectures unless you are illustrating a real dead end.",
+          "Prioritize with your week, not the internet’s wishlist. Requests tied to adherence—faster edits, clearer servings, coach exports—usually matter more than cosmetic themes."
+        ],
+        "heading": "Writing feature requests that survive review"
+      },
+      {
+        "body": [
+          "Do not paste passwords, recovery codes, or full payment details. Do not include other people’s private meals from a Friend feed. Do not threaten; it does not accelerate triage and can get the thread ignored.",
+          "Avoid bundling ten unrelated issues into one blob. Split crashes from wishlist items so each can close independently."
+        ],
+        "heading": "What not to put in a report"
+      },
+      {
+        "body": [
+          "Store reviews influence downloads; they are a poor bug database. Use them for high-level sentiment after you have already filed a reproducible report in-app. If you only review, engineering may never see the stack trace path you hit at 10 p.m.",
+          "If support follows up, answer once with the same structure. Echoing the original steps beats rewriting the novel each time."
+        ],
+        "heading": "Store reviews versus in-app channels"
+      },
+      {
+        "body": [
+          "Vision logging, label OCR, and social sharing fail in edge cases by nature. Field reports from real kitchens and gyms teach more than lab demos. Your boring edge case—steam on the lens, glossy takeout, multipack yogurt—may be tomorrow’s fix.",
+          "That does not mean every request ships next sprint. It means high-quality signal compounds. Low-quality noise slows everyone, including the features you actually want."
+        ],
+        "heading": "How feedback shapes a photo-first app"
+      },
+      {
+        "body": [
+          "Use the in-app feature request and bug report flows from Profile or help surfaces so metadata can travel with the ticket. Keep logging with Snap Track while you wait; workarounds like describe mode or saved meals often unblock the day even when a camera path misbehaves.",
+          "Premium users hitting AI capture bugs should say so—those paths are compute-heavy and worth precise reports. Honesty about Premium gates in feedback also helps: “blocked behind paywall unexpectedly” is different from “estimate wrong after I paid.”"
+        ],
+        "heading": "Where IGNITE AI wants the signal"
+      },
+      {
+        "body": [
+          "Good reports are short, reproducible, and labeled as bug or request. Screenshots and mode names beat vague one-star essays.",
+          "When something breaks mid-log, file it in IGNITE AI’s in-app channels with steps—then keep the diary moving with a fallback capture path while the team uses your signal."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "summary-report-for-online-coaches",
+    "title": "Send Your IGNITE AI Summary Report to an Online Coach",
+    "date": "2026-08-29",
+    "description": "How to send an IGNITE AI summary report to an online coach—what belongs in a coach-ready artifact, which screenshots to skip, and how weekly trends beat chaotic diary photo folders every time.",
+    "sections": [
+      {
+        "body": [
+          "Online coaches do not need forty cropped screenshots of random days. They need a coherent story: intake trends, protein consistency, training load, weight direction, and the weekends that actually decide fat loss. Summary reports exist to package that story from the same logs you already keep.",
+          "Athletes often under-communicate with chaos or over-communicate with noise. A clean report respects both sides: you stop assembling slide decks at midnight; your coach stops reverse-engineering your life from blurry Home screens.",
+          "This guide covers what to include, what to omit, how often to send, and how IGNITE AI summary reports fit a remote coaching loop. It does not replace a coach’s professional judgment or clinical care."
+        ]
+      },
+      {
+        "body": [
+          "Most adjustments are about averages and adherence: Are you hitting protein? Is the weekly calorie average near the plan? Are steps and training matching the cut or bulk? Did travel wreck four days?",
+          "A single heroic deficit day after three blank evenings misleads everyone. Reports should emphasize completeness and central tendency, not your best Tuesday."
+        ],
+        "heading": "What coaches actually decide from data"
+      },
+      {
+        "body": [
+          "Garbage in, garbage out. If oils, drinks, and shared plates are missing, the summary will look “perfect” while the scale disagrees. Spend the week logging with editable capture—photo drafts plus corrections—before you invest in prettier exports.",
+          "Saved staples and meal-prep repeats make coach weeks comparable. When Monday–Friday food is the same container, trend lines become interpretable."
+        ],
+        "heading": "Build the report from real logs first"
+      },
+      {
+        "body": [
+          "Include weekly calorie and macro averages, weight trend if you track it, training summary, and a short note on anomalies: wedding, illness, sleep crash, medication changes you are willing to share. Flag suspected under-logging honestly.",
+          "Optional extras: sleep or step context from Health if you and your coach use it, plus one or two representative meal photos for portion calibration—not a full camera roll."
+        ],
+        "heading": "What belongs in a coach-ready package"
+      },
+      {
+        "body": [
+          "Skip minute-by-minute play-by-plays, moral commentary, and unrelated app settings screenshots. Skip other people’s Friend-group posts. Skip payment or account screens.",
+          "Do not send raw exports of every micronutrient field unless your coach asked. Overwhelm creates ignored email threads."
+        ],
+        "heading": "What to leave out"
+      },
+      {
+        "body": [
+          "Agree on a Sunday or Monday send. Same cadence trains you to complete the week and trains your coach to respond on a schedule. Midweek panic texts with three photos are for emergencies, not routine.",
+          "If you miss a week, say so and send a partial with labeled gaps. Pretending completeness is how programs stall for a month unnoticed."
+        ],
+        "heading": "Cadence: weekly beats random dumps"
+      },
+      {
+        "body": [
+          "Ask your coach which levers they will change: calories, protein, steps, or training—not all at once. Use the next week to test one primary change so the following report can show signal.",
+          "If the report and scale disagree, audit drinks, weekends, and portion edits before demanding a steeper cut. Coaches cannot out-program missing peanut butter."
+        ],
+        "heading": "Reading the report together"
+      },
+      {
+        "body": [
+          "Share only what your coaching agreement covers. You can blur locations or remove social identifiers from Share Cards. Keep medical diagnosis details in the channel your coach specifies.",
+          "If you switch coaches, revoke access patterns and stop sending automatic artifacts. Data portability should not become accidental surveillance."
+        ],
+        "heading": "Privacy and professional boundaries"
+      },
+      {
+        "body": [
+          "Generate the summary report from the diary you already maintain in IGNITE AI—Home rings, Progress trends, Exercise logs—so the coach artifact matches reality instead of a separate spreadsheet you abandon.",
+          "Premium Snap Track improves the underlying meal quality that makes reports trustworthy. The export is only as good as the week’s confirmed logs; treat capture quality as part of coaching hygiene."
+        ],
+        "heading": "Where IGNITE AI summary reports fit"
+      },
+      {
+        "body": [
+          "Coach-ready communication is a weekly trend story, not a screenshot pile. Log honestly, summarize cleanly, send on a cadence, and change one lever at a time.",
+          "Use IGNITE AI summary reports to replace chaos with a single artifact—so remote coaching time is spent on decisions, not archaeology."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "appearance-modes-adherence-ignite",
+    "title": "Why Appearance Modes in IGNITE AI Affect Whether You Open the App",
+    "date": "2026-08-29",
+    "description": "Why appearance modes in IGNITE AI affect whether you open the app — light versus dark comfort, late-night logging, pairing with units and language, and adherence as a UX problem not only a mindset problem.",
+    "sections": [
+      {
+        "body": [
+          "If the UI hurts your eyes at 11 p.m., you will skip. People call that a discipline failure; often it is an appearance failure. IGNITE AI Preferences let you choose light, dark, or system-aligned looks so the diary is something you will actually open after a long day.",
+          "Appearance will not replace Snap Track edits or protein targets. It will remove a silly reason to close the app before the log exists.",
+          "Treat chrome as part of adherence design — the same category as units, language, and reminder timing."
+        ]
+      },
+      {
+        "body": [
+          "Many users finish dinner logs in bed or on the couch in a dark room. A blazing light theme feels like a flashlight to the face. Dark modes reduce that flinch.",
+          "Shift workers and parents on overnight feeds get the same benefit. Comfort is not vanity; it is capture insurance."
+        ],
+        "heading": "Late-night logging is common"
+      },
+      {
+        "body": [
+          "If you log every meal at noon in an office, light mode may feel clearer. If your critical meal is late, optimize for that moment — the one you historically skip.",
+          "System-following appearance can work if your phone already switches at sunset. Manual dark is better if system timing disagrees with your meals."
+        ],
+        "heading": "Match theme to when you log"
+      },
+      {
+        "body": [
+          "While choosing a theme, confirm language and metric/imperial units. A comfortable dark UI that still shows the wrong measurement system only solves half the friction.",
+          "Travel and campus life are good moments to recheck all three."
+        ],
+        "heading": "Pair appearance with units and language"
+      },
+      {
+        "body": [
+          "Snap Track review screens, Diet planner, AI Lab, and Progress charts should be easy to read in your chosen mode. If contrast feels wrong, switch themes rather than abandoning AI capture.",
+          "The product is serious about logging; flexible chrome is part of that seriousness."
+        ],
+        "heading": "Premium tools deserve readable chrome"
+      },
+      {
+        "body": [
+          "Share Cards have their own themes for export. Your in-app appearance does not have to match your Instagram aesthetic — but creators filming tutorials may want a consistent look on camera.",
+          "Never require followers to use your theme. Teach Preferences instead."
+        ],
+        "heading": "Social posting and Share Cards"
+      },
+      {
+        "body": [
+          "Opening Friends chat or fasting tools at night should not blast light either. Whole-app appearance keeps those surfaces comfortable.",
+          "If notifications wake you, fix notification settings separately — theme alone will not solve sleep hygiene."
+        ],
+        "heading": "Friends, fasting, and nighttime UI"
+      },
+      {
+        "body": [
+          "Pick a mode, live with it a week, then leave it alone. Endless theme hopping is procrastination dressed as productivity.",
+          "Revisit only when seasons, travel, or shift changes make the old choice wrong."
+        ],
+        "heading": "When to stop tinkering"
+      },
+      {
+        "body": [
+          "Make IGNITE AI easy to look at, then the hard part is just dinner. Appearance modes are adherence tools — especially for late logs — not cosmetic afterthoughts.",
+          "Set dark or light deliberately beside language and units, then let Snap Track and Progress carry the work. Serious logging deserves flexible chrome."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "rollover-calories-week-examples",
+    "title": "How Calorie Rollover Works Week-to-Week (With Examples)",
+    "date": "2026-08-29",
+    "description": "How calorie rollover works week-to-week in IGNITE AI—with concrete examples for uneven social weekends, when banking helps adherence, and when rollover becomes an excuse for blank or dishonest logs.",
+    "sections": [
+      {
+        "body": [
+          "Calorie targets are daily for convenience and weekly for physiology. Life is not a flat line: weddings, travel, and hard training days bend intake. Rollover preferences exist to move unused calories across days so a heavier Saturday does not require fake math or silent under-eating Monday through Friday.",
+          "Rollover is not a cheat-code printer. If weekday logs are missing, there is nothing honest to bank. If every day “rolls” into unrestricted nights, you simply reinvented an uncontrolled surplus with extra steps.",
+          "Below are plain examples of when rollover helps, when it hurts, and how to read the week in Progress instead of negotiating with a single evening. Adjust only preferences you understand; this is not personalized medical nutrition therapy."
+        ]
+      },
+      {
+        "body": [
+          "Strict daily caps punish social reality and reward people whose calendars never change. Rollover lets a clean weekday undershoot fund a planned heavier meal without abandoning the weekly energy budget.",
+          "The psychological win matters too: planned flexibility reduces the binge-restrict loop that starts with “I already ruined the day.” Planned spend is not the same as unlogged chaos."
+        ],
+        "heading": "What rollover is trying to solve"
+      },
+      {
+        "body": [
+          "Suppose your target is 2,200 kcal. You eat about 2,000 on Monday–Friday with complete logs—roughly 1,000 kcal banked if your rollover rules allow it. Saturday dinner can absorb a sizable restaurant meal while the weekly average still tracks the plan.",
+          "This only works if Monday–Friday entries are real. Photographing salads you did not finish, or skipping oils, fabricates a bank that never existed. Rollover amplifies honesty; it also amplifies fiction."
+        ],
+        "heading": "Example A: bank weekdays for Saturday dinner"
+      },
+      {
+        "body": [
+          "Some athletes prefer slightly higher intake around key sessions. Rollover can shift calories toward Thursday dinner and Friday breakfast, then run lighter on a rest Sunday. The diary should still show protein staying high on training days.",
+          "If Exercise logging is active, judge the week by food plus training context—not by pretending burned calories are free unlimited toppings. Keep rollover rules conservative enough that “eat back everything” never becomes the silent policy."
+        ],
+        "heading": "Example B: hard training Thursday, easier Friday"
+      },
+      {
+        "body": [
+          "You undershoot by forgetting lunch three days, “bank” phantom calories, then blow Saturday and wonder why weight trends up. That is not flexible dieting; that is missing data plus a celebratory surplus.",
+          "Another failure mode: rolling forward indefinitely without a weekly review. Flexibility needs a container. If Progress shows the weekly average drifting up for three weeks, tighten rollover or return to flatter daily targets temporarily."
+        ],
+        "heading": "Example C: when rollover becomes an excuse"
+      },
+      {
+        "body": [
+          "Require complete logs before you trust the bank. Cap how much can move in a day if the product settings allow limits. Keep protein floors intact—flexibility should live mostly in carbs and fats around social meals.",
+          "Decide the heavy meal in advance when possible. Pre-commitment turns rollover into a plan; post-hoc rationalization turns it into permission after the damage."
+        ],
+        "heading": "Guardrails that keep flexibility honest"
+      },
+      {
+        "body": [
+          "Rollover often gets spent on dinner plus drinks. Log alcohol in drink mode and food with photo edits so the “bank” faces reality. Liquid calories are where flexible plans quietly die.",
+          "If nights out are weekly, build them into the average on purpose. A system that assumes monastery weekdays and chaos Saturdays will always feel broken."
+        ],
+        "heading": "Weekends, alcohol, and liquid calories"
+      },
+      {
+        "body": [
+          "Open Progress and look at the weekly average, not the loudest day. Ask: Did rollover reduce stress without raising the average beyond the goal? Did protein hold? Were logs complete?",
+          "If yes, keep the preference. If no, reduce flexibility for two weeks and rebuild the habit of same-day logging before you unlock banking again."
+        ],
+        "heading": "How to review rollover on Monday"
+      },
+      {
+        "body": [
+          "Use IGNITE AI calorie rollover preferences as a deliberate weekly tool, then feed them with honest Snap Track and Quick Log entries. Empty days cannot fund real dinners—only complete diaries can.",
+          "Premium AI capture helps the honesty layer on mixed restaurant plates; rollover without editable logging is just a softer way to guess. Pair preferences with Progress reviews so the feature stays a steering wheel, not a story you tell yourself."
+        ],
+        "heading": "Where IGNITE AI preferences fit"
+      },
+      {
+        "body": [
+          "Rollover smooths uneven weeks when weekday logs are complete and the weekly average stays intentional. It fails when used to launder blank days or unbounded weekends.",
+          "Bank on purpose, spend on purpose, review on Monday in IGNITE AI Progress—and treat rollover as flexible budgeting, not a loophole machine."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "add-burned-calories-on-vs-off",
+    "title": "Should You Add Burned Calories Back in IGNITE AI?",
+    "date": "2026-08-30",
+    "description": "When to enable “add burned calories” in IGNITE AI — fat-loss phases versus high-output training, wearable overestimation, Health sync caveats, and how to judge the setting with Progress averages.",
+    "sections": [
+      {
+        "body": [
+          "Few preference toggles start more arguments than adding burned calories back to your daily budget. Some athletes need the flexibility; many fat-loss phases quietly stall because watches invent hundreds of bonus kcal. IGNITE AI does not preach a single religion — it lets you choose whether workout burn adjusts targets.",
+          "Wearables and Health Connect / Apple Health syncs can feed activity data. That convenience is not the same as metabolic truth. Overestimation is common; underestimation happens too. Your scale trends and Progress energy averages are the referee.",
+          "This guide helps you pick on versus off for a defined phase, run it for two weeks, and decide with data instead of gym-forum dogma."
+        ]
+      },
+      {
+        "body": [
+          "When enabled, logged or synced exercise energy can increase what you are allowed to eat that day. When disabled, food targets stay anchored to your planned intake regardless of optimistic burn.",
+          "Neither mode replaces editing food logs. Oil you forgot still matters more than a five-minute argument about watch credits."
+        ],
+        "heading": "What the setting actually changes"
+      },
+      {
+        "body": [
+          "If the goal is a deficit, many people do better with burned calories off. You train for performance and health; you do not automatically eat the watch’s imagination.",
+          "If you prefer on, mentally discount burn or keep sessions lightly logged until Progress shows the combination still moves weekly averages the right way."
+        ],
+        "heading": "Fat-loss phases: default toward off or discount"
+      },
+      {
+        "body": [
+          "Athletes in heavy blocks or people maintaining at high NEAT sometimes need add-back to avoid under-fueling. On can be rational when training volume is real and appetite lags.",
+          "Still verify with body-weight trends, energy in sessions, and Progress — not with a single post-workout hunger cue."
+        ],
+        "heading": "High-output athletes and maintenance"
+      },
+      {
+        "body": [
+          "Restless sleep, car vibrations misread as steps, and generous strength-training estimates create phantom budget. If weekends look “earned” despite sedentary brunch days, suspicion is warranted.",
+          "Cross-check Exercise logs you manually trust against automatic credits. Prefer clarity over double counting."
+        ],
+        "heading": "Wearable inflation patterns to watch"
+      },
+      {
+        "body": [
+          "Pick one setting. Keep food logging quality constant — Snap Track edits included. Do not change protein targets mid-test. Weigh under similar conditions.",
+          "Read Progress energy averages at day fourteen. If weight stalled while intake looks high with burn-on, flip off and retest. If performance crashed with burn-off, reconsider on or raise planned intake deliberately."
+        ],
+        "heading": "How to run a clean two-week test"
+      },
+      {
+        "body": [
+          "When training drops, phantom burn becomes more dangerous. Prefer off until activity returns. Update Profile goals so rings match reality.",
+          "See also recovery logging habits: keep the diary, simplify protein, skip hero deficits."
+        ],
+        "heading": "Injury and low-activity exceptions"
+      },
+      {
+        "body": [
+          "If you post workout cards, remember followers may copy your burn philosophy without copying your volume. Say which preference you use when you teach.",
+          "Creators should not imply IGNITE AI forces eat-back. The product offers a choice — accuracy in content builds trust."
+        ],
+        "heading": "Share Cards and social context"
+      },
+      {
+        "body": [
+          "Add burned calories on for high-output fueling when Progress agrees; keep it off for many fat-loss phases to avoid wearable theater. IGNITE AI lets you choose instead of preaching.",
+          "Pick a rule, run two honest weeks with Snap Track and Progress, then judge averages — not vibes. Revisit the toggle when training volume or goals change."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "progress-energy-averages-read-a-stall",
+    "title": "How to Read Energy Averages in IGNITE AI When Weight Stalls",
+    "date": "2026-08-30",
+    "description": "How to read Progress energy averages in IGNITE AI when weight stalls — separate sodium noise from true surplus, check photo-log honesty, and change one lever without panic cutting.",
+    "sections": [
+      {
+        "body": [
+          "Stalls are not always surplus. Sodium, menstrual fluid, inflammation, glycogen, underreported oils, or a true need for intake change can all freeze the scale. Panic cutting 500 kcal teaches misery more often than fat loss. Progress energy averages exist so you diagnose before you burn the plan.",
+          "IGNITE AI’s Progress tab pairs nutrition trends with the logging quality you actually produced — especially when Snap Track edits were honest about dressings and weekend drinks.",
+          "This guide is a reading method, not a medical workup. Persistent symptoms or extreme behaviors need professionals, not deeper app settings."
+        ]
+      },
+      {
+        "body": [
+          "If three dinners are missing, you do not have a stall — you have a data gap. Fill the diary for seven complete days before changing targets.",
+          "Revisit restaurant and drink entries. The “mystery plateau” is often unlogged shared appetizers."
+        ],
+        "heading": "Start with logging completeness"
+      },
+      {
+        "body": [
+          "Compare a rolling week of intake to your intended target. One wedding buffet does not define the phase; fourteen days of quiet surplus might.",
+          "Split weekdays versus weekends mentally. Many “stalls” are Friday–Sunday average problems wearing a Monday mask."
+        ],
+        "heading": "Read energy averages, not single days"
+      },
+      {
+        "body": [
+          "Confirm protein days hit. Low protein with “fine calories” still feels like a failed cut. Then hunt fats: oils, nut butters, cheese, creamy sauces — the Snap Track edit layer.",
+          "AI Lab can help brainstorm where hidden energy hides in your usual meals; you still verify on the plate."
+        ],
+        "heading": "Protein and fat quality checks"
+      },
+      {
+        "body": [
+          "If add burned calories is on, ask whether wearable credits erased the deficit on paper. Try a week off and compare Progress.",
+          "Steps can be real; bonus kcal from restless nights are less sacred. Preferences are there to test philosophies."
+        ],
+        "heading": "Burned calories and Health sync suspects"
+      },
+      {
+        "body": [
+          "Use weekly average weight if you weigh daily. Progress photos help when fluid noise is emotional. A flat average for three weeks with complete high intake logs is a stronger signal than a two-day jump after sushi.",
+          "Women’s cycle-related swings deserve patience measured in weeks, not hours — without using that as a forever excuse to ignore averages."
+        ],
+        "heading": "Scale noise versus true stall"
+      },
+      {
+        "body": [
+          "Options: tighten weekend logging, reduce target calories modestly, raise protein, increase deliberate steps, or flip burn add-back off. Pick one. Reassess in fourteen days.",
+          "Diet planner swaps can lower energy density without reinventing your entire cuisine. Extreme cuts after a stall often rebound harder."
+        ],
+        "heading": "Change one lever only"
+      },
+      {
+        "body": [
+          "Friends groups should celebrate completed diagnosis weeks, not demand thinner Share Cards. Mute auto-share if public proof spikes anxiety.",
+          "Creators teaching stalls should show Progress screens honestly — no fake before/after science."
+        ],
+        "heading": "Social features and stall psychology"
+      },
+      {
+        "body": [
+          "Read energy averages in IGNITE AI before you burn the plan. Complete logs, weekend honesty, oil edits, and burn-toggle tests explain more stalls than another crash diet.",
+          "Use Progress as the evidence folder panic never has. Change one lever, give it two weeks, and keep Snap Track quality high while the scale tells a slower story."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "snap-cook-with-diet-planner-swaps",
+    "title": "Pair Snap Cook Recipes with IGNITE AI Diet Planner Swaps",
+    "date": "2026-08-30",
+    "description": "How to pair Snap Cook with IGNITE AI Diet planner swaps — cook from what you have, swap what you cannot buy, Snap Track what you plated, and keep Premium planning and cooking inside one loop.",
+    "sections": [
+      {
+        "body": [
+          "Meal plans die when the fridge disagrees. The Diet planner says salmon; you have eggs and spinach. The winning move is not abandoning structure — it is swapping the plan and cooking what exists. IGNITE AI connects those jobs: Diet planner for the week, Snap Cook for recipe direction from photos of ingredients, Snap Track for the plated truth.",
+          "Premium unlocks this AI planning and cooking stack. The point is one loop, not three subscriptions that never speak.",
+          "This guide shows a practical kitchen workflow for busy weeks, batch prep, and “what’s left in the drawer” nights."
+        ]
+      },
+      {
+        "body": [
+          "Generate or open your Diet plan after onboarding goals are set. Notice protein anchors for each day. When a meal is impossible, swap before you ghost the day.",
+          "Swaps keep macro intent alive when groceries fail. They are not cheating; they are how plans survive contact with real life."
+        ],
+        "heading": "Start from the plan, not from vibes"
+      },
+      {
+        "body": [
+          "Photograph what you actually have. Snap Cook proposes a workable direction so leftovers and odd produce become dinner instead of delivery by default.",
+          "Treat the recipe as assistance. Seasoning, food safety, and allergen judgment stay yours. Then cook."
+        ],
+        "heading": "Snap Cook when ingredients are the prompt"
+      },
+      {
+        "body": [
+          "After cooking, Snap Track the plated meal. Oils you added in the pan still count. Saved staples capture wins you will repeat next Thursday.",
+          "If the cooked result diverged hard from the planner item, your log is the source of truth for Progress — update mental notes for next week’s plan."
+        ],
+        "heading": "Log the plate, not the fantasy"
+      },
+      {
+        "body": [
+          "Plan proteins and bases in Diet planner, cook a flexible set with Snap Cook inspiration, portion, and save staples. Weeknights become reheat plus a vegetable — still logged.",
+          "Friends auto-share is optional if meal-prep accountability helps; silence is fine if you only need the kitchen loop."
+        ],
+        "heading": "Batch-prep Sundays"
+      },
+      {
+        "body": [
+          "Swap the planner meal to “out” mentally, then photo-log the restaurant plate. Do not pretend the salmon bowl happened.",
+          "Weekend strategies still apply: drinks, oils, shared plates. The planner is a guide, not a court transcript."
+        ],
+        "heading": "Restaurant nights inside a planner week"
+      },
+      {
+        "body": [
+          "When two swaps seem equal, AI Lab can help compare high-level options. You still decide and still Snap Track.",
+          "Do not outsource medical nutrition decisions to chat. Scope stays lifestyle planning and logging assistance."
+        ],
+        "heading": "AI Lab as the tie-breaker"
+      },
+      {
+        "body": [
+          "Filming plan → Snap Cook → plated Share Card is strong educational content. Creator Program complimentary Premium helps you demo without paywall cuts.",
+          "Keep CTAs accurate: annual Premium where offered via creator code — not invented kitchen coupons."
+        ],
+        "heading": "Creators and food educators"
+      },
+      {
+        "body": [
+          "When the plan breaks, Snap Cook plus Diet planner swaps keep you in motion inside IGNITE AI. Cook what you have, swap what you cannot, log what you ate.",
+          "Premium ties planning and cooking to Snap Track so Progress sees reality. That single loop beats a PDF meal plan and a separate recipe app that never meets your diary."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "calorie-tracker-for-shift-workers",
+    "title": "Best Calorie Tracker for Shift Workers and Night Shifts",
+    "date": "2026-08-30",
+    "description": "Best practices for shift workers tracking calories in IGNITE AI — Quick Log at 3 a.m., Saved staples, flexible reminders, rollover ideas, Health sleep context, and Progress averages across nights.",
+    "sections": [
+      {
+        "body": [
+          "Night shift destroys “normal meal” UI. Breakfast at 7 p.m., lunch at 2 a.m., and a chronobiologist’s nightmare on the calendar will break any diary that assumes cereal at sunrise. Shift workers need capture that does not care what the sun is doing.",
+          "IGNITE AI fits that job with Quick Log voice and photo, Snap Track for cafeteria trays, Saved staples for repeated break-room food, Preferences for appearance, and Progress averages that judge weeks instead of socially normal mealtimes.",
+          "This is adherence engineering for rotating and permanent nights — not medical advice about shift work disorder."
+        ]
+      },
+      {
+        "body": [
+          "If you can log at 3 a.m. with one hand and a bad fluorescent light, you will log at easier times too. Favor photo and voice over multi-field search. Edit oils when you can; finish the entry either way.",
+          "Dark appearance modes reduce the “bright screen, close the app” failure after night shift."
+        ],
+        "heading": "Design the log for the ugliest hour"
+      },
+      {
+        "body": [
+          "Repeating the same two hot meals and one snack is a feature under fatigue. Save them. Barcode the packaged backups living in your locker.",
+          "Diet planner can sketch structure for a rotation; swaps exist when the cafeteria surprises you. Still Snap Track what hit the tray."
+        ],
+        "heading": "Saved staples beat heroic cooking"
+      },
+      {
+        "body": [
+          "Hit protein with foods you will actually eat at odd hours: shakes, yogurt, eggs, microwaveable lean options. Quick Log those without ceremony.",
+          "Under-eating protein on nights shows up later as miserable recovery — Progress trends catch it if the diary is complete."
+        ],
+        "heading": "Protein across upside-down days"
+      },
+      {
+        "body": [
+          "Rollover preferences can help when one night is chaos and the next is controlled — if you earned them with honest logging, not creative math. Burned-calorie add-back from restless shifts and wearable confusion often deserves to stay off.",
+          "Test settings for two weeks of your actual roster, not for a hypothetical 9–5."
+        ],
+        "heading": "Rollover and burned calories on rotating shifts"
+      },
+      {
+        "body": [
+          "Sleep stages and steps from Apple Health or Health Connect can explain wreckage without demanding perfection. Use them as context beside food averages.",
+          "Do not let a depleted sleep ring become an excuse to abandon macros entirely — or to binge as “reward.”"
+        ],
+        "heading": "Health sync for context, not guilt"
+      },
+      {
+        "body": [
+          "A private Friends group with other night workers understands 2 a.m. meals. Day-shift gym flex culture may not. Choose accountability that matches your clock.",
+          "Auto-share optional. Kindness mandatory."
+        ],
+        "heading": "Friends who share the roster"
+      },
+      {
+        "body": [
+          "Log coffee drinks and energy beverages. They are easy to treat as invisible. Same for the meal you eat when you get home “just so I can sleep.”",
+          "If fasting tools help you set a feed window that matches your shift, use them gently. If they worsen sleep, turn them off."
+        ],
+        "heading": "Caffeine, drinks, and “second dinner”"
+      },
+      {
+        "body": [
+          "If your clock is broken, your logger cannot be fragile. IGNITE AI Quick Log and Snap Track work at 3 a.m.; Saved staples and Progress averages survive rotating weeks.",
+          "Set appearance and burn/rollover preferences for night reality, keep Friends optional, and judge adherence across the roster — not against a daytime meal script you do not live."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "macro-app-for-college-dining-hall",
+    "title": "Best Macro App for College Students on a Dining Hall Plan",
+    "date": "2026-08-30",
+    "description": "Best macro tracking approach for college dining halls — Snap Track tray photos, Saved staples for repeat stations, Friends dorm accountability, and Progress averages when barcodes do not exist.",
+    "sections": [
+      {
+        "body": [
+          "Dining halls are buffets with student IDs. Barcodes are rare, serving spoons are optimistic, and late-night cereal is a food group. Spreadsheet athletes look disciplined for a week and then vanish. Camera-first logging is how campus macros stay honest.",
+          "IGNITE AI Snap Track is built for trays and bowls: photograph, edit oils and fried edges, confirm. Saved staples help when the grill station repeats. Friends groups turn dorm accountability into something lighter than a shared Google Sheet.",
+          "This guide assumes a chaotic meal plan, not a private chef. No fake campus studies — just workflows that survive midterms."
+        ]
+      },
+      {
+        "body": [
+          "Shoot from above after you plate, before you sit down and start negotiating fries with friends. Identify protein first, then starch, then liquids. Edit what you know was ladled heavily.",
+          "Seconds count as seconds. “I’ll remember” is how the weekly average lies."
+        ],
+        "heading": "Tray photo protocol"
+      },
+      {
+        "body": [
+          "When Monday’s chicken and rice is indistinguishable from Thursday’s, save it. Barcode packaged dorm snacks and protein shakes so late study sessions do not rely on memory.",
+          "Quick Log voice helps when your hands are full of backpack and plate — Premium AI capture earns its keep during rush hours."
+        ],
+        "heading": "Build a campus staple library"
+      },
+      {
+        "body": [
+          "Dining halls bury protein under fried sides. Default to eggs, grilled meats, yogurt, beans, and cottage cheese when available. Shakes in the dorm fill gaps without another fried basket.",
+          "Hit protein before you negotiate dessert. Progress will show whether “busy student” was an excuse or a schedule."
+        ],
+        "heading": "Protein strategy on meal plans"
+      },
+      {
+        "body": [
+          "Off-campus pizza nights erase careful tray logging. Use the same restaurant weekend tactics: snap as served, log drinks, edit oil.",
+          "Optional calorie rollover only if weekdays were honest — not as a mythology that appears Friday at 11 p.m."
+        ],
+        "heading": "Weekend and takeout leakage"
+      },
+      {
+        "body": [
+          "Create a private group with roommates or teammates. Auto-share meals if it reduces skipping; ban body shaming in the rules. Leaderboards are optional teeth, not a requirement.",
+          "Do not share logins. Two accounts, one group — same rule as couples."
+        ],
+        "heading": "Friends groups in the dorm"
+      },
+      {
+        "body": [
+          "Log lifts and club sports in Exercise. Campus walking can be real; wearable eat-back still deserves skepticism during fat-loss phases. Prefer Progress trends over watch theater.",
+          "Health sync is fine when available on student phones — optional, not moral."
+        ],
+        "heading": "Training, steps, and burned calories"
+      },
+      {
+        "body": [
+          "AI photo logging is most valuable precisely when barcodes vanish. If the meal plan is your entire diet, Premium for Snap Track can be cheaper than abandoning tracking three times a semester.",
+          "Creators on campus should use Creator Program codes accurately if they promote the app — annual Premium where offered, no invented student loopholes."
+        ],
+        "heading": "Budgeting Premium on a student calendar"
+      },
+      {
+        "body": [
+          "Campus food is chaotic. IGNITE AI is a dorm-proof diary when you photograph trays, save repeats, and keep Friends optional for accountability.",
+          "Stop hunting barcodes that do not exist. Snap Track the plate, protect protein, review Progress through midterms — and let dining-hall chaos become data instead of a blackout."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "track-macros-international-travel",
+    "title": "How to Track Macros While Traveling Internationally",
+    "date": "2026-08-31",
+    "description": "How to track macros while traveling internationally — Snap Track for foreign menus, drink logging, language and units preferences, and Progress averages that survive jet lag without barcode addiction.",
+    "sections": [
+      {
+        "body": [
+          "International travel breaks barcode-first trackers. Menus change language, packages use different UPCs, and hotel breakfasts look like shared buffets with no labels. The people who keep macro momentum abroad switch to photo and describe — then edit what they know.",
+          "IGNITE AI is built for that mode: Snap Track meal photos, label capture when packaging exists, drink-aware logging, Quick Log voice when you are exhausted, and Preferences for language plus metric/imperial units before you fly.",
+          "This is practical travel hygiene, not a promise that every estimate will match a lab. Finished logs beat blank vacation diaries."
+        ]
+      },
+      {
+        "body": [
+          "Switch units if the destination thinks in grams while you think in ounces — or the reverse. Set language so UI chrome does not add friction when you are jet-lagged.",
+          "Appearance matters too: dark mode on overnight flights can be the difference between logging the snack and giving up."
+        ],
+        "heading": "Set Preferences before you board"
+      },
+      {
+        "body": [
+          "Photograph as served. Identify the dense items — meat, rice, oil sheen, fried components — and edit portions. Accept that sauces are estimates; still better than skipping.",
+          "If a dish is famous and repeatable, save a staple after the first good log so day four’s second order is faster."
+        ],
+        "heading": "Restaurant and street-food protocol"
+      },
+      {
+        "body": [
+          "When packaging exists, use label or barcode modes. Regional catalog gaps happen — label photos and manual edits are the recovery path, not rage-quitting.",
+          "Minibar nuts and airplane snacks are easy to forget and easy to under-log. Capture them the same hour, not “tomorrow.”"
+        ],
+        "heading": "Labels and hotel minibar reality"
+      },
+      {
+        "body": [
+          "Alcohol and sweetened coffee drinks decide travel surplus more often than bread. Log drinks deliberately. If fasting windows help you skip hotel pastry grazing, use them; if travel wrecks sleep, do not force windows for aesthetics.",
+          "Water goals on Home still matter in dry cabins and hot cities — simple, not performative."
+        ],
+        "heading": "Drinks, jet lag, and fasting tools"
+      },
+      {
+        "body": [
+          "Log walks and hotel gym sessions in Exercise when they happen. Wearable burn can be noisier across time zones; consider keeping burned-calorie add-back conservative until you are home.",
+          "Apple Health or Health Connect sync is optional support — not a requirement for a useful travel diary."
+        ],
+        "heading": "Training and Health sync on the road"
+      },
+      {
+        "body": [
+          "Open Progress mid-trip and at return. Energy averages tell you whether vacation was a planned surplus or an accidental blackout. Adjust one lever when you get home — not seven mid-flight.",
+          "Share Cards are fun for Stories if you create; silence is fine if you only want a private log."
+        ],
+        "heading": "Weekly averages beat daily panic abroad"
+      },
+      {
+        "body": [
+          "A private group can keep you honest on long trips. Auto-share only if it reduces skipping — turn it off if it creates performative meals.",
+          "Partners traveling together should keep two accounts and one Friends group, same as at home."
+        ],
+        "heading": "Friends without forcing content"
+      },
+      {
+        "body": [
+          "Trips do not require a tracking vacation. Set language and units, photo the plate, log the drink, and review Progress averages when you land.",
+          "IGNITE AI Snap Track travels better than barcode addiction. Premium AI capture earns its keep the first time a foreign menu kills search — edit, save, move on."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "calorie-tracking-after-injury",
+    "title": "Calorie Tracking After Injury or Low-Activity Weeks",
+    "date": "2026-08-31",
+    "description": "How to keep calorie tracking honest after injury or low-activity weeks in IGNITE AI — adjust targets, rethink burned calories, use Progress photos, and protect protein without abandoning the log.",
+    "sections": [
+      {
+        "body": [
+          "Injury weeks break more diets through silence than through surplus. People stop logging because training stopped, then invent a comeback plan from memory. The better move is quieter: keep the food diary, lower expenditure honesty, and protect protein while tissues heal.",
+          "IGNITE AI cannot diagnose injuries or prescribe rehab. It can keep rings, Progress trends, and optional Health sync visible while you work with a clinician or physio on the actual recovery plan.",
+          "This guide is for temporary low-activity stretches — sprains, post-op limits, forced deloads — not for eating-disorder care or medical nutrition therapy."
+        ]
+      },
+      {
+        "body": [
+          "If onboarding or Profile goals assumed five hard sessions a week, update pace and activity assumptions when you cannot train. Leaving an aggressive deficit on top of sudden inactivity is how recovery months feel miserable and unsustainable.",
+          "Revisit goals when patterns change for weeks — not because one salty dinner scared you. Continuity of logging matters more than clinging to pre-injury targets."
+        ],
+        "heading": "Lower the story you tell the rings"
+      },
+      {
+        "body": [
+          "Wearables still invent burn from restless sleep and limping errands. If you normally add burned calories back, consider turning that preference off during low-activity phases so the budget does not quietly inflate.",
+          "IGNITE AI lets you choose whether workout burn adjusts daily targets. Injury weeks are a good time to pick the conservative setting and reassess later."
+        ],
+        "heading": "Burned calories: usually dial down the theater"
+      },
+      {
+        "body": [
+          "Healing is not a reason to abandon protein; it is a reason to simplify sources. Yogurt, eggs, shakes, canned fish, tofu — logged with Quick Log or barcodes — beat elaborate meal prep you cannot stand on a sore foot to cook.",
+          "Snap Track photo still helps for delivery and partner-cooked plates. Edit what you know; do not skip because the meal was “someone else’s kitchen.”"
+        ],
+        "heading": "Protein and ease over hero cooking"
+      },
+      {
+        "body": [
+          "Immobilization and inflammation mess with scale weight. Progress photos and weekly energy averages give you a calmer folder than daily weigh-ins alone.",
+          "Use Progress to confirm you are still logging consistently. A blank diary plus a scary scale is how people rebound into chaos when cleared to train again."
+        ],
+        "heading": "Progress photos when the scale is emotional"
+      },
+      {
+        "body": [
+          "If your Friends group is gym-flex heavy, mute auto-share for a while or tell the circle you are in a recovery block. Accountability should not demand PR content while you are icing a joint.",
+          "A partner group that celebrates finished logs — not only lifts — is more useful on injury weeks."
+        ],
+        "heading": "Friends without performance pressure"
+      },
+      {
+        "body": [
+          "Diet planner can propose simpler weeks when grocery energy is low. AI Lab can help brainstorm high-protein easy meals — always as assistance, never as a substitute for clinical advice about your injury.",
+          "Premium unlocks those AI tools; if you already subscribe, use them for friction reduction, not for miracle healing claims."
+        ],
+        "heading": "AI Lab and Diet planner as gentle structure"
+      },
+      {
+        "body": [
+          "When cleared to train, ramp Exercise logging gradually. Do not immediately eat back every optimistic wearable calorie. Watch Progress averages for two weeks before aggressive cuts resume.",
+          "The diary that survived the injury becomes the diary that survives the comeback — if you never abandoned it."
+        ],
+        "heading": "Return-to-training caution"
+      },
+      {
+        "body": [
+          "After injury, keep logging, update targets, and usually quiet burned-calorie add-backs. Protect protein with easy foods and use Progress when the scale is noisy.",
+          "IGNITE AI stays useful as a recovery companion for food honesty — not as a clinician. Adjust Profile goals, lean on Quick Log and Snap Track, and return to training with averages, not ego."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "couples-tracking-friends-groups",
+    "title": "How Couples Can Track Together in IGNITE AI Without Sharing Logins",
+    "date": "2026-08-31",
+    "description": "How couples track together in IGNITE AI without sharing logins — private Friends groups, optional auto-share of meals and workouts, chat, and boundaries that keep two diaries intact.",
+    "sections": [
+      {
+        "body": [
+          "Couples who share one login eventually share one fight: whose goals, whose history, whose Premium, whose embarrassing 1 a.m. snack. IGNITE AI’s answer is two accounts and one private Friends group — shared proof without merged diaries.",
+          "Friends and private groups (Groups Room) support feeds, reactions, chat, and optional auto-share after meals or training. Each person still owns targets, Progress, and preferences.",
+          "This guide is for partners who want accountability with kindness — not surveillance cosplay or public leaderboard humiliation."
+        ]
+      },
+      {
+        "body": [
+          "Macros, body weight, and Premium entitlements are personal. Sharing credentials breaks security hygiene and corrupts onboarding assumptions. It also makes breakups or privacy needs unnecessarily messy.",
+          "Buy or trial Premium per person as needed. Do not treat one subscription as a household login unless the product expressly supports family plans — and IGNITE AI’s fair-use rules are not a multi-user share scheme."
+        ],
+        "heading": "Why separate accounts matter"
+      },
+      {
+        "body": [
+          "Create a small Friends group, invite only each other (or add a trusted third if you want a triad challenge). Agree what auto-shares: dinners, workouts, neither, or both.",
+          "Pin a one-line rule: no mocking numbers, no diagnosing, celebrate finished logs. Tone is a feature."
+        ],
+        "heading": "Set up a private couple group"
+      },
+      {
+        "body": [
+          "Share Cards and feed posts are optional proof. Weight figures, medical notes, and binge-context meals can stay private even inside a couple group if either partner prefers.",
+          "Ask before resharing your partner’s plate to Instagram. In-app consent is not the same as public consent."
+        ],
+        "heading": "What to share versus what to keep quiet"
+      },
+      {
+        "body": [
+          "One partner cutting and one maintaining is normal. Friends does not require matching rings. Cheer adherence, not identical calories.",
+          "Use Diet planner independently. Cooking together can still mean two Snap Track logs from the same pot with different portions."
+        ],
+        "heading": "Different goals, same app"
+      },
+      {
+        "body": [
+          "Restaurant nights kill solo trackers. Agree to snap as served, edit oils, log drinks. If one person forgets, a gentle group nudge beats a lecture at the table.",
+          "Optional calorie rollover preferences are personal — do not force one philosophy on both diaries."
+        ],
+        "heading": "Weekend strategy for two"
+      },
+      {
+        "body": [
+          "If either partner has a history of food surveillance trauma, skip feeds and keep tracking private. Accountability that spikes anxiety is not adherence.",
+          "Coaching relationships also differ from romantic ones — do not blur client data into a couple group."
+        ],
+        "heading": "When Friends is the wrong tool"
+      },
+      {
+        "body": [
+          "Creator Groups are for approved Creator Program audiences. Your relationship accountability belongs in private Friends space unless you are deliberately running a public brand community together.",
+          "Keep those mental models separate to avoid privacy mistakes."
+        ],
+        "heading": "Creator Groups are not couple mode"
+      },
+      {
+        "body": [
+          "Two accounts, one private Friends group. IGNITE AI lets couples share proof — meals, workouts, streaks of effort — without sharing passwords or merging goals.",
+          "Agree on auto-share rules, protect dignity, and let Snap Track and Exercise do the daily work. Accountability with boundaries lasts longer than fused logins."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "ignite-ai-for-creators-share-to-code",
+    "title": "IGNITE AI for Creators: From Share Cards to Creator Codes",
+    "date": "2026-08-31",
+    "description": "A creator workflow in IGNITE AI from Share Cards to creator codes — apply to Creator Program, publish proof content, unlock audience annual Premium pricing where offered, and grow Creator Groups.",
+    "sections": [
+      {
+        "body": [
+          "Creators do not need another affiliate link that points to an ugly diary. They need a loop that starts as content and ends as attribution: film the meal or workout, publish a Share Card, apply to Creator Program, share a personalized code, optionally run a Creator Group.",
+          "IGNITE AI keeps those layers beside the real logger — Snap Track, Exercise, Diet planner, AI Lab — so demos are authentic instead of screenshot theater from a product you never open.",
+          "This article maps the end-to-end creator path without confusing Creator Program with Refer a Friend."
+        ]
+      },
+      {
+        "body": [
+          "After logging a meal or session, generate a Share Card, edit the headline, pick a theme, export via the system share sheet. Stories and carousels stop looking like accidental spreadsheet leaks.",
+          "Batch cards on strong days so quiet days still have inventory. Editorial taste beats posting every snack."
+        ],
+        "heading": "Step 1: make Share Cards your default proof"
+      },
+      {
+        "body": [
+          "Submit accurate socials and niche details. Acceptance is discretionary. When approved, you unlock Program mechanics: creator code, complimentary Premium window shown in-app, rewards path, Creator Groups eligibility.",
+          "Do not promote a referral code as a creator offer while you wait. Launch cleanly after approval."
+        ],
+        "heading": "Step 2: apply in Profile → Creator Program"
+      },
+      {
+        "body": [
+          "Use the grant to film Snap Track edits, Snap Cook, Diet swaps, AI Lab questions, and Exercise logs without cutting away at a paywall. Commonly the window begins near ninety days and may extend with dedication and results as managed in Program screens.",
+          "Followers still purchase Premium for themselves. Your complimentary access is a production tool, not their pricing."
+        ],
+        "heading": "Step 3: teach the product on complimentary Premium"
+      },
+      {
+        "body": [
+          "One sentence: creator code for annual Premium where offered. Put it in bio and calm end cards. Rewards target qualified annual Premium under your attribution; weekly/monthly generally do not qualify.",
+          "Regional reward amounts and pricing appear in-app. Say “where offered” if your audience is global."
+        ],
+        "heading": "Step 4: ship the code CTA"
+      },
+      {
+        "body": [
+          "Launch a Group after you have seed posts and rules. Members join via search or invite. Keep Friends for private circles; Groups for audience culture.",
+          "The Group retains; the code attributes. Do not imply joining alone qualifies rewards."
+        ],
+        "heading": "Step 5: Creator Groups when the audience is ready"
+      },
+      {
+        "body": [
+          "Monday: training card. Wednesday: oil-edit Reel. Friday: restaurant Snap Track. Sunday: Progress honesty. Code mentions stay light and accurate.",
+          "Platform packaging differs — short demos on Reels, cards on Stories, long context on YouTube — same code underneath."
+        ],
+        "heading": "Content calendar that feeds the loop"
+      },
+      {
+        "body": [
+          "No fake studies, no invented discount math, no blending Refer a Friend into creator CTAs. Misrepresentation can end Program benefits under the Terms.",
+          "Disclose sponsorships where required. Privacy still matters when featuring other people’s meals."
+        ],
+        "heading": "Compliance that protects the brand"
+      },
+      {
+        "body": [
+          "Creators: stop screenshotting ugly diaries. Use IGNITE AI end to end — Share Cards for proof, Creator Program for distribution, creator codes for audience annual Premium, Groups for community.",
+          "Apply in-app, demo with complimentary Premium, keep Refer a Friend separate, and grow on qualified annual signups with content you would publish even without a code."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "30-day-ignite-ai-challenge-outline",
+    "title": "A 30-Day IGNITE AI Challenge Outline (What to Measure Weekly)",
+    "date": "2026-08-31",
+    "description": "A 30-day IGNITE AI challenge outline — weekly logging and protein targets, Exercise habits, optional Friends proof, Progress reviews each Sunday, and one lever to change without burning the plan.",
+    "sections": [
+      {
+        "body": [
+          "Most “30-day challenges” fail because they measure vibes instead of finished logs. A useful IGNITE AI month is simpler: capture meals honestly, protect protein, train a realistic amount, and read weekly averages before you slash calories out of boredom.",
+          "This outline assumes Premium access to Snap Track and related AI tools, or a challenge host providing clear expectations if participants are on mixed tiers. It is a framework, not a medical protocol and not a promise of a specific scale change.",
+          "Use it solo or inside a private Friends group. The scoreboard is adherence and trends — not public humiliation."
+        ]
+      },
+      {
+        "body": [
+          "Log every eating occasion you can. Prefer Snap Track photo for mixed plates; use barcode or label modes for packages; try Quick Log voice or describe when your hands are full. Edit oils and sauces before you save.",
+          "Do not chase perfection. Chase zero blank meals. Save two or three staples you will repeat. Optional: set appearance, units, and language in Preferences so the UI does not fight you at night."
+        ],
+        "heading": "Days 1–7: learn the capture loop"
+      },
+      {
+        "body": [
+          "Schedule two to four Exercise sessions you can actually finish. Log them in Activity. If you sync Apple Health or Health Connect, glance at steps — do not let wearable burn rewrite your entire deficit philosophy yet.",
+          "Keep food logging as the main habit. A pristine workout week with three missing dinners is a cosplay challenge."
+        ],
+        "heading": "Days 8–14: add training without theater"
+      },
+      {
+        "body": [
+          "Lean on Saved staples and Diet planner swaps when the week gets messy. If Snap Cook helps you use what is in the fridge, use it — then log what you actually plated.",
+          "Optional accountability: join or create a private Friends group and auto-share meals or workouts if that motivates you. Couples and roommates work well here; strangers optional."
+        ],
+        "heading": "Days 15–21: reduce friction and add proof"
+      },
+      {
+        "body": [
+          "Open Progress. Read energy averages and nutrition trends across the month. Compare weekend versus weekday logging quality. Adjust one lever only: protein target, daily calories, training frequency, or burned-calories preference — not all four.",
+          "If weight stalled while averages look high, fix underreported fats before panic cutting. If averages look dialed and the scale is noisy, give sodium and water a vote before you torch the plan."
+        ],
+        "heading": "Days 22–30: Progress review, one lever"
+      },
+      {
+        "body": [
+          "Track four numbers: average body weight (or weekly average if you weigh daily), protein days hit, workouts completed, unlogged meals (aim: zero). Write them in a note or Share Card for yourself — not necessarily for the internet.",
+          "Celebrate finished logs louder than scale drama. Adherence is the skill the next thirty days still need."
+        ],
+        "heading": "Weekly Sunday scoreboard"
+      },
+      {
+        "body": [
+          "No public weigh-ins required. No shaming screenshots. No fabricating medical claims. Fasting tools are optional; do not force windows on people who sleep badly or train hard without guidance.",
+          "If injury, illness, or life chaos hits, shorten the challenge rather than ghosting the diary. A logged “maintenance week” still teaches the product."
+        ],
+        "heading": "Rules that keep the challenge humane"
+      },
+      {
+        "body": [
+          "Pin the outline. Define what auto-share means. Moderate nutrition arguments. Offer AI Lab as a troubleshooting aid, not as gospel.",
+          "Creators running public versions should use Creator Groups under Creator Program rules and keep codes accurate — annual Premium where offered, no invented discounts."
+        ],
+        "heading": "Host tips for Friends-group challenges"
+      },
+      {
+        "body": [
+          "A 30-day IGNITE AI challenge succeeds when Snap Track stays open, Exercise stays realistic, and Progress gets a Sunday vote. Measure finished logs and weekly averages, not motivational posters.",
+          "Run the four phases, change one lever at the end, and keep Friends optional. That is enough structure for a month that teaches the product instead of burning you out."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-burpees",
+    "title": "How Many Calories Do Burpees Burn?",
+    "date": "2026-08-22",
+    "description": "Burpees burns about 280 kcal in 30 minutes for a 70 kg person at MET ≈ 8 (~560/hour). Tables by weight and duration, intensity notes, and how IGNITE AI keeps the session honest next to food.",
+    "sections": [
+      {
+        "body": [
+          "Burpees are the internet’s favorite punishment — and a terrible place to trust a round counter that ignores rest on the floor.",
+          "At MET ≈ 8 (vigorous continuous burpee work), expect roughly 280 kcal in 30 minutes at 70 kg (about 560/hour). Heavier bodies burn more; rests and easy intervals burn less.",
+          "Weekly energy balance still decides fat loss. Board numbers are estimates — not vouchers."
+        ]
+      },
+      {
+        "body": [
+          "Estimated calories for Burpees (MET ≈ 8) — approximate:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680",
+          "Continuous work only. Phone breaks do not count."
+        ],
+        "heading": "Calorie estimates by bodyweight and duration"
+      },
+      {
+        "body": [
+          "MET ≈ 8.0 for dense continuous burpees. Slow step-back versions and long breathers crash the average.",
+          "Bodyweight and continuous intensity beat the class nickname."
+        ],
+        "heading": "What drives the burn"
+      },
+      {
+        "body": [
+          "Brutal conditioning in tiny space. Dose carefully if wrists and shoulders complain.",
+          "Keep protein around 1.6–2.2 g/kg if you are cutting and training hard."
+        ],
+        "heading": "Training value"
+      },
+      {
+        "body": [
+          "After burpees, “I earned pizza” writes itself. IGNITE AI is the kill-switch: photograph the plate before the story hardens, keep the session on the same day, see whether the suffering moved anything but appetite."
+        ],
+        "heading": "Where IGNITE AI fits"
+      },
+      {
+        "body": [
+          "Ballpark 280 kcal / 30 min at 70 kg for burpees at MET ≈ 8.",
+          "Suffer on purpose. Log on purpose. IGNITE AI for people who burpee and still want a waistline."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-battle-ropes",
+    "title": "How Many Calories Do Battle Ropes Burn?",
+    "date": "2026-08-22",
+    "description": "Battle ropes burns about 280 kcal in 30 minutes for a 70 kg person at MET ≈ 8 (~560/hour). Tables by weight and duration, intensity notes, and how IGNITE AI keeps the session honest next to food.",
+    "sections": [
+      {
+        "body": [
+          "Battle ropes look like calorie fireworks. Reality is work-to-rest ratio: continuous waves earn the MET; thirty-second flexing for Instagram does not.",
+          "At MET ≈ 8 (vigorous continuous waves), expect roughly 280 kcal in 30 minutes at 70 kg (about 560/hour). Heavier bodies burn more; rests and easy intervals burn less.",
+          "Weekly energy balance still decides fat loss. Board numbers are estimates — not vouchers."
+        ]
+      },
+      {
+        "body": [
+          "Estimated calories for Battle ropes (MET ≈ 8) — approximate:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680",
+          "Continuous work only. Phone breaks do not count."
+        ],
+        "heading": "Calorie estimates by bodyweight and duration"
+      },
+      {
+        "body": [
+          "MET ≈ 8.0 for hard continuous rope waves. Long rest between intervals drops the session fast.",
+          "Bodyweight and continuous intensity beat the class nickname."
+        ],
+        "heading": "What drives the burn"
+      },
+      {
+        "body": [
+          "Upper-body engine and grip. Pair with legs and protein if physique is the goal.",
+          "Keep protein around 1.6–2.2 g/kg if you are cutting and training hard."
+        ],
+        "heading": "Training value"
+      },
+      {
+        "body": [
+          "Ropes crush you; the smoothie afterward quietly un-crushes the deficit. IGNITE AI catches that second round — Snap Track the drink, log the ropes, stop letting “shredded” be a feeling."
+        ],
+        "heading": "Where IGNITE AI fits"
+      },
+      {
+        "body": [
+          "Ballpark 280 kcal / 30 min at 70 kg for battle ropes at MET ≈ 8.",
+          "Wave hard. Track harder. IGNITE AI keeps battle ropes from becoming a smoothie alibi."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-rowing-machine",
+    "title": "How Many Calories Does a Rowing Machine Burn? (Erg Guide)",
+    "date": "2026-08-23",
+    "description": "Rowing machine burns about 245 kcal in 30 minutes for a 70 kg person at MET ≈ 7 (~490/hour). Tables by weight and duration, intensity notes, and how IGNITE AI keeps the session honest next to food.",
+    "sections": [
+      {
+        "body": [
+          "Erg calories on the monitor are sales tools. Use MET ranges as a sanity check, then row for splits and consistency — not console glory.",
+          "At MET ≈ 7 (moderate continuous erg), expect roughly 245 kcal in 30 minutes at 70 kg (about 490/hour). Heavier bodies burn more; rests and easy intervals burn less.",
+          "Weekly energy balance still decides fat loss. Board numbers are estimates — not vouchers."
+        ]
+      },
+      {
+        "body": [
+          "Estimated calories for Rowing machine (MET ≈ 7) — approximate:",
+          "55 kg: 15 min: ~96 · 30 min: ~193 · 45 min: ~289 · 60 min: ~385",
+          "70 kg: 15 min: ~123 · 30 min: ~245 · 45 min: ~368 · 60 min: ~490",
+          "85 kg: 15 min: ~149 · 30 min: ~298 · 45 min: ~446 · 60 min: ~595",
+          "Continuous work only. Phone breaks do not count."
+        ],
+        "heading": "Calorie estimates by bodyweight and duration"
+      },
+      {
+        "body": [
+          "MET ≈ 7.0 moderate continuous. Hard pieces climb; long rests between intervals average down.",
+          "Bodyweight and continuous intensity beat the class nickname."
+        ],
+        "heading": "What drives the burn"
+      },
+      {
+        "body": [
+          "Full-body engine with low impact when technique is clean. Ugly pulls tax the back for fake calories.",
+          "Keep protein around 1.6–2.2 g/kg if you are cutting and training hard."
+        ],
+        "heading": "Training value"
+      },
+      {
+        "body": [
+          "Concept2 will flatter you. IGNITE AI will not — meal snaps beside the erg session so “I rowed” and “I ate” finally share one truth."
+        ],
+        "heading": "Where IGNITE AI fits"
+      },
+      {
+        "body": [
+          "Ballpark 245 kcal / 30 min at 70 kg for rowing machine at MET ≈ 7.",
+          "Trust the split, verify the plate. IGNITE AI is the erg rider’s food honesty layer."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "how-many-calories-power-walking",
+    "title": "How Many Calories Does Power Walking Burn?",
+    "date": "2026-08-23",
+    "description": "Power walking burns about 175 kcal in 30 minutes for a 70 kg person at MET ≈ 5 (~350/hour). Tables by weight and duration, intensity notes, and how IGNITE AI keeps the session honest next to food.",
+    "sections": [
+      {
+        "body": [
+          "Power walking is the underrated fat-loss volume tool — higher than a stroll, kinder than a jog, easy to repeat daily.",
+          "At MET ≈ 5 (brisk continuous walking ~4 mph effort), expect roughly 175 kcal in 30 minutes at 70 kg (about 350/hour). Heavier bodies burn more; rests and easy intervals burn less.",
+          "Weekly energy balance still decides fat loss. Board numbers are estimates — not vouchers."
+        ]
+      },
+      {
+        "body": [
+          "Estimated calories for Power walking (MET ≈ 5) — approximate:",
+          "55 kg: 15 min: ~69 · 30 min: ~138 · 45 min: ~206 · 60 min: ~275",
+          "70 kg: 15 min: ~88 · 30 min: ~175 · 45 min: ~263 · 60 min: ~350",
+          "85 kg: 15 min: ~106 · 30 min: ~213 · 45 min: ~319 · 60 min: ~425",
+          "Continuous work only. Phone breaks do not count."
+        ],
+        "heading": "Calorie estimates by bodyweight and duration"
+      },
+      {
+        "body": [
+          "MET ≈ 5.0 for continuous brisk power walking. Phone-ambling is closer to 2.5–3.5.",
+          "Bodyweight and continuous intensity beat the class nickname."
+        ],
+        "heading": "What drives the burn"
+      },
+      {
+        "body": [
+          "Steps you can recover from. Perfect NEAT-plus when running hates your knees.",
+          "Keep protein around 1.6–2.2 g/kg if you are cutting and training hard."
+        ],
+        "heading": "Training value"
+      },
+      {
+        "body": [
+          "Walking only works when the other 23 hours are logged. IGNITE AI makes the boring wins visible: steps from Health beside photo dinners that used to vanish."
+        ],
+        "heading": "Where IGNITE AI fits"
+      },
+      {
+        "body": [
+          "Ballpark 175 kcal / 30 min at 70 kg for power walking at MET ≈ 5.",
+          "Walk with intent. Track without drama. IGNITE AI for power walkers who want the scale to notice."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  },
+  {
+    "slug": "burpees-vs-jump-rope-calories",
+    "title": "Burpees vs Jump Rope: Calories Burned Compared (2026)",
+    "date": "2026-08-24",
+    "description": "70 kg / 30 min: ~385 kcal jump rope (MET ≈ 11) vs ~280 burpees (MET ≈ 8). 105 kcal gap, tables, and how to choose — then log food in IGNITE AI.",
+    "sections": [
+      {
+        "body": [
+          "Burpees vs jump rope is a density duel in a living room. Continuous rope usually wins per minute if you truly keep skipping.",
+          "At 70 kg for 30 minutes: ~385 vs ~280. Jump rope leads by about 105 kcal before rests change the story."
+        ]
+      },
+      {
+        "body": [
+          "Estimated calories for Jump rope (MET ≈ 11) — approximate:",
+          "55 kg: 15 min: ~151 · 30 min: ~303 · 45 min: ~454 · 60 min: ~605",
+          "70 kg: 15 min: ~193 · 30 min: ~385 · 45 min: ~578 · 60 min: ~770",
+          "85 kg: 15 min: ~234 · 30 min: ~468 · 45 min: ~701 · 60 min: ~935"
+        ],
+        "heading": "Jump rope (MET ≈ 11)"
+      },
+      {
+        "body": [
+          "Estimated calories for Burpees (MET ≈ 8) — approximate:",
+          "55 kg: 15 min: ~110 · 30 min: ~220 · 45 min: ~330 · 60 min: ~440",
+          "70 kg: 15 min: ~140 · 30 min: ~280 · 45 min: ~420 · 60 min: ~560",
+          "85 kg: 15 min: ~170 · 30 min: ~340 · 45 min: ~510 · 60 min: ~680"
+        ],
+        "heading": "Burpees (MET ≈ 8)"
+      },
+      {
+        "body": [
+          "Rope for max burn per minute. Burpees when you want full-body strength-endurance without a rope. Both punish poor recovery."
+        ],
+        "heading": "Which to pick"
+      },
+      {
+        "body": [
+          "Home HIIT without a food log is just loud cardio. IGNITE AI is how living-room athletes keep the after-session sandwich from erasing the MET chart."
+        ],
+        "heading": "Where IGNITE AI fits"
+      },
+      {
+        "body": [
+          "Jump rope edges Burpees by ~105 kcal / 30 min at these METs.",
+          "Pick your poison. Then open IGNITE AI before the fridge does."
+        ],
+        "heading": "Bottom line"
+      }
+    ]
+  }
+]
