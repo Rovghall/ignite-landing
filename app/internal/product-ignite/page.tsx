@@ -3705,7 +3705,7 @@ export default function ProductInsightsAdminPage() {
                                               Sem emails nesta plataforma na janela.
                                             </p>
                                           ) : (
-                                            <ul className="grid gap-1 sm:grid-cols-2">
+                                            <ul className="flex flex-col gap-1">
                                               {emails.users.map((u, i) => (
                                                 <li
                                                   key={`${u.email ?? 'none'}-${i}`}
