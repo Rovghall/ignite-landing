@@ -14,6 +14,13 @@ import {
   type YearBreakdown,
 } from '@/lib/unit-economics-model'
 
+/** Friendly sans for dashboard copy; extra right padding keeps values clear of number spinners. */
+const NUMBER_INPUT_CLASS =
+  'w-[7.25rem] rounded-lg border border-zinc-700 bg-zinc-900 py-2 pl-3 pr-10 text-right text-sm font-medium tabular-nums text-white outline-none focus:border-zinc-500 [appearance:textfield] [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+
+const NUMBER_INPUT_COMPACT_CLASS =
+  'rounded-lg border border-zinc-700 bg-zinc-950 py-1.5 pl-2.5 pr-9 text-sm tabular-nums text-white outline-none focus:border-zinc-500 [appearance:textfield] [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none'
+
 function SliderField({
   label,
   value,
@@ -51,7 +58,7 @@ function SliderField({
           step={step}
           value={Number.isFinite(value) ? value : 0}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="w-24 rounded-lg border border-zinc-700 bg-zinc-900 px-2.5 py-2 text-right text-sm font-semibold text-white outline-none focus:border-zinc-500"
+          className={NUMBER_INPUT_CLASS}
         />
         {suffix ? <span className="w-8 text-xs text-zinc-500">{suffix}</span> : null}
       </div>
@@ -62,8 +69,8 @@ function SliderField({
 function KpiCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex flex-1 flex-col gap-1 border-zinc-700/80 px-4 first:pl-0 last:pr-0 sm:border-r sm:last:border-r-0">
-      <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-zinc-500">{label}</p>
-      <p className="font-display text-2xl font-extrabold tracking-tight text-white sm:text-3xl">{value}</p>
+      <p className="text-[10px] font-semibold uppercase tracking-[0.1em] text-zinc-500">{label}</p>
+      <p className="text-xl font-semibold tabular-nums tracking-normal text-white sm:text-2xl">{value}</p>
     </div>
   )
 }
@@ -148,7 +155,7 @@ export function InternalUnitEconomicsDashboard() {
         <p className="text-xs font-semibold uppercase tracking-[0.14em] text-zinc-500">
           Unit economics · simulador
         </p>
-        <h2 className="mt-1 font-display text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+        <h2 className="mt-1 text-xl font-semibold tracking-normal text-white sm:text-2xl">
           Estimativa de ganhos & conversão
         </h2>
         <p className="mt-2 max-w-3xl text-sm text-zinc-400">
@@ -361,7 +368,7 @@ export function InternalUnitEconomicsDashboard() {
                   step={0.01}
                   value={inputs.usdToEur}
                   onChange={(e) => patchInputs({ usdToEur: Number(e.target.value) })}
-                  className="rounded-lg border border-zinc-700 bg-zinc-900 px-2.5 py-2 text-sm text-white"
+                  className={NUMBER_INPUT_COMPACT_CLASS}
                 />
               </label>
               <label className="flex flex-col gap-1.5 text-xs text-zinc-400">
@@ -371,7 +378,7 @@ export function InternalUnitEconomicsDashboard() {
                   step={0.01}
                   value={inputs.usdToGbp}
                   onChange={(e) => patchInputs({ usdToGbp: Number(e.target.value) })}
-                  className="rounded-lg border border-zinc-700 bg-zinc-900 px-2.5 py-2 text-sm text-white"
+                  className={NUMBER_INPUT_COMPACT_CLASS}
                 />
               </label>
             </div>
@@ -411,7 +418,7 @@ export function InternalUnitEconomicsDashboard() {
                           step={0.1}
                           value={tier.price}
                           onChange={(e) => patchTier(tier.id, { price: Number(e.target.value) })}
-                          className="rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-sm text-white"
+                          className={NUMBER_INPUT_COMPACT_CLASS}
                         />
                       </label>
                       <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
@@ -423,7 +430,7 @@ export function InternalUnitEconomicsDashboard() {
                           onChange={(e) =>
                             patchTier(tier.id, { durationMonths: Number(e.target.value) })
                           }
-                          className="rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-sm text-white"
+                          className={NUMBER_INPUT_COMPACT_CLASS}
                         />
                       </label>
                       <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
@@ -435,7 +442,7 @@ export function InternalUnitEconomicsDashboard() {
                           onChange={(e) =>
                             patchTier(tier.id, { creatorPayout: Number(e.target.value) })
                           }
-                          className="rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-sm text-white"
+                          className={NUMBER_INPUT_COMPACT_CLASS}
                         />
                       </label>
                       <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
@@ -448,7 +455,7 @@ export function InternalUnitEconomicsDashboard() {
                           onChange={(e) =>
                             patchTier(tier.id, { subscribers: Number(e.target.value) })
                           }
-                          className="rounded-lg border border-zinc-700 bg-zinc-950 px-2 py-1.5 text-sm font-bold text-lime-300"
+                          className={cn(NUMBER_INPUT_COMPACT_CLASS, 'font-semibold text-lime-300')}
                         />
                       </label>
                     </div>
