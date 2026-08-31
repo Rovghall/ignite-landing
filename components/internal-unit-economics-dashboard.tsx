@@ -166,7 +166,7 @@ function StackedBar({
     { key: 'store', label: 'Loja / web', value: breakdown.storeFee, color: 'bg-sky-500' },
     { key: 'creator', label: 'Creator', value: breakdown.creatorPayout, color: 'bg-emerald-400' },
     { key: 'api', label: 'API', value: breakdown.apiCost, color: 'bg-orange-400' },
-    { key: 'infra', label: 'Infra', value: breakdown.infraCost, color: 'bg-violet-400' },
+    { key: 'infra', label: 'Infra fixa', value: breakdown.infraCost, color: 'bg-violet-400' },
     { key: 'profit', label: 'Lucro líq.', value: Math.max(0, breakdown.netProfit), color: 'bg-lime-500' },
   ].filter((s) => s.value > 0.001)
 
@@ -292,7 +292,7 @@ export function InternalUnitEconomicsDashboard() {
                 <span className="h-2.5 w-2.5 rounded-sm bg-orange-400" /> API
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-sm bg-violet-400" /> Infra
+                <span className="h-2.5 w-2.5 rounded-sm bg-violet-400" /> Infra fixa
               </span>
               <span className="inline-flex items-center gap-1.5">
                 <span className="h-2.5 w-2.5 rounded-sm bg-lime-500" /> Lucro
@@ -402,13 +402,36 @@ export function InternalUnitEconomicsDashboard() {
               onChange={(v) => patchInputs({ mealsPerDay: v })}
             />
             <SliderField
-              label="Infra + suporte / user / mês"
-              value={inputs.infraPerUserMonth}
+              label="Supabase ($/mês)"
+              value={inputs.supabaseMonthlyUsd}
               min={0}
-              max={5}
-              step={0.1}
-              onChange={(v) => patchInputs({ infraPerUserMonth: v })}
+              max={200}
+              step={1}
+              onChange={(v) => patchInputs({ supabaseMonthlyUsd: v })}
             />
+            <SliderField
+              label="Email Namecheap ($/ano)"
+              value={inputs.emailYearlyUsd}
+              min={0}
+              max={500}
+              step={5}
+              onChange={(v) => patchInputs({ emailYearlyUsd: v })}
+            />
+            <p className="rounded-xl border border-zinc-800 bg-zinc-900/80 px-3 py-2.5 text-xs leading-relaxed text-zinc-400">
+              Infra fixa total:{' '}
+              <span className="font-semibold text-zinc-200">
+                {formatMoney(result.fixedInfraMonthlyTotal, inputs.currency)}/mês
+              </span>{' '}
+              (Supabase + email ÷ 12). Repartida por{' '}
+              <span className="font-semibold text-zinc-200">
+                {result.totalSubscribers.toLocaleString()} subs
+              </span>
+              :{' '}
+              <span className="font-semibold text-violet-300">
+                {formatMoney(result.infraPerUserMonth, inputs.currency, 3)}/user/mês
+              </span>
+              .
+            </p>
             <SliderField
               label="Conversões (campanha)"
               value={inputs.campaignConversions}
@@ -480,7 +503,7 @@ export function InternalUnitEconomicsDashboard() {
                       <p className="text-sm font-bold text-white">{tier.name}</p>
                       {computed ? (
                         <p className="text-xs tabular-nums text-zinc-400">
-                          {formatMoney(computed.monthlyMargin, inputs.currency)}/mês
+                          {formatMoney(computed.monthlyMargin, inputs.currency)}/mês margem
                         </p>
                       ) : null}
                     </div>

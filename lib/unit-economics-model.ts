@@ -15,7 +15,10 @@ export type UnitEconomicsInputs = {
   /** API cost per meal analysis, stored in USD internally */
   apiCostUsd: number
   mealsPerDay: number
-  infraPerUserMonth: number
+  /** Fixed Supabase bill (USD / month) */
+  supabaseMonthlyUsd: number
+  /** Namecheap / email hosting (USD / year) */
+  emailYearlyUsd: number
   currency: DisplayCurrency
   usdToEur: number
   usdToGbp: number
@@ -50,6 +53,8 @@ export type UnitEconomicsResult = {
   totalSubscribers: number
   weightedNetPerMonth: number
   apiCostPerUserMonth: number
+  infraPerUserMonth: number
+  fixedInfraMonthlyTotal: number
   marginPerUserMonth: number
   marginPerUserYear: number
   monthlyOperatingMargin: number
@@ -94,7 +99,8 @@ export const DEFAULT_INPUTS: UnitEconomicsInputs = {
   /** ~0.6¢ measured (gpt-4o-mini); editable — e.g. 0.06 for 6¢ */
   apiCostUsd: 0.006,
   mealsPerDay: 2.5,
-  infraPerUserMonth: 1,
+  supabaseMonthlyUsd: 25,
+  emailYearlyUsd: 70,
   currency: 'EUR',
   usdToEur: 0.92,
   usdToGbp: 0.79,
@@ -111,6 +117,20 @@ export function convertToUsd(amount: number, currency: DisplayCurrency, rates: P
   if (currency === 'USD') return amount
   if (currency === 'EUR') return rates.usdToEur > 0 ? amount / rates.usdToEur : amount
   return rates.usdToGbp > 0 ? amount / rates.usdToGbp : amount
+}
+
+export function fixedInfraMonthlyUsd(inputs: Pick<UnitEconomicsInputs, 'supabaseMonthlyUsd' | 'emailYearlyUsd'>): number {
+  return inputs.supabaseMonthlyUsd + inputs.emailYearlyUsd / 12
+}
+
+export function infraPerUserMonthFromInputs(
+  inputs: UnitEconomicsInputs,
+  totalSubscribers: number,
+): { fixedInfraMonthlyTotal: number; infraPerUserMonth: number } {
+  const fixedInfraMonthlyTotal = convertFromUsd(fixedInfraMonthlyUsd(inputs), inputs.currency, inputs)
+  const infraPerUserMonth =
+    totalSubscribers > 0 ? fixedInfraMonthlyTotal / totalSubscribers : fixedInfraMonthlyTotal
+  return { fixedInfraMonthlyTotal, infraPerUserMonth }
 }
 
 function computeTier(
@@ -155,14 +175,18 @@ function weightedAverage(values: { weight: number; value: number }[]): number {
 export function computeUnitEconomics(inputs: UnitEconomicsInputs): UnitEconomicsResult {
   const apiCostDisplay = convertFromUsd(inputs.apiCostUsd, inputs.currency, inputs)
   const apiCostPerUserMonth = inputs.mealsPerDay * 30 * apiCostDisplay
+  const totalSubscribers = inputs.tiers.reduce((s, t) => s + t.subscribers, 0)
+  const { fixedInfraMonthlyTotal, infraPerUserMonth } = infraPerUserMonthFromInputs(
+    inputs,
+    totalSubscribers,
+  )
   const tiers = inputs.tiers.map((tier) =>
-    computeTier(tier, inputs.storeFeePercent, apiCostPerUserMonth, inputs.infraPerUserMonth),
+    computeTier(tier, inputs.storeFeePercent, apiCostPerUserMonth, infraPerUserMonth),
   )
 
-  const totalSubscribers = tiers.reduce((s, t) => s + t.subscribers, 0)
   const weights = tiers.map((t) => ({ weight: t.subscribers, value: t.netPerMonth }))
   const weightedNetPerMonth = weightedAverage(weights)
-  const marginPerUserMonth = weightedNetPerMonth - apiCostPerUserMonth - inputs.infraPerUserMonth
+  const marginPerUserMonth = weightedNetPerMonth - apiCostPerUserMonth - infraPerUserMonth
   const marginPerUserYear = marginPerUserMonth * 12
 
   const monthlyOperatingMargin = tiers.reduce((s, t) => s + t.monthlyMargin, 0)
@@ -178,7 +202,7 @@ export function computeUnitEconomics(inputs: UnitEconomicsInputs): UnitEconomics
     tiers.map((t) => ({ weight: t.subscribers, value: t.storeCut * (12 / t.durationMonths) })),
   )
   const apiYear = apiCostPerUserMonth * 12
-  const infraYear = inputs.infraPerUserMonth * 12
+  const infraYear = infraPerUserMonth * 12
 
   const year1PerUser: YearBreakdown = {
     grossRevenue: weightedGrossYear,
@@ -205,6 +229,8 @@ export function computeUnitEconomics(inputs: UnitEconomicsInputs): UnitEconomics
     totalSubscribers,
     weightedNetPerMonth,
     apiCostPerUserMonth,
+    infraPerUserMonth,
+    fixedInfraMonthlyTotal,
     marginPerUserMonth,
     marginPerUserYear,
     monthlyOperatingMargin,
