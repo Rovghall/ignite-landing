@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { ChevronDown, ChevronUp } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import {
   computeUnitEconomics,
@@ -14,12 +15,89 @@ import {
   type YearBreakdown,
 } from '@/lib/unit-economics-model'
 
-/** Slider pills: wider gap before spinners, tighter right edge after arrows. */
-const NUMBER_INPUT_CLASS =
-  'w-[6.625rem] shrink-0 rounded-lg border border-zinc-700 bg-zinc-900 py-2 pl-2.5 pr-12 text-right text-sm font-medium tabular-nums text-white outline-none focus:border-zinc-500'
+function clampNumber(value: number, min?: number, max?: number): number {
+  let next = value
+  if (min != null && next < min) next = min
+  if (max != null && next > max) next = max
+  return next
+}
 
-const NUMBER_INPUT_COMPACT_CLASS =
-  'rounded-lg border border-zinc-700 bg-zinc-950 py-1.5 pl-2.5 pr-10 text-sm tabular-nums text-white outline-none focus:border-zinc-500'
+/** Custom stepper column — native browser spinners cannot be spaced reliably. */
+function EconomicsNumberInput({
+  value,
+  onChange,
+  min,
+  max,
+  step = 1,
+  size = 'default',
+  className,
+  inputClassName,
+}: {
+  value: number
+  onChange: (v: number) => void
+  min?: number
+  max?: number
+  step?: number
+  size?: 'default' | 'compact'
+  className?: string
+  inputClassName?: string
+}) {
+  const compact = size === 'compact'
+
+  function bump(direction: 1 | -1) {
+    const raw = value + direction * step
+    const rounded =
+      step < 1 ? Math.round(raw * 10000) / 10000 : Math.round(raw * 100) / 100
+    onChange(clampNumber(rounded, min, max))
+  }
+
+  return (
+    <div
+      className={cn(
+        'flex shrink-0 items-stretch overflow-hidden rounded-lg border border-zinc-700',
+        compact ? 'h-[34px] w-full bg-zinc-950' : 'h-[38px] w-[6.5rem] bg-zinc-900',
+        className,
+      )}
+    >
+      <input
+        type="number"
+        min={min}
+        max={max}
+        step={step}
+        value={Number.isFinite(value) ? value : 0}
+        onChange={(e) => {
+          const parsed = Number(e.target.value)
+          if (Number.isFinite(parsed)) onChange(clampNumber(parsed, min, max))
+        }}
+        className={cn(
+          'min-w-0 flex-1 border-0 bg-transparent py-0 pl-2.5 pr-2 text-right text-sm font-medium tabular-nums text-white outline-none',
+          '[appearance:textfield] [-moz-appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none',
+          inputClassName,
+        )}
+      />
+      <div className="flex w-[22px] shrink-0 flex-col border-l border-zinc-700/80">
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-label="Aumentar valor"
+          onClick={() => bump(1)}
+          className="flex flex-1 items-center justify-center text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+        >
+          <ChevronUp className="size-3" strokeWidth={2.5} />
+        </button>
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-label="Diminuir valor"
+          onClick={() => bump(-1)}
+          className="flex flex-1 items-center justify-center border-t border-zinc-700/80 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
+        >
+          <ChevronDown className="size-3" strokeWidth={2.5} />
+        </button>
+      </div>
+    </div>
+  )
+}
 
 function SliderField({
   label,
@@ -51,14 +129,12 @@ function SliderField({
           onChange={(e) => onChange(Number(e.target.value))}
           className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full bg-zinc-700 accent-white"
         />
-        <input
-          type="number"
+        <EconomicsNumberInput
+          value={value}
+          onChange={onChange}
           min={min}
           max={max}
           step={step}
-          value={Number.isFinite(value) ? value : 0}
-          onChange={(e) => onChange(Number(e.target.value))}
-          className={NUMBER_INPUT_CLASS}
         />
         {suffix ? <span className="w-8 text-xs text-zinc-500">{suffix}</span> : null}
       </div>
@@ -363,22 +439,20 @@ export function InternalUnitEconomicsDashboard() {
               </div>
               <label className="flex flex-col gap-1.5 text-xs text-zinc-400">
                 USD → EUR
-                <input
-                  type="number"
+                <EconomicsNumberInput
+                  size="compact"
                   step={0.01}
                   value={inputs.usdToEur}
-                  onChange={(e) => patchInputs({ usdToEur: Number(e.target.value) })}
-                  className={NUMBER_INPUT_COMPACT_CLASS}
+                  onChange={(v) => patchInputs({ usdToEur: v })}
                 />
               </label>
               <label className="flex flex-col gap-1.5 text-xs text-zinc-400">
                 USD → GBP
-                <input
-                  type="number"
+                <EconomicsNumberInput
+                  size="compact"
                   step={0.01}
                   value={inputs.usdToGbp}
-                  onChange={(e) => patchInputs({ usdToGbp: Number(e.target.value) })}
-                  className={NUMBER_INPUT_COMPACT_CLASS}
+                  onChange={(v) => patchInputs({ usdToGbp: v })}
                 />
               </label>
             </div>
@@ -413,49 +487,41 @@ export function InternalUnitEconomicsDashboard() {
                     <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
                       <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
                         Preço ({inputs.currency})
-                        <input
-                          type="number"
+                        <EconomicsNumberInput
+                          size="compact"
                           step={0.1}
                           value={tier.price}
-                          onChange={(e) => patchTier(tier.id, { price: Number(e.target.value) })}
-                          className={NUMBER_INPUT_COMPACT_CLASS}
+                          onChange={(v) => patchTier(tier.id, { price: v })}
                         />
                       </label>
                       <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
                         Meses
-                        <input
-                          type="number"
+                        <EconomicsNumberInput
+                          size="compact"
                           min={1}
+                          step={1}
                           value={tier.durationMonths}
-                          onChange={(e) =>
-                            patchTier(tier.id, { durationMonths: Number(e.target.value) })
-                          }
-                          className={NUMBER_INPUT_COMPACT_CLASS}
+                          onChange={(v) => patchTier(tier.id, { durationMonths: v })}
                         />
                       </label>
                       <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
                         Creator (1×)
-                        <input
-                          type="number"
+                        <EconomicsNumberInput
+                          size="compact"
                           step={1}
                           value={tier.creatorPayout}
-                          onChange={(e) =>
-                            patchTier(tier.id, { creatorPayout: Number(e.target.value) })
-                          }
-                          className={NUMBER_INPUT_COMPACT_CLASS}
+                          onChange={(v) => patchTier(tier.id, { creatorPayout: v })}
                         />
                       </label>
                       <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
                         Subscritores
-                        <input
-                          type="number"
+                        <EconomicsNumberInput
+                          size="compact"
                           min={0}
                           step={1}
                           value={tier.subscribers}
-                          onChange={(e) =>
-                            patchTier(tier.id, { subscribers: Number(e.target.value) })
-                          }
-                          className={cn(NUMBER_INPUT_COMPACT_CLASS, 'font-semibold text-lime-300')}
+                          onChange={(v) => patchTier(tier.id, { subscribers: v })}
+                          inputClassName="font-semibold text-lime-300"
                         />
                       </label>
                     </div>
