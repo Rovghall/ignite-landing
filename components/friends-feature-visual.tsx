@@ -15,11 +15,13 @@ const screens = [
 export function FriendsFeatureVisual() {
   const reduce = useReducedMotion()
   const [hovered, setHovered] = useState<string | null>(null)
-  const [desktopHover, setDesktopHover] = useState(false)
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false,
+  )
 
   useEffect(() => {
-    const mq = window.matchMedia('(min-width: 768px) and (hover: hover)')
-    const sync = () => setDesktopHover(mq.matches)
+    const mq = window.matchMedia('(max-width: 767px)')
+    const sync = () => setMobile(mq.matches)
     sync()
     mq.addEventListener('change', sync)
     return () => mq.removeEventListener('change', sync)
@@ -35,7 +37,7 @@ export function FriendsFeatureVisual() {
         const isHovered = hovered === screen.src
 
         // Mobile / iOS: static phones — Motion float + drop-shadow paint gray plates.
-        if (!desktopHover || reduce) {
+        if (mobile || reduce) {
           return (
             <div
               key={screen.src}

@@ -29,8 +29,9 @@ export function ThemeShowcase() {
   const t = useT()
   const reduce = useReducedMotion()
   const [hovered, setHovered] = useState<ThemeId | null>(null)
-  const [desktopHover, setDesktopHover] = useState(false)
-  const [mobile, setMobile] = useState(false)
+  const [mobile, setMobile] = useState(() =>
+    typeof window !== 'undefined' ? window.matchMedia('(max-width: 767px)').matches : false,
+  )
   const [expanded, setExpanded] = useState<ThemePreview | null>(null)
   const [mounted, setMounted] = useState(false)
   const titleId = useId()
@@ -44,19 +45,11 @@ export function ThemeShowcase() {
 
   useEffect(() => {
     setMounted(true)
-    const hoverMq = window.matchMedia('(min-width: 768px) and (hover: hover)')
     const mobileMq = window.matchMedia('(max-width: 767px)')
-    const sync = () => {
-      setDesktopHover(hoverMq.matches)
-      setMobile(mobileMq.matches)
-    }
+    const sync = () => setMobile(mobileMq.matches)
     sync()
-    hoverMq.addEventListener('change', sync)
     mobileMq.addEventListener('change', sync)
-    return () => {
-      hoverMq.removeEventListener('change', sync)
-      mobileMq.removeEventListener('change', sync)
-    }
+    return () => mobileMq.removeEventListener('change', sync)
   }, [])
 
   useEffect(() => {
@@ -103,7 +96,7 @@ export function ThemeShowcase() {
             {themes.map((theme, i) => {
               const Icon = theme.icon
               const isHovered = hovered === theme.id
-              const hoverScale = desktopHover && isHovered ? 1.4 : 1
+              const hoverScale = !mobile && isHovered ? 1.4 : 1
               const alt = t.themes.alt.replace('{name}', theme.name)
 
               return (
@@ -128,12 +121,12 @@ export function ThemeShowcase() {
                       animate={
                         reduce
                           ? { y: 0 }
-                          : { y: isHovered && desktopHover ? -6 : [0, -10, 0] }
+                          : { y: isHovered && !mobile ? -6 : [0, -10, 0] }
                       }
                       transition={
                         reduce
                           ? { duration: 0.2 }
-                          : isHovered && desktopHover
+                          : isHovered && !mobile
                             ? { type: 'spring', stiffness: 300, damping: 24 }
                             : {
                                 duration: 4.6 + i * 0.45,
