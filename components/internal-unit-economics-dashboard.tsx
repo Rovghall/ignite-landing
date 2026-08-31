@@ -484,7 +484,12 @@ export function InternalUnitEconomicsDashboard() {
                         </p>
                       ) : null}
                     </div>
-                    <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                    <div
+                      className={cn(
+                        'grid grid-cols-2 gap-2',
+                        tier.id === '12m-creator' ? 'sm:grid-cols-4' : 'sm:grid-cols-3',
+                      )}
+                    >
                       <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
                         Preço ({inputs.currency})
                         <EconomicsNumberInput
@@ -504,15 +509,17 @@ export function InternalUnitEconomicsDashboard() {
                           onChange={(v) => patchTier(tier.id, { durationMonths: v })}
                         />
                       </label>
-                      <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
-                        Creator (1×)
-                        <EconomicsNumberInput
-                          size="compact"
-                          step={1}
-                          value={tier.creatorPayout}
-                          onChange={(v) => patchTier(tier.id, { creatorPayout: v })}
-                        />
-                      </label>
+                      {tier.id === '12m-creator' ? (
+                        <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
+                          Creator (1×)
+                          <EconomicsNumberInput
+                            size="compact"
+                            step={1}
+                            value={tier.creatorPayout}
+                            onChange={(v) => patchTier(tier.id, { creatorPayout: v })}
+                          />
+                        </label>
+                      ) : null}
                       <label className="flex flex-col gap-1 text-[10px] uppercase text-zinc-500">
                         Subscritores
                         <EconomicsNumberInput
