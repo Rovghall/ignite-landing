@@ -285,6 +285,12 @@ export const ja = {
     creatorProgramTerms: "Creator Program利用規約",
   },
   faq: faqJa,
+  store: {
+    appStoreSoonTitle: "App Storeで近日公開",
+    appStoreSoonBody:
+      "iOS版IGNITE AIはまもなくApp Storeで公開されます。Android版はGoogle Playで今すぐダウンロードできます。",
+    gotIt: "了解",
+  },
   comingSoon: {
     title: "近日公開",
     subtitle:

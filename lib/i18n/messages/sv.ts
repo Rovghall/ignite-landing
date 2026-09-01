@@ -285,6 +285,12 @@ export const sv = {
     creatorProgramTerms: "Villkor för Creator Program",
   },
   faq: faqSv,
+  store: {
+    appStoreSoonTitle: "Kommer snart till App Store",
+    appStoreSoonBody:
+      "IGNITE AI för iOS kommer snart till App Store. Du kan redan ladda ner Android-appen på Google Play.",
+    gotIt: "Okej",
+  },
   comingSoon: {
     title: "Kommer snart",
     subtitle:

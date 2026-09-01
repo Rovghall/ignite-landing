@@ -284,6 +284,12 @@ export const zh = {
     creatorProgramTerms: "Creator Program 条款",
   },
   faq: faqZh,
+  store: {
+    appStoreSoonTitle: "即将登陆 App Store",
+    appStoreSoonBody:
+      "iOS 版 IGNITE AI 即将在 App Store 上线。你现在可以在 Google Play 下载 Android 版。",
+    gotIt: "知道了",
+  },
   comingSoon: {
     title: "即将推出",
     subtitle:

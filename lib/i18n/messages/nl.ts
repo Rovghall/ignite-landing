@@ -285,6 +285,12 @@ export const nl = {
     creatorProgramTerms: "Voorwaarden Creator Program",
   },
   faq: faqNl,
+  store: {
+    appStoreSoonTitle: "Binnenkort in de App Store",
+    appStoreSoonBody:
+      "IGNITE AI voor iOS komt binnenkort naar de App Store. Je kunt de Android-app nu al downloaden via Google Play.",
+    gotIt: "Begrepen",
+  },
   comingSoon: {
     title: "Binnenkort",
     subtitle:

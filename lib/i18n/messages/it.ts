@@ -285,6 +285,12 @@ export const it = {
     creatorProgramTerms: "Termini del Creator Program",
   },
   faq: faqIt,
+  store: {
+    appStoreSoonTitle: "Presto sull’App Store",
+    appStoreSoonBody:
+      "IGNITE AI per iOS sarà presto disponibile sull’App Store. Puoi già scaricare l’app Android su Google Play.",
+    gotIt: "Capito",
+  },
   comingSoon: {
     title: "Prossimamente",
     subtitle:

@@ -285,6 +285,12 @@ export const ptBr = {
     creatorProgramTerms: "Termos do Programa de Criadores",
   },
   faq: faqPtBr,
+  store: {
+    appStoreSoonTitle: "Em breve na App Store",
+    appStoreSoonBody:
+      "A IGNITE AI para iOS estará disponível na App Store em breve. Você já pode baixar o app Android na Google Play.",
+    gotIt: "Entendi",
+  },
   comingSoon: {
     title: 'Em breve',
     subtitle:

@@ -285,6 +285,12 @@ export const ko = {
     creatorProgramTerms: "Creator Program 약관",
   },
   faq: faqKo,
+  store: {
+    appStoreSoonTitle: "App Store 출시 예정",
+    appStoreSoonBody:
+      "iOS용 IGNITE AI가 곧 App Store에서 제공됩니다. Android 앱은 지금 Google Play에서 다운로드할 수 있습니다.",
+    gotIt: "확인",
+  },
   comingSoon: {
     title: "곧 공개",
     subtitle:
