@@ -10,24 +10,49 @@ import {
   groupInviteDisplayLabel,
   type GroupInviteTarget,
 } from '@/lib/group-invite'
+import {
+  detectClientStorePlatform,
+  preferredStoreUrl,
+} from '@/lib/store-links'
 import { cn } from '@/lib/utils'
 
 type Props = {
   target: GroupInviteTarget
 }
 
+const DEEP_LINK_FALLBACK_MS = 1600
+
 export function GroupInviteContent({ target }: Props) {
   const deepLink = useMemo(() => buildIgniteAiGroupDeepLink(target), [target])
   const label = groupInviteDisplayLabel(target)
   const [triedOpen, setTriedOpen] = useState(false)
+  const storeHref = useMemo(() => preferredStoreUrl(detectClientStorePlatform()), [])
+  const getAppIsExternal = storeHref.startsWith('http')
 
   useEffect(() => {
     if (!deepLink || triedOpen) return
     setTriedOpen(true)
-    const timer = window.setTimeout(() => {
+
+    const openTimer = window.setTimeout(() => {
+      // Custom scheme: opens the app when installed; otherwise stays on this page.
       window.location.href = deepLink
     }, 350)
-    return () => window.clearTimeout(timer)
+
+    const fallbackTimer = window.setTimeout(() => {
+      // If the app opened, the tab is usually hidden / backgrounded.
+      if (document.hidden) return
+      const dest = preferredStoreUrl(detectClientStorePlatform())
+      if (dest.startsWith('http')) {
+        window.location.href = dest
+        return
+      }
+      document.getElementById('download')?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }, DEEP_LINK_FALLBACK_MS)
+
+    return () => {
+      window.clearTimeout(openTimer)
+      window.clearTimeout(fallbackTimer)
+    }
   }, [deepLink, triedOpen])
 
   return (
@@ -93,7 +118,10 @@ export function GroupInviteContent({ target }: Props) {
                 Open in IGNITE AI
               </a>
               <a
-                href="#download"
+                href={storeHref}
+                {...(getAppIsExternal
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
                 className={cn(
                   'inline-flex h-12 w-full items-center justify-center gap-2 rounded-full',
                   'border border-foreground/12 bg-white/70 px-5 font-brand text-sm font-semibold tracking-wide text-foreground',
