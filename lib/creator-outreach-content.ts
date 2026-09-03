@@ -258,7 +258,7 @@ const en: CreatorOutreachContent = {
     },
     {
       title: 'Consistency leaderboard',
-      body: 'Automatic ranking of who's logging the most inside the group. Gamify your community and encourage consistency — members want to climb the leaderboard.',
+      body: "Automatic ranking of who's logging the most inside the group. Gamify your community and encourage consistency — members want to climb the leaderboard.",
       src: '/g3.png',
       alt: 'Creator Group Leaderboard tab with consistency ranking by streak',
     },
