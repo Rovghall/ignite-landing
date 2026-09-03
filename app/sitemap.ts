@@ -13,6 +13,7 @@ const staticPaths = [
   '/terms',
   '/referral-terms',
   '/creator-program-terms',
+  '/creator-program',
 ] as const
 
 export default function sitemap(): MetadataRoute.Sitemap {

@@ -42,6 +42,7 @@ export function SiteNav() {
       { label: t.nav.home, path: '/', pill: false },
       { label: t.nav.press, path: '/press', pill: false },
       { label: t.nav.blogs, path: '/blog', pill: false },
+      { label: t.nav.creatorProgram, path: '/creator-program', pill: true },
     ],
     [t],
   )

@@ -81,18 +81,11 @@ export async function middleware(request: NextRequest) {
 
   const preferred = resolvePreferredLocale(request)
 
-  // Short unlisted alias for Creator Program outreach DMs
+  // Short unlisted alias for creator outreach brief (not the public Creator Program page)
   if (pathname === '/creators' || pathname === '/creators/') {
     const url = request.nextUrl.clone()
-    url.pathname = `/${preferred}/creator-program`
+    url.pathname = `/${preferred}/creators`
     return withGeoCookie(request, NextResponse.redirect(url), preferred)
-  }
-  const creatorsLocaleMatch = pathname.match(/^\/([^/]+)\/creators\/?$/)
-  if (creatorsLocaleMatch && isLocale(creatorsLocaleMatch[1])) {
-    const locale = creatorsLocaleMatch[1] as Locale
-    const url = request.nextUrl.clone()
-    url.pathname = `/${locale}/creator-program`
-    return withGeoCookie(request, NextResponse.redirect(url), locale)
   }
 
   // `/` or paths without locale → redirect to preferred locale
