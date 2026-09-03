@@ -19,8 +19,6 @@ type ShotRowProps = {
   width: number
   height: number
   imageMaxClass: string
-  /** Crop transparent mockup padding so the phone sits next to the title. */
-  crop?: boolean
 }
 
 function ScreenshotRow({
@@ -32,23 +30,16 @@ function ScreenshotRow({
   width,
   height,
   imageMaxClass,
-  crop,
 }: ShotRowProps) {
   return (
     <div
       className={cn(
-        'flex w-full flex-col-reverse items-center justify-center sm:flex-row sm:items-center sm:gap-1',
+        'flex w-full flex-col-reverse items-center justify-center gap-2 sm:flex-row sm:items-center sm:gap-3',
         reverse ? 'sm:flex-row-reverse' : '',
       )}
     >
-      <div className={cn('w-full shrink-0 overflow-hidden', imageMaxClass, crop ? '-my-8 sm:-my-4' : '')}>
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          className={cn('w-full', crop ? 'origin-center scale-[1.22]' : '')}
-        />
+      <div className={cn('w-full shrink-0', imageMaxClass)}>
+        <Image src={src} alt={alt} width={width} height={height} className="w-full" />
       </div>
       <div
         className={cn(
@@ -154,7 +145,7 @@ export function CreatorOutreachPageContent() {
           <p className="mx-auto mt-3 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
             {c.appTrackingIntro}
           </p>
-          <div className="mt-2 flex flex-col gap-2">
+          <div className="mt-4 flex flex-col gap-8">
             {c.appTrackingSteps.map((step, i) => (
               <ScreenshotRow
                 key={step.src}
@@ -182,7 +173,7 @@ export function CreatorOutreachPageContent() {
               ? 'Criadores aceites no programa recebem uma badge de verificado ao lado do nome do perfil. Quando és aprovado, crias o teu grupo privado dentro da IGNITE. Convidas a tua audiência pelo código ou link e eles passam a fazer parte da tua comunidade com 3 abas:'
               : 'Accepted creators get a verified badge next to their profile name. When approved, you set up your private group inside IGNITE. Invite your audience via code or link and they join your community with 3 tabs:'}
           </p>
-          <div className="-mt-2 flex flex-col gap-1">
+          <div className="mt-6 flex flex-col gap-8">
             {c.groupScreens.map((step, i) => (
               <ScreenshotRow
                 key={step.src}
@@ -194,7 +185,6 @@ export function CreatorOutreachPageContent() {
                 width={2160}
                 height={3840}
                 imageMaxClass="max-w-[380px]"
-                crop
               />
             ))}
           </div>
