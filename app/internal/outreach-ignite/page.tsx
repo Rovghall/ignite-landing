@@ -76,6 +76,21 @@ const STATUS_ORDER: OutreachStatus[] = [
   'not_a_fit',
 ]
 
+const OUTREACH_COUNTRIES = [
+  { code: 'US', name: 'USA' },
+  { code: 'PT', name: 'Portugal' },
+  { code: 'ES', name: 'Espanha' },
+  { code: 'GB', name: 'UK' },
+  { code: 'AU', name: 'Australia' },
+  { code: 'DE', name: 'Alemanha' },
+  { code: 'CA', name: 'Canada' },
+] as const
+
+function countryLabel(code: string, fallbackName = ''): string {
+  const hit = OUTREACH_COUNTRIES.find((c) => c.code === code.toUpperCase())
+  return hit?.name ?? (fallbackName.trim() || code || 'Sem país')
+}
+
 const EMPTY_FORM: FormState = {
   id: null,
   display_name: '',
@@ -85,8 +100,8 @@ const EMPTY_FORM: FormState = {
   followers_ig: '',
   followers_tiktok: '',
   followers_youtube: '',
-  country_code: '',
-  country_name: '',
+  country_code: 'PT',
+  country_name: 'Portugal',
   niche: '',
   status: 'to_contact',
   notes: '',
@@ -388,17 +403,7 @@ export default function OutreachAdminPage() {
 
   const rowSource = demoMode ? demoRows : rows
 
-  const countries = useMemo(() => {
-    const map = new Map<string, string>()
-    for (const row of rowSource) {
-      const name = row.country_name.trim() || 'Sem país'
-      const key = name.toLowerCase()
-      if (!map.has(key)) map.set(key, name)
-    }
-    return [...map.entries()]
-      .sort((a, b) => a[1].localeCompare(b[1]))
-      .map(([key, label]) => ({ key, label }))
-  }, [rowSource])
+  const countries = OUTREACH_COUNTRIES
 
   const statusCounts = useMemo(() => {
     const counts = { all: rowSource.length } as Record<OutreachStatus | 'all', number>
@@ -411,8 +416,7 @@ export default function OutreachAdminPage() {
     const q = search.trim().toLowerCase()
     return rowSource.filter((row) => {
       if (statusFilter !== 'all' && row.status !== statusFilter) return false
-      const countryKey = (row.country_name.trim() || 'Sem país').toLowerCase()
-      if (countryFilter !== 'all' && countryKey !== countryFilter) return false
+      if (countryFilter !== 'all' && row.country_code.toUpperCase() !== countryFilter) return false
       if (!q) return true
       const hay = [
         row.display_name,
@@ -433,7 +437,7 @@ export default function OutreachAdminPage() {
   const grouped = useMemo(() => {
     const map = new Map<string, OutreachRow[]>()
     for (const row of visibleRows) {
-      const label = row.country_name.trim() || 'Sem país'
+      const label = countryLabel(row.country_code, row.country_name)
       const list = map.get(label) ?? []
       list.push(row)
       map.set(label, list)
@@ -772,8 +776,8 @@ export default function OutreachAdminPage() {
           >
             <option value="all">Todos os países</option>
             {countries.map((c) => (
-              <option key={c.key} value={c.key}>
-                {c.label}
+              <option key={c.code} value={c.code}>
+                {c.name}
               </option>
             ))}
           </select>
@@ -1017,21 +1021,25 @@ export default function OutreachAdminPage() {
                 />
               </Field>
               <Field label="País">
-                <input
+                <select
                   className={inputClass}
-                  placeholder="Portugal"
-                  value={form.country_name}
-                  onChange={(e) => setForm((f) => ({ ...f, country_name: e.target.value }))}
-                />
-              </Field>
-              <Field label="Código país">
-                <input
-                  className={inputClass}
-                  placeholder="PT"
-                  maxLength={8}
-                  value={form.country_code}
-                  onChange={(e) => setForm((f) => ({ ...f, country_code: e.target.value }))}
-                />
+                  value={
+                    OUTREACH_COUNTRIES.some((c) => c.code === form.country_code.toUpperCase())
+                      ? form.country_code.toUpperCase()
+                      : 'PT'
+                  }
+                  onChange={(e) => {
+                    const next = OUTREACH_COUNTRIES.find((c) => c.code === e.target.value)
+                    if (!next) return
+                    setForm((f) => ({ ...f, country_code: next.code, country_name: next.name }))
+                  }}
+                >
+                  {OUTREACH_COUNTRIES.map((c) => (
+                    <option key={c.code} value={c.code}>
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
               </Field>
               <Field label="Nicho">
                 <input
