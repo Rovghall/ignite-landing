@@ -174,7 +174,7 @@ export function CreatorOutreachPageContent() {
                 reverse={i % 2 === 1}
                 width={722}
                 height={1490}
-                imageMaxClass="max-w-[260px]"
+                imageMaxClass="max-w-[300px]"
               />
             ))}
           </div>
