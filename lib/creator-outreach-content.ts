@@ -3,6 +3,7 @@ import {
   getCreatorOutreachMoney,
   type CreatorOutreachCurrency,
 } from '@/lib/creator-outreach-currency'
+import { creatorOutreachByLocale } from '@/lib/creator-outreach-content-i18n'
 
 export type CreatorOutreachFaq = {
   q: string
@@ -39,6 +40,8 @@ export type CreatorOutreachContent = {
   appTrackingSteps: CreatorOutreachImageStep[]
   appOverview: CreatorOutreachImageStep
   groupScreens: CreatorOutreachImageStep[]
+  groupsTitle: string
+  groupsIntro: string
   processTitle: string
   processSteps: string[]
   shareCardsTitle: string
@@ -162,6 +165,9 @@ const pt: CreatorOutreachContent = {
       alt: 'Aba Leaderboard do Creator Group com ranking de consistência por streak',
     },
   ],
+  groupsTitle: 'Creator Groups',
+  groupsIntro:
+    'Criadores aceites no programa recebem uma badge de verificado ao lado do nome do perfil. Quando és aprovado, crias o teu grupo privado dentro da IGNITE. Convidas a tua audiência pelo código ou link e eles passam a fazer parte da tua comunidade com 3 abas:',
   processTitle: 'Como funciona',
   processSteps: [
     'Faz download da app, entra em Profile → Creator Program e candidata-te. Se fores aprovado, recebes 3 meses de VIP e o teu código personalizado.',
@@ -326,6 +332,9 @@ const en: CreatorOutreachContent = {
       alt: 'Creator Group Leaderboard tab with consistency ranking by streak',
     },
   ],
+  groupsTitle: 'Creator Groups',
+  groupsIntro:
+    'Accepted creators get a verified badge next to their profile name. When approved, you set up your private group inside IGNITE. Invite your audience via code or link and they join your community with 3 tabs:',
   processTitle: 'How it works',
   processSteps: [
     'Download the app, go to Profile → Creator Program, and apply. If approved, you get 3 months of VIP access plus your personalized creator code.',
@@ -417,6 +426,11 @@ export function getCreatorOutreachContent(
   currency: CreatorOutreachCurrency = 'EUR',
 ): CreatorOutreachContent {
   const money = getCreatorOutreachMoney(currency)
-  const base = locale === 'pt' || locale === 'pt-br' ? pt : en
+  const base =
+    locale === 'pt'
+      ? pt
+      : locale === 'en'
+        ? en
+        : (creatorOutreachByLocale[locale] ?? en)
   return fillContent(base, money)
 }

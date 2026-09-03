@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Wordmark } from '@/components/site-nav'
 import { StoreButtons } from '@/components/store-buttons'
+import { LanguagePicker } from '@/components/language-picker'
 import { getCreatorOutreachContent } from '@/lib/creator-outreach-content'
 import {
   type CreatorOutreachCurrency,
@@ -101,9 +102,12 @@ export function CreatorOutreachPageContent({
       />
 
       <div className="mx-auto max-w-3xl px-4 pb-20 pt-8 sm:px-6">
-        <Link href={href('/')} className="inline-block text-lg" aria-label="IGNITE AI">
-          <Wordmark className="text-lg" />
-        </Link>
+        <div className="flex items-center justify-between gap-3">
+          <Link href={href('/')} className="inline-block text-lg" aria-label="IGNITE AI">
+            <Wordmark className="text-lg" />
+          </Link>
+          <LanguagePicker />
+        </div>
 
         {/* ── Hero ── */}
         <section className="mt-10 text-center">
@@ -195,13 +199,11 @@ export function CreatorOutreachPageContent({
         {/* ── Creator Groups: Chat / Feed / Leaderboard ── */}
         <section className="mt-14">
           <h2 className="flex items-center justify-center gap-2 font-brand text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            Creator Groups
+            {c.groupsTitle}
             <BadgeCheck className="inline-block h-7 w-7 shrink-0 text-white" fill="#0095F6" strokeWidth={2.2} />
           </h2>
           <p className="mx-auto mt-2 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
-            {locale === 'pt' || locale === 'pt-br'
-              ? 'Criadores aceites no programa recebem uma badge de verificado ao lado do nome do perfil. Quando és aprovado, crias o teu grupo privado dentro da IGNITE. Convidas a tua audiência pelo código ou link e eles passam a fazer parte da tua comunidade com 3 abas:'
-              : 'Accepted creators get a verified badge next to their profile name. When approved, you set up your private group inside IGNITE. Invite your audience via code or link and they join your community with 3 tabs:'}
+            {c.groupsIntro}
           </p>
           <div className="mt-3 flex flex-col gap-6">
             {c.groupScreens.map((step, i) => (
