@@ -135,9 +135,9 @@ const pt: CreatorOutreachContent = {
   ],
   processTitle: 'Como funciona',
   processSteps: [
-    'Candidatas-te e, se fores aprovado, recebes 3 meses de VIP e o teu código personalizado.',
+    'Faz download da app, entra em Profile → Creator Program e candidata-te. Se fores aprovado, recebes 3 meses de VIP e o teu código personalizado.',
     'Lanças o teu grupo privado dentro da app.',
-    'Partilhas o teu código com a audiência; novos users inserem-no no onboarding.',
+    'Cria conteúdo para as tuas redes: meal scans, share cards das tuas refeições e treinos, stories e posts — e partilha o teu código para novos users o inserirem no onboarding.',
     'Acompanhas registos, estados e pagamentos no ecrã Creator Program.',
   ],
   calculatorTitle: 'Calculadora rápida',
@@ -262,9 +262,9 @@ const en: CreatorOutreachContent = {
   ],
   processTitle: 'How it works',
   processSteps: [
-    'Apply and, if approved, receive 3 months of VIP access plus your personalized creator code.',
+    'Download the app, go to Profile → Creator Program, and apply. If approved, you get 3 months of VIP access plus your personalized creator code.',
     'Launch your private group inside the app.',
-    'Share your code; new users enter it during onboarding.',
+    'Create content for your socials: meal scans, share cards of your meals and workouts, stories and posts — and share your code so new users can enter it during onboarding.',
     'Track signups, statuses, and payouts inside the Creator Program screen.',
   ],
   calculatorTitle: 'Quick earnings calculator',
