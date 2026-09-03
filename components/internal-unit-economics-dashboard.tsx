@@ -378,16 +378,17 @@ export function InternalUnitEconomicsDashboard() {
               Resultado dos tiers
             </h3>
             <p className="mb-4 text-xs text-zinc-500">
-              Calculado automaticamente a partir dos preços, meses e subscritores à direita.
+              Ano 1 inclui fee do creator amortizado. Ano 2 = renovação sem novo payout.
             </p>
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[640px] text-left text-sm">
+              <table className="w-full min-w-[720px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-zinc-800 text-[11px] uppercase tracking-[0.08em] text-zinc-500">
                     <th className="pb-3 pr-3 font-semibold">Tier</th>
                     <th className="pb-3 pr-3 font-semibold text-right">Subs</th>
                     <th className="pb-3 pr-3 font-semibold text-right">Margem/mês</th>
-                    <th className="pb-3 pr-3 font-semibold text-right">Margem/ano</th>
+                    <th className="pb-3 pr-3 font-semibold text-right">Ano 1</th>
+                    <th className="pb-3 pr-3 font-semibold text-right">Ano 2</th>
                     <th className="pb-3 font-semibold text-right">API/ano</th>
                   </tr>
                 </thead>
@@ -404,6 +405,9 @@ export function InternalUnitEconomicsDashboard() {
                       <td className="py-3 pr-3 text-right tabular-nums text-lime-400">
                         {formatMoney(tier.annualMargin, inputs.currency)}
                       </td>
+                      <td className="py-3 pr-3 text-right tabular-nums text-emerald-300">
+                        {formatMoney(tier.annualMarginYear2, inputs.currency)}
+                      </td>
                       <td className="py-3 text-right tabular-nums text-orange-300">
                         {formatMoney(tier.monthlyApiCost * 12, inputs.currency)}
                       </td>
@@ -419,6 +423,9 @@ export function InternalUnitEconomicsDashboard() {
                     </td>
                     <td className="py-3 pr-3 text-right font-bold tabular-nums text-lime-400">
                       {formatMoney(result.annualOperatingMargin, inputs.currency)}
+                    </td>
+                    <td className="py-3 pr-3 text-right font-bold tabular-nums text-emerald-300">
+                      {formatMoney(result.annualOperatingMarginYear2, inputs.currency)}
                     </td>
                     <td className="py-3 text-right font-bold tabular-nums text-orange-300">
                       {formatMoney(

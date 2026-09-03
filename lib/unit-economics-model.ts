@@ -36,7 +36,10 @@ export type TierComputed = SubscriptionTier & {
   monthlyApiCost: number
   monthlyInfraCost: number
   monthlyMargin: number
+  /** Run-rate anual com fee creator amortizado (≈ 1.º ano) */
   annualMargin: number
+  /** Run-rate anual sem fee creator (renovação / 2.º ano) */
+  annualMarginYear2: number
 }
 
 export type YearBreakdown = {
@@ -59,6 +62,8 @@ export type UnitEconomicsResult = {
   marginPerUserYear: number
   monthlyOperatingMargin: number
   annualOperatingMargin: number
+  /** Total run-rate anual sem payouts de creator (renovação) */
+  annualOperatingMarginYear2: number
   year1PerUser: YearBreakdown
   year2PerUser: YearBreakdown
   /** Per subscriber on the creator tier (12m) — 1.ª subscrição vs renovação */
@@ -146,12 +151,14 @@ function computeTier(
   const netAfterStore = tier.price - storeCut
   const netAfterCreator = netAfterStore - tier.creatorPayout
   const netPerMonth = netAfterCreator / tier.durationMonths
+  const netPerMonthYear2 = netAfterStore / tier.durationMonths
   const monthlyGross = (tier.price / tier.durationMonths) * tier.subscribers
   const monthlyNetAfterStore = (netAfterStore / tier.durationMonths) * tier.subscribers
   const monthlyNetAfterCreator = netPerMonth * tier.subscribers
   const monthlyApiCost = apiCostPerUserMonth * tier.subscribers
   const monthlyInfraCost = infraPerUserMonth * tier.subscribers
   const monthlyMargin = monthlyNetAfterCreator - monthlyApiCost - monthlyInfraCost
+  const monthlyMarginYear2 = netPerMonthYear2 * tier.subscribers - monthlyApiCost - monthlyInfraCost
 
   return {
     ...tier,
@@ -166,6 +173,7 @@ function computeTier(
     monthlyInfraCost,
     monthlyMargin,
     annualMargin: monthlyMargin * 12,
+    annualMarginYear2: monthlyMarginYear2 * 12,
   }
 }
 
@@ -216,6 +224,7 @@ export function computeUnitEconomics(inputs: UnitEconomicsInputs): UnitEconomics
 
   const monthlyOperatingMargin = tiers.reduce((s, t) => s + t.monthlyMargin, 0)
   const annualOperatingMargin = monthlyOperatingMargin * 12
+  const annualOperatingMarginYear2 = tiers.reduce((s, t) => s + t.annualMarginYear2, 0)
 
   const weightedCreatorFirstYear = weightedAverage(
     tiers.map((t) => ({ weight: t.subscribers, value: t.creatorPayout })),
@@ -280,6 +289,7 @@ export function computeUnitEconomics(inputs: UnitEconomicsInputs): UnitEconomics
     marginPerUserYear,
     monthlyOperatingMargin,
     annualOperatingMargin,
+    annualOperatingMarginYear2,
     year1PerUser,
     year2PerUser,
     creatorPlanYear1,
