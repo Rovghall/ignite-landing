@@ -100,7 +100,7 @@ export function CreatorOutreachPageContent() {
           <p className="mx-auto mt-3 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
             {c.appTrackingIntro}
           </p>
-          <div className="mt-8 flex flex-col gap-10">
+          <div className="mt-5 flex flex-col gap-10">
             {c.appTrackingSteps.map((step, i) => (
               <div
                 key={step.src}
@@ -137,7 +137,7 @@ export function CreatorOutreachPageContent() {
               ? 'Quando és aprovado como creator, crias o teu grupo privado dentro da IGNITE. Convidas a tua audiência pelo código ou link e eles passam a fazer parte da tua comunidade com 3 abas:'
               : 'When approved as a creator, you set up your private group inside IGNITE. Invite your audience via code or link and they join your community with 3 tabs:'}
           </p>
-          <div className="mt-8 flex flex-col gap-10">
+          <div className="mt-5 flex flex-col gap-10">
             {c.groupScreens.map((step, i) => (
               <div
                 key={step.src}
@@ -150,8 +150,8 @@ export function CreatorOutreachPageContent() {
                   <Image
                     src={step.src}
                     alt={step.alt}
-                    width={590}
-                    height={1280}
+                    width={722}
+                    height={1490}
                     className="w-full"
                   />
                 </div>
@@ -171,8 +171,8 @@ export function CreatorOutreachPageContent() {
               <Image
                 src={c.workoutScreen.src}
                 alt={c.workoutScreen.alt}
-                width={590}
-                height={1280}
+                width={722}
+                height={1490}
                 className="w-full"
               />
             </div>
