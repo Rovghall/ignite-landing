@@ -17,6 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return withLocaleAlternates(locale, '/creator-program', {
     title: `${t.creatorProgram.title} | IGNITE AI`,
     description: t.creatorProgram.subtitle,
+    robots: { index: false, follow: false },
   })
 }
 
