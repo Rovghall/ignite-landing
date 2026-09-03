@@ -109,7 +109,7 @@ export function CreatorOutreachPageContent() {
                   i % 2 === 1 ? 'sm:flex-row-reverse' : '',
                 )}
               >
-                <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-3xl border border-black/10 shadow-[0_12px_40px_rgba(0,0,0,0.10)]">
+                <div className="w-full max-w-[260px] shrink-0">
                   <Image
                     src={step.src}
                     alt={step.alt}
@@ -130,7 +130,7 @@ export function CreatorOutreachPageContent() {
         {/* ── App overview ── */}
         <section className="mt-14">
           <div className="flex flex-col items-center gap-6 sm:flex-row">
-            <div className="w-full max-w-[280px] shrink-0 overflow-hidden rounded-3xl border border-black/10 shadow-[0_12px_40px_rgba(0,0,0,0.10)]">
+            <div className="w-full max-w-[280px] shrink-0">
               <Image
                 src={c.appOverview.src}
                 alt={c.appOverview.alt}
@@ -169,7 +169,7 @@ export function CreatorOutreachPageContent() {
                   i % 2 === 1 ? 'sm:flex-row-reverse' : '',
                 )}
               >
-                <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-3xl border border-black/10 shadow-[0_12px_40px_rgba(0,0,0,0.10)]">
+                <div className="w-full max-w-[260px] shrink-0">
                   <Image
                     src={step.src}
                     alt={step.alt}
@@ -190,7 +190,7 @@ export function CreatorOutreachPageContent() {
         {/* ── Workout logging ── */}
         <section className="mt-14">
           <div className="flex flex-col items-center gap-6 sm:flex-row-reverse">
-            <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-3xl border border-black/10 shadow-[0_12px_40px_rgba(0,0,0,0.10)]">
+            <div className="w-full max-w-[260px] shrink-0">
               <Image
                 src={c.workoutScreen.src}
                 alt={c.workoutScreen.alt}
