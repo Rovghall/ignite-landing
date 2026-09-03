@@ -127,21 +127,86 @@ export function CreatorOutreachPageContent() {
           </div>
         </section>
 
-        {/* ── Community hub ── */}
+        {/* ── App overview ── */}
+        <section className="mt-14">
+          <div className="flex flex-col items-center gap-6 sm:flex-row">
+            <div className="w-full max-w-[280px] shrink-0 overflow-hidden rounded-3xl border border-black/10 shadow-[0_12px_40px_rgba(0,0,0,0.10)]">
+              <Image
+                src={c.appOverview.src}
+                alt={c.appOverview.alt}
+                width={1024}
+                height={1024}
+                className="w-full"
+              />
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <h2 className="font-brand text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                {c.appOverview.title}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {c.appOverview.body}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Creator Groups: Chat / Feed / Leaderboard ── */}
         <section className="mt-14">
           <h2 className="text-center font-brand text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-            {c.communityTitle}
+            Creator Groups
           </h2>
-          <div className="mt-6 grid gap-4 sm:grid-cols-3">
-            {c.communityCards.map((card) => (
+          <p className="mx-auto mt-3 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
+            {locale === 'pt' || locale === 'pt-br'
+              ? 'Quando és aprovado como creator, crias o teu grupo privado dentro da IGNITE. Convidas a tua audiência pelo código ou link e eles passam a fazer parte da tua comunidade com 3 abas:'
+              : 'When approved as a creator, you set up your private group inside IGNITE. Invite your audience via code or link and they join your community with 3 tabs:'}
+          </p>
+          <div className="mt-8 flex flex-col gap-10">
+            {c.groupScreens.map((step, i) => (
               <div
-                key={card.title}
-                className="rounded-2xl border border-black/5 bg-white p-5 shadow-[0_8px_24px_rgba(0,0,0,0.05)]"
+                key={step.src}
+                className={cn(
+                  'flex flex-col items-center gap-5 sm:flex-row',
+                  i % 2 === 1 ? 'sm:flex-row-reverse' : '',
+                )}
               >
-                <h3 className="font-brand text-sm font-semibold text-foreground">{card.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{card.body}</p>
+                <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-3xl border border-black/10 shadow-[0_12px_40px_rgba(0,0,0,0.10)]">
+                  <Image
+                    src={step.src}
+                    alt={step.alt}
+                    width={590}
+                    height={1280}
+                    className="w-full"
+                  />
+                </div>
+                <div className="flex-1 text-center sm:text-left">
+                  <h3 className="font-brand text-lg font-semibold text-foreground">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+                </div>
               </div>
             ))}
+          </div>
+        </section>
+
+        {/* ── Workout logging ── */}
+        <section className="mt-14">
+          <div className="flex flex-col items-center gap-6 sm:flex-row-reverse">
+            <div className="w-full max-w-[260px] shrink-0 overflow-hidden rounded-3xl border border-black/10 shadow-[0_12px_40px_rgba(0,0,0,0.10)]">
+              <Image
+                src={c.workoutScreen.src}
+                alt={c.workoutScreen.alt}
+                width={590}
+                height={1280}
+                className="w-full"
+              />
+            </div>
+            <div className="flex-1 text-center sm:text-left">
+              <h2 className="font-brand text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+                {c.workoutScreen.title}
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {c.workoutScreen.body}
+              </p>
+            </div>
           </div>
         </section>
 

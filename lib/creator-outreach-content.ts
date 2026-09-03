@@ -33,8 +33,9 @@ export type CreatorOutreachContent = {
   appTrackingTitle: string
   appTrackingIntro: string
   appTrackingSteps: CreatorOutreachImageStep[]
-  communityTitle: string
-  communityCards: CreatorOutreachCard[]
+  appOverview: CreatorOutreachImageStep
+  groupScreens: CreatorOutreachImageStep[]
+  workoutScreen: CreatorOutreachImageStep
   processTitle: string
   processSteps: string[]
   calculatorTitle: string
@@ -105,21 +106,38 @@ const pt: CreatorOutreachContent = {
       alt: 'Histórico da audiência com estados de cada utilizador atribuído ao creator',
     },
   ],
-  communityTitle: 'A tua comunidade privada na IGNITE',
-  communityCards: [
+  appOverview: {
+    title: 'A app por dentro',
+    body: 'Dashboard principal: calorias restantes, macros (proteína, hidratos, gordura), hidratação, Apple Health, calorias queimadas e refeições registadas com foto — tudo num só ecrã.',
+    src: '/dark.png',
+    alt: 'Dashboard IGNITE AI com calorias, macros, refeições e Apple Health',
+  },
+  groupScreens: [
     {
-      title: 'Private chat',
-      body: 'Canal directo com os teus followers mais envolvidos para responder perguntas e puxar consistência.',
+      title: 'Chat do grupo',
+      body: 'Comunidade privada dentro da IGNITE. Os teus followers falam entre si, partilham receitas, tiram dúvidas e mantêm-se accountable. Reacções e respostas como numa rede social.',
+      src: '/g1.png',
+      alt: 'Aba Chat do Creator Group com mensagens, reacções e respostas',
     },
     {
-      title: 'Meal & workout feed',
-      body: 'A tua comunidade vê refeições e treinos registados em tempo real dentro do grupo.',
+      title: 'Feed de refeições e treinos',
+      body: 'Cada vez que um membro do grupo regista uma refeição ou treino, aparece automaticamente no feed — com foto, calorias, macros e duração. A audiência vê exactamente o que comes e treinas.',
+      src: '/g2.png',
+      alt: 'Aba Feed do Creator Group com um post de treino de kayaking, calorias e reacções',
     },
     {
-      title: 'Consistency leaderboard',
-      body: 'Gamifica o grupo com ranking de quem está a registar mais e melhor.',
+      title: 'Leaderboard de consistência',
+      body: 'Ranking automático de quem está a registar mais dentro do grupo. Gamifica a tua comunidade e incentiva consistência — os membros querem subir no leaderboard.',
+      src: '/g3.png',
+      alt: 'Aba Leaderboard do Creator Group com ranking de consistência por streak',
     },
   ],
+  workoutScreen: {
+    title: 'Registo de treinos',
+    body: 'Os teus followers (e tu) podem registar treinos com 4 opções: cardio, strength, descrever o treino à IA (que estima as calorias queimadas), ou inserir manualmente. Tudo conta para o feed e leaderboard do grupo.',
+    src: '/workout.png',
+    alt: 'Ecrã de registo de treinos com cardio, strength, AI e manual',
+  },
   processTitle: 'Como funciona',
   processSteps: [
     'Candidatas-te e, se fores aprovado, recebes 3 meses de VIP e o teu código personalizado.',
@@ -219,21 +237,38 @@ const en: CreatorOutreachContent = {
       alt: 'Audience history screen showing follower attribution and status',
     },
   ],
-  communityTitle: 'Your dedicated in-app hub',
-  communityCards: [
+  appOverview: {
+    title: 'The app up close',
+    body: 'Main dashboard: remaining calories, macros (protein, carbs, fat), hydration, Apple Health sync, calories burned, and meals logged with photos — all on one screen.',
+    src: '/dark.png',
+    alt: 'IGNITE AI dashboard with calories, macros, meals, and Apple Health',
+  },
+  groupScreens: [
     {
-      title: 'Private chat',
-      body: 'Keep a direct line with your most engaged followers to answer questions and keep momentum high.',
+      title: 'Group chat',
+      body: 'A private community inside IGNITE. Your followers talk to each other, share recipes, ask questions, and stay accountable. Reactions and replies work just like a social network.',
+      src: '/g1.png',
+      alt: 'Creator Group Chat tab with messages, reactions, and replies',
     },
     {
       title: 'Meal & workout feed',
-      body: 'Let your audience see daily meals and workouts logged inside the group in real time.',
+      body: 'Every time a group member logs a meal or workout, it shows up automatically in the feed — with photo, calories, macros, and duration. Your audience sees exactly what you eat and train.',
+      src: '/g2.png',
+      alt: 'Creator Group Feed tab with a kayaking workout post, calories, and reactions',
     },
     {
       title: 'Consistency leaderboard',
-      body: 'Gamify your community with a leaderboard that rewards the followers who stay most consistent.',
+      body: 'Automatic ranking of who's logging the most inside the group. Gamify your community and encourage consistency — members want to climb the leaderboard.',
+      src: '/g3.png',
+      alt: 'Creator Group Leaderboard tab with consistency ranking by streak',
     },
   ],
+  workoutScreen: {
+    title: 'Workout logging',
+    body: 'Your followers (and you) can log workouts in 4 ways: cardio, strength, describe the workout to the AI (which estimates calories burned), or enter manually. Everything counts toward the group feed and leaderboard.',
+    src: '/workout.png',
+    alt: 'Workout logging screen with cardio, strength, AI, and manual options',
+  },
   processTitle: 'How it works',
   processSteps: [
     'Apply and, if approved, receive 3 months of VIP access plus your personalized creator code.',
