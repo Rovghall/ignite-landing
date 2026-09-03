@@ -38,7 +38,7 @@ function ScreenshotRow({
     <div
       className={cn(
         'flex w-full flex-col-reverse items-center justify-center sm:flex-row sm:items-center',
-        groups ? 'gap-0 sm:gap-0' : 'gap-2 sm:gap-3',
+        groups ? 'gap-0 sm:gap-2' : 'gap-2 sm:gap-3',
         reverse ? 'sm:flex-row-reverse' : '',
       )}
     >
@@ -54,16 +54,13 @@ function ScreenshotRow({
           alt={alt}
           width={width}
           height={height}
-          className={cn('w-full', groups && 'origin-center scale-[1.18]')}
+          className={cn('w-full', groups && 'origin-center scale-[1.12]')}
         />
       </div>
       <div
         className={cn(
           'w-full max-w-[240px] shrink-0 text-center sm:px-0',
           reverse ? 'sm:text-right' : 'sm:text-left',
-          groups && !reverse && 'relative z-10 sm:-ml-14',
-          groups && reverse && 'relative z-10 sm:-mr-14',
-          groups && 'mb-0 sm:mb-0',
         )}
       >
         <h3 className="font-brand text-lg font-semibold text-foreground">{title}</h3>
