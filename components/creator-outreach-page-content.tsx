@@ -21,7 +21,6 @@ type ShotRowProps = {
   imageMaxClass: string
   /** Crop transparent mockup padding so the phone sits next to the title. */
   crop?: boolean
-  titleClassName?: string
 }
 
 function ScreenshotRow({
@@ -34,7 +33,6 @@ function ScreenshotRow({
   height,
   imageMaxClass,
   crop,
-  titleClassName,
 }: ShotRowProps) {
   return (
     <div
@@ -58,9 +56,7 @@ function ScreenshotRow({
           reverse ? 'sm:text-right' : 'sm:text-left',
         )}
       >
-        <h3 className={cn('font-brand font-semibold text-foreground', titleClassName ?? 'text-lg')}>
-          {title}
-        </h3>
+        <h3 className="font-brand text-lg font-semibold text-foreground">{title}</h3>
         <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{body}</p>
       </div>
     </div>
@@ -202,22 +198,6 @@ export function CreatorOutreachPageContent() {
               />
             ))}
           </div>
-        </section>
-
-        {/* ── Workout logging ── */}
-        <section className="mt-6">
-          <ScreenshotRow
-            src={c.workoutScreen.src}
-            alt={c.workoutScreen.alt}
-            title={c.workoutScreen.title}
-            body={c.workoutScreen.body}
-            reverse
-            width={2160}
-            height={3840}
-            imageMaxClass="max-w-[380px]"
-            crop
-            titleClassName="text-2xl font-bold tracking-tight sm:text-3xl"
-          />
         </section>
 
         {/* ── Process ── */}

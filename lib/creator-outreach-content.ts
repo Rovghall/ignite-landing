@@ -35,7 +35,6 @@ export type CreatorOutreachContent = {
   appTrackingSteps: CreatorOutreachImageStep[]
   appOverview: CreatorOutreachImageStep
   groupScreens: CreatorOutreachImageStep[]
-  workoutScreen: CreatorOutreachImageStep
   processTitle: string
   processSteps: string[]
   calculatorTitle: string
@@ -134,12 +133,6 @@ const pt: CreatorOutreachContent = {
       alt: 'Aba Leaderboard do Creator Group com ranking de consistência por streak',
     },
   ],
-  workoutScreen: {
-    title: 'Registo de treinos',
-    body: 'Os teus followers (e tu) podem registar treinos com 4 opções: cardio, strength, descrever o treino à IA (que estima as calorias queimadas), ou inserir manualmente. Tudo conta para o feed e leaderboard do grupo.',
-    src: '/workout.png',
-    alt: 'Ecrã de registo de treinos com cardio, strength, AI e manual',
-  },
   processTitle: 'Como funciona',
   processSteps: [
     'Candidatas-te e, se fores aprovado, recebes 3 meses de VIP e o teu código personalizado.',
@@ -267,12 +260,6 @@ const en: CreatorOutreachContent = {
       alt: 'Creator Group Leaderboard tab with consistency ranking by streak',
     },
   ],
-  workoutScreen: {
-    title: 'Workout logging',
-    body: 'Your followers (and you) can log workouts in 4 ways: cardio, strength, describe the workout to the AI (which estimates calories burned), or enter manually. Everything counts toward the group feed and leaderboard.',
-    src: '/workout.png',
-    alt: 'Workout logging screen with cardio, strength, AI, and manual options',
-  },
   processTitle: 'How it works',
   processSteps: [
     'Apply and, if approved, receive 3 months of VIP access plus your personalized creator code.',
