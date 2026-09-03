@@ -75,7 +75,7 @@ function ScreenshotRow({
 export function CreatorOutreachPageContent() {
   const { locale, href } = useLanguage()
   const c = getCreatorOutreachContent(locale)
-  const [calcSignups, setCalcSignups] = useState(50)
+  const [calcSignups, setCalcSignups] = useState(40)
 
   return (
     <main className="relative min-h-screen overflow-hidden">
