@@ -37,6 +37,9 @@ export type CreatorOutreachContent = {
   groupScreens: CreatorOutreachImageStep[]
   processTitle: string
   processSteps: string[]
+  shareCardsTitle: string
+  shareCardsBody: string
+  shareCards: CreatorOutreachImageStep[]
   calculatorTitle: string
   calculatorBody: string
   calculatorLabel: string
@@ -139,6 +142,23 @@ const pt: CreatorOutreachContent = {
     'Lanças o teu grupo privado dentro da app.',
     'Cria conteúdo para as tuas redes: meal scans, share cards das tuas refeições e treinos, stories e posts — e partilha o teu código para novos users o inserirem no onboarding.',
     'Acompanhas registos, estados e pagamentos no ecrã Creator Program.',
+  ],
+  shareCardsTitle: 'Share Cards para as tuas redes',
+  shareCardsBody:
+    'Cada refeição ou treino que registas pode virar um card pronto a partilhar: foto, calorias, macros ou duração, com temas editáveis. Ideal para stories, Reels e posts — e para mostrares o teu código de creator no mesmo fluxo.',
+  shareCards: [
+    {
+      title: 'Meal Share Card',
+      body: 'Transforma um meal scan num visual com macros e frase — escolhe o tema e partilha em segundos.',
+      src: '/share_meal.png',
+      alt: 'Share cards de refeição IGNITE AI com macros e temas',
+    },
+    {
+      title: 'Workout Share Card',
+      body: 'Partilha o teu treino com kcal, duração e um título impactante, pronto para stories.',
+      src: '/share_workout.png',
+      alt: 'Share cards de treino IGNITE AI com kcal e duração',
+    },
   ],
   calculatorTitle: 'Calculadora rápida',
   calculatorBody: 'Move o slider e vê quanto renderiam conversões anuais elegíveis num mês.',
@@ -266,6 +286,23 @@ const en: CreatorOutreachContent = {
     'Launch your private group inside the app.',
     'Create content for your socials: meal scans, share cards of your meals and workouts, stories and posts — and share your code so new users can enter it during onboarding.',
     'Track signups, statuses, and payouts inside the Creator Program screen.',
+  ],
+  shareCardsTitle: 'Share Cards for your socials',
+  shareCardsBody:
+    'Every meal or workout you log can become a ready-to-post card: photo, calories, macros or duration, with editable themes. Perfect for stories, Reels, and posts — and a natural place to drop your creator code.',
+  shareCards: [
+    {
+      title: 'Meal Share Card',
+      body: 'Turn a meal scan into a visual with macros and a punchy line — pick a theme and share in seconds.',
+      src: '/share_meal.png',
+      alt: 'IGNITE AI meal share cards with macros and themes',
+    },
+    {
+      title: 'Workout Share Card',
+      body: 'Share your workout with kcal, duration, and a bold title — ready for stories.',
+      src: '/share_workout.png',
+      alt: 'IGNITE AI workout share cards with kcal and duration',
+    },
   ],
   calculatorTitle: 'Quick earnings calculator',
   calculatorBody: 'Move the slider to estimate how much eligible annual signups could generate per month.',

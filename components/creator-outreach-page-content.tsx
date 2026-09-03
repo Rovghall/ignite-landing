@@ -224,6 +224,36 @@ export function CreatorOutreachPageContent() {
               </li>
             ))}
           </ol>
+
+          <div className="mt-10">
+            <h3 className="text-center font-brand text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+              {c.shareCardsTitle}
+            </h3>
+            <p className="mx-auto mt-2 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
+              {c.shareCardsBody}
+            </p>
+            <div className="mt-5 flex flex-col gap-8">
+              {c.shareCards.map((card) => (
+                <div key={card.src} className="flex flex-col items-center">
+                  <div className="w-full max-w-xl">
+                    <Image
+                      src={card.src}
+                      alt={card.alt}
+                      width={1600}
+                      height={900}
+                      className="w-full"
+                    />
+                  </div>
+                  <p className="mt-3 max-w-md text-center text-sm font-medium text-foreground">
+                    {card.title}
+                  </p>
+                  <p className="mt-1 max-w-md text-center text-sm leading-relaxed text-muted-foreground">
+                    {card.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         {/* ── Earnings calculator ── */}
