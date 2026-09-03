@@ -203,6 +203,26 @@ const pt: CreatorOutreachContent = {
   faqTitle: 'FAQ',
   faq: [
     {
+      q: 'A app IGNITE é para quem?',
+      a: 'Para quem quer melhorar nutrição, treino e consistência: creators, coaches e a respetiva audiência. Serve para registar refeições com IA, treinos, progresso e acompanhar tudo numa comunidade dentro da app.',
+    },
+    {
+      q: 'Para que serve a app IGNITE?',
+      a: 'É uma app de fitness e nutrição: scans de refeições com macros, registo de treinos, tracking de progresso, Health sync e — para creators — grupo privado com chat, feed e leaderboard.',
+    },
+    {
+      q: 'O que ganha a minha audiência?',
+      a: 'Acesso ao plano anual mais barato da app ({annual}), só com o teu código, mais o teu grupo privado: chat, feed de refeições/treinos e leaderboard de consistência.',
+    },
+    {
+      q: 'Quanto ganho por cada conversão?',
+      a: 'Ganhas {reward} fixos por cada nova subscrição anual Premium elegível feita com o teu código.',
+    },
+    {
+      q: 'O que tenho de fazer depois de ser aprovado?',
+      a: 'Recebes VIP + código, lanças o teu grupo Creator, partilhas o código (stories, Share Cards, posts) e acompanhas conversões e payouts no ecrã Creator Program.',
+    },
+    {
       q: 'Como é renovado o acesso VIP?',
       a: 'Os 3 meses iniciais servem para testares a app. Podemos renovar enquanto a parceria estiver activa e fizer sentido para ambos.',
     },
@@ -346,6 +366,26 @@ const en: CreatorOutreachContent = {
   ],
   faqTitle: 'FAQ',
   faq: [
+    {
+      q: 'Who is the IGNITE app for?',
+      a: 'Anyone who wants better nutrition, training, and consistency — creators, coaches, and their audiences. Log meals with AI, track workouts and progress, and stay accountable in an in-app community.',
+    },
+    {
+      q: 'What is the IGNITE app for?',
+      a: 'A fitness and nutrition app: AI meal scans with macros, workout logging, progress tracking, Health sync — and for creators, a private group with chat, feed, and leaderboard.',
+    },
+    {
+      q: 'What does my audience get?',
+      a: 'Access to the cheapest annual plan in the app ({annual}), only with your code, plus your private group: chat, meal/workout feed, and consistency leaderboard.',
+    },
+    {
+      q: 'How much do I earn per conversion?',
+      a: 'You earn a fixed {reward} for each eligible new annual Premium signup that uses your code.',
+    },
+    {
+      q: 'What do I do after I get approved?',
+      a: 'You get VIP + your code, launch your Creator group, share the code (stories, Share Cards, posts), and track conversions and payouts in the Creator Program screen.',
+    },
     {
       q: 'How is VIP access renewed?',
       a: 'The first 3 months are there so you can test the app properly. We can renew access while the partnership remains active and aligned.',
