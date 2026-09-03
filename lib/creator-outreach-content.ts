@@ -1,4 +1,8 @@
 import type { Locale } from '@/lib/i18n/locales'
+import {
+  getCreatorOutreachMoney,
+  type CreatorOutreachCurrency,
+} from '@/lib/creator-outreach-currency'
 
 export type CreatorOutreachFaq = {
   q: string
@@ -58,24 +62,46 @@ export type CreatorOutreachContent = {
   contactEmail: string
 }
 
+type MoneyTokens = { reward: string; annual: string }
+
+function fill(template: string, money: MoneyTokens): string {
+  return template.replaceAll('{reward}', money.reward).replaceAll('{annual}', money.annual)
+}
+
+function fillContent(content: CreatorOutreachContent, money: MoneyTokens): CreatorOutreachContent {
+  return {
+    ...content,
+    metaDescription: fill(content.metaDescription, money),
+    subtitle: fill(content.subtitle, money),
+    heroPoints: content.heroPoints.map((item) => fill(item, money)),
+    economyCreator: content.economyCreator.map((item) => fill(item, money)),
+    economyAudience: content.economyAudience.map((item) => fill(item, money)),
+    codeRules: content.codeRules.map((item) => fill(item, money)),
+    faq: content.faq.map((item) => ({
+      q: fill(item.q, money),
+      a: fill(item.a, money),
+    })),
+  }
+}
+
 const pt: CreatorOutreachContent = {
   metaTitle: 'Creators — detalhes da parceria | IGNITE AI',
   metaDescription:
-    'Monetiza a tua audiência com IGNITE AI: €10 por anual, plano exclusivo a €44.90 para a comunidade, grupo privado na app e tracking de payouts.',
+    'Monetiza a tua audiência com IGNITE AI: {reward} por anual, plano exclusivo a {annual} para a comunidade, grupo privado na app e tracking de payouts.',
   eyebrow: 'IGNITE AI · Creator Program',
   title: 'Monetiza a tua audiência e cria a tua comunidade fitness dentro da app',
   subtitle:
-    'Ganha €10 por cada adesão anual elegível, a tua audiência acede ao plano mais barato da app (€44.90/ano) — só possível com o teu código — e acompanhas tudo em tempo real.',
+    'Ganha {reward} por cada adesão anual elegível, a tua audiência acede ao plano mais barato da app ({annual}/ano) — só possível com o teu código — e acompanhas tudo em tempo real.',
   primaryCta: 'Candidatar-me em 60 segundos',
   secondaryCta: 'Ver termos do programa',
   heroPoints: [
-    '€10 por cada nova subscrição anual elegível',
-    'A tua audiência acede ao plano anual a €44.90 — só possível com o teu código',
+    '{reward} por cada nova subscrição anual elegível',
+    'A tua audiência acede ao plano anual a {annual} — só possível com o teu código',
     '3 meses de VIP gratuitos para testares a app',
   ],
   economyCreatorTitle: 'O que tu ganhas',
   economyCreator: [
-    '€10 de comissão fixa por cada adesão anual',
+    '{reward} de comissão fixa por cada adesão anual',
     '3 meses de acesso VIP gratuitos, renováveis',
     'Badge de Creator verificado ao lado do teu nome de perfil',
     'Possibilidade de criar um grupo "Creator" exclusivo dentro da app',
@@ -83,7 +109,7 @@ const pt: CreatorOutreachContent = {
   ],
   economyAudienceTitle: 'O que a tua comunidade ganha',
   economyAudience: [
-    'Acesso ao plano anual mais barato da app: €44.90 — exclusivo com o teu código',
+    'Acesso ao plano anual mais barato da app: {annual} — exclusivo com o teu código',
     'Acesso ao teu grupo privado dentro da app',
     'Chat, feed de refeições/treinos e leaderboard de consistência',
   ],
@@ -171,7 +197,7 @@ const pt: CreatorOutreachContent = {
     'Válido apenas para o plano Premium anual.',
     'Só para novos users que nunca tiveram qualquer subscrição Premium na IGNITE AI.',
     'Não conta: renovação, reactivação, upgrade de ex-Premium ou outros planos.',
-    'A comissão de €10 aplica-se apenas à 1.ª subscrição anual elegível com o teu código.',
+    'A comissão de {reward} aplica-se apenas à 1.ª subscrição anual elegível com o teu código.',
     'O creator acompanha tudo na app; payout é pedido após a janela de validação.',
   ],
   faqTitle: 'FAQ',
@@ -205,21 +231,21 @@ const pt: CreatorOutreachContent = {
 const en: CreatorOutreachContent = {
   metaTitle: 'Creators — partnership details | IGNITE AI',
   metaDescription:
-    'Monetize your audience with IGNITE AI: €10 per annual signup, exclusive €44.90 plan for followers, a private in-app group, and live reward tracking.',
+    'Monetize your audience with IGNITE AI: {reward} per annual signup, exclusive {annual} plan for followers, a private in-app group, and live reward tracking.',
   eyebrow: 'IGNITE AI · Creator Program',
   title: 'Monetize your audience and build your in-app fitness community',
   subtitle:
-    'Earn €10 per eligible annual signup. Your audience gets the lowest annual plan at €44.90 — only available with your code — and you track everything in real time.',
+    'Earn {reward} per eligible annual signup. Your audience gets the lowest annual plan at {annual} — only available with your code — and you track everything in real time.',
   primaryCta: 'Apply as a creator in 60 seconds',
   secondaryCta: 'View creator terms',
   heroPoints: [
-    '€10 for each eligible new annual Premium signup',
-    'Your audience gets the annual plan at €44.90 — only available with your code',
+    '{reward} for each eligible new annual Premium signup',
+    'Your audience gets the annual plan at {annual} — only available with your code',
     '3 months of free VIP access to test the app',
   ],
   economyCreatorTitle: 'What you get',
   economyCreator: [
-    '€10 fixed commission per annual signup',
+    '{reward} fixed commission per annual signup',
     '3 months of free VIP access, renewable',
     'Verified Creator badge next to your profile name',
     'Ability to create an exclusive "Creator" group inside the app',
@@ -227,7 +253,7 @@ const en: CreatorOutreachContent = {
   ],
   economyAudienceTitle: 'What your audience gets',
   economyAudience: [
-    'Access to the cheapest annual plan in the app: €44.90 — exclusive with your code',
+    'Access to the cheapest annual plan in the app: {annual} — exclusive with your code',
     'Access to your private group inside the app',
     'Chat, meal/workout feed, and consistency leaderboard',
   ],
@@ -315,7 +341,7 @@ const en: CreatorOutreachContent = {
     'Valid for annual Premium only.',
     'New users only: accounts that never had any IGNITE AI Premium subscription before.',
     'Does not count: renewals, reactivations, former Premium upgrades, or other plans.',
-    'The €10 commission only applies to the first eligible annual subscription with your code.',
+    'The {reward} commission only applies to the first eligible annual subscription with your code.',
     'Creators track everything in-app; payout is requested after the validation window.',
   ],
   faqTitle: 'FAQ',
@@ -346,7 +372,11 @@ const en: CreatorOutreachContent = {
   contactEmail: 'hello@ignitehub.app',
 }
 
-export function getCreatorOutreachContent(locale: Locale): CreatorOutreachContent {
-  if (locale === 'pt' || locale === 'pt-br') return pt
-  return en
+export function getCreatorOutreachContent(
+  locale: Locale,
+  currency: CreatorOutreachCurrency = 'EUR',
+): CreatorOutreachContent {
+  const money = getCreatorOutreachMoney(currency)
+  const base = locale === 'pt' || locale === 'pt-br' ? pt : en
+  return fillContent(base, money)
 }

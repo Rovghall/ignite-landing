@@ -6,6 +6,10 @@ import { useState } from 'react'
 import { Wordmark } from '@/components/site-nav'
 import { StoreButtons } from '@/components/store-buttons'
 import { getCreatorOutreachContent } from '@/lib/creator-outreach-content'
+import {
+  type CreatorOutreachCurrency,
+  type CreatorOutreachMoney,
+} from '@/lib/creator-outreach-currency'
 import { useLanguage } from '@/lib/i18n/provider'
 import { cn } from '@/lib/utils'
 import { BadgeCheck } from 'lucide-react'
@@ -72,10 +76,18 @@ function ScreenshotRow({
   )
 }
 
-export function CreatorOutreachPageContent() {
+export function CreatorOutreachPageContent({
+  currency = 'EUR',
+  money,
+}: {
+  currency?: CreatorOutreachCurrency
+  money?: CreatorOutreachMoney
+}) {
   const { locale, href } = useLanguage()
-  const c = getCreatorOutreachContent(locale)
+  const c = getCreatorOutreachContent(locale, currency)
   const [calcSignups, setCalcSignups] = useState(40)
+  const rewardPerSignup = money?.rewardAmount ?? 10
+  const currencySymbol = money?.symbol ?? '€'
 
   return (
     <main className="relative min-h-screen overflow-hidden">
@@ -286,7 +298,8 @@ export function CreatorOutreachPageContent() {
                 {c.calculatorResultPrefix}
               </p>
               <p className="font-brand text-3xl font-extrabold tabular-nums tracking-tight text-foreground">
-                €{(calcSignups * 10).toLocaleString()}
+                {currencySymbol}
+                {(calcSignups * rewardPerSignup).toLocaleString()}
               </p>
               <p className="text-xs text-muted-foreground">{c.calculatorResultSuffix}</p>
             </div>
