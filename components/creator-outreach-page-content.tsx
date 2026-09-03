@@ -127,29 +127,6 @@ export function CreatorOutreachPageContent() {
           </div>
         </section>
 
-        {/* ── App overview ── */}
-        <section className="mt-14">
-          <div className="flex flex-col items-center gap-6 sm:flex-row">
-            <div className="w-full max-w-[320px] shrink-0">
-              <Image
-                src={c.appOverview.src}
-                alt={c.appOverview.alt}
-                width={1024}
-                height={1024}
-                className="w-full"
-              />
-            </div>
-            <div className="flex-1 text-center sm:text-left">
-              <h2 className="font-brand text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                {c.appOverview.title}
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {c.appOverview.body}
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* ── Creator Groups: Chat / Feed / Leaderboard ── */}
         <section className="mt-14">
           <h2 className="text-center font-brand text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
