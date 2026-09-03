@@ -165,7 +165,7 @@ const pt: CreatorOutreachContent = {
   processTitle: 'Como funciona',
   processSteps: [
     'Faz download da app, entra em Profile → Creator Program e candidata-te. Se fores aprovado, recebes 3 meses de VIP e o teu código personalizado.',
-    'Lanças o teu grupo privado dentro da app.',
+    'Lanças o teu grupo privado dentro da app — opcional, mas pode ser uma boa ideia se fizer sentido para ti e para a tua audiência.',
     'Cria conteúdo para as tuas redes: meal scans, share cards das tuas refeições e treinos, stories e posts — e partilha o teu código para novos users o inserirem no onboarding.',
     'Acompanhas registos, estados e pagamentos no ecrã Creator Program.',
   ],
@@ -329,7 +329,7 @@ const en: CreatorOutreachContent = {
   processTitle: 'How it works',
   processSteps: [
     'Download the app, go to Profile → Creator Program, and apply. If approved, you get 3 months of VIP access plus your personalized creator code.',
-    'Launch your private group inside the app.',
+    'Launch your private group inside the app — optional, but a great idea if it fits your brand and your audience.',
     'Create content for your socials: meal scans, share cards of your meals and workouts, stories and posts — and share your code so new users can enter it during onboarding.',
     'Track signups, statuses, and payouts inside the Creator Program screen.',
   ],
