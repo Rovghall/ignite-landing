@@ -81,7 +81,7 @@ const STATUS_ORDER: OutreachStatus[] = [
   'not_a_fit',
 ]
 
-const VIP_MONTHS = 3
+const VIP_DAYS = 90
 const MS_PER_DAY = 24 * 60 * 60 * 1000
 
 function vipWindow(contractedAt: string | null): {
@@ -93,8 +93,7 @@ function vipWindow(contractedAt: string | null): {
   if (!contractedAt) return { start: null, end: null, daysLeft: null, expired: false }
   const start = new Date(contractedAt)
   if (!Number.isFinite(start.getTime())) return { start: null, end: null, daysLeft: null, expired: false }
-  const end = new Date(start)
-  end.setMonth(end.getMonth() + VIP_MONTHS)
+  const end = new Date(start.getTime() + VIP_DAYS * MS_PER_DAY)
   const daysLeft = Math.ceil((end.getTime() - Date.now()) / MS_PER_DAY)
   return { start, end, daysLeft, expired: daysLeft < 0 }
 }
@@ -227,7 +226,7 @@ const DEMO_ROWS: OutreachRow[] = [
     country_name: 'Brazil',
     niche: 'Nutrition',
     status: 'contracted',
-    notes: 'Código SOFIA20 activo. VIP 3 meses a correr.',
+    notes: 'Código SOFIA20 activo. VIP 90 dias a correr.',
     last_contacted_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
     contracted_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
     owner_email: 'filip@igniteai.app',
@@ -947,7 +946,7 @@ export default function OutreachAdminPage() {
           </div>
         ) : (
           <p className="mb-6 text-sm text-muted-foreground">
-            Creators contratados com VIP de {VIP_MONTHS} meses a partir da data de contratação.
+            Creators contratados com VIP de {VIP_DAYS} dias a partir da data de contratação.
           </p>
         )}
 
@@ -971,7 +970,7 @@ export default function OutreachAdminPage() {
                     <th className="px-4 py-3">País</th>
                     <th className="px-4 py-3">Handles</th>
                     <th className="px-4 py-3">VIP início</th>
-                    <th className="px-4 py-3">VIP fim ({VIP_MONTHS}m)</th>
+                    <th className="px-4 py-3">VIP fim ({VIP_DAYS}d)</th>
                     <th className="px-4 py-3">Tempo restante</th>
                     <th className="px-4 py-3 text-right">Acções</th>
                   </tr>
@@ -1150,7 +1149,7 @@ export default function OutreachAdminPage() {
                                   type="button"
                                   onClick={() => void markContracted(row)}
                                   className="rounded-full border border-violet-300 bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-800"
-                                  title="Marcar contratado e iniciar VIP 3 meses"
+                                  title="Marcar contratado e iniciar VIP 90 dias"
                                 >
                                   Contratado
                                 </button>
@@ -1315,7 +1314,7 @@ export default function OutreachAdminPage() {
                   onChange={(e) => setForm((f) => ({ ...f, last_contacted_at: e.target.value }))}
                 />
               </Field>
-              <Field label="Data contratação (VIP 3m)">
+              <Field label="Data contratação (VIP 90d)">
                 <input
                   className={inputClass}
                   type="datetime-local"
