@@ -204,11 +204,11 @@ const pt: CreatorOutreachContent = {
   faq: [
     {
       q: 'A app IGNITE é para quem?',
-      a: 'Para quem quer melhorar nutrição, treino e consistência: creators, coaches e a respetiva audiência. Serve para registar refeições com IA, treinos, progresso e acompanhar tudo numa comunidade dentro da app.',
+      a: 'Para quem tem um objetivo de peso (perder, manter ou ganhar) e quer uma estimativa aproximada do que está a comer em calorias e macros, com tracking de refeições e treinos.',
     },
     {
       q: 'Para que serve a app IGNITE?',
-      a: 'É uma app de fitness e nutrição: scans de refeições com macros, registo de treinos, tracking de progresso, Health sync e — para creators — grupo privado com chat, feed e leaderboard.',
+      a: 'É uma app de fitness e nutrição: scans de refeições com IA (calorias e macros), registo de treinos, tracking de progresso, sync com Health e ferramentas para manteres consistência no dia a dia.',
     },
     {
       q: 'O que ganha a minha audiência?',
@@ -368,11 +368,11 @@ const en: CreatorOutreachContent = {
   faq: [
     {
       q: 'Who is the IGNITE app for?',
-      a: 'Anyone who wants better nutrition, training, and consistency — creators, coaches, and their audiences. Log meals with AI, track workouts and progress, and stay accountable in an in-app community.',
+      a: 'People with a weight goal (lose, maintain, or gain) who want an approximate estimate of what they are eating in calories and macros, with meal and workout tracking.',
     },
     {
       q: 'What is the IGNITE app for?',
-      a: 'A fitness and nutrition app: AI meal scans with macros, workout logging, progress tracking, Health sync — and for creators, a private group with chat, feed, and leaderboard.',
+      a: 'A fitness and nutrition app: AI meal scans (calories and macros), workout logging, progress tracking, Health sync, and tools to stay consistent day to day.',
     },
     {
       q: 'What does my audience get?',
