@@ -109,7 +109,7 @@ export function CreatorOutreachPageContent() {
                   i % 2 === 1 ? 'sm:flex-row-reverse' : '',
                 )}
               >
-                <div className="mx-auto w-full max-w-[300px] shrink-0">
+                <div className="mx-auto w-full max-w-[260px] shrink-0">
                   <Image
                     src={step.src}
                     alt={step.alt}
