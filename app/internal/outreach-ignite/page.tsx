@@ -32,6 +32,13 @@ type OutreachRow = {
   notes: string
   last_contacted_at: string | null
   contracted_at: string | null
+  creator_application_id: string | null
+  creator_matched_at: string | null
+  creator_application_status: 'pending' | 'approved' | 'rejected' | null
+  creator_applied_at: string | null
+  creator_display_name: string | null
+  creator_primary_handle: string | null
+  has_creator_application: boolean
   owner_email: string
   created_at: string
   updated_at: string
@@ -113,6 +120,27 @@ function countryLabel(code: string, fallbackName = ''): string {
   return hit?.name ?? (fallbackName.trim() || code || 'Sem país')
 }
 
+function emptyCreatorMatchFields(): Pick<
+  OutreachRow,
+  | 'creator_application_id'
+  | 'creator_matched_at'
+  | 'creator_application_status'
+  | 'creator_applied_at'
+  | 'creator_display_name'
+  | 'creator_primary_handle'
+  | 'has_creator_application'
+> {
+  return {
+    creator_application_id: null,
+    creator_matched_at: null,
+    creator_application_status: null,
+    creator_applied_at: null,
+    creator_display_name: null,
+    creator_primary_handle: null,
+    has_creator_application: false,
+  }
+}
+
 const EMPTY_FORM: FormState = {
   id: null,
   display_name: '',
@@ -149,6 +177,13 @@ const DEMO_ROWS: OutreachRow[] = [
     notes: 'Interessada em código 15%. Pediu kit.',
     last_contacted_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
     contracted_at: null,
+    creator_application_id: 'demo-app-1',
+    creator_matched_at: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+    creator_application_status: 'pending',
+    creator_applied_at: new Date(Date.now() - 6 * 60 * 60 * 1000).toISOString(),
+    creator_display_name: 'Ana Fitness',
+    creator_primary_handle: 'ana.fit.pt',
+    has_creator_application: true,
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -169,6 +204,7 @@ const DEMO_ROWS: OutreachRow[] = [
     notes: 'DM enviado 28 Ago.',
     last_contacted_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
     contracted_at: null,
+    ...emptyCreatorMatchFields(),
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
@@ -189,6 +225,7 @@ const DEMO_ROWS: OutreachRow[] = [
     notes: '',
     last_contacted_at: null,
     contracted_at: null,
+    ...emptyCreatorMatchFields(),
     owner_email: '',
     created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
@@ -209,6 +246,7 @@ const DEMO_ROWS: OutreachRow[] = [
     notes: '2 follow-ups. Sem resposta.',
     last_contacted_at: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
     contracted_at: null,
+    ...emptyCreatorMatchFields(),
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
@@ -229,6 +267,13 @@ const DEMO_ROWS: OutreachRow[] = [
     notes: 'Código SOFIA20 activo. VIP 90 dias a correr.',
     last_contacted_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
     contracted_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+    creator_application_id: 'demo-app-5',
+    creator_matched_at: new Date(Date.now() - 40 * 24 * 60 * 60 * 1000).toISOString(),
+    creator_application_status: 'approved',
+    creator_applied_at: new Date(Date.now() - 40 * 24 * 60 * 60 * 1000).toISOString(),
+    creator_display_name: 'Sofia Nutri',
+    creator_primary_handle: 'sofianutri',
+    has_creator_application: true,
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -263,6 +308,28 @@ function statusBadge(status: OutreachStatus): string {
   if (status === 'rejected' || status === 'not_a_fit')
     return 'inline-flex rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold text-red-700'
   return 'inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-bold text-foreground/70'
+}
+
+function applicationBadge(status: OutreachRow['creator_application_status']): {
+  label: string
+  className: string
+} | null {
+  if (status === 'pending')
+    return {
+      label: 'Candidatou-se',
+      className: 'inline-flex rounded-full bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-800',
+    }
+  if (status === 'approved')
+    return {
+      label: 'Candidatura aprovada',
+      className: 'inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800',
+    }
+  if (status === 'rejected')
+    return {
+      label: 'Candidatura rejeitada',
+      className: 'inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-700',
+    }
+  return null
 }
 
 function toDatetimeLocal(iso: string | null): string {
@@ -388,6 +455,7 @@ export default function OutreachAdminPage() {
   const [statusFilter, setStatusFilter] = useState<OutreachStatus | 'all'>('all')
   const [countryFilter, setCountryFilter] = useState<string>('all')
   const [viewTab, setViewTab] = useState<'pipeline' | 'contracted'>('pipeline')
+  const [onlyApplied, setOnlyApplied] = useState(false)
   const [formOpen, setFormOpen] = useState(false)
   const [form, setForm] = useState<FormState>(EMPTY_FORM)
 
@@ -434,6 +502,13 @@ export default function OutreachAdminPage() {
       (Array.isArray(payload.items) ? payload.items : []).map((row) => ({
         ...row,
         contracted_at: row.contracted_at ?? null,
+        creator_application_id: row.creator_application_id ?? null,
+        creator_matched_at: row.creator_matched_at ?? null,
+        creator_application_status: row.creator_application_status ?? null,
+        creator_applied_at: row.creator_applied_at ?? null,
+        creator_display_name: row.creator_display_name ?? null,
+        creator_primary_handle: row.creator_primary_handle ?? null,
+        has_creator_application: Boolean(row.has_creator_application || row.creator_application_id),
       })),
     )
   }, [supabase, demoMode])
@@ -454,6 +529,15 @@ export default function OutreachAdminPage() {
     return counts
   }, [rowSource])
 
+  const appliedCount = useMemo(
+    () => rowSource.filter((r) => r.has_creator_application).length,
+    [rowSource],
+  )
+  const pendingAppliedCount = useMemo(
+    () => rowSource.filter((r) => r.creator_application_status === 'pending').length,
+    [rowSource],
+  )
+
   const visibleRows = useMemo(() => {
     const q = search.trim().toLowerCase()
     return rowSource.filter((row) => {
@@ -462,6 +546,7 @@ export default function OutreachAdminPage() {
       } else if (row.status === 'contracted') {
         return false
       }
+      if (onlyApplied && !row.has_creator_application) return false
       if (statusFilter !== 'all' && row.status !== statusFilter) return false
       if (countryFilter !== 'all' && row.country_code.toUpperCase() !== countryFilter) return false
       if (!q) return true
@@ -474,12 +559,13 @@ export default function OutreachAdminPage() {
         row.country_name,
         row.notes,
         row.owner_email,
+        row.creator_primary_handle,
       ]
         .join(' ')
         .toLowerCase()
       return hay.includes(q)
     })
-  }, [rowSource, statusFilter, countryFilter, search, viewTab])
+  }, [rowSource, statusFilter, countryFilter, search, viewTab, onlyApplied])
 
   const contractedRows = useMemo(
     () =>
@@ -567,6 +653,23 @@ export default function OutreachAdminPage() {
         contracted_at:
           payload.contracted_at ||
           (payload.status === 'contracted' ? now : null),
+        ...emptyCreatorMatchFields(),
+        ...(form.id
+          ? (() => {
+              const prev = demoRows.find((r) => r.id === form.id)
+              return prev
+                ? {
+                    creator_application_id: prev.creator_application_id,
+                    creator_matched_at: prev.creator_matched_at,
+                    creator_application_status: prev.creator_application_status,
+                    creator_applied_at: prev.creator_applied_at,
+                    creator_display_name: prev.creator_display_name,
+                    creator_primary_handle: prev.creator_primary_handle,
+                    has_creator_application: prev.has_creator_application,
+                  }
+                : {}
+            })()
+          : {}),
         owner_email: payload.owner_email,
         created_at: form.id
           ? demoRows.find((r) => r.id === form.id)?.created_at ?? now
@@ -859,12 +962,43 @@ export default function OutreachAdminPage() {
           </p>
         ) : null}
 
-        <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-5">
           <StatCard label="Total" value={String(rowSource.length)} />
           <StatCard label="A contactar" value={String(statusCounts.to_contact)} />
           <StatCard label="Em conversa" value={String(statusCounts.in_talk)} />
           <StatCard label="Contratados" value={String(statusCounts.contracted)} />
+          <StatCard label="Candidaturas" value={String(appliedCount)} />
         </div>
+
+        {pendingAppliedCount > 0 ? (
+          <div className="mb-5 rounded-2xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-950">
+            <p className="font-bold">
+              {pendingAppliedCount} contacto{pendingAppliedCount === 1 ? '' : 's'} do Outreach
+              candidatou-se no Creator Program
+            </p>
+            <p className="mt-1 text-blue-900/80">
+              Match automático pelo mesmo handle. Abre Creators para rever o pedido.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setViewTab('pipeline')
+                  setOnlyApplied(true)
+                }}
+                className="rounded-full border border-blue-300 bg-white px-3 py-1.5 text-xs font-bold text-blue-900"
+              >
+                Ver no Outreach
+              </button>
+              <a
+                href="/internal/creator-program-ignite"
+                className="rounded-full bg-blue-900 px-3 py-1.5 text-xs font-bold text-white"
+              >
+                Abrir Creators
+              </a>
+            </div>
+          </div>
+        ) : null}
 
         <div className="mb-5 flex flex-wrap gap-2">
           <button
@@ -912,6 +1046,18 @@ export default function OutreachAdminPage() {
               </option>
             ))}
           </select>
+          <button
+            type="button"
+            onClick={() => setOnlyApplied((v) => !v)}
+            className={cn(
+              'rounded-full border px-3.5 py-2 text-sm font-bold',
+              onlyApplied
+                ? 'border-blue-700 bg-blue-700 text-white'
+                : 'border-border bg-card text-foreground',
+            )}
+          >
+            Com candidatura ({appliedCount})
+          </button>
         </div>
 
         {viewTab === 'pipeline' ? (
@@ -993,7 +1139,14 @@ export default function OutreachAdminPage() {
                         <tr key={row.id} className="border-b border-border/70 last:border-0">
                           <td className="px-4 py-3 align-top">
                             <p className="font-bold text-foreground">{row.display_name || '—'}</p>
-                            <span className={cn(statusBadge('contracted'), 'mt-1')}>Contratado</span>
+                            <div className="mt-1 flex flex-wrap gap-1.5">
+                              <span className={cn(statusBadge('contracted'))}>Contratado</span>
+                              {(() => {
+                                const app = applicationBadge(row.creator_application_status)
+                                if (!app) return null
+                                return <span className={app.className}>{app.label}</span>
+                              })()}
+                            </div>
                           </td>
                           <td className="px-4 py-3 align-top text-sm">
                             {countryLabel(row.country_code, row.country_name)}
@@ -1084,6 +1237,27 @@ export default function OutreachAdminPage() {
                             <p className="font-bold text-foreground">
                               {row.display_name || '—'}
                             </p>
+                            <div className="mt-1 flex flex-wrap gap-1.5">
+                              <span className={statusBadge(row.status)}>
+                                {STATUS_LABELS[row.status]}
+                              </span>
+                              {(() => {
+                                const app = applicationBadge(row.creator_application_status)
+                                if (!app) return null
+                                return (
+                                  <span className={app.className} title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}>
+                                    {app.label}
+                                  </span>
+                                )
+                              })()}
+                            </div>
+                            {row.has_creator_application ? (
+                              <p className="mt-1 text-xs text-blue-800">
+                                Handle match
+                                {row.creator_primary_handle ? ` · @${row.creator_primary_handle.replace(/^@/, '')}` : ''}
+                                {row.creator_applied_at ? ` · ${shortDate(row.creator_applied_at)}` : ''}
+                              </p>
+                            ) : null}
                             {row.notes ? (
                               <p className="mt-0.5 line-clamp-2 max-w-[220px] text-xs text-muted-foreground">
                                 {row.notes}
@@ -1123,6 +1297,14 @@ export default function OutreachAdminPage() {
                             <span className={statusBadge(row.status)}>
                               {STATUS_LABELS[row.status]}
                             </span>
+                            {row.has_creator_application ? (
+                              <a
+                                href="/internal/creator-program-ignite"
+                                className="mt-2 block text-xs font-bold text-blue-700 underline underline-offset-2"
+                              >
+                                Ver em Creators
+                              </a>
+                            ) : null}
                           </td>
                           <td className="px-4 py-3 align-top text-xs text-muted-foreground">
                             {shortDate(row.last_contacted_at)}
