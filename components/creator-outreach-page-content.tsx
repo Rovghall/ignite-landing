@@ -109,7 +109,7 @@ export function CreatorOutreachPageContent() {
                   i % 2 === 1 ? 'sm:flex-row-reverse' : '',
                 )}
               >
-                <div className="w-full max-w-[320px] shrink-0">
+                <div className="mx-auto w-full max-w-[300px] shrink-0">
                   <Image
                     src={step.src}
                     alt={step.alt}
@@ -146,12 +146,12 @@ export function CreatorOutreachPageContent() {
                   i % 2 === 1 ? 'sm:flex-row-reverse' : '',
                 )}
               >
-                <div className="w-full max-w-[320px] shrink-0">
+                <div className="mx-auto w-full max-w-[300px] shrink-0">
                   <Image
                     src={step.src}
                     alt={step.alt}
-                    width={722}
-                    height={1490}
+                    width={2160}
+                    height={3840}
                     className="w-full"
                   />
                 </div>
@@ -167,12 +167,12 @@ export function CreatorOutreachPageContent() {
         {/* ── Workout logging ── */}
         <section className="mt-14">
           <div className="flex flex-col items-center gap-6 sm:flex-row-reverse">
-            <div className="w-full max-w-[320px] shrink-0">
+            <div className="mx-auto w-full max-w-[300px] shrink-0">
               <Image
                 src={c.workoutScreen.src}
                 alt={c.workoutScreen.alt}
-                width={722}
-                height={1490}
+                width={2160}
+                height={3840}
                 className="w-full"
               />
             </div>
