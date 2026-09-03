@@ -336,7 +336,6 @@ export function CreatorOutreachPageContent({
           <h2 className="font-brand text-xl font-semibold tracking-tight text-foreground">
             {c.ctaTitle}
           </h2>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.ctaBody}</p>
           <ol className="mx-auto mt-4 flex max-w-xs flex-col gap-2 text-left text-sm text-muted-foreground">
             {c.ctaSteps.map((step, i) => (
               <li key={step} className="flex items-start gap-2">
