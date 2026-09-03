@@ -101,12 +101,12 @@ export function CreatorOutreachPageContent() {
           <p className="mx-auto mt-3 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
             {c.appTrackingIntro}
           </p>
-          <div className="mt-5 flex flex-col gap-10">
+          <div className="mt-3 flex flex-col gap-4">
             {c.appTrackingSteps.map((step, i) => (
               <div
                 key={step.src}
                 className={cn(
-                  'flex flex-col items-center gap-5 sm:flex-row',
+                  'flex flex-col-reverse items-center gap-1 sm:flex-row sm:gap-5',
                   i % 2 === 1 ? 'sm:flex-row-reverse' : '',
                 )}
               >
@@ -139,16 +139,16 @@ export function CreatorOutreachPageContent() {
               ? 'Criadores aceites no programa recebem uma badge de verificado ao lado do nome do perfil. Quando és aprovado, crias o teu grupo privado dentro da IGNITE. Convidas a tua audiência pelo código ou link e eles passam a fazer parte da tua comunidade com 3 abas:'
               : 'Accepted creators get a verified badge next to their profile name. When approved, you set up your private group inside IGNITE. Invite your audience via code or link and they join your community with 3 tabs:'}
           </p>
-          <div className="mt-2 flex flex-col gap-10">
+          <div className="mt-1 flex flex-col gap-3">
             {c.groupScreens.map((step, i) => (
               <div
                 key={step.src}
                 className={cn(
-                  'flex flex-col items-center gap-5 sm:flex-row',
+                  'flex flex-col-reverse items-center gap-0 sm:flex-row sm:gap-5',
                   i % 2 === 1 ? 'sm:flex-row-reverse' : '',
                 )}
               >
-                <div className="mx-auto w-full max-w-[380px] shrink-0">
+                <div className="mx-auto -mt-6 w-full max-w-[380px] shrink-0 sm:mt-0">
                   <Image
                     src={step.src}
                     alt={step.alt}
@@ -159,7 +159,7 @@ export function CreatorOutreachPageContent() {
                 </div>
                 <div className="flex-1 text-center sm:text-left">
                   <h3 className="font-brand text-lg font-semibold text-foreground">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
                 </div>
               </div>
             ))}
@@ -168,8 +168,8 @@ export function CreatorOutreachPageContent() {
 
         {/* ── Workout logging ── */}
         <section className="mt-14">
-          <div className="flex flex-col items-center gap-6 sm:flex-row-reverse">
-            <div className="mx-auto w-full max-w-[380px] shrink-0">
+          <div className="flex flex-col-reverse items-center gap-0 sm:flex-row-reverse sm:gap-5">
+            <div className="mx-auto -mt-6 w-full max-w-[380px] shrink-0 sm:mt-0">
               <Image
                 src={c.workoutScreen.src}
                 alt={c.workoutScreen.alt}
@@ -182,7 +182,7 @@ export function CreatorOutreachPageContent() {
               <h2 className="font-brand text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
                 {c.workoutScreen.title}
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
                 {c.workoutScreen.body}
               </p>
             </div>
