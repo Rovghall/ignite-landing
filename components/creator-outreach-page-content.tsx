@@ -163,7 +163,7 @@ export function CreatorOutreachPageContent() {
           <p className="mx-auto mt-3 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
             {c.appTrackingIntro}
           </p>
-          <div className="mt-4 flex flex-col gap-8">
+          <div className="mt-4 flex flex-col gap-14">
             {c.appTrackingSteps.map((step, i) => (
               <ScreenshotRow
                 key={step.src}
