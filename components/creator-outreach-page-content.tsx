@@ -146,7 +146,7 @@ export function CreatorOutreachPageContent() {
                   i % 2 === 1 ? 'sm:flex-row-reverse' : '',
                 )}
               >
-                <div className="mx-auto w-full max-w-[300px] shrink-0">
+                <div className="mx-auto w-full max-w-[380px] shrink-0">
                   <Image
                     src={step.src}
                     alt={step.alt}
@@ -167,7 +167,7 @@ export function CreatorOutreachPageContent() {
         {/* ── Workout logging ── */}
         <section className="mt-14">
           <div className="flex flex-col items-center gap-6 sm:flex-row-reverse">
-            <div className="mx-auto w-full max-w-[300px] shrink-0">
+            <div className="mx-auto w-full max-w-[380px] shrink-0">
               <Image
                 src={c.workoutScreen.src}
                 alt={c.workoutScreen.alt}
