@@ -132,12 +132,12 @@ export function CreatorOutreachPageContent() {
           <h2 className="text-center font-brand text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
             Creator Groups
           </h2>
-          <p className="mx-auto mt-3 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-2 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
             {locale === 'pt' || locale === 'pt-br'
               ? 'Quando és aprovado como creator, crias o teu grupo privado dentro da IGNITE. Convidas a tua audiência pelo código ou link e eles passam a fazer parte da tua comunidade com 3 abas:'
               : 'When approved as a creator, you set up your private group inside IGNITE. Invite your audience via code or link and they join your community with 3 tabs:'}
           </p>
-          <div className="mt-5 flex flex-col gap-10">
+          <div className="mt-2 flex flex-col gap-10">
             {c.groupScreens.map((step, i) => (
               <div
                 key={step.src}
