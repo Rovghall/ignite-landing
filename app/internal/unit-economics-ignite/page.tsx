@@ -143,8 +143,8 @@ export default function UnitEconomicsAdminPage() {
             </p>
             <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight">Unit economics</h1>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground">
-              Estimativa de lucro líquido por tier, comissão Apple/Google, custo API por análise e
-              escala 100–2.500 subscritores.
+              Estimativa de lucro líquido por tier, comissão Apple/Google e custo API por análise —
+              actualiza-se com os subscritores de cada tier.
               {demoMode ? ' · Modo demo (sem login).' : user?.email ? ` · ${user.email}` : null}
             </p>
             <InternalAdminNav active="economics" className="mt-4" />

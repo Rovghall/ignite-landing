@@ -238,8 +238,6 @@ export function InternalUnitEconomicsDashboard() {
     }))
   }
 
-  const scaleRows = [100, 500, 1000, 1500, 2000, 2500]
-
   return (
     <div className="overflow-hidden rounded-3xl border border-zinc-800 bg-[#0f1115] text-zinc-100 shadow-[0_24px_80px_rgba(0,0,0,0.35)]">
       <div className="border-b border-zinc-800 px-5 py-5 sm:px-8 sm:py-6">
@@ -376,44 +374,45 @@ export function InternalUnitEconomicsDashboard() {
           </div>
 
           <div className="rounded-2xl border border-zinc-800 bg-zinc-950/60 p-5">
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-[0.1em] text-zinc-400">
-              Escala de subscritores (cenário actual)
+            <h3 className="mb-1 text-sm font-bold uppercase tracking-[0.1em] text-zinc-400">
+              Resultado dos tiers
             </h3>
+            <p className="mb-4 text-xs text-zinc-500">
+              Calculado automaticamente a partir dos preços, meses e subscritores à direita.
+            </p>
             <div className="overflow-x-auto">
               <table className="w-full min-w-[640px] text-left text-sm">
                 <thead>
                   <tr className="border-b border-zinc-800 text-[11px] uppercase tracking-[0.08em] text-zinc-500">
-                    <th className="pb-3 pr-3 font-semibold">Subscritores</th>
+                    <th className="pb-3 pr-3 font-semibold">Tier</th>
+                    <th className="pb-3 pr-3 font-semibold text-right">Subs</th>
                     <th className="pb-3 pr-3 font-semibold text-right">Margem/mês</th>
                     <th className="pb-3 pr-3 font-semibold text-right">Margem/ano</th>
                     <th className="pb-3 font-semibold text-right">API/ano</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {scaleRows.map((n) => {
-                    const factor = result.totalSubscribers > 0 ? n / result.totalSubscribers : 0
-                    const marginMonth = result.monthlyOperatingMargin * factor
-                    const marginYear = marginMonth * 12
-                    const apiYear =
-                      result.apiCostPerUserMonth * n * 12
-                    return (
-                      <tr key={n} className="border-b border-zinc-800/70 last:border-0">
-                        <td className="py-3 pr-3 font-semibold text-white">{n.toLocaleString()}</td>
-                        <td className="py-3 pr-3 text-right tabular-nums text-zinc-200">
-                          {formatMoney(marginMonth, inputs.currency)}
-                        </td>
-                        <td className="py-3 pr-3 text-right tabular-nums text-lime-400">
-                          {formatMoney(marginYear, inputs.currency)}
-                        </td>
-                        <td className="py-3 text-right tabular-nums text-orange-300">
-                          {formatMoney(apiYear, inputs.currency)}
-                        </td>
-                      </tr>
-                    )
-                  })}
+                  {result.tiers.map((tier) => (
+                    <tr key={tier.id} className="border-b border-zinc-800/70 last:border-0">
+                      <td className="py-3 pr-3 font-semibold text-white">{tier.name}</td>
+                      <td className="py-3 pr-3 text-right tabular-nums text-zinc-300">
+                        {tier.subscribers.toLocaleString()}
+                      </td>
+                      <td className="py-3 pr-3 text-right tabular-nums text-zinc-200">
+                        {formatMoney(tier.monthlyMargin, inputs.currency)}
+                      </td>
+                      <td className="py-3 pr-3 text-right tabular-nums text-lime-400">
+                        {formatMoney(tier.annualMargin, inputs.currency)}
+                      </td>
+                      <td className="py-3 text-right tabular-nums text-orange-300">
+                        {formatMoney(tier.monthlyApiCost * 12, inputs.currency)}
+                      </td>
+                    </tr>
+                  ))}
                   <tr className="bg-zinc-900/50">
-                    <td className="py-3 pr-3 font-bold text-white">
-                      Total tiers ({result.totalSubscribers.toLocaleString()})
+                    <td className="py-3 pr-3 font-bold text-white">Total</td>
+                    <td className="py-3 pr-3 text-right font-bold tabular-nums text-white">
+                      {result.totalSubscribers.toLocaleString()}
                     </td>
                     <td className="py-3 pr-3 text-right font-bold tabular-nums text-white">
                       {formatMoney(result.monthlyOperatingMargin, inputs.currency)}
