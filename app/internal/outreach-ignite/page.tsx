@@ -12,6 +12,7 @@ type OutreachStatus =
   | 'no_reply'
   | 'in_talk'
   | 'accepted'
+  | 'contracted'
   | 'rejected'
   | 'not_a_fit'
 
@@ -30,6 +31,7 @@ type OutreachRow = {
   status: OutreachStatus
   notes: string
   last_contacted_at: string | null
+  contracted_at: string | null
   owner_email: string
   created_at: string
   updated_at: string
@@ -50,6 +52,7 @@ type FormState = {
   status: OutreachStatus
   notes: string
   last_contacted_at: string
+  contracted_at: string
   owner_email: string
 }
 
@@ -62,6 +65,7 @@ const STATUS_LABELS: Record<OutreachStatus, string> = {
   no_reply: 'Sem resposta',
   in_talk: 'Em conversa',
   accepted: 'Aceite',
+  contracted: 'Contratado',
   rejected: 'Recusado',
   not_a_fit: 'Não encaixa',
 }
@@ -72,9 +76,28 @@ const STATUS_ORDER: OutreachStatus[] = [
   'no_reply',
   'in_talk',
   'accepted',
+  'contracted',
   'rejected',
   'not_a_fit',
 ]
+
+const VIP_MONTHS = 3
+const MS_PER_DAY = 24 * 60 * 60 * 1000
+
+function vipWindow(contractedAt: string | null): {
+  start: Date | null
+  end: Date | null
+  daysLeft: number | null
+  expired: boolean
+} {
+  if (!contractedAt) return { start: null, end: null, daysLeft: null, expired: false }
+  const start = new Date(contractedAt)
+  if (!Number.isFinite(start.getTime())) return { start: null, end: null, daysLeft: null, expired: false }
+  const end = new Date(start)
+  end.setMonth(end.getMonth() + VIP_MONTHS)
+  const daysLeft = Math.ceil((end.getTime() - Date.now()) / MS_PER_DAY)
+  return { start, end, daysLeft, expired: daysLeft < 0 }
+}
 
 const OUTREACH_COUNTRIES = [
   { code: 'US', name: 'USA' },
@@ -106,6 +129,7 @@ const EMPTY_FORM: FormState = {
   status: 'to_contact',
   notes: '',
   last_contacted_at: '',
+  contracted_at: '',
   owner_email: '',
 }
 
@@ -125,6 +149,7 @@ const DEMO_ROWS: OutreachRow[] = [
     status: 'in_talk',
     notes: 'Interessada em código 15%. Pediu kit.',
     last_contacted_at: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+    contracted_at: null,
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -144,6 +169,7 @@ const DEMO_ROWS: OutreachRow[] = [
     status: 'contacted',
     notes: 'DM enviado 28 Ago.',
     last_contacted_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+    contracted_at: null,
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
@@ -163,6 +189,7 @@ const DEMO_ROWS: OutreachRow[] = [
     status: 'to_contact',
     notes: '',
     last_contacted_at: null,
+    contracted_at: null,
     owner_email: '',
     created_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000).toISOString(),
@@ -182,6 +209,7 @@ const DEMO_ROWS: OutreachRow[] = [
     status: 'no_reply',
     notes: '2 follow-ups. Sem resposta.',
     last_contacted_at: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
+    contracted_at: null,
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
@@ -198,9 +226,10 @@ const DEMO_ROWS: OutreachRow[] = [
     country_code: 'BR',
     country_name: 'Brazil',
     niche: 'Nutrition',
-    status: 'accepted',
-    notes: 'Código SOFIA20 activo.',
+    status: 'contracted',
+    notes: 'Código SOFIA20 activo. VIP 3 meses a correr.',
     last_contacted_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
+    contracted_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -222,6 +251,8 @@ function formatFollowers(n: number | null): string {
 }
 
 function statusBadge(status: OutreachStatus): string {
+  if (status === 'contracted')
+    return 'inline-flex rounded-full bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-800'
   if (status === 'accepted')
     return 'inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800'
   if (status === 'in_talk')
@@ -259,6 +290,7 @@ function rowToForm(row: OutreachRow): FormState {
     status: row.status,
     notes: row.notes,
     last_contacted_at: toDatetimeLocal(row.last_contacted_at),
+    contracted_at: toDatetimeLocal(row.contracted_at),
     owner_email: row.owner_email,
   }
 }
@@ -268,6 +300,10 @@ function formToPayload(form: FormState) {
     form.last_contacted_at.trim() === ''
       ? null
       : new Date(form.last_contacted_at).toISOString()
+  const contracted =
+    form.contracted_at.trim() === ''
+      ? null
+      : new Date(form.contracted_at).toISOString()
   return {
     ...(form.id ? { id: form.id } : {}),
     display_name: form.display_name.trim(),
@@ -283,6 +319,7 @@ function formToPayload(form: FormState) {
     status: form.status,
     notes: form.notes.trim(),
     last_contacted_at: last ?? '',
+    contracted_at: contracted ?? '',
     owner_email: form.owner_email.trim(),
   }
 }
@@ -351,6 +388,7 @@ export default function OutreachAdminPage() {
   const [search, setSearch] = useState('')
   const [statusFilter, setStatusFilter] = useState<OutreachStatus | 'all'>('all')
   const [countryFilter, setCountryFilter] = useState<string>('all')
+  const [viewTab, setViewTab] = useState<'pipeline' | 'contracted'>('pipeline')
   const [formOpen, setFormOpen] = useState(false)
   const [form, setForm] = useState<FormState>(EMPTY_FORM)
 
@@ -393,7 +431,12 @@ export default function OutreachAdminPage() {
       setRows([])
       return
     }
-    setRows(Array.isArray(payload.items) ? payload.items : [])
+    setRows(
+      (Array.isArray(payload.items) ? payload.items : []).map((row) => ({
+        ...row,
+        contracted_at: row.contracted_at ?? null,
+      })),
+    )
   }, [supabase, demoMode])
 
   useEffect(() => {
@@ -415,6 +458,11 @@ export default function OutreachAdminPage() {
   const visibleRows = useMemo(() => {
     const q = search.trim().toLowerCase()
     return rowSource.filter((row) => {
+      if (viewTab === 'contracted') {
+        if (row.status !== 'contracted') return false
+      } else if (row.status === 'contracted') {
+        return false
+      }
       if (statusFilter !== 'all' && row.status !== statusFilter) return false
       if (countryFilter !== 'all' && row.country_code.toUpperCase() !== countryFilter) return false
       if (!q) return true
@@ -432,7 +480,19 @@ export default function OutreachAdminPage() {
         .toLowerCase()
       return hay.includes(q)
     })
-  }, [rowSource, statusFilter, countryFilter, search])
+  }, [rowSource, statusFilter, countryFilter, search, viewTab])
+
+  const contractedRows = useMemo(
+    () =>
+      rowSource
+        .filter((row) => row.status === 'contracted')
+        .sort((a, b) => {
+          const aT = a.contracted_at ? new Date(a.contracted_at).getTime() : 0
+          const bT = b.contracted_at ? new Date(b.contracted_at).getTime() : 0
+          return bT - aT
+        }),
+    [rowSource],
+  )
 
   const grouped = useMemo(() => {
     const map = new Map<string, OutreachRow[]>()
@@ -505,6 +565,9 @@ export default function OutreachAdminPage() {
         status: payload.status,
         notes: payload.notes,
         last_contacted_at: payload.last_contacted_at || null,
+        contracted_at:
+          payload.contracted_at ||
+          (payload.status === 'contracted' ? now : null),
         owner_email: payload.owner_email,
         created_at: form.id
           ? demoRows.find((r) => r.id === form.id)?.created_at ?? now
@@ -617,6 +680,48 @@ export default function OutreachAdminPage() {
       return
     }
     setRows((prev) => prev.map((r) => (r.id === payload.item!.id ? payload.item! : r)))
+  }
+
+  async function markContracted(row: OutreachRow) {
+    const nowIso = new Date().toISOString()
+    const patch = {
+      ...rowToForm(row),
+      status: 'contracted' as OutreachStatus,
+      contracted_at: toDatetimeLocal(row.contracted_at ?? nowIso),
+      last_contacted_at: toDatetimeLocal(row.last_contacted_at ?? nowIso),
+    }
+    if (demoMode) {
+      setDemoRows((prev) =>
+        prev.map((r) =>
+          r.id === row.id
+            ? {
+                ...r,
+                status: 'contracted',
+                contracted_at: r.contracted_at ?? nowIso,
+                last_contacted_at: r.last_contacted_at ?? nowIso,
+                updated_at: nowIso,
+              }
+            : r,
+        ),
+      )
+      setViewTab('contracted')
+      return
+    }
+    if (!supabase) return
+    const { data, error } = await supabase.rpc('admin_upsert_influencer_outreach', {
+      p_payload: formToPayload(patch),
+    })
+    if (error) {
+      setListError(error.message)
+      return
+    }
+    const payload = data as { ok?: boolean; error?: string; item?: OutreachRow } | null
+    if (!payload?.ok || !payload.item) {
+      setListError(payload?.error || 'Falha a marcar como contratado')
+      return
+    }
+    setRows((prev) => prev.map((r) => (r.id === payload.item!.id ? payload.item! : r)))
+    setViewTab('contracted')
   }
 
   if (configError) {
@@ -759,7 +864,34 @@ export default function OutreachAdminPage() {
           <StatCard label="Total" value={String(rowSource.length)} />
           <StatCard label="A contactar" value={String(statusCounts.to_contact)} />
           <StatCard label="Em conversa" value={String(statusCounts.in_talk)} />
-          <StatCard label="Aceites" value={String(statusCounts.accepted)} />
+          <StatCard label="Contratados" value={String(statusCounts.contracted)} />
+        </div>
+
+        <div className="mb-5 flex flex-wrap gap-2">
+          <button
+            type="button"
+            onClick={() => setViewTab('pipeline')}
+            className={cn(
+              'rounded-full border px-4 py-2 text-sm font-bold',
+              viewTab === 'pipeline'
+                ? 'border-foreground bg-foreground text-background'
+                : 'border-border bg-card text-foreground',
+            )}
+          >
+            Pipeline
+          </button>
+          <button
+            type="button"
+            onClick={() => setViewTab('contracted')}
+            className={cn(
+              'rounded-full border px-4 py-2 text-sm font-bold',
+              viewTab === 'contracted'
+                ? 'border-foreground bg-foreground text-background'
+                : 'border-border bg-card text-foreground',
+            )}
+          >
+            Contratados ({statusCounts.contracted})
+          </button>
         </div>
 
         <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
@@ -783,41 +915,134 @@ export default function OutreachAdminPage() {
           </select>
         </div>
 
-        <div className="mb-6 flex flex-wrap gap-1.5">
-          <button
-            type="button"
-            onClick={() => setStatusFilter('all')}
-            className={cn(
-              'rounded-full border px-3 py-1.5 text-xs font-bold',
-              statusFilter === 'all'
-                ? 'border-foreground bg-foreground text-background'
-                : 'border-border bg-card',
-            )}
-          >
-            Todos ({statusCounts.all})
-          </button>
-          {STATUS_ORDER.map((s) => (
+        {viewTab === 'pipeline' ? (
+          <div className="mb-6 flex flex-wrap gap-1.5">
             <button
-              key={s}
               type="button"
-              onClick={() => setStatusFilter(s)}
+              onClick={() => setStatusFilter('all')}
               className={cn(
                 'rounded-full border px-3 py-1.5 text-xs font-bold',
-                statusFilter === s
+                statusFilter === 'all'
                   ? 'border-foreground bg-foreground text-background'
                   : 'border-border bg-card',
               )}
             >
-              {STATUS_LABELS[s]} ({statusCounts[s]})
+              Todos ({rowSource.filter((r) => r.status !== 'contracted').length})
             </button>
-          ))}
-        </div>
+            {STATUS_ORDER.filter((s) => s !== 'contracted').map((s) => (
+              <button
+                key={s}
+                type="button"
+                onClick={() => setStatusFilter(s)}
+                className={cn(
+                  'rounded-full border px-3 py-1.5 text-xs font-bold',
+                  statusFilter === s
+                    ? 'border-foreground bg-foreground text-background'
+                    : 'border-border bg-card',
+                )}
+              >
+                {STATUS_LABELS[s]} ({statusCounts[s]})
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="mb-6 text-sm text-muted-foreground">
+            Creators contratados com VIP de {VIP_MONTHS} meses a partir da data de contratação.
+          </p>
+        )}
 
         {listError && !demoMode ? (
           <p className="mb-4 text-sm font-semibold text-red-600">{listError}</p>
         ) : null}
 
-        {grouped.length === 0 ? (
+        {viewTab === 'contracted' ? (
+          contractedRows.length === 0 ? (
+            <div className="rounded-2xl border border-dashed border-border bg-card/60 px-6 py-12 text-center">
+              <p className="text-sm font-semibold text-muted-foreground">
+                Ainda sem contratados. Quando alguém aceitar, usa o botão «Contratado».
+              </p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
+              <table className="min-w-full text-left text-sm">
+                <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                  <tr>
+                    <th className="px-4 py-3">Nome</th>
+                    <th className="px-4 py-3">País</th>
+                    <th className="px-4 py-3">Handles</th>
+                    <th className="px-4 py-3">VIP início</th>
+                    <th className="px-4 py-3">VIP fim ({VIP_MONTHS}m)</th>
+                    <th className="px-4 py-3">Tempo restante</th>
+                    <th className="px-4 py-3 text-right">Acções</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {contractedRows
+                    .filter((row) => {
+                      if (countryFilter !== 'all' && row.country_code.toUpperCase() !== countryFilter)
+                        return false
+                      const q = search.trim().toLowerCase()
+                      if (!q) return true
+                      return [row.display_name, row.ig_handle, row.niche, row.notes]
+                        .join(' ')
+                        .toLowerCase()
+                        .includes(q)
+                    })
+                    .map((row) => {
+                      const vip = vipWindow(row.contracted_at)
+                      return (
+                        <tr key={row.id} className="border-b border-border/70 last:border-0">
+                          <td className="px-4 py-3 align-top">
+                            <p className="font-bold text-foreground">{row.display_name || '—'}</p>
+                            <span className={cn(statusBadge('contracted'), 'mt-1')}>Contratado</span>
+                          </td>
+                          <td className="px-4 py-3 align-top text-sm">
+                            {countryLabel(row.country_code, row.country_name)}
+                          </td>
+                          <td className="px-4 py-3 align-top text-xs">
+                            {row.ig_handle ? <p>@{row.ig_handle}</p> : <span className="text-muted-foreground">—</span>}
+                          </td>
+                          <td className="px-4 py-3 align-top text-xs text-muted-foreground">
+                            {shortDate(row.contracted_at)}
+                          </td>
+                          <td className="px-4 py-3 align-top text-xs text-muted-foreground">
+                            {vip.end ? shortDate(vip.end.toISOString()) : '—'}
+                          </td>
+                          <td className="px-4 py-3 align-top text-sm font-semibold">
+                            {vip.daysLeft == null ? (
+                              '—'
+                            ) : vip.expired ? (
+                              <span className="text-red-700">Expirado ({Math.abs(vip.daysLeft)}d)</span>
+                            ) : (
+                              <span className="text-emerald-700">{vip.daysLeft} dias</span>
+                            )}
+                          </td>
+                          <td className="px-4 py-3 align-top">
+                            <div className="flex flex-wrap justify-end gap-1.5">
+                              <button
+                                type="button"
+                                onClick={() => openEdit(row)}
+                                className="rounded-full border border-border px-2.5 py-1 text-xs font-bold"
+                              >
+                                Editar
+                              </button>
+                              <button
+                                type="button"
+                                onClick={() => void onDelete(row)}
+                                className="rounded-full border border-red-200 px-2.5 py-1 text-xs font-bold text-red-700"
+                              >
+                                Apagar
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                </tbody>
+              </table>
+            </div>
+          )
+        ) : grouped.length === 0 ? (
           <div className="rounded-2xl border border-dashed border-border bg-card/60 px-6 py-12 text-center">
             <p className="text-sm font-semibold text-muted-foreground">
               Sem contactos{search || statusFilter !== 'all' || countryFilter !== 'all' ? ' com estes filtros' : ''}.
@@ -920,6 +1145,16 @@ export default function OutreachAdminPage() {
                               >
                                 Contactei
                               </button>
+                              {row.status === 'accepted' || row.status === 'in_talk' ? (
+                                <button
+                                  type="button"
+                                  onClick={() => void markContracted(row)}
+                                  className="rounded-full border border-violet-300 bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-800"
+                                  title="Marcar contratado e iniciar VIP 3 meses"
+                                >
+                                  Contratado
+                                </button>
+                              ) : null}
                               <button
                                 type="button"
                                 onClick={() => void onDelete(row)}
@@ -1053,9 +1288,17 @@ export default function OutreachAdminPage() {
                 <select
                   className={inputClass}
                   value={form.status}
-                  onChange={(e) =>
-                    setForm((f) => ({ ...f, status: e.target.value as OutreachStatus }))
-                  }
+                  onChange={(e) => {
+                    const next = e.target.value as OutreachStatus
+                    setForm((f) => ({
+                      ...f,
+                      status: next,
+                      contracted_at:
+                        next === 'contracted' && !f.contracted_at
+                          ? toDatetimeLocal(new Date().toISOString())
+                          : f.contracted_at,
+                    }))
+                  }}
                 >
                   {STATUS_ORDER.map((s) => (
                     <option key={s} value={s}>
@@ -1070,6 +1313,14 @@ export default function OutreachAdminPage() {
                   type="datetime-local"
                   value={form.last_contacted_at}
                   onChange={(e) => setForm((f) => ({ ...f, last_contacted_at: e.target.value }))}
+                />
+              </Field>
+              <Field label="Data contratação (VIP 3m)">
+                <input
+                  className={inputClass}
+                  type="datetime-local"
+                  value={form.contracted_at}
+                  onChange={(e) => setForm((f) => ({ ...f, contracted_at: e.target.value }))}
                 />
               </Field>
               <Field label="Owner (email)">
