@@ -10,6 +10,63 @@ import { useLanguage } from '@/lib/i18n/provider'
 import { cn } from '@/lib/utils'
 import { BadgeCheck } from 'lucide-react'
 
+type ShotRowProps = {
+  src: string
+  alt: string
+  title: string
+  body: string
+  reverse?: boolean
+  width: number
+  height: number
+  imageMaxClass: string
+  /** Crop transparent mockup padding so the phone sits next to the title. */
+  crop?: boolean
+  titleClassName?: string
+}
+
+function ScreenshotRow({
+  src,
+  alt,
+  title,
+  body,
+  reverse,
+  width,
+  height,
+  imageMaxClass,
+  crop,
+  titleClassName,
+}: ShotRowProps) {
+  return (
+    <div
+      className={cn(
+        'flex w-full flex-col-reverse items-center justify-center sm:flex-row sm:items-center sm:gap-1',
+        reverse ? 'sm:flex-row-reverse' : '',
+      )}
+    >
+      <div className={cn('w-full shrink-0 overflow-hidden', imageMaxClass, crop ? '-my-8 sm:-my-4' : '')}>
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          className={cn('w-full', crop ? 'origin-center scale-[1.22]' : '')}
+        />
+      </div>
+      <div
+        className={cn(
+          'w-full max-w-[240px] shrink-0 text-center sm:px-1',
+          reverse ? 'sm:text-right' : 'sm:text-left',
+        )}
+      >
+        <h3 className={cn('font-brand font-semibold text-foreground', titleClassName ?? 'text-lg')}>
+          {title}
+        </h3>
+        <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{body}</p>
+      </div>
+    </div>
+  )
+}
+
 export function CreatorOutreachPageContent() {
   const { locale, href } = useLanguage()
   const c = getCreatorOutreachContent(locale)
@@ -101,29 +158,19 @@ export function CreatorOutreachPageContent() {
           <p className="mx-auto mt-3 max-w-lg text-center text-sm leading-relaxed text-muted-foreground">
             {c.appTrackingIntro}
           </p>
-          <div className="mt-3 flex flex-col gap-4">
+          <div className="mt-2 flex flex-col gap-2">
             {c.appTrackingSteps.map((step, i) => (
-              <div
+              <ScreenshotRow
                 key={step.src}
-                className={cn(
-                  'flex flex-col-reverse items-center gap-1 sm:flex-row sm:gap-5',
-                  i % 2 === 1 ? 'sm:flex-row-reverse' : '',
-                )}
-              >
-                <div className="mx-auto w-full max-w-[260px] shrink-0">
-                  <Image
-                    src={step.src}
-                    alt={step.alt}
-                    width={722}
-                    height={1490}
-                    className="w-full"
-                  />
-                </div>
-                <div className="flex-1 text-center sm:text-left">
-                  <h3 className="font-brand text-lg font-semibold text-foreground">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
-                </div>
-              </div>
+                src={step.src}
+                alt={step.alt}
+                title={step.title}
+                body={step.body}
+                reverse={i % 2 === 1}
+                width={722}
+                height={1490}
+                imageMaxClass="max-w-[260px]"
+              />
             ))}
           </div>
         </section>
@@ -139,54 +186,38 @@ export function CreatorOutreachPageContent() {
               ? 'Criadores aceites no programa recebem uma badge de verificado ao lado do nome do perfil. Quando és aprovado, crias o teu grupo privado dentro da IGNITE. Convidas a tua audiência pelo código ou link e eles passam a fazer parte da tua comunidade com 3 abas:'
               : 'Accepted creators get a verified badge next to their profile name. When approved, you set up your private group inside IGNITE. Invite your audience via code or link and they join your community with 3 tabs:'}
           </p>
-          <div className="mt-1 flex flex-col gap-3">
+          <div className="-mt-2 flex flex-col gap-1">
             {c.groupScreens.map((step, i) => (
-              <div
+              <ScreenshotRow
                 key={step.src}
-                className={cn(
-                  'flex flex-col-reverse items-center gap-0 sm:flex-row sm:gap-5',
-                  i % 2 === 1 ? 'sm:flex-row-reverse' : '',
-                )}
-              >
-                <div className="mx-auto -mt-6 w-full max-w-[380px] shrink-0 sm:mt-0">
-                  <Image
-                    src={step.src}
-                    alt={step.alt}
-                    width={2160}
-                    height={3840}
-                    className="w-full"
-                  />
-                </div>
-                <div className="flex-1 text-center sm:text-left">
-                  <h3 className="font-brand text-lg font-semibold text-foreground">{step.title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{step.body}</p>
-                </div>
-              </div>
+                src={step.src}
+                alt={step.alt}
+                title={step.title}
+                body={step.body}
+                reverse={i % 2 === 1}
+                width={2160}
+                height={3840}
+                imageMaxClass="max-w-[380px]"
+                crop
+              />
             ))}
           </div>
         </section>
 
         {/* ── Workout logging ── */}
-        <section className="mt-14">
-          <div className="flex flex-col-reverse items-center gap-0 sm:flex-row-reverse sm:gap-5">
-            <div className="mx-auto -mt-6 w-full max-w-[380px] shrink-0 sm:mt-0">
-              <Image
-                src={c.workoutScreen.src}
-                alt={c.workoutScreen.alt}
-                width={2160}
-                height={3840}
-                className="w-full"
-              />
-            </div>
-            <div className="flex-1 text-center sm:text-left">
-              <h2 className="font-brand text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
-                {c.workoutScreen.title}
-              </h2>
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                {c.workoutScreen.body}
-              </p>
-            </div>
-          </div>
+        <section className="mt-6">
+          <ScreenshotRow
+            src={c.workoutScreen.src}
+            alt={c.workoutScreen.alt}
+            title={c.workoutScreen.title}
+            body={c.workoutScreen.body}
+            reverse
+            width={2160}
+            height={3840}
+            imageMaxClass="max-w-[380px]"
+            crop
+            titleClassName="text-2xl font-bold tracking-tight sm:text-3xl"
+          />
         </section>
 
         {/* ── Process ── */}
