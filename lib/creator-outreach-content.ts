@@ -75,6 +75,8 @@ const pt: CreatorOutreachContent = {
   economyCreator: [
     '€10 de comissão fixa por cada adesão anual',
     '3 meses de acesso VIP gratuitos, renováveis',
+    'Badge de Creator verificado ao lado do teu nome de perfil',
+    'Possibilidade de criar um grupo "Creator" exclusivo dentro da app',
     'Painel na app para acompanhar código, ganhos e payout',
   ],
   economyAudienceTitle: 'O que a tua comunidade ganha',
@@ -206,6 +208,8 @@ const en: CreatorOutreachContent = {
   economyCreator: [
     '€10 fixed commission per annual signup',
     '3 months of free VIP access, renewable',
+    'Verified Creator badge next to your profile name',
+    'Ability to create an exclusive "Creator" group inside the app',
     'In-app dashboard for code usage, rewards, and payout tracking',
   ],
   economyAudienceTitle: 'What your audience gets',
