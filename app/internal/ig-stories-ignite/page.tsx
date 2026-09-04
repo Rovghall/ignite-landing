@@ -37,21 +37,31 @@ function StoryLogo() {
   )
 }
 
+function StoryFounderPhoto() {
+  return (
+    <img
+      src="/ceofounder.jpg"
+      alt="Filipe, founder of IGNITE"
+      className="mx-auto mb-7 h-28 w-28 rounded-full object-cover ring-2 ring-white/20 sm:mb-8 sm:h-32 sm:w-32"
+    />
+  )
+}
+
 function StoryFrame({
   title,
   blocks,
-  showLogo,
+  header,
 }: {
   title: string
   blocks: string[]
-  showLogo?: boolean
+  header?: 'logo' | 'founder'
 }) {
   return (
     <div
       className="relative mx-auto flex aspect-[9/16] w-full max-w-[420px] flex-col justify-center overflow-hidden rounded-[28px] px-8 py-16 text-center shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
       style={{ background: APP_DARK_CANVAS }}
     >
-      {showLogo ? <StoryLogo /> : null}
+      {header === 'founder' ? <StoryFounderPhoto /> : header === 'logo' ? <StoryLogo /> : null}
       <p className="font-sans text-[28px] font-semibold leading-tight tracking-tight text-white sm:text-[32px]">
         {title}
       </p>
@@ -86,17 +96,36 @@ function wrapLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: number
   return lines
 }
 
-function loadLogo() {
+function loadImage(path: string) {
   return new Promise<HTMLImageElement | null>((resolve) => {
     const img = new Image()
     img.crossOrigin = 'anonymous'
     img.onload = () => resolve(img)
     img.onerror = () => resolve(null)
-    img.src = `${window.location.origin}/ignite-logo.png`
+    img.src = `${window.location.origin}${path}`
   })
 }
 
-async function renderStoryPng(slide: IgStorySlide, showLogo: boolean) {
+function drawCoverCircle(
+  ctx: CanvasRenderingContext2D,
+  img: HTMLImageElement,
+  cx: number,
+  y: number,
+  size: number,
+) {
+  ctx.save()
+  ctx.beginPath()
+  ctx.arc(cx, y + size / 2, size / 2, 0, Math.PI * 2)
+  ctx.closePath()
+  ctx.clip()
+  const scale = Math.max(size / img.width, size / img.height)
+  const w = img.width * scale
+  const h = img.height * scale
+  ctx.drawImage(img, cx - w / 2, y + (size - h) / 2, w, h)
+  ctx.restore()
+}
+
+async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') {
   const canvas = document.createElement('canvas')
   canvas.width = EXPORT_W
   canvas.height = EXPORT_H
@@ -124,6 +153,8 @@ async function renderStoryPng(slide: IgStorySlide, showLogo: boolean) {
   const blockGap = 24 * EXPORT_SCALE
   const titleGap = 32 * EXPORT_SCALE
   const logoSize = 72 * EXPORT_SCALE
+  const founderSize = 112 * EXPORT_SCALE
+  const headerSize = header === 'founder' ? founderSize : logoSize
   const logoGap = 28 * EXPORT_SCALE
 
   ctx.textAlign = 'center'
@@ -139,13 +170,17 @@ async function renderStoryPng(slide: IgStorySlide, showLogo: boolean) {
     contentH += lines.length * bodyLh
     if (index < blockLines.length - 1) contentH += blockGap
   })
-  if (showLogo) contentH += logoSize + logoGap
+  if (header) contentH += headerSize + logoGap
 
   let y = Math.max(48, (EXPORT_H - contentH) / 2)
   const cx = EXPORT_W / 2
 
-  if (showLogo) {
-    const logo = await loadLogo()
+  if (header === 'founder') {
+    const photo = await loadImage('/ceofounder.jpg')
+    if (photo) drawCoverCircle(ctx, photo, cx, y, founderSize)
+    y += founderSize + logoGap
+  } else if (header === 'logo') {
+    const logo = await loadImage('/ignite-logo.png')
     if (logo) {
       ctx.save()
       ctx.globalCompositeOperation = 'screen'
@@ -214,7 +249,8 @@ export default function IgStoriesAdminPage() {
 
   const slides = IG_STORY_SLIDES[highlight][lang]
   const slide = slides[Math.min(slideIndex, slides.length - 1)] ?? slides[0]
-  const showLogo = highlight === 'whos-ignite'
+  const header: 'logo' | 'founder' | undefined =
+    highlight === 'whos-ignite' ? (slide?.id === 'founder' ? 'founder' : 'logo') : undefined
 
   useEffect(() => {
     setSlideIndex(0)
@@ -231,7 +267,7 @@ export default function IgStoriesAdminPage() {
     setDownloadHref(null)
     const name = `ignite-${highlight}-${slide.id}-${lang}.png`
     setDownloadName(name)
-    void renderStoryPng(slide, showLogo)
+    void renderStoryPng(slide, header)
       .then((blob) => blobToDataUrl(blob))
       .then((dataUrl) => {
         if (cancelled) return
@@ -244,7 +280,7 @@ export default function IgStoriesAdminPage() {
     return () => {
       cancelled = true
     }
-  }, [session, highlight, lang, showLogo, slide])
+  }, [session, highlight, lang, header, slide])
 
   useEffect(() => {
     if (!supabase) {
@@ -362,7 +398,13 @@ export default function IgStoriesAdminPage() {
             style={{ background: APP_DARK_CANVAS }}
           >
             <div className="max-w-[520px]">
-              {showLogo ? (
+              {header === 'founder' ? (
+                <img
+                  src="/ceofounder.jpg"
+                  alt="Filipe, founder of IGNITE"
+                  className="mx-auto mb-[4.5vh] h-[22vw] max-h-32 w-[22vw] max-w-32 rounded-full object-cover ring-2 ring-white/20"
+                />
+              ) : header === 'logo' ? (
                 <img
                   src="/ignite-logo.png"
                   alt="IGNITE"
@@ -489,7 +531,7 @@ export default function IgStoriesAdminPage() {
         ) : null}
 
         {slide ? (
-          <StoryFrame title={slide.title} blocks={slide.blocks} showLogo={showLogo} />
+          <StoryFrame title={slide.title} blocks={slide.blocks} header={header} />
         ) : null}
 
         <div className="mt-4 flex justify-between">
