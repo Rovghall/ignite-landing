@@ -373,6 +373,16 @@ const HIGHLIGHT_COVERS: Partial<
     hint: 'Logo IGNITE. Fundo igual ao das stories.',
     image: '/ignite-logo.png',
   },
+  'share-cards': {
+    file: 'ignite-share-cards-highlight-cover.png',
+    title: 'Capa do destaque Share cards',
+    hint: 'Ícone de partilha, estilo Apple. Fundo igual ao das stories.',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M8.5 10.5H7.25A2 2 0 0 0 5.25 12.5v5A2 2 0 0 0 7.25 19.5h9.5a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H15.5" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M12 15.25V4.75" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+  <path d="M8.75 8 12 4.75 15.25 8" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`,
+  },
 }
 
 async function renderHighlightCoverPng(cover: { svg?: string; image?: string }) {
@@ -580,7 +590,7 @@ export default function IgStoriesAdminPage() {
       return
     }
     coverDownloadRef.current.click()
-    setSaveHint('Capa guardada. No IG: Destaque FAQ → Editar destaque → Editar capa → esta imagem.')
+    setSaveHint('Capa guardada. No IG: Editar destaque → Editar capa → esta imagem.')
   }
 
   const downloadLink = (
