@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { FormEvent, useEffect, useMemo, useRef, useState, type Ref } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
@@ -9,6 +9,7 @@ import {
   IG_STORY_SLIDES,
   type IgHighlightId,
   type IgStoryLang,
+  type IgStorySlide,
 } from '@/lib/ig-story-highlights'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
 import { cn } from '@/lib/utils'
@@ -19,6 +20,10 @@ const PAGE_BG =
 /** Matches the app dark canvas (`DARK_BACKGROUND_BASE` + wash in `DarkCanvasGradient`). */
 const APP_DARK_CANVAS =
   'radial-gradient(120% 78% at 100% 0%, #484450 0%, transparent 46%), linear-gradient(180deg, #16161C 0%, #0C0C12 100%)'
+
+const EXPORT_W = 1080
+const EXPORT_H = 1920
+const EXPORT_SCALE = EXPORT_W / 420
 
 function StoryLogo() {
   return (
@@ -62,6 +67,120 @@ function StoryFrame({
   )
 }
 
+function StoryExportCanvas({
+  slide,
+  showLogo,
+  canvasRef,
+}: {
+  slide: IgStorySlide
+  showLogo: boolean
+  canvasRef: Ref<HTMLDivElement>
+}) {
+  const logo = 72 * EXPORT_SCALE
+  const title = 28 * EXPORT_SCALE
+  const body = 16 * EXPORT_SCALE
+  const padX = 32 * EXPORT_SCALE
+  const padY = 64 * EXPORT_SCALE
+  const blockGap = 24 * EXPORT_SCALE
+  const titleGap = 32 * EXPORT_SCALE
+  const logoGap = 28 * EXPORT_SCALE
+
+  return (
+    <div
+      ref={canvasRef}
+      style={{
+        width: EXPORT_W,
+        height: EXPORT_H,
+        backgroundColor: '#0C0C12',
+        backgroundImage: APP_DARK_CANVAS,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        padding: `${padY}px ${padX}px`,
+        textAlign: 'center',
+        fontFamily:
+          'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
+      }}
+    >
+      {showLogo ? (
+        <img
+          src="/ignite-logo.png"
+          alt=""
+          width={logo}
+          height={logo}
+          style={{
+            display: 'block',
+            width: logo,
+            height: logo,
+            margin: `0 auto ${logoGap}px`,
+            objectFit: 'contain',
+            mixBlendMode: 'screen',
+          }}
+        />
+      ) : null}
+      <p
+        style={{
+          margin: 0,
+          color: '#ffffff',
+          fontSize: title,
+          fontWeight: 600,
+          letterSpacing: '-0.025em',
+          lineHeight: 1.15,
+        }}
+      >
+        {slide.title}
+      </p>
+      <div style={{ marginTop: titleGap, display: 'flex', flexDirection: 'column', gap: blockGap }}>
+        {slide.blocks.map((block, index) => (
+          <p
+            key={`${index}-${block.slice(0, 32)}`}
+            style={{
+              margin: 0,
+              color: 'rgba(255,255,255,0.9)',
+              fontSize: body,
+              lineHeight: 1.35,
+            }}
+          >
+            {block}
+          </p>
+        ))}
+      </div>
+    </div>
+  )
+}
+
+async function waitForImages(root: HTMLElement) {
+  const images = Array.from(root.querySelectorAll('img'))
+  await Promise.all(
+    images.map((img) =>
+      img.complete && img.naturalWidth > 0
+        ? Promise.resolve()
+        : new Promise<void>((resolve) => {
+            img.onload = () => resolve()
+            img.onerror = () => resolve()
+          }),
+    ),
+  )
+}
+
+async function savePngFile(blob: Blob, filename: string) {
+  const file = new File([blob], filename, { type: 'image/png' })
+  if (typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] })) {
+    await navigator.share({ files: [file] })
+    return
+  }
+  const url = URL.createObjectURL(blob)
+  const link = document.createElement('a')
+  link.href = url
+  link.download = filename
+  link.rel = 'noopener'
+  document.body.appendChild(link)
+  link.click()
+  link.remove()
+  window.setTimeout(() => URL.revokeObjectURL(url), 30_000)
+}
+
 export default function IgStoriesAdminPage() {
   const supabase = useMemo(() => {
     try {
@@ -71,6 +190,7 @@ export default function IgStoriesAdminPage() {
     }
   }, [])
 
+  const exportRef = useRef<HTMLDivElement>(null)
   const [configError, setConfigError] = useState<string | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [user, setUser] = useState<User | null>(null)
@@ -81,9 +201,12 @@ export default function IgStoriesAdminPage() {
   const [lang, setLang] = useState<IgStoryLang>('EN')
   const [slideIndex, setSlideIndex] = useState(0)
   const [printMode, setPrintMode] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [saveHint, setSaveHint] = useState<string | null>(null)
 
   const slides = IG_STORY_SLIDES[highlight][lang]
   const slide = slides[Math.min(slideIndex, slides.length - 1)] ?? slides[0]
+  const showLogo = highlight === 'whos-ignite' && slide?.id === 'why'
 
   useEffect(() => {
     setSlideIndex(0)
@@ -122,6 +245,34 @@ export default function IgStoriesAdminPage() {
     setPrintMode(false)
   }
 
+  async function onSavePng() {
+    if (!slide || !exportRef.current) return
+    setSaving(true)
+    setSaveHint(null)
+    try {
+      await document.fonts.ready
+      await waitForImages(exportRef.current)
+      const { toBlob } = await import('html-to-image')
+      const blob = await toBlob(exportRef.current, {
+        cacheBust: true,
+        pixelRatio: 1,
+        width: EXPORT_W,
+        height: EXPORT_H,
+        canvasWidth: EXPORT_W,
+        canvasHeight: EXPORT_H,
+        backgroundColor: '#0C0C12',
+      })
+      if (!blob) throw new Error('empty png')
+      const filename = `ignite-${highlight}-${slide.id}-${lang}.png`
+      await savePngFile(blob, filename)
+      setSaveHint('No telemóvel: escolhe Guardar imagem. No computador o PNG descarrega.')
+    } catch {
+      setSaveHint('Não deu para gerar o PNG. Tenta outra vez.')
+    } finally {
+      setSaving(false)
+    }
+  }
+
   if (configError) {
     return (
       <main className={cn(PAGE_BG, 'px-4 py-10')}>
@@ -151,23 +302,45 @@ export default function IgStoriesAdminPage() {
     )
   }
 
+  const exportNode = slide ? (
+    <div aria-hidden className="pointer-events-none fixed top-0" style={{ left: -EXPORT_W - 40 }}>
+      <StoryExportCanvas slide={slide} showLogo={showLogo} canvasRef={exportRef} />
+    </div>
+  ) : null
+
   if (printMode && slide) {
     return (
       <main className="flex min-h-screen items-center justify-center p-0" style={{ background: '#0C0C12' }}>
-        <button
-          type="button"
-          onClick={() => setPrintMode(false)}
-          className="fixed right-3 top-3 z-10 rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold text-white"
-        >
-          Sair do print
-        </button>
+        {exportNode}
+        <div className="fixed right-3 top-3 z-10 flex gap-2">
+          <button
+            type="button"
+            disabled={saving}
+            onClick={() => void onSavePng()}
+            className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-zinc-900 disabled:opacity-50"
+          >
+            {saving ? 'A gerar…' : 'Guardar PNG'}
+          </button>
+          <button
+            type="button"
+            onClick={() => setPrintMode(false)}
+            className="rounded-full bg-white/15 px-3 py-1.5 text-xs font-semibold text-white"
+          >
+            Sair do print
+          </button>
+        </div>
+        {saveHint ? (
+          <p className="fixed bottom-4 left-4 right-4 z-10 text-center text-xs font-semibold text-white/80">
+            {saveHint}
+          </p>
+        ) : null}
         <div className="h-screen w-screen max-w-none">
           <div
             className="flex h-full w-full items-center justify-center px-8 text-center"
             style={{ background: APP_DARK_CANVAS }}
           >
             <div className="max-w-[520px]">
-              {slide.id === 'why' ? (
+              {showLogo ? (
                 <img
                   src="/ignite-logo.png"
                   alt="IGNITE"
@@ -196,6 +369,7 @@ export default function IgStoriesAdminPage() {
 
   return (
     <main className={cn(PAGE_BG, 'px-4 py-8 sm:px-6')}>
+      {exportNode}
       <div className="mx-auto max-w-3xl">
         <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
@@ -204,8 +378,8 @@ export default function IgStoriesAdminPage() {
             </p>
             <h1 className="mt-1 text-3xl font-semibold tracking-tight text-zinc-900">Stories</h1>
             <p className="mt-1 max-w-xl text-sm text-muted-foreground">
-              Slides 9:16 para tirares print no telemóvel e meteres no Instagram. Abre esta página no
-              telemóvel → Modo print → captura de ecrã.
+              Escolhe o slide e toca em Guardar PNG. No telemóvel abre a partilha e escolhe Guardar
+              imagem. No computador descarrega um PNG 1080×1920.
             </p>
             <InternalAdminNav active="ig-stories" className="mt-3" />
           </div>
@@ -269,25 +443,31 @@ export default function IgStoriesAdminPage() {
           ))}
           <button
             type="button"
+            disabled={saving}
+            onClick={() => void onSavePng()}
+            className="ml-auto rounded-full bg-foreground px-3.5 py-1.5 text-xs font-bold text-background disabled:opacity-50"
+          >
+            {saving ? 'A gerar…' : 'Guardar PNG'}
+          </button>
+          <button
+            type="button"
             onClick={() => setPrintMode(true)}
-            className="ml-auto rounded-full bg-foreground px-3.5 py-1.5 text-xs font-bold text-background"
+            className="rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-bold"
           >
             Modo print
           </button>
         </div>
 
+        {saveHint ? <p className="mb-3 text-sm font-semibold text-zinc-700">{saveHint}</p> : null}
+
         {slide && !slide.ready ? (
           <p className="mb-3 text-sm font-semibold text-amber-800">
-            Rascunho — ainda não publiques este highlight no IG.
+            Rascunho. Ainda não publiques este highlight no IG.
           </p>
         ) : null}
 
         {slide ? (
-          <StoryFrame
-            title={slide.title}
-            blocks={slide.blocks}
-            showLogo={highlight === 'whos-ignite' && slide.id === 'why'}
-          />
+          <StoryFrame title={slide.title} blocks={slide.blocks} showLogo={showLogo} />
         ) : null}
 
         <div className="mt-4 flex justify-between">
