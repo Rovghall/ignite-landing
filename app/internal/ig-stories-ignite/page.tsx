@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { FormEvent, useEffect, useMemo, useRef, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
@@ -178,21 +178,13 @@ async function renderStoryPng(slide: IgStorySlide, showLogo: boolean) {
   })
 }
 
-async function savePngFile(blob: Blob, filename: string) {
-  const file = new File([blob], filename, { type: 'image/png' })
-  if (typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] })) {
-    await navigator.share({ files: [file] })
-    return
-  }
-  const url = URL.createObjectURL(blob)
-  const link = document.createElement('a')
-  link.href = url
-  link.download = filename
-  link.rel = 'noopener'
-  document.body.appendChild(link)
-  link.click()
-  link.remove()
-  window.setTimeout(() => URL.revokeObjectURL(url), 30_000)
+function blobToDataUrl(blob: Blob) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onload = () => resolve(String(reader.result))
+    reader.onerror = () => reject(reader.error)
+    reader.readAsDataURL(blob)
+  })
 }
 
 export default function IgStoriesAdminPage() {
@@ -214,8 +206,11 @@ export default function IgStoriesAdminPage() {
   const [lang, setLang] = useState<IgStoryLang>('EN')
   const [slideIndex, setSlideIndex] = useState(0)
   const [printMode, setPrintMode] = useState(false)
-  const [saving, setSaving] = useState(false)
   const [saveHint, setSaveHint] = useState<string | null>(null)
+  const [pngReady, setPngReady] = useState(false)
+  const [downloadHref, setDownloadHref] = useState<string | null>(null)
+  const [downloadName, setDownloadName] = useState('ignite-story.png')
+  const downloadRef = useRef<HTMLAnchorElement>(null)
 
   const slides = IG_STORY_SLIDES[highlight][lang]
   const slide = slides[Math.min(slideIndex, slides.length - 1)] ?? slides[0]
@@ -224,6 +219,32 @@ export default function IgStoriesAdminPage() {
   useEffect(() => {
     setSlideIndex(0)
   }, [highlight, lang])
+
+  useEffect(() => {
+    if (!session || !slide) {
+      setPngReady(false)
+      setDownloadHref(null)
+      return
+    }
+    let cancelled = false
+    setPngReady(false)
+    setDownloadHref(null)
+    const name = `ignite-${highlight}-${slide.id}-${lang}.png`
+    setDownloadName(name)
+    void renderStoryPng(slide, showLogo)
+      .then((blob) => blobToDataUrl(blob))
+      .then((dataUrl) => {
+        if (cancelled) return
+        setDownloadHref(dataUrl.replace(/^data:[^;]+/, 'data:application/octet-stream'))
+        setPngReady(true)
+      })
+      .catch(() => {
+        if (!cancelled) setPngReady(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [session, highlight, lang, showLogo, slide])
 
   useEffect(() => {
     if (!supabase) {
@@ -258,20 +279,27 @@ export default function IgStoriesAdminPage() {
     setPrintMode(false)
   }
 
-  async function onSavePng() {
-    if (!slide) return
-    setSaving(true)
-    setSaveHint(null)
-    try {
-      const blob = await renderStoryPng(slide, showLogo)
-      await savePngFile(blob, `ignite-${highlight}-${slide.id}-${lang}.png`)
-      setSaveHint('No telemóvel: escolhe Guardar imagem. No computador o PNG descarrega.')
-    } catch {
-      setSaveHint('Não deu para gerar o PNG. Tenta outra vez.')
-    } finally {
-      setSaving(false)
+  function onSavePng() {
+    if (!pngReady || !downloadHref || !downloadRef.current) {
+      setSaveHint('Ainda a preparar o PNG. Toca outra vez daqui a um segundo.')
+      return
     }
+    downloadRef.current.click()
+    setSaveHint('Guardado em Downloads. No iPhone, se não aparecer na galeria, está em Ficheiros.')
   }
+
+  const downloadLink = (
+    <a
+      ref={downloadRef}
+      href={downloadHref ?? undefined}
+      download={downloadName}
+      className="absolute -left-[9999px] top-0 h-px w-px overflow-hidden"
+      tabIndex={-1}
+      aria-hidden
+    >
+      png
+    </a>
+  )
 
   if (configError) {
     return (
@@ -305,14 +333,15 @@ export default function IgStoriesAdminPage() {
   if (printMode && slide) {
     return (
       <main className="flex min-h-screen items-center justify-center p-0" style={{ background: '#0C0C12' }}>
+        {downloadLink}
         <div className="fixed right-3 top-3 z-10 flex gap-2">
           <button
             type="button"
-            disabled={saving}
-            onClick={() => void onSavePng()}
+            disabled={!pngReady}
+            onClick={onSavePng}
             className="rounded-full bg-white px-3 py-1.5 text-xs font-semibold text-zinc-900 disabled:opacity-50"
           >
-            {saving ? 'A gerar…' : 'Guardar PNG'}
+            {pngReady ? 'Guardar PNG' : 'A preparar…'}
           </button>
           <button
             type="button"
@@ -362,6 +391,7 @@ export default function IgStoriesAdminPage() {
 
   return (
     <main className={cn(PAGE_BG, 'px-4 py-8 sm:px-6')}>
+      {downloadLink}
       <div className="mx-auto max-w-3xl">
         <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
@@ -370,8 +400,8 @@ export default function IgStoriesAdminPage() {
             </p>
             <h1 className="mt-1 text-3xl font-semibold tracking-tight text-zinc-900">Stories</h1>
             <p className="mt-1 max-w-xl text-sm text-muted-foreground">
-              Escolhe o slide e toca em Guardar PNG. No telemóvel abre a partilha e escolhe Guardar
-              imagem. No computador descarrega um PNG 1080×1920.
+              Escolhe o slide e toca em Guardar PNG. O ficheiro vai para Downloads no telemóvel, sem
+              ecrã de partilha.
             </p>
             <InternalAdminNav active="ig-stories" className="mt-3" />
           </div>
@@ -435,11 +465,11 @@ export default function IgStoriesAdminPage() {
           ))}
           <button
             type="button"
-            disabled={saving}
-            onClick={() => void onSavePng()}
+            disabled={!pngReady}
+            onClick={onSavePng}
             className="ml-auto rounded-full bg-foreground px-3.5 py-1.5 text-xs font-bold text-background disabled:opacity-50"
           >
-            {saving ? 'A gerar…' : 'Guardar PNG'}
+            {pngReady ? 'Guardar PNG' : 'A preparar…'}
           </button>
           <button
             type="button"
