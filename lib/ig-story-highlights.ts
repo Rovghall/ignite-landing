@@ -1,4 +1,4 @@
-import { FAQ_STORY_SLIDES } from '@/lib/ig-story-faq'
+import { FAQ_STORY_SLIDES, SHARE_CARDS_STORY_SLIDES } from '@/lib/ig-story-faq'
 
 export type IgHighlightId =
   | 'whos-ignite'
@@ -326,32 +326,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
       },
     ],
   },
-  'share-cards': {
-    EN: [
-      {
-        id: 'cards',
-        title: 'Share cards',
-        ready: true,
-        blocks: [
-          'Every meal or workout can become a card.',
-          'Photo, calories, macros or duration. Ready for stories.',
-          'Post the habit, not a screenshot of a spreadsheet.',
-        ],
-      },
-    ],
-    PT: [
-      {
-        id: 'cards',
-        title: 'Share cards',
-        ready: true,
-        blocks: [
-          'Cada refeição ou treino pode virar um card.',
-          'Foto, calorias, macros ou duração. Pronto para stories.',
-          'Publicas o hábito, não um print de uma folha Excel.',
-        ],
-      },
-    ],
-  },
+  'share-cards': SHARE_CARDS_STORY_SLIDES,
   faq: FAQ_STORY_SLIDES,
   reviews: {
     EN: [
