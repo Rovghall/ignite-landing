@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useEffect, useMemo, useRef, useState, type Ref } from 'react'
+import { FormEvent, useEffect, useMemo, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
@@ -24,6 +24,8 @@ const APP_DARK_CANVAS =
 const EXPORT_W = 1080
 const EXPORT_H = 1920
 const EXPORT_SCALE = EXPORT_W / 420
+const FONT_STACK =
+  'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
 
 function StoryLogo() {
   return (
@@ -67,101 +69,113 @@ function StoryFrame({
   )
 }
 
-function StoryExportCanvas({
-  slide,
-  showLogo,
-  canvasRef,
-}: {
-  slide: IgStorySlide
-  showLogo: boolean
-  canvasRef: Ref<HTMLDivElement>
-}) {
-  const logo = 72 * EXPORT_SCALE
-  const title = 28 * EXPORT_SCALE
-  const body = 16 * EXPORT_SCALE
-  const padX = 32 * EXPORT_SCALE
-  const padY = 64 * EXPORT_SCALE
-  const blockGap = 24 * EXPORT_SCALE
-  const titleGap = 32 * EXPORT_SCALE
-  const logoGap = 28 * EXPORT_SCALE
-
-  return (
-    <div
-      ref={canvasRef}
-      style={{
-        width: EXPORT_W,
-        height: EXPORT_H,
-        backgroundColor: '#0C0C12',
-        backgroundImage: APP_DARK_CANVAS,
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        padding: `${padY}px ${padX}px`,
-        textAlign: 'center',
-        fontFamily:
-          'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-      }}
-    >
-      {showLogo ? (
-        <img
-          src="/ignite-logo.png"
-          alt=""
-          width={logo}
-          height={logo}
-          style={{
-            display: 'block',
-            width: logo,
-            height: logo,
-            margin: `0 auto ${logoGap}px`,
-            objectFit: 'contain',
-            mixBlendMode: 'screen',
-          }}
-        />
-      ) : null}
-      <p
-        style={{
-          margin: 0,
-          color: '#ffffff',
-          fontSize: title,
-          fontWeight: 600,
-          letterSpacing: '-0.025em',
-          lineHeight: 1.15,
-        }}
-      >
-        {slide.title}
-      </p>
-      <div style={{ marginTop: titleGap, display: 'flex', flexDirection: 'column', gap: blockGap }}>
-        {slide.blocks.map((block, index) => (
-          <p
-            key={`${index}-${block.slice(0, 32)}`}
-            style={{
-              margin: 0,
-              color: 'rgba(255,255,255,0.9)',
-              fontSize: body,
-              lineHeight: 1.35,
-            }}
-          >
-            {block}
-          </p>
-        ))}
-      </div>
-    </div>
-  )
+function wrapLines(ctx: CanvasRenderingContext2D, text: string, maxWidth: number) {
+  const words = text.split(/\s+/)
+  const lines: string[] = []
+  let current = ''
+  for (const word of words) {
+    const next = current ? `${current} ${word}` : word
+    if (current && ctx.measureText(next).width > maxWidth) {
+      lines.push(current)
+      current = word
+    } else {
+      current = next
+    }
+  }
+  if (current) lines.push(current)
+  return lines
 }
 
-async function waitForImages(root: HTMLElement) {
-  const images = Array.from(root.querySelectorAll('img'))
-  await Promise.all(
-    images.map((img) =>
-      img.complete && img.naturalWidth > 0
-        ? Promise.resolve()
-        : new Promise<void>((resolve) => {
-            img.onload = () => resolve()
-            img.onerror = () => resolve()
-          }),
-    ),
-  )
+function loadLogo() {
+  return new Promise<HTMLImageElement | null>((resolve) => {
+    const img = new Image()
+    img.crossOrigin = 'anonymous'
+    img.onload = () => resolve(img)
+    img.onerror = () => resolve(null)
+    img.src = `${window.location.origin}/ignite-logo.png`
+  })
+}
+
+async function renderStoryPng(slide: IgStorySlide, showLogo: boolean) {
+  const canvas = document.createElement('canvas')
+  canvas.width = EXPORT_W
+  canvas.height = EXPORT_H
+  const ctx = canvas.getContext('2d')
+  if (!ctx) throw new Error('canvas')
+
+  const linear = ctx.createLinearGradient(0, 0, 0, EXPORT_H)
+  linear.addColorStop(0, '#16161C')
+  linear.addColorStop(1, '#0C0C12')
+  ctx.fillStyle = linear
+  ctx.fillRect(0, 0, EXPORT_W, EXPORT_H)
+
+  const radial = ctx.createRadialGradient(EXPORT_W, 0, 0, EXPORT_W, 0, EXPORT_W * 0.95)
+  radial.addColorStop(0, 'rgba(72, 68, 80, 0.9)')
+  radial.addColorStop(0.46, 'rgba(72, 68, 80, 0)')
+  ctx.fillStyle = radial
+  ctx.fillRect(0, 0, EXPORT_W, EXPORT_H)
+
+  const padX = 32 * EXPORT_SCALE
+  const maxW = EXPORT_W - padX * 2
+  const titleSize = 28 * EXPORT_SCALE
+  const bodySize = 16 * EXPORT_SCALE
+  const titleLh = titleSize * 1.15
+  const bodyLh = bodySize * 1.35
+  const blockGap = 24 * EXPORT_SCALE
+  const titleGap = 32 * EXPORT_SCALE
+  const logoSize = 72 * EXPORT_SCALE
+  const logoGap = 28 * EXPORT_SCALE
+
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'top'
+
+  ctx.font = `600 ${titleSize}px ${FONT_STACK}`
+  const titleLines = wrapLines(ctx, slide.title, maxW)
+  ctx.font = `400 ${bodySize}px ${FONT_STACK}`
+  const blockLines = slide.blocks.map((block) => wrapLines(ctx, block, maxW))
+
+  let contentH = titleLines.length * titleLh + titleGap
+  blockLines.forEach((lines, index) => {
+    contentH += lines.length * bodyLh
+    if (index < blockLines.length - 1) contentH += blockGap
+  })
+  if (showLogo) contentH += logoSize + logoGap
+
+  let y = Math.max(48, (EXPORT_H - contentH) / 2)
+  const cx = EXPORT_W / 2
+
+  if (showLogo) {
+    const logo = await loadLogo()
+    if (logo) {
+      ctx.save()
+      ctx.globalCompositeOperation = 'screen'
+      ctx.drawImage(logo, cx - logoSize / 2, y, logoSize, logoSize)
+      ctx.restore()
+    }
+    y += logoSize + logoGap
+  }
+
+  ctx.fillStyle = '#ffffff'
+  ctx.font = `600 ${titleSize}px ${FONT_STACK}`
+  for (const line of titleLines) {
+    ctx.fillText(line, cx, y)
+    y += titleLh
+  }
+  y += titleGap
+
+  ctx.fillStyle = 'rgba(255,255,255,0.9)'
+  ctx.font = `400 ${bodySize}px ${FONT_STACK}`
+  blockLines.forEach((lines, index) => {
+    for (const line of lines) {
+      ctx.fillText(line, cx, y)
+      y += bodyLh
+    }
+    if (index < blockLines.length - 1) y += blockGap
+  })
+
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('png'))), 'image/png')
+  })
 }
 
 async function savePngFile(blob: Blob, filename: string) {
@@ -190,7 +204,6 @@ export default function IgStoriesAdminPage() {
     }
   }, [])
 
-  const exportRef = useRef<HTMLDivElement>(null)
   const [configError, setConfigError] = useState<string | null>(null)
   const [session, setSession] = useState<Session | null>(null)
   const [user, setUser] = useState<User | null>(null)
@@ -246,25 +259,12 @@ export default function IgStoriesAdminPage() {
   }
 
   async function onSavePng() {
-    if (!slide || !exportRef.current) return
+    if (!slide) return
     setSaving(true)
     setSaveHint(null)
     try {
-      await document.fonts.ready
-      await waitForImages(exportRef.current)
-      const { toBlob } = await import('html-to-image')
-      const blob = await toBlob(exportRef.current, {
-        cacheBust: true,
-        pixelRatio: 1,
-        width: EXPORT_W,
-        height: EXPORT_H,
-        canvasWidth: EXPORT_W,
-        canvasHeight: EXPORT_H,
-        backgroundColor: '#0C0C12',
-      })
-      if (!blob) throw new Error('empty png')
-      const filename = `ignite-${highlight}-${slide.id}-${lang}.png`
-      await savePngFile(blob, filename)
+      const blob = await renderStoryPng(slide, showLogo)
+      await savePngFile(blob, `ignite-${highlight}-${slide.id}-${lang}.png`)
       setSaveHint('No telemóvel: escolhe Guardar imagem. No computador o PNG descarrega.')
     } catch {
       setSaveHint('Não deu para gerar o PNG. Tenta outra vez.')
@@ -302,16 +302,9 @@ export default function IgStoriesAdminPage() {
     )
   }
 
-  const exportNode = slide ? (
-    <div aria-hidden className="pointer-events-none fixed top-0" style={{ left: -EXPORT_W - 40 }}>
-      <StoryExportCanvas slide={slide} showLogo={showLogo} canvasRef={exportRef} />
-    </div>
-  ) : null
-
   if (printMode && slide) {
     return (
       <main className="flex min-h-screen items-center justify-center p-0" style={{ background: '#0C0C12' }}>
-        {exportNode}
         <div className="fixed right-3 top-3 z-10 flex gap-2">
           <button
             type="button"
@@ -369,7 +362,6 @@ export default function IgStoriesAdminPage() {
 
   return (
     <main className={cn(PAGE_BG, 'px-4 py-8 sm:px-6')}>
-      {exportNode}
       <div className="mx-auto max-w-3xl">
         <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
