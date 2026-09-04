@@ -69,7 +69,7 @@ function StoryBodyBlock({
         cta
           ? print
             ? 'mt-auto pt-[3vh] text-[4.4vw] font-bold text-white sm:text-lg'
-            ? 'mt-auto pt-6 text-[16px] font-bold text-white sm:text-[17px]'
+            : 'mt-auto pt-6 text-[16px] font-bold text-white sm:text-[17px]'
           : print
             ? 'font-sans text-[4.2vw] leading-snug text-white/90 sm:text-lg'
             : 'text-[16px] text-white/90 sm:text-[17px]',
