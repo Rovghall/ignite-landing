@@ -32,6 +32,18 @@ const TOQUE_FILTERS: { id: 'all' | OutreachScriptToque; label: string }[] = [
   { id: 3, label: 'Follow-up' },
 ]
 
+const FAVORITES_KEY = 'ignite-outreach-script-favorites'
+
+function readFavoriteIds(): string[] {
+  try {
+    const parsed = JSON.parse(window.localStorage.getItem(FAVORITES_KEY) ?? '[]') as unknown
+    if (!Array.isArray(parsed)) return []
+    return parsed.filter((id): id is string => typeof id === 'string')
+  } catch {
+    return []
+  }
+}
+
 function CopyButton({ value, label }: { value: string; label: string }) {
   const [copied, setCopied] = useState(false)
   return (
@@ -71,6 +83,7 @@ export default function OutreachScriptsAdminPage() {
   const [password, setPassword] = useState('')
   const [authError, setAuthError] = useState<string | null>(null)
   const [toqueFilter, setToqueFilter] = useState<'all' | OutreachScriptToque>('all')
+  const [favoriteIds, setFavoriteIds] = useState<string[]>([])
   const [lang, setLang] = useState<OutreachScriptLang>('PT')
   const [currency, setCurrency] = useState<CreatorOutreachCurrency>('EUR')
   const [nome, setNome] = useState(OUTREACH_SCRIPT_DEFAULTS.nome)
@@ -93,13 +106,25 @@ export default function OutreachScriptsAdminPage() {
     [nome, playStore, pdfBriefing, contactEmail, money],
   )
 
-  const scripts = useMemo(
-    () =>
-      OUTREACH_SCRIPTS.filter((script) =>
-        toqueFilter === 'all' ? true : script.toque === toqueFilter,
-      ),
-    [toqueFilter],
-  )
+  const favoriteSet = useMemo(() => new Set(favoriteIds), [favoriteIds])
+
+  const scripts = useMemo(() => {
+    const filtered = OUTREACH_SCRIPTS.filter((script) =>
+      toqueFilter === 'all' ? true : script.toque === toqueFilter,
+    )
+    return [...filtered].sort((a, b) => {
+      const ai = favoriteIds.indexOf(a.id)
+      const bi = favoriteIds.indexOf(b.id)
+      if (ai === -1 && bi === -1) return 0
+      if (ai === -1) return 1
+      if (bi === -1) return -1
+      return ai - bi
+    })
+  }, [toqueFilter, favoriteIds])
+
+  useEffect(() => {
+    setFavoriteIds(readFavoriteIds())
+  }, [])
 
   useEffect(() => {
     if (!supabase) {
@@ -131,6 +156,14 @@ export default function OutreachScriptsAdminPage() {
   async function onSignOut() {
     if (!supabase) return
     await supabase.auth.signOut()
+  }
+
+  function toggleFavorite(id: string) {
+    setFavoriteIds((prev) => {
+      const next = prev.includes(id) ? prev.filter((item) => item !== id) : [id, ...prev]
+      window.localStorage.setItem(FAVORITES_KEY, JSON.stringify(next))
+      return next
+    })
   }
 
   if (configError) {
@@ -305,7 +338,21 @@ export default function OutreachScriptsAdminPage() {
                       <p className="mt-1 text-xs text-muted-foreground">{copy.note}</p>
                     ) : null}
                   </div>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => toggleFavorite(script.id)}
+                      title={favoriteSet.has(script.id) ? 'Remover dos favoritos' : 'Favoritar'}
+                      aria-label={favoriteSet.has(script.id) ? 'Remover dos favoritos' : 'Favoritar'}
+                      className={cn(
+                        'rounded-full px-2.5 py-1.5 text-sm font-semibold',
+                        favoriteSet.has(script.id)
+                          ? 'text-amber-500'
+                          : 'text-zinc-300 hover:text-amber-400',
+                      )}
+                    >
+                      {favoriteSet.has(script.id) ? '★' : '☆'}
+                    </button>
                     {subject ? <CopyButton value={subject} label="Copiar assunto" /> : null}
                     <CopyButton value={body} label="Copiar" />
                   </div>
