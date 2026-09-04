@@ -47,23 +47,19 @@ export const OUTREACH_SCRIPTS: OutreachScript[] = [
     note: 'Não attaches PDF. Objectivo: resposta. Só troca o nome se quiseres.',
     body: `Olá [NOME], tudo bem?
 
-Sou o Filipe, fundador da IGNITE AI.
+Sou o Filipe, fundador da app IGNITE AI.
 
-Gostaríamos de saber se esta proposta é do teu interesse.
+Acabámos de a lançar para iOS e Android e estou a contactar criadores cujo conteúdo encaixa no que estamos a construir. Queria saber se esta proposta te interessa.
 
-A IGNITE é uma app de nutrição e fitness que monta um plano calórico personalizado consoante o objetivo de cada pessoa (perder peso, ganhar massa, manter).
+App de nutrição e fitness: foto da refeição → calorias, macros e ingredientes em 4–8s, mais treinos e Apple Health / Health Connect.
 
-O utilizador tira foto da refeição e, em cerca de 5 segundos, obtém uma estimativa das calorias e macros do que consumiu, com a respectiva lista de ingredientes (editável se necessário). Também pode registar treinos para acompanhar o gasto calórico — tudo num só sítio.
+No Creator Program oferecemos:
+• Premium grátis, renovável, para testares a app enquanto fazes conteúdo
+• Código teu com o plano anual mais barato para a tua audiência
+• €10 por cada seguidor que assine o Premium anual com o teu código
+• Creator Group na app (chat, feed dos teus logs e leaderboard) para a comunidade ficar contigo dentro da app
 
-Acabámos de lançar no iOS e Android e estou a contactar creators cujo conteúdo encaixa no que estamos a construir.
-
-Temos um Programa de Criadores:
-• Premium grátis por um período determinado e renovável, para testares a app à vontade
-• Um código exclusivo teu com preço anual exclusivo para a tua audiência — com o teu código, a tua audiência tem acesso ao plano anual mais barato, exclusivo creator
-• Recebes €10 por cada seguidor que assine o Premium anual com o teu código
-• Acesso a Creator Groups na app: crias o teu grupo e convidas seguidores. Dentro do grupo há 3 secções — Chat (para participar), Feed (onde aparecem os teus logs de refeições e treinos em tempo real; podes ativar ou desativar isto) e Leaderboard
-
-Se achas que para ti faz sentido mostrar uma ferramenta real no teu dia a dia, criar conteúdo, dar valor à audiência (preço especial) e ainda monetizar de forma transparente — responde e mando-te os detalhes + PDF. Sem compromisso.
+Se te fizer sentido mostrar a ferramenta no dia a dia, dar um preço especial à audiência e monetizar de forma transparente, responde e mando a página com todos os detalhes.
 
 Abraço,
 Filipe`,
@@ -78,23 +74,19 @@ Filipe`,
     note: 'No email, podes acrescentar no fim: Fundador, IGNITE AI + o teu email.',
     body: `Olá [NOME], tudo bem?
 
-Sou o Filipe, fundador da IGNITE AI.
+Sou o Filipe, fundador da app IGNITE AI.
 
-Gostaríamos de saber se esta proposta é do teu interesse.
+Acabámos de a lançar para iOS e Android e estou a contactar criadores cujo conteúdo encaixa no que estamos a construir. Queria saber se esta proposta te interessa.
 
-A IGNITE é uma app de nutrição e fitness que monta um plano calórico personalizado consoante o objetivo de cada pessoa (perder peso, ganhar massa, manter).
+App de nutrição e fitness: foto da refeição → calorias, macros e ingredientes em 4–8s, mais treinos e Apple Health / Health Connect.
 
-O utilizador tira foto da refeição e, em cerca de 5 segundos, obtém uma estimativa das calorias e macros do que consumiu, com a respectiva lista de ingredientes (editável se necessário). Também pode registar treinos para acompanhar o gasto calórico — tudo num só sítio.
+No Creator Program oferecemos:
+• Premium grátis, renovável, para testares a app enquanto fazes conteúdo
+• Código teu com o plano anual mais barato para a tua audiência
+• €10 por cada seguidor que assine o Premium anual com o teu código
+• Creator Group na app (chat, feed dos teus logs e leaderboard) para a comunidade ficar contigo dentro da app
 
-Acabámos de lançar no iOS e Android e estou a contactar creators cujo conteúdo encaixa no que estamos a construir.
-
-Temos um Programa de Criadores:
-• Premium grátis por um período determinado e renovável, para testares a app à vontade
-• Um código exclusivo teu com preço anual exclusivo para a tua audiência — com o teu código, a tua audiência tem acesso ao plano anual mais barato, exclusivo creator
-• Recebes €10 por cada seguidor que assine o Premium anual com o teu código
-• Acesso a Creator Groups na app: crias o teu grupo e convidas seguidores. Dentro do grupo há 3 secções — Chat (para participar), Feed (onde aparecem os teus logs de refeições e treinos em tempo real; podes ativar ou desativar isto) e Leaderboard
-
-Se achas que para ti faz sentido mostrar uma ferramenta real no teu dia a dia, criar conteúdo, dar valor à audiência (preço especial) e ainda monetizar de forma transparente — responde e mando-te os detalhes + PDF. Sem compromisso.
+Se te fizer sentido mostrar a ferramenta no dia a dia, dar um preço especial à audiência e monetizar de forma transparente, responde e mando a página com todos os detalhes.
 
 Abraço,
 Filipe
@@ -110,13 +102,13 @@ Fundador, IGNITE AI
     note: 'Só se o DM tiver limite de caracteres.',
     body: `Olá [NOME], tudo bem?
 
-Sou o Filipe, fundador da IGNITE AI. Gostaríamos de saber se esta proposta é do teu interesse.
+Sou o Filipe, fundador da app IGNITE AI. Acabámos de a lançar para iOS e Android — queria saber se esta proposta te interessa.
 
-A IGNITE monta um plano calórico ao objetivo do user. Tira foto da refeição → calorias, macros e ingredientes editáveis em ~5 seg. Também regista treinos.
+App de nutrição e fitness: foto da refeição → calorias, macros e ingredientes em 4–8s, mais treinos e Apple Health / Health Connect.
 
-Programa de Criadores: Premium renovável · código teu com o plano anual mais barato · €10/assinatura anual · Creator Group (chat, feed das tuas refeições/treinos e leaderboard).
+Creator Program: Premium renovável · código teu com o plano anual mais barato · €10/assinatura anual · Creator Group na app.
 
-Se fizer sentido, responde e mando PDF. Sem compromisso.
+Se fizer sentido, responde e mando a página com os detalhes.
 
 Abraço,
 Filipe`,
