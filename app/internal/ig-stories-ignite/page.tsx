@@ -393,6 +393,24 @@ const HIGHLIGHT_COVERS: Partial<
   <circle cx="12" cy="13" r="3.2" stroke="#fff" stroke-width="1.7"/>
 </svg>`,
   },
+  research: {
+    file: 'ignite-research-highlight-cover.png',
+    title: 'Capa do destaque Research',
+    hint: 'Ícone de lupa iOS. Fundo igual ao das stories.',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <circle cx="10.35" cy="10.35" r="5.85" stroke="#fff" stroke-width="1.75"/>
+  <path d="M14.7 14.7 19.55 19.55" stroke="#fff" stroke-width="1.9" stroke-linecap="round"/>
+</svg>`,
+  },
+  testimonials: {
+    file: 'ignite-testimonials-highlight-cover.png',
+    title: 'Capa do destaque Testimonials',
+    hint: 'Aspas iOS. Fundo igual ao das stories.',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M5.6 8.15c0-2.55 1.85-4.7 4.55-4.7v2.55c-1.2 0-2.05.9-2.05 2.15 0 .45.12.82.3 1.15h2.85v7.35H5.6V8.15z" fill="#fff"/>
+  <path d="M13.85 8.15c0-2.55 1.85-4.7 4.55-4.7v2.55c-1.2 0-2.05.9-2.05 2.15 0 .45.12.82.3 1.15h2.85v7.35h-5.65V8.15z" fill="#fff"/>
+</svg>`,
+  },
 }
 
 async function renderHighlightCoverPng(cover: { svg?: string; image?: string }) {
