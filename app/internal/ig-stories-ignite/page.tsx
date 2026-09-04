@@ -214,7 +214,7 @@ export default function IgStoriesAdminPage() {
 
   const slides = IG_STORY_SLIDES[highlight][lang]
   const slide = slides[Math.min(slideIndex, slides.length - 1)] ?? slides[0]
-  const showLogo = highlight === 'whos-ignite' && slide?.id === 'why'
+  const showLogo = highlight === 'whos-ignite'
 
   useEffect(() => {
     setSlideIndex(0)
