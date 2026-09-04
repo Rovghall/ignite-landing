@@ -18,9 +18,29 @@ import { cn } from '@/lib/utils'
 const PAGE_BG =
   'min-h-screen bg-[radial-gradient(1200px_600px_at_10%_-10%,#fff7ed,transparent),linear-gradient(#fafafa,#ffffff)]'
 
-/** Matches the app dark canvas (`DARK_BACKGROUND_BASE` + wash in `DarkCanvasGradient`). */
-const APP_DARK_CANVAS =
-  'radial-gradient(120% 78% at 100% 0%, #484450 0%, transparent 46%), linear-gradient(180deg, #16161C 0%, #0C0C12 100%)'
+/** Matches the app dark canvas (`DarkCanvasGradient`): many stops so 8-bit screens do not band. */
+const APP_DARK_CANVAS = [
+  'linear-gradient(180deg, rgba(12,12,18,0) 0%, rgba(12,12,18,0.14) 32%, rgba(10,10,14,0.36) 58%, rgba(8,8,12,0.58) 82%, #0C0C12 100%)',
+  'linear-gradient(210deg, #484450 0%, #3A3840 10%, #34323A 20%, #2E2E34 32%, #28282E 44%, #222228 58%, #1E1E24 72%, #1A1A20 86%, #16161C 100%)',
+].join(', ')
+
+const STORY_NOISE =
+  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E\")"
+
+function StoryBandingMask() {
+  return (
+    <div
+      aria-hidden
+      className="pointer-events-none absolute inset-0 z-[-1] mix-blend-overlay"
+      style={{
+        opacity: 0.08,
+        backgroundImage: STORY_NOISE,
+        backgroundRepeat: 'repeat',
+        backgroundSize: '160px 160px',
+      }}
+    />
+  )
+}
 
 const EXPORT_W = 1080
 const EXPORT_H = 1920
@@ -95,8 +115,9 @@ function StoryFrame({
         'relative mx-auto flex aspect-[9/16] w-full max-w-[420px] flex-col overflow-hidden rounded-[28px] px-8 py-12 text-center shadow-[0_24px_80px_rgba(0,0,0,0.35)]',
         cta ? '' : 'justify-center',
       )}
-      style={{ background: APP_DARK_CANVAS }}
+      style={{ backgroundColor: '#0C0C12', backgroundImage: APP_DARK_CANVAS }}
     >
+      <StoryBandingMask />
       {header === 'founder' ? <StoryFounderPhoto /> : header === 'logo' ? <StoryLogo /> : null}
       {research ? (
         <ResearchLayout slide={slide} />
@@ -170,24 +191,66 @@ function drawCoverCircle(
   ctx.restore()
 }
 
+function clampByte(n: number) {
+  return n < 0 ? 0 : n > 255 ? 255 : n
+}
+
+function fillAppDarkCanvas(ctx: CanvasRenderingContext2D, w: number, h: number) {
+  ctx.fillStyle = '#0C0C12'
+  ctx.fillRect(0, 0, w, h)
+
+  const diag = ctx.createLinearGradient(w, 0, 0, h)
+  const stops: Array<[number, string]> = [
+    [0, '#484450'],
+    [0.06, '#3A3840'],
+    [0.14, '#34323A'],
+    [0.24, '#2E2E34'],
+    [0.36, '#28282E'],
+    [0.48, '#222228'],
+    [0.62, '#1E1E24'],
+    [0.78, '#1A1A20'],
+    [1, '#16161C'],
+  ]
+  for (const [t, color] of stops) diag.addColorStop(t, color)
+  ctx.fillStyle = diag
+  ctx.fillRect(0, 0, w, h)
+
+  const vert = ctx.createLinearGradient(0, 0, 0, h)
+  vert.addColorStop(0, 'rgba(12, 12, 18, 0)')
+  vert.addColorStop(0.32, 'rgba(12, 12, 18, 0.14)')
+  vert.addColorStop(0.58, 'rgba(10, 10, 14, 0.36)')
+  vert.addColorStop(0.82, 'rgba(8, 8, 12, 0.58)')
+  vert.addColorStop(1, '#0C0C12')
+  ctx.fillStyle = vert
+  ctx.fillRect(0, 0, w, h)
+
+  const tl = ctx.createLinearGradient(0, 0, w * 0.78, h * 0.52)
+  tl.addColorStop(0, 'rgba(8, 8, 12, 0.6)')
+  tl.addColorStop(0.3, 'rgba(10, 10, 14, 0.34)')
+  tl.addColorStop(0.58, 'rgba(12, 12, 18, 0.12)')
+  tl.addColorStop(1, 'rgba(12, 12, 18, 0)')
+  ctx.fillStyle = tl
+  ctx.fillRect(0, 0, w, h)
+
+  const image = ctx.getImageData(0, 0, w, h)
+  const data = image.data
+  for (let i = 0; i < data.length; i += 4) {
+    const n = (Math.random() - 0.5) * 12
+    data[i] = clampByte(data[i] + n)
+    data[i + 1] = clampByte(data[i + 1] + n)
+    data[i + 2] = clampByte(data[i + 2] + n)
+  }
+  ctx.putImageData(image, 0, 0)
+}
+
 async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') {
   const canvas = document.createElement('canvas')
   canvas.width = EXPORT_W
   canvas.height = EXPORT_H
-  const ctx = canvas.getContext('2d')
+  const ctx = canvas.getContext('2d', { willReadFrequently: true })
   if (!ctx) throw new Error('canvas')
 
-  const linear = ctx.createLinearGradient(0, 0, 0, EXPORT_H)
-  linear.addColorStop(0, '#16161C')
-  linear.addColorStop(1, '#0C0C12')
-  ctx.fillStyle = linear
-  ctx.fillRect(0, 0, EXPORT_W, EXPORT_H)
-
-  const radial = ctx.createRadialGradient(EXPORT_W, 0, 0, EXPORT_W, 0, EXPORT_W * 0.95)
-  radial.addColorStop(0, 'rgba(72, 68, 80, 0.9)')
-  radial.addColorStop(0.46, 'rgba(72, 68, 80, 0)')
-  ctx.fillStyle = radial
-  ctx.fillRect(0, 0, EXPORT_W, EXPORT_H)
+  fillAppDarkCanvas(ctx, EXPORT_W, EXPORT_H)
 
   const padX = 32 * EXPORT_SCALE
   const maxW = EXPORT_W - padX * 2
@@ -470,10 +533,11 @@ export default function IgStoriesAdminPage() {
         ) : null}
         <div className="h-screen w-screen max-w-none">
           <div
-            className="flex h-full w-full justify-center px-8 text-center"
-            style={{ background: APP_DARK_CANVAS }}
+            className="relative flex h-full w-full justify-center px-8 text-center"
+            style={{ backgroundColor: '#0C0C12', backgroundImage: APP_DARK_CANVAS }}
           >
-            <div className="flex h-full max-w-[520px] w-full flex-col py-[8vh]">
+            <StoryBandingMask />
+            <div className="relative z-[1] flex h-full max-w-[520px] w-full flex-col py-[8vh]">
               {header === 'founder' ? (
                 <img
                   src="/ceofounder.jpg"
