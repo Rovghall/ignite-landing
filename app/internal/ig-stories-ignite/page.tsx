@@ -16,6 +16,10 @@ import { cn } from '@/lib/utils'
 const PAGE_BG =
   'min-h-screen bg-[radial-gradient(1200px_600px_at_10%_-10%,#fff7ed,transparent),linear-gradient(#fafafa,#ffffff)]'
 
+/** Matches the app dark canvas (`DARK_BACKGROUND_BASE` + wash in `DarkCanvasGradient`). */
+const APP_DARK_CANVAS =
+  'radial-gradient(120% 78% at 100% 0%, #484450 0%, transparent 46%), linear-gradient(180deg, #16161C 0%, #0C0C12 100%)'
+
 function StoryFrame({
   title,
   blocks,
@@ -26,7 +30,7 @@ function StoryFrame({
   return (
     <div
       className="relative mx-auto flex aspect-[9/16] w-full max-w-[420px] flex-col justify-center overflow-hidden rounded-[28px] px-8 py-16 text-center shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
-      style={{ background: '#121214' }}
+      style={{ background: APP_DARK_CANVAS }}
     >
       <p className="font-sans text-[28px] font-semibold leading-tight tracking-tight text-white sm:text-[32px]">
         {title}
@@ -136,7 +140,7 @@ export default function IgStoriesAdminPage() {
 
   if (printMode && slide) {
     return (
-      <main className="flex min-h-screen items-center justify-center bg-black p-0">
+      <main className="flex min-h-screen items-center justify-center p-0" style={{ background: '#0C0C12' }}>
         <button
           type="button"
           onClick={() => setPrintMode(false)}
@@ -145,7 +149,10 @@ export default function IgStoriesAdminPage() {
           Sair do print
         </button>
         <div className="h-screen w-screen max-w-none">
-          <div className="flex h-full w-full items-center justify-center bg-[#121214] px-8 text-center">
+          <div
+            className="flex h-full w-full items-center justify-center px-8 text-center"
+            style={{ background: APP_DARK_CANVAS }}
+          >
             <div className="max-w-[520px]">
               <p className="font-sans text-[8.2vw] font-semibold leading-tight tracking-tight text-white sm:text-4xl">
                 {slide.title}
