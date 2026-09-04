@@ -37,7 +37,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'We built IGNITE AI so tracking food and training doesn’t eat your day.',
           'Most people guess calories, skip logging, or give up after a week of weighing every meal.',
-          'Take a photo. In 4–8 seconds you get calories, macros, and ingredients. Log workouts. Sync Apple Health / Health Connect.',
+          'Take a photo. In 4-8 seconds you get calories, macros, and ingredients. Log workouts. Sync Apple Health / Health Connect.',
           'One place for the plan: lose, maintain, or gain.',
         ],
       },
@@ -46,9 +46,9 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         title: 'How accurate is it?',
         ready: true,
         blocks: [
-          'IGNITE uses AI plus nutrition data to estimate what’s on the plate — not a lab test.',
+          'IGNITE uses AI plus nutrition data to estimate what’s on the plate. Not a lab test.',
           'Lighting, angles, and hidden oils change the result. Center the food. Edit ingredients if something’s off.',
-          'Your daily plan is an estimate from your profile — a starting point, not a medical prescription.',
+          'Your daily plan is an estimate from your profile. A starting point, not a medical prescription.',
           'The point isn’t perfection. It’s a number you can actually stick to.',
         ],
       },
@@ -58,7 +58,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Each scan runs on servers. That’s a real cost, every photo.',
-          'Premium keeps the product fast and the estimates improving — not ads in the middle of logging lunch.',
+          'Premium keeps the product fast and the estimates improving. Not ads in the middle of logging lunch.',
           'iOS and Android. Start free, upgrade if it fits.',
         ],
       },
@@ -68,7 +68,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'I’m Filipe, founder of IGNITE AI.',
-          'I built this because I wanted a simple way to see what I eat and how I train — without turning it into a second job.',
+          'I built this because I wanted a simple way to see what I eat and how I train, without turning it into a second job.',
           'If something’s broken or you want the Creator Program: DM me. I actually read them.',
         ],
       },
@@ -93,7 +93,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'Criámos a IGNITE AI para o tracking de comida e treino não te comer o dia.',
           'A maior parte das pessoas adivinha calorias, desiste de registar, ou cansa-se de pesar tudo.',
-          'Tiras uma foto. Em 4–8 segundos tens calorias, macros e ingredientes. Registas treinos. Ligas Apple Health / Health Connect.',
+          'Tiras uma foto. Em 4-8 segundos tens calorias, macros e ingredientes. Registas treinos. Ligas Apple Health / Health Connect.',
           'Um sítio para o plano: perder, manter ou ganhar peso.',
         ],
       },
@@ -102,9 +102,9 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         title: 'Quão preciso é?',
         ready: true,
         blocks: [
-          'A IGNITE usa IA e dados de nutrição para estimar o que está no prato — não é um teste de laboratório.',
+          'A IGNITE usa IA e dados de nutrição para estimar o que está no prato. Não é um teste de laboratório.',
           'Luz, ângulo e óleos escondidos mudam o resultado. Centra a comida. Edita ingredientes se faltar alguma coisa.',
-          'O plano diário é uma estimativa a partir do teu perfil — um ponto de partida, não uma prescrição médica.',
+          'O plano diário é uma estimativa a partir do teu perfil. Um ponto de partida, não uma prescrição médica.',
           'O ponto não é a perfeição. É um número a que consigas mesmo agarrar.',
         ],
       },
@@ -114,7 +114,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Cada scan corre em servidores. É um custo real, em cada foto.',
-          'O Premium mantém o produto rápido e as estimativas a melhorar — não anúncios a meio do almoço.',
+          'O Premium mantém o produto rápido e as estimativas a melhorar. Não anúncios a meio do almoço.',
           'iOS e Android. Começas grátis, upgrades se fizer sentido.',
         ],
       },
@@ -124,7 +124,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Sou o Filipe, fundador da IGNITE AI.',
-          'Construí isto porque queria ver o que como e como treino — sem transformar isso num segundo emprego.',
+          'Construí isto porque queria ver o que como e como treino, sem transformar isso num segundo emprego.',
           'Se algo falhar ou quiseres o Creator Program: manda DM. Eu leio.',
         ],
       },
@@ -150,7 +150,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Snap the meal.',
-          'In 4–8 seconds: calories, macros, and a list of ingredients.',
+          'In 4-8 seconds: calories, macros, and a list of ingredients.',
           'Edit anything that’s off. Then log it.',
         ],
       },
@@ -162,7 +162,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Tira foto à refeição.',
-          'Em 4–8 segundos: calorias, macros e lista de ingredientes.',
+          'Em 4-8 segundos: calorias, macros e lista de ingredientes.',
           'Edita o que estiver errado. Depois regista.',
         ],
       },
@@ -176,7 +176,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Every meal or workout can become a card.',
-          'Photo, calories, macros or duration — ready for stories.',
+          'Photo, calories, macros or duration. Ready for stories.',
           'Post the habit, not a screenshot of a spreadsheet.',
         ],
       },
@@ -188,7 +188,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Cada refeição ou treino pode virar um card.',
-          'Foto, calorias, macros ou duração — pronto para stories.',
+          'Foto, calorias, macros ou duração. Pronto para stories.',
           'Publicas o hábito, não um print de uma folha Excel.',
         ],
       },
@@ -201,7 +201,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         title: 'Who is IGNITE for?',
         ready: true,
         blocks: [
-          'Anyone with a weight goal — lose, maintain, or gain — who wants a calorie and macro estimate of what they eat.',
+          'Anyone with a weight goal (lose, maintain, or gain) who wants a calorie and macro estimate of what they eat.',
           'Plus workouts and Health sync, in one app.',
         ],
       },
@@ -227,7 +227,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         title: 'Para quem é a IGNITE?',
         ready: true,
         blocks: [
-          'Quem tem um objetivo de peso — perder, manter ou ganhar — e quer uma estimativa de calorias e macros do que come.',
+          'Quem tem um objetivo de peso (perder, manter ou ganhar) e quer uma estimativa de calorias e macros do que come.',
           'Mais treinos e Health sync, numa só app.',
         ],
       },
