@@ -13,6 +13,7 @@ import {
 } from '@/lib/ig-story-highlights'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
 import { ResearchLayout, paintResearchSlide } from '@/components/ig-story-layouts'
+import { cn } from '@/lib/utils'
 
 const PAGE_BG =
   'min-h-screen bg-[radial-gradient(1200px_600px_at_10%_-10%,#fff7ed,transparent),linear-gradient(#fafafa,#ffffff)]'
