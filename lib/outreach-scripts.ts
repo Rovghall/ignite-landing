@@ -81,7 +81,7 @@ export const OUTREACH_SCRIPTS: OutreachScript[] = [
       PT: {
         channel: 'DM / email / WhatsApp',
         title: 'Toque 1 — mensagem principal',
-        note: 'Objectivo: resposta. O link da página entra automaticamente com o idioma.',
+        note: 'Não envies o link. Objectivo: resposta. A página vai no Toque 2.',
         body: `Olá [NOME], tudo bem?
 
 Sou o Filipe, fundador da app IGNITE AI.
@@ -96,8 +96,7 @@ No Creator Program oferecemos:
 • [REWARD] por cada seguidor que assine o Premium anual com o teu código
 • Creator Group na app (chat, feed dos teus logs e leaderboard) para a comunidade ficar contigo dentro da app
 
-Se te fizer sentido mostrar a ferramenta no dia a dia, dar um preço especial à audiência e monetizar de forma transparente, responde e mando a página com todos os detalhes:
-[PDF_BRIEFING]
+Se te fizer sentido mostrar a ferramenta no dia a dia, dar um preço especial à audiência e monetizar de forma transparente, responde e mando a página com todos os detalhes.
 
 Abraço,
 Filipe`,
@@ -105,7 +104,7 @@ Filipe`,
       EN: {
         channel: 'DM / email / WhatsApp',
         title: 'Touch 1 — main message',
-        note: 'Goal: a reply. The page link follows the language pill.',
+        note: 'Don’t send the link. Goal: a reply. The page goes in Touch 2.',
         body: `Hi [NOME], how are you?
 
 I’m Filipe, founder of the IGNITE AI app.
@@ -120,8 +119,7 @@ In the Creator Program we offer:
 • [REWARD] for every follower who subscribes to annual Premium with your code
 • Creator Group in the app (chat, feed of your logs and leaderboard) so your community stays with you inside the app
 
-If it makes sense to show a real tool in your day to day, give your audience a special price and monetize transparently, reply and I’ll send the page with all the details:
-[PDF_BRIEFING]
+If it makes sense to show a real tool in your day to day, give your audience a special price and monetize transparently, reply and I’ll send the page with all the details.
 
 Best,
 Filipe`,
@@ -129,7 +127,7 @@ Filipe`,
       ES: {
         channel: 'DM / email / WhatsApp',
         title: 'Toque 1 — mensaje principal',
-        note: 'Objetivo: respuesta. El link de la página sigue el idioma.',
+        note: 'No envíes el link. Objetivo: respuesta. La página va en el Toque 2.',
         body: `Hola [NOME], ¿qué tal?
 
 Soy Filipe, fundador de la app IGNITE AI.
@@ -144,8 +142,7 @@ En el Creator Program ofrecemos:
 • [REWARD] por cada seguidor que se suscriba al Premium anual con tu código
 • Creator Group en la app (chat, feed de tus logs y leaderboard) para que tu comunidad esté contigo dentro de la app
 
-Si te encaja mostrar una herramienta real en el día a día, dar un precio especial a la audiencia y monetizar de forma transparente, responde y te envío la página con todos los detalles:
-[PDF_BRIEFING]
+Si te encaja mostrar una herramienta real en el día a día, dar un precio especial a la audiencia y monetizar de forma transparente, responde y te envío la página con todos los detalles.
 
 Un abrazo,
 Filipe`,
@@ -175,8 +172,7 @@ No Creator Program oferecemos:
 • [REWARD] por cada seguidor que assine o Premium anual com o teu código
 • Creator Group na app (chat, feed dos teus logs e leaderboard) para a comunidade ficar contigo dentro da app
 
-Se te fizer sentido mostrar a ferramenta no dia a dia, dar um preço especial à audiência e monetizar de forma transparente, responde e mando a página com todos os detalhes:
-[PDF_BRIEFING]
+Se te fizer sentido mostrar a ferramenta no dia a dia, dar um preço especial à audiência e monetizar de forma transparente, responde e mando a página com todos os detalhes.
 
 Abraço,
 Filipe
@@ -202,8 +198,7 @@ In the Creator Program we offer:
 • [REWARD] for every follower who subscribes to annual Premium with your code
 • Creator Group in the app (chat, feed of your logs and leaderboard) so your community stays with you inside the app
 
-If it makes sense to show a real tool in your day to day, give your audience a special price and monetize transparently, reply and I’ll send the page with all the details:
-[PDF_BRIEFING]
+If it makes sense to show a real tool in your day to day, give your audience a special price and monetize transparently, reply and I’ll send the page with all the details.
 
 Best,
 Filipe
@@ -229,8 +224,7 @@ En el Creator Program ofrecemos:
 • [REWARD] por cada seguidor que se suscriba al Premium anual con tu código
 • Creator Group en la app (chat, feed de tus logs y leaderboard) para que tu comunidad esté contigo dentro de la app
 
-Si te encaja mostrar una herramienta real en el día a día, dar un precio especial a la audiencia y monetizar de forma transparente, responde y te envío la página con todos los detalles:
-[PDF_BRIEFING]
+Si te encaja mostrar una herramienta real en el día a día, dar un precio especial a la audiencia y monetizar de forma transparente, responde y te envío la página con todos los detalles.
 
 Un abrazo,
 Filipe
@@ -255,8 +249,7 @@ App de nutrição e fitness: foto da refeição → calorias, macros e ingredien
 
 Creator Program: Premium renovável · código teu com o plano anual mais barato · [REWARD]/assinatura anual · Creator Group na app.
 
-Se fizer sentido, responde e mando a página com os detalhes:
-[PDF_BRIEFING]
+Se fizer sentido, responde e mando a página com os detalhes.
 
 Abraço,
 Filipe`,
@@ -273,8 +266,7 @@ Nutrition and fitness app: snap a meal photo → calories, macros and ingredient
 
 Creator Program: renewable Premium · your code with the lowest annual price · [REWARD]/annual signup · Creator Group in the app.
 
-If it makes sense, reply and I’ll send the page with the details:
-[PDF_BRIEFING]
+If it makes sense, reply and I’ll send the page with the details.
 
 Best,
 Filipe`,
@@ -291,8 +283,7 @@ App de nutrición y fitness: foto de la comida → calorías, macros e ingredien
 
 Creator Program: Premium renovable · código tuyo con el precio anual más bajo · [REWARD]/suscripción anual · Creator Group en la app.
 
-Si te encaja, responde y te envío la página con los detalles:
-[PDF_BRIEFING]
+Si te encaja, responde y te envío la página con los detalles.
 
 Un abrazo,
 Filipe`,
