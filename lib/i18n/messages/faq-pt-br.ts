@@ -165,7 +165,8 @@ export const faqPtBr = {
         },
         {
           q: 'O que são Share Cards?',
-          a: 'Share Cards são imagens estilizadas de refeições, treinos ou badges de celebração para enviar a amigos ou publicar nas redes. Escolha um tema, gere o cartão e compartilhe pelo menu do dispositivo. Marque a gente no post para aparecer em destaque.',
+          a: 'Share Cards são imagens estilizadas de refeições, treinos ou badges de celebração para enviar a amigos ou publicar nas redes. Escolha um tema, gere o cartão e compartilhe pelo menu do dispositivo.',
+          bullets: ['Tag us to get featured 😊'],
         },
         {
           q: 'Posso deixar de compartilhar com alguém?',

@@ -48,6 +48,37 @@ function StoryFounderPhoto() {
   )
 }
 
+function isShareCardCta(block: string) {
+  return /tag us to get featured/i.test(block)
+}
+
+function StoryBodyBlock({
+  block,
+  index,
+  print,
+}: {
+  block: string
+  index: number
+  print?: boolean
+}) {
+  const cta = isShareCardCta(block)
+  return (
+    <p
+      className={cn(
+        'font-sans leading-snug',
+        cta
+          ? print
+            ? 'mt-auto pt-[3vh] text-[4.4vw] font-bold text-white sm:text-lg'
+            ? 'mt-auto pt-6 text-[16px] font-bold text-white sm:text-[17px]'
+          : print
+            ? 'font-sans text-[4.2vw] leading-snug text-white/90 sm:text-lg'
+            : 'text-[16px] text-white/90 sm:text-[17px]',
+      )}
+    >
+      {block}
+    </p>
+  )
+}
 function StoryFrame({
   slide,
   header,
@@ -56,9 +87,14 @@ function StoryFrame({
   header?: 'logo' | 'founder'
 }) {
   const research = slide.layout && slide.layout !== 'text'
+  const bodyBlocks = slide.blocks.filter((block) => !isShareCardCta(block))
+  const cta = slide.blocks.find((block) => isShareCardCta(block))
   return (
     <div
-      className="relative mx-auto flex aspect-[9/16] w-full max-w-[420px] flex-col justify-center overflow-hidden rounded-[28px] px-8 py-12 text-center shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
+      className={cn(
+        'relative mx-auto flex aspect-[9/16] w-full max-w-[420px] flex-col overflow-hidden rounded-[28px] px-8 py-12 text-center shadow-[0_24px_80px_rgba(0,0,0,0.35)]',
+        cta ? '' : 'justify-center',
+      )}
       style={{ background: APP_DARK_CANVAS }}
     >
       {header === 'founder' ? <StoryFounderPhoto /> : header === 'logo' ? <StoryLogo /> : null}
@@ -74,15 +110,13 @@ function StoryFrame({
           >
             {slide.title}
           </p>
-          <div className="mt-8 flex flex-col gap-6">
-            {slide.blocks.map((block, index) => (
-              <p
-                key={`${index}-${block.slice(0, 32)}`}
-                className="font-sans text-[16px] leading-snug text-white/90 sm:text-[17px]"
-              >
-                {block}
-              </p>
+          <div className="mt-8 flex min-h-0 flex-1 flex-col gap-6">
+            {bodyBlocks.map((block, index) => (
+              <StoryBodyBlock key={`${index}-${block.slice(0, 32)}`} block={block} index={index} />
             ))}
+            {cta ? (
+              <StoryBodyBlock block={cta} index={bodyBlocks.length} />
+            ) : null}
           </div>
         </>
       )}
@@ -173,17 +207,21 @@ async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') 
 
   ctx.font = `600 ${titleSize}px ${FONT_STACK}`
   const titleLines = wrapLines(ctx, slide.title, maxW)
+  const bodyBlocks = slide.blocks.filter((block) => !isShareCardCta(block))
+  const ctaBlock = slide.blocks.find((block) => isShareCardCta(block))
   ctx.font = `400 ${bodySize}px ${FONT_STACK}`
-  const blockLines = slide.blocks.map((block) => wrapLines(ctx, block, maxW))
+  const bodyLineGroups = bodyBlocks.map((block) => wrapLines(ctx, block, maxW))
+  ctx.font = `700 ${bodySize}px ${FONT_STACK}`
+  const ctaLines = ctaBlock ? wrapLines(ctx, ctaBlock, maxW) : []
 
   let contentH = titleLines.length * titleLh + titleGap
-  blockLines.forEach((lines, index) => {
+  bodyLineGroups.forEach((lines, index) => {
     contentH += lines.length * bodyLh
-    if (index < blockLines.length - 1) contentH += blockGap
+    if (index < bodyLineGroups.length - 1) contentH += blockGap
   })
   if (header) contentH += headerSize + logoGap
 
-  let y = Math.max(48, (EXPORT_H - contentH) / 2)
+  let y = Math.max(48, (EXPORT_H - contentH - (ctaBlock ? 180 : 0)) / 2)
   const cx = EXPORT_W / 2
 
   if (slide.layout && slide.layout !== 'text') {
@@ -227,13 +265,24 @@ async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') 
 
   ctx.fillStyle = 'rgba(255,255,255,0.9)'
   ctx.font = `400 ${bodySize}px ${FONT_STACK}`
-  blockLines.forEach((lines, index) => {
+  bodyLineGroups.forEach((lines, index) => {
     for (const line of lines) {
       ctx.fillText(line, cx, y)
       y += bodyLh
     }
-    if (index < blockLines.length - 1) y += blockGap
+    if (index < bodyLineGroups.length - 1) y += blockGap
   })
+
+  if (ctaBlock) {
+    ctx.fillStyle = '#ffffff'
+    ctx.font = `700 ${bodySize}px ${FONT_STACK}`
+    let ctaY = EXPORT_H - 64 * EXPORT_SCALE - ctaLines.length * bodyLh
+    if (ctaY < y + blockGap) ctaY = y + blockGap * 1.5
+    for (const line of ctaLines) {
+      ctx.fillText(line, cx, ctaY)
+      ctaY += bodyLh
+    }
+  }
 
   return new Promise<Blob>((resolve, reject) => {
     canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('png'))), 'image/png')
@@ -421,10 +470,10 @@ export default function IgStoriesAdminPage() {
         ) : null}
         <div className="h-screen w-screen max-w-none">
           <div
-            className="flex h-full w-full items-center justify-center px-8 text-center"
+            className="flex h-full w-full justify-center px-8 text-center"
             style={{ background: APP_DARK_CANVAS }}
           >
-            <div className="max-w-[520px]">
+            <div className="flex h-full max-w-[520px] w-full flex-col py-[8vh]">
               {header === 'founder' ? (
                 <img
                   src="/ceofounder.jpg"
@@ -445,15 +494,27 @@ export default function IgStoriesAdminPage() {
                   <p className="font-sans text-[8.2vw] font-semibold leading-tight tracking-tight text-white sm:text-4xl">
                     {slide.title}
                   </p>
-                  <div className="mt-[7vh] flex flex-col gap-[4.5vh]">
-                    {slide.blocks.map((block, index) => (
-                      <p
-                        key={`${index}-${block.slice(0, 32)}`}
-                        className="font-sans text-[4.2vw] leading-snug text-white/90 sm:text-lg"
-                      >
-                        {block}
-                      </p>
-                    ))}
+                  <div className="mt-[7vh] flex min-h-0 flex-1 flex-col gap-[4.5vh]">
+                    {slide.blocks
+                      .filter((block) => !isShareCardCta(block))
+                      .map((block, index) => (
+                        <StoryBodyBlock
+                          key={`${index}-${block.slice(0, 32)}`}
+                          block={block}
+                          index={index}
+                          print
+                        />
+                      ))}
+                    {slide.blocks
+                      .filter((block) => isShareCardCta(block))
+                      .map((block, index) => (
+                        <StoryBodyBlock
+                          key={`cta-${index}`}
+                          block={block}
+                          index={index}
+                          print
+                        />
+                      ))}
                   </div>
                 </>
               )}
