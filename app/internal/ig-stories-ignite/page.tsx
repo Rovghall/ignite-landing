@@ -45,6 +45,7 @@ function StoryBandingMask() {
 const EXPORT_W = 1080
 const EXPORT_H = 1920
 const EXPORT_SCALE = EXPORT_W / 420
+const COVER_SIZE = 1080
 const FONT_STACK =
   'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
 
@@ -352,6 +353,60 @@ async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') 
   })
 }
 
+async function renderHighlightCoverPng(label: string) {
+  const canvas = document.createElement('canvas')
+  canvas.width = COVER_SIZE
+  canvas.height = COVER_SIZE
+  const ctx = canvas.getContext('2d', { willReadFrequently: true })
+  if (!ctx) throw new Error('canvas')
+
+  fillAppDarkCanvas(ctx, COVER_SIZE, COVER_SIZE)
+
+  const cx = COVER_SIZE / 2
+  const logoSize = 390
+  const labelSize = 88
+  const gap = 32
+  const groupH = logoSize + gap + labelSize
+  const y = (COVER_SIZE - groupH) / 2
+
+  const logo = await loadImage('/ignite-logo.png')
+  if (logo) {
+    ctx.save()
+    ctx.globalCompositeOperation = 'screen'
+    ctx.drawImage(logo, cx - logoSize / 2, y, logoSize, logoSize)
+    ctx.restore()
+  }
+
+  ctx.fillStyle = '#ffffff'
+  ctx.textAlign = 'center'
+  ctx.textBaseline = 'top'
+  ctx.font = `700 ${labelSize}px ${FONT_STACK}`
+  ctx.fillText(label, cx, y + logoSize + gap)
+
+  return new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('png'))), 'image/png')
+  })
+}
+
+function FaqHighlightCoverPreview() {
+  return (
+    <div
+      className="relative h-[112px] w-[112px] overflow-hidden rounded-full shadow-[0_12px_32px_rgba(0,0,0,0.28)] ring-2 ring-zinc-200"
+      style={{ backgroundColor: '#0C0C12', backgroundImage: APP_DARK_CANVAS }}
+    >
+      <StoryBandingMask />
+      <div className="relative z-[1] flex h-full flex-col items-center justify-center">
+        <img
+          src="/ignite-logo.png"
+          alt=""
+          className="h-12 w-12 object-contain mix-blend-screen"
+        />
+        <p className="mt-1 text-[11px] font-bold tracking-[0.14em] text-white">FAQ</p>
+      </div>
+    </div>
+  )
+}
+
 function blobToDataUrl(blob: Blob) {
   return new Promise<string>((resolve, reject) => {
     const reader = new FileReader()
@@ -384,7 +439,10 @@ export default function IgStoriesAdminPage() {
   const [pngReady, setPngReady] = useState(false)
   const [downloadHref, setDownloadHref] = useState<string | null>(null)
   const [downloadName, setDownloadName] = useState('ignite-story.png')
+  const [coverHref, setCoverHref] = useState<string | null>(null)
+  const [coverReady, setCoverReady] = useState(false)
   const downloadRef = useRef<HTMLAnchorElement>(null)
+  const coverDownloadRef = useRef<HTMLAnchorElement>(null)
 
   const slides = IG_STORY_SLIDES[highlight][lang]
   const slide = slides[Math.min(slideIndex, slides.length - 1)] ?? slides[0]
@@ -420,6 +478,30 @@ export default function IgStoriesAdminPage() {
       cancelled = true
     }
   }, [session, highlight, lang, header, slide])
+
+  useEffect(() => {
+    if (!session || highlight !== 'faq') {
+      setCoverReady(false)
+      setCoverHref(null)
+      return
+    }
+    let cancelled = false
+    setCoverReady(false)
+    setCoverHref(null)
+    void renderHighlightCoverPng('FAQ')
+      .then((blob) => blobToDataUrl(blob))
+      .then((dataUrl) => {
+        if (cancelled) return
+        setCoverHref(dataUrl.replace(/^data:[^;]+/, 'data:application/octet-stream'))
+        setCoverReady(true)
+      })
+      .catch(() => {
+        if (!cancelled) setCoverReady(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [session, highlight])
 
   useEffect(() => {
     if (!supabase) {
@@ -463,6 +545,15 @@ export default function IgStoriesAdminPage() {
     setSaveHint('Guardado em Downloads. No iPhone, se não aparecer na galeria, está em Ficheiros.')
   }
 
+  function onSaveCover() {
+    if (!coverReady || !coverHref || !coverDownloadRef.current) {
+      setSaveHint('Ainda a preparar a capa. Toca outra vez daqui a um segundo.')
+      return
+    }
+    coverDownloadRef.current.click()
+    setSaveHint('Capa guardada. No IG: Destaque FAQ → Editar destaque → Editar capa → esta imagem.')
+  }
+
   const downloadLink = (
     <a
       ref={downloadRef}
@@ -473,6 +564,19 @@ export default function IgStoriesAdminPage() {
       aria-hidden
     >
       png
+    </a>
+  )
+
+  const coverDownloadLink = (
+    <a
+      ref={coverDownloadRef}
+      href={coverHref ?? undefined}
+      download="ignite-faq-highlight-cover.png"
+      className="absolute -left-[9999px] top-0 h-px w-px overflow-hidden"
+      tabIndex={-1}
+      aria-hidden
+    >
+      cover
     </a>
   )
 
@@ -592,6 +696,7 @@ export default function IgStoriesAdminPage() {
   return (
     <main className={cn(PAGE_BG, 'px-4 py-8 sm:px-6')}>
       {downloadLink}
+      {coverDownloadLink}
       <div className="mx-auto max-w-3xl">
         <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
           <div>
@@ -631,6 +736,27 @@ export default function IgStoriesAdminPage() {
             </button>
           ))}
         </div>
+
+        {highlight === 'faq' ? (
+          <div className="mb-5 flex items-center gap-4 rounded-2xl border border-border bg-card px-4 py-3">
+            <FaqHighlightCoverPreview />
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-semibold text-zinc-900">Capa do destaque FAQ</p>
+              <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
+                PNG 1080×1080, feito para o círculo do Instagram. Não uses um slide de texto como
+                capa.
+              </p>
+              <button
+                type="button"
+                disabled={!coverReady}
+                onClick={onSaveCover}
+                className="mt-2 rounded-full bg-foreground px-3.5 py-1.5 text-xs font-bold text-background disabled:opacity-50"
+              >
+                {coverReady ? 'Guardar capa' : 'A preparar…'}
+              </button>
+            </div>
+          </div>
+        ) : null}
 
         <div className="mb-5 flex flex-wrap items-center gap-1.5">
           {(['EN', 'PT'] as const).map((item) => (
