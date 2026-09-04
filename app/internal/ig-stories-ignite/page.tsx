@@ -376,11 +376,12 @@ const HIGHLIGHT_COVERS: Partial<
   'share-cards': {
     file: 'ignite-share-cards-highlight-cover.png',
     title: 'Capa do destaque Share cards',
-    hint: 'Ícone de partilha, estilo Apple. Fundo igual ao das stories.',
+    hint: 'Cartão com foto, único. Fundo igual ao das stories.',
     svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-  <path d="M8.5 10.5H7.25A2 2 0 0 0 5.25 12.5v5A2 2 0 0 0 7.25 19.5h9.5a2 2 0 0 0 2-2v-5a2 2 0 0 0-2-2H15.5" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M12 15.25V4.75" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
-  <path d="M8.75 8 12 4.75 15.25 8" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="8.55" y="3.15" width="11.05" height="14.7" rx="2.35" transform="rotate(12 14.07 10.5)" stroke="#fff" stroke-width="1.65" stroke-linejoin="round"/>
+  <rect x="4.15" y="5.15" width="12.7" height="16.45" rx="2.35" stroke="#fff" stroke-width="1.65" stroke-linejoin="round"/>
+  <rect x="5.95" y="6.95" width="9.1" height="8.55" rx="1.35" stroke="#fff" stroke-width="1.55"/>
+  <path d="M12 17.05l.42 1.12 1.13.42-1.13.42L12 20.13l-.42-1.12-1.13-.42 1.13-.42z" fill="#fff"/>
 </svg>`,
   },
 }
