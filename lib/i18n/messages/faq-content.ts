@@ -167,7 +167,7 @@ export const faqEn = {
         {
           q: 'What are Share Cards?',
           a: 'Share Cards are styled snapshots of meals, workouts, and celebration badges you can send to friends or post on social. Pick a theme, generate the card, then share from your device sheet.',
-          bullets: ['Tag us to get featured 😊'],
+          bullets: ['Tag us to get featured 🔥'],
         },
         {
           q: 'Can I stop sharing with someone?',
@@ -363,7 +363,7 @@ export const faqPt = {
         {
           q: 'O que são Share Cards?',
           a: 'Share Cards são imagens estilizadas de refeições, treinos ou badges de celebração para enviar a amigos ou publicar nas redes. Escolhe um tema, gera o cartão e partilha pelo menu do dispositivo.',
-          bullets: ['Tag us to get featured 😊'],
+          bullets: ['Tag us to get featured 🔥'],
         },
         {
           q: 'Posso deixar de partilhar com alguém?',
