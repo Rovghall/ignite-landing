@@ -353,54 +353,360 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
   faq: {
     EN: [
       {
-        id: 'who',
-        title: 'Who is IGNITE for?',
+        id: 'cancel',
+        title: 'How do I cancel?',
         ready: true,
         blocks: [
-          'Anyone with a weight goal (lose, maintain, or gain) who wants a calorie and macro estimate of what they eat.',
-          'Plus workouts and Health sync, in one app.',
+          'Cancel in your store, not inside IGNITE.',
+          'iPhone: Settings → your name → Subscriptions → IGNITE AI → Cancel.',
+          'Android: Google Play → Payments & subscriptions → Subscriptions → IGNITE AI → Cancel.',
+          'Do it before the trial or renewal date so you are not charged again.',
         ],
       },
       {
-        id: 'medical',
-        title: 'Is this medical advice?',
+        id: 'refund',
+        title: 'I want a refund',
         ready: true,
         blocks: [
-          'No. IGNITE is a wellness tool.',
-          'Estimates, not a clinical measurement. Talk to a professional if you have a medical condition.',
+          'Apple or Google handle refunds, not us.',
+          'App Store: request it from Apple. Play Store: request it from Google.',
+          'Need the right page? Email support@ignitehub.app.',
         ],
       },
       {
-        id: 'platforms',
-        title: 'iOS and Android?',
+        id: 'trial-charge',
+        title: 'Charged after the trial?',
         ready: true,
-        blocks: ['Yes. Both.', 'ignitehub.app'],
+        blocks: [
+          'Yes, if you do not cancel before the trial ends, it renews at the price shown at signup.',
+          'Apple and Google send their own reminders. Manage it in store subscriptions.',
+        ],
+      },
+      {
+        id: 'cross-store',
+        title: 'iPhone vs Android',
+        ready: true,
+        blocks: [
+          'A subscription on Apple does not move to Google, and the reverse.',
+          'You need an active plan on the store of the phone you are using.',
+          'Switching devices? Email support@ignitehub.app.',
+        ],
+      },
+      {
+        id: 'scan-wrong',
+        title: 'The AI got my meal wrong',
+        ready: true,
+        blocks: [
+          'Open it from Recently uploaded.',
+          'Edit ingredients, portions, or the total. Then save.',
+          'That is how IGNITE stays accurate. You can fix the plate.',
+        ],
+      },
+      {
+        id: 'accuracy',
+        title: 'How accurate are calories?',
+        ready: true,
+        blocks: [
+          'IGNITE is built to identify what is on the plate visually.',
+          'Macros follow the weight of each ingredient. That weight is an estimate.',
+          'If you weigh food, adjust the grams. The edit is the point.',
+        ],
+      },
+      {
+        id: 'no-photo',
+        title: 'Can I log without a photo?',
+        ready: true,
+        blocks: [
+          'Yes. Quick log: type it, use voice, or scan a barcode or nutrition label.',
+          'Photo is optional.',
+        ],
+      },
+      {
+        id: 'edit-meal',
+        title: 'Can I change a meal after save?',
+        ready: true,
+        blocks: [
+          'Yes. Open the logged meal and edit foods, portions, or totals.',
+          'Your day updates with the new calories and macros.',
+        ],
+      },
+      {
+        id: 'save-meal',
+        title: 'Save a meal to log again?',
+        ready: true,
+        blocks: [
+          'Open a logged meal and tap save. It goes to Diet → Saved.',
+          'Same food later: open Saved and tap Log. No new photo needed.',
+        ],
+      },
+      {
+        id: 'log-workout',
+        title: 'How do I log a workout?',
+        ready: true,
+        blocks: [
+          'On home, tap + and choose Log workout.',
+          'Pick the option that fits. Burn is estimated from your profile.',
+        ],
+      },
+      {
+        id: 'workout-goal',
+        title: 'Do workouts change my calorie goal?',
+        ready: true,
+        blocks: [
+          'Logged activity and Health sync help you see the week. Treat the target as guidance.',
+          'If training load changes, adjust the goal in settings.',
+        ],
+      },
+      {
+        id: 'edit-workout',
+        title: 'Edit or delete a workout?',
+        ready: true,
+        blocks: [
+          'Yes. Open it from history and edit or remove it so your stats stay right.',
+        ],
+      },
+      {
+        id: 'health-missing',
+        title: 'Steps or Health data missing?',
+        ready: true,
+        blocks: [
+          'Turn on Health permissions for IGNITE AI. Apple Health on iPhone, Health Connect on Android.',
+          'Allow steps and activity. Open IGNITE once so it can sync.',
+          'Still stuck? Revoke permissions, grant them again, reopen the app.',
+        ],
+      },
+      {
+        id: 'health-data',
+        title: 'What Health data does IGNITE read?',
+        ready: true,
+        blocks: [
+          'With your permission: steps, average heart rate, blood oxygen, and sleep including stages.',
+          'You control categories in Apple Health or Health Connect. Revoke anytime in system settings.',
+        ],
+      },
+      {
+        id: 'health-mismatch',
+        title: 'Numbers don’t match my watch',
+        ready: true,
+        blocks: [
+          'Phone and watch can be different sources. Sync is not always instant.',
+          'Set the primary source in Health / Health Connect, then refresh or reopen IGNITE.',
+        ],
+      },
+      {
+        id: 'friends',
+        title: 'How do Friends and groups work?',
+        ready: true,
+        blocks: [
+          'Invite people from Friends. Once connected, share meals, workouts, or wins you choose to post.',
+          'You control what is visible.',
+        ],
+      },
+      {
+        id: 'share-cards',
+        title: 'What are Share Cards?',
+        ready: true,
+        blocks: [
+          'Styled snapshots of meals, streaks, or wins. Ready for friends or Instagram.',
+          'Pick a theme, generate the card, share from your phone.',
+        ],
+      },
+      {
+        id: 'stop-share',
+        title: 'Stop sharing with someone?',
+        ready: true,
+        blocks: [
+          'Yes. Remove them from friends or leave the group in Friends settings.',
+          'Future posts will not go to them.',
+        ],
+      },
+      {
+        id: 'more',
+        title: 'Still stuck?',
+        ready: true,
+        blocks: [
+          'support@ignitehub.app',
+          'Or DM @rovghall. Messages get read.',
+        ],
       },
     ],
     PT: [
       {
-        id: 'who',
-        title: 'Para quem é a IGNITE?',
+        id: 'cancel',
+        title: 'Como cancelo a subscrição?',
         ready: true,
         blocks: [
-          'Quem tem um objetivo de peso (perder, manter ou ganhar) e quer uma estimativa de calorias e macros do que come.',
-          'Mais treinos e Health sync, numa só app.',
+          'Cancela na loja do telemóvel, não dentro da IGNITE.',
+          'iPhone: Definições → o teu nome → Subscrições → IGNITE AI → Cancelar.',
+          'Android: Google Play → Pagamentos e subscrições → Subscrições → IGNITE AI → Cancelar.',
+          'Faz isto antes do fim do teste ou da renovação para não seres cobrado outra vez.',
         ],
       },
       {
-        id: 'medical',
-        title: 'Isto é conselho médico?',
+        id: 'refund',
+        title: 'Quero um reembolso. Como peço?',
         ready: true,
         blocks: [
-          'Não. A IGNITE é uma ferramenta de wellness.',
-          'Estimativas, não uma medição clínica. Fala com um profissional se tiveres uma condição médica.',
+          'Quem trata do reembolso é a Apple ou a Google, não nós.',
+          'App Store: pede à Apple. Play Store: pede à Google.',
+          'Não encontras a página? Escreve para support@ignitehub.app.',
         ],
       },
       {
-        id: 'platforms',
-        title: 'iOS e Android?',
+        id: 'trial-charge',
+        title: 'Vou ser cobrado depois do teste?',
         ready: true,
-        blocks: ['Sim. Os dois.', 'ignitehub.app'],
+        blocks: [
+          'Sim, se não cancelares antes do fim do teste, renova ao preço que viste no registo.',
+          'A Apple e a Google enviam os avisos deles. Gere nas subscrições da loja.',
+        ],
+      },
+      {
+        id: 'cross-store',
+        title: 'Subscrevi no iPhone, uso Android',
+        ready: true,
+        blocks: [
+          'A subscrição da Apple não passa para a Google, nem o contrário.',
+          'Precisas de um plano ativo na loja do telemóvel que estás a usar.',
+          'A mudar de telemóvel? Escreve para support@ignitehub.app.',
+        ],
+      },
+      {
+        id: 'scan-wrong',
+        title: 'A IA leu mal a minha refeição',
+        ready: true,
+        blocks: [
+          'Abre a refeição em Recently uploaded.',
+          'Edita ingredientes, porções ou o total. Depois grava.',
+          'Assim a IGNITE fica certa. Tu corriges o prato.',
+        ],
+      },
+      {
+        id: 'accuracy',
+        title: 'Quão precisas são as calorias?',
+        ready: true,
+        blocks: [
+          'A IGNITE é feita para identificar o que está no prato.',
+          'As macros seguem o peso de cada ingrediente. Esse peso é uma estimativa.',
+          'Se pesas a comida, ajusta os gramas. Editar é o ponto.',
+        ],
+      },
+      {
+        id: 'no-photo',
+        title: 'Posso registar sem fotografia?',
+        ready: true,
+        blocks: [
+          'Sim. No Quick log: escreves, usas a voz, ou lês código de barras / rótulo.',
+          'A foto é opcional.',
+        ],
+      },
+      {
+        id: 'edit-meal',
+        title: 'Posso alterar depois de guardar?',
+        ready: true,
+        blocks: [
+          'Sim. Abre a refeição e edita alimentos, porções ou totais.',
+          'O dia atualiza com as novas calorias e macros.',
+        ],
+      },
+      {
+        id: 'save-meal',
+        title: 'Guardar para logar outra vez?',
+        ready: true,
+        blocks: [
+          'Abre a refeição e toca em guardar. Fica em Diet → Saved.',
+          'A mesma comida mais tarde: Saved → Log. Sem foto nova.',
+        ],
+      },
+      {
+        id: 'log-workout',
+        title: 'Como registo um treino?',
+        ready: true,
+        blocks: [
+          'Na home, toca em + e escolhe Log workout.',
+          'Escolhe a opção que te serve. O gasto é estimado a partir do teu perfil.',
+        ],
+      },
+      {
+        id: 'workout-goal',
+        title: 'Os treinos mudam a meta de calorias?',
+        ready: true,
+        blocks: [
+          'O que registas e o Health ajudam a ver a semana. A meta é orientação.',
+          'Se a carga de treino mudar, ajusta nas definições.',
+        ],
+      },
+      {
+        id: 'edit-workout',
+        title: 'Posso editar ou apagar um treino?',
+        ready: true,
+        blocks: [
+          'Sim. Abre no histórico e edita ou remove para as estatísticas ficarem certas.',
+        ],
+      },
+      {
+        id: 'health-missing',
+        title: 'Passos ou Saúde não aparecem',
+        ready: true,
+        blocks: [
+          'Liga as permissões de Saúde para o IGNITE AI. Apple Health no iPhone, Health Connect no Android.',
+          'Autoriza passos e atividade. Abre a IGNITE uma vez para sincronizar.',
+          'Ainda falha? Revoga, volta a autorizar, reabre a app.',
+        ],
+      },
+      {
+        id: 'health-data',
+        title: 'Que dados o IGNITE AI lê?',
+        ready: true,
+        blocks: [
+          'Com a tua permissão: passos, frequência cardíaca média, oxigénio no sangue, e sono com fases.',
+          'Controlas as categorias no Apple Health ou Health Connect. Podes revogar nas definições do sistema.',
+        ],
+      },
+      {
+        id: 'health-mismatch',
+        title: 'Os números não batem com o relógio',
+        ready: true,
+        blocks: [
+          'Telemóvel e relógio podem ser fontes diferentes. A sync nem sempre é imediata.',
+          'Define a fonte principal no Health / Health Connect, atualiza ou reabre a IGNITE.',
+        ],
+      },
+      {
+        id: 'friends',
+        title: 'Como funcionam Amigos e grupos?',
+        ready: true,
+        blocks: [
+          'Convida em Amigos. Depois de ligados, partilhas refeições, treinos ou wins que escolheres.',
+          'Tu decides o que fica visível.',
+        ],
+      },
+      {
+        id: 'share-cards',
+        title: 'O que são Share Cards?',
+        ready: true,
+        blocks: [
+          'Imagens de refeições, streaks ou conquistas, prontas para amigos ou Instagram.',
+          'Escolhe o tema, gera o card, partilha pelo telemóvel.',
+        ],
+      },
+      {
+        id: 'stop-share',
+        title: 'Deixar de partilhar com alguém?',
+        ready: true,
+        blocks: [
+          'Sim. Remove a pessoa dos amigos ou sai do grupo nas definições de Amigos.',
+          'As publicações seguintes não lhes chegam.',
+        ],
+      },
+      {
+        id: 'more',
+        title: 'Ainda precisas de ajuda?',
+        ready: true,
+        blocks: [
+          'support@ignitehub.app',
+          'Ou DM a @rovghall. As mensagens são lidas.',
+        ],
       },
     ],
   },
