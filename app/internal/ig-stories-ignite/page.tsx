@@ -354,7 +354,10 @@ async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') 
 }
 
 const HIGHLIGHT_COVERS: Partial<
-  Record<IgHighlightId, { file: string; title: string; hint: string; svg: string }>
+  Record<
+    IgHighlightId,
+    { file: string; title: string; hint: string; svg?: string; image?: string }
+  >
 > = {
   faq: {
     file: 'ignite-faq-highlight-cover.png',
@@ -367,15 +370,12 @@ const HIGHLIGHT_COVERS: Partial<
   'whos-ignite': {
     file: 'ignite-whos-ignite-highlight-cover.png',
     title: "Capa do destaque Who's IGNITE?",
-    hint: 'Ícone de pessoa, estilo Apple. Fundo igual ao das stories.',
-    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
-  <circle cx="12" cy="8" r="3.35" stroke="#fff" stroke-width="1.7"/>
-  <path d="M5.15 19.5c.95-3.45 3.45-5.2 6.85-5.2s5.9 1.75 6.85 5.2" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
-</svg>`,
+    hint: 'Logo IGNITE. Fundo igual ao das stories.',
+    image: '/ignite-logo.png',
   },
 }
 
-async function renderHighlightCoverPng(svg: string) {
+async function renderHighlightCoverPng(cover: { svg?: string; image?: string }) {
   const canvas = document.createElement('canvas')
   canvas.width = COVER_SIZE
   canvas.height = COVER_SIZE
@@ -384,15 +384,26 @@ async function renderHighlightCoverPng(svg: string) {
 
   fillAppDarkCanvas(ctx, COVER_SIZE, COVER_SIZE)
 
-  const icon = await new Promise<HTMLImageElement | null>((resolve) => {
-    const img = new Image()
-    img.onload = () => resolve(img)
-    img.onerror = () => resolve(null)
-    img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
-  })
-  if (icon) {
-    const size = 460
-    ctx.drawImage(icon, (COVER_SIZE - size) / 2, (COVER_SIZE - size) / 2 + 8, size, size)
+  if (cover.image) {
+    const logo = await loadImage(cover.image)
+    if (logo) {
+      const size = 520
+      ctx.save()
+      ctx.globalCompositeOperation = 'screen'
+      ctx.drawImage(logo, (COVER_SIZE - size) / 2, (COVER_SIZE - size) / 2, size, size)
+      ctx.restore()
+    }
+  } else if (cover.svg) {
+    const icon = await new Promise<HTMLImageElement | null>((resolve) => {
+      const img = new Image()
+      img.onload = () => resolve(img)
+      img.onerror = () => resolve(null)
+      img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(cover.svg!)}`
+    })
+    if (icon) {
+      const size = 460
+      ctx.drawImage(icon, (COVER_SIZE - size) / 2, (COVER_SIZE - size) / 2 + 8, size, size)
+    }
   }
 
   return new Promise<Blob>((resolve, reject) => {
@@ -400,18 +411,26 @@ async function renderHighlightCoverPng(svg: string) {
   })
 }
 
-function HighlightCoverPreview({ svg }: { svg: string }) {
+function HighlightCoverPreview({ cover }: { cover: { svg?: string; image?: string } }) {
   return (
     <div
       className="relative flex h-[112px] w-[112px] items-center justify-center overflow-hidden rounded-full ring-[3px] ring-zinc-500/70"
       style={{ backgroundColor: '#0C0C12', backgroundImage: APP_DARK_CANVAS }}
     >
       <StoryBandingMask />
-      <img
-        src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`}
-        alt=""
-        className="relative z-[1] h-[52px] w-[52px]"
-      />
+      {cover.image ? (
+        <img
+          src={cover.image}
+          alt=""
+          className="relative z-[1] h-[58px] w-[58px] object-contain mix-blend-screen"
+        />
+      ) : cover.svg ? (
+        <img
+          src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(cover.svg)}`}
+          alt=""
+          className="relative z-[1] h-[52px] w-[52px]"
+        />
+      ) : null}
     </div>
   )
 }
@@ -498,7 +517,7 @@ export default function IgStoriesAdminPage() {
     let cancelled = false
     setCoverReady(false)
     setCoverHref(null)
-    void renderHighlightCoverPng(cover.svg)
+    void renderHighlightCoverPng(cover)
       .then((blob) => blobToDataUrl(blob))
       .then((dataUrl) => {
         if (cancelled) return
@@ -749,7 +768,7 @@ export default function IgStoriesAdminPage() {
 
         {cover ? (
           <div className="mb-5 flex items-center gap-4 rounded-2xl border border-border bg-card px-4 py-3">
-            <HighlightCoverPreview svg={cover.svg} />
+            <HighlightCoverPreview cover={cover} />
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-zinc-900">{cover.title}</p>
               <p className="mt-0.5 text-xs leading-snug text-muted-foreground">{cover.hint}</p>
