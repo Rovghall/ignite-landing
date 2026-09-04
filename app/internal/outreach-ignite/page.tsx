@@ -65,7 +65,7 @@ type FormState = {
 }
 
 const PAGE_BG =
-  'min-h-screen bg-[radial-gradient(1200px_600px_at_10%_-10%,#fff7ed,transparent),linear-gradient(#fafafa,#ffffff)]'
+  'min-h-screen bg-[radial-gradient(900px_480px_at_0%_0%,rgba(201,162,39,0.08),transparent_55%),linear-gradient(180deg,#f6f4ef_0%,#faf9f6_40%,#ffffff_100%)]'
 
 const STATUS_LABELS: Record<OutreachStatus, string> = {
   to_contact: 'A contactar',
@@ -304,15 +304,15 @@ function initials(name: string): string {
 
 function statusBadge(status: OutreachStatus): string {
   const base =
-    'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide'
-  if (status === 'contracted') return `${base} bg-violet-100/80 text-violet-800 ring-1 ring-violet-200/70`
-  if (status === 'accepted') return `${base} bg-emerald-100/80 text-emerald-800 ring-1 ring-emerald-200/70`
-  if (status === 'in_talk') return `${base} bg-sky-100/80 text-sky-800 ring-1 ring-sky-200/70`
-  if (status === 'contacted') return `${base} bg-amber-100/80 text-amber-800 ring-1 ring-amber-200/70`
-  if (status === 'no_reply') return `${base} bg-orange-100/80 text-orange-800 ring-1 ring-orange-200/70`
+    'inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em]'
+  if (status === 'contracted') return `${base} bg-[#efe8ff] text-[#5b4a8a]`
+  if (status === 'accepted') return `${base} bg-[#e8f4ea] text-[#2f6b3c]`
+  if (status === 'in_talk') return `${base} bg-[#e8f1f7] text-[#355f78]`
+  if (status === 'contacted') return `${base} bg-[#f4ead6] text-[#7a5a28]`
+  if (status === 'no_reply') return `${base} bg-[#f6e6dc] text-[#8a4b32]`
   if (status === 'rejected' || status === 'not_a_fit')
-    return `${base} bg-red-50 text-red-700 ring-1 ring-red-200/70`
-  return `${base} bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200/80`
+    return `${base} bg-[#f7e8e8] text-[#8a3d3d]`
+  return `${base} bg-zinc-100 text-zinc-500`
 }
 
 function applicationBadge(status: OutreachRow['creator_application_status']): {
@@ -320,32 +320,34 @@ function applicationBadge(status: OutreachRow['creator_application_status']): {
   className: string
 } | null {
   const base =
-    'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide'
+    'inline-flex items-center rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em]'
   if (status === 'pending')
-    return { label: 'Candidatou-se', className: `${base} bg-blue-100/80 text-blue-800 ring-1 ring-blue-200/70` }
+    return { label: 'Candidatou-se', className: `${base} bg-[#e8eef6] text-[#3d5878]` }
   if (status === 'approved')
-    return {
-      label: 'Candidatura aprovada',
-      className: `${base} bg-emerald-100/80 text-emerald-800 ring-1 ring-emerald-200/70`,
-    }
+    return { label: 'Aprovada', className: `${base} bg-[#e8f4ea] text-[#2f6b3c]` }
   if (status === 'rejected')
-    return {
-      label: 'Candidatura rejeitada',
-      className: `${base} bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200/80`,
-    }
+    return { label: 'Rejeitada', className: `${base} bg-zinc-100 text-zinc-500` }
   return null
+}
+
+function Avatar({ name }: { name: string }) {
+  return (
+    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(160deg,#1c1917_0%,#3f3a32_100%)] text-[12px] font-semibold tracking-[0.08em] text-[#f3ead2] shadow-[0_8px_18px_rgba(28,25,23,0.18)] ring-1 ring-black/10">
+      {initials(name)}
+    </div>
+  )
 }
 
 function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }) {
   const app = applicationBadge(row.creator_application_status)
   const handle = row.creator_primary_handle?.replace(/^@/, '') || row.ig_handle
   return (
-    <div className="flex items-start gap-3">
-      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-[11px] font-bold tracking-wide text-zinc-600 ring-1 ring-zinc-200/80">
-        {initials(row.display_name || row.ig_handle || '?')}
-      </div>
+    <div className="flex items-start gap-3.5">
+      <Avatar name={row.display_name || row.ig_handle || '?'} />
       <div className="min-w-0">
-        <p className="font-semibold tracking-tight text-foreground">{row.display_name || '—'}</p>
+        <p className="font-display text-[16px] font-semibold tracking-tight text-zinc-900">
+          {row.display_name || '—'}
+        </p>
         <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
           {extra}
           {app ? (
@@ -358,15 +360,14 @@ function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }
           ) : null}
         </div>
         {row.has_creator_application ? (
-          <p className="mt-1 text-[11px] text-muted-foreground">
-            Match{handle ? ` · @${handle}` : ''}
+          <a
+            href="/internal/creator-program-ignite"
+            className="mt-2 inline-flex items-center gap-1.5 rounded-full bg-[#f4efe3] px-2.5 py-1 text-[11px] font-medium text-zinc-700 ring-1 ring-[#e6dcc4] transition-colors hover:bg-[#efe7d4]"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#c9a227]" />
+            Handle match {handle ? `· @${handle}` : ''}
             {row.creator_applied_at ? ` · ${shortDate(row.creator_applied_at)}` : ''}
-          </p>
-        ) : null}
-        {row.notes ? (
-          <p className="mt-1 line-clamp-2 max-w-[240px] text-[11px] leading-snug text-muted-foreground">
-            {row.notes}
-          </p>
+          </a>
         ) : null}
       </div>
     </div>
@@ -378,20 +379,63 @@ function HandleChips({ row }: { row: OutreachRow }) {
   if (row.ig_handle) chips.push({ label: 'IG', value: `@${row.ig_handle}` })
   if (row.tiktok_handle) chips.push({ label: 'TT', value: `@${row.tiktok_handle}` })
   if (row.youtube_handle) chips.push({ label: 'YT', value: row.youtube_handle })
-  if (chips.length === 0) return <span className="text-muted-foreground">—</span>
+  if (chips.length === 0) return null
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-wrap gap-1.5">
       {chips.map((chip) => (
         <span
           key={`${chip.label}-${chip.value}`}
-          className="inline-flex w-fit items-center gap-1 rounded-full bg-muted/50 px-2 py-0.5 text-[11px] font-medium text-foreground/80"
+          className="inline-flex items-center gap-1.5 rounded-full bg-[#f7f4ee] px-2.5 py-1 text-[11px] font-medium text-zinc-700"
         >
-          <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+          <span className="text-[9px] font-bold uppercase tracking-[0.12em] text-[#b08d2a]">
             {chip.label}
           </span>
           {chip.value}
         </span>
       ))}
+    </div>
+  )
+}
+
+function MetaLine({ row, vip }: { row: OutreachRow; vip?: ReturnType<typeof vipWindow> }) {
+  const parts = [
+    row.niche || null,
+    `IG ${formatFollowers(row.followers_ig)}`,
+    row.followers_tiktok != null ? `TT ${formatFollowers(row.followers_tiktok)}` : null,
+    row.followers_youtube != null ? `YT ${formatFollowers(row.followers_youtube)}` : null,
+    row.last_contacted_at ? `Último contacto ${shortDate(row.last_contacted_at)}` : null,
+  ].filter(Boolean)
+  return (
+    <div className="mt-3 space-y-2">
+      <HandleChips row={row} />
+      <p className="text-[12px] text-zinc-500">{parts.join('  ·  ')}</p>
+      {row.notes ? (
+        <p className="line-clamp-1 text-[12px] italic text-zinc-400">{row.notes}</p>
+      ) : null}
+      {vip?.start && vip.end ? (
+        <div className="pt-1">
+          <div className="mb-1.5 flex items-center justify-between text-[11px]">
+            <span className="text-zinc-500">
+              VIP {shortDate(vip.start.toISOString())} → {shortDate(vip.end.toISOString())}
+            </span>
+            <span className={vip.expired ? 'font-semibold text-red-700' : 'font-semibold text-emerald-800'}>
+              {vip.daysLeft == null
+                ? '—'
+                : vip.expired
+                  ? `Expirado (${Math.abs(vip.daysLeft)}d)`
+                  : `${vip.daysLeft} dias`}
+            </span>
+          </div>
+          <div className="h-1.5 overflow-hidden rounded-full bg-zinc-100">
+            <div
+              className={cn('h-full rounded-full', vip.expired ? 'bg-red-400' : 'bg-[#c9a227]')}
+              style={{
+                width: `${Math.min(100, Math.max(4, ((VIP_DAYS - (vip.daysLeft ?? 0)) / VIP_DAYS) * 100))}%`,
+              }}
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   )
 }
@@ -456,14 +500,88 @@ function formToPayload(form: FormState) {
 
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-4 shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
-      <p className="text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+    <div className="rounded-2xl border border-zinc-200/70 bg-white/80 p-4 shadow-[0_10px_30px_rgba(28,25,23,0.04)] backdrop-blur-sm">
+      <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-zinc-400">
         {label}
       </p>
-      <p className="mt-1.5 font-display text-xl font-bold tracking-tight text-foreground sm:text-2xl">
+      <p className="mt-2 font-display text-2xl font-semibold tracking-tight text-zinc-900">
         {value}
       </p>
     </div>
+  )
+}
+
+function GhostButton({
+  children,
+  onClick,
+  tone = 'neutral',
+  title,
+}: {
+  children: ReactNode
+  onClick: () => void
+  tone?: 'neutral' | 'primary' | 'danger' | 'gold'
+  title?: string
+}) {
+  return (
+    <button
+      type="button"
+      title={title}
+      onClick={onClick}
+      className={cn(
+        'rounded-full px-3 py-1.5 text-[11px] font-semibold tracking-wide transition-colors',
+        tone === 'neutral' && 'text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800',
+        tone === 'primary' && 'bg-zinc-900 text-white hover:bg-zinc-800',
+        tone === 'gold' && 'bg-[#1c1917] text-[#f3ead2] hover:bg-black',
+        tone === 'danger' && 'text-red-600 hover:bg-red-50',
+      )}
+    >
+      {children}
+    </button>
+  )
+}
+
+function ContactCard({
+  row,
+  variant = 'pipeline',
+  onEdit,
+  onContacted,
+  onContracted,
+  onDelete,
+}: {
+  row: OutreachRow
+  variant?: 'pipeline' | 'contracted'
+  onEdit: () => void
+  onContacted?: () => void
+  onContracted?: () => void
+  onDelete: () => void
+}) {
+  const vip = variant === 'contracted' ? vipWindow(row.contracted_at) : undefined
+  return (
+    <article className="rounded-2xl border border-zinc-200/80 bg-white/90 p-4 shadow-[0_12px_36px_rgba(28,25,23,0.045)] transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_44px_rgba(28,25,23,0.08)] sm:p-5">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+        <ContactIdentity
+          row={row}
+          extra={<span className={statusBadge(row.status)}>{STATUS_LABELS[row.status]}</span>}
+        />
+        <div className="flex flex-wrap items-center gap-0.5 sm:justify-end">
+          <GhostButton onClick={onEdit}>Editar</GhostButton>
+          {onContacted ? (
+            <GhostButton onClick={onContacted} tone="primary" title="Marcar contactado + data de hoje">
+              Contactei
+            </GhostButton>
+          ) : null}
+          {onContracted ? (
+            <GhostButton onClick={onContracted} tone="gold" title="Marcar contratado e iniciar VIP 90 dias">
+              Contratado
+            </GhostButton>
+          ) : null}
+          <GhostButton onClick={onDelete} tone="danger">
+            Apagar
+          </GhostButton>
+        </div>
+      </div>
+      <MetaLine row={row} vip={vip} />
+    </article>
   )
 }
 
@@ -485,7 +603,7 @@ function Field({
 }
 
 const inputClass =
-  'rounded-xl border border-border bg-muted/40 px-3 py-2.5 text-base font-normal outline-none focus:border-foreground/30'
+  'rounded-xl border border-zinc-200 bg-white px-3 py-2.5 text-base font-normal text-zinc-900 outline-none ring-0 transition focus:border-[#c9a227]/50 focus:shadow-[0_0_0_3px_rgba(201,162,39,0.12)]'
 
 export default function OutreachAdminPage() {
   const supabase = useMemo(() => {
@@ -922,15 +1040,16 @@ export default function OutreachAdminPage() {
   return (
     <main className={cn(PAGE_BG, 'px-4 py-8 sm:px-6')}>
       <div className="mx-auto max-w-6xl">
-        <header className="mb-6 flex flex-wrap items-start justify-between gap-4">
+        <header className="mb-8 flex flex-wrap items-start justify-between gap-4">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[#b08d2a]">
               IGNITE · Interno
             </p>
-            <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight">Outreach</h1>
-            <p className="mt-1 max-w-xl text-sm text-muted-foreground">
-              Pipeline de contactos IG / TikTok / YouTube. Agrupado por país. Não é o programa de
-              creators.
+            <h1 className="mt-1 font-display text-4xl font-semibold tracking-tight text-zinc-900">
+              Outreach
+            </h1>
+            <p className="mt-1.5 max-w-xl text-sm text-zinc-500">
+              Pipeline de contactos IG / TikTok / YouTube. Agrupado por país.
             </p>
             <InternalAdminNav active="outreach" className="mt-3" />
           </div>
@@ -939,10 +1058,10 @@ export default function OutreachAdminPage() {
               type="button"
               onClick={() => setDemoMode((on) => !on)}
               className={cn(
-                'rounded-full border px-3.5 py-2 text-sm font-semibold',
+                'rounded-full px-3.5 py-2 text-sm font-semibold transition',
                 demoMode
-                  ? 'border-amber-500 bg-amber-50 text-amber-900'
-                  : 'border-border bg-card text-foreground',
+                  ? 'bg-[#f4ead6] text-[#7a5a28]'
+                  : 'text-zinc-500 hover:bg-white hover:text-zinc-800',
               )}
             >
               {demoMode ? 'Sair da demo' : 'Pré-visualização demo'}
@@ -953,14 +1072,14 @@ export default function OutreachAdminPage() {
                 if (demoMode) return
                 void load()
               }}
-              className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
+              className="rounded-full px-3.5 py-2 text-sm font-semibold text-zinc-500 hover:bg-white hover:text-zinc-800"
             >
               {loading && !demoMode ? 'A carregar…' : 'Actualizar'}
             </button>
             <button
               type="button"
               onClick={openCreate}
-              className="rounded-full bg-foreground px-3.5 py-2 text-sm font-bold text-background"
+              className="rounded-full bg-[#1c1917] px-4 py-2 text-sm font-semibold text-[#f3ead2] shadow-[0_8px_20px_rgba(28,25,23,0.18)] hover:bg-black"
             >
               + Novo
             </button>
@@ -968,7 +1087,7 @@ export default function OutreachAdminPage() {
               <button
                 type="button"
                 onClick={() => void onSignOut()}
-                className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-semibold"
+                className="rounded-full px-3.5 py-2 text-sm font-semibold text-zinc-500 hover:bg-white hover:text-zinc-800"
               >
                 Sair
               </button>
@@ -977,12 +1096,12 @@ export default function OutreachAdminPage() {
         </header>
 
         {demoMode ? (
-          <p className="mb-4 rounded-xl border border-amber-200 bg-amber-50 px-3.5 py-2.5 text-sm font-semibold text-amber-900">
+          <p className="mb-5 rounded-2xl border border-[#e6dcc4] bg-[#fbf7ee] px-4 py-3 text-sm text-[#7a5a28]">
             Modo demo — alterações só em memória. Aplica a migration para dados reais.
           </p>
         ) : null}
 
-        <div className="mb-5 grid grid-cols-2 gap-3 sm:grid-cols-5">
+        <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-5">
           <StatCard label="Total" value={String(rowSource.length)} />
           <StatCard label="A contactar" value={String(statusCounts.to_contact)} />
           <StatCard label="Em conversa" value={String(statusCounts.in_talk)} />
@@ -991,13 +1110,12 @@ export default function OutreachAdminPage() {
         </div>
 
         {pendingAppliedCount > 0 ? (
-          <div className="mb-5 rounded-2xl border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-950">
-            <p className="font-bold">
-              {pendingAppliedCount} contacto{pendingAppliedCount === 1 ? '' : 's'} do Outreach
-              candidatou-se no Creator Program
+          <div className="mb-6 rounded-2xl border border-[#e6dcc4] bg-[#fbf7ee] px-5 py-4">
+            <p className="font-display text-[15px] font-semibold text-zinc-900">
+              {pendingAppliedCount} contacto{pendingAppliedCount === 1 ? '' : 's'} candidatou-se
             </p>
-            <p className="mt-1 text-blue-900/80">
-              Match automático pelo mesmo handle. Abre Creators para rever o pedido.
+            <p className="mt-1 text-sm text-zinc-500">
+              Match automático pelo mesmo handle. Revê o pedido em Creators.
             </p>
             <div className="mt-3 flex flex-wrap gap-2">
               <button
@@ -1006,13 +1124,13 @@ export default function OutreachAdminPage() {
                   setViewTab('pipeline')
                   setOnlyApplied(true)
                 }}
-                className="rounded-full border border-blue-300 bg-white px-3 py-1.5 text-xs font-bold text-blue-900"
+                className="rounded-full bg-white px-3.5 py-1.5 text-xs font-semibold text-zinc-800 ring-1 ring-zinc-200"
               >
                 Ver no Outreach
               </button>
               <a
                 href="/internal/creator-program-ignite"
-                className="rounded-full bg-blue-900 px-3 py-1.5 text-xs font-bold text-white"
+                className="rounded-full bg-[#1c1917] px-3.5 py-1.5 text-xs font-semibold text-[#f3ead2]"
               >
                 Abrir Creators
               </a>
@@ -1020,15 +1138,13 @@ export default function OutreachAdminPage() {
           </div>
         ) : null}
 
-        <div className="mb-5 flex flex-wrap gap-2">
+        <div className="mb-5 inline-flex rounded-full bg-zinc-100/80 p-1">
           <button
             type="button"
             onClick={() => setViewTab('pipeline')}
             className={cn(
-              'rounded-full border px-4 py-2 text-sm font-bold',
-              viewTab === 'pipeline'
-                ? 'border-foreground bg-foreground text-background'
-                : 'border-border bg-card text-foreground',
+              'rounded-full px-4 py-1.5 text-sm font-semibold transition',
+              viewTab === 'pipeline' ? 'bg-[#1c1917] text-[#f3ead2] shadow-sm' : 'text-zinc-500',
             )}
           >
             Pipeline
@@ -1037,10 +1153,8 @@ export default function OutreachAdminPage() {
             type="button"
             onClick={() => setViewTab('contracted')}
             className={cn(
-              'rounded-full border px-4 py-2 text-sm font-bold',
-              viewTab === 'contracted'
-                ? 'border-foreground bg-foreground text-background'
-                : 'border-border bg-card text-foreground',
+              'rounded-full px-4 py-1.5 text-sm font-semibold transition',
+              viewTab === 'contracted' ? 'bg-[#1c1917] text-[#f3ead2] shadow-sm' : 'text-zinc-500',
             )}
           >
             Contratados ({statusCounts.contracted})
@@ -1070,10 +1184,10 @@ export default function OutreachAdminPage() {
             type="button"
             onClick={() => setOnlyApplied((v) => !v)}
             className={cn(
-              'rounded-full border px-3.5 py-2 text-sm font-bold',
+              'rounded-full px-3.5 py-2 text-sm font-semibold transition',
               onlyApplied
-                ? 'border-blue-700 bg-blue-700 text-white'
-                : 'border-border bg-card text-foreground',
+                ? 'bg-[#1c1917] text-[#f3ead2]'
+                : 'bg-white text-zinc-600 ring-1 ring-zinc-200',
             )}
           >
             Com candidatura ({appliedCount})
@@ -1086,10 +1200,10 @@ export default function OutreachAdminPage() {
               type="button"
               onClick={() => setStatusFilter('all')}
               className={cn(
-                'rounded-full border px-3 py-1.5 text-xs font-bold',
+                'rounded-full px-3 py-1.5 text-xs font-semibold transition',
                 statusFilter === 'all'
-                  ? 'border-foreground bg-foreground text-background'
-                  : 'border-border bg-card',
+                  ? 'bg-[#1c1917] text-[#f3ead2]'
+                  : 'bg-white text-zinc-500 ring-1 ring-zinc-200/80 hover:text-zinc-800',
               )}
             >
               Todos ({rowSource.filter((r) => r.status !== 'contracted').length})
@@ -1100,10 +1214,10 @@ export default function OutreachAdminPage() {
                 type="button"
                 onClick={() => setStatusFilter(s)}
                 className={cn(
-                  'rounded-full border px-3 py-1.5 text-xs font-bold',
+                  'rounded-full px-3 py-1.5 text-xs font-semibold transition',
                   statusFilter === s
-                    ? 'border-foreground bg-foreground text-background'
-                    : 'border-border bg-card',
+                    ? 'bg-[#1c1917] text-[#f3ead2]'
+                    : 'bg-white text-zinc-500 ring-1 ring-zinc-200/80 hover:text-zinc-800',
                 )}
               >
                 {STATUS_LABELS[s]} ({statusCounts[s]})
@@ -1111,7 +1225,7 @@ export default function OutreachAdminPage() {
             ))}
           </div>
         ) : (
-          <p className="mb-6 text-sm text-muted-foreground">
+          <p className="mb-6 text-sm text-zinc-500">
             Creators contratados com VIP de {VIP_DAYS} dias a partir da data de contratação.
           </p>
         )}
@@ -1122,202 +1236,80 @@ export default function OutreachAdminPage() {
 
         {viewTab === 'contracted' ? (
           contractedRows.length === 0 ? (
-            <div className="rounded-2xl border border-dashed border-border bg-card/60 px-6 py-12 text-center">
-              <p className="text-sm font-semibold text-muted-foreground">
+            <div className="rounded-3xl border border-dashed border-zinc-200 bg-white/50 px-6 py-16 text-center">
+              <p className="text-sm text-zinc-500">
                 Ainda sem contratados. Quando alguém aceitar, usa o botão «Contratado».
               </p>
             </div>
           ) : (
-            <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
-              <table className="min-w-full text-left text-sm">
-                <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
-                  <tr>
-                    <th className="px-4 py-3">Nome</th>
-                    <th className="px-4 py-3">País</th>
-                    <th className="px-4 py-3">Handles</th>
-                    <th className="px-4 py-3">VIP início</th>
-                    <th className="px-4 py-3">VIP fim ({VIP_DAYS}d)</th>
-                    <th className="px-4 py-3">Tempo restante</th>
-                    <th className="px-4 py-3 text-right">Acções</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {contractedRows
-                    .filter((row) => {
-                      if (countryFilter !== 'all' && row.country_code.toUpperCase() !== countryFilter)
-                        return false
-                      const q = search.trim().toLowerCase()
-                      if (!q) return true
-                      return [row.display_name, row.ig_handle, row.niche, row.notes]
-                        .join(' ')
-                        .toLowerCase()
-                        .includes(q)
-                    })
-                    .map((row) => {
-                      const vip = vipWindow(row.contracted_at)
-                      return (
-                        <tr key={row.id} className="border-b border-border/60 last:border-0 hover:bg-muted/20">
-                          <td className="px-4 py-3.5 align-middle">
-                            <ContactIdentity
-                              row={row}
-                              extra={
-                                <span className={statusBadge('contracted')}>Contratado</span>
-                              }
-                            />
-                          </td>
-                          <td className="px-4 py-3 align-top text-sm">
-                            {countryLabel(row.country_code, row.country_name)}
-                          </td>
-                          <td className="px-4 py-3 align-top text-xs">
-                            {row.ig_handle ? <p>@{row.ig_handle}</p> : <span className="text-muted-foreground">—</span>}
-                          </td>
-                          <td className="px-4 py-3 align-top text-xs text-muted-foreground">
-                            {shortDate(row.contracted_at)}
-                          </td>
-                          <td className="px-4 py-3 align-top text-xs text-muted-foreground">
-                            {vip.end ? shortDate(vip.end.toISOString()) : '—'}
-                          </td>
-                          <td className="px-4 py-3 align-top text-sm font-semibold">
-                            {vip.daysLeft == null ? (
-                              '—'
-                            ) : vip.expired ? (
-                              <span className="text-red-700">Expirado ({Math.abs(vip.daysLeft)}d)</span>
-                            ) : (
-                              <span className="text-emerald-700">{vip.daysLeft} dias</span>
-                            )}
-                          </td>
-                          <td className="px-4 py-3 align-top">
-                            <div className="flex flex-wrap justify-end gap-1">
-                              <button
-                                type="button"
-                                onClick={() => openEdit(row)}
-                                className="rounded-full px-2.5 py-1 text-xs font-semibold text-foreground/70 hover:bg-muted/70 hover:text-foreground"
-                              >
-                                Editar
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => void onDelete(row)}
-                                className="rounded-full border border-red-200 px-2.5 py-1 text-xs font-bold text-red-700"
-                              >
-                                Apagar
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      )
-                    })}
-                </tbody>
-              </table>
+            <div className="flex flex-col gap-3">
+              {contractedRows
+                .filter((row) => {
+                  if (countryFilter !== 'all' && row.country_code.toUpperCase() !== countryFilter)
+                    return false
+                  const q = search.trim().toLowerCase()
+                  if (!q) return true
+                  return [row.display_name, row.ig_handle, row.niche, row.notes]
+                    .join(' ')
+                    .toLowerCase()
+                    .includes(q)
+                })
+                .map((row) => (
+                  <ContactCard
+                    key={row.id}
+                    row={row}
+                    variant="contracted"
+                    onEdit={() => openEdit(row)}
+                    onDelete={() => void onDelete(row)}
+                  />
+                ))}
             </div>
           )
         ) : grouped.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-border bg-card/60 px-6 py-12 text-center">
-            <p className="text-sm font-semibold text-muted-foreground">
+          <div className="rounded-3xl border border-dashed border-zinc-200 bg-white/50 px-6 py-16 text-center">
+            <p className="text-sm text-zinc-500">
               Sem contactos{search || statusFilter !== 'all' || countryFilter !== 'all' ? ' com estes filtros' : ''}.
             </p>
             <button
               type="button"
               onClick={openCreate}
-              className="mt-4 rounded-full bg-foreground px-4 py-2 text-sm font-bold text-background"
+              className="mt-4 rounded-full bg-[#1c1917] px-4 py-2 text-sm font-semibold text-[#f3ead2]"
             >
               Adicionar primeiro contacto
             </button>
           </div>
         ) : (
-          <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-10">
             {grouped.map(([country, items]) => (
               <section key={country}>
-                <div className="mb-3 flex items-baseline gap-2">
-                  <h2 className="font-display text-xl font-extrabold tracking-tight">{country}</h2>
-                  <span className="text-sm font-semibold text-muted-foreground">
+                <div className="mb-4 flex items-end justify-between gap-3">
+                  <div>
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[#b08d2a]">
+                      País
+                    </p>
+                    <h2 className="mt-0.5 font-display text-2xl font-semibold tracking-tight text-zinc-900">
+                      {country}
+                    </h2>
+                  </div>
+                  <span className="text-sm text-zinc-400">
                     {items.length} {items.length === 1 ? 'contacto' : 'contactos'}
                   </span>
                 </div>
-                <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
-                  <table className="min-w-full text-left text-sm">
-                    <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
-                      <tr>
-                        <th className="px-4 py-3">Nome</th>
-                        <th className="px-4 py-3">Handles</th>
-                        <th className="px-4 py-3">Followers</th>
-                        <th className="px-4 py-3">Nicho</th>
-                        <th className="px-4 py-3">Estado</th>
-                        <th className="px-4 py-3">Último contacto</th>
-                        <th className="px-4 py-3 text-right">Acções</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {items.map((row) => (
-                        <tr key={row.id} className="border-b border-border/60 last:border-0 hover:bg-muted/20">
-                          <td className="px-4 py-3.5 align-middle">
-                            <ContactIdentity row={row} />
-                          </td>
-                          <td className="px-4 py-3.5 align-middle">
-                            <HandleChips row={row} />
-                          </td>
-                          <td className="px-4 py-3 align-top text-xs tabular-nums">
-                            <p>IG {formatFollowers(row.followers_ig)}</p>
-                            <p>TT {formatFollowers(row.followers_tiktok)}</p>
-                            <p>YT {formatFollowers(row.followers_youtube)}</p>
-                          </td>
-                          <td className="px-4 py-3 align-top">{row.niche || '—'}</td>
-                          <td className="px-4 py-3 align-top">
-                            <span className={statusBadge(row.status)}>
-                              {STATUS_LABELS[row.status]}
-                            </span>
-                            {row.has_creator_application ? (
-                              <a
-                                href="/internal/creator-program-ignite"
-                                className="mt-2 block text-xs font-bold text-blue-700 underline underline-offset-2"
-                              >
-                                Ver em Creators
-                              </a>
-                            ) : null}
-                          </td>
-                          <td className="px-4 py-3 align-top text-xs text-muted-foreground">
-                            {shortDate(row.last_contacted_at)}
-                          </td>
-                          <td className="px-4 py-3 align-top">
-                            <div className="flex flex-wrap justify-end gap-1">
-                              <button
-                                type="button"
-                                onClick={() => openEdit(row)}
-                                className="rounded-full px-2.5 py-1 text-xs font-semibold text-foreground/70 hover:bg-muted/70 hover:text-foreground"
-                              >
-                                Editar
-                              </button>
-                              <button
-                                type="button"
-                                onClick={() => void markContacted(row)}
-                                className="rounded-full border border-border px-2.5 py-1 text-xs font-bold"
-                                title="Marcar contactado + data de hoje"
-                              >
-                                Contactei
-                              </button>
-                              {row.status === 'accepted' || row.status === 'in_talk' ? (
-                                <button
-                                  type="button"
-                                  onClick={() => void markContracted(row)}
-                                  className="rounded-full border border-violet-300 bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-800"
-                                  title="Marcar contratado e iniciar VIP 90 dias"
-                                >
-                                  Contratado
-                                </button>
-                              ) : null}
-                              <button
-                                type="button"
-                                onClick={() => void onDelete(row)}
-                                className="rounded-full border border-red-200 px-2.5 py-1 text-xs font-bold text-red-700"
-                              >
-                                Apagar
-                              </button>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                <div className="flex flex-col gap-3">
+                  {items.map((row) => (
+                    <ContactCard
+                      key={row.id}
+                      row={row}
+                      onEdit={() => openEdit(row)}
+                      onContacted={() => void markContacted(row)}
+                      onContracted={
+                        row.status === 'accepted' || row.status === 'in_talk'
+                          ? () => void markContracted(row)
+                          : undefined
+                      }
+                      onDelete={() => void onDelete(row)}
+                    />
+                  ))}
                 </div>
               </section>
             ))}
@@ -1326,24 +1318,24 @@ export default function OutreachAdminPage() {
       </div>
 
       {formOpen ? (
-        <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center">
+        <div className="fixed inset-0 z-50 flex items-end justify-center bg-zinc-900/35 p-4 backdrop-blur-sm sm:items-center">
           <form
             onSubmit={(e) => void onSave(e)}
-            className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-border bg-card p-5 shadow-2xl sm:p-6"
+            className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-zinc-200 bg-white p-5 shadow-[0_30px_80px_rgba(28,25,23,0.18)] sm:p-7"
           >
-            <div className="mb-4 flex items-start justify-between gap-3">
+            <div className="mb-5 flex items-start justify-between gap-3">
               <div>
-                <h2 className="font-display text-2xl font-extrabold tracking-tight">
+                <h2 className="font-display text-2xl font-semibold tracking-tight text-zinc-900">
                   {form.id ? 'Editar contacto' : 'Novo contacto'}
                 </h2>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="mt-1 text-sm text-zinc-500">
                   Handles sem @. País usado para agrupar a lista.
                 </p>
               </div>
               <button
                 type="button"
                 onClick={closeForm}
-                className="rounded-full border border-border px-3 py-1.5 text-sm font-semibold"
+                className="rounded-full px-3 py-1.5 text-sm font-semibold text-zinc-500 hover:bg-zinc-100"
               >
                 Fechar
               </button>
@@ -1494,18 +1486,18 @@ export default function OutreachAdminPage() {
               <p className="mt-3 text-sm font-semibold text-red-600">{formError}</p>
             ) : null}
 
-            <div className="mt-5 flex flex-wrap justify-end gap-2">
+            <div className="mt-6 flex flex-wrap justify-end gap-2">
               <button
                 type="button"
                 onClick={closeForm}
-                className="rounded-full border border-border px-4 py-2 text-sm font-semibold"
+                className="rounded-full px-4 py-2 text-sm font-semibold text-zinc-500 hover:bg-zinc-100"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={saving}
-                className="rounded-full bg-foreground px-4 py-2 text-sm font-bold text-background disabled:opacity-60"
+                className="rounded-full bg-[#1c1917] px-4 py-2 text-sm font-semibold text-[#f3ead2] disabled:opacity-60"
               >
                 {saving ? 'A guardar…' : 'Guardar'}
               </button>
