@@ -10,11 +10,17 @@ type FaqStorySlide = {
 function landingFaqToStories(
   categories: typeof faqEn.categories | typeof faqPt.categories,
 ): FaqStorySlide[] {
-  const slides: IgStorySlide[] = []
-  categories.forEach((cat, catIndex) => {
+  const slides: FaqStorySlide[] = []
+  categories.forEach((cat) => {
     if (cat.title === 'App issues' || cat.title === 'Problemas na app') return
+    if (cat.title === 'Subscriptions & billing' || cat.title === 'Subscrições e faturação') return
     cat.items.forEach((item, itemIndex) => {
-      if (catIndex === 0 && itemIndex === 0) return
+      if (
+        (cat.title === 'Apple Health & Health Connect' || cat.title === 'Apple Health e Health Connect') &&
+        itemIndex === 2
+      ) {
+        return
+      }
       const blocks = [item.a]
       if ('bullets' in item && item.bullets) blocks.push(...item.bullets)
       if ('links' in item && item.links) {
