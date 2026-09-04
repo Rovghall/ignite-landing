@@ -60,7 +60,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'Each scan runs on servers. That’s a real cost, every photo.',
           'Premium keeps the product fast and the estimates improving. Not ads in the middle of logging lunch.',
-          'iOS and Android. Start free, upgrade if it fits.',
+          'iOS and Android. Free to download, plus a 1-week free trial.',
         ],
       },
       {
@@ -117,7 +117,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'Cada scan corre em servidores. É um custo real, em cada foto.',
           'O Premium mantém o produto rápido e as estimativas a melhorar. Não anúncios a meio do almoço.',
-          'iOS e Android. Começas grátis, upgrades se fizer sentido.',
+          'iOS e Android. O download é grátis, e tens 1 semana de trial.',
         ],
       },
       {
