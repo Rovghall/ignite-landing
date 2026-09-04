@@ -6,10 +6,16 @@ import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
 import {
   fillOutreachScript,
+  moneyForOutreachScripts,
+  creatorsPageUrl,
+  OUTREACH_SCRIPT_CURRENCIES,
   OUTREACH_SCRIPT_DEFAULTS,
+  OUTREACH_SCRIPT_LANGS,
   OUTREACH_SCRIPTS,
+  type OutreachScriptLang,
   type OutreachScriptToque,
 } from '@/lib/outreach-scripts'
+import type { CreatorOutreachCurrency } from '@/lib/creator-outreach-currency'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
 import { cn } from '@/lib/utils'
 
@@ -65,10 +71,14 @@ export default function OutreachScriptsAdminPage() {
   const [password, setPassword] = useState('')
   const [authError, setAuthError] = useState<string | null>(null)
   const [toqueFilter, setToqueFilter] = useState<'all' | OutreachScriptToque>('all')
+  const [lang, setLang] = useState<OutreachScriptLang>('PT')
+  const [currency, setCurrency] = useState<CreatorOutreachCurrency>('EUR')
   const [nome, setNome] = useState(OUTREACH_SCRIPT_DEFAULTS.nome)
   const [playStore, setPlayStore] = useState(OUTREACH_SCRIPT_DEFAULTS.playStore)
-  const [pdfBriefing, setPdfBriefing] = useState(OUTREACH_SCRIPT_DEFAULTS.pdfBriefing)
   const [contactEmail, setContactEmail] = useState(OUTREACH_SCRIPT_DEFAULTS.email)
+
+  const money = useMemo(() => moneyForOutreachScripts(currency), [currency])
+  const pdfBriefing = creatorsPageUrl(lang)
 
   const vars = useMemo(
     () => ({
@@ -77,8 +87,10 @@ export default function OutreachScriptsAdminPage() {
       playStore,
       pdfBriefing,
       email: contactEmail,
+      reward: money.reward,
+      annual: money.annual,
     }),
-    [nome, playStore, pdfBriefing, contactEmail],
+    [nome, playStore, pdfBriefing, contactEmail, money],
   )
 
   const scripts = useMemo(
@@ -200,14 +212,57 @@ export default function OutreachScriptsAdminPage() {
               onChange={(e) => setPlayStore(e.target.value)}
             />
           </label>
-          <label className="flex flex-col gap-1.5 text-sm font-semibold text-foreground/80">
-            PDF / página
-            <input
-              className={inputClass}
-              value={pdfBriefing}
-              onChange={(e) => setPdfBriefing(e.target.value)}
-            />
+          <label className="flex flex-col gap-1.5 text-sm font-semibold text-foreground/80 sm:col-span-2">
+            Página creators (muda com o idioma)
+            <input className={inputClass} value={pdfBriefing} readOnly />
           </label>
+        </div>
+
+        <div className="mb-5 flex flex-col gap-3">
+          <div>
+            <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+              Idioma
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {OUTREACH_SCRIPT_LANGS.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setLang(item.id)}
+                  className={cn(
+                    'rounded-full border px-3 py-1.5 text-xs font-bold',
+                    lang === item.id
+                      ? 'border-foreground bg-foreground text-background'
+                      : 'border-border bg-card',
+                  )}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <p className="mb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
+              Moeda
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {OUTREACH_SCRIPT_CURRENCIES.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  onClick={() => setCurrency(item.id)}
+                  className={cn(
+                    'rounded-full border px-3 py-1.5 text-xs font-bold',
+                    currency === item.id
+                      ? 'border-foreground bg-foreground text-background'
+                      : 'border-border bg-card',
+                  )}
+                >
+                  {item.label}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
 
         <div className="mb-5 flex flex-wrap gap-1.5">
@@ -230,10 +285,9 @@ export default function OutreachScriptsAdminPage() {
 
         <div className="flex flex-col gap-4">
           {scripts.map((script) => {
-            const body = fillOutreachScript(script.body, vars)
-            const subject = script.subject
-              ? fillOutreachScript(script.subject, vars)
-              : null
+            const copy = script.copies[lang]
+            const body = fillOutreachScript(copy.body, vars)
+            const subject = copy.subject ? fillOutreachScript(copy.subject, vars) : null
             return (
               <article
                 key={script.id}
@@ -242,13 +296,13 @@ export default function OutreachScriptsAdminPage() {
                 <div className="mb-3 flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
-                      {script.channel} · {script.lang}
+                      {copy.channel} · {lang} · {money.reward}
                     </p>
                     <h2 className="mt-0.5 font-display text-lg font-extrabold tracking-tight">
-                      {script.title}
+                      {copy.title}
                     </h2>
-                    {script.note ? (
-                      <p className="mt-1 text-xs text-muted-foreground">{script.note}</p>
+                    {copy.note ? (
+                      <p className="mt-1 text-xs text-muted-foreground">{copy.note}</p>
                     ) : null}
                   </div>
                   <div className="flex flex-wrap gap-1.5">
