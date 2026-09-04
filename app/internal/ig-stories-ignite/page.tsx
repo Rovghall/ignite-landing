@@ -353,35 +353,32 @@ async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') 
   })
 }
 
-async function renderHighlightCoverPng(label: string) {
+const FAQ_COVER_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <path d="M12 11h32a10 10 0 0 1 10 10v18a10 10 0 0 1-10 10H29L17 61V49h-5A10 10 0 0 1 2 39V21a10 10 0 0 1 10-10z" stroke="#fff" stroke-width="3.4" stroke-linejoin="round"/>
+  <path d="M32 22.5c0-3.6 2.8-6.2 7-6.2s7 2.6 7 6.2c0 2.9-1.7 4.6-4.4 6.1-1.3.7-2.2 1.8-2.2 3.3v1.6" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="39.4" cy="40.2" r="2.15" fill="#fff"/>
+</svg>`
+
+async function renderHighlightCoverPng(_label: string) {
   const canvas = document.createElement('canvas')
   canvas.width = COVER_SIZE
   canvas.height = COVER_SIZE
-  const ctx = canvas.getContext('2d', { willReadFrequently: true })
+  const ctx = canvas.getContext('2d')
   if (!ctx) throw new Error('canvas')
 
-  fillAppDarkCanvas(ctx, COVER_SIZE, COVER_SIZE)
+  ctx.fillStyle = '#0C0C12'
+  ctx.fillRect(0, 0, COVER_SIZE, COVER_SIZE)
 
-  const cx = COVER_SIZE / 2
-  const logoSize = 390
-  const labelSize = 88
-  const gap = 32
-  const groupH = logoSize + gap + labelSize
-  const y = (COVER_SIZE - groupH) / 2
-
-  const logo = await loadImage('/ignite-logo.png')
-  if (logo) {
-    ctx.save()
-    ctx.globalCompositeOperation = 'screen'
-    ctx.drawImage(logo, cx - logoSize / 2, y, logoSize, logoSize)
-    ctx.restore()
+  const icon = await new Promise<HTMLImageElement | null>((resolve) => {
+    const img = new Image()
+    img.onload = () => resolve(img)
+    img.onerror = () => resolve(null)
+    img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(FAQ_COVER_SVG)}`
+  })
+  if (icon) {
+    const size = 470
+    ctx.drawImage(icon, (COVER_SIZE - size) / 2, (COVER_SIZE - size) / 2, size, size)
   }
-
-  ctx.fillStyle = '#ffffff'
-  ctx.textAlign = 'center'
-  ctx.textBaseline = 'top'
-  ctx.font = `700 ${labelSize}px ${FONT_STACK}`
-  ctx.fillText(label, cx, y + logoSize + gap)
 
   return new Promise<Blob>((resolve, reject) => {
     canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('png'))), 'image/png')
@@ -390,19 +387,12 @@ async function renderHighlightCoverPng(label: string) {
 
 function FaqHighlightCoverPreview() {
   return (
-    <div
-      className="relative h-[112px] w-[112px] overflow-hidden rounded-full shadow-[0_12px_32px_rgba(0,0,0,0.28)] ring-2 ring-zinc-200"
-      style={{ backgroundColor: '#0C0C12', backgroundImage: APP_DARK_CANVAS }}
-    >
-      <StoryBandingMask />
-      <div className="relative z-[1] flex h-full flex-col items-center justify-center">
-        <img
-          src="/ignite-logo.png"
-          alt=""
-          className="h-12 w-12 object-contain mix-blend-screen"
-        />
-        <p className="mt-1 text-[11px] font-bold tracking-[0.14em] text-white">FAQ</p>
-      </div>
+    <div className="flex h-[112px] w-[112px] items-center justify-center overflow-hidden rounded-full bg-[#0C0C12] ring-[3px] ring-zinc-500/70">
+      <img
+        src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(FAQ_COVER_SVG)}`}
+        alt=""
+        className="h-[54px] w-[54px]"
+      />
     </div>
   )
 }
@@ -743,8 +733,8 @@ export default function IgStoriesAdminPage() {
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-zinc-900">Capa do destaque FAQ</p>
               <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
-                PNG 1080×1080, feito para o círculo do Instagram. Não uses um slide de texto como
-                capa.
+                Só o ícone, fundo escuro, no estilo dos outros destaques. O Instagram põe o anel e o
+                nome FAQ por baixo.
               </p>
               <button
                 type="button"
