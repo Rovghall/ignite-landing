@@ -47,10 +47,10 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         title: 'How accurate is it?',
         ready: true,
         blocks: [
-          'IGNITE uses AI plus nutrition data to estimate what’s on the plate. Not a lab test.',
-          'Lighting, angles, and hidden oils change the result. Center the food. Edit ingredients if something’s off.',
-          'Your daily plan is an estimate from your profile. A starting point, not a medical prescription.',
-          'The point isn’t perfection. It’s a number you can actually stick to.',
+          'Most calorie apps throw a number at you and hope. IGNITE reads the plate: calories, macros, and ingredients you can actually edit.',
+          'AI plus real nutrition data. Center the food. In a couple of seconds you get a breakdown you can trust enough to log every day.',
+          'If lighting or oil throws it off, you fix the ingredient. Other apps lock you into a black box. That is why people quit.',
+          'Your plan comes from your profile. Built to hit lose, maintain, or gain. Not a spreadsheet you abandon in a week.',
         ],
       },
       {
@@ -104,10 +104,10 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         title: 'Quão preciso é?',
         ready: true,
         blocks: [
-          'A IGNITE usa IA e dados de nutrição para estimar o que está no prato. Não é um teste de laboratório.',
-          'Luz, ângulo e óleos escondidos mudam o resultado. Centra a comida. Edita ingredientes se faltar alguma coisa.',
-          'O plano diário é uma estimativa a partir do teu perfil. Um ponto de partida, não uma prescrição médica.',
-          'O ponto não é a perfeição. É um número a que consigas mesmo agarrar.',
+          'A maior parte das apps atira um número e reza. A IGNITE lê o prato: calorias, macros e ingredientes que podes editar.',
+          'IA mais dados de nutrição a sério. Centra a comida. Em poucos segundos tens um resultado que dá para usar todos os dias.',
+          'Se a luz ou o azeite desviarem, corriges o ingrediente. As outras apps fecham-te numa caixa preta. Por isso desistem.',
+          'O plano sai do teu perfil. Feito para perder, manter ou ganhar. Não uma folha Excel que abandonas numa semana.',
         ],
       },
       {
