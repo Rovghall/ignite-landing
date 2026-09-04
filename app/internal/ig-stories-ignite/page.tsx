@@ -353,11 +353,29 @@ async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') 
   })
 }
 
-const FAQ_COVER_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+const HIGHLIGHT_COVERS: Partial<
+  Record<IgHighlightId, { file: string; title: string; hint: string; svg: string }>
+> = {
+  faq: {
+    file: 'ignite-faq-highlight-cover.png',
+    title: 'Capa do destaque FAQ',
+    hint: 'Só o balão, estilo ícone Apple. Fundo igual ao das stories.',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
   <path d="M7.75 3.75h8.5A3.75 3.75 0 0 1 20 7.5v6.25a3.75 3.75 0 0 1-3.75 3.75h-3.05l-4.15 3.28a.7.7 0 0 1-1.12-.56v-2.72H7.75A3.75 3.75 0 0 1 4 13.75V7.5a3.75 3.75 0 0 1 3.75-3.75Z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/>
-</svg>`
+</svg>`,
+  },
+  'whos-ignite': {
+    file: 'ignite-whos-ignite-highlight-cover.png',
+    title: "Capa do destaque Who's IGNITE?",
+    hint: 'Ícone de pessoa, estilo Apple. Fundo igual ao das stories.',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <circle cx="12" cy="8" r="3.35" stroke="#fff" stroke-width="1.7"/>
+  <path d="M5.15 19.5c.95-3.45 3.45-5.2 6.85-5.2s5.9 1.75 6.85 5.2" stroke="#fff" stroke-width="1.7" stroke-linecap="round"/>
+</svg>`,
+  },
+}
 
-async function renderHighlightCoverPng(_label: string) {
+async function renderHighlightCoverPng(svg: string) {
   const canvas = document.createElement('canvas')
   canvas.width = COVER_SIZE
   canvas.height = COVER_SIZE
@@ -370,11 +388,11 @@ async function renderHighlightCoverPng(_label: string) {
     const img = new Image()
     img.onload = () => resolve(img)
     img.onerror = () => resolve(null)
-    img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(FAQ_COVER_SVG)}`
+    img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`
   })
   if (icon) {
     const size = 460
-    ctx.drawImage(icon, (COVER_SIZE - size) / 2, (COVER_SIZE - size) / 2 + 12, size, size)
+    ctx.drawImage(icon, (COVER_SIZE - size) / 2, (COVER_SIZE - size) / 2 + 8, size, size)
   }
 
   return new Promise<Blob>((resolve, reject) => {
@@ -382,7 +400,7 @@ async function renderHighlightCoverPng(_label: string) {
   })
 }
 
-function FaqHighlightCoverPreview() {
+function HighlightCoverPreview({ svg }: { svg: string }) {
   return (
     <div
       className="relative flex h-[112px] w-[112px] items-center justify-center overflow-hidden rounded-full ring-[3px] ring-zinc-500/70"
@@ -390,7 +408,7 @@ function FaqHighlightCoverPreview() {
     >
       <StoryBandingMask />
       <img
-        src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(FAQ_COVER_SVG)}`}
+        src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`}
         alt=""
         className="relative z-[1] h-[52px] w-[52px]"
       />
@@ -439,6 +457,7 @@ export default function IgStoriesAdminPage() {
   const slide = slides[Math.min(slideIndex, slides.length - 1)] ?? slides[0]
   const header: 'logo' | 'founder' | undefined =
     highlight === 'whos-ignite' && slide?.id === 'founder' ? 'founder' : 'logo'
+  const cover = HIGHLIGHT_COVERS[highlight]
 
   useEffect(() => {
     setSlideIndex(0)
@@ -471,7 +490,7 @@ export default function IgStoriesAdminPage() {
   }, [session, highlight, lang, header, slide])
 
   useEffect(() => {
-    if (!session || highlight !== 'faq') {
+    if (!session || !cover) {
       setCoverReady(false)
       setCoverHref(null)
       return
@@ -479,7 +498,7 @@ export default function IgStoriesAdminPage() {
     let cancelled = false
     setCoverReady(false)
     setCoverHref(null)
-    void renderHighlightCoverPng('FAQ')
+    void renderHighlightCoverPng(cover.svg)
       .then((blob) => blobToDataUrl(blob))
       .then((dataUrl) => {
         if (cancelled) return
@@ -492,7 +511,7 @@ export default function IgStoriesAdminPage() {
     return () => {
       cancelled = true
     }
-  }, [session, highlight])
+  }, [session, cover])
 
   useEffect(() => {
     if (!supabase) {
@@ -562,7 +581,7 @@ export default function IgStoriesAdminPage() {
     <a
       ref={coverDownloadRef}
       href={coverHref ?? undefined}
-      download="ignite-faq-highlight-cover.png"
+      download={cover?.file ?? 'ignite-highlight-cover.png'}
       className="absolute -left-[9999px] top-0 h-px w-px overflow-hidden"
       tabIndex={-1}
       aria-hidden
@@ -728,14 +747,12 @@ export default function IgStoriesAdminPage() {
           ))}
         </div>
 
-        {highlight === 'faq' ? (
+        {cover ? (
           <div className="mb-5 flex items-center gap-4 rounded-2xl border border-border bg-card px-4 py-3">
-            <FaqHighlightCoverPreview />
+            <HighlightCoverPreview svg={cover.svg} />
             <div className="min-w-0 flex-1">
-              <p className="text-sm font-semibold text-zinc-900">Capa do destaque FAQ</p>
-              <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
-                Só o balão, estilo ícone Apple. Fundo igual ao das stories.
-              </p>
+              <p className="text-sm font-semibold text-zinc-900">{cover.title}</p>
+              <p className="mt-0.5 text-xs leading-snug text-muted-foreground">{cover.hint}</p>
               <button
                 type="button"
                 disabled={!coverReady}
