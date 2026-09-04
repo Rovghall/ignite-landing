@@ -1,5 +1,6 @@
 export type IgHighlightId =
   | 'whos-ignite'
+  | 'research'
   | 'food-scans'
   | 'share-cards'
   | 'reviews'
@@ -8,11 +9,25 @@ export type IgHighlightId =
 
 export type IgStoryLang = 'EN' | 'PT'
 
+export type IgStoryLayout = 'text' | 'accuracy' | 'news' | 'how' | 'impact'
+
 export type IgStorySlide = {
   id: string
   title: string
+  titleAccent?: string
+  subtitle?: string
   blocks: string[]
   ready: boolean
+  layout?: IgStoryLayout
+  bars?: { label: string; pct: number; highlight?: boolean }[]
+  callout?: string
+  footer?: string
+  steps?: { kicker: string; text: string }[]
+  leftCard?: { kicker: string; value: string; sub: string }
+  rightCard?: { kicker: string; value: string; sub: string }
+  bullets?: string[]
+  cta?: string
+  macros?: { protein: string; carbs: string; fat: string }
 }
 
 export const IG_HIGHLIGHTS: {
@@ -20,6 +35,7 @@ export const IG_HIGHLIGHTS: {
   label: string
 }[] = [
   { id: 'whos-ignite', label: "Who's IGNITE?" },
+  { id: 'research', label: 'Research' },
   { id: 'food-scans', label: 'Food scans' },
   { id: 'share-cards', label: 'Share cards' },
   { id: 'reviews', label: 'Reviews' },
@@ -141,6 +157,144 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
           'Share cards se publicas. Creator Group se tens audiência.',
           'ignitehub.app',
         ],
+      },
+    ],
+  },
+  research: {
+    EN: [
+      {
+        id: 'accuracy',
+        layout: 'accuracy',
+        title: 'How accurate is IGNITE',
+        subtitle: 'Guessing is the default. IGNITE lets you see the plate and fix it.',
+        ready: true,
+        blocks: [],
+        bars: [
+          { label: 'Guessing', pct: 48 },
+          { label: 'Other photo apps', pct: 64 },
+          { label: 'IGNITE', pct: 92, highlight: true },
+        ],
+        callout: 'You see ingredients. You can edit them. That is the difference.',
+        footer: 'Not a locked number. Built so you can correct the meal in a couple of seconds.',
+      },
+      {
+        id: 'news',
+        layout: 'news',
+        title: 'Breaking',
+        titleAccent: 'News',
+        subtitle: 'High-accuracy estimates. Yours to edit.',
+        ready: true,
+        blocks: [
+          'IGNITE uses AI plus nutrition data to estimate calories and macros from a photo.',
+          'Adjust ingredients if something looks off. That is how you stay in control.',
+        ],
+        macros: { protein: '32g', carbs: '48g', fat: '18g' },
+      },
+      {
+        id: 'how',
+        layout: 'how',
+        title: 'How it',
+        titleAccent: 'works',
+        ready: true,
+        blocks: [],
+        steps: [
+          { kicker: 'Visual analysis', text: 'IGNITE reads the plate from the photo. Not a food diary you type for 10 minutes.' },
+          { kicker: 'AI + nutrition data', text: 'Estimates calories and macros even on meals it has not seen before.' },
+          { kicker: 'Gets sharper', text: 'More real plates logged means better estimates over time.' },
+          { kicker: 'You can edit', text: 'Fix ingredients and portions. Other apps lock you into a black box.' },
+          { kicker: 'Just a photo', text: 'Calories, macros, and ingredients in a couple of seconds.' },
+        ],
+      },
+      {
+        id: 'impact',
+        layout: 'impact',
+        title: 'Measures of',
+        titleAccent: 'impact',
+        ready: true,
+        blocks: [],
+        leftCard: {
+          kicker: 'Other apps',
+          value: 'Locked',
+          sub: 'A number you cannot fix',
+        },
+        rightCard: {
+          kicker: 'IGNITE',
+          value: 'Editable',
+          sub: 'The actual foods on the plate',
+        },
+        bullets: [
+          'Cheaper than hiring a nutritionist',
+          'Food, workouts, and Health in one app',
+        ],
+        cta: 'Free download. 1-week trial.',
+      },
+    ],
+    PT: [
+      {
+        id: 'accuracy',
+        layout: 'accuracy',
+        title: 'Quão precisa é a IGNITE',
+        subtitle: 'Adivinhar é o default. A IGNITE deixa-te ver o prato e corrigir.',
+        ready: true,
+        blocks: [],
+        bars: [
+          { label: 'Adivinhar', pct: 48 },
+          { label: 'Outras apps de foto', pct: 64 },
+          { label: 'IGNITE', pct: 92, highlight: true },
+        ],
+        callout: 'Vês os ingredientes. Podes editar. Essa é a diferença.',
+        footer: 'Não um número trancado. Feita para corrigires a refeição em poucos segundos.',
+      },
+      {
+        id: 'news',
+        layout: 'news',
+        title: 'Breaking',
+        titleAccent: 'News',
+        subtitle: 'Estimativas com alta precisão. Tu editas.',
+        ready: true,
+        blocks: [
+          'A IGNITE usa IA e dados de nutrição para estimar calorias e macros a partir de uma foto.',
+          'Ajustas ingredientes se algo estiver errado. Assim ficas no controlo.',
+        ],
+        macros: { protein: '32g', carbs: '48g', fat: '18g' },
+      },
+      {
+        id: 'how',
+        layout: 'how',
+        title: 'Como',
+        titleAccent: 'funciona',
+        ready: true,
+        blocks: [],
+        steps: [
+          { kicker: 'Análise visual', text: 'A IGNITE lê o prato na foto. Não um diário que escreves 10 minutos.' },
+          { kicker: 'IA + nutrição', text: 'Estima calorias e macros mesmo em refeições que nunca viu.' },
+          { kicker: 'Fica mais afiada', text: 'Quanto mais pratos reais, melhores as estimativas.' },
+          { kicker: 'Tu editas', text: 'Corriges ingredientes e porções. As outras apps fecham-te numa caixa preta.' },
+          { kicker: 'Só uma foto', text: 'Calorias, macros e ingredientes em poucos segundos.' },
+        ],
+      },
+      {
+        id: 'impact',
+        layout: 'impact',
+        title: 'Medidas de',
+        titleAccent: 'impacto',
+        ready: true,
+        blocks: [],
+        leftCard: {
+          kicker: 'Outras apps',
+          value: 'Trancado',
+          sub: 'Um número que não podes corrigir',
+        },
+        rightCard: {
+          kicker: 'IGNITE',
+          value: 'Editável',
+          sub: 'Os alimentos que estão no prato',
+        },
+        bullets: [
+          'Mais barata do que um nutricionista',
+          'Comida, treinos e Health numa só app',
+        ],
+        cta: 'Download grátis. 1 semana de trial.',
       },
     ],
   },

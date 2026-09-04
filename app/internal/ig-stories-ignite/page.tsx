@@ -12,7 +12,7 @@ import {
   type IgStorySlide,
 } from '@/lib/ig-story-highlights'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
-import { cn } from '@/lib/utils'
+import { ResearchLayout, paintResearchSlide } from '@/components/ig-story-layouts'
 
 const PAGE_BG =
   'min-h-screen bg-[radial-gradient(1200px_600px_at_10%_-10%,#fff7ed,transparent),linear-gradient(#fafafa,#ffffff)]'
@@ -48,33 +48,38 @@ function StoryFounderPhoto() {
 }
 
 function StoryFrame({
-  title,
-  blocks,
+  slide,
   header,
 }: {
-  title: string
-  blocks: string[]
+  slide: IgStorySlide
   header?: 'logo' | 'founder'
 }) {
+  const research = slide.layout && slide.layout !== 'text'
   return (
     <div
-      className="relative mx-auto flex aspect-[9/16] w-full max-w-[420px] flex-col justify-center overflow-hidden rounded-[28px] px-8 py-16 text-center shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
+      className="relative mx-auto flex aspect-[9/16] w-full max-w-[420px] flex-col justify-center overflow-hidden rounded-[28px] px-8 py-12 text-center shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
       style={{ background: APP_DARK_CANVAS }}
     >
       {header === 'founder' ? <StoryFounderPhoto /> : header === 'logo' ? <StoryLogo /> : null}
-      <p className="font-sans text-[28px] font-semibold leading-tight tracking-tight text-white sm:text-[32px]">
-        {title}
-      </p>
-      <div className="mt-8 flex flex-col gap-6">
-        {blocks.map((block, index) => (
-          <p
-            key={`${index}-${block.slice(0, 32)}`}
-            className="font-sans text-[16px] leading-snug text-white/90 sm:text-[17px]"
-          >
-            {block}
+      {research ? (
+        <ResearchLayout slide={slide} />
+      ) : (
+        <>
+          <p className="font-sans text-[28px] font-semibold leading-tight tracking-tight text-white sm:text-[32px]">
+            {slide.title}
           </p>
-        ))}
-      </div>
+          <div className="mt-8 flex flex-col gap-6">
+            {slide.blocks.map((block, index) => (
+              <p
+                key={`${index}-${block.slice(0, 32)}`}
+                className="font-sans text-[16px] leading-snug text-white/90 sm:text-[17px]"
+              >
+                {block}
+              </p>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   )
 }
@@ -175,6 +180,22 @@ async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') 
   let y = Math.max(48, (EXPORT_H - contentH) / 2)
   const cx = EXPORT_W / 2
 
+  if (slide.layout && slide.layout !== 'text') {
+    if (header === 'logo') {
+      const logo = await loadImage('/ignite-logo.png')
+      if (logo) {
+        ctx.save()
+        ctx.globalCompositeOperation = 'screen'
+        ctx.drawImage(logo, cx - 56, 72, 112, 112)
+        ctx.restore()
+      }
+    }
+    paintResearchSlide(ctx, slide, EXPORT_W, EXPORT_H)
+    return new Promise<Blob>((resolve, reject) => {
+      canvas.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('png'))), 'image/png')
+    })
+  }
+
   if (header === 'founder') {
     const photo = await loadImage('/ceofounder.jpg')
     if (photo) drawCoverCircle(ctx, photo, cx, y, founderSize)
@@ -250,7 +271,13 @@ export default function IgStoriesAdminPage() {
   const slides = IG_STORY_SLIDES[highlight][lang]
   const slide = slides[Math.min(slideIndex, slides.length - 1)] ?? slides[0]
   const header: 'logo' | 'founder' | undefined =
-    highlight === 'whos-ignite' ? (slide?.id === 'founder' ? 'founder' : 'logo') : undefined
+    highlight === 'whos-ignite'
+      ? slide?.id === 'founder'
+        ? 'founder'
+        : 'logo'
+      : highlight === 'research' && slide?.layout !== 'how'
+        ? 'logo'
+        : undefined
 
   useEffect(() => {
     setSlideIndex(0)
@@ -411,19 +438,25 @@ export default function IgStoriesAdminPage() {
                   className="mx-auto mb-[4.5vh] h-[14vw] max-h-20 w-[14vw] max-w-20 object-contain mix-blend-screen"
                 />
               ) : null}
-              <p className="font-sans text-[8.2vw] font-semibold leading-tight tracking-tight text-white sm:text-4xl">
-                {slide.title}
-              </p>
-              <div className="mt-[7vh] flex flex-col gap-[4.5vh]">
-                {slide.blocks.map((block, index) => (
-                  <p
-                    key={`${index}-${block.slice(0, 32)}`}
-                    className="font-sans text-[4.2vw] leading-snug text-white/90 sm:text-lg"
-                  >
-                    {block}
+              {slide.layout && slide.layout !== 'text' ? (
+                <ResearchLayout slide={slide} print />
+              ) : (
+                <>
+                  <p className="font-sans text-[8.2vw] font-semibold leading-tight tracking-tight text-white sm:text-4xl">
+                    {slide.title}
                   </p>
-                ))}
-              </div>
+                  <div className="mt-[7vh] flex flex-col gap-[4.5vh]">
+                    {slide.blocks.map((block, index) => (
+                      <p
+                        key={`${index}-${block.slice(0, 32)}`}
+                        className="font-sans text-[4.2vw] leading-snug text-white/90 sm:text-lg"
+                      >
+                        {block}
+                      </p>
+                    ))}
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>
@@ -531,7 +564,7 @@ export default function IgStoriesAdminPage() {
         ) : null}
 
         {slide ? (
-          <StoryFrame title={slide.title} blocks={slide.blocks} header={header} />
+          <StoryFrame slide={slide} header={header} />
         ) : null}
 
         <div className="mt-4 flex justify-between">
