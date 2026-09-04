@@ -383,6 +383,16 @@ const HIGHLIGHT_COVERS: Partial<
   <path d="M8.75 8 12 4.75 15.25 8" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`,
   },
+  'food-scans': {
+    file: 'ignite-food-scans-highlight-cover.png',
+    title: 'Capa do destaque Food scans',
+    hint: 'Ícone de câmara iOS. Fundo igual ao das stories.',
+    svg: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M8.35 7.4 9.2 6.05A1.7 1.7 0 0 1 10.6 5.35h2.8a1.7 1.7 0 0 1 1.4.7L15.65 7.4" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="4.2" y="7.4" width="15.6" height="11.35" rx="3.15" stroke="#fff" stroke-width="1.7"/>
+  <circle cx="12" cy="13" r="3.2" stroke="#fff" stroke-width="1.7"/>
+</svg>`,
+  },
 }
 
 async function renderHighlightCoverPng(cover: { svg?: string; image?: string }) {
