@@ -37,7 +37,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'We built IGNITE AI so tracking food and training doesn’t eat your day.',
           'Most people guess calories, skip logging, or give up after a week of weighing every meal.',
-          'Take a photo. In a couple of seconds you get calories, macros, and ingredients. Log workouts.',
+          'Take a photo. In a couple of seconds you get calories, macros, and ingredients. You can also estimate how much your workouts burn.',
           'Sync Apple Health / Health Connect: average heart rate, sleep, steps and blood oxygen. All in one.',
           'One place for the plan: lose, maintain, or gain.',
         ],
@@ -94,7 +94,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'Criámos a IGNITE AI para o tracking de comida e treino não te comer o dia.',
           'A maior parte das pessoas adivinha calorias, desiste de registar, ou cansa-se de pesar tudo.',
-          'Tiras uma foto. Em poucos segundos tens calorias, macros e ingredientes. Registas treinos.',
+          'Tiras uma foto. Em poucos segundos tens calorias, macros e ingredientes. Também podes estimar o que os treinos queimam.',
           'Ligas Apple Health / Health Connect: frequência cardíaca média, sono, passos e oxigénio no sangue. Tudo num só sítio.',
           'Um sítio para o plano: perder, manter ou ganhar peso.',
         ],
