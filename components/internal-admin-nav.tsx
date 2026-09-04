@@ -8,6 +8,7 @@ export type InternalAdminPage =
   | 'referrals'
   | 'creators'
   | 'outreach'
+  | 'outreach-scripts'
   | 'bots'
   | 'abusers'
   | 'economics'
@@ -17,6 +18,7 @@ const LINKS: { id: InternalAdminPage; href: string; label: string }[] = [
   { id: 'referrals', href: '/internal/rc-payouts-ignite', label: 'Referrals' },
   { id: 'creators', href: '/internal/creator-program-ignite', label: 'Creators' },
   { id: 'outreach', href: '/internal/outreach-ignite', label: 'Outreach' },
+  { id: 'outreach-scripts', href: '/internal/outreach-scripts-ignite', label: 'Mensagens' },
   { id: 'bots', href: '/internal/bot-watch-ignite', label: 'Bots' },
   { id: 'abusers', href: '/internal/abusers-ignite', label: 'Abusers' },
   { id: 'economics', href: '/internal/unit-economics-ignite', label: 'Economics' },
