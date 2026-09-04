@@ -37,7 +37,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'We built IGNITE AI so tracking food and training doesn’t eat your day.',
           'Most people guess calories, skip logging, or give up after a week of weighing every meal.',
-          'Take a photo. In 4-8 seconds you get calories, macros, and ingredients. Log workouts. Sync Apple Health / Health Connect.',
+          'Take a photo. In a couple of seconds you get calories, macros, and ingredients. Log workouts. Sync Apple Health / Health Connect.',
           'One place for the plan: lose, maintain, or gain.',
         ],
       },
@@ -93,7 +93,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'Criámos a IGNITE AI para o tracking de comida e treino não te comer o dia.',
           'A maior parte das pessoas adivinha calorias, desiste de registar, ou cansa-se de pesar tudo.',
-          'Tiras uma foto. Em 4-8 segundos tens calorias, macros e ingredientes. Registas treinos. Ligas Apple Health / Health Connect.',
+          'Tiras uma foto. Em poucos segundos tens calorias, macros e ingredientes. Registas treinos. Ligas Apple Health / Health Connect.',
           'Um sítio para o plano: perder, manter ou ganhar peso.',
         ],
       },
@@ -150,7 +150,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Snap the meal.',
-          'In 4-8 seconds: calories, macros, and a list of ingredients.',
+          'In a couple of seconds: calories, macros, and a list of ingredients.',
           'Edit anything that’s off. Then log it.',
         ],
       },
@@ -162,7 +162,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Tira foto à refeição.',
-          'Em 4-8 segundos: calorias, macros e lista de ingredientes.',
+          'Em poucos segundos: calorias, macros e lista de ingredientes.',
           'Edita o que estiver errado. Depois regista.',
         ],
       },
