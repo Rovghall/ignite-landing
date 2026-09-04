@@ -353,21 +353,18 @@ async function renderStoryPng(slide: IgStorySlide, header?: 'logo' | 'founder') 
   })
 }
 
-const FAQ_COVER_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
-  <path d="M12 11h32a10 10 0 0 1 10 10v18a10 10 0 0 1-10 10H29L17 61V49h-5A10 10 0 0 1 2 39V21a10 10 0 0 1 10-10z" stroke="#fff" stroke-width="3.4" stroke-linejoin="round"/>
-  <path d="M32 22.5c0-3.6 2.8-6.2 7-6.2s7 2.6 7 6.2c0 2.9-1.7 4.6-4.4 6.1-1.3.7-2.2 1.8-2.2 3.3v1.6" stroke="#fff" stroke-width="3.4" stroke-linecap="round"/>
-  <circle cx="39.4" cy="40.2" r="2.15" fill="#fff"/>
+const FAQ_COVER_SVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <path d="M7.75 3.75h8.5A3.75 3.75 0 0 1 20 7.5v6.25a3.75 3.75 0 0 1-3.75 3.75h-3.05l-4.15 3.28a.7.7 0 0 1-1.12-.56v-2.72H7.75A3.75 3.75 0 0 1 4 13.75V7.5a3.75 3.75 0 0 1 3.75-3.75Z" stroke="#fff" stroke-width="1.7" stroke-linejoin="round"/>
 </svg>`
 
 async function renderHighlightCoverPng(_label: string) {
   const canvas = document.createElement('canvas')
   canvas.width = COVER_SIZE
   canvas.height = COVER_SIZE
-  const ctx = canvas.getContext('2d')
+  const ctx = canvas.getContext('2d', { willReadFrequently: true })
   if (!ctx) throw new Error('canvas')
 
-  ctx.fillStyle = '#0C0C12'
-  ctx.fillRect(0, 0, COVER_SIZE, COVER_SIZE)
+  fillAppDarkCanvas(ctx, COVER_SIZE, COVER_SIZE)
 
   const icon = await new Promise<HTMLImageElement | null>((resolve) => {
     const img = new Image()
@@ -376,8 +373,8 @@ async function renderHighlightCoverPng(_label: string) {
     img.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(FAQ_COVER_SVG)}`
   })
   if (icon) {
-    const size = 470
-    ctx.drawImage(icon, (COVER_SIZE - size) / 2, (COVER_SIZE - size) / 2, size, size)
+    const size = 460
+    ctx.drawImage(icon, (COVER_SIZE - size) / 2, (COVER_SIZE - size) / 2 + 12, size, size)
   }
 
   return new Promise<Blob>((resolve, reject) => {
@@ -387,11 +384,15 @@ async function renderHighlightCoverPng(_label: string) {
 
 function FaqHighlightCoverPreview() {
   return (
-    <div className="flex h-[112px] w-[112px] items-center justify-center overflow-hidden rounded-full bg-[#0C0C12] ring-[3px] ring-zinc-500/70">
+    <div
+      className="relative flex h-[112px] w-[112px] items-center justify-center overflow-hidden rounded-full ring-[3px] ring-zinc-500/70"
+      style={{ backgroundColor: '#0C0C12', backgroundImage: APP_DARK_CANVAS }}
+    >
+      <StoryBandingMask />
       <img
         src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(FAQ_COVER_SVG)}`}
         alt=""
-        className="h-[54px] w-[54px]"
+        className="relative z-[1] h-[52px] w-[52px]"
       />
     </div>
   )
@@ -733,8 +734,7 @@ export default function IgStoriesAdminPage() {
             <div className="min-w-0 flex-1">
               <p className="text-sm font-semibold text-zinc-900">Capa do destaque FAQ</p>
               <p className="mt-0.5 text-xs leading-snug text-muted-foreground">
-                Só o ícone, fundo escuro, no estilo dos outros destaques. O Instagram põe o anel e o
-                nome FAQ por baixo.
+                Só o balão, estilo ícone Apple. Fundo igual ao das stories.
               </p>
               <button
                 type="button"
