@@ -140,7 +140,7 @@ export default function OutreachScriptsAdminPage() {
           <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
             IGNITE · Interno
           </p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">Mensagens</h1>
+          <h1 className="mt-2 text-3xl font-semibold tracking-tight text-zinc-900">Mensagens</h1>
           <InternalAdminNav active="outreach-scripts" className="mt-4" />
           <p className="mt-3 text-sm font-semibold text-red-600">{configError}</p>
         </div>
@@ -170,7 +170,7 @@ export default function OutreachScriptsAdminPage() {
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
               IGNITE · Interno
             </p>
-            <h1 className="mt-1 font-display text-3xl font-extrabold tracking-tight">Mensagens</h1>
+            <h1 className="mt-1 text-3xl font-semibold tracking-tight text-zinc-900">Mensagens</h1>
             <p className="mt-1 max-w-xl text-sm text-muted-foreground">
               Textos prontos para copy/paste no outreach a influencers. Preenche o nome em cima e
               copia o bloco.
@@ -298,7 +298,7 @@ export default function OutreachScriptsAdminPage() {
                     <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground">
                       {copy.channel} · {lang} · {money.reward}
                     </p>
-                    <h2 className="mt-0.5 font-display text-lg font-extrabold tracking-tight">
+                    <h2 className="mt-0.5 text-[17px] font-semibold tracking-tight text-zinc-900">
                       {copy.title}
                     </h2>
                     {copy.note ? (

@@ -88,10 +88,10 @@ Sou o Filipe, fundador da app IGNITE AI.
 
 Acabámos de a lançar para iOS e Android e estou a contactar criadores cujo conteúdo encaixa no que estamos a construir. Queria saber se esta proposta te interessa.
 
-App de nutrição e fitness: foto da refeição → calorias, macros e ingredientes em 4–8s, mais treinos e Apple Health / Health Connect.
+Somos uma app de nutrição e fitness: tiras foto à refeição e em 4–8s tens calorias, macros e ingredientes, mais treinos e Apple Health / Health Connect.
 
 No Creator Program oferecemos:
-• Premium grátis, renovável, para testares a app enquanto fazes conteúdo
+• Premium grátis durante 3 meses, renovável, para testares a app enquanto fazes conteúdo
 • Código teu com o plano anual mais barato para a tua audiência
 • [REWARD] por cada seguidor que assine o Premium anual com o teu código
 • Creator Group na app (chat, feed dos teus logs e leaderboard) para a comunidade ficar contigo dentro da app
@@ -111,10 +111,10 @@ I’m Filipe, founder of the IGNITE AI app.
 
 We just launched on iOS and Android and I’m reaching out to creators whose content fits what we’re building. Wanted to see if this proposal interests you.
 
-Nutrition and fitness app: snap a meal photo → calories, macros and ingredients in 4–8s, plus workouts and Apple Health / Health Connect.
+We’re a nutrition and fitness app: snap a meal photo and in 4–8s you get calories, macros and ingredients, plus workouts and Apple Health / Health Connect.
 
 In the Creator Program we offer:
-• Free Premium, renewable, so you can test the app while making content
+• Free Premium for 3 months, renewable, so you can test the app while making content
 • Your own code with the lowest annual price for your audience
 • [REWARD] for every follower who subscribes to annual Premium with your code
 • Creator Group in the app (chat, feed of your logs and leaderboard) so your community stays with you inside the app
@@ -134,10 +134,10 @@ Soy Filipe, fundador de la app IGNITE AI.
 
 Acabamos de lanzarla en iOS y Android y estoy contactando a creadores cuyo contenido encaja con lo que estamos construyendo. Quería saber si esta propuesta te interesa.
 
-App de nutrición y fitness: foto de la comida → calorías, macros e ingredientes en 4–8s, más entrenos y Apple Health / Health Connect.
+Somos una app de nutrición y fitness: haces foto a la comida y en 4–8s tienes calorías, macros e ingredientes, más entrenos y Apple Health / Health Connect.
 
 En el Creator Program ofrecemos:
-• Premium gratis, renovable, para probar la app mientras haces contenido
+• Premium gratis durante 3 meses, renovable, para probar la app mientras haces contenido
 • Código tuyo con el precio anual más bajo para tu audiencia
 • [REWARD] por cada seguidor que se suscriba al Premium anual con tu código
 • Creator Group en la app (chat, feed de tus logs y leaderboard) para que tu comunidad esté contigo dentro de la app
@@ -164,10 +164,10 @@ Sou o Filipe, fundador da app IGNITE AI.
 
 Acabámos de a lançar para iOS e Android e estou a contactar criadores cujo conteúdo encaixa no que estamos a construir. Queria saber se esta proposta te interessa.
 
-App de nutrição e fitness: foto da refeição → calorias, macros e ingredientes em 4–8s, mais treinos e Apple Health / Health Connect.
+Somos uma app de nutrição e fitness: tiras foto à refeição e em 4–8s tens calorias, macros e ingredientes, mais treinos e Apple Health / Health Connect.
 
 No Creator Program oferecemos:
-• Premium grátis, renovável, para testares a app enquanto fazes conteúdo
+• Premium grátis durante 3 meses, renovável, para testares a app enquanto fazes conteúdo
 • Código teu com o plano anual mais barato para a tua audiência
 • [REWARD] por cada seguidor que assine o Premium anual com o teu código
 • Creator Group na app (chat, feed dos teus logs e leaderboard) para a comunidade ficar contigo dentro da app
@@ -190,10 +190,10 @@ I’m Filipe, founder of the IGNITE AI app.
 
 We just launched on iOS and Android and I’m reaching out to creators whose content fits what we’re building. Wanted to see if this proposal interests you.
 
-Nutrition and fitness app: snap a meal photo → calories, macros and ingredients in 4–8s, plus workouts and Apple Health / Health Connect.
+We’re a nutrition and fitness app: snap a meal photo and in 4–8s you get calories, macros and ingredients, plus workouts and Apple Health / Health Connect.
 
 In the Creator Program we offer:
-• Free Premium, renewable, so you can test the app while making content
+• Free Premium for 3 months, renewable, so you can test the app while making content
 • Your own code with the lowest annual price for your audience
 • [REWARD] for every follower who subscribes to annual Premium with your code
 • Creator Group in the app (chat, feed of your logs and leaderboard) so your community stays with you inside the app
@@ -216,10 +216,10 @@ Soy Filipe, fundador de la app IGNITE AI.
 
 Acabamos de lanzarla en iOS y Android y estoy contactando a creadores cuyo contenido encaja con lo que estamos construyendo. Quería saber si esta propuesta te interesa.
 
-App de nutrición y fitness: foto de la comida → calorías, macros e ingredientes en 4–8s, más entrenos y Apple Health / Health Connect.
+Somos una app de nutrición y fitness: haces foto a la comida y en 4–8s tienes calorías, macros e ingredientes, más entrenos y Apple Health / Health Connect.
 
 En el Creator Program ofrecemos:
-• Premium gratis, renovable, para probar la app mientras haces contenido
+• Premium gratis durante 3 meses, renovable, para probar la app mientras haces contenido
 • Código tuyo con el precio anual más bajo para tu audiencia
 • [REWARD] por cada seguidor que se suscriba al Premium anual con tu código
 • Creator Group en la app (chat, feed de tus logs y leaderboard) para que tu comunidad esté contigo dentro de la app
@@ -245,9 +245,9 @@ Fundador, IGNITE AI
 
 Sou o Filipe, fundador da app IGNITE AI. Acabámos de a lançar para iOS e Android — queria saber se esta proposta te interessa.
 
-App de nutrição e fitness: foto da refeição → calorias, macros e ingredientes em 4–8s, mais treinos e Apple Health / Health Connect.
+Somos uma app de nutrição e fitness: tiras foto à refeição e em 4–8s tens calorias, macros e ingredientes, mais treinos e Apple Health / Health Connect.
 
-Creator Program: Premium renovável · código teu com o plano anual mais barato · [REWARD]/assinatura anual · Creator Group na app.
+Creator Program: Premium 3 meses (renovável) · código teu com o plano anual mais barato · [REWARD]/assinatura anual · Creator Group na app.
 
 Se fizer sentido, responde e mando a página com os detalhes.
 
@@ -262,9 +262,9 @@ Filipe`,
 
 I’m Filipe, founder of the IGNITE AI app. We just launched on iOS and Android — wanted to see if this proposal interests you.
 
-Nutrition and fitness app: snap a meal photo → calories, macros and ingredients in 4–8s, plus workouts and Apple Health / Health Connect.
+We’re a nutrition and fitness app: snap a meal photo and in 4–8s you get calories, macros and ingredients, plus workouts and Apple Health / Health Connect.
 
-Creator Program: renewable Premium · your code with the lowest annual price · [REWARD]/annual signup · Creator Group in the app.
+Creator Program: 3 months Premium (renewable) · your code with the lowest annual price · [REWARD]/annual signup · Creator Group in the app.
 
 If it makes sense, reply and I’ll send the page with the details.
 
@@ -279,9 +279,9 @@ Filipe`,
 
 Soy Filipe, fundador de la app IGNITE AI. Acabamos de lanzarla en iOS y Android — quería saber si esta propuesta te interesa.
 
-App de nutrición y fitness: foto de la comida → calorías, macros e ingredientes en 4–8s, más entrenos y Apple Health / Health Connect.
+Somos una app de nutrición y fitness: haces foto a la comida y en 4–8s tienes calorías, macros e ingredientes, más entrenos y Apple Health / Health Connect.
 
-Creator Program: Premium renovable · código tuyo con el precio anual más bajo · [REWARD]/suscripción anual · Creator Group en la app.
+Creator Program: Premium 3 meses (renovable) · código tuyo con el precio anual más bajo · [REWARD]/suscripción anual · Creator Group en la app.
 
 Si te encaja, responde y te envío la página con los detalles.
 
@@ -303,7 +303,7 @@ Filipe`,
 Resumo do Programa de Criadores IGNITE AI:
 
 PARA TI
-• Premium de cortesia (~90 dias) para testares a app
+• Premium de cortesia (3 meses) para testares a app
 • Código personalizado (ex.: TEUNOME) só teu
 • [REWARD] por cada seguidor que assine o Premium ANUAL com o teu código
 • Dashboard na app: quem usou o código, recompensas, PayPal
@@ -336,7 +336,7 @@ Qualquer dúvida, estou aqui. Quando te candidatares, diz-me o email da conta IG
 IGNITE AI Creator Program — quick overview:
 
 FOR YOU
-• Complimentary Premium (~90 days) to test the app
+• Complimentary Premium (3 months) to test the app
 • Your personal creator code
 • [REWARD] for every follower who subscribes to ANNUAL Premium with your code
 • In-app dashboard: who used the code, rewards, PayPal
@@ -369,7 +369,7 @@ Any questions, I’m here. When you apply, send me the email of your IGNITE acco
 Programa de Creadores IGNITE AI:
 
 PARA TI
-• Premium de cortesía (~90 días) para probar la app
+• Premium de cortesía (3 meses) para probar la app
 • Código personalizado (ej.: TUNOMBRE) solo tuyo
 • [REWARD] por cada seguidor que se suscriba al Premium ANUAL con tu código
 • Panel en la app: quién usó el código, recompensas, PayPal
@@ -411,7 +411,7 @@ O QUE É A IGNITE AI
 App de nutrição e fitness: registo de refeições (foto, voz, texto), macros, objetivos diários e tracking de progresso.
 
 O QUE RECEBES COMO CREATOR
-• Premium de cortesia para testares (~90 dias após aprovação)
+• Premium de cortesia para testares (3 meses após aprovação)
 • Código de criador personalizado para partilhares com a audiência
 • [REWARD] por cada seguidor que subscreva o plano Premium ANUAL com o teu código
 • Painel na app: utilização do código, recompensas pendentes/pagas, email PayPal
@@ -452,7 +452,7 @@ WHAT IGNITE AI IS
 Nutrition and fitness app: meal logging (photo, voice, text), macros, daily goals and progress tracking.
 
 WHAT YOU GET AS A CREATOR
-• Complimentary Premium to test (~90 days after approval)
+• Complimentary Premium to test (3 months after approval)
 • Your personal creator code to share with your audience
 • [REWARD] for every follower who subscribes to ANNUAL Premium with your code
 • In-app dashboard: code usage, pending/paid rewards, PayPal email
@@ -493,7 +493,7 @@ QUÉ ES IGNITE AI
 App de nutrición y fitness: registro de comidas (foto, voz, texto), macros, objetivos diarios y seguimiento de progreso.
 
 LO QUE RECIBES COMO CREATOR
-• Premium de cortesía para probar (~90 días tras la aprobación)
+• Premium de cortesía para probar (3 meses tras la aprobación)
 • Código de creador personalizado para compartir con tu audiencia
 • [REWARD] por cada seguidor que se suscriba al plan Premium ANUAL con tu código
 • Panel en la app: uso del código, recompensas pendientes/pagadas, email de PayPal
