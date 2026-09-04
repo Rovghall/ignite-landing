@@ -32,9 +32,9 @@ function StoryFrame({
         {title}
       </p>
       <div className="mt-8 flex flex-col gap-6">
-        {blocks.map((block) => (
+        {blocks.map((block, index) => (
           <p
-            key={`${block}-${index}`}
+            key={`${index}-${block.slice(0, 32)}`}
             className="font-sans text-[16px] leading-snug text-white/90 sm:text-[17px]"
           >
             {block}
@@ -151,8 +151,11 @@ export default function IgStoriesAdminPage() {
                 {slide.title}
               </p>
               <div className="mt-[7vh] flex flex-col gap-[4.5vh]">
-                {slide.blocks.map((block) => (
-                  <p key={block} className="font-sans text-[4.2vw] leading-snug text-white/90 sm:text-lg">
+                {slide.blocks.map((block, index) => (
+                  <p
+                    key={`${index}-${block.slice(0, 32)}`}
+                    className="font-sans text-[4.2vw] leading-snug text-white/90 sm:text-lg"
+                  >
                     {block}
                   </p>
                 ))}
