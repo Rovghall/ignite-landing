@@ -37,7 +37,8 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'We built IGNITE AI so tracking food and training doesn’t eat your day.',
           'Most people guess calories, skip logging, or give up after a week of weighing every meal.',
-          'Take a photo. In a couple of seconds you get calories, macros, and ingredients. Log workouts. Sync Apple Health / Health Connect.',
+          'Take a photo. In a couple of seconds you get calories, macros, and ingredients. Log workouts.',
+          'Sync Apple Health / Health Connect: average heart rate, sleep, steps and blood oxygen. All in one.',
           'One place for the plan: lose, maintain, or gain.',
         ],
       },
@@ -78,7 +79,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Photo → calories, macros, ingredients.',
-          'Workouts + Health sync.',
+          'Workouts + Health: heart rate, sleep, steps, blood oxygen.',
           'A calorie plan for your goal.',
           'Share cards if you post. Creator Group if you have an audience.',
           'ignitehub.app',
@@ -93,7 +94,8 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         blocks: [
           'Criámos a IGNITE AI para o tracking de comida e treino não te comer o dia.',
           'A maior parte das pessoas adivinha calorias, desiste de registar, ou cansa-se de pesar tudo.',
-          'Tiras uma foto. Em poucos segundos tens calorias, macros e ingredientes. Registas treinos. Ligas Apple Health / Health Connect.',
+          'Tiras uma foto. Em poucos segundos tens calorias, macros e ingredientes. Registas treinos.',
+          'Ligas Apple Health / Health Connect: frequência cardíaca média, sono, passos e oxigénio no sangue. Tudo num só sítio.',
           'Um sítio para o plano: perder, manter ou ganhar peso.',
         ],
       },
@@ -134,7 +136,7 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         ready: true,
         blocks: [
           'Foto → calorias, macros, ingredientes.',
-          'Treinos + Health sync.',
+          'Treinos + Health: frequência cardíaca, sono, passos, oxigénio no sangue.',
           'Plano calórico para o teu objetivo.',
           'Share cards se publicas. Creator Group se tens audiência.',
           'ignitehub.app',
