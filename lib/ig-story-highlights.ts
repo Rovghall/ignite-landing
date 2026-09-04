@@ -68,9 +68,9 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         title: 'Who’s behind IGNITE?',
         ready: true,
         blocks: [
-          'I’m Filipe, founder of IGNITE AI.',
-          'I built this because I wanted a simple way to see what I eat and how I train, without turning it into a second job.',
-          'If something’s broken or you want the Creator Program: DM me. I actually read them.',
+          'Filipe founded IGNITE AI for people who want to track food and training without it eating the whole day.',
+          'Built for real plates, real workouts, and a goal you can actually follow. Not another app that makes you weigh every meal.',
+          'Something broken, or the Creator Program: send a DM. Every message gets read.',
         ],
       },
       {
@@ -125,9 +125,9 @@ export const IG_STORY_SLIDES: Record<IgHighlightId, Record<IgStoryLang, IgStoryS
         title: 'Quem está por trás?',
         ready: true,
         blocks: [
-          'Sou o Filipe, fundador da IGNITE AI.',
-          'Construí isto porque queria ver o que como e como treino, sem transformar isso num segundo emprego.',
-          'Se algo falhar ou quiseres o Creator Program: manda DM. Eu leio.',
+          'O Filipe fundou a IGNITE AI para quem quer fazer tracking de comida e treino sem isso comer o dia inteiro.',
+          'Feita para pratos a sério, treinos a sério, e um objetivo a que dá para agarrar. Não mais uma app que te manda pesar cada refeição.',
+          'Algo avariado, ou o Creator Program: manda DM. Todas as mensagens são lidas.',
         ],
       },
       {
