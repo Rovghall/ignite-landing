@@ -1,7 +1,8 @@
 'use client'
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from 'react'
+import { FormEvent, type ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
+import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
 import { cn } from '@/lib/utils'
@@ -294,42 +295,105 @@ function formatFollowers(n: number | null): string {
   return String(n)
 }
 
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/).filter(Boolean)
+  if (parts.length === 0) return '?'
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
+  return `${parts[0][0] ?? ''}${parts[1][0] ?? ''}`.toUpperCase()
+}
+
 function statusBadge(status: OutreachStatus): string {
-  if (status === 'contracted')
-    return 'inline-flex rounded-full bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-800'
-  if (status === 'accepted')
-    return 'inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800'
-  if (status === 'in_talk')
-    return 'inline-flex rounded-full bg-sky-50 px-2.5 py-1 text-xs font-bold text-sky-800'
-  if (status === 'contacted')
-    return 'inline-flex rounded-full bg-amber-50 px-2.5 py-1 text-xs font-bold text-amber-800'
-  if (status === 'no_reply')
-    return 'inline-flex rounded-full bg-orange-50 px-2.5 py-1 text-xs font-bold text-orange-800'
+  const base =
+    'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide'
+  if (status === 'contracted') return `${base} bg-violet-100/80 text-violet-800 ring-1 ring-violet-200/70`
+  if (status === 'accepted') return `${base} bg-emerald-100/80 text-emerald-800 ring-1 ring-emerald-200/70`
+  if (status === 'in_talk') return `${base} bg-sky-100/80 text-sky-800 ring-1 ring-sky-200/70`
+  if (status === 'contacted') return `${base} bg-amber-100/80 text-amber-800 ring-1 ring-amber-200/70`
+  if (status === 'no_reply') return `${base} bg-orange-100/80 text-orange-800 ring-1 ring-orange-200/70`
   if (status === 'rejected' || status === 'not_a_fit')
-    return 'inline-flex rounded-full bg-red-50 px-2.5 py-1 text-xs font-bold text-red-700'
-  return 'inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-bold text-foreground/70'
+    return `${base} bg-red-50 text-red-700 ring-1 ring-red-200/70`
+  return `${base} bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200/80`
 }
 
 function applicationBadge(status: OutreachRow['creator_application_status']): {
   label: string
   className: string
 } | null {
+  const base =
+    'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide'
   if (status === 'pending')
-    return {
-      label: 'Candidatou-se',
-      className: 'inline-flex rounded-full bg-blue-50 px-2.5 py-1 text-xs font-bold text-blue-800',
-    }
+    return { label: 'Candidatou-se', className: `${base} bg-blue-100/80 text-blue-800 ring-1 ring-blue-200/70` }
   if (status === 'approved')
     return {
       label: 'Candidatura aprovada',
-      className: 'inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-800',
+      className: `${base} bg-emerald-100/80 text-emerald-800 ring-1 ring-emerald-200/70`,
     }
   if (status === 'rejected')
     return {
       label: 'Candidatura rejeitada',
-      className: 'inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-700',
+      className: `${base} bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200/80`,
     }
   return null
+}
+
+function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }) {
+  const app = applicationBadge(row.creator_application_status)
+  const handle = row.creator_primary_handle?.replace(/^@/, '') || row.ig_handle
+  return (
+    <div className="flex items-start gap-3">
+      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-[11px] font-bold tracking-wide text-zinc-600 ring-1 ring-zinc-200/80">
+        {initials(row.display_name || row.ig_handle || '?')}
+      </div>
+      <div className="min-w-0">
+        <p className="font-semibold tracking-tight text-foreground">{row.display_name || '—'}</p>
+        <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+          {extra}
+          {app ? (
+            <span
+              className={app.className}
+              title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}
+            >
+              {app.label}
+            </span>
+          ) : null}
+        </div>
+        {row.has_creator_application ? (
+          <p className="mt-1 text-[11px] text-muted-foreground">
+            Match{handle ? ` · @${handle}` : ''}
+            {row.creator_applied_at ? ` · ${shortDate(row.creator_applied_at)}` : ''}
+          </p>
+        ) : null}
+        {row.notes ? (
+          <p className="mt-1 line-clamp-2 max-w-[240px] text-[11px] leading-snug text-muted-foreground">
+            {row.notes}
+          </p>
+        ) : null}
+      </div>
+    </div>
+  )
+}
+
+function HandleChips({ row }: { row: OutreachRow }) {
+  const chips: { label: string; value: string }[] = []
+  if (row.ig_handle) chips.push({ label: 'IG', value: `@${row.ig_handle}` })
+  if (row.tiktok_handle) chips.push({ label: 'TT', value: `@${row.tiktok_handle}` })
+  if (row.youtube_handle) chips.push({ label: 'YT', value: row.youtube_handle })
+  if (chips.length === 0) return <span className="text-muted-foreground">—</span>
+  return (
+    <div className="flex flex-col gap-1">
+      {chips.map((chip) => (
+        <span
+          key={`${chip.label}-${chip.value}`}
+          className="inline-flex w-fit items-center gap-1 rounded-full bg-muted/50 px-2 py-0.5 text-[11px] font-medium text-foreground/80"
+        >
+          <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
+            {chip.label}
+          </span>
+          {chip.value}
+        </span>
+      ))}
+    </div>
+  )
 }
 
 function toDatetimeLocal(iso: string | null): string {
@@ -843,59 +907,15 @@ export default function OutreachAdminPage() {
 
   if ((!session || !user) && !demoMode) {
     return (
-      <main className={cn(PAGE_BG, 'px-4 py-10')}>
-        <div className="mx-auto w-full max-w-md">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            IGNITE · Interno
-          </p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">Outreach</h1>
-          <InternalAdminNav active="outreach" className="mt-4" />
-          <p className="mt-2 text-sm text-muted-foreground">
-            CRM de outreach a influenciadores. Separado do programa de creators.
-          </p>
-          <form
-            onSubmit={onSignIn}
-            className="mt-6 flex flex-col gap-3.5 rounded-2xl border border-border bg-card p-6 shadow-[0_12px_40px_rgba(15,23,42,0.06)]"
-          >
-            <label className="flex flex-col gap-2 text-sm font-semibold text-foreground/80">
-              Email
-              <input
-                className={inputClass}
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="username"
-              />
-            </label>
-            <label className="flex flex-col gap-2 text-sm font-semibold text-foreground/80">
-              Palavra-passe
-              <input
-                className={inputClass}
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoComplete="current-password"
-              />
-            </label>
-            {authError ? <p className="text-sm font-semibold text-red-600">{authError}</p> : null}
-            <button
-              type="submit"
-              className="mt-1 rounded-full bg-foreground px-4 py-2.5 text-sm font-bold text-background"
-            >
-              Entrar
-            </button>
-            <button
-              type="button"
-              onClick={() => setDemoMode(true)}
-              className="rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold"
-            >
-              Pré-visualização demo
-            </button>
-          </form>
-        </div>
-      </main>
+      <InternalAdminLogin
+        className={PAGE_BG}
+        email={email}
+        password={password}
+        onEmailChange={setEmail}
+        onPasswordChange={setPassword}
+        onSubmit={onSignIn}
+        authError={authError}
+      />
     )
   }
 
@@ -1136,17 +1156,14 @@ export default function OutreachAdminPage() {
                     .map((row) => {
                       const vip = vipWindow(row.contracted_at)
                       return (
-                        <tr key={row.id} className="border-b border-border/70 last:border-0">
-                          <td className="px-4 py-3 align-top">
-                            <p className="font-bold text-foreground">{row.display_name || '—'}</p>
-                            <div className="mt-1 flex flex-wrap gap-1.5">
-                              <span className={cn(statusBadge('contracted'))}>Contratado</span>
-                              {(() => {
-                                const app = applicationBadge(row.creator_application_status)
-                                if (!app) return null
-                                return <span className={app.className}>{app.label}</span>
-                              })()}
-                            </div>
+                        <tr key={row.id} className="border-b border-border/60 last:border-0 hover:bg-muted/20">
+                          <td className="px-4 py-3.5 align-middle">
+                            <ContactIdentity
+                              row={row}
+                              extra={
+                                <span className={statusBadge('contracted')}>Contratado</span>
+                              }
+                            />
                           </td>
                           <td className="px-4 py-3 align-top text-sm">
                             {countryLabel(row.country_code, row.country_name)}
@@ -1170,11 +1187,11 @@ export default function OutreachAdminPage() {
                             )}
                           </td>
                           <td className="px-4 py-3 align-top">
-                            <div className="flex flex-wrap justify-end gap-1.5">
+                            <div className="flex flex-wrap justify-end gap-1">
                               <button
                                 type="button"
                                 onClick={() => openEdit(row)}
-                                className="rounded-full border border-border px-2.5 py-1 text-xs font-bold"
+                                className="rounded-full px-2.5 py-1 text-xs font-semibold text-foreground/70 hover:bg-muted/70 hover:text-foreground"
                               >
                                 Editar
                               </button>
@@ -1232,60 +1249,12 @@ export default function OutreachAdminPage() {
                     </thead>
                     <tbody>
                       {items.map((row) => (
-                        <tr key={row.id} className="border-b border-border/70 last:border-0">
-                          <td className="px-4 py-3 align-top">
-                            <p className="font-bold text-foreground">
-                              {row.display_name || '—'}
-                            </p>
-                            <div className="mt-1 flex flex-wrap gap-1.5">
-                              <span className={statusBadge(row.status)}>
-                                {STATUS_LABELS[row.status]}
-                              </span>
-                              {(() => {
-                                const app = applicationBadge(row.creator_application_status)
-                                if (!app) return null
-                                return (
-                                  <span className={app.className} title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}>
-                                    {app.label}
-                                  </span>
-                                )
-                              })()}
-                            </div>
-                            {row.has_creator_application ? (
-                              <p className="mt-1 text-xs text-blue-800">
-                                Handle match
-                                {row.creator_primary_handle ? ` · @${row.creator_primary_handle.replace(/^@/, '')}` : ''}
-                                {row.creator_applied_at ? ` · ${shortDate(row.creator_applied_at)}` : ''}
-                              </p>
-                            ) : null}
-                            {row.notes ? (
-                              <p className="mt-0.5 line-clamp-2 max-w-[220px] text-xs text-muted-foreground">
-                                {row.notes}
-                              </p>
-                            ) : null}
+                        <tr key={row.id} className="border-b border-border/60 last:border-0 hover:bg-muted/20">
+                          <td className="px-4 py-3.5 align-middle">
+                            <ContactIdentity row={row} />
                           </td>
-                          <td className="px-4 py-3 align-top text-xs">
-                            {row.ig_handle ? (
-                              <p>
-                                <span className="font-semibold text-muted-foreground">IG</span>{' '}
-                                @{row.ig_handle}
-                              </p>
-                            ) : null}
-                            {row.tiktok_handle ? (
-                              <p>
-                                <span className="font-semibold text-muted-foreground">TT</span>{' '}
-                                @{row.tiktok_handle}
-                              </p>
-                            ) : null}
-                            {row.youtube_handle ? (
-                              <p>
-                                <span className="font-semibold text-muted-foreground">YT</span>{' '}
-                                {row.youtube_handle}
-                              </p>
-                            ) : null}
-                            {!row.ig_handle && !row.tiktok_handle && !row.youtube_handle ? (
-                              <span className="text-muted-foreground">—</span>
-                            ) : null}
+                          <td className="px-4 py-3.5 align-middle">
+                            <HandleChips row={row} />
                           </td>
                           <td className="px-4 py-3 align-top text-xs tabular-nums">
                             <p>IG {formatFollowers(row.followers_ig)}</p>
@@ -1310,11 +1279,11 @@ export default function OutreachAdminPage() {
                             {shortDate(row.last_contacted_at)}
                           </td>
                           <td className="px-4 py-3 align-top">
-                            <div className="flex flex-wrap justify-end gap-1.5">
+                            <div className="flex flex-wrap justify-end gap-1">
                               <button
                                 type="button"
                                 onClick={() => openEdit(row)}
-                                className="rounded-full border border-border px-2.5 py-1 text-xs font-bold"
+                                className="rounded-full px-2.5 py-1 text-xs font-semibold text-foreground/70 hover:bg-muted/70 hover:text-foreground"
                               >
                                 Editar
                               </button>

@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useMemo, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
+import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { InternalUnitEconomicsDashboard } from '@/components/internal-unit-economics-dashboard'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
@@ -77,59 +78,15 @@ export default function UnitEconomicsAdminPage() {
 
   if ((!session || !user) && !demoMode) {
     return (
-      <main className={cn(PAGE_BG, 'px-4 py-10')}>
-        <div className="mx-auto w-full max-w-md">
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
-            IGNITE · Interno
-          </p>
-          <h1 className="mt-2 font-display text-3xl font-extrabold tracking-tight">Unit economics</h1>
-          <InternalAdminNav active="economics" className="mt-4" />
-          <p className="mt-2 text-sm text-muted-foreground">
-            Simulador de margens, conversão e escala de subscritores. Só equipa interna.
-          </p>
-          <form
-            onSubmit={onSignIn}
-            className="mt-6 flex flex-col gap-3.5 rounded-2xl border border-border bg-card p-6 shadow-[0_12px_40px_rgba(15,23,42,0.06)]"
-          >
-            <label className="flex flex-col gap-2 text-sm font-semibold text-foreground/80">
-              Email
-              <input
-                className="rounded-xl border border-border bg-muted/40 px-3.5 py-3 text-base outline-none focus:border-foreground/30"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                autoComplete="username"
-              />
-            </label>
-            <label className="flex flex-col gap-2 text-sm font-semibold text-foreground/80">
-              Palavra-passe
-              <input
-                className="rounded-xl border border-border bg-muted/40 px-3.5 py-3 text-base outline-none focus:border-foreground/30"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                autoComplete="current-password"
-              />
-            </label>
-            {authError ? <p className="text-sm font-semibold text-red-600">{authError}</p> : null}
-            <button
-              type="submit"
-              className="mt-1 rounded-full bg-foreground px-4 py-2.5 text-sm font-bold text-background"
-            >
-              Entrar
-            </button>
-            <button
-              type="button"
-              onClick={() => setDemoMode(true)}
-              className="rounded-full border border-border bg-card px-4 py-2 text-sm font-semibold"
-            >
-              Pré-visualização demo
-            </button>
-          </form>
-        </div>
-      </main>
+      <InternalAdminLogin
+        className={PAGE_BG}
+        email={email}
+        password={password}
+        onEmailChange={setEmail}
+        onPasswordChange={setPassword}
+        onSubmit={onSignIn}
+        authError={authError}
+      />
     )
   }
 
