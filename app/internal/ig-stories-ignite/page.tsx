@@ -20,18 +20,31 @@ const PAGE_BG =
 const APP_DARK_CANVAS =
   'radial-gradient(120% 78% at 100% 0%, #484450 0%, transparent 46%), linear-gradient(180deg, #16161C 0%, #0C0C12 100%)'
 
+function StoryLogo() {
+  return (
+    <img
+      src="/ignite-logo.png"
+      alt="IGNITE"
+      className="mx-auto mb-7 h-[72px] w-[72px] object-contain mix-blend-screen sm:mb-8 sm:h-20 sm:w-20"
+    />
+  )
+}
+
 function StoryFrame({
   title,
   blocks,
+  showLogo,
 }: {
   title: string
   blocks: string[]
+  showLogo?: boolean
 }) {
   return (
     <div
       className="relative mx-auto flex aspect-[9/16] w-full max-w-[420px] flex-col justify-center overflow-hidden rounded-[28px] px-8 py-16 text-center shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
       style={{ background: APP_DARK_CANVAS }}
     >
+      {showLogo ? <StoryLogo /> : null}
       <p className="font-sans text-[28px] font-semibold leading-tight tracking-tight text-white sm:text-[32px]">
         {title}
       </p>
@@ -154,6 +167,13 @@ export default function IgStoriesAdminPage() {
             style={{ background: APP_DARK_CANVAS }}
           >
             <div className="max-w-[520px]">
+              {slide.id === 'why' ? (
+                <img
+                  src="/ignite-logo.png"
+                  alt="IGNITE"
+                  className="mx-auto mb-[4.5vh] h-[14vw] max-h-20 w-[14vw] max-w-20 object-contain mix-blend-screen"
+                />
+              ) : null}
               <p className="font-sans text-[8.2vw] font-semibold leading-tight tracking-tight text-white sm:text-4xl">
                 {slide.title}
               </p>
@@ -262,7 +282,13 @@ export default function IgStoriesAdminPage() {
           </p>
         ) : null}
 
-        {slide ? <StoryFrame title={slide.title} blocks={slide.blocks} /> : null}
+        {slide ? (
+          <StoryFrame
+            title={slide.title}
+            blocks={slide.blocks}
+            showLogo={highlight === 'whos-ignite' && slide.id === 'why'}
+          />
+        ) : null}
 
         <div className="mt-4 flex justify-between">
           <button
