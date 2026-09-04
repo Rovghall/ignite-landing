@@ -66,7 +66,12 @@ function StoryFrame({
         <ResearchLayout slide={slide} />
       ) : (
         <>
-          <p className="font-sans text-[28px] font-semibold leading-tight tracking-tight text-white sm:text-[32px]">
+          <p
+            className={cn(
+              'font-sans font-semibold leading-tight tracking-tight text-white',
+              slide.title.length > 42 ? 'text-[20px] sm:text-[24px]' : 'text-[28px] sm:text-[32px]',
+            )}
+          >
             {slide.title}
           </p>
           <div className="mt-8 flex flex-col gap-6">
