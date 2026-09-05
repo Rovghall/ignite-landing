@@ -295,13 +295,6 @@ function formatFollowers(n: number | null): string {
   return String(n)
 }
 
-function initials(name: string): string {
-  const parts = name.trim().split(/\s+/).filter(Boolean)
-  if (parts.length === 0) return '?'
-  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
-  return `${parts[0][0] ?? ''}${parts[1][0] ?? ''}`.toUpperCase()
-}
-
 function statusBadge(status: OutreachStatus): string {
   const base =
     'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide'
@@ -340,10 +333,7 @@ function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }
   const app = applicationBadge(row.creator_application_status)
   const handle = row.creator_primary_handle?.replace(/^@/, '') || row.ig_handle
   return (
-    <div className="flex flex-col items-center gap-2 text-center">
-      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-[11px] font-bold tracking-wide text-zinc-600 ring-1 ring-zinc-200/80">
-        {initials(row.display_name || row.ig_handle || '?')}
-      </div>
+    <div className="flex flex-col items-center gap-1 text-center">
       <div className="min-w-0 w-full">
         <p className="font-semibold tracking-tight text-foreground">{row.display_name || '—'}</p>
         {extra || app ? (
