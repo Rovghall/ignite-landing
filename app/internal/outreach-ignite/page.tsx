@@ -576,10 +576,12 @@ function StatCard({ label, value }: { label: string; value: string }) {
 
 function Field({
   label,
+  hint,
   children,
   className,
 }: {
   label: string
+  hint?: string
   children: React.ReactNode
   className?: string
 }) {
@@ -587,6 +589,7 @@ function Field({
     <label className={cn('flex flex-col gap-1.5 text-sm font-semibold text-foreground/80', className)}>
       {label}
       {children}
+      {hint ? <span className="text-[11px] font-medium text-muted-foreground">{hint}</span> : null}
     </label>
   )
 }
@@ -1592,7 +1595,10 @@ export default function OutreachAdminPage() {
                   onChange={(e) => setForm((f) => ({ ...f, contracted_at: e.target.value }))}
                 />
               </Field>
-              <Field label="Owner (email)">
+              <Field
+                label="Responsável (teu email)"
+                hint="Quem trata deste contacto na IGNITE. Não é o email da creator."
+              >
                 <input
                   className={inputClass}
                   type="email"
