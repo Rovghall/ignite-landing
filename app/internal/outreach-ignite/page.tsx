@@ -5,7 +5,7 @@ import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
-import { convertFromUsd, convertToUsd, DEFAULT_INPUTS, type DisplayCurrency } from '@/lib/unit-economics-model'
+import { convertFromUsd, DEFAULT_INPUTS, type DisplayCurrency } from '@/lib/unit-economics-model'
 import { getCreatorOutreachMoney } from '@/lib/creator-outreach-currency'
 import { cn } from '@/lib/utils'
 
@@ -122,8 +122,8 @@ type OutreachCodeStats = {
   codeUsers: number
   annuals: number
   cancellations: number
-  pendingUsd: number
-  paidUsd: number
+  pendingN: number
+  paidN: number
 }
 
 type ReferralRewardHit = {
@@ -137,13 +137,7 @@ type ReferralRewardHit = {
 }
 
 function emptyCodeStats(): OutreachCodeStats {
-  return { codeUsers: 0, annuals: 0, cancellations: 0, pendingUsd: 0, paidUsd: 0 }
-}
-
-function rewardAmountUsd(row: ReferralRewardHit) {
-  const amount = (Number(row.amount_cents) || 0) / 100
-  const currency = (row.currency === 'EUR' || row.currency === 'GBP' ? row.currency : 'USD') as DisplayCurrency
-  return convertToUsd(amount, currency, DEFAULT_INPUTS)
+  return { codeUsers: 0, annuals: 0, cancellations: 0, pendingN: 0, paidN: 0 }
 }
 
 function summarizeCodeStats(rewards: ReferralRewardHit[], row: OutreachRow, userId?: string | null): OutreachCodeStats {
@@ -160,9 +154,9 @@ function summarizeCodeStats(rewards: ReferralRewardHit[], row: OutreachRow, user
       stats.cancellations += 1
       continue
     }
-    if (hit.reward_status === 'paid') stats.paidUsd += rewardAmountUsd(hit)
+    if (hit.reward_status === 'paid') stats.paidN += 1
     else if (hit.reward_status === 'pending' || hit.reward_status === 'holding' || hit.reward_status === 'requested') {
-      stats.pendingUsd += rewardAmountUsd(hit)
+      stats.pendingN += 1
     }
   }
   return stats
@@ -173,6 +167,13 @@ function formatMoney(amountUsd: number, currency: DisplayCurrency) {
   const symbol = currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$'
   if (amount === 0) return `${symbol}0`
   if (amount < 1) return `${symbol}${amount.toFixed(3)}`
+  return `${symbol}${amount.toFixed(2)}`
+}
+
+function formatListMoney(amount: number, currency: DisplayCurrency) {
+  const symbol = currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$'
+  if (amount === 0) return `${symbol}0`
+  if (Math.abs(amount) < 1) return `${symbol}${amount.toFixed(3)}`
   return `${symbol}${amount.toFixed(2)}`
 }
 
@@ -1199,8 +1200,8 @@ export default function OutreachAdminPage() {
         codeUsers: 1,
         annuals: 1,
         cancellations: 0,
-        pendingUsd: 10,
-        paidUsd: 0,
+        pendingN: 1,
+        paidN: 0,
       })
       return
     }
@@ -2051,14 +2052,12 @@ export default function OutreachAdminPage() {
 
                 {(() => {
                   const pack = getCreatorOutreachMoney(usageCurrency)
-                  const revenueUsd = convertToUsd(
-                    codeStats.annuals * pack.annualAmount,
-                    usageCurrency,
-                    DEFAULT_INPUTS,
-                  )
-                  const snapUsd = usage.total * ANALYSIS_COST_USD
-                  const payoutUsd = codeStats.paidUsd + codeStats.pendingUsd
-                  const profitUsd = revenueUsd - payoutUsd - snapUsd
+                  const revenue = codeStats.annuals * pack.annualAmount
+                  const paid = codeStats.paidN * pack.rewardAmount
+                  const pending = codeStats.pendingN * pack.rewardAmount
+                  const payout = paid + pending
+                  const snapCost = convertFromUsd(usage.total * ANALYSIS_COST_USD, usageCurrency, DEFAULT_INPUTS)
+                  const profit = revenue - payout - snapCost
                   return (
                     <section>
                       <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
@@ -2070,7 +2069,7 @@ export default function OutreachAdminPage() {
                             Receita anual
                           </p>
                           <p className="mt-1 text-lg font-extrabold tabular-nums">
-                            {formatMoney(revenueUsd, usageCurrency)}
+                            {formatListMoney(revenue, usageCurrency)}
                           </p>
                           <p className="text-[11px] text-muted-foreground">
                             {codeStats.annuals} × {pack.annual}
@@ -2081,11 +2080,11 @@ export default function OutreachAdminPage() {
                             Payout creator
                           </p>
                           <p className="mt-1 text-lg font-extrabold tabular-nums">
-                            {formatMoney(payoutUsd, usageCurrency)}
+                            {formatListMoney(payout, usageCurrency)}
                           </p>
                           <p className="text-[11px] text-muted-foreground">
-                            pago {formatMoney(codeStats.paidUsd, usageCurrency)} · pendente{' '}
-                            {formatMoney(codeStats.pendingUsd, usageCurrency)}
+                            pago {formatListMoney(paid, usageCurrency)} · pendente{' '}
+                            {formatListMoney(pending, usageCurrency)}
                           </p>
                         </div>
                       </div>
@@ -2094,10 +2093,11 @@ export default function OutreachAdminPage() {
                           Lucro estimado
                         </p>
                         <p className="mt-1 text-2xl font-extrabold tabular-nums">
-                          {formatMoney(profitUsd, usageCurrency)}
+                          {formatListMoney(profit, usageCurrency)}
                         </p>
                         <p className="mt-1 text-[11px] leading-snug text-background/70">
                           Anuais − payout (pago + pendente) − custo das análises. Sem taxas da store.
+                          Payout é sempre {pack.reward} por anual.
                         </p>
                       </div>
                     </section>
