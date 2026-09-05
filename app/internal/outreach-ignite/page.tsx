@@ -5,7 +5,8 @@ import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
-import { convertFromUsd, DEFAULT_INPUTS, type DisplayCurrency } from '@/lib/unit-economics-model'
+import { convertFromUsd, convertToUsd, DEFAULT_INPUTS, type DisplayCurrency } from '@/lib/unit-economics-model'
+import { getCreatorOutreachMoney } from '@/lib/creator-outreach-currency'
 import { cn } from '@/lib/utils'
 
 type OutreachStatus =
@@ -108,12 +109,63 @@ const USAGE_CURRENCIES: { id: DisplayCurrency; label: string }[] = [
 
 type OutreachUsage = {
   linked: boolean
+  user_id?: string | null
   snap_track: number
   snap_cook: number
   total: number
   last_snap_at: string | null
   vip_start: string | null
   vip_end: string | null
+}
+
+type OutreachCodeStats = {
+  codeUsers: number
+  annuals: number
+  cancellations: number
+  pendingUsd: number
+  paidUsd: number
+}
+
+type ReferralRewardHit = {
+  referrer_id: string
+  code_used?: string | null
+  reward_status: string
+  amount_cents: number
+  currency: string
+  annual_purchased_at: string | null
+  refunded_at: string | null
+}
+
+function emptyCodeStats(): OutreachCodeStats {
+  return { codeUsers: 0, annuals: 0, cancellations: 0, pendingUsd: 0, paidUsd: 0 }
+}
+
+function rewardAmountUsd(row: ReferralRewardHit) {
+  const amount = (Number(row.amount_cents) || 0) / 100
+  const currency = (row.currency === 'EUR' || row.currency === 'GBP' ? row.currency : 'USD') as DisplayCurrency
+  return convertToUsd(amount, currency, DEFAULT_INPUTS)
+}
+
+function summarizeCodeStats(rewards: ReferralRewardHit[], row: OutreachRow, userId?: string | null): OutreachCodeStats {
+  const code = normalizeAssignedCode(row.assigned_code || row.creator_code || '')
+  const stats = emptyCodeStats()
+  for (const hit of rewards) {
+    const hitCode = normalizeAssignedCode(hit.code_used ?? '')
+    const matchUser = Boolean(userId && hit.referrer_id === userId)
+    const matchCode = Boolean(code && hitCode === code)
+    if (!matchUser && !matchCode) continue
+    stats.codeUsers += 1
+    if (hit.annual_purchased_at) stats.annuals += 1
+    if (hit.refunded_at || hit.reward_status === 'cancelled' || hit.reward_status === 'refunded') {
+      stats.cancellations += 1
+      continue
+    }
+    if (hit.reward_status === 'paid') stats.paidUsd += rewardAmountUsd(hit)
+    else if (hit.reward_status === 'pending' || hit.reward_status === 'holding' || hit.reward_status === 'requested') {
+      stats.pendingUsd += rewardAmountUsd(hit)
+    }
+  }
+  return stats
 }
 
 function formatMoney(amountUsd: number, currency: DisplayCurrency) {
@@ -875,6 +927,7 @@ export default function OutreachAdminPage() {
   const [usageLoading, setUsageLoading] = useState(false)
   const [usageError, setUsageError] = useState<string | null>(null)
   const [usageCurrency, setUsageCurrency] = useState<DisplayCurrency>('EUR')
+  const [codeStats, setCodeStats] = useState<OutreachCodeStats>(emptyCodeStats())
 
   useEffect(() => {
     if (!supabase) return
@@ -1122,15 +1175,17 @@ export default function OutreachAdminPage() {
     setUsage(null)
     setUsageError(null)
     setUsageLoading(false)
+    setCodeStats(emptyCodeStats())
   }
 
   async function openUsage(row: OutreachRow) {
     setUsageRow(row)
     setUsage(null)
     setUsageError(null)
+    setCodeStats(emptyCodeStats())
     if (demoMode) {
       setUsage({
-        linked: Boolean(row.has_creator_application),
+        linked: Boolean(row.has_creator_application || row.assigned_code),
         snap_track: row.has_creator_application ? 48 : 0,
         snap_cook: row.has_creator_application ? 12 : 0,
         total: row.has_creator_application ? 60 : 0,
@@ -1140,6 +1195,13 @@ export default function OutreachAdminPage() {
         vip_start: row.contracted_at,
         vip_end: vipWindow(row).end?.toISOString() ?? null,
       })
+      setCodeStats({
+        codeUsers: 1,
+        annuals: 1,
+        cancellations: 0,
+        pendingUsd: 10,
+        paidUsd: 0,
+      })
       return
     }
     if (!supabase) {
@@ -1147,10 +1209,13 @@ export default function OutreachAdminPage() {
       return
     }
     setUsageLoading(true)
-    const { data, error } = await supabase.rpc('admin_influencer_outreach_usage', { p_id: row.id })
+    const [usageRes, rewardsRes] = await Promise.all([
+      supabase.rpc('admin_influencer_outreach_usage', { p_id: row.id }),
+      supabase.rpc('admin_list_referral_rewards', { p_filter: 'all', p_source: 'creator' }),
+    ])
     setUsageLoading(false)
-    if (error) {
-      const msg = error.message || ''
+    if (usageRes.error) {
+      const msg = usageRes.error.message || ''
       setUsageError(
         /could not find the function|schema cache|does not exist/i.test(msg)
           ? 'RPC em falta — aplica a migration admin_influencer_outreach_usage no Supabase.'
@@ -1158,7 +1223,7 @@ export default function OutreachAdminPage() {
       )
       return
     }
-    const payload = data as (OutreachUsage & { ok?: boolean; error?: string }) | null
+    const payload = usageRes.data as (OutreachUsage & { ok?: boolean; error?: string }) | null
     if (!payload?.ok) {
       setUsageError(
         payload?.error === 'forbidden'
@@ -1167,15 +1232,21 @@ export default function OutreachAdminPage() {
       )
       return
     }
-    setUsage({
+    const nextUsage: OutreachUsage = {
       linked: Boolean(payload.linked),
+      user_id: payload.user_id ?? null,
       snap_track: Number(payload.snap_track) || 0,
       snap_cook: Number(payload.snap_cook) || 0,
       total: Number(payload.total) || 0,
       last_snap_at: payload.last_snap_at ?? null,
       vip_start: payload.vip_start ?? row.contracted_at,
       vip_end: payload.vip_end ?? vipWindow(row).end?.toISOString() ?? null,
-    })
+    }
+    setUsage(nextUsage)
+    const rewardsPayload = rewardsRes.data as { ok?: boolean; rewards?: ReferralRewardHit[] } | null
+    if (!rewardsRes.error && rewardsPayload?.ok && Array.isArray(rewardsPayload.rewards)) {
+      setCodeStats(summarizeCodeStats(rewardsPayload.rewards, row, nextUsage.user_id))
+    }
   }
 
   async function onSave(e: FormEvent) {
@@ -1857,7 +1928,7 @@ export default function OutreachAdminPage() {
           onClick={closeUsage}
         >
           <div
-            className="w-full max-w-md rounded-2xl border border-border bg-card p-5 shadow-2xl sm:p-6"
+            className="max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-border bg-card p-5 shadow-2xl sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-start justify-between gap-3">
@@ -1866,9 +1937,7 @@ export default function OutreachAdminPage() {
                   {usageRow.display_name || 'Uso VIP'}
                 </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Snap Track e Snap Cook na janela VIP de {VIP_DAYS} dias.
-                  {' '}
-                  {formatMoney(ANALYSIS_COST_USD, usageCurrency)} por análise.
+                  Análises, código e dinheiro deste creator. A moeda só muda a visualização.
                 </p>
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {USAGE_CURRENCIES.map((item) => (
@@ -1900,44 +1969,140 @@ export default function OutreachAdminPage() {
               <p className="text-sm text-muted-foreground">A carregar…</p>
             ) : usageError ? (
               <p className="text-sm font-semibold text-red-600">{usageError}</p>
-            ) : usage && !usage.linked ? (
-              <p className="text-sm text-muted-foreground">
-                Sem conta na app ligada a este contacto. Só dá para contar quando há candidatura.
-              </p>
             ) : usage ? (
-              <div className="space-y-3">
-                <p className="text-xs text-muted-foreground">
-                  {shortDate(usage.vip_start)} → {shortDate(usage.vip_end)}
-                  {usage.last_snap_at ? ` · último snap ${shortDate(usage.last_snap_at)}` : ''}
-                </p>
-                <div className="grid grid-cols-2 gap-2">
-                  <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      Snap Track
-                    </p>
-                    <p className="mt-1 text-2xl font-extrabold tabular-nums">{usage.snap_track}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {formatMoney(usage.snap_track * ANALYSIS_COST_USD, usageCurrency)}
-                    </p>
-                  </div>
-                  <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
-                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                      Snap Cook
-                    </p>
-                    <p className="mt-1 text-2xl font-extrabold tabular-nums">{usage.snap_cook}</p>
-                    <p className="text-xs text-muted-foreground">
-                      {formatMoney(usage.snap_cook * ANALYSIS_COST_USD, usageCurrency)}
-                    </p>
-                  </div>
-                </div>
-                <div className="rounded-xl border border-foreground/15 bg-foreground px-3 py-3 text-background">
-                  <p className="text-[11px] font-semibold uppercase tracking-wide text-background/70">
-                    Total estimado
+              <div className="space-y-4">
+                <section>
+                  <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                    Estado
                   </p>
-                  <p className="mt-1 text-2xl font-extrabold tabular-nums">
-                    {usage.total} análises · {formatMoney(usage.total * ANALYSIS_COST_USD, usageCurrency)}
+                  <StatusPills row={usageRow} />
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    VIP {shortDate(usage.vip_start)} → {shortDate(usage.vip_end)}
+                    {usage.last_snap_at ? ` · último snap ${shortDate(usage.last_snap_at)}` : ''}
+                    {usageRow.assigned_code || usageRow.creator_code
+                      ? ` · código ${normalizeAssignedCode(usageRow.assigned_code || usageRow.creator_code || '')}`
+                      : ''}
                   </p>
-                </div>
+                </section>
+
+                <section>
+                  <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                    Análises (custo teu)
+                  </p>
+                  {usage.linked ? (
+                    <>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                            Snap Track
+                          </p>
+                          <p className="mt-1 text-2xl font-extrabold tabular-nums">{usage.snap_track}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {formatMoney(usage.snap_track * ANALYSIS_COST_USD, usageCurrency)}
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                            Snap Cook
+                          </p>
+                          <p className="mt-1 text-2xl font-extrabold tabular-nums">{usage.snap_cook}</p>
+                          <p className="text-xs text-muted-foreground">
+                            {formatMoney(usage.snap_cook * ANALYSIS_COST_USD, usageCurrency)}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="mt-2 text-xs text-muted-foreground">
+                        {formatMoney(ANALYSIS_COST_USD, usageCurrency)} por análise · {usage.total} no total ·{' '}
+                        {formatMoney(usage.total * ANALYSIS_COST_USD, usageCurrency)}
+                      </p>
+                    </>
+                  ) : (
+                    <p className="text-sm text-muted-foreground">
+                      Sem conta da app ligada. Não dá para contar snaps.
+                    </p>
+                  )}
+                </section>
+
+                <section>
+                  <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                    Código e referrals
+                  </p>
+                  <div className="grid grid-cols-3 gap-2">
+                    <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Usaram o código
+                      </p>
+                      <p className="mt-1 text-2xl font-extrabold tabular-nums">{codeStats.codeUsers}</p>
+                    </div>
+                    <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Anual
+                      </p>
+                      <p className="mt-1 text-2xl font-extrabold tabular-nums">{codeStats.annuals}</p>
+                    </div>
+                    <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Cancelamentos
+                      </p>
+                      <p className="mt-1 text-2xl font-extrabold tabular-nums">{codeStats.cancellations}</p>
+                    </div>
+                  </div>
+                </section>
+
+                {(() => {
+                  const pack = getCreatorOutreachMoney(usageCurrency)
+                  const revenueUsd = convertToUsd(
+                    codeStats.annuals * pack.annualAmount,
+                    usageCurrency,
+                    DEFAULT_INPUTS,
+                  )
+                  const snapUsd = usage.total * ANALYSIS_COST_USD
+                  const payoutUsd = codeStats.paidUsd + codeStats.pendingUsd
+                  const profitUsd = revenueUsd - payoutUsd - snapUsd
+                  return (
+                    <section>
+                      <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                        Dinheiro
+                      </p>
+                      <div className="grid grid-cols-2 gap-2">
+                        <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                            Receita anual
+                          </p>
+                          <p className="mt-1 text-lg font-extrabold tabular-nums">
+                            {formatMoney(revenueUsd, usageCurrency)}
+                          </p>
+                          <p className="text-[11px] text-muted-foreground">
+                            {codeStats.annuals} × {pack.annual}
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                            Payout creator
+                          </p>
+                          <p className="mt-1 text-lg font-extrabold tabular-nums">
+                            {formatMoney(payoutUsd, usageCurrency)}
+                          </p>
+                          <p className="text-[11px] text-muted-foreground">
+                            pago {formatMoney(codeStats.paidUsd, usageCurrency)} · pendente{' '}
+                            {formatMoney(codeStats.pendingUsd, usageCurrency)}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="mt-2 rounded-xl border border-foreground/15 bg-foreground px-3 py-3 text-background">
+                        <p className="text-[11px] font-semibold uppercase tracking-wide text-background/70">
+                          Lucro estimado
+                        </p>
+                        <p className="mt-1 text-2xl font-extrabold tabular-nums">
+                          {formatMoney(profitUsd, usageCurrency)}
+                        </p>
+                        <p className="mt-1 text-[11px] leading-snug text-background/70">
+                          Anuais − payout (pago + pendente) − custo das análises. Sem taxas da store.
+                        </p>
+                      </div>
+                    </section>
+                  )
+                })()}
               </div>
             ) : null}
           </div>
