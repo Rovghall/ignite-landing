@@ -41,6 +41,7 @@ type OutreachRow = {
   creator_display_name: string | null
   creator_primary_handle: string | null
   has_creator_application: boolean
+  creator_code: string | null
   contact_email: string
   owner_email: string
   created_at: string
@@ -159,6 +160,7 @@ function emptyCreatorMatchFields(): Pick<
   | 'creator_display_name'
   | 'creator_primary_handle'
   | 'has_creator_application'
+  | 'creator_code'
 > {
   return {
     creator_application_id: null,
@@ -168,6 +170,7 @@ function emptyCreatorMatchFields(): Pick<
     creator_display_name: null,
     creator_primary_handle: null,
     has_creator_application: false,
+    creator_code: null,
   }
 }
 
@@ -216,6 +219,7 @@ const DEMO_ROWS: OutreachRow[] = [
     creator_display_name: 'Ana Fitness',
     creator_primary_handle: 'ana.fit.pt',
     has_creator_application: true,
+    creator_code: null,
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -310,6 +314,7 @@ const DEMO_ROWS: OutreachRow[] = [
     creator_display_name: 'Sofia Nutri',
     creator_primary_handle: 'sofianutri',
     has_creator_application: true,
+    creator_code: 'SOFIA20',
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -376,7 +381,11 @@ function ContactIdentity({
   onNameClick?: () => void
 }) {
   const app = applicationBadge(row.creator_application_status)
-  const handle = row.creator_primary_handle?.replace(/^@/, '') || row.ig_handle
+  const codeLabel = row.creator_code?.trim()
+    ? row.creator_code.trim().toUpperCase()
+    : row.has_creator_application
+      ? 'Sem código'
+      : null
   const nameRow = (
     <span className="inline-flex items-center justify-center gap-1.5 font-semibold tracking-tight text-foreground">
       {onNameClick ? (
@@ -431,10 +440,15 @@ function ContactIdentity({
             {app.label}
           </span>
         ) : null}
-        {row.has_creator_application ? (
-          <span className="text-[11px] text-muted-foreground">
-            Match{handle ? ` · @${handle}` : ''}
-            {row.creator_applied_at ? ` · ${shortDate(row.creator_applied_at)}` : ''}
+        {codeLabel ? (
+          <span
+            className={cn(
+              'text-[11px] leading-snug',
+              row.creator_code ? 'font-mono font-semibold tracking-wide text-foreground' : 'text-muted-foreground',
+            )}
+            title={row.creator_code ? `Código ${row.creator_code}` : 'Ainda sem código atribuído'}
+          >
+            {codeLabel}
           </span>
         ) : null}
         {row.notes ? (
@@ -464,10 +478,15 @@ function ContactIdentity({
             ) : null}
           </div>
         ) : null}
-        {row.has_creator_application ? (
-          <p className="mt-1 text-[11px] text-muted-foreground">
-            Match{handle ? ` · @${handle}` : ''}
-            {row.creator_applied_at ? ` · ${shortDate(row.creator_applied_at)}` : ''}
+        {codeLabel ? (
+          <p
+            className={cn(
+              'mt-1 text-[11px]',
+              row.creator_code ? 'font-mono font-semibold tracking-wide text-foreground' : 'text-muted-foreground',
+            )}
+            title={row.creator_code ? `Código ${row.creator_code}` : 'Ainda sem código atribuído'}
+          >
+            {codeLabel}
           </p>
         ) : null}
         {row.notes ? (
@@ -825,6 +844,7 @@ export default function OutreachAdminPage() {
         creator_display_name: row.creator_display_name ?? null,
         creator_primary_handle: row.creator_primary_handle ?? null,
         has_creator_application: Boolean(row.has_creator_application || row.creator_application_id),
+        creator_code: row.creator_code ?? null,
         contact_email: row.contact_email ?? '',
       })),
     )
@@ -883,6 +903,7 @@ export default function OutreachAdminPage() {
         row.contact_email,
         row.owner_email,
         row.creator_primary_handle,
+        row.creator_code,
       ]
         .join(' ')
         .toLowerCase()
@@ -1060,6 +1081,7 @@ export default function OutreachAdminPage() {
                     creator_display_name: prev.creator_display_name,
                     creator_primary_handle: prev.creator_primary_handle,
                     has_creator_application: prev.has_creator_application,
+                    creator_code: prev.creator_code,
                   }
                 : {}
             })()
