@@ -120,10 +120,9 @@ type OutreachUsage = {
 
 type OutreachCodeStats = {
   codeUsers: number
-  annuals: number
+  annualPending: number
+  annualCleared: number
   cancellations: number
-  pendingN: number
-  paidN: number
 }
 
 type ReferralRewardHit = {
@@ -134,10 +133,11 @@ type ReferralRewardHit = {
   currency: string
   annual_purchased_at: string | null
   refunded_at: string | null
+  payout_eligible?: boolean
 }
 
 function emptyCodeStats(): OutreachCodeStats {
-  return { codeUsers: 0, annuals: 0, cancellations: 0, pendingN: 0, paidN: 0 }
+  return { codeUsers: 0, annualPending: 0, annualCleared: 0, cancellations: 0 }
 }
 
 function summarizeCodeStats(rewards: ReferralRewardHit[], row: OutreachRow, userId?: string | null): OutreachCodeStats {
@@ -149,15 +149,13 @@ function summarizeCodeStats(rewards: ReferralRewardHit[], row: OutreachRow, user
     const matchCode = Boolean(code && hitCode === code)
     if (!matchUser && !matchCode) continue
     stats.codeUsers += 1
-    if (hit.annual_purchased_at) stats.annuals += 1
     if (hit.refunded_at || hit.reward_status === 'cancelled' || hit.reward_status === 'refunded') {
       stats.cancellations += 1
       continue
     }
-    if (hit.reward_status === 'paid') stats.paidN += 1
-    else if (hit.reward_status === 'pending' || hit.reward_status === 'holding' || hit.reward_status === 'requested') {
-      stats.pendingN += 1
-    }
+    if (!hit.annual_purchased_at) continue
+    if (hit.payout_eligible) stats.annualCleared += 1
+    else stats.annualPending += 1
   }
   return stats
 }
@@ -1198,10 +1196,9 @@ export default function OutreachAdminPage() {
       })
       setCodeStats({
         codeUsers: 1,
-        annuals: 1,
+        annualPending: 1,
+        annualCleared: 0,
         cancellations: 0,
-        pendingN: 1,
-        paidN: 0,
       })
       return
     }
@@ -2028,7 +2025,7 @@ export default function OutreachAdminPage() {
                   <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
                     Código e referrals
                   </p>
-                  <div className="grid grid-cols-3 gap-2">
+                  <div className="grid grid-cols-2 gap-2">
                     <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
                       <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                         Usaram o código
@@ -2037,27 +2034,37 @@ export default function OutreachAdminPage() {
                     </div>
                     <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
                       <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                        Anual
-                      </p>
-                      <p className="mt-1 text-2xl font-extrabold tabular-nums">{codeStats.annuals}</p>
-                    </div>
-                    <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
-                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
                         Cancelamentos
                       </p>
                       <p className="mt-1 text-2xl font-extrabold tabular-nums">{codeStats.cancellations}</p>
+                    </div>
+                    <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Anual pendente
+                      </p>
+                      <p className="mt-1 text-2xl font-extrabold tabular-nums">{codeStats.annualPending}</p>
+                      <p className="text-[11px] text-muted-foreground">Ainda na window de refund</p>
+                    </div>
+                    <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                      <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        Anual pago
+                      </p>
+                      <p className="mt-1 text-2xl font-extrabold tabular-nums">{codeStats.annualCleared}</p>
+                      <p className="text-[11px] text-muted-foreground">Já fora da window</p>
                     </div>
                   </div>
                 </section>
 
                 {(() => {
                   const pack = getCreatorOutreachMoney(usageCurrency)
-                  const revenue = codeStats.annuals * pack.annualAmount
-                  const paid = codeStats.paidN * pack.rewardAmount
-                  const pending = codeStats.pendingN * pack.rewardAmount
-                  const payout = paid + pending
+                  const estimatedAnnuals = codeStats.annualPending + codeStats.annualCleared
                   const snapCost = convertFromUsd(usage.total * ANALYSIS_COST_USD, usageCurrency, DEFAULT_INPUTS)
-                  const profit = revenue - payout - snapCost
+                  const estimatedRevenue = estimatedAnnuals * pack.annualAmount
+                  const estimatedPayout = estimatedAnnuals * pack.rewardAmount
+                  const estimatedProfit = estimatedRevenue - estimatedPayout - snapCost
+                  const realRevenue = codeStats.annualCleared * pack.annualAmount
+                  const realPayout = codeStats.annualCleared * pack.rewardAmount
+                  const realProfit = realRevenue - realPayout - snapCost
                   return (
                     <section>
                       <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
@@ -2066,40 +2073,71 @@ export default function OutreachAdminPage() {
                       <div className="grid grid-cols-2 gap-2">
                         <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
                           <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                            Receita anual
+                            Receita estimada
                           </p>
                           <p className="mt-1 text-lg font-extrabold tabular-nums">
-                            {formatListMoney(revenue, usageCurrency)}
+                            {formatListMoney(estimatedRevenue, usageCurrency)}
                           </p>
                           <p className="text-[11px] text-muted-foreground">
-                            {codeStats.annuals} × {pack.annual}
+                            {estimatedAnnuals} × {pack.annual} (com pendentes)
                           </p>
                         </div>
                         <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
                           <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                            Payout creator
+                            Receita real
                           </p>
                           <p className="mt-1 text-lg font-extrabold tabular-nums">
-                            {formatListMoney(payout, usageCurrency)}
+                            {formatListMoney(realRevenue, usageCurrency)}
                           </p>
                           <p className="text-[11px] text-muted-foreground">
-                            pago {formatListMoney(paid, usageCurrency)} · pendente{' '}
-                            {formatListMoney(pending, usageCurrency)}
+                            {codeStats.annualCleared} × {pack.annual} (fora da window)
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                            Payout estimado
+                          </p>
+                          <p className="mt-1 text-lg font-extrabold tabular-nums">
+                            {formatListMoney(estimatedPayout, usageCurrency)}
+                          </p>
+                          <p className="text-[11px] text-muted-foreground">
+                            {estimatedAnnuals} × {pack.reward}
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                            Payout real
+                          </p>
+                          <p className="mt-1 text-lg font-extrabold tabular-nums">
+                            {formatListMoney(realPayout, usageCurrency)}
+                          </p>
+                          <p className="text-[11px] text-muted-foreground">
+                            {codeStats.annualCleared} × {pack.reward}
                           </p>
                         </div>
                       </div>
-                      <div className="mt-2 rounded-xl border border-foreground/15 bg-foreground px-3 py-3 text-background">
-                        <p className="text-[11px] font-semibold uppercase tracking-wide text-background/70">
-                          Lucro estimado
-                        </p>
-                        <p className="mt-1 text-2xl font-extrabold tabular-nums">
-                          {formatListMoney(profit, usageCurrency)}
-                        </p>
-                        <p className="mt-1 text-[11px] leading-snug text-background/70">
-                          Anuais − payout (pago + pendente) − custo das análises. Sem taxas da store.
-                          Payout é sempre {pack.reward} por anual.
-                        </p>
+                      <div className="mt-2 grid grid-cols-2 gap-2">
+                        <div className="rounded-xl border border-foreground/15 bg-foreground px-3 py-3 text-background">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-background/70">
+                            Lucro estimado
+                          </p>
+                          <p className="mt-1 text-xl font-extrabold tabular-nums">
+                            {formatListMoney(estimatedProfit, usageCurrency)}
+                          </p>
+                        </div>
+                        <div className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-3">
+                          <p className="text-[11px] font-semibold uppercase tracking-wide text-emerald-800">
+                            Lucro real
+                          </p>
+                          <p className="mt-1 text-xl font-extrabold tabular-nums text-emerald-950">
+                            {formatListMoney(realProfit, usageCurrency)}
+                          </p>
+                        </div>
                       </div>
+                      <p className="mt-2 text-[11px] leading-snug text-muted-foreground">
+                        Estimado inclui anuais ainda na window de refund. Real só depois da window.
+                        Ambos: anuais − {pack.reward} por anual − análises. Sem taxas da store.
+                      </p>
                     </section>
                   )
                 })()}
