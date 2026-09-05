@@ -462,14 +462,31 @@ function SocialGlyph({
   )
 }
 
+function socialProfileHref(name: 'instagram' | 'tiktok' | 'youtube', handle: string) {
+  const clean = handle.replace(/^@/, '').trim()
+  if (!clean) return null
+  if (name === 'tiktok') return `https://www.tiktok.com/@${encodeURIComponent(clean)}`
+  if (name === 'youtube') return `https://www.youtube.com/@${encodeURIComponent(clean)}`
+  return `https://www.instagram.com/${encodeURIComponent(clean)}/`
+}
+
 function rowSocials(row: Pick<OutreachRow, 'ig_handle' | 'tiktok_handle' | 'youtube_handle'>) {
-  const chips: { name: 'instagram' | 'tiktok' | 'youtube'; value: string }[] = []
+  const chips: { name: 'instagram' | 'tiktok' | 'youtube'; value: string; href: string }[] = []
   const ig = (row.ig_handle ?? '').trim().replace(/^@/, '')
   const tt = (row.tiktok_handle ?? '').trim().replace(/^@/, '')
   const yt = (row.youtube_handle ?? '').trim().replace(/^@/, '')
-  if (ig) chips.push({ name: 'instagram', value: `@${ig}` })
-  if (tt) chips.push({ name: 'tiktok', value: `@${tt}` })
-  if (yt) chips.push({ name: 'youtube', value: yt.startsWith('@') ? yt : `@${yt}` })
+  if (ig) {
+    const href = socialProfileHref('instagram', ig)
+    if (href) chips.push({ name: 'instagram', value: `@${ig}`, href })
+  }
+  if (tt) {
+    const href = socialProfileHref('tiktok', tt)
+    if (href) chips.push({ name: 'tiktok', value: `@${tt}`, href })
+  }
+  if (yt) {
+    const href = socialProfileHref('youtube', yt)
+    if (href) chips.push({ name: 'youtube', value: `@${yt}`, href })
+  }
   return chips
 }
 
@@ -479,13 +496,16 @@ function HandleChips({ row }: { row: OutreachRow }) {
   return (
     <div className="flex flex-wrap items-center justify-center gap-1">
       {chips.map((chip) => (
-        <span
+        <a
           key={`${chip.name}-${chip.value}`}
-          className="inline-flex w-fit items-center gap-1.5 rounded-full bg-muted/50 px-2 py-0.5 text-[11px] font-medium text-foreground/80"
+          href={chip.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex w-fit items-center gap-1.5 rounded-full bg-muted/50 px-2 py-0.5 text-[11px] font-medium text-foreground/80 hover:bg-muted"
         >
           <SocialGlyph name={chip.name} />
           {chip.value}
-        </span>
+        </a>
       ))}
     </div>
   )
