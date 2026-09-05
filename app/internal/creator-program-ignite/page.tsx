@@ -4,6 +4,11 @@ import { FormEvent, useCallback, useEffect, useMemo, useState, type ReactNode } 
 import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
+import {
+  CreatorPerformanceModal,
+  type CreatorPerformanceCodeStats,
+  type CreatorPerformanceUsage,
+} from '@/components/creator-performance-modal'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
 import { cn } from '@/lib/utils'
 
@@ -618,58 +623,34 @@ function MetaField({
   )
 }
 
-type CreatorRewardStats = {
-  followers: number
-  pendingCentsByCurrency: Record<string, number>
-  paidCentsByCurrency: Record<string, number>
-  lastAnnualAt: string | null
-  lastPaidAt: string | null
-  lastRequestedAt: string | null
+function emptyApprovedCodeStats(): CreatorPerformanceCodeStats {
+  return { codeUsers: 0, annualPending: 0, annualCleared: 0, cancellations: 0 }
 }
 
-function emptyCreatorStats(): CreatorRewardStats {
-  return {
-    followers: 0,
-    pendingCentsByCurrency: {},
-    paidCentsByCurrency: {},
-    lastAnnualAt: null,
-    lastPaidAt: null,
-    lastRequestedAt: null,
-  }
+function normalizeCreatorCode(raw: string | null | undefined): string {
+  return (raw ?? '').trim().replace(/[^A-Za-z0-9]/g, '').toUpperCase()
 }
 
-function addCents(map: Record<string, number>, currency: string, cents: number) {
-  const key = currency || 'USD'
-  map[key] = (map[key] ?? 0) + cents
-}
-
-function formatMoneyMap(map: Record<string, number>): string {
-  const entries = Object.entries(map).filter(([, v]) => v > 0)
-  if (!entries.length) return '—'
-  return entries.map(([cur, cents]) => money(cents, cur)).join(' · ')
-}
-
-function laterIso(a: string | null, b: string | null): string | null {
-  if (!a) return b
-  if (!b) return a
-  return new Date(a).getTime() >= new Date(b).getTime() ? a : b
-}
-
-function summarizeCreatorRewards(rewards: RewardRow[], referrerId: string): CreatorRewardStats {
-  const stats = emptyCreatorStats()
-  for (const row of rewards) {
-    if (row.referrer_id !== referrerId) continue
-    stats.followers += 1
-    if (row.refunded_at) {
-      // still counts as a follower who used the code
-    } else if (row.reward_status === 'paid') {
-      addCents(stats.paidCentsByCurrency, row.currency, row.amount_cents)
-    } else if (row.reward_status === 'pending') {
-      addCents(stats.pendingCentsByCurrency, row.currency, row.amount_cents)
+function summarizeApprovedCodeStats(
+  rewards: RewardRow[],
+  userId: string,
+  code: string | null,
+): CreatorPerformanceCodeStats {
+  const assigned = normalizeCreatorCode(code)
+  const stats = emptyApprovedCodeStats()
+  for (const hit of rewards) {
+    const hitCode = normalizeCreatorCode(hit.code_used ?? '')
+    const matchUser = hit.referrer_id === userId
+    const matchCode = Boolean(assigned && hitCode === assigned)
+    if (!matchUser && !matchCode) continue
+    stats.codeUsers += 1
+    if (hit.refunded_at || hit.reward_status === 'cancelled' || hit.reward_status === 'refunded') {
+      stats.cancellations += 1
+      continue
     }
-    stats.lastAnnualAt = laterIso(stats.lastAnnualAt, row.annual_purchased_at)
-    stats.lastPaidAt = laterIso(stats.lastPaidAt, row.paid_at)
-    stats.lastRequestedAt = laterIso(stats.lastRequestedAt, row.payout_requested_at)
+    if (!hit.annual_purchased_at) continue
+    if (hit.payout_eligible) stats.annualCleared += 1
+    else stats.annualPending += 1
   }
   return stats
 }
@@ -1028,6 +1009,11 @@ export default function CreatorProgramAdminPage() {
   const [demoCodes, setDemoCodes] = useState<CodeRow[]>(DEMO_CODES)
   const [demoRewards, setDemoRewards] = useState<RewardRow[]>(DEMO_PAYOUTS)
   const [attributionRewards, setAttributionRewards] = useState<RewardRow[]>([])
+  const [perfApp, setPerfApp] = useState<ApplicationRow | null>(null)
+  const [perfUsage, setPerfUsage] = useState<CreatorPerformanceUsage | null>(null)
+  const [perfCodeStats, setPerfCodeStats] = useState<CreatorPerformanceCodeStats>(emptyApprovedCodeStats)
+  const [perfLoading, setPerfLoading] = useState(false)
+  const [perfError, setPerfError] = useState<string | null>(null)
   const [appSearch, setAppSearch] = useState('')
   const [payoutSearch, setPayoutSearch] = useState('')
   const [loading, setLoading] = useState(false)
@@ -1200,6 +1186,76 @@ export default function CreatorProgramAdminPage() {
     }
     setAttributionRewards(Array.isArray(payload.rewards) ? payload.rewards : [])
   }, [supabase])
+
+  function vipDatesForApp(app: ApplicationRow): { start: string | null; end: string | null } {
+    const end = app.creator_premium_ends_at ?? null
+    if (app.creator_premium_started_at) {
+      return { start: app.creator_premium_started_at, end }
+    }
+    if (end) {
+      const t = new Date(end).getTime()
+      if (Number.isFinite(t)) {
+        return { start: new Date(t - 90 * 24 * 60 * 60 * 1000).toISOString(), end }
+      }
+    }
+    return { start: null, end }
+  }
+
+  async function openPerformance(app: ApplicationRow) {
+    setPerfApp(app)
+    setPerfError(null)
+    const rewards = demoMode ? demoRewards : attributionRewards
+    setPerfCodeStats(summarizeApprovedCodeStats(rewards, app.user_id, app.assigned_code))
+    const vip = vipDatesForApp(app)
+    const fallback: CreatorPerformanceUsage = {
+      linked: Boolean(app.user_id),
+      snap_track: 0,
+      snap_cook: 0,
+      total: 0,
+      last_snap_at: null,
+      vip_start: vip.start,
+      vip_end: vip.end,
+    }
+    if (demoMode) {
+      setPerfUsage({
+        ...fallback,
+        linked: true,
+        snap_track: 15,
+        snap_cook: 0,
+        total: 15,
+        last_snap_at: daysAgo(0),
+      })
+      setPerfLoading(false)
+      return
+    }
+    if (!supabase) {
+      setPerfUsage(fallback)
+      return
+    }
+    setPerfLoading(true)
+    const { data, error } = await supabase.rpc('admin_creator_user_usage', {
+      p_user_id: app.user_id,
+    })
+    setPerfLoading(false)
+    if (error) {
+      setPerfUsage(fallback)
+      return
+    }
+    const payload = data as (CreatorPerformanceUsage & { ok?: boolean; error?: string }) | null
+    if (!payload?.ok) {
+      setPerfUsage(fallback)
+      return
+    }
+    setPerfUsage({
+      linked: Boolean(payload.linked),
+      snap_track: Number(payload.snap_track) || 0,
+      snap_cook: Number(payload.snap_cook) || 0,
+      total: Number(payload.total) || 0,
+      last_snap_at: payload.last_snap_at ?? null,
+      vip_start: payload.vip_start ?? vip.start,
+      vip_end: payload.vip_end ?? vip.end,
+    })
+  }
 
   const loadEvolution = useCallback(async () => {
     if (!supabase) return
@@ -1421,8 +1477,6 @@ export default function CreatorProgramAdminPage() {
     if (!q) return source
     return source.filter((row) => matchesRewardSearch(row, q))
   }, [rewardSource, payoutFilter, payoutSearch])
-
-  const attributionSource = demoMode ? demoRewards : attributionRewards
 
   async function onSignIn(e: FormEvent) {
     e.preventDefault()
@@ -2720,6 +2774,15 @@ export default function CreatorProgramAdminPage() {
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
                     <h2 className="flex flex-wrap items-center gap-2 text-lg font-bold tracking-tight">
+                      {app.status === 'approved' ? (
+                        <button
+                          type="button"
+                          onClick={() => void openPerformance(app)}
+                          className="rounded-full border border-border bg-card px-2.5 py-1 text-xs font-bold text-foreground/80 hover:bg-muted/70"
+                        >
+                          Ver performance
+                        </button>
+                      ) : null}
                       {app.display_name}
                       {outreachHit ? (
                         <span
@@ -3136,60 +3199,6 @@ export default function CreatorProgramAdminPage() {
                         </>
                       )
                     })()}
-                    {(() => {
-                      const stats = summarizeCreatorRewards(attributionSource, app.user_id)
-                      return (
-                        <div className="mt-1 flex flex-col gap-2.5 rounded-xl border border-emerald-200 bg-card p-3">
-                          <p className="text-[11px] font-bold uppercase tracking-wide text-emerald-700">
-                            Desempenho de referrals
-                          </p>
-                          <div className="grid grid-cols-[repeat(auto-fill,minmax(140px,1fr))] gap-2.5">
-                            <div>
-                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                                Followers (código usado)
-                              </p>
-                              <p className="mt-1 text-sm font-bold">{stats.followers}</p>
-                            </div>
-                            <div>
-                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                                Pendente
-                              </p>
-                              <p className="mt-1 text-sm font-bold">
-                                {formatMoneyMap(stats.pendingCentsByCurrency)}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                                Pago
-                              </p>
-                              <p className="mt-1 text-sm font-bold">
-                                {formatMoneyMap(stats.paidCentsByCurrency)}
-                              </p>
-                            </div>
-                            <div>
-                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                                Última compra anual
-                              </p>
-                              <p className="mt-1 text-sm font-bold">{shortDate(stats.lastAnnualAt)}</p>
-                            </div>
-                            <div>
-                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                                Último pagamento
-                              </p>
-                              <p className="mt-1 text-sm font-bold">{shortDate(stats.lastPaidAt)}</p>
-                            </div>
-                            <div>
-                              <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
-                                Último pedido
-                              </p>
-                              <p className="mt-1 text-sm font-bold">
-                                {shortDate(stats.lastRequestedAt)}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      )
-                    })()}
                     <div className="flex flex-wrap items-center gap-2">
                       {!app.creator_premium_active && !app.creator_premium_paused ? (
                         <button
@@ -3459,6 +3468,25 @@ export default function CreatorProgramAdminPage() {
           </>
         )}
       </div>
+
+      {perfApp ? (
+        <CreatorPerformanceModal
+          name={perfApp.display_name}
+          code={normalizeCreatorCode(perfApp.assigned_code) || null}
+          contracted={Boolean(findOutreachByApplication(perfApp, outreachSource))}
+          approved
+          usage={perfUsage}
+          codeStats={perfCodeStats}
+          loading={perfLoading}
+          error={perfError}
+          formatDate={shortDate}
+          onClose={() => {
+            setPerfApp(null)
+            setPerfUsage(null)
+            setPerfError(null)
+          }}
+        />
+      ) : null}
     </main>
   )
 }
