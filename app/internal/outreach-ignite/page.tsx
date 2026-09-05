@@ -5,7 +5,7 @@ import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
-import { DEFAULT_INPUTS } from '@/lib/unit-economics-model'
+import { convertFromUsd, DEFAULT_INPUTS, type DisplayCurrency } from '@/lib/unit-economics-model'
 import { cn } from '@/lib/utils'
 
 type OutreachStatus =
@@ -95,6 +95,11 @@ const STATUS_ORDER: OutreachStatus[] = [
 const VIP_DAYS = 90
 const MS_PER_DAY = 24 * 60 * 60 * 1000
 const ANALYSIS_COST_USD = DEFAULT_INPUTS.apiCostUsd
+const USAGE_CURRENCIES: { id: DisplayCurrency; label: string }[] = [
+  { id: 'USD', label: 'USD' },
+  { id: 'EUR', label: 'EUR' },
+  { id: 'GBP', label: 'GBP' },
+]
 
 type OutreachUsage = {
   linked: boolean
@@ -106,10 +111,12 @@ type OutreachUsage = {
   vip_end: string | null
 }
 
-function formatUsd(amount: number) {
-  if (amount === 0) return '$0'
-  if (amount < 1) return `$${amount.toFixed(3)}`
-  return `$${amount.toFixed(2)}`
+function formatMoney(amountUsd: number, currency: DisplayCurrency) {
+  const amount = convertFromUsd(amountUsd, currency, DEFAULT_INPUTS)
+  const symbol = currency === 'EUR' ? '€' : currency === 'GBP' ? '£' : '$'
+  if (amount === 0) return `${symbol}0`
+  if (amount < 1) return `${symbol}${amount.toFixed(3)}`
+  return `${symbol}${amount.toFixed(2)}`
 }
 
 function vipWindow(contractedAt: string | null): {
@@ -766,6 +773,7 @@ export default function OutreachAdminPage() {
   const [usage, setUsage] = useState<OutreachUsage | null>(null)
   const [usageLoading, setUsageLoading] = useState(false)
   const [usageError, setUsageError] = useState<string | null>(null)
+  const [usageCurrency, setUsageCurrency] = useState<DisplayCurrency>('EUR')
 
   useEffect(() => {
     if (!supabase) return
@@ -1671,8 +1679,25 @@ export default function OutreachAdminPage() {
                 <p className="mt-1 text-sm text-muted-foreground">
                   Snap Track e Snap Cook na janela VIP de {VIP_DAYS} dias.
                   {' '}
-                  {formatUsd(ANALYSIS_COST_USD)} por análise.
+                  {formatMoney(ANALYSIS_COST_USD, usageCurrency)} por análise.
                 </p>
+                <div className="mt-3 flex flex-wrap gap-1.5">
+                  {USAGE_CURRENCIES.map((item) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      onClick={() => setUsageCurrency(item.id)}
+                      className={cn(
+                        'rounded-full border px-3 py-1 text-xs font-bold',
+                        usageCurrency === item.id
+                          ? 'border-foreground bg-foreground text-background'
+                          : 'border-border bg-card',
+                      )}
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
               </div>
               <button
                 type="button"
@@ -1703,7 +1728,7 @@ export default function OutreachAdminPage() {
                     </p>
                     <p className="mt-1 text-2xl font-extrabold tabular-nums">{usage.snap_track}</p>
                     <p className="text-xs text-muted-foreground">
-                      {formatUsd(usage.snap_track * ANALYSIS_COST_USD)}
+                      {formatMoney(usage.snap_track * ANALYSIS_COST_USD, usageCurrency)}
                     </p>
                   </div>
                   <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
@@ -1712,7 +1737,7 @@ export default function OutreachAdminPage() {
                     </p>
                     <p className="mt-1 text-2xl font-extrabold tabular-nums">{usage.snap_cook}</p>
                     <p className="text-xs text-muted-foreground">
-                      {formatUsd(usage.snap_cook * ANALYSIS_COST_USD)}
+                      {formatMoney(usage.snap_cook * ANALYSIS_COST_USD, usageCurrency)}
                     </p>
                   </div>
                 </div>
@@ -1721,7 +1746,7 @@ export default function OutreachAdminPage() {
                     Total estimado
                   </p>
                   <p className="mt-1 text-2xl font-extrabold tabular-nums">
-                    {usage.total} análises · {formatUsd(usage.total * ANALYSIS_COST_USD)}
+                    {usage.total} análises · {formatMoney(usage.total * ANALYSIS_COST_USD, usageCurrency)}
                   </p>
                 </div>
               </div>
