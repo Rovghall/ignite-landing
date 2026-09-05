@@ -534,7 +534,7 @@ function HandleChips({ row }: { row: OutreachRow }) {
   const chips = rowSocials(row)
   if (chips.length === 0) return <span className="text-muted-foreground">—</span>
   return (
-    <div className="flex flex-wrap items-center justify-center gap-1">
+    <div className="flex flex-col items-center gap-0.5">
       {chips.map((chip) => (
         <a
           key={`${chip.name}-${chip.value}`}
