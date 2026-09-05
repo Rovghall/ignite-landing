@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, type ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+import { FormEvent, type ReactNode, useCallback, useEffect, useId, useMemo, useState } from 'react'
 import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
@@ -384,6 +384,7 @@ function SocialGlyph({
   name: 'instagram' | 'tiktok' | 'youtube'
   className?: string
 }) {
+  const uid = useId().replace(/:/g, '')
   const common = {
     viewBox: '0 0 24 24',
     className: cn('h-3.5 w-3.5 shrink-0', className),
@@ -391,21 +392,44 @@ function SocialGlyph({
   }
   if (name === 'instagram') {
     return (
-      <svg {...common} fill="currentColor">
-        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm6.35-.95a1.15 1.15 0 1 0 1.15 1.15 1.15 1.15 0 0 0-1.15-1.15zM12 9.1A2.9 2.9 0 1 1 9.1 12 2.9 2.9 0 0 1 12 9.1z" />
+      <svg {...common}>
+        <defs>
+          <linearGradient id={`ig-${uid}`} x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#F9CE34" />
+            <stop offset="45%" stopColor="#EE2A7B" />
+            <stop offset="100%" stopColor="#6228D7" />
+          </linearGradient>
+        </defs>
+        <path
+          fill={`url(#ig-${uid})`}
+          d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm6.35-.95a1.15 1.15 0 1 0 1.15 1.15 1.15 1.15 0 0 0-1.15-1.15zM12 9.1A2.9 2.9 0 1 1 9.1 12 2.9 2.9 0 0 1 12 9.1z"
+        />
       </svg>
     )
   }
   if (name === 'youtube') {
     return (
-      <svg {...common} fill="currentColor">
+      <svg {...common} fill="#FF0000">
         <path d="M23.5 7.2a3 3 0 0 0-2.1-2.1C19.5 4.6 12 4.6 12 4.6s-7.5 0-9.4.5A3 3 0 0 0 .5 7.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-4.8zM9.75 15.02V8.98L15.5 12z" />
       </svg>
     )
   }
   return (
-    <svg {...common} fill="currentColor">
-      <path d="M14.5 3c.3 2.4 1.7 4.1 4 4.5v2.4c-1.4-.05-2.6-.5-3.6-1.2v6.4c0 3.3-2.6 5.9-5.9 5.9S3.1 18.4 3.1 15.1 5.7 9.2 9 9.2c.4 0 .8 0 1.2.1v2.5c-.4-.15-.8-.2-1.2-.2-1.9 0-3.4 1.5-3.4 3.5S7.1 18.6 9 18.6s3.4-1.5 3.4-3.5V3h2.1Z" />
+    <svg {...common} viewBox="0 0 24 24">
+      <path
+        fill="#25F4EE"
+        d="M14.5 3c.3 2.4 1.7 4.1 4 4.5v2.4c-1.4-.05-2.6-.5-3.6-1.2v6.4c0 3.3-2.6 5.9-5.9 5.9S3.1 18.4 3.1 15.1 5.7 9.2 9 9.2c.4 0 .8 0 1.2.1v2.5c-.4-.15-.8-.2-1.2-.2-1.9 0-3.4 1.5-3.4 3.5S7.1 18.6 9 18.6s3.4-1.5 3.4-3.5V3h2.1Z"
+        transform="translate(-0.7 0.4)"
+      />
+      <path
+        fill="#FE2C55"
+        d="M14.5 3c.3 2.4 1.7 4.1 4 4.5v2.4c-1.4-.05-2.6-.5-3.6-1.2v6.4c0 3.3-2.6 5.9-5.9 5.9S3.1 18.4 3.1 15.1 5.7 9.2 9 9.2c.4 0 .8 0 1.2.1v2.5c-.4-.15-.8-.2-1.2-.2-1.9 0-3.4 1.5-3.4 3.5S7.1 18.6 9 18.6s3.4-1.5 3.4-3.5V3h2.1Z"
+        transform="translate(0.7 -0.4)"
+      />
+      <path
+        fill="#111111"
+        d="M14.5 3c.3 2.4 1.7 4.1 4 4.5v2.4c-1.4-.05-2.6-.5-3.6-1.2v6.4c0 3.3-2.6 5.9-5.9 5.9S3.1 18.4 3.1 15.1 5.7 9.2 9 9.2c.4 0 .8 0 1.2.1v2.5c-.4-.15-.8-.2-1.2-.2-1.9 0-3.4 1.5-3.4 3.5S7.1 18.6 9 18.6s3.4-1.5 3.4-3.5V3h2.1Z"
+      />
     </svg>
   )
 }
@@ -425,7 +449,7 @@ function HandleChips({ row }: { row: OutreachRow }) {
   const chips = rowSocials(row)
   if (chips.length === 0) return <span className="text-muted-foreground">—</span>
   return (
-    <div className="flex flex-wrap gap-1">
+    <div className="flex flex-wrap items-center justify-center gap-1">
       {chips.map((chip) => (
         <span
           key={`${chip.name}-${chip.value}`}
@@ -448,9 +472,9 @@ function FollowerLines({ row }: { row: OutreachRow }) {
     lines.push({ name: 'youtube', value: formatFollowers(row.followers_youtube) })
   if (lines.length === 0) return <span className="text-muted-foreground">—</span>
   return (
-    <div className="flex flex-col gap-0.5 text-xs tabular-nums">
+    <div className="flex flex-col items-center gap-0.5 text-xs tabular-nums">
       {lines.map((line) => (
-        <p key={line.name} className="inline-flex items-center gap-1.5">
+        <p key={line.name} className="inline-flex items-center justify-center gap-1.5">
           <SocialGlyph name={line.name} />
           {line.value}
         </p>
@@ -1235,17 +1259,17 @@ export default function OutreachAdminPage() {
           ) : (
             <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-[0_8px_24px_rgba(15,23,42,0.04)]">
               <table className="min-w-full text-left text-sm">
-                <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
-                  <tr>
-                    <th className="px-4 py-3">Nome</th>
-                    <th className="px-4 py-3">País</th>
-                    <th className="px-4 py-3">Handles</th>
-                    <th className="px-4 py-3">VIP início</th>
-                    <th className="px-4 py-3">VIP fim ({VIP_DAYS}d)</th>
-                    <th className="px-4 py-3">Tempo restante</th>
-                    <th className="px-4 py-3 text-right">Acções</th>
-                  </tr>
-                </thead>
+                    <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+                      <tr>
+                        <th className="px-4 py-3 text-left">Nome</th>
+                        <th className="px-4 py-3 text-center">País</th>
+                        <th className="px-4 py-3 text-center">Handles</th>
+                        <th className="px-4 py-3 text-center">VIP início</th>
+                        <th className="px-4 py-3 text-center">VIP fim ({VIP_DAYS}d)</th>
+                        <th className="px-4 py-3 text-center">Tempo restante</th>
+                        <th className="px-4 py-3 text-center">Acções</th>
+                      </tr>
+                    </thead>
                 <tbody>
                   {contractedRows
                     .filter((row) => {
@@ -1270,13 +1294,13 @@ export default function OutreachAdminPage() {
                               }
                             />
                           </td>
-                          <td className="px-4 py-3 align-top text-sm">
+                          <td className="px-4 py-3.5 align-middle text-center text-sm">
                             {countryLabel(row.country_code, row.country_name)}
                           </td>
-                          <td className="px-4 py-3 align-top text-xs">
+                          <td className="px-4 py-3.5 align-middle text-center text-xs">
                             <HandleChips row={row} />
                           </td>
-                          <td className="px-4 py-3 align-top text-xs text-muted-foreground">
+                          <td className="px-4 py-3.5 align-middle text-center text-xs text-muted-foreground">
                             {shortDate(row.contracted_at)}
                           </td>
                           <td className="px-4 py-3 align-top text-xs text-muted-foreground">
@@ -1343,13 +1367,13 @@ export default function OutreachAdminPage() {
                   <table className="min-w-full text-left text-sm">
                     <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
                       <tr>
-                        <th className="px-4 py-3">Nome</th>
-                        <th className="px-4 py-3">Handles</th>
-                        <th className="px-4 py-3">Followers</th>
-                        <th className="px-4 py-3">Nicho</th>
-                        <th className="px-4 py-3">Estado</th>
-                        <th className="px-4 py-3">Último contacto</th>
-                        <th className="px-4 py-3 text-right">Acções</th>
+                        <th className="px-4 py-3 text-left">Nome</th>
+                        <th className="px-4 py-3 text-center">Handles</th>
+                        <th className="px-4 py-3 text-center">Followers</th>
+                        <th className="px-4 py-3 text-center">Nicho</th>
+                        <th className="px-4 py-3 text-center">Estado</th>
+                        <th className="px-4 py-3 text-center">Último contacto</th>
+                        <th className="px-4 py-3 text-center">Acções</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1358,14 +1382,14 @@ export default function OutreachAdminPage() {
                           <td className="px-4 py-3.5 align-middle">
                             <ContactIdentity row={row} />
                           </td>
-                          <td className="px-4 py-3.5 align-middle">
+                          <td className="px-4 py-3.5 align-middle text-center">
                             <HandleChips row={row} />
                           </td>
-                          <td className="px-4 py-3 align-top text-xs tabular-nums">
+                          <td className="px-4 py-3.5 align-middle text-center text-xs tabular-nums">
                             <FollowerLines row={row} />
                           </td>
-                          <td className="px-4 py-3 align-top">{row.niche || '—'}</td>
-                          <td className="px-4 py-3 align-top">
+                          <td className="px-4 py-3.5 align-middle text-center">{row.niche || '—'}</td>
+                          <td className="px-4 py-3.5 align-middle text-center">
                             <span className={statusBadge(row.status)}>
                               {STATUS_LABELS[row.status]}
                             </span>
@@ -1378,11 +1402,11 @@ export default function OutreachAdminPage() {
                               </a>
                             ) : null}
                           </td>
-                          <td className="px-4 py-3 align-top text-xs text-muted-foreground">
+                          <td className="px-4 py-3.5 align-middle text-center text-xs text-muted-foreground">
                             {shortDate(row.last_contacted_at)}
                           </td>
-                          <td className="px-4 py-3 align-top">
-                            <div className="flex flex-wrap justify-end gap-1">
+                          <td className="px-4 py-3.5 align-middle">
+                            <div className="flex flex-wrap items-center justify-center gap-1">
                               <button
                                 type="button"
                                 onClick={() => openEdit(row)}
