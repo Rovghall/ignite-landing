@@ -910,7 +910,12 @@ export default function OutreachAdminPage() {
           ok?: boolean
           applications?: {
             id: string
+            status?: 'pending' | 'approved' | 'rejected' | null
             assigned_code?: string | null
+            primary_handle?: string | null
+            contact_email?: string | null
+            created_at?: string | null
+            display_name?: string | null
             creator_premium_started_at?: string | null
             creator_premium_ends_at?: string | null
           }[]
@@ -919,21 +924,40 @@ export default function OutreachAdminPage() {
     const apps = Array.isArray(appsPayload?.applications) ? appsPayload.applications : []
     const byCode = new Map<string, (typeof apps)[number]>()
     const byAppId = new Map<string, (typeof apps)[number]>()
+    const byHandle = new Map<string, (typeof apps)[number]>()
+    const byEmail = new Map<string, (typeof apps)[number]>()
     for (const app of apps) {
       byAppId.set(app.id, app)
       const code = normalizeAssignedCode(app.assigned_code ?? '')
       if (code) byCode.set(code, app)
+      const handle = normalizeHandle(app.primary_handle ?? '')
+      if (handle) byHandle.set(handle, app)
+      const email = (app.contact_email ?? '').trim().toLowerCase()
+      if (email) byEmail.set(email, app)
     }
 
     setRows(
       mapped.map((row) => {
         const code = normalizeAssignedCode(row.assigned_code || row.creator_code || '')
+        const handles = [row.ig_handle, row.tiktok_handle, row.youtube_handle]
+          .map((h) => normalizeHandle(h))
+          .filter(Boolean)
+        const email = (row.contact_email ?? '').trim().toLowerCase()
         const hit =
           (code ? byCode.get(code) : undefined) ||
-          (row.creator_application_id ? byAppId.get(row.creator_application_id) : undefined)
+          (row.creator_application_id ? byAppId.get(row.creator_application_id) : undefined) ||
+          handles.map((h) => byHandle.get(h)).find(Boolean) ||
+          (email ? byEmail.get(email) : undefined)
         if (!hit) return row
+        const status = (hit.status ?? 'approved') as OutreachRow['creator_application_status']
         return {
           ...row,
+          creator_application_id: row.creator_application_id || hit.id,
+          creator_application_status: row.creator_application_status || status,
+          creator_applied_at: row.creator_applied_at || hit.created_at || null,
+          creator_display_name: row.creator_display_name || hit.display_name || null,
+          creator_primary_handle: row.creator_primary_handle || hit.primary_handle || null,
+          has_creator_application: true,
           creator_code: row.creator_code || hit.assigned_code || null,
           creator_premium_started_at:
             hit.creator_premium_started_at ?? row.creator_premium_started_at,
