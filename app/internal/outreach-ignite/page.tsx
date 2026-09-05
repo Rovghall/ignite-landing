@@ -1308,7 +1308,7 @@ export default function OutreachAdminPage() {
                             )}
                           </td>
                           <td className="px-4 py-3 align-top">
-                            <div className="flex flex-wrap justify-end gap-1">
+                            <div className="flex flex-nowrap items-center justify-center gap-1 whitespace-nowrap">
                               <button
                                 type="button"
                                 onClick={() => openEdit(row)}
@@ -1397,8 +1397,8 @@ export default function OutreachAdminPage() {
                           <td className="px-4 py-3.5 align-middle text-center text-xs text-muted-foreground">
                             {shortDate(row.last_contacted_at)}
                           </td>
-                          <td className="px-4 py-3.5 align-middle">
-                            <div className="flex flex-wrap items-center justify-center gap-1">
+                          <td className="px-4 py-3.5 align-middle whitespace-nowrap">
+                            <div className="flex flex-nowrap items-center justify-center gap-1">
                               <button
                                 type="button"
                                 onClick={() => openEdit(row)}
