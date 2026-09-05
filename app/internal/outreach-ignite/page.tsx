@@ -42,6 +42,7 @@ type OutreachRow = {
   creator_primary_handle: string | null
   has_creator_application: boolean
   creator_code: string | null
+  assigned_code: string
   contact_email: string
   owner_email: string
   created_at: string
@@ -65,6 +66,7 @@ type FormState = {
   notes: string
   last_contacted_at: string
   contracted_at: string
+  assigned_code: string
   owner_email: string
 }
 
@@ -191,6 +193,7 @@ const EMPTY_FORM: FormState = {
   notes: '',
   last_contacted_at: '',
   contracted_at: '',
+  assigned_code: '',
   owner_email: '',
 }
 
@@ -202,6 +205,7 @@ const DEMO_ROWS: OutreachRow[] = [
     tiktok_handle: 'anafitpt',
     youtube_handle: '',
     contact_email: '',
+    assigned_code: '',
     followers_ig: 82000,
     followers_tiktok: 140000,
     followers_youtube: null,
@@ -231,6 +235,7 @@ const DEMO_ROWS: OutreachRow[] = [
     tiktok_handle: '',
     youtube_handle: 'ChefBrunoKitchen',
     contact_email: '',
+    assigned_code: '',
     followers_ig: 210000,
     followers_tiktok: null,
     followers_youtube: 95000,
@@ -253,6 +258,7 @@ const DEMO_ROWS: OutreachRow[] = [
     tiktok_handle: 'mayamoves',
     youtube_handle: '',
     contact_email: '',
+    assigned_code: '',
     followers_ig: 450000,
     followers_tiktok: 1200000,
     followers_youtube: null,
@@ -275,6 +281,7 @@ const DEMO_ROWS: OutreachRow[] = [
     tiktok_handle: 'liamcutsuk',
     youtube_handle: '',
     contact_email: '',
+    assigned_code: '',
     followers_ig: 67000,
     followers_tiktok: 88000,
     followers_youtube: null,
@@ -315,6 +322,7 @@ const DEMO_ROWS: OutreachRow[] = [
     creator_primary_handle: 'sofianutri',
     has_creator_application: true,
     creator_code: 'SOFIA20',
+    assigned_code: 'SOFIA20',
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -383,9 +391,11 @@ function ContactIdentity({
   const app = applicationBadge(row.creator_application_status)
   const codeLabel = row.creator_code?.trim()
     ? row.creator_code.trim().toUpperCase()
-    : row.has_creator_application
-      ? 'Sem código'
-      : null
+    : row.assigned_code?.trim()
+      ? row.assigned_code.trim().toUpperCase()
+      : row.has_creator_application
+        ? 'Sem código'
+        : null
   const nameRow = (
     <span className="inline-flex items-center justify-center gap-1.5 font-semibold tracking-tight text-foreground">
       {onNameClick ? (
@@ -497,6 +507,10 @@ function ContactIdentity({
       </div>
     </div>
   )
+}
+
+function normalizeAssignedCode(raw: string) {
+  return raw.trim().replace(/[^A-Za-z0-9]/g, '').toUpperCase()
 }
 
 function normalizeHandle(raw: string) {
@@ -683,6 +697,7 @@ function rowToForm(row: OutreachRow): FormState {
     notes: row.notes,
     last_contacted_at: toDatetimeLocal(row.last_contacted_at),
     contracted_at: toDatetimeLocal(row.contracted_at),
+    assigned_code: row.assigned_code || row.creator_code || '',
     owner_email: row.owner_email,
   }
 }
@@ -713,6 +728,7 @@ function formToPayload(form: FormState) {
     notes: form.notes.trim(),
     last_contacted_at: last ?? '',
     contracted_at: contracted ?? '',
+    assigned_code: normalizeAssignedCode(form.assigned_code),
     owner_email: form.owner_email.trim(),
   }
 }
@@ -844,7 +860,8 @@ export default function OutreachAdminPage() {
         creator_display_name: row.creator_display_name ?? null,
         creator_primary_handle: row.creator_primary_handle ?? null,
         has_creator_application: Boolean(row.has_creator_application || row.creator_application_id),
-        creator_code: row.creator_code ?? null,
+        assigned_code: row.assigned_code ?? '',
+        creator_code: row.creator_code ?? row.assigned_code ?? null,
         contact_email: row.contact_email ?? '',
       })),
     )
@@ -904,6 +921,7 @@ export default function OutreachAdminPage() {
         row.owner_email,
         row.creator_primary_handle,
         row.creator_code,
+        row.assigned_code,
       ]
         .join(' ')
         .toLowerCase()
@@ -1036,6 +1054,11 @@ export default function OutreachAdminPage() {
       setFormError('Precisas de nome ou pelo menos um handle.')
       return
     }
+    const assigned = normalizeAssignedCode(form.assigned_code)
+    if (assigned && (assigned.length < 4 || assigned.length > 16)) {
+      setFormError('Código com 4 a 16 letras ou números, sem @.')
+      return
+    }
     const dupes = findHandleDuplicates(form, rowSource)
     if (dupes.length > 0) {
       setFormError(
@@ -1056,6 +1079,7 @@ export default function OutreachAdminPage() {
         tiktok_handle: payload.tiktok_handle,
         youtube_handle: payload.youtube_handle,
         contact_email: payload.contact_email,
+        assigned_code: payload.assigned_code,
         followers_ig: payload.followers_ig ? Number(payload.followers_ig) : null,
         followers_tiktok: payload.followers_tiktok ? Number(payload.followers_tiktok) : null,
         followers_youtube: payload.followers_youtube ? Number(payload.followers_youtube) : null,
@@ -1086,6 +1110,8 @@ export default function OutreachAdminPage() {
                 : {}
             })()
           : {}),
+        assigned_code: payload.assigned_code,
+        creator_code: payload.assigned_code || (form.id ? demoRows.find((r) => r.id === form.id)?.creator_code ?? null : null),
         owner_email: payload.owner_email,
         created_at: form.id
           ? demoRows.find((r) => r.id === form.id)?.created_at ?? now
@@ -1116,7 +1142,9 @@ export default function OutreachAdminPage() {
       setFormError(
         payload?.error === 'forbidden'
           ? 'Forbidden — email não está em app_admins'
-          : payload?.error || 'Falha a guardar',
+          : payload?.error === 'invalid_code'
+            ? 'Código com 4 a 16 letras ou números, sem @.'
+            : payload?.error || 'Falha a guardar',
       )
       return
     }
@@ -1897,6 +1925,19 @@ export default function OutreachAdminPage() {
                   placeholder="Fitness, Food…"
                   value={form.niche}
                   onChange={(e) => setForm((f) => ({ ...f, niche: e.target.value }))}
+                />
+              </Field>
+              <Field
+                label="Código atribuído"
+                hint="O código IGNITE que lhe deste. Aparece em Contratados."
+                className="sm:col-span-2"
+              >
+                <input
+                  className={cn(inputClass, 'font-mono uppercase tracking-wide')}
+                  placeholder="ROVGHALL"
+                  maxLength={16}
+                  value={form.assigned_code}
+                  onChange={(e) => setForm((f) => ({ ...f, assigned_code: e.target.value.toUpperCase() }))}
                 />
               </Field>
               <Field label="Estado">
