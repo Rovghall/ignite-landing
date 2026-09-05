@@ -407,12 +407,14 @@ function ContactIdentity({
   compact,
   onNameClick,
   showCode = true,
+  showStatus = true,
 }: {
   row: OutreachRow
   extra?: ReactNode
   compact?: boolean
   onNameClick?: () => void
   showCode?: boolean
+  showStatus?: boolean
 }) {
   const app = applicationBadge(row.creator_application_status)
   const codeLabel = row.creator_code?.trim()
@@ -467,8 +469,8 @@ function ContactIdentity({
     return (
       <div className="flex flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
         {nameRow}
-        {extra}
-        {app ? (
+        {showStatus ? extra : null}
+        {showStatus && app ? (
           <span
             className={app.className}
             title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}
@@ -503,7 +505,7 @@ function ContactIdentity({
         <p className="inline-flex items-center justify-center gap-1.5 font-semibold tracking-tight text-foreground">
           {nameRow}
         </p>
-        {extra || app ? (
+        {showStatus && (extra || app) ? (
           <div className="mt-1.5 flex flex-wrap items-center justify-center gap-1.5">
             {extra}
             {app ? (
@@ -543,6 +545,23 @@ function CreatorCodeCell({ row }: { row: OutreachRow }) {
   const code = normalizeAssignedCode(row.assigned_code || row.creator_code || '')
   if (!code) return <span className="text-muted-foreground">—</span>
   return <span className="font-mono text-xs font-semibold tracking-wide">{code}</span>
+}
+
+function StatusPills({ row }: { row: OutreachRow }) {
+  const app = applicationBadge(row.creator_application_status)
+  return (
+    <div className="flex flex-wrap items-center justify-center gap-1.5">
+      <span className={statusBadge(row.status)}>{STATUS_LABELS[row.status]}</span>
+      {app ? (
+        <span
+          className={app.className}
+          title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}
+        >
+          {app.label}
+        </span>
+      ) : null}
+    </div>
+  )
 }
 
 function normalizeAssignedCode(raw: string) {
@@ -1613,6 +1632,7 @@ export default function OutreachAdminPage() {
                     <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
                       <tr>
                         <th className="px-4 py-3 text-center">Nome</th>
+                        <th className="px-4 py-3 text-center">Estado</th>
                         <th className="px-4 py-3 text-center">Código</th>
                         <th className="px-4 py-3 text-center">País</th>
                         <th className="px-4 py-3 text-center">Handles</th>
@@ -1642,12 +1662,13 @@ export default function OutreachAdminPage() {
                             <ContactIdentity
                               compact
                               showCode={false}
+                              showStatus={false}
                               row={row}
                               onNameClick={() => void openUsage(row)}
-                              extra={
-                                <span className={statusBadge('contracted')}>Contratado</span>
-                              }
                             />
+                          </td>
+                          <td className="px-4 py-3.5 align-middle text-center">
+                            <StatusPills row={row} />
                           </td>
                           <td className="px-4 py-3.5 align-middle text-center">
                             <CreatorCodeCell row={row} />
@@ -1746,7 +1767,7 @@ export default function OutreachAdminPage() {
                       {items.map((row) => (
                         <tr key={row.id} className="border-b border-border/60 last:border-0 hover:bg-muted/20">
                           <td className="px-4 py-3.5 align-middle">
-                            <ContactIdentity row={row} showCode={false} />
+                            <ContactIdentity row={row} showCode={false} showStatus={false} />
                           </td>
                           <td className="px-4 py-3.5 align-middle text-center">
                             <CreatorCodeCell row={row} />
@@ -1759,9 +1780,7 @@ export default function OutreachAdminPage() {
                           </td>
                           <td className="px-4 py-3.5 align-middle text-center">{row.niche || '—'}</td>
                           <td className="px-4 py-3.5 align-middle text-center">
-                            <span className={statusBadge(row.status)}>
-                              {STATUS_LABELS[row.status]}
-                            </span>
+                            <StatusPills row={row} />
                             {row.has_creator_application ? (
                               <a
                                 href="/internal/creator-program-ignite"
