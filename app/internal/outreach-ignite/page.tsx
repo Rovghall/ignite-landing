@@ -40,6 +40,7 @@ type OutreachRow = {
   creator_display_name: string | null
   creator_primary_handle: string | null
   has_creator_application: boolean
+  contact_email: string
   owner_email: string
   created_at: string
   updated_at: string
@@ -48,6 +49,7 @@ type OutreachRow = {
 type FormState = {
   id: string | null
   display_name: string
+  contact_email: string
   ig_handle: string
   tiktok_handle: string
   youtube_handle: string
@@ -145,6 +147,7 @@ function emptyCreatorMatchFields(): Pick<
 const EMPTY_FORM: FormState = {
   id: null,
   display_name: '',
+  contact_email: '',
   ig_handle: '',
   tiktok_handle: '',
   youtube_handle: '',
@@ -168,6 +171,7 @@ const DEMO_ROWS: OutreachRow[] = [
     ig_handle: 'ana.fit.pt',
     tiktok_handle: 'anafitpt',
     youtube_handle: '',
+    contact_email: '',
     followers_ig: 82000,
     followers_tiktok: 140000,
     followers_youtube: null,
@@ -195,6 +199,7 @@ const DEMO_ROWS: OutreachRow[] = [
     ig_handle: 'chefbruno',
     tiktok_handle: '',
     youtube_handle: 'ChefBrunoKitchen',
+    contact_email: '',
     followers_ig: 210000,
     followers_tiktok: null,
     followers_youtube: 95000,
@@ -216,6 +221,7 @@ const DEMO_ROWS: OutreachRow[] = [
     ig_handle: 'mayamoves',
     tiktok_handle: 'mayamoves',
     youtube_handle: '',
+    contact_email: '',
     followers_ig: 450000,
     followers_tiktok: 1200000,
     followers_youtube: null,
@@ -237,6 +243,7 @@ const DEMO_ROWS: OutreachRow[] = [
     ig_handle: 'liamcuts',
     tiktok_handle: 'liamcutsuk',
     youtube_handle: '',
+    contact_email: '',
     followers_ig: 67000,
     followers_tiktok: 88000,
     followers_youtube: null,
@@ -258,6 +265,7 @@ const DEMO_ROWS: OutreachRow[] = [
     ig_handle: 'sofianutri',
     tiktok_handle: '',
     youtube_handle: '',
+    contact_email: '',
     followers_ig: 34000,
     followers_tiktok: null,
     followers_youtube: null,
@@ -336,6 +344,14 @@ function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }
     <div className="flex flex-col items-center gap-1 text-center">
       <div className="min-w-0 w-full">
         <p className="font-semibold tracking-tight text-foreground">{row.display_name || '—'}</p>
+        {row.contact_email ? (
+          <a
+            href={`mailto:${row.contact_email}`}
+            className="mt-0.5 block text-[11px] font-medium text-blue-700 underline-offset-2 hover:underline"
+          >
+            {row.contact_email}
+          </a>
+        ) : null}
         {extra || app ? (
           <div className="mt-1.5 flex flex-wrap items-center justify-center gap-1.5">
             {extra}
@@ -515,6 +531,7 @@ function rowToForm(row: OutreachRow): FormState {
   return {
     id: row.id,
     display_name: row.display_name,
+    contact_email: row.contact_email ?? '',
     ig_handle: row.ig_handle,
     tiktok_handle: row.tiktok_handle,
     youtube_handle: row.youtube_handle,
@@ -544,6 +561,7 @@ function formToPayload(form: FormState) {
   return {
     ...(form.id ? { id: form.id } : {}),
     display_name: form.display_name.trim(),
+    contact_email: form.contact_email.trim().toLowerCase(),
     ig_handle: form.ig_handle.trim().replace(/^@/, ''),
     tiktok_handle: form.tiktok_handle.trim().replace(/^@/, ''),
     youtube_handle: form.youtube_handle.trim().replace(/^@/, ''),
@@ -683,6 +701,7 @@ export default function OutreachAdminPage() {
         creator_display_name: row.creator_display_name ?? null,
         creator_primary_handle: row.creator_primary_handle ?? null,
         has_creator_application: Boolean(row.has_creator_application || row.creator_application_id),
+        contact_email: row.contact_email ?? '',
       })),
     )
   }, [supabase, demoMode])
@@ -737,6 +756,7 @@ export default function OutreachAdminPage() {
         row.niche,
         row.country_name,
         row.notes,
+        row.contact_email,
         row.owner_email,
         row.creator_primary_handle,
       ]
@@ -829,6 +849,7 @@ export default function OutreachAdminPage() {
         ig_handle: payload.ig_handle,
         tiktok_handle: payload.tiktok_handle,
         youtube_handle: payload.youtube_handle,
+        contact_email: payload.contact_email,
         followers_ig: payload.followers_ig ? Number(payload.followers_ig) : null,
         followers_tiktok: payload.followers_tiktok ? Number(payload.followers_tiktok) : null,
         followers_youtube: payload.followers_youtube ? Number(payload.followers_youtube) : null,
@@ -1272,7 +1293,7 @@ export default function OutreachAdminPage() {
                         return false
                       const q = search.trim().toLowerCase()
                       if (!q) return true
-                      return [row.display_name, row.ig_handle, row.niche, row.notes]
+                      return [row.display_name, row.ig_handle, row.contact_email, row.niche, row.notes]
                         .join(' ')
                         .toLowerCase()
                         .includes(q)
@@ -1477,6 +1498,19 @@ export default function OutreachAdminPage() {
                   className={inputClass}
                   value={form.display_name}
                   onChange={(e) => setForm((f) => ({ ...f, display_name: e.target.value }))}
+                />
+              </Field>
+              <Field
+                label="Email da influencer"
+                hint="O email dela, para contactar. Opcional."
+                className="sm:col-span-2"
+              >
+                <input
+                  className={inputClass}
+                  type="email"
+                  placeholder="nome@email.com"
+                  value={form.contact_email}
+                  onChange={(e) => setForm((f) => ({ ...f, contact_email: e.target.value }))}
                 />
               </Field>
               <Field label="Instagram">
