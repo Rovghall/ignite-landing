@@ -134,14 +134,20 @@ function vipWindow(row: {
   daysLeft: number | null
   expired: boolean
 } {
-  const startIso = row.creator_premium_started_at || row.contracted_at
-  if (!startIso) return { start: null, end: null, daysLeft: null, expired: false }
-  const start = new Date(startIso)
+  if (row.creator_premium_ends_at) {
+    const end = new Date(row.creator_premium_ends_at)
+    if (!Number.isFinite(end.getTime())) return { start: null, end: null, daysLeft: null, expired: false }
+    const start = row.creator_premium_started_at
+      ? new Date(row.creator_premium_started_at)
+      : new Date(end.getTime() - VIP_DAYS * MS_PER_DAY)
+    if (!Number.isFinite(start.getTime())) return { start: null, end, daysLeft: null, expired: false }
+    const daysLeft = Math.ceil((end.getTime() - Date.now()) / MS_PER_DAY)
+    return { start, end, daysLeft, expired: daysLeft < 0 }
+  }
+  if (!row.contracted_at) return { start: null, end: null, daysLeft: null, expired: false }
+  const start = new Date(row.contracted_at)
   if (!Number.isFinite(start.getTime())) return { start: null, end: null, daysLeft: null, expired: false }
-  const end = row.creator_premium_ends_at
-    ? new Date(row.creator_premium_ends_at)
-    : new Date(start.getTime() + VIP_DAYS * MS_PER_DAY)
-  if (!Number.isFinite(end.getTime())) return { start, end: null, daysLeft: null, expired: false }
+  const end = new Date(start.getTime() + VIP_DAYS * MS_PER_DAY)
   const daysLeft = Math.ceil((end.getTime() - Date.now()) / MS_PER_DAY)
   return { start, end, daysLeft, expired: daysLeft < 0 }
 }
@@ -867,23 +873,61 @@ export default function OutreachAdminPage() {
       setRows([])
       return
     }
+    const mapped = (Array.isArray(payload.items) ? payload.items : []).map((row) => ({
+      ...row,
+      contracted_at: row.contracted_at ?? null,
+      creator_application_id: row.creator_application_id ?? null,
+      creator_matched_at: row.creator_matched_at ?? null,
+      creator_application_status: row.creator_application_status ?? null,
+      creator_applied_at: row.creator_applied_at ?? null,
+      creator_display_name: row.creator_display_name ?? null,
+      creator_primary_handle: row.creator_primary_handle ?? null,
+      has_creator_application: Boolean(row.has_creator_application || row.creator_application_id),
+      assigned_code: row.assigned_code ?? '',
+      creator_code: row.creator_code ?? row.assigned_code ?? null,
+      creator_premium_started_at: row.creator_premium_started_at ?? null,
+      creator_premium_ends_at: row.creator_premium_ends_at ?? null,
+      contact_email: row.contact_email ?? '',
+    }))
+
+    const { data: appsData } = await supabase.rpc('admin_list_creator_applications', {
+      p_filter: 'approved',
+    })
+    const appsPayload = appsData as
+      | {
+          ok?: boolean
+          applications?: {
+            id: string
+            assigned_code?: string | null
+            creator_premium_started_at?: string | null
+            creator_premium_ends_at?: string | null
+          }[]
+        }
+      | null
+    const apps = Array.isArray(appsPayload?.applications) ? appsPayload.applications : []
+    const byCode = new Map<string, (typeof apps)[number]>()
+    const byAppId = new Map<string, (typeof apps)[number]>()
+    for (const app of apps) {
+      byAppId.set(app.id, app)
+      const code = normalizeAssignedCode(app.assigned_code ?? '')
+      if (code) byCode.set(code, app)
+    }
+
     setRows(
-      (Array.isArray(payload.items) ? payload.items : []).map((row) => ({
-        ...row,
-        contracted_at: row.contracted_at ?? null,
-        creator_application_id: row.creator_application_id ?? null,
-        creator_matched_at: row.creator_matched_at ?? null,
-        creator_application_status: row.creator_application_status ?? null,
-        creator_applied_at: row.creator_applied_at ?? null,
-        creator_display_name: row.creator_display_name ?? null,
-        creator_primary_handle: row.creator_primary_handle ?? null,
-        has_creator_application: Boolean(row.has_creator_application || row.creator_application_id),
-        assigned_code: row.assigned_code ?? '',
-        creator_code: row.creator_code ?? row.assigned_code ?? null,
-        creator_premium_started_at: row.creator_premium_started_at ?? null,
-        creator_premium_ends_at: row.creator_premium_ends_at ?? null,
-        contact_email: row.contact_email ?? '',
-      })),
+      mapped.map((row) => {
+        const code = normalizeAssignedCode(row.assigned_code || row.creator_code || '')
+        const hit =
+          (code ? byCode.get(code) : undefined) ||
+          (row.creator_application_id ? byAppId.get(row.creator_application_id) : undefined)
+        if (!hit) return row
+        return {
+          ...row,
+          creator_code: row.creator_code || hit.assigned_code || null,
+          creator_premium_started_at:
+            hit.creator_premium_started_at ?? row.creator_premium_started_at,
+          creator_premium_ends_at: hit.creator_premium_ends_at ?? row.creator_premium_ends_at,
+        }
+      }),
     )
   }, [supabase, demoMode])
 
