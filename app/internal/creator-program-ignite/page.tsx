@@ -732,6 +732,41 @@ function matchesAppFilter(app: ApplicationRow, filter: AppFilter): boolean {
   return app.status === filter
 }
 
+type OutreachContactLite = {
+  display_name: string
+  ig_handle?: string | null
+  tiktok_handle?: string | null
+  youtube_handle?: string | null
+}
+
+function normalizeSocialHandle(raw: string | null | undefined): string {
+  let s = (raw ?? '').trim()
+  if (!s) return ''
+  s = s.replace(/^https?:\/\/(www\.)?(instagram\.com|tiktok\.com|youtube\.com|youtu\.be)\//i, '')
+  s = s.replace(/^@+/, '')
+  s = s.replace(/\/.*$/, '')
+  return s.toLowerCase()
+}
+
+function outreachHandlesOf(row: OutreachContactLite): string[] {
+  return [row.ig_handle, row.tiktok_handle, row.youtube_handle]
+    .map(normalizeSocialHandle)
+    .filter(Boolean)
+}
+
+function findOutreachByApplication(
+  app: ApplicationRow,
+  contacts: OutreachContactLite[],
+): OutreachContactLite | null {
+  const handle = normalizeSocialHandle(app.primary_handle)
+  if (!handle) return null
+  return contacts.find((row) => outreachHandlesOf(row).includes(handle)) ?? null
+}
+
+const DEMO_OUTREACH_CONTACTS: OutreachContactLite[] = [
+  { display_name: 'Ana Fitness', ig_handle: 'anafitness', tiktok_handle: '', youtube_handle: '' },
+]
+
 const APP_FILTER_LABELS: Record<AppFilter, string> = {
   pending: 'Pendentes',
   trial: 'Trial',
@@ -985,6 +1020,7 @@ export default function CreatorProgramAdminPage() {
   const [evolutionWindow, setEvolutionWindow] = useState<EvolutionWindow>(30)
   const [evolution, setEvolution] = useState<EvolutionPayload | null>(null)
   const [apps, setApps] = useState<ApplicationRow[]>([])
+  const [outreachContacts, setOutreachContacts] = useState<OutreachContactLite[]>([])
   const [codes, setCodes] = useState<CodeRow[]>([])
   const [rewards, setRewards] = useState<RewardRow[]>([])
   const [demoMode, setDemoMode] = useState(false)
@@ -1076,6 +1112,21 @@ export default function CreatorProgramAdminPage() {
       }
       return next
     })
+  }, [supabase])
+
+  const loadOutreachContacts = useCallback(async () => {
+    if (!supabase) return
+    const { data, error } = await supabase.rpc('admin_list_influencer_outreach')
+    if (error) {
+      setOutreachContacts([])
+      return
+    }
+    const payload = data as { ok?: boolean; items?: OutreachContactLite[] } | null
+    if (!payload?.ok || !Array.isArray(payload.items)) {
+      setOutreachContacts([])
+      return
+    }
+    setOutreachContacts(payload.items)
   }, [supabase])
 
   const loadCodes = useCallback(async () => {
@@ -1185,6 +1236,7 @@ export default function CreatorProgramAdminPage() {
     if (demoMode) return
     if (tab === 'applications') {
       await loadApplications()
+      await loadOutreachContacts()
       await loadAttributionRewards()
       // Needed to show Active / Deactivated on complimentary Premium cards.
       if (supabase) {
@@ -1223,6 +1275,7 @@ export default function CreatorProgramAdminPage() {
   }, [
     tab,
     loadApplications,
+    loadOutreachContacts,
     loadCodes,
     loadRewards,
     loadAttributionRewards,
@@ -1242,6 +1295,15 @@ export default function CreatorProgramAdminPage() {
   }, [demoMode, tab, evolutionWindow])
 
   const appSource = demoMode ? demoApps : apps
+  const outreachSource = demoMode ? DEMO_OUTREACH_CONTACTS : outreachContacts
+
+  const pendingFromOutreachCount = useMemo(
+    () =>
+      appSource.filter(
+        (app) => app.status === 'pending' && findOutreachByApplication(app, outreachSource),
+      ).length,
+    [appSource, outreachSource],
+  )
 
   const appCounts = useMemo(() => {
     const counts: Record<AppFilter, number> = {
@@ -1275,12 +1337,29 @@ export default function CreatorProgramAdminPage() {
         if (aValid !== bValid) return aValid - bValid
         return a.display_name.localeCompare(b.display_name)
       })
+    } else {
+      searched.sort((a, b) => {
+        const aOut =
+          a.status === 'pending' && findOutreachByApplication(a, outreachSource) ? 0 : 1
+        const bOut =
+          b.status === 'pending' && findOutreachByApplication(b, outreachSource) ? 0 : 1
+        if (aOut !== bOut) return aOut - bOut
+        return 0
+      })
     }
     return searched
-  }, [appSource, filter, appSort, appSearch])
+  }, [appSource, filter, appSort, appSearch, outreachSource])
 
   const visibleCodes = demoMode ? demoCodes : codes
   const codeSource = visibleCodes
+  const activeCodes = useMemo(
+    () => visibleCodes.filter((row) => row.active),
+    [visibleCodes],
+  )
+  const inactiveCodes = useMemo(
+    () => visibleCodes.filter((row) => !row.active),
+    [visibleCodes],
+  )
   const rewardSource = demoMode ? demoRewards : rewards
 
   function codeRowForAssigned(assigned: string | null | undefined): CodeRow | undefined {
@@ -2276,7 +2355,11 @@ export default function CreatorProgramAdminPage() {
             <div className="flex flex-wrap gap-2">
               {(['pending', 'trial', 'approved', 'ended', 'rejected', 'all'] as AppFilter[]).map((f) => (
                 <button key={f} type="button" onClick={() => setFilter(f)} className={chipClass(filter === f)}>
-                  {APP_FILTER_LABELS[f]} ({appCounts[f]})
+                  {APP_FILTER_LABELS[f]} ({appCounts[f]}
+                  {f === 'pending' && pendingFromOutreachCount > 0
+                    ? ` · ${pendingFromOutreachCount} Outreach`
+                    : ''}
+                  )
                 </button>
               ))}
             </div>
@@ -2622,14 +2705,35 @@ export default function CreatorProgramAdminPage() {
                   ? expiryUrgency(app.creator_premium_ends_at, true)
                   : null
               const codeRow = codeRowForAssigned(app.assigned_code)
+              const outreachHit =
+                app.status === 'pending' ? findOutreachByApplication(app, outreachSource) : null
               return (
               <article
                 key={app.id}
-                className="rounded-2xl border border-border bg-card p-5 shadow-[0_12px_40px_rgba(15,23,42,0.05)]"
+                className={cn(
+                  'rounded-2xl border bg-card p-5 shadow-[0_12px_40px_rgba(15,23,42,0.05)]',
+                  outreachHit
+                    ? 'border-violet-300 ring-1 ring-violet-100'
+                    : 'border-border',
+                )}
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <h2 className="text-lg font-bold tracking-tight">{app.display_name}</h2>
+                    <h2 className="flex flex-wrap items-center gap-2 text-lg font-bold tracking-tight">
+                      {app.display_name}
+                      {outreachHit ? (
+                        <span
+                          className="inline-flex rounded-full bg-violet-50 px-2.5 py-0.5 text-[11px] font-bold uppercase tracking-wide text-violet-700"
+                          title={
+                            outreachHit.display_name
+                              ? `Handle já está no Outreach: ${outreachHit.display_name}`
+                              : 'Handle já está no Outreach'
+                          }
+                        >
+                          From Outreach
+                        </span>
+                      ) : null}
+                    </h2>
                     <div className="mt-1.5 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
                       <a
                         href={`mailto:${app.contact_email}`}
@@ -2678,6 +2782,11 @@ export default function CreatorProgramAdminPage() {
                       const sub = subscriptionLabel(app)
                       return <span className={sub.className}>{sub.label}</span>
                     })()}
+                    {outreachHit ? (
+                      <span className="inline-flex rounded-full bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-700">
+                        From Outreach
+                      </span>
+                    ) : null}
                     <span className={statusBadgeClass(app.status)}>{app.status}</span>
                   </div>
                 </div>
@@ -3265,7 +3374,17 @@ export default function CreatorProgramAdminPage() {
                         </td>
                       </tr>
                     ) : null}
-                    {visibleCodes.map((row) => (
+                    {activeCodes.length > 0 ? (
+                      <tr>
+                        <td
+                          colSpan={6}
+                          className="border-t border-border/60 bg-emerald-50/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-800"
+                        >
+                          Ativos ({activeCodes.length})
+                        </td>
+                      </tr>
+                    ) : null}
+                    {activeCodes.map((row) => (
                       <tr key={row.id}>
                         <td className={tdClass}>
                           <span className="font-bold tracking-wide">{row.code}</span>
@@ -3277,15 +3396,8 @@ export default function CreatorProgramAdminPage() {
                           </code>
                         </td>
                         <td className={tdClass}>
-                          <span
-                            className={cn(
-                              'inline-flex rounded-full px-2.5 py-1 text-xs font-bold capitalize',
-                              row.active
-                                ? 'bg-emerald-50 text-emerald-700'
-                                : 'bg-muted text-foreground/70',
-                            )}
-                          >
-                            {row.active ? 'active' : 'off'}
+                          <span className="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold capitalize text-emerald-700">
+                            active
                           </span>
                         </td>
                         <td className={tdMuted}>{shortDate(row.created_at)}</td>
@@ -3296,7 +3408,46 @@ export default function CreatorProgramAdminPage() {
                             onClick={() => void toggleActive(row)}
                             className={btnGhost}
                           >
-                            {busyId === row.id ? '…' : row.active ? 'Desativar' : 'Ativar'}
+                            {busyId === row.id ? '…' : 'Desativar'}
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                    {inactiveCodes.length > 0 ? (
+                      <tr>
+                        <td
+                          colSpan={6}
+                          className="border-t border-border/60 bg-muted/70 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-muted-foreground"
+                        >
+                          Off ({inactiveCodes.length})
+                        </td>
+                      </tr>
+                    ) : null}
+                    {inactiveCodes.map((row) => (
+                      <tr key={row.id}>
+                        <td className={tdClass}>
+                          <span className="font-bold tracking-wide">{row.code}</span>
+                        </td>
+                        <td className={tdClass}>{row.label || '—'}</td>
+                        <td className={tdMuted}>
+                          <code className="text-xs text-muted-foreground">
+                            {row.creator_user_id ?? '—'}
+                          </code>
+                        </td>
+                        <td className={tdClass}>
+                          <span className="inline-flex rounded-full bg-muted px-2.5 py-1 text-xs font-bold capitalize text-foreground/70">
+                            off
+                          </span>
+                        </td>
+                        <td className={tdMuted}>{shortDate(row.created_at)}</td>
+                        <td className={tdClass}>
+                          <button
+                            type="button"
+                            disabled={busyId === row.id}
+                            onClick={() => void toggleActive(row)}
+                            className={btnGhost}
+                          >
+                            {busyId === row.id ? '…' : 'Ativar'}
                           </button>
                         </td>
                       </tr>
