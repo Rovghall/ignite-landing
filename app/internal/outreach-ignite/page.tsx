@@ -112,9 +112,11 @@ const OUTREACH_COUNTRIES = [
   { code: 'US', name: 'USA' },
   { code: 'PT', name: 'Portugal' },
   { code: 'ES', name: 'Espanha' },
+  { code: 'IT', name: 'Itália' },
+  { code: 'FR', name: 'França' },
+  { code: 'DE', name: 'Alemanha' },
   { code: 'GB', name: 'UK' },
   { code: 'AU', name: 'Australia' },
-  { code: 'DE', name: 'Alemanha' },
   { code: 'CA', name: 'Canada' },
 ] as const
 
