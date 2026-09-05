@@ -5,6 +5,7 @@ import type { Session, User } from '@supabase/supabase-js'
 import { InternalAdminLogin } from '@/components/internal-admin-login'
 import { InternalAdminNav } from '@/components/internal-admin-nav'
 import { createBrowserSupabase } from '@/lib/supabase-browser'
+import { DEFAULT_INPUTS } from '@/lib/unit-economics-model'
 import { cn } from '@/lib/utils'
 
 type OutreachStatus =
@@ -93,6 +94,23 @@ const STATUS_ORDER: OutreachStatus[] = [
 
 const VIP_DAYS = 90
 const MS_PER_DAY = 24 * 60 * 60 * 1000
+const ANALYSIS_COST_USD = DEFAULT_INPUTS.apiCostUsd
+
+type OutreachUsage = {
+  linked: boolean
+  snap_track: number
+  snap_cook: number
+  total: number
+  last_snap_at: string | null
+  vip_start: string | null
+  vip_end: string | null
+}
+
+function formatUsd(amount: number) {
+  if (amount === 0) return '$0'
+  if (amount < 1) return `$${amount.toFixed(3)}`
+  return `$${amount.toFixed(2)}`
+}
 
 function vipWindow(contractedAt: string | null): {
   start: Date | null
@@ -343,16 +361,28 @@ function ContactIdentity({
   row,
   extra,
   compact,
+  onNameClick,
 }: {
   row: OutreachRow
   extra?: ReactNode
   compact?: boolean
+  onNameClick?: () => void
 }) {
   const app = applicationBadge(row.creator_application_status)
   const handle = row.creator_primary_handle?.replace(/^@/, '') || row.ig_handle
   const nameRow = (
     <span className="inline-flex items-center justify-center gap-1.5 font-semibold tracking-tight text-foreground">
-      <span>{row.display_name || '—'}</span>
+      {onNameClick ? (
+        <button
+          type="button"
+          onClick={onNameClick}
+          className="font-semibold tracking-tight text-foreground underline-offset-2 hover:underline"
+        >
+          {row.display_name || '—'}
+        </button>
+      ) : (
+        <span>{row.display_name || '—'}</span>
+      )}
       {row.contact_email ? (
         <a
           href={`mailto:${row.contact_email}`}
@@ -732,6 +762,10 @@ export default function OutreachAdminPage() {
   const [onlyApplied, setOnlyApplied] = useState(false)
   const [formOpen, setFormOpen] = useState(false)
   const [form, setForm] = useState<FormState>(EMPTY_FORM)
+  const [usageRow, setUsageRow] = useState<OutreachRow | null>(null)
+  const [usage, setUsage] = useState<OutreachUsage | null>(null)
+  const [usageLoading, setUsageLoading] = useState(false)
+  const [usageError, setUsageError] = useState<string | null>(null)
 
   useEffect(() => {
     if (!supabase) return
@@ -904,6 +938,67 @@ export default function OutreachAdminPage() {
   function closeForm() {
     setFormOpen(false)
     setFormError(null)
+  }
+
+  function closeUsage() {
+    setUsageRow(null)
+    setUsage(null)
+    setUsageError(null)
+    setUsageLoading(false)
+  }
+
+  async function openUsage(row: OutreachRow) {
+    setUsageRow(row)
+    setUsage(null)
+    setUsageError(null)
+    if (demoMode) {
+      setUsage({
+        linked: Boolean(row.has_creator_application),
+        snap_track: row.has_creator_application ? 48 : 0,
+        snap_cook: row.has_creator_application ? 12 : 0,
+        total: row.has_creator_application ? 60 : 0,
+        last_snap_at: row.has_creator_application
+          ? new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString()
+          : null,
+        vip_start: row.contracted_at,
+        vip_end: vipWindow(row.contracted_at).end?.toISOString() ?? null,
+      })
+      return
+    }
+    if (!supabase) {
+      setUsageError('Supabase não configurado.')
+      return
+    }
+    setUsageLoading(true)
+    const { data, error } = await supabase.rpc('admin_influencer_outreach_usage', { p_id: row.id })
+    setUsageLoading(false)
+    if (error) {
+      const msg = error.message || ''
+      setUsageError(
+        /could not find the function|schema cache|does not exist/i.test(msg)
+          ? 'RPC em falta — aplica a migration admin_influencer_outreach_usage no Supabase.'
+          : msg,
+      )
+      return
+    }
+    const payload = data as (OutreachUsage & { ok?: boolean; error?: string }) | null
+    if (!payload?.ok) {
+      setUsageError(
+        payload?.error === 'forbidden'
+          ? 'Forbidden — adiciona o teu email a app_admins no Supabase'
+          : payload?.error || 'Falha a carregar uso',
+      )
+      return
+    }
+    setUsage({
+      linked: Boolean(payload.linked),
+      snap_track: Number(payload.snap_track) || 0,
+      snap_cook: Number(payload.snap_cook) || 0,
+      total: Number(payload.total) || 0,
+      last_snap_at: payload.last_snap_at ?? null,
+      vip_start: payload.vip_start ?? row.contracted_at,
+      vip_end: payload.vip_end ?? vipWindow(row.contracted_at).end?.toISOString() ?? null,
+    })
   }
 
   async function onSave(e: FormEvent) {
@@ -1388,6 +1483,7 @@ export default function OutreachAdminPage() {
                             <ContactIdentity
                               compact
                               row={row}
+                              onNameClick={() => void openUsage(row)}
                               extra={
                                 <span className={statusBadge('contracted')}>Contratado</span>
                               }
@@ -1416,6 +1512,13 @@ export default function OutreachAdminPage() {
                           </td>
                           <td className="px-4 py-3.5 align-middle whitespace-nowrap">
                             <div className="flex flex-nowrap items-center justify-center gap-1 whitespace-nowrap">
+                              <button
+                                type="button"
+                                onClick={() => void openUsage(row)}
+                                className="rounded-full px-2.5 py-1 text-xs font-semibold text-foreground/70 hover:bg-muted/70 hover:text-foreground"
+                              >
+                                Uso
+                              </button>
                               <button
                                 type="button"
                                 onClick={() => openEdit(row)}
@@ -1550,6 +1653,82 @@ export default function OutreachAdminPage() {
           </div>
         )}
       </div>
+
+      {usageRow ? (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center"
+          onClick={closeUsage}
+        >
+          <div
+            className="w-full max-w-md rounded-2xl border border-border bg-card p-5 shadow-2xl sm:p-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="mb-4 flex items-start justify-between gap-3">
+              <div>
+                <h2 className="font-display text-2xl font-extrabold tracking-tight">
+                  {usageRow.display_name || 'Uso VIP'}
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Snap Track e Snap Cook na janela VIP de {VIP_DAYS} dias.
+                  {' '}
+                  {formatUsd(ANALYSIS_COST_USD)} por análise.
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={closeUsage}
+                className="rounded-full border border-border px-3 py-1.5 text-sm font-semibold"
+              >
+                Fechar
+              </button>
+            </div>
+            {usageLoading ? (
+              <p className="text-sm text-muted-foreground">A carregar…</p>
+            ) : usageError ? (
+              <p className="text-sm font-semibold text-red-600">{usageError}</p>
+            ) : usage && !usage.linked ? (
+              <p className="text-sm text-muted-foreground">
+                Sem conta na app ligada a este contacto. Só dá para contar quando há candidatura.
+              </p>
+            ) : usage ? (
+              <div className="space-y-3">
+                <p className="text-xs text-muted-foreground">
+                  {shortDate(usage.vip_start)} → {shortDate(usage.vip_end)}
+                  {usage.last_snap_at ? ` · último snap ${shortDate(usage.last_snap_at)}` : ''}
+                </p>
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      Snap Track
+                    </p>
+                    <p className="mt-1 text-2xl font-extrabold tabular-nums">{usage.snap_track}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatUsd(usage.snap_track * ANALYSIS_COST_USD)}
+                    </p>
+                  </div>
+                  <div className="rounded-xl border border-border bg-muted/30 px-3 py-3">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+                      Snap Cook
+                    </p>
+                    <p className="mt-1 text-2xl font-extrabold tabular-nums">{usage.snap_cook}</p>
+                    <p className="text-xs text-muted-foreground">
+                      {formatUsd(usage.snap_cook * ANALYSIS_COST_USD)}
+                    </p>
+                  </div>
+                </div>
+                <div className="rounded-xl border border-foreground/15 bg-foreground px-3 py-3 text-background">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-background/70">
+                    Total estimado
+                  </p>
+                  <p className="mt-1 text-2xl font-extrabold tabular-nums">
+                    {usage.total} análises · {formatUsd(usage.total * ANALYSIS_COST_USD)}
+                  </p>
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
 
       {formOpen ? (
         <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/40 p-4 sm:items-center">
