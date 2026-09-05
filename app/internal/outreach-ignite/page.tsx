@@ -383,14 +383,16 @@ function statusBadge(status: OutreachStatus): string {
 function applicationBadge(status: OutreachRow['creator_application_status']): {
   label: string
   className: string
+  check?: boolean
 } | null {
   const base =
-    'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide'
+    'inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold tracking-wide'
   if (status === 'pending')
     return { label: 'Candidatou-se', className: `${base} bg-blue-100/80 text-blue-800 ring-1 ring-blue-200/70` }
   if (status === 'approved')
     return {
-      label: 'Candidatura aprovada',
+      label: 'Aprovado',
+      check: true,
       className: `${base} bg-emerald-100/80 text-emerald-800 ring-1 ring-emerald-200/70`,
     }
   if (status === 'rejected')
@@ -399,6 +401,33 @@ function applicationBadge(status: OutreachRow['creator_application_status']): {
       className: `${base} bg-zinc-100 text-zinc-600 ring-1 ring-zinc-200/80`,
     }
   return null
+}
+
+function ApplicationStatusChip({
+  status,
+  appliedAt,
+}: {
+  status: OutreachRow['creator_application_status']
+  appliedAt?: string | null
+}) {
+  const app = applicationBadge(status)
+  if (!app) return null
+  return (
+    <span className={app.className} title={appliedAt ? `Pedido: ${shortDate(appliedAt)}` : undefined}>
+      {app.check ? (
+        <svg viewBox="0 0 16 16" className="h-3 w-3 shrink-0" fill="none" aria-hidden>
+          <path
+            d="M3.2 8.2 6.4 11.4 12.8 4.6"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ) : null}
+      {app.label}
+    </span>
+  )
 }
 
 function ContactIdentity({
@@ -471,12 +500,7 @@ function ContactIdentity({
         {nameRow}
         {showStatus ? extra : null}
         {showStatus && app ? (
-          <span
-            className={app.className}
-            title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}
-          >
-            {app.label}
-          </span>
+          <ApplicationStatusChip status={row.creator_application_status} appliedAt={row.creator_applied_at} />
         ) : null}
         {showCode && codeLabel ? (
           <span
@@ -509,12 +533,7 @@ function ContactIdentity({
           <div className="mt-1.5 flex flex-wrap items-center justify-center gap-1.5">
             {extra}
             {app ? (
-              <span
-                className={app.className}
-                title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}
-              >
-                {app.label}
-              </span>
+              <ApplicationStatusChip status={row.creator_application_status} appliedAt={row.creator_applied_at} />
             ) : null}
           </div>
         ) : null}
@@ -548,18 +567,10 @@ function CreatorCodeCell({ row }: { row: OutreachRow }) {
 }
 
 function StatusPills({ row }: { row: OutreachRow }) {
-  const app = applicationBadge(row.creator_application_status)
   return (
     <div className="flex flex-wrap items-center justify-center gap-1.5">
       <span className={statusBadge(row.status)}>{STATUS_LABELS[row.status]}</span>
-      {app ? (
-        <span
-          className={app.className}
-          title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}
-        >
-          {app.label}
-        </span>
-      ) : null}
+      <ApplicationStatusChip status={row.creator_application_status} appliedAt={row.creator_applied_at} />
     </div>
   )
 }
