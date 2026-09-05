@@ -343,15 +343,35 @@ function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }
   return (
     <div className="flex flex-col items-center gap-1 text-center">
       <div className="min-w-0 w-full">
-        <p className="font-semibold tracking-tight text-foreground">{row.display_name || '—'}</p>
-        {row.contact_email ? (
-          <a
-            href={`mailto:${row.contact_email}`}
-            className="mt-0.5 block text-[11px] font-medium text-blue-700 underline-offset-2 hover:underline"
-          >
-            {row.contact_email}
-          </a>
-        ) : null}
+        <p className="inline-flex items-center justify-center gap-1.5 font-semibold tracking-tight text-foreground">
+          <span>{row.display_name || '—'}</span>
+          {row.contact_email ? (
+            <a
+              href={`mailto:${row.contact_email}`}
+              title={row.contact_email}
+              aria-label={`Email ${row.contact_email}`}
+              className="inline-flex text-foreground/70 hover:text-foreground"
+            >
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" aria-hidden>
+                <rect
+                  x="3.25"
+                  y="5.5"
+                  width="17.5"
+                  height="13"
+                  rx="2.2"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                />
+                <path
+                  d="M4 7.2 12 13.2 20 7.2"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+          ) : null}
+        </p>
         {extra || app ? (
           <div className="mt-1.5 flex flex-wrap items-center justify-center gap-1.5">
             {extra}
