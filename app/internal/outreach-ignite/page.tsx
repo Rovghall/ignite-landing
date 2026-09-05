@@ -43,6 +43,8 @@ type OutreachRow = {
   has_creator_application: boolean
   creator_code: string | null
   assigned_code: string
+  creator_premium_started_at: string | null
+  creator_premium_ends_at: string | null
   contact_email: string
   owner_email: string
   created_at: string
@@ -122,16 +124,24 @@ function formatMoney(amountUsd: number, currency: DisplayCurrency) {
   return `${symbol}${amount.toFixed(2)}`
 }
 
-function vipWindow(contractedAt: string | null): {
+function vipWindow(row: {
+  contracted_at: string | null
+  creator_premium_started_at?: string | null
+  creator_premium_ends_at?: string | null
+}): {
   start: Date | null
   end: Date | null
   daysLeft: number | null
   expired: boolean
 } {
-  if (!contractedAt) return { start: null, end: null, daysLeft: null, expired: false }
-  const start = new Date(contractedAt)
+  const startIso = row.creator_premium_started_at || row.contracted_at
+  if (!startIso) return { start: null, end: null, daysLeft: null, expired: false }
+  const start = new Date(startIso)
   if (!Number.isFinite(start.getTime())) return { start: null, end: null, daysLeft: null, expired: false }
-  const end = new Date(start.getTime() + VIP_DAYS * MS_PER_DAY)
+  const end = row.creator_premium_ends_at
+    ? new Date(row.creator_premium_ends_at)
+    : new Date(start.getTime() + VIP_DAYS * MS_PER_DAY)
+  if (!Number.isFinite(end.getTime())) return { start, end: null, daysLeft: null, expired: false }
   const daysLeft = Math.ceil((end.getTime() - Date.now()) / MS_PER_DAY)
   return { start, end, daysLeft, expired: daysLeft < 0 }
 }
@@ -163,6 +173,8 @@ function emptyCreatorMatchFields(): Pick<
   | 'creator_primary_handle'
   | 'has_creator_application'
   | 'creator_code'
+  | 'creator_premium_started_at'
+  | 'creator_premium_ends_at'
 > {
   return {
     creator_application_id: null,
@@ -173,6 +185,8 @@ function emptyCreatorMatchFields(): Pick<
     creator_primary_handle: null,
     has_creator_application: false,
     creator_code: null,
+    creator_premium_started_at: null,
+    creator_premium_ends_at: null,
   }
 }
 
@@ -224,6 +238,8 @@ const DEMO_ROWS: OutreachRow[] = [
     creator_primary_handle: 'ana.fit.pt',
     has_creator_application: true,
     creator_code: null,
+    creator_premium_started_at: null,
+    creator_premium_ends_at: null,
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -323,6 +339,8 @@ const DEMO_ROWS: OutreachRow[] = [
     has_creator_application: true,
     creator_code: 'SOFIA20',
     assigned_code: 'SOFIA20',
+    creator_premium_started_at: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+    creator_premium_ends_at: new Date(Date.now() + 70 * 24 * 60 * 60 * 1000).toISOString(),
     owner_email: 'filip@igniteai.app',
     created_at: new Date(Date.now() - 45 * 24 * 60 * 60 * 1000).toISOString(),
     updated_at: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000).toISOString(),
@@ -862,6 +880,8 @@ export default function OutreachAdminPage() {
         has_creator_application: Boolean(row.has_creator_application || row.creator_application_id),
         assigned_code: row.assigned_code ?? '',
         creator_code: row.creator_code ?? row.assigned_code ?? null,
+        creator_premium_started_at: row.creator_premium_started_at ?? null,
+        creator_premium_ends_at: row.creator_premium_ends_at ?? null,
         contact_email: row.contact_email ?? '',
       })),
     )
@@ -1008,7 +1028,7 @@ export default function OutreachAdminPage() {
           ? new Date(Date.now() - 8 * 60 * 60 * 1000).toISOString()
           : null,
         vip_start: row.contracted_at,
-        vip_end: vipWindow(row.contracted_at).end?.toISOString() ?? null,
+        vip_end: vipWindow(row).end?.toISOString() ?? null,
       })
       return
     }
@@ -1044,7 +1064,7 @@ export default function OutreachAdminPage() {
       total: Number(payload.total) || 0,
       last_snap_at: payload.last_snap_at ?? null,
       vip_start: payload.vip_start ?? row.contracted_at,
-      vip_end: payload.vip_end ?? vipWindow(row.contracted_at).end?.toISOString() ?? null,
+      vip_end: payload.vip_end ?? vipWindow(row).end?.toISOString() ?? null,
     })
   }
 
@@ -1534,7 +1554,7 @@ export default function OutreachAdminPage() {
                         .includes(q)
                     })
                     .map((row) => {
-                      const vip = vipWindow(row.contracted_at)
+                      const vip = vipWindow(row)
                       return (
                         <tr key={row.id} className="border-b border-border/60 last:border-0 hover:bg-muted/20">
                           <td className="px-4 py-3.5 align-middle whitespace-nowrap">
