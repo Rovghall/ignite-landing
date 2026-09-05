@@ -373,27 +373,118 @@ function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }
   )
 }
 
+function normalizeHandle(raw: string) {
+  return raw.trim().replace(/^@/, '').toLowerCase()
+}
+
+function SocialGlyph({
+  name,
+  className,
+}: {
+  name: 'instagram' | 'tiktok' | 'youtube'
+  className?: string
+}) {
+  const common = {
+    viewBox: '0 0 24 24',
+    className: cn('h-3.5 w-3.5 shrink-0', className),
+    'aria-hidden': true as const,
+  }
+  if (name === 'instagram') {
+    return (
+      <svg {...common} fill="currentColor">
+        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm5 5.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm6.35-.95a1.15 1.15 0 1 0 1.15 1.15 1.15 1.15 0 0 0-1.15-1.15zM12 9.1A2.9 2.9 0 1 1 9.1 12 2.9 2.9 0 0 1 12 9.1z" />
+      </svg>
+    )
+  }
+  if (name === 'youtube') {
+    return (
+      <svg {...common} fill="currentColor">
+        <path d="M23.5 7.2a3 3 0 0 0-2.1-2.1C19.5 4.6 12 4.6 12 4.6s-7.5 0-9.4.5A3 3 0 0 0 .5 7.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-4.8zM9.75 15.02V8.98L15.5 12z" />
+      </svg>
+    )
+  }
+  return (
+    <svg {...common} fill="currentColor">
+      <path d="M14.5 3c.3 2.4 1.7 4.1 4 4.5v2.4c-1.4-.05-2.6-.5-3.6-1.2v6.4c0 3.3-2.6 5.9-5.9 5.9S3.1 18.4 3.1 15.1 5.7 9.2 9 9.2c.4 0 .8 0 1.2.1v2.5c-.4-.15-.8-.2-1.2-.2-1.9 0-3.4 1.5-3.4 3.5S7.1 18.6 9 18.6s3.4-1.5 3.4-3.5V3h2.1Z" />
+    </svg>
+  )
+}
+
+function rowSocials(row: Pick<OutreachRow, 'ig_handle' | 'tiktok_handle' | 'youtube_handle'>) {
+  const chips: { name: 'instagram' | 'tiktok' | 'youtube'; value: string }[] = []
+  const ig = (row.ig_handle ?? '').trim().replace(/^@/, '')
+  const tt = (row.tiktok_handle ?? '').trim().replace(/^@/, '')
+  const yt = (row.youtube_handle ?? '').trim().replace(/^@/, '')
+  if (ig) chips.push({ name: 'instagram', value: `@${ig}` })
+  if (tt) chips.push({ name: 'tiktok', value: `@${tt}` })
+  if (yt) chips.push({ name: 'youtube', value: yt.startsWith('@') ? yt : `@${yt}` })
+  return chips
+}
+
 function HandleChips({ row }: { row: OutreachRow }) {
-  const chips: { label: string; value: string }[] = []
-  if (row.ig_handle) chips.push({ label: 'IG', value: `@${row.ig_handle}` })
-  if (row.tiktok_handle) chips.push({ label: 'TT', value: `@${row.tiktok_handle}` })
-  if (row.youtube_handle) chips.push({ label: 'YT', value: row.youtube_handle })
+  const chips = rowSocials(row)
   if (chips.length === 0) return <span className="text-muted-foreground">—</span>
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-wrap gap-1">
       {chips.map((chip) => (
         <span
-          key={`${chip.label}-${chip.value}`}
-          className="inline-flex w-fit items-center gap-1 rounded-full bg-muted/50 px-2 py-0.5 text-[11px] font-medium text-foreground/80"
+          key={`${chip.name}-${chip.value}`}
+          className="inline-flex w-fit items-center gap-1.5 rounded-full bg-muted/50 px-2 py-0.5 text-[11px] font-medium text-foreground/80"
         >
-          <span className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">
-            {chip.label}
-          </span>
+          <SocialGlyph name={chip.name} />
           {chip.value}
         </span>
       ))}
     </div>
   )
+}
+
+function FollowerLines({ row }: { row: OutreachRow }) {
+  const lines: { name: 'instagram' | 'tiktok' | 'youtube'; value: string }[] = []
+  if ((row.ig_handle ?? '').trim()) lines.push({ name: 'instagram', value: formatFollowers(row.followers_ig) })
+  if ((row.tiktok_handle ?? '').trim())
+    lines.push({ name: 'tiktok', value: formatFollowers(row.followers_tiktok) })
+  if ((row.youtube_handle ?? '').trim())
+    lines.push({ name: 'youtube', value: formatFollowers(row.followers_youtube) })
+  if (lines.length === 0) return <span className="text-muted-foreground">—</span>
+  return (
+    <div className="flex flex-col gap-0.5 text-xs tabular-nums">
+      {lines.map((line) => (
+        <p key={line.name} className="inline-flex items-center gap-1.5">
+          <SocialGlyph name={line.name} />
+          {line.value}
+        </p>
+      ))}
+    </div>
+  )
+}
+
+function findHandleDuplicates(
+  form: FormState,
+  rows: OutreachRow[],
+): { platform: string; handle: string; name: string }[] {
+  const fields: { platform: string; value: string }[] = [
+    { platform: 'Instagram', value: form.ig_handle },
+    { platform: 'TikTok', value: form.tiktok_handle },
+    { platform: 'YouTube', value: form.youtube_handle },
+  ]
+  const hits: { platform: string; handle: string; name: string }[] = []
+  for (const field of fields) {
+    const handle = normalizeHandle(field.value)
+    if (!handle) continue
+    for (const row of rows) {
+      if (form.id && row.id === form.id) continue
+      const existing = [row.ig_handle, row.tiktok_handle, row.youtube_handle].map(normalizeHandle)
+      if (existing.includes(handle)) {
+        hits.push({
+          platform: field.platform,
+          handle,
+          name: row.display_name || `@${handle}`,
+        })
+      }
+    }
+  }
+  return hits
 }
 
 function toDatetimeLocal(iso: string | null): string {
@@ -584,6 +675,11 @@ export default function OutreachAdminPage() {
 
   const rowSource = demoMode ? demoRows : rows
 
+  const handleDuplicates = useMemo(
+    () => findHandleDuplicates(form, rowSource),
+    [form, rowSource],
+  )
+
   const countries = OUTREACH_COUNTRIES
 
   const statusCounts = useMemo(() => {
@@ -693,6 +789,15 @@ export default function OutreachAdminPage() {
     e.preventDefault()
     if (!form.display_name.trim() && !form.ig_handle.trim() && !form.tiktok_handle.trim()) {
       setFormError('Precisas de nome ou pelo menos um handle.')
+      return
+    }
+    const dupes = findHandleDuplicates(form, rowSource)
+    if (dupes.length > 0) {
+      setFormError(
+        `Já adicionei este handle: ${dupes
+          .map((d) => `@${d.handle} (${d.platform}) em ${d.name}`)
+          .join('; ')}.`,
+      )
       return
     }
 
@@ -1169,7 +1274,7 @@ export default function OutreachAdminPage() {
                             {countryLabel(row.country_code, row.country_name)}
                           </td>
                           <td className="px-4 py-3 align-top text-xs">
-                            {row.ig_handle ? <p>@{row.ig_handle}</p> : <span className="text-muted-foreground">—</span>}
+                            <HandleChips row={row} />
                           </td>
                           <td className="px-4 py-3 align-top text-xs text-muted-foreground">
                             {shortDate(row.contracted_at)}
@@ -1257,9 +1362,7 @@ export default function OutreachAdminPage() {
                             <HandleChips row={row} />
                           </td>
                           <td className="px-4 py-3 align-top text-xs tabular-nums">
-                            <p>IG {formatFollowers(row.followers_ig)}</p>
-                            <p>TT {formatFollowers(row.followers_tiktok)}</p>
-                            <p>YT {formatFollowers(row.followers_youtube)}</p>
+                            <FollowerLines row={row} />
                           </td>
                           <td className="px-4 py-3 align-top">{row.niche || '—'}</td>
                           <td className="px-4 py-3 align-top">
@@ -1489,6 +1592,16 @@ export default function OutreachAdminPage() {
                 />
               </Field>
             </div>
+
+            {handleDuplicates.length > 0 ? (
+              <div className="mt-3 rounded-xl border border-amber-200 bg-amber-50 px-3 py-2 text-sm font-semibold text-amber-900">
+                {handleDuplicates.map((d) => (
+                  <p key={`${d.platform}-${d.handle}-${d.name}`}>
+                    Já adicionei @{d.handle} ({d.platform}) em {d.name}.
+                  </p>
+                ))}
+              </div>
+            ) : null}
 
             {formError ? (
               <p className="mt-3 text-sm font-semibold text-red-600">{formError}</p>
