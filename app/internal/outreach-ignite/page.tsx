@@ -406,11 +406,13 @@ function ContactIdentity({
   extra,
   compact,
   onNameClick,
+  showCode = true,
 }: {
   row: OutreachRow
   extra?: ReactNode
   compact?: boolean
   onNameClick?: () => void
+  showCode?: boolean
 }) {
   const app = applicationBadge(row.creator_application_status)
   const codeLabel = row.creator_code?.trim()
@@ -474,13 +476,15 @@ function ContactIdentity({
             {app.label}
           </span>
         ) : null}
-        {codeLabel ? (
+        {showCode && codeLabel ? (
           <span
             className={cn(
               'text-[11px] leading-snug',
-              row.creator_code ? 'font-mono font-semibold tracking-wide text-foreground' : 'text-muted-foreground',
+              row.creator_code || row.assigned_code
+                ? 'font-mono font-semibold tracking-wide text-foreground'
+                : 'text-muted-foreground',
             )}
-            title={row.creator_code ? `Código ${row.creator_code}` : 'Ainda sem código atribuído'}
+            title={row.creator_code || row.assigned_code ? `Código ${codeLabel}` : 'Ainda sem código atribuído'}
           >
             {codeLabel}
           </span>
@@ -512,13 +516,15 @@ function ContactIdentity({
             ) : null}
           </div>
         ) : null}
-        {codeLabel ? (
+        {showCode && codeLabel ? (
           <p
             className={cn(
               'mt-1 text-[11px]',
-              row.creator_code ? 'font-mono font-semibold tracking-wide text-foreground' : 'text-muted-foreground',
+              row.creator_code || row.assigned_code
+                ? 'font-mono font-semibold tracking-wide text-foreground'
+                : 'text-muted-foreground',
             )}
-            title={row.creator_code ? `Código ${row.creator_code}` : 'Ainda sem código atribuído'}
+            title={row.creator_code || row.assigned_code ? `Código ${codeLabel}` : 'Ainda sem código atribuído'}
           >
             {codeLabel}
           </p>
@@ -531,6 +537,12 @@ function ContactIdentity({
       </div>
     </div>
   )
+}
+
+function CreatorCodeCell({ row }: { row: OutreachRow }) {
+  const code = normalizeAssignedCode(row.assigned_code || row.creator_code || '')
+  if (!code) return <span className="text-muted-foreground">—</span>
+  return <span className="font-mono text-xs font-semibold tracking-wide">{code}</span>
 }
 
 function normalizeAssignedCode(raw: string) {
@@ -1577,6 +1589,7 @@ export default function OutreachAdminPage() {
                     <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
                       <tr>
                         <th className="px-4 py-3 text-center">Nome</th>
+                        <th className="px-4 py-3 text-center">Código</th>
                         <th className="px-4 py-3 text-center">País</th>
                         <th className="px-4 py-3 text-center">Handles</th>
                         <th className="px-4 py-3 text-center">VIP início</th>
@@ -1604,12 +1617,16 @@ export default function OutreachAdminPage() {
                           <td className="px-4 py-3.5 align-middle whitespace-nowrap">
                             <ContactIdentity
                               compact
+                              showCode={false}
                               row={row}
                               onNameClick={() => void openUsage(row)}
                               extra={
                                 <span className={statusBadge('contracted')}>Contratado</span>
                               }
                             />
+                          </td>
+                          <td className="px-4 py-3.5 align-middle text-center">
+                            <CreatorCodeCell row={row} />
                           </td>
                           <td className="px-4 py-3.5 align-middle text-center text-sm">
                             {countryLabel(row.country_code, row.country_name)}
@@ -1692,6 +1709,7 @@ export default function OutreachAdminPage() {
                     <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
                       <tr>
                         <th className="px-4 py-3 text-center">Nome</th>
+                        <th className="px-4 py-3 text-center">Código</th>
                         <th className="px-4 py-3 text-center">Handles</th>
                         <th className="px-4 py-3 text-center">Followers</th>
                         <th className="px-4 py-3 text-center">Nicho</th>
@@ -1704,7 +1722,10 @@ export default function OutreachAdminPage() {
                       {items.map((row) => (
                         <tr key={row.id} className="border-b border-border/60 last:border-0 hover:bg-muted/20">
                           <td className="px-4 py-3.5 align-middle">
-                            <ContactIdentity row={row} />
+                            <ContactIdentity row={row} showCode={false} />
+                          </td>
+                          <td className="px-4 py-3.5 align-middle text-center">
+                            <CreatorCodeCell row={row} />
                           </td>
                           <td className="px-4 py-3.5 align-middle text-center">
                             <HandleChips row={row} />
