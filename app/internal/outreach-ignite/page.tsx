@@ -337,40 +337,80 @@ function applicationBadge(status: OutreachRow['creator_application_status']): {
   return null
 }
 
-function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }) {
+function ContactIdentity({
+  row,
+  extra,
+  compact,
+}: {
+  row: OutreachRow
+  extra?: ReactNode
+  compact?: boolean
+}) {
   const app = applicationBadge(row.creator_application_status)
   const handle = row.creator_primary_handle?.replace(/^@/, '') || row.ig_handle
+  const nameRow = (
+    <span className="inline-flex items-center justify-center gap-1.5 font-semibold tracking-tight text-foreground">
+      <span>{row.display_name || '—'}</span>
+      {row.contact_email ? (
+        <a
+          href={`mailto:${row.contact_email}`}
+          title={row.contact_email}
+          aria-label={`Email ${row.contact_email}`}
+          className="inline-flex text-foreground/70 hover:text-foreground"
+        >
+          <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" aria-hidden>
+            <rect
+              x="3.25"
+              y="5.5"
+              width="17.5"
+              height="13"
+              rx="2.2"
+              stroke="currentColor"
+              strokeWidth="1.8"
+            />
+            <path
+              d="M4 7.2 12 13.2 20 7.2"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </a>
+      ) : null}
+    </span>
+  )
+  if (compact) {
+    return (
+      <div className="flex flex-nowrap items-center justify-center gap-2 whitespace-nowrap">
+        {nameRow}
+        {extra}
+        {app ? (
+          <span
+            className={app.className}
+            title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}
+          >
+            {app.label}
+          </span>
+        ) : null}
+        {row.has_creator_application ? (
+          <span className="text-[11px] text-muted-foreground">
+            Match{handle ? ` · @${handle}` : ''}
+            {row.creator_applied_at ? ` · ${shortDate(row.creator_applied_at)}` : ''}
+          </span>
+        ) : null}
+        {row.notes ? (
+          <span className="max-w-[180px] truncate text-[11px] leading-snug text-muted-foreground">
+            {row.notes}
+          </span>
+        ) : null}
+      </div>
+    )
+  }
   return (
     <div className="flex flex-col items-center gap-1 text-center">
       <div className="min-w-0 w-full">
         <p className="inline-flex items-center justify-center gap-1.5 font-semibold tracking-tight text-foreground">
-          <span>{row.display_name || '—'}</span>
-          {row.contact_email ? (
-            <a
-              href={`mailto:${row.contact_email}`}
-              title={row.contact_email}
-              aria-label={`Email ${row.contact_email}`}
-              className="inline-flex text-foreground/70 hover:text-foreground"
-            >
-              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" aria-hidden>
-                <rect
-                  x="3.25"
-                  y="5.5"
-                  width="17.5"
-                  height="13"
-                  rx="2.2"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                />
-                <path
-                  d="M4 7.2 12 13.2 20 7.2"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          ) : null}
+          {nameRow}
         </p>
         {extra || app ? (
           <div className="mt-1.5 flex flex-wrap items-center justify-center gap-1.5">
@@ -1342,8 +1382,9 @@ export default function OutreachAdminPage() {
                       const vip = vipWindow(row.contracted_at)
                       return (
                         <tr key={row.id} className="border-b border-border/60 last:border-0 hover:bg-muted/20">
-                          <td className="px-4 py-3.5 align-middle">
+                          <td className="px-4 py-3.5 align-middle whitespace-nowrap">
                             <ContactIdentity
+                              compact
                               row={row}
                               extra={
                                 <span className={statusBadge('contracted')}>Contratado</span>
@@ -1359,10 +1400,10 @@ export default function OutreachAdminPage() {
                           <td className="px-4 py-3.5 align-middle text-center text-xs text-muted-foreground">
                             {shortDate(row.contracted_at)}
                           </td>
-                          <td className="px-4 py-3 align-top text-xs text-muted-foreground">
+                          <td className="px-4 py-3.5 align-middle text-center text-xs text-muted-foreground whitespace-nowrap">
                             {vip.end ? shortDate(vip.end.toISOString()) : '—'}
                           </td>
-                          <td className="px-4 py-3 align-top text-sm font-semibold">
+                          <td className="px-4 py-3.5 align-middle text-center text-sm font-semibold whitespace-nowrap">
                             {vip.daysLeft == null ? (
                               '—'
                             ) : vip.expired ? (
@@ -1371,7 +1412,7 @@ export default function OutreachAdminPage() {
                               <span className="text-emerald-700">{vip.daysLeft} dias</span>
                             )}
                           </td>
-                          <td className="px-4 py-3 align-top">
+                          <td className="px-4 py-3.5 align-middle whitespace-nowrap">
                             <div className="flex flex-nowrap items-center justify-center gap-1 whitespace-nowrap">
                               <button
                                 type="button"
