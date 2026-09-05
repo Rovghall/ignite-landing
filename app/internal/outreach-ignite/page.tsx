@@ -340,23 +340,25 @@ function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }
   const app = applicationBadge(row.creator_application_status)
   const handle = row.creator_primary_handle?.replace(/^@/, '') || row.ig_handle
   return (
-    <div className="flex items-start gap-3">
-      <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-[11px] font-bold tracking-wide text-zinc-600 ring-1 ring-zinc-200/80">
+    <div className="flex flex-col items-center gap-2 text-center">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-zinc-100 text-[11px] font-bold tracking-wide text-zinc-600 ring-1 ring-zinc-200/80">
         {initials(row.display_name || row.ig_handle || '?')}
       </div>
-      <div className="min-w-0">
+      <div className="min-w-0 w-full">
         <p className="font-semibold tracking-tight text-foreground">{row.display_name || '—'}</p>
-        <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
-          {extra}
-          {app ? (
-            <span
-              className={app.className}
-              title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}
-            >
-              {app.label}
-            </span>
-          ) : null}
-        </div>
+        {extra || app ? (
+          <div className="mt-1.5 flex flex-wrap items-center justify-center gap-1.5">
+            {extra}
+            {app ? (
+              <span
+                className={app.className}
+                title={row.creator_applied_at ? `Pedido: ${shortDate(row.creator_applied_at)}` : undefined}
+              >
+                {app.label}
+              </span>
+            ) : null}
+          </div>
+        ) : null}
         {row.has_creator_application ? (
           <p className="mt-1 text-[11px] text-muted-foreground">
             Match{handle ? ` · @${handle}` : ''}
@@ -364,7 +366,7 @@ function ContactIdentity({ row, extra }: { row: OutreachRow; extra?: ReactNode }
           </p>
         ) : null}
         {row.notes ? (
-          <p className="mt-1 line-clamp-2 max-w-[240px] text-[11px] leading-snug text-muted-foreground">
+          <p className="mx-auto mt-1 line-clamp-2 max-w-[240px] text-center text-[11px] leading-snug text-muted-foreground">
             {row.notes}
           </p>
         ) : null}
@@ -1261,7 +1263,7 @@ export default function OutreachAdminPage() {
               <table className="min-w-full text-left text-sm">
                     <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
                       <tr>
-                        <th className="px-4 py-3 text-left">Nome</th>
+                        <th className="px-4 py-3 text-center">Nome</th>
                         <th className="px-4 py-3 text-center">País</th>
                         <th className="px-4 py-3 text-center">Handles</th>
                         <th className="px-4 py-3 text-center">VIP início</th>
@@ -1367,7 +1369,7 @@ export default function OutreachAdminPage() {
                   <table className="min-w-full text-left text-sm">
                     <thead className="border-b border-border bg-muted/30 text-[11px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
                       <tr>
-                        <th className="px-4 py-3 text-left">Nome</th>
+                        <th className="px-4 py-3 text-center">Nome</th>
                         <th className="px-4 py-3 text-center">Handles</th>
                         <th className="px-4 py-3 text-center">Followers</th>
                         <th className="px-4 py-3 text-center">Nicho</th>
