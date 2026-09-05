@@ -1970,11 +1970,13 @@ export default function OutreachAdminPage() {
             ) : usage ? (
               <div className="space-y-4">
                 <section>
-                  <p className="mb-2 text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
-                    Estado
-                  </p>
-                  <StatusPills row={usageRow} />
-                  <p className="mt-2 text-xs text-muted-foreground">
+                  <div className="mb-2 flex flex-wrap items-center gap-2">
+                    <p className="text-[11px] font-bold uppercase tracking-wide text-muted-foreground">
+                      Estado
+                    </p>
+                    <StatusPills row={usageRow} />
+                  </div>
+                  <p className="text-xs text-muted-foreground">
                     VIP {shortDate(usage.vip_start)} → {shortDate(usage.vip_end)}
                     {usage.last_snap_at ? ` · último snap ${shortDate(usage.last_snap_at)}` : ''}
                     {usageRow.assigned_code || usageRow.creator_code
